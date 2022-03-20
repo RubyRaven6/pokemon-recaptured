@@ -123,6 +123,7 @@ enum
     POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL,
     POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS,
     POKENAV_REGION_MAP,
+    POKENAV_DEXNAV,
     POKENAV_CONDITION_GRAPH_PARTY,              // The Condition graph screen when Party has been selected
     POKENAV_CONDITION_SEARCH_RESULTS,           // The list of results from a Condition search
     POKENAV_CONDITION_GRAPH_SEARCH,             // The Condition graph screen when a search result has been selected
@@ -148,6 +149,7 @@ enum
 enum
 {
     POKENAV_MENUITEM_MAP,
+    POKENAV_MENUITEM_DEXNAV,
     POKENAV_MENUITEM_CONDITION,
     POKENAV_MENUITEM_MATCH_CALL,
     POKENAV_MENUITEM_RIBBONS,
@@ -248,6 +250,7 @@ enum RegionMapFuncIds
     POKENAV_MENU_FUNC_NO_RIBBON_WINNERS,
     POKENAV_MENU_FUNC_RESHOW_DESCRIPTION,
     POKENAV_MENU_FUNC_OPEN_FEATURE,
+    POKENAV_MENU_FUNC_OPEN_DEXNAV,
 };
 
 enum
@@ -387,6 +390,7 @@ void ShutdownPokenav(void);
 
 // pokenav_menu_handler.c
 bool32 PokenavCallback_Init_MainMenuCursorOnMap(void);
+bool32 PokenavCallback_Init_MainMenuCursorOnDexNav(void);
 bool32 PokenavCallback_Init_MainMenuCursorOnMatchCall(void);
 bool32 PokenavCallback_Init_MainMenuCursorOnRibbons(void);
 bool32 PokenavCallback_Init_ConditionMenu(void);
