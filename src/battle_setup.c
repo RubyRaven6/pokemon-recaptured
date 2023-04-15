@@ -1018,6 +1018,9 @@ void SetMapVarsToTrainerB(void)
         gSpecialVar_LastTalked = TRAINER_BATTLE_PARAM.objEventLocalIdB;
         gSelectedObjectEvent = GetObjectEventIdByLocalIdAndMap(TRAINER_BATTLE_PARAM.objEventLocalIdB, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     }
+    // if (TRAINER_BATTLE_PARAM.objEventLocalIdA != 0) {
+    //     gSpeakerName = GetTrainerNameFromId(TRAINER_BATTLE_PARAM.objEventLocalIdA);
+    // }
 }
 
 // expects parameters have been loaded correctly with TrainerBattleLoadArgs
@@ -1480,10 +1483,14 @@ static const u8 *ReturnEmptyStringIfNull(const u8 *string)
 
 static const u8 *GetIntroSpeechOfApproachingTrainer(void)
 {
-    if (gApproachingTrainerId == 0)
+    if (gApproachingTrainerId == 0) {
+        // gSpeakerName = GetTrainerNameFromId(TRAINER_BATTLE_PARAM.objEventLocalIdA);
         return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.introTextA);
-    else
+    }
+    else {
+        // gSpeakerName = GetTrainerNameFromId(TRAINER_BATTLE_PARAM.objEventLocalIdB);
         return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.introTextB);
+    }
 }
 
 const u8 *GetTrainerALoseText(void)
