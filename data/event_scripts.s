@@ -1074,3 +1074,8 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+
+	.include "data/maps/FlottTown/scripts.inc"
+	.include "data/maps/FlottTown_InsideHarbor/scripts.inc"
+	.include "data/maps/FlottTown_ShipCabin/scripts.inc"
+	.include "data/maps/FlottTown_ShipHallway/scripts.inc"

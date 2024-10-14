@@ -1,0 +1,54 @@
+{
+  "id": "MAP_FLOTT_TOWN_INSIDE_HARBOR",
+  "name": "FlottTown_InsideHarbor",
+  "layout": "LAYOUT_FLOTT_TOWN_INSIDE_HARBOR",
+  "music": "MUS_SURF",
+  "region_map_section": "MAPSEC_NONE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
+      "x": 8,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_BOAT_DEPARTS"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 8,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_FLOTT_TOWN",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_BOAT_DEPARTED",
+      "var_value": "1",
+      "script": "FlottTown_InsideHarbor_EventScript_BoatLeaves"
+    }
+  ],
+  "bg_events": [
+
+  ]
+}

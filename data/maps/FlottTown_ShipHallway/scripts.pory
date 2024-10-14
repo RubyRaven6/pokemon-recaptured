@@ -1,0 +1,84 @@
+mapscripts FlottTown_ShipHallway_MapScripts{
+    MAP_SCRIPT_ON_FRAME_TABLE [
+            VAR_BOAT_DEPARTED, 0: FlottTown_ShipHallway_EventScript_MomLeaves
+        ]
+}
+
+script FlottTown_ShipHallway_EventScript_MomLeaves{
+    applymovement(OBJ_EVENT_ID_PLAYER, LookAtMom)
+    applymovement(2, MomLooks)
+    waitmovement(0)
+    msgbox(FlottTown_ShipHallway_Text_LetsGoChild, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    applymovement(2, MomExits)
+    waitmovement(0)
+    removeobject(2)
+    setvar(VAR_BOAT_DEPARTED, 1)
+}
+
+script FlottTown_ShipHallway_EventScript_LowerStairway{
+    msgbox(FlottTown_ShipHallway_Text_LowerStairway, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, LowerStairway)
+    waitmovement(0)
+}
+
+script FlottTown_ShipHallway_EventScript_Sailor{
+    lock
+    faceplayer
+    msgbox(FlottTown_ShipHallway_Text_Sailor, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    setvar(VAR_BOAT_DEPARTED, 1)
+    warp(MAP_FLOTT_TOWN_INSIDE_HARBOR, 8, 5)
+}
+
+script FlottTown_ShipHallway_GottaGo{
+    lockall
+    msgbox(FlottTown_ShipHallway_Text_GottaGo, MSGBOX_DEFAULT)
+    releaseall
+}
+
+script FlottTown_ShipHallway_LockedDoor{
+    lockall
+    msgbox(FlottTown_ShipHallway_Text_LockedDoor, MSGBOX_DEFAULT)
+    releaseall
+}
+
+movement LookAtMom {
+    face_left
+}
+
+movement LowerStairway{
+    walk_left * 1
+}
+
+movement MomLooks{
+    face_right
+}
+
+movement MomExits{
+    walk_left * 8
+}
+
+text FlottTown_ShipHallway_Text_LetsGoChild{
+    format("Oh, {PLAYER}! You're finally up. Just in time, too. We're finally at Flott Town! Let's get off before the boat departs.")
+}
+
+text FlottTown_ShipHallway_Text_GottaGo{
+    format("No need to go back. We need to get off the ship!")
+}
+
+text FlottTown_ShipHallway_Text_LowerStairway{
+    format("I don't think I can pass through there.")
+}
+
+text FlottTown_ShipHallway_Text_LockedDoor{
+    format("The door's locked.")
+}
+
+text FlottTown_ShipHallway_Text_Sailor{
+    format("We've arrived at Flott Town! Thank you for sailing with the S.S. Tidal.")
+}

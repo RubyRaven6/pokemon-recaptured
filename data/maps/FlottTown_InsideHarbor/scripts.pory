@@ -1,0 +1,23 @@
+mapscripts FlottTown_InsideHarbor_MapScripts {
+}
+
+script FlottTown_InsideHarbor_EventScript_BoatLeaves{
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER,LookAtBoat)
+    waitmovement(0)
+    applymovement(1, BoatDeparts)
+    waitmovement(0)
+    hideobjectat(1, MAP_FLOTT_TOWN_INSIDE_HARBOR)
+    setflag(FLAG_BOAT_DEPARTS)
+    setvar(VAR_BOAT_DEPARTED, 2)
+    release
+}
+
+movement LookAtBoat{
+    face_down
+}
+
+movement BoatDeparts {
+    walk_left * 8
+    walk_left * 4
+}

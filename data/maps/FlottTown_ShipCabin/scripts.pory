@@ -1,0 +1,32 @@
+mapscripts FlottTown_ShipCabin_MapScripts{
+}
+
+script FlottTown_ShipCabin_MomsBed{
+    lockall
+    msgbox(FlottTown_ShipCabin_Text_MomsBed, MSGBOX_DEFAULT)
+    releaseall
+}
+
+script FlottTown_ShipCabin_Bed{
+    lockall
+    msgbox(FlottTown_ShipCabin_Text_Bed, MSGBOX_DEFAULT)
+    releaseall
+}
+
+script FlottTown_ShipCabin_Trash{
+    lockall
+    msgbox(FlottTown_ShipCabin_Text_Trash, MSGBOX_DEFAULT)
+    releaseall
+}
+
+text FlottTown_ShipCabin_Text_MomsBed{
+    format("It's your bed!")
+}
+
+text FlottTown_ShipCabin_Text_Bed{
+    format("It's your mom's bed.")
+}
+
+text FlottTown_ShipCabin_Text_Trash{
+    format("Just some trash.")
+}
