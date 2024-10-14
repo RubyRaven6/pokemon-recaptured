@@ -1,6 +1,14 @@
 {
   "map_sections": [
     {
+      "map_section": "MAPSEC_FLOTT_TOWN",
+      "name": "FLOTT TOWN",
+      "x": 4,
+      "y": 11,
+      "width": 1,
+      "height": 1
+    },
+    {
       "map_section": "MAPSEC_LITTLEROOT_TOWN",
       "name": "LITTLEROOT TOWN",
       "x": 4,

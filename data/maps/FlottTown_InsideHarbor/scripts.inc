@@ -18,7 +18,7 @@ FlottTown_InsideHarbor_EventScript_BoatLeaves::
 # 11 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	setflag FLAG_BOAT_DEPARTS
 # 12 "data/maps/FlottTown_InsideHarbor/scripts.pory"
-	setvar VAR_BOAT_DEPARTED, 2
+	setvar VAR_FLOTT_TOWN_STATE, 2
 # 13 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	release
 	return

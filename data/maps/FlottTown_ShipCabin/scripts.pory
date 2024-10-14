@@ -1,9 +1,9 @@
 mapscripts FlottTown_ShipCabin_MapScripts{
 }
 
-script FlottTown_ShipCabin_MomsBed{
+script FlottTown_ShipCabin_ElsieBed{
     lockall
-    msgbox(FlottTown_ShipCabin_Text_MomsBed, MSGBOX_DEFAULT)
+    msgbox(FlottTown_ShipCabin_Text_ElsieBed, MSGBOX_DEFAULT)
     releaseall
 }
 
@@ -19,12 +19,12 @@ script FlottTown_ShipCabin_Trash{
     releaseall
 }
 
-text FlottTown_ShipCabin_Text_MomsBed{
+text FlottTown_ShipCabin_Text_Bed{
     format("It's your bed!")
 }
 
-text FlottTown_ShipCabin_Text_Bed{
-    format("It's your mom's bed.")
+text FlottTown_ShipCabin_Text_ElsieBed{
+    format("It's your sister's bed.")
 }
 
 text FlottTown_ShipCabin_Text_Trash{

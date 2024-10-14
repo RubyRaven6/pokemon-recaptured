@@ -1,20 +1,20 @@
 mapscripts FlottTown_ShipHallway_MapScripts{
     MAP_SCRIPT_ON_FRAME_TABLE [
-            VAR_BOAT_DEPARTED, 0: FlottTown_ShipHallway_EventScript_MomLeaves
-        ]
+            VAR_FLOTT_TOWN_STATE, 0: FlottTown_ShipHallway_EventScript_ElsieLeaves
+    ]
 }
 
-script FlottTown_ShipHallway_EventScript_MomLeaves{
-    applymovement(OBJ_EVENT_ID_PLAYER, LookAtMom)
-    applymovement(2, MomLooks)
+script FlottTown_ShipHallway_EventScript_ElsieLeaves{
+    applymovement(OBJ_EVENT_ID_PLAYER, LookAtElsie)
+    applymovement(2, ElsieLooks)
     waitmovement(0)
     msgbox(FlottTown_ShipHallway_Text_LetsGoChild, MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    applymovement(2, MomExits)
+    applymovement(2, ElsieExits)
     waitmovement(0)
     removeobject(2)
-    setvar(VAR_BOAT_DEPARTED, 1)
+    setvar(VAR_FLOTT_TOWN_STATE, 1)
 }
 
 script FlottTown_ShipHallway_EventScript_LowerStairway{
@@ -31,7 +31,7 @@ script FlottTown_ShipHallway_EventScript_Sailor{
     msgbox(FlottTown_ShipHallway_Text_Sailor, MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    setvar(VAR_BOAT_DEPARTED, 1)
+    setvar(VAR_FLOTT_TOWN_STATE, 1)
     warp(MAP_FLOTT_TOWN_INSIDE_HARBOR, 8, 5)
 }
 
@@ -47,7 +47,7 @@ script FlottTown_ShipHallway_LockedDoor{
     releaseall
 }
 
-movement LookAtMom {
+movement LookAtElsie {
     face_left
 }
 
@@ -55,16 +55,16 @@ movement LowerStairway{
     walk_left * 1
 }
 
-movement MomLooks{
+movement ElsieLooks{
     face_right
 }
 
-movement MomExits{
+movement ElsieExits{
     walk_left * 8
 }
 
 text FlottTown_ShipHallway_Text_LetsGoChild{
-    format("Oh, {PLAYER}! You're finally up. Just in time, too. We're finally at Flott Town! Let's get off before the boat departs.")
+    format("ELSIE: Oh, {PLAYER}! You're finally up. Just in time, too. We're finally at Flott Town! Let's get off before the boat departs.")
 }
 
 text FlottTown_ShipHallway_Text_GottaGo{

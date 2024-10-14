@@ -4450,6 +4450,26 @@
       "secondary_tileset": "gTileset_InsideShip",
       "border_filepath": "data/layouts/FlottTown_ShipHallway/border.bin",
       "blockdata_filepath": "data/layouts/FlottTown_ShipHallway/map.bin"
+    },
+    {
+      "id": "LAYOUT_FLOTT_TOWN_PLAYER_HOUSE_1F",
+      "name": "FlottTown_PlayerHouse_1F_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/FlottTown_PlayerHouse_1F/border.bin",
+      "blockdata_filepath": "data/layouts/FlottTown_PlayerHouse_1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_FLOTT_TOWN_PLAYER_HOUSE_2F",
+      "name": "FlottTown_PlayerHouse_2F_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "border_filepath": "data/layouts/FlottTown_PlayerHouse_2F/border.bin",
+      "blockdata_filepath": "data/layouts/FlottTown_PlayerHouse_2F/map.bin"
     }
   ]
 }

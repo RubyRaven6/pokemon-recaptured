@@ -103,7 +103,9 @@
     "LittlerootTown_ProfessorBirchsLab",
     "FlottTown_InsideHarbor",
     "FlottTown_ShipCabin",
-    "FlottTown_ShipHallway"
+    "FlottTown_ShipHallway",
+    "FlottTown_PlayerHouse_1F",
+    "FlottTown_PlayerHouse_2F"
   ],
   "gMapGroup_IndoorOldale": [
     "OldaleTown_House1",

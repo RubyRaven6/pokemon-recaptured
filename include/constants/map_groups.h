@@ -74,6 +74,8 @@
 #define MAP_FLOTT_TOWN_INSIDE_HARBOR             (5 | (1 << 8))
 #define MAP_FLOTT_TOWN_SHIP_CABIN                (6 | (1 << 8))
 #define MAP_FLOTT_TOWN_SHIP_HALLWAY              (7 | (1 << 8))
+#define MAP_FLOTT_TOWN_PLAYER_HOUSE_1F           (8 | (1 << 8))
+#define MAP_FLOTT_TOWN_PLAYER_HOUSE_2F           (9 | (1 << 8))
 
 // gMapGroup_IndoorOldale
 #define MAP_OLDALE_TOWN_HOUSE1            (0 | (2 << 8))

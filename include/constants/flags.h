@@ -43,7 +43,7 @@
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
 #define FLAG_BOAT_DEPARTS    0x20 // Unused Flag
-#define FLAG_MOM_LEAVES      0x21 // Unused Flag
+#define FLAG_ELSIE_LEAVES    0x21 // Unused Flag
 #define FLAG_UNUSED_0x022    0x22 // Unused Flag
 #define FLAG_UNUSED_0x023    0x23 // Unused Flag
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag

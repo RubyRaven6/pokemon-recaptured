@@ -1079,3 +1079,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/FlottTown_InsideHarbor/scripts.inc"
 	.include "data/maps/FlottTown_ShipCabin/scripts.inc"
 	.include "data/maps/FlottTown_ShipHallway/scripts.inc"
+
+	.include "data/maps/FlottTown_PlayerHouse_1F/scripts.inc"
+
+	.include "data/maps/FlottTown_PlayerHouse_2F/scripts.inc"

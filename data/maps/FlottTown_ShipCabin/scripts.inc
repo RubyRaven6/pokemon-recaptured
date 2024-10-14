@@ -2,11 +2,11 @@ FlottTown_ShipCabin_MapScripts::
 	.byte 0
 
 
-FlottTown_ShipCabin_MomsBed::
+FlottTown_ShipCabin_ElsieBed::
 # 5 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	lockall
 # 6 "data/maps/FlottTown_ShipCabin/scripts.pory"
-	msgbox FlottTown_ShipCabin_Text_MomsBed, MSGBOX_DEFAULT
+	msgbox FlottTown_ShipCabin_Text_ElsieBed, MSGBOX_DEFAULT
 # 7 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	releaseall
 	return
@@ -32,13 +32,13 @@ FlottTown_ShipCabin_Trash::
 	return
 
 
-FlottTown_ShipCabin_Text_MomsBed::
+FlottTown_ShipCabin_Text_Bed::
 # 22 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "It's your bed!$"
 
-FlottTown_ShipCabin_Text_Bed::
+FlottTown_ShipCabin_Text_ElsieBed::
 # 26 "data/maps/FlottTown_ShipCabin/scripts.pory"
-	.string "It's your mom's bed.$"
+	.string "It's your sister's bed.$"
 
 FlottTown_ShipCabin_Text_Trash::
 # 30 "data/maps/FlottTown_ShipCabin/scripts.pory"

@@ -43,7 +43,7 @@
       "x": 8,
       "y": 4,
       "elevation": 0,
-      "var": "VAR_BOAT_DEPARTED",
+      "var": "VAR_FLOTT_TOWN_STATE",
       "var_value": "1",
       "script": "FlottTown_InsideHarbor_EventScript_BoatLeaves"
     }

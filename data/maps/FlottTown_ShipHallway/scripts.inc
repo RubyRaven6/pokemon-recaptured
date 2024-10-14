@@ -5,15 +5,15 @@ FlottTown_ShipHallway_MapScripts::
 
 FlottTown_ShipHallway_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 # 3 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	map_script_2 VAR_BOAT_DEPARTED, 0, FlottTown_ShipHallway_EventScript_MomLeaves
+	map_script_2 VAR_FLOTT_TOWN_STATE, 0, FlottTown_ShipHallway_EventScript_ElsieLeaves
 	.2byte 0
 
 
-FlottTown_ShipHallway_EventScript_MomLeaves::
+FlottTown_ShipHallway_EventScript_ElsieLeaves::
 # 8 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, LookAtMom
+	applymovement OBJ_EVENT_ID_PLAYER, LookAtElsie
 # 9 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	applymovement 2, MomLooks
+	applymovement 2, ElsieLooks
 # 10 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	waitmovement 0
 # 11 "data/maps/FlottTown_ShipHallway/scripts.pory"
@@ -23,35 +23,35 @@ FlottTown_ShipHallway_EventScript_MomLeaves::
 # 13 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	closemessage
 # 14 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	applymovement 2, MomExits
+	applymovement 2, ElsieExits
 # 15 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	waitmovement 0
 # 16 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	removeobject 2
 # 17 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	special DrawWholeMapView
-# 18 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	setvar VAR_BOAT_DEPARTED, 1
+	setvar VAR_FLOTT_TOWN_STATE, 1
 	return
 
 
 FlottTown_ShipHallway_EventScript_LowerStairway::
-# 22 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 21 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	msgbox FlottTown_ShipHallway_Text_LowerStairway, MSGBOX_DEFAULT
-# 23 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 22 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	waitmessage
-# 24 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 23 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	closemessage
-# 25 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 24 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, LowerStairway
-# 26 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 25 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	waitmovement 0
 	return
 
 
 FlottTown_ShipHallway_EventScript_Sailor::
-# 30 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 29 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	lock
+# 30 "data/maps/FlottTown_ShipHallway/scripts.pory"
+	faceplayer
 # 31 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	msgbox FlottTown_ShipHallway_Text_Sailor, MSGBOX_DEFAULT
 # 32 "data/maps/FlottTown_ShipHallway/scripts.pory"
@@ -59,7 +59,7 @@ FlottTown_ShipHallway_EventScript_Sailor::
 # 33 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	closemessage
 # 34 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	setvar VAR_BOAT_DEPARTED, 1
+	setvar VAR_FLOTT_TOWN_STATE, 1
 # 35 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	warp MAP_FLOTT_TOWN_INSIDE_HARBOR, 8, 5
 	return
@@ -86,7 +86,7 @@ FlottTown_ShipHallway_LockedDoor::
 
 
 # 50 "data/maps/FlottTown_ShipHallway/scripts.pory"
-LookAtMom:
+LookAtElsie:
 # 51 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	face_left
 	step_end
@@ -95,18 +95,16 @@ LookAtMom:
 LowerStairway:
 # 55 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
-# 55 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	walk_left
 	step_end
 
 # 58 "data/maps/FlottTown_ShipHallway/scripts.pory"
-MomLooks:
+ElsieLooks:
 # 59 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	face_right
 	step_end
 
 # 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
-MomExits:
+ElsieExits:
 # 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
 # 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
@@ -127,9 +125,10 @@ MomExits:
 
 FlottTown_ShipHallway_Text_LetsGoChild::
 # 66 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	.string "Oh, {PLAYER}! You're finally up. Just\n"
-	.string "in time, too. We're finally at Flott Town!\l"
-	.string "Let's get off before the boat departs.$"
+	.string "ELSIE: Oh, {PLAYER}! You're finally up.\n"
+	.string "Just in time, too. We're finally at Flott\l"
+	.string "Town! Let's get off before the boat\l"
+	.string "departs.$"
 
 FlottTown_ShipHallway_Text_GottaGo::
 # 70 "data/maps/FlottTown_ShipHallway/scripts.pory"
