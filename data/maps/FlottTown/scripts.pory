@@ -47,9 +47,7 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     waitmovement(OBJ_EVENT_ID_PLAYER)
     msgbox(FlottTown_Text_LookAtTown, MSGBOX_DEFAULT)
     closemessage
-    delay(60)
-    delay(60)
-    delay(60)
+    delay(180)
     applymovement(1, ElsieLooksAtPlayer)
     applymovement(OBJ_EVENT_ID_PLAYER, PlayerLooksAtElsie)
     waitmovement(1)
@@ -83,10 +81,15 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     msgbox(FlottTown_Text_IllPrepareInside,MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    applymovement(1, ElsieGoesInside)
+    applymovement(1, ElsieGoesInside1)
     waitmovement(0)
     delay(16)
-    hideobjectat(1, MAP_FLOTT_TOWN)
+    opendoor(10, 6)
+    waitdooranim
+    applymovement(1, ElsieGoesInside2)
+    waitmovement(0)
+    closedoor(10, 6)
+    waitdooranim
     end
 }
 
@@ -161,10 +164,16 @@ movement PlayerWalksToHouse{
     walk_left * 18 
 }
 
-movement ElsieGoesInside{
+movement ElsieGoesInside1{
     walk_up * 3
     walk_right
     face_up
+}
+
+movement ElsieGoesInside2{
+    walk_up
+	set_invisible
+	step_end
 }
 
 text FlottTown_Text_TookYourTime{
