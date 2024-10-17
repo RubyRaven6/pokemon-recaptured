@@ -1,0 +1,94 @@
+raw`
+.set LOCALID_ELSIE, 1
+.set LOCALID_BALL, 2
+`
+
+mapscripts FlottTown_AbandonedGym_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_FLOTT_TOWN_STATE, 3: FlottTown_AbandonedGym_Setup
+    ]
+}
+
+script FlottTown_AbandonedGym_Setup{
+    applymovement(OBJ_EVENT_ID_PLAYER, FlottTown_AbandonedGym_WalkingUp1)
+    waitmovement(0)
+    clearflag(FLAG_ELSIE_ENTERS)
+    addobject(LOCALID_ELSIE)
+    applymovement(OBJ_EVENT_ID_PLAYER, FlottTown_AbandonedGym_WalkingUp2)
+    applymovement(LOCALID_ELSIE, FlottTown_AbandonedGym_WalkingUp3)
+    waitmovement(LOCALID_ELSIE)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    setvar(VAR_FLOTT_TOWN_STATE, 4)
+    end
+}
+
+script FlottTown_AbandonedGym_FreePokeball{
+    msgbox(FlottTown_AbandonedGym_Text_FreePokeball, MSGBOX_AUTOCLOSE)
+    removeobject(LOCALID_BALL, MAP_FLOTT_TOWN_ABANDONED_GYM)
+    giveitem(ITEM_POKE_BALL, 1)
+    setvar(VAR_FLOTT_TOWN_STATE, 5)
+    closemessage
+    end
+}
+
+script FlottTown_AbandonedGym_Elsie{
+    faceplayer
+    msgbox(FlottTown_AbandonedGym_Text_ThisPlaceIsCool, MSGBOX_DEFAULT)
+    closemessage
+}
+
+script FlottTown_AbandonedGym_AfterBallPickup{
+    applymovement(LOCALID_ELSIE, FlottTown_AbandonedGym_GoToPlayer)
+    waitmessage
+    msgbox(FlottTown_AbandonedGym_Text_BeforeCollapse, MSGBOX_DEFAULT)
+    waitbuttonpress
+    closemessage
+    end
+}
+
+script FlottTown_AbandonedGym_GymCollapses{
+    setvar(VAR_FLOTT_TOWN_STATE, 6)
+    setmetatile(13, 18, METATILE_MirageTower_MirageTower_CrackedFloorHole, FALSE)
+}
+
+movement FlottTown_AbandonedGym_WalkingUp1{
+    walk_up
+}
+
+movement FlottTown_AbandonedGym_WalkingUp2{
+    walk_up * 5
+    walk_left * 4
+    walk_up * 3
+}
+
+movement FlottTown_AbandonedGym_WalkingUp3{
+    walk_up * 6
+    walk_left * 3
+    walk_left
+    walk_up * 2
+}
+
+movement FlottTown_AbandonedGym_GoToPlayer{
+    walk_left
+    walk_up * 4
+}
+
+movement FlottTown_AbandonedGym_WalkingOut{
+    walk_down * 5
+}
+
+movement FlottTown_AbandonedGym_WalkingOut2{
+    walk_down * 7
+}
+
+text FlottTown_AbandonedGym_Text_FreePokeball{
+    format("It's a Pokéball! It seems there's no Pokémon inside it, though.")
+}
+
+text FlottTown_AbandonedGym_Text_ThisPlaceIsCool{
+    format("This place seems pretty cool! Sad it seems abandoned, though.")
+}
+
+text FlottTown_AbandonedGym_Text_BeforeCollapse{
+    format("Oh hey, a Pokéball! Maybe you can catch your own Pokémon with that someday?\p There doesn't seem to be anything else in here though. We'd best get home.")
+}

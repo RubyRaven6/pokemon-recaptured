@@ -357,6 +357,9 @@
 #define METATILE_MeteorFalls_CaveEntrance_Right   0x24F
 #define METATILE_MeteorFalls_CaveEntrance_Top     0x246
 
+// gTileset_MirageTower
+#define METATILE_MirageTower_MirageTower_CrackedFloorHole  0x206
+
 // gTileset_Mossdeep
 #define METATILE_Mossdeep_Door              0x2A1
 #define METATILE_Mossdeep_Door_SpaceCenter  0x2ED

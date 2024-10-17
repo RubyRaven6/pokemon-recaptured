@@ -1,0 +1,67 @@
+{
+  "id": "MAP_FLOTT_TOWN_ABANDONED_GYM",
+  "name": "FlottTown_AbandonedGym",
+  "layout": "LAYOUT_FLOTT_TOWN_ABANDONED_GYM",
+  "music": "MUS_NONE",
+  "region_map_section": "MAPSEC_FLOTT_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ANABEL",
+      "x": 13,
+      "y": 18,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FlottTown_AbandonedGym_Elsie",
+      "flag": "FLAG_ELSIE_ENTERS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
+      "x": 8,
+      "y": 3,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FlottTown_AbandonedGym_FreePokeball",
+      "flag": "FLAG_TEMP_1"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 13,
+      "y": 18,
+      "elevation": 0,
+      "dest_map": "MAP_FLOTT_TOWN",
+      "dest_warp_id": "4"
+    }
+  ],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "5",
+      "script": "FlottTown_AbandonedGym_AfterBallPickup"
+    }
+  ],
+  "bg_events": [
+
+  ]
+}

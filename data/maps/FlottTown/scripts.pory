@@ -6,6 +6,9 @@ mapscripts FlottTown_MapScripts{
 // 1 = Exited ship cabin
 // 2 = S.S. Anne Departs
 // 3 = Elsie brings us to our new home
+// 4 = Entered the Gym
+// 5 = Took the Pokeball
+// 6 = Fell into the cave
 
 script FlottTown_EventScript_ElsieBringsUsHome1{
     applymovement(1, ElsieLooksAtDown)
@@ -90,6 +93,7 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     waitmovement(0)
     closedoor(10, 6)
     waitdooranim
+    setvar(VAR_FLOTT_TOWN_STATE, 3)
     end
 }
 
