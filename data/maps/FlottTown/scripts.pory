@@ -8,7 +8,8 @@ mapscripts FlottTown_MapScripts{
 // 3 = Elsie brings us to our new home
 // 4 = Entered the Gym
 // 5 = Took the Pokeball
-// 6 = Fell into the cave
+// 6 = Fell Into a cave
+// 7 = In the cave, after Elsie leavs to get help.
 
 script FlottTown_EventScript_ElsieBringsUsHome1{
     applymovement(1, ElsieLooksAtDown)
@@ -98,21 +99,15 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
 }
 
 script FlottTown_PlayerHouseSign{
-    lockall
-    msgbox(FlottTown_Text_PlayerHouseSign, MSGBOX_DEFAULT)
-    releaseall
+    msgbox(FlottTown_Text_PlayerHouseSign, MSGBOX_SIGN)
 }
 
 script FlottTown_BarneyHouseSign{
-    lockall
-    msgbox(FlottTown_Text_BarneyHouseSign, MSGBOX_DEFAULT)
-    releaseall
+    msgbox(FlottTown_Text_BarneyHouseSign, MSGBOX_SIGN)
 }
 
 script FlottTown_OldGymSign{
-    lockall
-    msgbox(FlottTown_Text_OldGymSign, MSGBOX_DEFAULT)
-    releaseall
+    msgbox(FlottTown_Text_OldGymSign, MSGBOX_SIGN)
 }
 
 movement LookAtTown {

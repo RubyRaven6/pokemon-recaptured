@@ -101,7 +101,8 @@
     "FlottTown_ShipHallway",
     "FlottTown_PlayerHouse_1F",
     "FlottTown_PlayerHouse_2F",
-    "FlottTown_AbandonedGym"
+    "FlottTown_AbandonedGym",
+    "FlottTown_FlottCave"
   ],
   "gMapGroup_IndoorOldale": [
     "OldaleTown_House1",

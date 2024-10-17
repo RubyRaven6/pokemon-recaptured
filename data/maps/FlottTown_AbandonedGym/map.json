@@ -2,7 +2,7 @@
   "id": "MAP_FLOTT_TOWN_ABANDONED_GYM",
   "name": "FlottTown_AbandonedGym",
   "layout": "LAYOUT_FLOTT_TOWN_ABANDONED_GYM",
-  "music": "MUS_NONE",
+  "music": "MUS_PETALBURG_WOODS",
   "region_map_section": "MAPSEC_FLOTT_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -24,7 +24,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FlottTown_AbandonedGym_Elsie",
+      "script": "0x0",
       "flag": "FLAG_ELSIE_ENTERS"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "FlottTown_AbandonedGym_FreePokeball",
+      "script": "FlottTown_AbandonedGym_EventScript_FreePokeball",
       "flag": "FLAG_TEMP_1"
     }
   ],
@@ -53,12 +53,48 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 8,
-      "y": 5,
+      "x": 12,
+      "y": 18,
       "elevation": 0,
       "var": "VAR_FLOTT_TOWN_STATE",
       "var_value": "5",
-      "script": "FlottTown_AbandonedGym_AfterBallPickup"
+      "script": "FlottTown_AbandonedGym_EventScript_GymCollapses"
+    },
+    {
+      "type": "trigger",
+      "x": 12,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "5",
+      "script": "FlottTown_AbandonedGym_EventScript_GymCollapses"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "5",
+      "script": "FlottTown_AbandonedGym_EventScript_GymCollapses"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 17,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "5",
+      "script": "FlottTown_AbandonedGym_EventScript_GymCollapses"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "5",
+      "script": "FlottTown_AbandonedGym_EventScript_GymCollapses"
     }
   ],
   "bg_events": [

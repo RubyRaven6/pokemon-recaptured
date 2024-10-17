@@ -4417,9 +4417,19 @@
       "width": 20,
       "height": 20,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_MirageTower",
+      "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/FlottTown_AbandonedGym/border.bin",
       "blockdata_filepath": "data/layouts/FlottTown_AbandonedGym/map.bin"
+    },
+    {
+      "id": "LAYOUT_FLOTT_TOWN_FLOTT_CAVE",
+      "name": "FlottTown_FlottCave_Layout",
+      "width": 20,
+      "height": 21,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/FlottTown_FlottCave/border.bin",
+      "blockdata_filepath": "data/layouts/FlottTown_FlottCave/map.bin"
     }
   ]
 }

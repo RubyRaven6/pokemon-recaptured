@@ -1,0 +1,29 @@
+mapscripts FlottTown_FlottCave_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: FlottTown_FlottCave_OnTransition
+    MAP_SCRIPT_ON_FRAME_TABLE [ 
+        VAR_FLOTT_TOWN_STATE, 6: FlottTown_FlottCave_OnFrame
+    ]
+}
+
+script FlottTown_FlottCave_OnTransition {
+    destroyfollower
+    setflag(FLAG_TEMP_5)
+}
+
+script FlottTown_FlottCave_OnFrame{
+    msgbox(FlottTown_FlottCave_Text_ElsieWorried, MSGBOX_DEFAULT)
+    closemessage
+    setvar(VAR_FLOTT_TOWN_STATE, 7)
+}
+
+script FlottTown_FlottCave_EventScript_SavedByStarter{
+    
+    if(var(VAR_TEMP_2) == 30){
+        getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+    }
+
+}
+
+text FlottTown_FlottCave_Text_ElsieWorried{
+    format("ELSIE: Oh my god! {PLAYER}! Are you okay?! Sit tight in there, okay? I'll go get help!\pYou here the footsteps of your sister exiting the gym.")
+}

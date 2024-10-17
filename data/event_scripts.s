@@ -1080,3 +1080,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/FlottTown_PlayerHouse_2F/scripts.inc"
 
 	.include "data/maps/FlottTown_AbandonedGym/scripts.inc"
+
+	.include "data/maps/FlottTown_FlottCave/scripts.inc"
