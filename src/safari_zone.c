@@ -27,6 +27,7 @@ extern const u8 SafariZone_EventScript_TimesUp[];
 extern const u8 SafariZone_EventScript_RetirePrompt[];
 extern const u8 SafariZone_EventScript_OutOfBallsMidBattle[];
 extern const u8 SafariZone_EventScript_OutOfBalls[];
+extern const u8 FlottTown_FlottCave_EventScript_ZubatAttacks[];
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
 EWRAM_DATA static u16 sSafariZoneStepCounter = 0;
@@ -74,6 +75,22 @@ void ExitSafariMode(void)
 
 bool8 SafariZoneTakeStep(void)
 {
+    if(FlagGet(FLAG_FALLEN_INTO_CAVE))
+    {
+        if(sSafariZoneStepCounter == 0)
+        {
+            sSafariZoneStepCounter = 30;
+        }
+
+        sSafariZoneStepCounter--;
+        if (sSafariZoneStepCounter == 0)
+        {
+            sSafariZoneStepCounter = 30;
+            ScriptContext_SetupScript(FlottTown_FlottCave_EventScript_ZubatAttacks);
+            return FALSE;
+        }
+    }
+    
     if (GetSafariZoneFlag() == FALSE)
     {
         return FALSE;

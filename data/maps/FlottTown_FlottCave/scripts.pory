@@ -1,3 +1,10 @@
+raw `
+.set LOCALID_ZUBAT, 1
+.set LOCALID_MANKEY, 2
+.set LOCALID_TINKATINK, 3
+.set LOCALID_TEDDIURSA, 4
+`
+
 mapscripts FlottTown_FlottCave_MapScripts {
     MAP_SCRIPT_ON_TRANSITION: FlottTown_FlottCave_OnTransition
     MAP_SCRIPT_ON_FRAME_TABLE [ 
@@ -13,15 +20,21 @@ script FlottTown_FlottCave_OnTransition {
 script FlottTown_FlottCave_OnFrame{
     msgbox(FlottTown_FlottCave_Text_ElsieWorried, MSGBOX_DEFAULT)
     closemessage
+    setflag(FLAG_FALLEN_INTO_CAVE)
     setvar(VAR_FLOTT_TOWN_STATE, 7)
+    end
 }
 
-script FlottTown_FlottCave_EventScript_SavedByStarter{
-    
-    if(var(VAR_TEMP_2) == 30){
-        getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    }
-
+script FlottTown_FlottCave_EventScript_ZubatAttacks{
+    msgbox(format("As you walk inside the dark cave, you hear a noise coming from the darkness!"))
+    waitmessage
+    closemessage
+    playmoncry(SPECIES_ZUBAT, CRY_MODE_NORMAL)
+    waitmoncry
+    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
+    subvar(VAR_TEMP_0, 2)
+    subvar(VAR_TEMP_1, 2)
+    setobjectxy(LOCALID_ZUBAT, VAR_TEMP_0, VAR_TEMP_1)
 }
 
 text FlottTown_FlottCave_Text_ElsieWorried{
