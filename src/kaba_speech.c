@@ -15,6 +15,7 @@
 #include "menu.h"
 #include "scanline_effect.h"
 #include "sound.h"
+#include "strings.h"
 #include "kaba_speech.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -61,8 +62,8 @@ enum SpeechLoadStates
     STATE_ALLOC,
     STATE_REGS,
     STATE_BGS,
-    STATE_WINDOWS,
     STATE_BG_GFX,
+    STATE_WINDOWS,
     STATE_FINISH,
     STATE_COUNT,
 };
@@ -218,18 +219,22 @@ static void Task_KabaSpeech_Begin(u8 taskId)
             SetBgTilemapBuffer(BG_PIC_2, sKabaSpeech->pic2TilemapBuffer);
             ResetBgPositions();
             break;
-        case STATE_WINDOWS:
-            InitWindows(sKabaSpeech_WindowTemplates);
-            InitTextBoxGfxAndPrinters();
-            Menu_LoadStdPalAt(BG_PLTT_ID(13));
-            DrawDialogueFrame(WIN_TEXT, TRUE);
-            break;
         case STATE_BG_GFX:
             LoadPalette(sKabaSpeech_BgPal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
             LoadBgTiles(BG_INTRO, sKabaSpeech_BgGfx, 0x180, 0);
             CopyToBgTilemapBuffer(BG_INTRO, sKabaSpeech_BgMap, 0, 0);
             CopyBgTilemapBufferToVram(BG_INTRO);
+            FillBgTilemapBufferRect_Palette0(BG_PIC_2, 0, 0, 0, 32, 32);
+            CopyBgTilemapBufferToVram(BG_PIC_2);
+            FillBgTilemapBufferRect_Palette0(BG_TEXT, 0, 0, 0, 32, 32);
+            CopyBgTilemapBufferToVram(BG_TEXT);
             DrawCharacterPic(PIC_KABA);
+            break;
+        case STATE_WINDOWS:
+            InitWindows(sKabaSpeech_WindowTemplates);
+            InitTextBoxGfxAndPrinters();
+            Menu_LoadStdPalAt(BG_PLTT_ID(13));
+            DrawDialogueFrame(WIN_TEXT, TRUE);
             BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
             break;
         case STATE_FINISH:
@@ -283,7 +288,7 @@ static void Task_KabaSpeech_WelcomeToTheWorld(u8 taskId)
         }
         else
         {
-            KabaSpeechPrintMessage(a);
+            KabaSpeechPrintMessage(gText_Birch_Welcome);
             gTasks[taskId].func = Task_KabaSpeech_ThisWorld;
         }
     }
