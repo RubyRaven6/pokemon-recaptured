@@ -92,7 +92,7 @@ struct KabaSpeech
     u8 monSpriteId;
     u8 platformSpriteIds[2]; // the platform is made out of 2 32x64sprites
     u16 alphaCoeff;
-    u8 timer;
+    u16 timer;
 };
 
 // EWRAM data
@@ -112,6 +112,31 @@ static inline void KabaSpeech_PrintMessageBox(const u8 *);
 static void KabaSpeech_CreateMonSprite(void);
 
 // Const data
+static const u8 sKabaSpeech_Greetings[] = _(
+    "Greetings, young traveler.\p"
+    "And welcome to the world of Pokémon.\p"
+    "I am Kaba, one of the four elders of\n"
+    "the Toku Region.\p"
+    "However, you can call me Elder Kaba\n"
+    "instead.\p"
+);
+static const u8 sKabaSpeech_AndThis[] = _(
+    "And this…"
+);
+static const u8 sKabaSpeech_JoltikAPokemon[] = _(
+    "…is Joltik, a Pokémon creature.{PAUSE 30}\p"
+);
+static const u8 sKabaSpeech_ThisPokemonLives[] = _(
+    "Joltik, with other Pokémon creatures,\n"
+    "initially lives seperately from us,\l"
+    "humans.\p"
+    "However, thanks to a latest discovery,\n"
+    "we're now able capture and befriend\l"
+    "these creatures with this special\l"
+    "device we call Pokéball.\p"
+    "More here blah blah i ran out of ideas\p"
+);
+
 static const u16 sKabaSpeech_BgGfx[] = INCBIN_U16("graphics/kaba_speech/bg.4bpp");
 static const u16 sKabaSpeech_BgPal[] = INCBIN_U16("graphics/kaba_speech/bg.gbapal");
 static const u32 sKabaSpeech_BgMap[] = INCBIN_U32("graphics/kaba_speech/bg.bin.lz");
@@ -303,7 +328,7 @@ static void Task_KabaSpeech_WelcomeToTheWorld(u8 taskId)
         }
         else
         {
-            KabaSpeech_PrintMessageBox(gText_Birch_Welcome);
+            KabaSpeech_PrintMessageBox(sKabaSpeech_Greetings);
             gTasks[taskId].func = Task_KabaSpeech_ThisWorld;
         }
     }
@@ -313,9 +338,7 @@ static void Task_KabaSpeech_ThisWorld(u8 taskId)
 {
     if (!IsTextPrinterActive(WIN_TEXT))
     {
-        KabaSpeech_PrintMessageBox(COMPOUND_STRING(
-            "And this.."
-        ));
+        KabaSpeech_PrintMessageBox(sKabaSpeech_AndThis);
         sKabaSpeech->timer = 30;
         gTasks[taskId].func = Task_KabaSpeech_ReleaseMonFromPokeball;
     }
@@ -332,34 +355,23 @@ static void Task_KabaSpeech_ReleaseMonFromPokeball(u8 taskId)
         }
         else
         {
-            sKabaSpeech->timer = 0;
             spriteId = sKabaSpeech->monSpriteId;
             gSprites[spriteId].invisible = FALSE;
             CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF, SPECIES_JOLTIK);
             gTasks[taskId].func = Task_KabaSpeech_IsInhabitedFarAndWide;
+            sKabaSpeech->timer = 0;
         }
     }
 }
 
 static void Task_KabaSpeech_IsInhabitedFarAndWide(u8 taskId)
 {
-    if (sKabaSpeech->timer == 0xff)
-        sKabaSpeech->timer = 0;
-
     sKabaSpeech->timer++;
-
-    if (sKabaSpeech->timer == 60)
-    {
-        KabaSpeech_PrintMessageBox(COMPOUND_STRING(
-            "..is Joltik, a Pokemon!{PAUSE 30}\p"
-        ));
-        PlayCry_Normal(SPECIES_JOLTIK, 0);
-    }
-
     if (IsCryFinished())
     {
-        if (sKabaSpeech->timer >= 96)
+        if (sKabaSpeech->timer >= 192)
         {
+            KabaSpeech_PrintMessageBox(sKabaSpeech_JoltikAPokemon);
             gTasks[taskId].func = Task_KabaSpeech_IStudyPokemon;
         }
     }
@@ -369,7 +381,7 @@ static void Task_KabaSpeech_IStudyPokemon(u8 taskId)
 {
     if (!IsTextPrinterActive(WIN_TEXT))
     {
-        KabaSpeech_PrintMessageBox(gText_Birch_MainSpeech);
+        KabaSpeech_PrintMessageBox(sKabaSpeech_ThisPokemonLives);
         gTasks[taskId].func = Task_KabaSpeech_baba;
     }
 }
