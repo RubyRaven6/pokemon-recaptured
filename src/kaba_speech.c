@@ -90,6 +90,7 @@ struct KabaSpeech
     u16 pic1TilemapBuffer[0x800];
     u16 pic2TilemapBuffer[0x800];
     u8 monSpriteId;
+    u8 ballSpriteId;
     u8 platformSpriteIds[2]; // the platform is made out of 2 32x64sprites
     u16 alphaCoeff;
     u16 timer;
@@ -101,12 +102,16 @@ static EWRAM_DATA struct KabaSpeech *sKabaSpeech = NULL;
 // Function declarations
 static void Task_KabaSpeech_Begin(u8);
 static void Task_KabaSpeech_FadeInEverything(u8);
-static void Task_KabaSpeech_WelcomeToTheWorld(u8);
-static void Task_KabaSpeech_ThisWorld(u8);
-static void Task_KabaSpeech_ReleaseMonFromPokeball(u8);
-static void Task_KabaSpeech_IsInhabitedFarAndWide(u8);
-static void Task_KabaSpeech_IStudyPokemon(u8);
-static void Task_KabaSpeech_baba(u8);
+static void Task_KabaSpeech_GreetingsTraveler(u8);
+static void Task_KabaSpeech_AndThis(u8);
+static void Task_KabaSpeech_ReleaseJoltikFromPokeball(u8);
+static void Task_KabaSpeech_JoltikAPokemon(u8);
+static void Task_KabaSpeech_MainTalk(u8);
+static void Task_KabaSpeech_ReturnJoltik(u8);
+static void Task_KabaSpeech_FadeOutPokeball(u8);
+static void Task_KabaSpeech_FadeOutEverything(u8);
+static void Task_KabaSpeech_SpawnPlatform(u8);
+
 static void KabaSpeech_DrawCharacterPic(u8);
 static inline void KabaSpeech_PrintMessageBox(const u8 *);
 static void KabaSpeech_CreateMonSprite(void);
@@ -126,7 +131,7 @@ static const u8 sKabaSpeech_AndThis[] = _(
 static const u8 sKabaSpeech_JoltikAPokemon[] = _(
     "…is Joltik, a Pokémon creature.{PAUSE 30}\p"
 );
-static const u8 sKabaSpeech_ThisPokemonLives[] = _(
+static const u8 sKabaSpeech_MainTalk[] = _(
     "Joltik, with other Pokémon creatures,\n"
     "initially lives seperately from us,\l"
     "humans.\p"
@@ -280,7 +285,7 @@ static void Task_KabaSpeech_Begin(u8 taskId)
         case STATE_FINISH:
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
-            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG_ALL | BLDCNT_EFFECT_BLEND);
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
             SetGpuReg(REG_OFFSET_BLDY, 0);
             ShowBg(BG_INTRO);
@@ -308,7 +313,7 @@ static void Task_KabaSpeech_FadeInEverything(u8 taskId)
     {
         sKabaSpeech->alphaCoeff = 16;
         sKabaSpeech->timer = 80;
-        gTasks[taskId].func = Task_KabaSpeech_WelcomeToTheWorld;
+        gTasks[taskId].func = Task_KabaSpeech_GreetingsTraveler;
         return;
     }
     else
@@ -318,7 +323,7 @@ static void Task_KabaSpeech_FadeInEverything(u8 taskId)
     }
 }
 
-static void Task_KabaSpeech_WelcomeToTheWorld(u8 taskId)
+static void Task_KabaSpeech_GreetingsTraveler(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -329,22 +334,22 @@ static void Task_KabaSpeech_WelcomeToTheWorld(u8 taskId)
         else
         {
             KabaSpeech_PrintMessageBox(sKabaSpeech_Greetings);
-            gTasks[taskId].func = Task_KabaSpeech_ThisWorld;
+            gTasks[taskId].func = Task_KabaSpeech_AndThis;
         }
     }
 }
 
-static void Task_KabaSpeech_ThisWorld(u8 taskId)
+static void Task_KabaSpeech_AndThis(u8 taskId)
 {
     if (!IsTextPrinterActive(WIN_TEXT))
     {
         KabaSpeech_PrintMessageBox(sKabaSpeech_AndThis);
         sKabaSpeech->timer = 30;
-        gTasks[taskId].func = Task_KabaSpeech_ReleaseMonFromPokeball;
+        gTasks[taskId].func = Task_KabaSpeech_ReleaseJoltikFromPokeball;
     }
 }
 
-static void Task_KabaSpeech_ReleaseMonFromPokeball(u8 taskId)
+static void Task_KabaSpeech_ReleaseJoltikFromPokeball(u8 taskId)
 {
     u32 spriteId;
     if (!IsTextPrinterActive(WIN_TEXT))
@@ -358,13 +363,13 @@ static void Task_KabaSpeech_ReleaseMonFromPokeball(u8 taskId)
             spriteId = sKabaSpeech->monSpriteId;
             gSprites[spriteId].invisible = FALSE;
             CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF, SPECIES_JOLTIK);
-            gTasks[taskId].func = Task_KabaSpeech_IsInhabitedFarAndWide;
+            gTasks[taskId].func = Task_KabaSpeech_JoltikAPokemon;
             sKabaSpeech->timer = 0;
         }
     }
 }
 
-static void Task_KabaSpeech_IsInhabitedFarAndWide(u8 taskId)
+static void Task_KabaSpeech_JoltikAPokemon(u8 taskId)
 {
     sKabaSpeech->timer++;
     if (IsCryFinished())
@@ -372,21 +377,60 @@ static void Task_KabaSpeech_IsInhabitedFarAndWide(u8 taskId)
         if (sKabaSpeech->timer >= 192)
         {
             KabaSpeech_PrintMessageBox(sKabaSpeech_JoltikAPokemon);
-            gTasks[taskId].func = Task_KabaSpeech_IStudyPokemon;
+            gTasks[taskId].func = Task_KabaSpeech_MainTalk;
         }
     }
 }
 
-static void Task_KabaSpeech_IStudyPokemon(u8 taskId)
+static void Task_KabaSpeech_MainTalk(u8 taskId)
 {
     if (!IsTextPrinterActive(WIN_TEXT))
     {
-        KabaSpeech_PrintMessageBox(sKabaSpeech_ThisPokemonLives);
-        gTasks[taskId].func = Task_KabaSpeech_baba;
+        KabaSpeech_PrintMessageBox(sKabaSpeech_MainTalk);
+        gTasks[taskId].func = Task_KabaSpeech_ReturnJoltik;
     }
 }
 
-static void Task_KabaSpeech_baba(u8 taskId)
+static void Task_KabaSpeech_ReturnJoltik(u8 taskId)
+{
+    if (!IsTextPrinterActive(WIN_TEXT))
+    {
+        u32 spriteId = sKabaSpeech->monSpriteId;
+        sKabaSpeech->ballSpriteId = CreateTradePokeballSprite(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF);
+        gTasks[taskId].func = Task_KabaSpeech_FadeOutPokeball;
+    }
+}
+
+static void Task_KabaSpeech_FadeOutPokeball(u8 taskId)
+{
+    // the ball callback ends its functionality with SpriteCallbackDummy
+    if (gSprites[sKabaSpeech->ballSpriteId].callback == SpriteCallbackDummy)
+    {
+        gSprites[sKabaSpeech->monSpriteId].invisible = TRUE;
+        gSprites[sKabaSpeech->ballSpriteId].invisible = TRUE;
+        DestroySprite(&gSprites[sKabaSpeech->monSpriteId]);
+        DestroySprite(&gSprites[sKabaSpeech->ballSpriteId]);
+        sKabaSpeech->alphaCoeff = 16;
+        gTasks[taskId].func = Task_KabaSpeech_FadeOutEverything;
+    }
+}
+
+static void Task_KabaSpeech_FadeOutEverything(u8 taskId)
+{
+    if (sKabaSpeech->alphaCoeff <= 0)
+    {
+        sKabaSpeech->alphaCoeff = 0;
+        sKabaSpeech->timer = 80;
+        gTasks[taskId].func = Task_KabaSpeech_SpawnPlatform;
+    }
+    else
+    {
+        sKabaSpeech->alphaCoeff--;
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sKabaSpeech->alphaCoeff, 16 - sKabaSpeech->alphaCoeff));
+    }
+}
+
+static void Task_KabaSpeech_SpawnPlatform(u8 taskId)
 {
 
 }
@@ -433,4 +477,9 @@ static void KabaSpeech_CreateMonSprite(void)
     gSprites[sKabaSpeech->monSpriteId].callback = SpriteCallbackDummy;
     gSprites[sKabaSpeech->monSpriteId].oam.priority = 0;
     gSprites[sKabaSpeech->monSpriteId].invisible = TRUE;
+}
+
+static void KabaSpeech_CreatePlatformSprites(void)
+{
+
 }
