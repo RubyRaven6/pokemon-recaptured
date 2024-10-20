@@ -92,10 +92,10 @@ static EWRAM_DATA struct KabaSpeech *sKabaSpeech = NULL;
 // Function declarations
 static void Task_KabaSpeech_Begin(u8);
 static void Task_KabaSpeech_FadeInEverything(u8);
-static void DrawCharacterPic(u8);
-static inline void KabaSpeechPrintMessage(const u8 *);
 static void Task_KabaSpeech_WelcomeToTheWorld(u8);
 static void Task_KabaSpeech_ThisWorld(u8);
+static void KabaSpeech_DrawCharacterPic(u8);
+static inline void KabaSpeech_PrintMessageBox(const u8 *);
 
 // Const data
 static const u16 sKabaSpeech_BgGfx[] = INCBIN_U16("graphics/kaba_speech/bg.4bpp");
@@ -228,7 +228,7 @@ static void Task_KabaSpeech_Begin(u8 taskId)
             CopyBgTilemapBufferToVram(BG_PIC_2);
             FillBgTilemapBufferRect_Palette0(BG_TEXT, 0, 0, 0, 32, 32);
             CopyBgTilemapBufferToVram(BG_TEXT);
-            DrawCharacterPic(PIC_KABA);
+            KabaSpeech_DrawCharacterPic(PIC_KABA);
             break;
         case STATE_WINDOWS:
             InitWindows(sKabaSpeech_WindowTemplates);
@@ -288,7 +288,7 @@ static void Task_KabaSpeech_WelcomeToTheWorld(u8 taskId)
         }
         else
         {
-            KabaSpeechPrintMessage(gText_Birch_Welcome);
+            KabaSpeech_PrintMessageBox(gText_Birch_Welcome);
             gTasks[taskId].func = Task_KabaSpeech_ThisWorld;
         }
     }
@@ -304,7 +304,7 @@ static void Task_KabaSpeech_ThisWorld(u8 taskId)
 
 // misc. helper functions
 
-static void DrawCharacterPic(u8 id)
+static void KabaSpeech_DrawCharacterPic(u8 id)
 {
     switch(id)
     {
@@ -323,7 +323,7 @@ static void DrawCharacterPic(u8 id)
     }
 }
 
-static inline void KabaSpeechPrintMessage(const u8 *str)
+static inline void KabaSpeech_PrintMessageBox(const u8 *str)
 {
     DrawDialogueFrame(WIN_TEXT, FALSE);
     if (str != gStringVar4)
