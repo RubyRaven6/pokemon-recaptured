@@ -16,6 +16,8 @@
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"
+#include "trainer_pokemon_sprites.h"
+#include "pokeball.h"
 #include "kaba_speech.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -35,6 +37,12 @@
  */
 
 // Define, enum, struct definitions
+
+// positions for joltik + pokeball
+// If you want to edit these, dont touch the `+ 32`!
+#define MON_POS_X 55 + 32
+#define MON_POS_Y 66 + 32
+
 enum Bgs
 {
     // self explanatory
@@ -81,6 +89,7 @@ struct KabaSpeech
     u16 introTilemapBuffer[0x800];
     u16 pic1TilemapBuffer[0x800];
     u16 pic2TilemapBuffer[0x800];
+    u8 monSpriteId;
     u8 platformSpriteIds[2]; // the platform is made out of 2 32x64sprites
     u16 alphaCoeff;
     u8 timer;
@@ -94,8 +103,13 @@ static void Task_KabaSpeech_Begin(u8);
 static void Task_KabaSpeech_FadeInEverything(u8);
 static void Task_KabaSpeech_WelcomeToTheWorld(u8);
 static void Task_KabaSpeech_ThisWorld(u8);
+static void Task_KabaSpeech_ReleaseMonFromPokeball(u8);
+static void Task_KabaSpeech_IsInhabitedFarAndWide(u8);
+static void Task_KabaSpeech_IStudyPokemon(u8);
+static void Task_KabaSpeech_baba(u8);
 static void KabaSpeech_DrawCharacterPic(u8);
 static inline void KabaSpeech_PrintMessageBox(const u8 *);
+static void KabaSpeech_CreateMonSprite(void);
 
 // Const data
 static const u16 sKabaSpeech_BgGfx[] = INCBIN_U16("graphics/kaba_speech/bg.4bpp");
@@ -220,6 +234,7 @@ static void Task_KabaSpeech_Begin(u8 taskId)
             ResetBgPositions();
             break;
         case STATE_BG_GFX:
+            KabaSpeech_CreateMonSprite();
             LoadPalette(sKabaSpeech_BgPal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
             LoadBgTiles(BG_INTRO, sKabaSpeech_BgGfx, 0x180, 0);
             CopyToBgTilemapBuffer(BG_INTRO, sKabaSpeech_BgMap, 0, 0);
@@ -298,8 +313,70 @@ static void Task_KabaSpeech_ThisWorld(u8 taskId)
 {
     if (!IsTextPrinterActive(WIN_TEXT))
     {
-        DebugPrintf("hello");
+        KabaSpeech_PrintMessageBox(COMPOUND_STRING(
+            "And this.."
+        ));
+        sKabaSpeech->timer = 30;
+        gTasks[taskId].func = Task_KabaSpeech_ReleaseMonFromPokeball;
     }
+}
+
+static void Task_KabaSpeech_ReleaseMonFromPokeball(u8 taskId)
+{
+    u32 spriteId;
+    if (!IsTextPrinterActive(WIN_TEXT))
+    {
+        if (sKabaSpeech->timer)
+        {
+            sKabaSpeech->timer--;
+        }
+        else
+        {
+            sKabaSpeech->timer = 0;
+            spriteId = sKabaSpeech->monSpriteId;
+            gSprites[spriteId].invisible = FALSE;
+            CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF, SPECIES_JOLTIK);
+            gTasks[taskId].func = Task_KabaSpeech_IsInhabitedFarAndWide;
+        }
+    }
+}
+
+static void Task_KabaSpeech_IsInhabitedFarAndWide(u8 taskId)
+{
+    if (sKabaSpeech->timer == 0xff)
+        sKabaSpeech->timer = 0;
+
+    sKabaSpeech->timer++;
+
+    if (sKabaSpeech->timer == 60)
+    {
+        KabaSpeech_PrintMessageBox(COMPOUND_STRING(
+            "..is Joltik, a Pokemon!{PAUSE 30}\p"
+        ));
+        PlayCry_Normal(SPECIES_JOLTIK, 0);
+    }
+
+    if (IsCryFinished())
+    {
+        if (sKabaSpeech->timer >= 96)
+        {
+            gTasks[taskId].func = Task_KabaSpeech_IStudyPokemon;
+        }
+    }
+}
+
+static void Task_KabaSpeech_IStudyPokemon(u8 taskId)
+{
+    if (!IsTextPrinterActive(WIN_TEXT))
+    {
+        KabaSpeech_PrintMessageBox(gText_Birch_MainSpeech);
+        gTasks[taskId].func = Task_KabaSpeech_baba;
+    }
+}
+
+static void Task_KabaSpeech_baba(u8 taskId)
+{
+
 }
 
 // misc. helper functions
@@ -338,3 +415,10 @@ static inline void KabaSpeech_PrintMessageBox(const u8 *str)
     CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
 }
 
+static void KabaSpeech_CreateMonSprite(void)
+{
+    sKabaSpeech->monSpriteId = CreateMonPicSprite_Affine(SPECIES_JOLTIK, FALSE, 0, MON_PIC_AFFINE_FRONT, MON_POS_X, MON_POS_Y, 14, TAG_NONE);
+    gSprites[sKabaSpeech->monSpriteId].callback = SpriteCallbackDummy;
+    gSprites[sKabaSpeech->monSpriteId].oam.priority = 0;
+    gSprites[sKabaSpeech->monSpriteId].invisible = TRUE;
+}
