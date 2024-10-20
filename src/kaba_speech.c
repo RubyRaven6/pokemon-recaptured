@@ -213,7 +213,7 @@ static void Task_KabaSpeech_Begin(u8 taskId)
             break;
         case STATE_BGS:
             ResetBgsAndClearDma3BusyFlags(0);
-			InitBgsFromTemplates(0, sKabaSpeech_BgTemplates, ARRAY_COUNT(sKabaSpeech_BgTemplates));
+            InitBgsFromTemplates(0, sKabaSpeech_BgTemplates, ARRAY_COUNT(sKabaSpeech_BgTemplates));
             SetBgTilemapBuffer(BG_INTRO, sKabaSpeech->introTilemapBuffer);
             SetBgTilemapBuffer(BG_PIC_1, sKabaSpeech->pic1TilemapBuffer);
             SetBgTilemapBuffer(BG_PIC_2, sKabaSpeech->pic2TilemapBuffer);
