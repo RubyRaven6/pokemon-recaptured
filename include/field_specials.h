@@ -33,5 +33,6 @@ void ResetFanClub(void);
 bool8 ShouldShowBoxWasFullMessage(void);
 void SetPCBoxToSendMon(u8 boxId);
 void PreparePartyForSkyBattle(void);
+void CheckZubatSpawning(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

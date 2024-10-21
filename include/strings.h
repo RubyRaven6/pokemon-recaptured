@@ -3046,4 +3046,9 @@ extern const u8 gText_PlantBerry[];
 extern const u8 gText_AM[];
 extern const u8 gText_PM[];
 
+//Starters
+extern const u8 gText_Fury[];
+extern const u8 gText_Mischief[];
+extern const u8 gText_Friendship[];
+
 #endif // GUARD_STRINGS_H

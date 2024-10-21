@@ -3,18 +3,23 @@ raw `
 .set LOCALID_MANKEY, 2
 .set LOCALID_TINKATINK, 3
 .set LOCALID_TEDDIURSA, 4
+.set LOCALID_ELSIE, 7
+.set LOCALID_BARNEY, 8
 `
 
 mapscripts FlottTown_FlottCave_MapScripts {
     MAP_SCRIPT_ON_TRANSITION: FlottTown_FlottCave_OnTransition
     MAP_SCRIPT_ON_FRAME_TABLE [ 
         VAR_FLOTT_TOWN_STATE, 6: FlottTown_FlottCave_OnFrame
+        VAR_FLOTT_TOWN_STATE, 9: FlottTown_FlottCave_TurnOn
     ]
 }
 
 script FlottTown_FlottCave_OnTransition {
     destroyfollower
-    setflag(FLAG_TEMP_5)
+    setflag(FLAG_BARNEY_IN_CAVE)
+    setflag(FLAG_ELSIE_IN_CAVE)
+    call(FlottTown_FlottCave_CaveLightLevel)
 }
 
 script FlottTown_FlottCave_OnFrame{
@@ -25,18 +30,281 @@ script FlottTown_FlottCave_OnFrame{
     end
 }
 
+script FlottTown_FlottCave_TurnOn{
+    setflashlevel(0)
+}
+
+script FlottTown_FlottCave_CaveLightLevel{
+    switch (var(VAR_FLOTT_TOWN_STATE)) {
+        case 6:
+            setflashlevel(6)
+            break
+        case 8:
+            setflashlevel(0)
+            break
+    }
+}
+
 script FlottTown_FlottCave_EventScript_ZubatAttacks{
-    msgbox(format("As you walk inside the dark cave, you hear a noise coming from the darkness!"))
+    lockall
+    msgbox(format("As you walk inside the dark cave, you hear a noise coming from the darkness!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     playmoncry(SPECIES_ZUBAT, CRY_MODE_NORMAL)
     waitmoncry
-    getplayerxy(VAR_TEMP_0, VAR_TEMP_1)
-    subvar(VAR_TEMP_0, 2)
-    subvar(VAR_TEMP_1, 2)
+    special(CheckZubatSpawning)
+    addobject(LOCALID_ZUBAT)
     setobjectxy(LOCALID_ZUBAT, VAR_TEMP_0, VAR_TEMP_1)
+    applymovement(LOCALID_ZUBAT, Common_Movement_FacePlayer)
+    call(FlottTown_FlottCave_FacePlayerDirection)
+    fadescreen(FADE_TO_BLACK)
+    msgbox(format("As the Pokémon is about to attack, you feel a presence approach."))
+    call(FlottTown_FlottCave_StarterChoice)
+    fadescreen(FADE_FROM_BLACK)
+    call(FlottTown_FlottCave_WildZubatBattle)
+    delay(60)
+    call(FlottTown_FlottCave_StarterWantsToJoin)
+    clearflag(FLAG_FALLEN_INTO_CAVE)
+    setvar(VAR_FLOTT_TOWN_STATE, 8)
+    call(FlottTown_FlottCave_EventScript_RockSmash)
+    end
+}
+
+script FlottTown_FlottCave_EventScript_RockSmash{
+    msgbox(format("???: Golurk! Use Rock Smash!"), MSGBOX_DEFAULT)
+    playmoncry(SPECIES_GOLURK, CRY_MODE_NORMAL)
+    playse(SE_M_ROCK_THROW)
+    clearflag(FLAG_ELSIE_IN_CAVE)
+    clearflag(FLAG_BARNEY_IN_CAVE)
+    setflag(FLAG_TEMP_11)
+    removeobject(6)
+    msgbox(format("That sounded like it came from the smashable rocks!"), MSGBOX_DEFAULT)
+    closemessage
+    end
+}
+
+script FlottTown_FlottCave_RightTrigger{
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft)
+    call(FlottTown_FlottCave_EventScript_ElsieRescue)
+}
+script FlottTown_FlottCave_BottomTrigger{
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    call(FlottTown_FlottCave_EventScript_ElsieRescue)
+}
+
+script FlottTown_FlottCave_EventScript_ElsieRescue{
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    msgbox(FlottTown_FlottCave_Text_Rescue, MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_BARNEY, FlottTown_FlottCave_Movement_BarneyWalksToPlayer)
+    waitmovement(LOCALID_BARNEY)
+    applymovement(LOCALID_ELSIE, FlottTown_FlottCave_Movement_ElsieWalksUp)
+    applymovement(OBJ_EVENT_ID_PLAYER, FlottTown_FlottCave_Movement_PlayerWalksUp)
+    waitmovement(LOCALID_BARNEY)
+    waitmovement(LOCALID_ELSIE)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
+    msgbox(format("ELSIE: {PLAYER}! Thank goodness you're alright. I don't know what I'd do if you got hurt."), MSGBOX_DEFAULT)
+    applymovement(LOCALID_ELSIE, Common_Movement_WalkInPlaceRight)
+    msgbox(format("ELSIE: This is Mr. Heinrich. This was his old gym."), MSGBOX_DEFAULT)
+    applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
+    applymovement(LOCALID_BARNEY, Common_Movement_WalkInPlaceDown)
+    msgbox(FlottTown_FlottCave_Text_LetsGoHome, MSGBOX_DEFAULT)
+    setflag(FLAG_ELSIE_IN_CAVE)
+    setflag(FLAG_BARNEY_IN_CAVE)
+    setvar(VAR_FLOTT_TOWN_STATE, 9)
+    warp(MAP_FLOTT_TOWN_BARNEYS_HOUSE, 7, 4)
+    end
+}
+
+script Holder{
+
+}
+
+script FlottTown_FlottCave_FacePlayerDirection{
+    specialvar(VAR_ZUBAT_DIR, GetPlayerFacingDirection)
+    switch(var(VAR_ZUBAT_DIR)){
+        case DIR_NORTH:
+            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
+            return
+        case DIR_SOUTH:
+            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+            return
+        case DIR_EAST:
+            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+            return
+        case DIR_WEST:
+            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
+            return            
+    }
+    return
+}
+
+script FlottTown_FlottCave_StarterChoice{
+    lockall
+	msgbox(format("What presence do you feel intervenes?"))
+    multichoice(10, 4, 115, 1)
+    if(var(VAR_RESULT) == 0){
+        addobject(LOCALID_MANKEY)
+        applymovement(LOCALID_MANKEY, Common_Movement_FaceAwayPlayer)
+        setobjectxy(LOCALID_MANKEY, VAR_TEMP_2, VAR_TEMP_3)
+        fadescreen(FADE_FROM_BLACK)
+        msgbox(format("Mankey jumped in to save you!"), MSGBOX_DEFAULT)
+        playmoncry(SPECIES_MANKEY, CRY_MODE_NORMAL)
+        waitmoncry
+        givemon(SPECIES_MANKEY, 10, ITEM_NONE)
+        setvar(VAR_STARTER_MON, 0)
+        removeobject(LOCALID_TINKATINK)
+        removeobject(LOCALID_TEDDIURSA)
+        return
+    }
+    if(var(VAR_RESULT) == 1){
+        addobject(LOCALID_TINKATINK)
+        applymovement(LOCALID_TINKATINK, Common_Movement_FaceAwayPlayer)
+        setobjectxy(LOCALID_TINKATINK, VAR_TEMP_2, VAR_TEMP_3)
+        fadescreen(FADE_FROM_BLACK)
+        msgbox(format("Tinkatink jumped in to save you!"), MSGBOX_DEFAULT)
+        playmoncry(SPECIES_TINKATINK, CRY_MODE_NORMAL)
+        waitmoncry
+        givemon(SPECIES_TINKATINK, 10, ITEM_NONE)
+        setvar(VAR_STARTER_MON, 1)
+        removeobject(LOCALID_MANKEY)
+        removeobject(LOCALID_TEDDIURSA)
+        return
+    }
+    if(var(VAR_RESULT) == 2){
+        addobject(LOCALID_TEDDIURSA)
+        applymovement(LOCALID_TEDDIURSA, Common_Movement_FaceAwayPlayer)
+        setobjectxy(LOCALID_TEDDIURSA, VAR_TEMP_2, VAR_TEMP_3)
+        fadescreen(FADE_FROM_BLACK)
+        msgbox(format("Teddiursa jumped in to save you!"), MSGBOX_DEFAULT)
+        playmoncry(SPECIES_TEDDIURSA, CRY_MODE_NORMAL)
+        waitmoncry
+        givemon(SPECIES_TEDDIURSA, 10, ITEM_NONE)
+        setvar(VAR_STARTER_MON, 2)
+        removeobject(LOCALID_MANKEY)
+        removeobject(LOCALID_TINKATINK)
+        return
+    }
+}
+
+script FlottTown_FlottCave_WildZubatBattle{
+    removeitem(ITEM_POKE_BALL, 1)
+    setwildbattle(SPECIES_ZUBAT, 10)
+    dowildbattle
+    fadescreen(FADE_TO_BLACK)
+    removeobject(LOCALID_ZUBAT)
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("The wild Zubat ran away!"), MSGBOX_DEFAULT)
+    closemessage
+    return
+}
+
+script FlottTown_FlottCave_StarterWantsToJoin{
+    switch(var(VAR_STARTER_MON)){
+        case 0:
+            applymovement(LOCALID_MANKEY, Common_Movement_FacePlayer)
+            msgbox(format("Mankey is looking at you curiously. It seems to want to join you."), MSGBOX_DEFAULT)
+            msgbox(format("Do you accept?"), MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+                call(FlottTown_FlottCave_StarterYesNo)
+            }
+            else{
+                msgbox(format("Mankey looks like it's about to hit you next."), MSGBOX_DEFAULT)
+                call(FlottTown_FlottCave_StarterWantsToJoin)
+            }
+        case 1:
+            applymovement(LOCALID_TINKATINK, Common_Movement_FacePlayer)
+            msgbox(format("Tinkatink is too busy playing with its hammer to notice you."), MSGBOX_DEFAULT)
+            msgbox(format("Do you want to convince it to join you?"), MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+                call(FlottTown_FlottCave_StarterYesNo)
+            }
+            else{
+                msgbox(format("Are you sure? It looks really cute."), MSGBOX_DEFAULT)
+                call(FlottTown_FlottCave_StarterWantsToJoin)
+            }        
+        case 2:
+            applymovement(LOCALID_TEDDIURSA, Common_Movement_FacePlayer)
+            msgbox(format("Teddiursa is looking at you curiously. It seems to want to join you."), MSGBOX_DEFAULT)
+            msgbox(format("Do you accept?"), MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+                call(FlottTown_FlottCave_StarterYesNo)
+            }
+            else{
+                msgbox(format("Teddiursa looks at you with Baby-Doll eyes."), MSGBOX_DEFAULT)
+                call(FlottTown_FlottCave_StarterWantsToJoin)
+            }
+    }
+    return
+}
+
+script FlottTown_FlottCave_StarterYesNo{
+    switch(var(VAR_STARTER_MON)){
+        case 0:
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox(format("Mankey joined you!"), MSGBOX_DEFAULT)
+            waitfanfare
+            setflag(FLAG_SYS_POKEMON_GET)
+            removeobject(LOCALID_MANKEY)
+            call(FlottTown_FlottCave_NicknamePartyMon)
+            return
+        case 1:
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox(format("Tinkatink joined you!"), MSGBOX_DEFAULT)
+            waitfanfare
+            setflag(FLAG_SYS_POKEMON_GET)
+            removeobject(LOCALID_TINKATINK)
+            call(FlottTown_FlottCave_NicknamePartyMon)
+            return
+        case 2:
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox(format("Teddiursa joined you!"), MSGBOX_DEFAULT)
+            waitfanfare
+            setflag(FLAG_SYS_POKEMON_GET)
+            removeobject(LOCALID_TEDDIURSA)
+            call(FlottTown_FlottCave_NicknamePartyMon)
+            return
+    }
+}
+
+script FlottTown_FlottCave_NicknamePartyMon{
+    msgbox("Give a nickname?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        call(Common_EventScript_GetGiftMonPartySlot)
+        call(Common_EventScript_NameReceivedPartyMon)
+    }
+    else{closemessage}
+    return
+}
+
+movement FlottTown_FlottCave_Movement_BarneyWalksToPlayer{
+    walk_up * 4
+    face_down
+    step_end
+}
+
+movement FlottTown_FlottCave_Movement_ElsieWalksUp{
+    walk_up * 3
+    step_end
+}
+
+movement FlottTown_FlottCave_Movement_PlayerWalksUp{
+    walk_left
+    walk_up * 3
+    step_end
 }
 
 text FlottTown_FlottCave_Text_ElsieWorried{
     format("ELSIE: Oh my god! {PLAYER}! Are you okay?! Sit tight in there, okay? I'll go get help!\pYou here the footsteps of your sister exiting the gym.")
+}
+
+text FlottTown_FlottCave_Text_Rescue{
+    format("???: Ah! There you are! Come, let's get you out here.\p" 
+            "ELSIE: {PLAYER}! Oh gods, I'm so glad you're okay!")
+}
+
+text FlottTown_FlottCave_Text_LetsGoHome {
+    format("BARNEY: Indeed it were. Now, how about we get you kids out of this dreadful place? You both look tired. Seeing as it's my gym, anything that happens here is on my head. My home is nearby; let's take a rest there.")
 }

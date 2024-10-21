@@ -13,16 +13,12 @@ script FlottTown_AbandonedGym_OnFrame{
     lock
     applymovement(OBJ_EVENT_ID_PLAYER, FlottTown_AbandonedGym_WalkingIn)
     waitmovement(0)
-    clearflag(FLAG_ELSIE_ENTERS)
+    clearflag(FLAG_ELSIE_ENTERS_GYM)
     addobject(LOCALID_ELSIE)
     lock
-    applymovement(OBJ_EVENT_ID_PLAYER, FlottTown_AbandonedGym_FaceUp)
-    applymovement(LOCALID_ELSIE, FlottTown_AbandonedGym_FaceUp)
-    waitmovement(OBJ_EVENT_ID_PLAYER)
+    applymovement(LOCALID_ELSIE, Common_Movement_FaceUp)
     waitmovement(LOCALID_ELSIE)
     msgbox(format("ELSIE: Huh, this gym is pretty run down. I wonder what's inside?"), MSGBOX_DEFAULT)
-    waitmessage
-    closemessage
     msgbox(format("Elsie decided to follow you!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -31,19 +27,27 @@ script FlottTown_AbandonedGym_OnFrame{
     end
 }
 
+script FlottTown_AbandonedGym_LadderStopper{
+    msgbox(FlottTown_AbandonedGym_Text_LetsStayUp, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, WalkAway)
+}
+
 script FlottTown_AbandonedGym_EventScript_FreePokeball{
     msgbox(format("It's a Pokéball! It seems there's no Pokémon inside it, though."), MSGBOX_AUTOCLOSE)
     removeobject(LOCALID_BALL, MAP_FLOTT_TOWN_ABANDONED_GYM)
     giveitem(ITEM_POKE_BALL, 1)
     setvar(VAR_FLOTT_TOWN_STATE, 5)
     closemessage
-    msgbox(FlottTown_AbandonedGym_Text_BeforeCollapse, MSGBOX_DEFAULT)
+    msgbox(FlottTown_AbandonedGym_Text_BeforeCollapse, MSGBOX_NPC)
     waitmessage
     closemessage
     end
 }
 
 script FlottTown_AbandonedGym_EventScript_GymCollapses{
+    applymovement(OBJ_EVENT_ID_FOLLOWER, Common_Movement_FacePlayer)
     setmetatile(12, 17, METATILE_Cave_CrackedFloor, FALSE)
     setmetatile(13, 17, METATILE_Cave_CrackedFloor, FALSE)
     setmetatile(14, 17, METATILE_Cave_CrackedFloor, FALSE)
@@ -51,8 +55,8 @@ script FlottTown_AbandonedGym_EventScript_GymCollapses{
     setmetatile(13, 18, METATILE_Cave_CrackedFloor, FALSE)
     setmetatile(14, 18, METATILE_Cave_CrackedFloor, FALSE)
     special(DrawWholeMapView)
-    msgbox(format("ELSIE:{PLAYER}! Watch out!"))
-    waitmessage
+    applymovement(OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer)
+    msgbox(format("ELSIE:{PLAYER}! Watch out!"), MSGBOX_DEFAULT)
     closemessage
     setmetatile(12, 17, METATILE_Cave_CrackedFloor_Hole, FALSE)
     setmetatile(13, 17, METATILE_Cave_CrackedFloor_Hole, FALSE)
@@ -66,24 +70,30 @@ script FlottTown_AbandonedGym_EventScript_GymCollapses{
 }
 
 script FlottTown_AbandonedGym_ElsieFollowerScript{
-    lock
-    faceplayer
+    facefollower
     if(var(VAR_FLOTT_TOWN_STATE) == 4){
         msgbox(format("ELSIE: I wonder what's inside? There must be something interesting deeper in."))
+        closemessage
     }
     else{
         msgbox(format("ELSIE: What'cha waiting for? Let's get outta here!\p Once we get home, I can cook you up a hamburg steak."))
+        closemessage
     }
-    closemessage
-    release
-}
-
-movement FlottTown_AbandonedGym_FaceUp{
-    face_up
 }
 
 movement FlottTown_AbandonedGym_WalkingIn{
     walk_left
+    face_up
+    step_end
+}
+
+movement WalkAway{
+    walk_left
+    step_end
+}
+
+text FlottTown_AbandonedGym_Text_LetsStayUp {
+    format("ELSIE: A ladder? Hmm...let's not go down there.")
 }
 
 text FlottTown_AbandonedGym_Text_BeforeCollapse{

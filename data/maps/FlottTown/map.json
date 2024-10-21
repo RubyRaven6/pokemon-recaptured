@@ -47,8 +47,8 @@
       "x": 25,
       "y": 6,
       "elevation": 0,
-      "dest_map": "MAP_FLOTT_TOWN_ABANDONED_GYM",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_FLOTT_TOWN_BARNEYS_HOUSE",
+      "dest_warp_id": "1"
     },
     {
       "x": 7,

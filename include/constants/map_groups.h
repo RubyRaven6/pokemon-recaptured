@@ -73,6 +73,7 @@
 #define MAP_FLOTT_TOWN_PLAYER_HOUSE_2F (4 | (1 << 8))
 #define MAP_FLOTT_TOWN_ABANDONED_GYM   (5 | (1 << 8))
 #define MAP_FLOTT_TOWN_FLOTT_CAVE      (6 | (1 << 8))
+#define MAP_FLOTT_TOWN_BARNEYS_HOUSE   (7 | (1 << 8))
 
 // gMapGroup_IndoorOldale
 #define MAP_OLDALE_TOWN_HOUSE1            (0 | (2 << 8))

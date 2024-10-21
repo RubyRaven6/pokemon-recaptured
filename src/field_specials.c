@@ -141,6 +141,8 @@ static void Task_CloseBattlePikeCurtain(u8);
 static u8 DidPlayerGetFirstFans(void);
 static void SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
+void CheckZubatSpawning(void);
+
 #if FREE_LINK_BATTLE_RECORDS == FALSE
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
 #else
@@ -4275,4 +4277,65 @@ void PreparePartyForSkyBattle(void)
     }
     VarSet(B_VAR_SKY_BATTLE,participatingPokemonSlot);
     CompactPartySlots();
+}
+
+void CheckZubatSpawning(void)
+{
+    s16 playerX;
+    s16 playerY;
+    s16 zubatX =   0;
+    s16 zubatY =   0;
+    s16 starterX = 0;
+    s16 starterY = 0;
+    u8 playerDirection = GetPlayerFacingDirection();
+
+    
+    //gets the player's position
+    PlayerGetDestCoords(&playerX, &playerY);
+
+    //gets the player's direction
+    switch (playerDirection)
+        {
+        case DIR_NORTH:
+            zubatY =   -2;
+            starterY = -1;
+            VarSet(VAR_ZUBAT_DIR, 1);
+            break;
+        case DIR_WEST:
+            zubatX =   -2;
+            starterX = -1;
+            VarSet(VAR_ZUBAT_DIR, 2);
+            break;
+        case DIR_EAST:
+            zubatX =   +2;
+            starterX = +1;
+            VarSet(VAR_ZUBAT_DIR, 3);
+            break;
+        case DIR_SOUTH:
+            zubatY =   +2;
+            starterY = +1;
+            VarSet(VAR_ZUBAT_DIR, 4);
+            break;
+        }
+
+    // Checks if the tiles behind player are impassible. If they are, runs opposite code to put it in front of player instead
+    if(MapGridGetCollisionAt(VAR_TEMP_0, VAR_TEMP_1)){
+        VarSet(VAR_TEMP_0, (playerX-MAP_OFFSET)-zubatX);
+        VarSet(VAR_TEMP_1, (playerY-MAP_OFFSET)-zubatY);
+        VarSet(VAR_TEMP_2, (playerX-MAP_OFFSET)-starterX);
+        VarSet(VAR_TEMP_3, (playerY-MAP_OFFSET)-starterY);
+
+        //coords for if there's collision two tiles behind player, which just inverts the coordinate addition
+    }
+    else{
+        //assigns var coords according to player's position and direction
+        VarSet(VAR_TEMP_0, (playerX-MAP_OFFSET)+zubatX);
+        VarSet(VAR_TEMP_1, (playerY-MAP_OFFSET)+zubatY);
+        VarSet(VAR_TEMP_2, (playerX-MAP_OFFSET)+starterX);
+        VarSet(VAR_TEMP_3, (playerY-MAP_OFFSET)+starterY);
+        return;
+        //coords for if there's no collision two tiles behind player
+    }
+
+    return;
 }

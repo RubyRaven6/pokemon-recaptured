@@ -24,168 +24,180 @@ FlottTown_AbandonedGym_OnFrame::
 # 15 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	waitmovement 0
 # 16 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	clearflag FLAG_ELSIE_ENTERS
+	clearflag FLAG_ELSIE_ENTERS_GYM
 # 17 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	addobject LOCALID_ELSIE
 # 18 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	lock
 # 19 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, FlottTown_AbandonedGym_FaceUp
+	applymovement LOCALID_ELSIE, Common_Movement_FaceUp
 # 20 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	applymovement LOCALID_ELSIE, FlottTown_AbandonedGym_FaceUp
-# 21 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
-# 22 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	waitmovement LOCALID_ELSIE
-# 23 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 21 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	msgbox FlottTown_AbandonedGym_OnFrame_Text_0, MSGBOX_DEFAULT
-# 24 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	waitmessage
-# 25 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	closemessage
-# 26 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 22 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	msgbox FlottTown_AbandonedGym_OnFrame_Text_1, MSGBOX_DEFAULT
-# 27 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 23 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	waitmessage
-# 28 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 24 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	closemessage
-# 29 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 25 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	setfollower LOCALID_ELSIE, FOLLOWER_ALL, FlottTown_AbandonedGym_ElsieFollowerScript, 0
-# 30 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 26 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	setvar VAR_FLOTT_TOWN_STATE, 4
 	end
 
 
-FlottTown_AbandonedGym_EventScript_FreePokeball::
-# 35 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	msgbox FlottTown_AbandonedGym_EventScript_FreePokeball_Text_0, MSGBOX_AUTOCLOSE
-# 36 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	removeobject LOCALID_BALL, MAP_FLOTT_TOWN_ABANDONED_GYM
-# 37 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	giveitem ITEM_POKE_BALL, 1
-# 38 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setvar VAR_FLOTT_TOWN_STATE, 5
-# 39 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	closemessage
-# 40 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	msgbox FlottTown_AbandonedGym_Text_BeforeCollapse, MSGBOX_DEFAULT
-# 41 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+FlottTown_AbandonedGym_LadderStopper::
+# 31 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	msgbox FlottTown_AbandonedGym_Text_LetsStayUp, MSGBOX_DEFAULT
+# 32 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	waitmessage
+# 33 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	closemessage
+# 34 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, WalkAway
+	return
+
+
+FlottTown_AbandonedGym_EventScript_FreePokeball::
+# 38 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	msgbox FlottTown_AbandonedGym_EventScript_FreePokeball_Text_0, MSGBOX_AUTOCLOSE
+# 39 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	removeobject LOCALID_BALL, MAP_FLOTT_TOWN_ABANDONED_GYM
+# 40 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	giveitem ITEM_POKE_BALL, 1
+# 41 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	setvar VAR_FLOTT_TOWN_STATE, 5
 # 42 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	closemessage
+# 43 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	msgbox FlottTown_AbandonedGym_Text_BeforeCollapse, MSGBOX_NPC
+# 44 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	waitmessage
+# 45 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	closemessage
 	end
 
 
 FlottTown_AbandonedGym_EventScript_GymCollapses::
-# 47 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 12, 17, METATILE_Cave_CrackedFloor, FALSE
-# 48 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 13, 17, METATILE_Cave_CrackedFloor, FALSE
-# 49 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 14, 17, METATILE_Cave_CrackedFloor, FALSE
 # 50 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 12, 18, METATILE_Cave_CrackedFloor, FALSE
+	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_FacePlayer
 # 51 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 13, 18, METATILE_Cave_CrackedFloor, FALSE
+	setmetatile 12, 17, METATILE_Cave_CrackedFloor, FALSE
 # 52 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 14, 18, METATILE_Cave_CrackedFloor, FALSE
+	setmetatile 13, 17, METATILE_Cave_CrackedFloor, FALSE
 # 53 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	special DrawWholeMapView
+	setmetatile 14, 17, METATILE_Cave_CrackedFloor, FALSE
 # 54 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	msgbox FlottTown_AbandonedGym_EventScript_GymCollapses_Text_0
+	setmetatile 12, 18, METATILE_Cave_CrackedFloor, FALSE
 # 55 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	waitmessage
+	setmetatile 13, 18, METATILE_Cave_CrackedFloor, FALSE
 # 56 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	closemessage
+	setmetatile 14, 18, METATILE_Cave_CrackedFloor, FALSE
 # 57 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 12, 17, METATILE_Cave_CrackedFloor_Hole, FALSE
-# 58 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 13, 17, METATILE_Cave_CrackedFloor_Hole, FALSE
-# 59 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 14, 17, METATILE_Cave_CrackedFloor_Hole, FALSE
-# 60 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 12, 18, METATILE_Cave_CrackedFloor_Hole, FALSE
-# 61 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 13, 18, METATILE_Cave_CrackedFloor_Hole, FALSE
-# 62 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setmetatile 14, 18, METATILE_Cave_CrackedFloor_Hole, FALSE
-# 63 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	special DrawWholeMapView
+# 58 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	applymovement OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer
+# 59 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	msgbox FlottTown_AbandonedGym_EventScript_GymCollapses_Text_0, MSGBOX_DEFAULT
+# 60 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	closemessage
+# 61 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	setmetatile 12, 17, METATILE_Cave_CrackedFloor_Hole, FALSE
+# 62 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	setmetatile 13, 17, METATILE_Cave_CrackedFloor_Hole, FALSE
+# 63 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	setmetatile 14, 17, METATILE_Cave_CrackedFloor_Hole, FALSE
 # 64 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setholewarp MAP_FLOTT_TOWN_FLOTT_CAVE
+	setmetatile 12, 18, METATILE_Cave_CrackedFloor_Hole, FALSE
 # 65 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	setmetatile 13, 18, METATILE_Cave_CrackedFloor_Hole, FALSE
+# 66 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	setmetatile 14, 18, METATILE_Cave_CrackedFloor_Hole, FALSE
+# 67 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	special DrawWholeMapView
+# 68 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	setholewarp MAP_FLOTT_TOWN_FLOTT_CAVE
+# 69 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	setvar VAR_FLOTT_TOWN_STATE, 6
 	return
 
 
 FlottTown_AbandonedGym_ElsieFollowerScript::
-# 69 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	lock
-# 70 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	faceplayer
-# 71 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 73 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	facefollower
+# 74 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	compare VAR_FLOTT_TOWN_STATE, 4
-	goto_if_eq FlottTown_AbandonedGym_ElsieFollowerScript_2
-# 75 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	goto_if_eq FlottTown_AbandonedGym_ElsieFollowerScript_1
+# 79 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	msgbox FlottTown_AbandonedGym_ElsieFollowerScript_Text_1
-FlottTown_AbandonedGym_ElsieFollowerScript_1:
-# 77 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 80 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	closemessage
-# 78 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	release
 	return
 
-FlottTown_AbandonedGym_ElsieFollowerScript_2:
-# 72 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+FlottTown_AbandonedGym_ElsieFollowerScript_1:
+# 75 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	msgbox FlottTown_AbandonedGym_ElsieFollowerScript_Text_0
-	goto FlottTown_AbandonedGym_ElsieFollowerScript_1
+# 76 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	closemessage
+	return
 
 
-# 81 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-FlottTown_AbandonedGym_FaceUp:
-# 82 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 84 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+FlottTown_AbandonedGym_WalkingIn:
+# 85 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	walk_left
+# 86 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	face_up
+# 87 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	step_end
 
-# 85 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-FlottTown_AbandonedGym_WalkingIn:
-# 86 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 90 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+WalkAway:
+# 91 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	walk_left
+# 92 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	step_end
 
 FlottTown_AbandonedGym_OnFrame_Text_0:
-# 23 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 21 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	.string "ELSIE: Huh, this gym is pretty run down.\n"
 	.string "I wonder what's inside?$"
 
 FlottTown_AbandonedGym_OnFrame_Text_1:
-# 26 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 22 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	.string "Elsie decided to follow you!$"
 
 FlottTown_AbandonedGym_EventScript_FreePokeball_Text_0:
-# 35 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 38 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	.string "It's a Pokéball! It seems there's no\n"
 	.string "Pokémon inside it, though.$"
 
 FlottTown_AbandonedGym_EventScript_GymCollapses_Text_0:
-# 54 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 59 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	.string "ELSIE:{PLAYER}! Watch out!$"
 
 FlottTown_AbandonedGym_ElsieFollowerScript_Text_0:
-# 72 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 75 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	.string "ELSIE: I wonder what's inside? There\n"
 	.string "must be something interesting deeper\l"
 	.string "in.$"
 
 FlottTown_AbandonedGym_ElsieFollowerScript_Text_1:
-# 75 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 79 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	.string "ELSIE: What'cha waiting for? Let's get\n"
 	.string "outta here!\p"
 	.string "Once we get home, I can cook you up a\n"
 	.string "hamburg steak.$"
 
+FlottTown_AbandonedGym_Text_LetsStayUp::
+# 95 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	.string "ELSIE: A ladder? Hmm...let's not go down\n"
+	.string "there.$"
+
 FlottTown_AbandonedGym_Text_BeforeCollapse::
-# 89 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+# 99 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	.string "ELSIE: Oh hey, a Pokéball! Maybe you\n"
 	.string "can catch your own Pokémon with that\l"
 	.string "someday?\p"

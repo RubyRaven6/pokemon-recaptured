@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_ELSIE_ENTERS"
+      "flag": "FLAG_ELSIE_ENTERS_GYM"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
@@ -48,6 +48,13 @@
       "elevation": 0,
       "dest_map": "MAP_FLOTT_TOWN",
       "dest_warp_id": "4"
+    },
+    {
+      "x": 16,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_FLOTT_TOWN_FLOTT_CAVE",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -95,6 +102,60 @@
       "var": "VAR_FLOTT_TOWN_STATE",
       "var_value": "5",
       "script": "FlottTown_AbandonedGym_EventScript_GymCollapses"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "4",
+      "script": "FlottTown_AbandonedGym_LadderStopper"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 3,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "4",
+      "script": "FlottTown_AbandonedGym_LadderStopper"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "4",
+      "script": "FlottTown_AbandonedGym_LadderStopper"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "5",
+      "script": "FlottTown_AbandonedGym_LadderStopper"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 4,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "5",
+      "script": "FlottTown_AbandonedGym_LadderStopper"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 3,
+      "elevation": 0,
+      "var": "VAR_FLOTT_TOWN_STATE",
+      "var_value": "5",
+      "script": "FlottTown_AbandonedGym_LadderStopper"
     }
   ],
   "bg_events": [

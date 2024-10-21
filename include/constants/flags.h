@@ -42,14 +42,14 @@
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
-#define FLAG_BOAT_DEPARTS    0x20 // Unused Flag
-#define FLAG_ELSIE_LEAVES    0x21 // Unused Flag
-#define FLAG_ELSIE_ENTERS    0x22 // Unused Flag
-#define FLAG_FALLEN_INTO_CAVE    0x23 // Unused Flag
-#define FLAG_UNUSED_0x024    0x24 // Unused Flag
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
-#define FLAG_UNUSED_0x026    0x26 // Unused Flag
-#define FLAG_UNUSED_0x027    0x27 // Unused Flag
+#define FLAG_BOAT_DEPARTS              0x20 // For S.S. Anne
+#define FLAG_ELSIE_DISEMBARKS          0x21 //Used for when Elsie departs from the S.S. Anne
+#define FLAG_ELSIE_ENTERS_GYM          0x22 // When Elsie Enters Gym
+#define FLAG_FALLEN_INTO_CAVE          0x23 // When player falls into cave. Used for step counting.
+#define FLAG_BARNEY_IN_CAVE            0x24 // For when Barney appears in the cave.
+#define FLAG_ELSIE_IN_CAVE             0x25 // For when Elsie appears in the cave.
+#define FLAG_ELSIE_IN_BARNEYS_HOUSE    0x26 // Unused Flag
+#define FLAG_BARNEY_IN_HOUSE    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag
 #define FLAG_UNUSED_0x029    0x29 // Unused Flag
 #define FLAG_UNUSED_0x02A    0x2A // Unused Flag

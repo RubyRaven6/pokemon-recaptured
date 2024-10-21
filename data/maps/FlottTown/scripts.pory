@@ -1,7 +1,8 @@
 mapscripts FlottTown_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION: FlottTown_OnTransition
 }
 
-// Flott town has different states depending on what's already happened. Uses VAR_FLOTT_TOWN
+// Flott town has different states depending on what's already happened. Uses VAR_FLOTT_TOWN_STATE
 // 0 = Nothing; start of the game
 // 1 = Exited ship cabin
 // 2 = S.S. Anne Departs
@@ -9,10 +10,16 @@ mapscripts FlottTown_MapScripts{
 // 4 = Entered the Gym
 // 5 = Took the Pokeball
 // 6 = Fell Into a cave
-// 7 = In the cave, after Elsie leavs to get help.
+// 7 = In the cave, after Elsie leaves to get help.
+// 8 = Starter Pokémon acquired
+// 9 = Visited Barney's House
+
+script FlottTown_OnTransition{
+    setflag(FLAG_BARNEY_IN_HOUSE)
+}
 
 script FlottTown_EventScript_ElsieBringsUsHome1{
-    applymovement(1, ElsieLooksAtDown)
+    applymovement(1, Common_Movement_FaceDown)
     waitmovement(0)
     applymovement(1, Common_Movement_ExclamationMark)
     applymovement(OBJ_EVENT_ID_PLAYER, MoveNextToElsie1)
@@ -21,7 +28,7 @@ script FlottTown_EventScript_ElsieBringsUsHome1{
 }
 
 script FlottTown_EventScript_ElsieBringsUsHome2{
-    applymovement(1, ElsieLooksAtDown)
+    applymovement(1, Common_Movement_FaceDown)
     waitmovement(0)
     applymovement(1, Common_Movement_ExclamationMark)
     applymovement(OBJ_EVENT_ID_PLAYER, MoveNextToElsie2)
@@ -30,7 +37,7 @@ script FlottTown_EventScript_ElsieBringsUsHome2{
 }
 
 script FlottTown_EventScript_ElsieBringsUsHome3{
-    applymovement(1, ElsieLooksAtDown)
+    applymovement(1, Common_Movement_FaceDown)
     waitmovement(0)
     applymovement(1, Common_Movement_ExclamationMark)
     applymovement(OBJ_EVENT_ID_PLAYER, MoveNextToElsie3)
@@ -39,21 +46,14 @@ script FlottTown_EventScript_ElsieBringsUsHome3{
 }
 
 script FlottTown_EventScript_ElsieBringsUsHome4{
-    applymovement(1, ElsieLooksAtPlayer)
-    applymovement(OBJ_EVENT_ID_PLAYER, PlayerLooksAtElsie)
+    applymovement(1, Common_Movement_FaceRight)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     waitmovement(1)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     msgbox(FlottTown_Text_TookYourTime, MSGBOX_DEFAULT)
     waitmessage
-    applymovement(1, LookAtTown)
-    applymovement(OBJ_EVENT_ID_PLAYER, LookAtTown)
-    waitmovement(1)
-    waitmovement(OBJ_EVENT_ID_PLAYER)
-    msgbox(FlottTown_Text_LookAtTown, MSGBOX_DEFAULT)
-    closemessage
-    delay(180)
-    applymovement(1, ElsieLooksAtPlayer)
-    applymovement(OBJ_EVENT_ID_PLAYER, PlayerLooksAtElsie)
+    applymovement(1, Common_Movement_FaceRight)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     waitmovement(1)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     msgbox(FlottTown_Text_LetsTakeALook, MSGBOX_DEFAULT)
@@ -64,13 +64,13 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     applymovement(OBJ_EVENT_ID_PLAYER, PlayerWalksToHouse)
     waitmovement(1)
     waitmovement(OBJ_EVENT_ID_PLAYER)
-    applymovement(1, LookAtTown)
-    applymovement(OBJ_EVENT_ID_PLAYER, LookAtTown)
+    applymovement(1, Common_Movement_FaceUp)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
     msgbox(FlottTown_Text_OurNewHome, MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    applymovement(1, ElsieLooksAtPlayer)
-    applymovement(OBJ_EVENT_ID_PLAYER, PlayerLooksAtElsie)
+    applymovement(1, Common_Movement_FaceRight)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     waitmovement(1)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     msgbox(FlottTown_Text_DoYouLikeIt, MSGBOX_YESNO)
@@ -110,10 +110,6 @@ script FlottTown_OldGymSign{
     msgbox(FlottTown_Text_OldGymSign, MSGBOX_SIGN)
 }
 
-movement LookAtTown {
-    face_up    
-}
-
 movement MoveNextToElsie1{
     walk_up * 2
     walk_right
@@ -128,18 +124,6 @@ movement MoveNextToElsie3{
     walk_up * 2
     walk_left
     walk_up
-}
-
-movement ElsieLooksAtDown{
-    face_down
-}
-
-movement ElsieLooksAtPlayer{
-    face_right
-}
-
-movement PlayerLooksAtElsie{
-    face_left
 }
 
 movement ElsieWalksUp{
@@ -177,10 +161,6 @@ movement ElsieGoesInside2{
 
 text FlottTown_Text_TookYourTime{
     format("Hey! You really took your time, huh?")
-}
-
-text FlottTown_Text_LookAtTown{
-    format("So, this is our new home. Beautiful, isn't it?")
 }
 
 text FlottTown_Text_LetsTakeALook{
