@@ -42,6 +42,26 @@
 // If you want to edit these, dont touch the `+ 32`!
 #define MON_POS_X 55 + 32
 #define MON_POS_Y 66 + 32
+// positions for platform (they're split into two sprites!)
+#define PLAT_POS_X 56 + 32
+#define PLAT_POS_Y 83 + 16
+// this is pos difference for the second platform sprite
+#define PLAT_POS_X2 64
+
+#define PLAT_SPRITE_ID_COUNT 2
+
+// tSpriteType, for fade in/out
+enum SpriteTypes
+{
+    SPRITE_TYPE_PLATFORM = 0,
+    SPRITE_TYPE_POKE_BALL,
+    SPRITE_TYPE_NONE,
+};
+
+enum SpriteTags
+{
+    TAG_PLATFORM = 0x9000,
+};
 
 enum Bgs
 {
@@ -91,9 +111,13 @@ struct KabaSpeech
     u16 pic2TilemapBuffer[0x800];
     u8 monSpriteId;
     u8 ballSpriteId;
-    u8 platformSpriteIds[2]; // the platform is made out of 2 32x64sprites
-    u16 alphaCoeff;
-    u16 timer;
+    u8 platformSpriteIds[PLAT_SPRITE_ID_COUNT]; // the platform is made out of 2 64x32sprites
+    s16 alphaCoeff;
+    s16 alphaCoeff2;
+    u16 timer:8;
+    u16 fadeTimer:8;
+    bool32 fadeFinished:1;
+    u8 chosenPic:2;
 };
 
 // EWRAM data
@@ -110,11 +134,15 @@ static void Task_KabaSpeech_MainTalk(u8);
 static void Task_KabaSpeech_ReturnJoltik(u8);
 static void Task_KabaSpeech_FadeOutPokeball(u8);
 static void Task_KabaSpeech_FadeOutEverything(u8);
-static void Task_KabaSpeech_SpawnPlatform(u8);
+static void Task_KabaSpeech_FadeOutPlayerChoice(u8);
+static void Task_KabaSpeech_SpawnPlayerChoice(u8);
+static void Task_KabaSpeech_WaitForChoice(u8);
 
 static void KabaSpeech_DrawCharacterPic(u8);
 static inline void KabaSpeech_PrintMessageBox(const u8 *);
 static void KabaSpeech_CreateMonSprite(void);
+static void KabaSpeech_CreatePlatformSprites(void);
+static void KabaSpeech_BeginFade(u8, u8, u8);
 
 // Const data
 static const u8 sKabaSpeech_Greetings[] = _(
@@ -285,16 +313,14 @@ static void Task_KabaSpeech_Begin(u8 taskId)
         case STATE_FINISH:
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
-            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG_ALL | BLDCNT_EFFECT_BLEND);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
             SetGpuReg(REG_OFFSET_BLDY, 0);
             ShowBg(BG_INTRO);
             ShowBg(BG_PIC_1);
             ShowBg(BG_TEXT);
             SetVBlankCallback(VBlankCB_KabaSpeech);
-            PlayBGM(MUS_ROUTE122);
-            sKabaSpeech->alphaCoeff = 0;
-            sKabaSpeech->timer = 0xD8;
+            PlayBGM(MUS_RG_ROUTE24);
             gTasks[taskId].func = Task_KabaSpeech_FadeInEverything;
             gMain.state = 0;
             return;
@@ -305,37 +331,26 @@ static void Task_KabaSpeech_Begin(u8 taskId)
 
 static void Task_KabaSpeech_FadeInEverything(u8 taskId)
 {
-    if (sKabaSpeech->timer)
+    if (!gPaletteFade.active)
     {
-        sKabaSpeech->timer--;
-    }
-    else if (sKabaSpeech->alphaCoeff >= 16)
-    {
-        sKabaSpeech->alphaCoeff = 16;
-        sKabaSpeech->timer = 80;
+        sKabaSpeech->timer = 30;
+        KabaSpeech_BeginFade(FALSE, 0xd8, SPRITE_TYPE_NONE);
         gTasks[taskId].func = Task_KabaSpeech_GreetingsTraveler;
-        return;
-    }
-    else
-    {
-        sKabaSpeech->alphaCoeff++;
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sKabaSpeech->alphaCoeff, 16 - sKabaSpeech->alphaCoeff));
     }
 }
 
 static void Task_KabaSpeech_GreetingsTraveler(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (sKabaSpeech->fadeFinished)
     {
         if (sKabaSpeech->timer)
         {
             sKabaSpeech->timer--;
+            return;
         }
-        else
-        {
-            KabaSpeech_PrintMessageBox(sKabaSpeech_Greetings);
-            gTasks[taskId].func = Task_KabaSpeech_AndThis;
-        }
+
+        KabaSpeech_PrintMessageBox(sKabaSpeech_Greetings);
+        gTasks[taskId].func = Task_KabaSpeech_AndThis;
     }
 }
 
@@ -357,15 +372,14 @@ static void Task_KabaSpeech_ReleaseJoltikFromPokeball(u8 taskId)
         if (sKabaSpeech->timer)
         {
             sKabaSpeech->timer--;
+            return;
         }
-        else
-        {
-            spriteId = sKabaSpeech->monSpriteId;
-            gSprites[spriteId].invisible = FALSE;
-            CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF, SPECIES_JOLTIK);
-            gTasks[taskId].func = Task_KabaSpeech_JoltikAPokemon;
-            sKabaSpeech->timer = 0;
-        }
+
+        spriteId = sKabaSpeech->monSpriteId;
+        gSprites[spriteId].invisible = FALSE;
+        CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF, SPECIES_JOLTIK);
+        gTasks[taskId].func = Task_KabaSpeech_JoltikAPokemon;
+        sKabaSpeech->timer = 0;
     }
 }
 
@@ -406,33 +420,100 @@ static void Task_KabaSpeech_FadeOutPokeball(u8 taskId)
     // the ball callback ends its functionality with SpriteCallbackDummy
     if (gSprites[sKabaSpeech->ballSpriteId].callback == SpriteCallbackDummy)
     {
-        gSprites[sKabaSpeech->monSpriteId].invisible = TRUE;
-        gSprites[sKabaSpeech->ballSpriteId].invisible = TRUE;
-        DestroySprite(&gSprites[sKabaSpeech->monSpriteId]);
-        DestroySprite(&gSprites[sKabaSpeech->ballSpriteId]);
-        sKabaSpeech->alphaCoeff = 16;
+        KabaSpeech_BeginFade(TRUE, 0, SPRITE_TYPE_POKE_BALL);
         gTasks[taskId].func = Task_KabaSpeech_FadeOutEverything;
     }
 }
 
 static void Task_KabaSpeech_FadeOutEverything(u8 taskId)
 {
-    if (sKabaSpeech->alphaCoeff <= 0)
+    if (sKabaSpeech->fadeFinished)
     {
-        sKabaSpeech->alphaCoeff = 0;
-        sKabaSpeech->timer = 80;
-        gTasks[taskId].func = Task_KabaSpeech_SpawnPlatform;
-    }
-    else
-    {
-        sKabaSpeech->alphaCoeff--;
-        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(sKabaSpeech->alphaCoeff, 16 - sKabaSpeech->alphaCoeff));
+        DestroySprite(&gSprites[sKabaSpeech->monSpriteId]);
+        DestroySprite(&gSprites[sKabaSpeech->ballSpriteId]);
+        ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
+        FillBgTilemapBufferRect_Palette0(BG_PIC_1, 0, 0, 0, 32, 32);
+        CopyBgTilemapBufferToVram(BG_PIC_1);
+        KabaSpeech_DrawCharacterPic(PIC_AO);
+        KabaSpeech_DrawCharacterPic(PIC_AKA);
+        gTasks[taskId].func = Task_KabaSpeech_FadeOutPlayerChoice;
     }
 }
 
-static void Task_KabaSpeech_SpawnPlatform(u8 taskId)
+static void Task_KabaSpeech_FadeOutPlayerChoice(u8 taskId)
 {
+    sKabaSpeech->timer = 60;
+    KabaSpeech_BeginFade(FALSE, 60, SPRITE_TYPE_PLATFORM);
+    gTasks[taskId].func = Task_KabaSpeech_SpawnPlayerChoice;
 
+}
+
+static void Task_KabaSpeech_SpawnPlayerChoice(u8 taskId)
+{
+    if (sKabaSpeech->fadeFinished)
+    {
+        if (sKabaSpeech->timer)
+        {
+            sKabaSpeech->timer--;
+            return;
+        }
+
+        SetGpuReg(REG_OFFSET_BLDCNT, 0);
+        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+        SetGpuReg(REG_OFFSET_BLDY, 0);
+        KabaSpeech_PrintMessageBox(sKabaSpeech_GenderChoice);
+        sKabaSpeech->chosenPic = PIC_AO;
+        sKabaSpeech->timer = 30;
+        gTasks[taskId].func = Task_KabaSpeech_WaitForChoice;
+    }
+}
+
+static void Task_KabaSpeech_WaitForChoice(u8 taskId)
+{
+    if (sKabaSpeech->timer)
+    {
+        sKabaSpeech->timer--;
+        return;
+    }
+
+    switch (sKabaSpeech->chosenPic)
+    {
+    default:
+    case PIC_AO: // female
+        SetGpuReg(REG_OFFSET_BLDCNT,
+            BLDCNT_TGT1_BG2 |
+            BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 |
+            BLDCNT_EFFECT_BLEND);
+        break;
+    case PIC_AKA: // male
+        SetGpuReg(REG_OFFSET_BLDCNT,
+            BLDCNT_TGT1_BG1 |
+            BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 |
+            BLDCNT_EFFECT_BLEND);
+        break;
+    }
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
+
+    if (JOY_NEW(DPAD_LEFT))
+    {
+        if (sKabaSpeech->chosenPic > 0)
+            sKabaSpeech->chosenPic--;
+        else
+            sKabaSpeech->chosenPic++;
+    }
+
+    if (JOY_NEW(DPAD_RIGHT))
+    {
+        if (sKabaSpeech->chosenPic < 1)
+            sKabaSpeech->chosenPic++;
+        else
+            sKabaSpeech->chosenPic--;
+    }
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        DebugPrintf("%d is chosen", sKabaSpeech->chosenPic);
+    }
 }
 
 // misc. helper functions
@@ -482,4 +563,138 @@ static void KabaSpeech_CreateMonSprite(void)
 static void KabaSpeech_CreatePlatformSprites(void)
 {
 
+}
+
+#define tSpriteType data[0]
+
+static void Task_KabaSpeech_FadeOut(u8 taskId)
+{
+    u32 i = 0;
+    if (sKabaSpeech->alphaCoeff == 0)
+    {
+        sKabaSpeech->fadeFinished = TRUE;
+        switch (gTasks[taskId].tSpriteType)
+        {
+            case SPRITE_TYPE_PLATFORM:
+            {
+                for (i = 0; i < PLAT_SPRITE_ID_COUNT; i++)
+                    gSprites[sKabaSpeech->platformSpriteIds[i]].invisible = TRUE;
+            }
+                break;
+            case SPRITE_TYPE_POKE_BALL:
+                gSprites[sKabaSpeech->ballSpriteId].invisible = TRUE;
+                break;
+            default:
+            case SPRITE_TYPE_NONE:
+                break;
+        }
+        DestroyTask(taskId);
+    }
+    else
+    {
+        if (sKabaSpeech->fadeTimer != 0)
+        {
+            sKabaSpeech->fadeTimer--;
+        }
+        else
+        {
+            sKabaSpeech->fadeTimer = 0;
+            sKabaSpeech->alphaCoeff--;
+            sKabaSpeech->alphaCoeff2++;
+            if (sKabaSpeech->alphaCoeff == 8)
+            {
+                switch (gTasks[taskId].tSpriteType)
+                {
+                    case SPRITE_TYPE_PLATFORM:
+                    {
+                        for (i = 0; i < PLAT_SPRITE_ID_COUNT; i++)
+                            gSprites[sKabaSpeech->platformSpriteIds[i]].invisible ^= TRUE;
+                    }
+                        break;
+                    case SPRITE_TYPE_POKE_BALL:
+                        gSprites[sKabaSpeech->ballSpriteId].invisible ^= TRUE;
+                        break;
+                    default:
+                    case SPRITE_TYPE_NONE:
+                        break;
+                }
+            }
+            SetGpuReg(REG_OFFSET_BLDALPHA, (sKabaSpeech->alphaCoeff2 * 256) + sKabaSpeech->alphaCoeff);
+        }
+    }
+}
+
+static void Task_KabaSpeech_FadeIn(u8 taskId)
+{
+    u32 i = 0;
+
+    if (sKabaSpeech->alphaCoeff == 16)
+    {
+        if (!gPaletteFade.active)
+        {
+            sKabaSpeech->fadeFinished = TRUE;
+            DestroyTask(taskId);
+        }
+    }
+    else
+    {
+        if (sKabaSpeech->fadeTimer != 0)
+        {
+            sKabaSpeech->fadeTimer--;
+        }
+        else
+        {
+            sKabaSpeech->fadeTimer = 0;
+            sKabaSpeech->alphaCoeff++;
+            sKabaSpeech->alphaCoeff2--;
+            if (sKabaSpeech->alphaCoeff == 8)
+            {
+                switch (gTasks[taskId].tSpriteType)
+                {
+                    case SPRITE_TYPE_PLATFORM:
+                    {
+                        for (i = 0; i < PLAT_SPRITE_ID_COUNT; i++)
+                            gSprites[sKabaSpeech->platformSpriteIds[i]].invisible ^= TRUE;
+                    }
+                        break;
+                    case SPRITE_TYPE_POKE_BALL:
+                        gSprites[sKabaSpeech->ballSpriteId].invisible ^= TRUE;
+                        break;
+                    default:
+                    case SPRITE_TYPE_NONE:
+                        break;
+                }
+            }
+            SetGpuReg(REG_OFFSET_BLDALPHA, (sKabaSpeech->alphaCoeff2 * 256) + sKabaSpeech->alphaCoeff);
+        }
+    }
+}
+
+static void KabaSpeech_BeginFade(u8 fadeOut, u8 delay, u8 spriteType)
+{
+    u32 taskId;
+    u32 bldTarget1, bldTarget2;
+
+    bldTarget1 = fadeOut ? 16 : 0;
+    bldTarget2 = fadeOut ? 0 : 16;
+
+    sKabaSpeech->fadeFinished = FALSE;
+    sKabaSpeech->alphaCoeff = bldTarget1;
+    sKabaSpeech->alphaCoeff2 = bldTarget2;
+    sKabaSpeech->fadeTimer = delay;
+
+    if (spriteType != SPRITE_TYPE_NONE)
+    {
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
+    }
+    else
+    {
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
+    }
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(bldTarget1, bldTarget2));
+    SetGpuReg(REG_OFFSET_BLDY, 0);
+
+    DebugPrintf("fadeOut: %d", fadeOut);
+    taskId = CreateTask(fadeOut ? Task_KabaSpeech_FadeOut : Task_KabaSpeech_FadeIn, 0);
+    gTasks[taskId].tSpriteType = spriteType;
 }
