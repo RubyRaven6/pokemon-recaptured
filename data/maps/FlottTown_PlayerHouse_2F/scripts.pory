@@ -1,0 +1,8 @@
+mapscripts FlottTown_PlayerHouse_2F_MapScripts {
+    
+}
+
+script Holder {
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(format("There! All done."), MSGBOX_DEFAULT)
+}

@@ -64,16 +64,19 @@
 #define MAP_UNDERWATER_ROUTE105 (55 | (0 << 8))
 #define MAP_UNDERWATER_ROUTE125 (56 | (0 << 8))
 #define MAP_FLOTT_TOWN          (57 | (0 << 8))
+#define MAP_BLACK_HOLE          (58 | (0 << 8))
 
-// gMapGroup_IndoorLittleroot
-#define MAP_FLOTT_TOWN_INSIDE_HARBOR   (0 | (1 << 8))
-#define MAP_FLOTT_TOWN_SHIP_CABIN      (1 | (1 << 8))
-#define MAP_FLOTT_TOWN_SHIP_HALLWAY    (2 | (1 << 8))
-#define MAP_FLOTT_TOWN_PLAYER_HOUSE_1F (3 | (1 << 8))
-#define MAP_FLOTT_TOWN_PLAYER_HOUSE_2F (4 | (1 << 8))
-#define MAP_FLOTT_TOWN_ABANDONED_GYM   (5 | (1 << 8))
-#define MAP_FLOTT_TOWN_FLOTT_CAVE      (6 | (1 << 8))
-#define MAP_FLOTT_TOWN_BARNEYS_HOUSE   (7 | (1 << 8))
+// gMapGroup_IndoorFlott
+#define MAP_FLOTT_TOWN_INSIDE_HARBOR            (0 | (1 << 8))
+#define MAP_FLOTT_TOWN_SHIP_CABIN               (1 | (1 << 8))
+#define MAP_FLOTT_TOWN_SHIP_HALLWAY             (2 | (1 << 8))
+#define MAP_FLOTT_TOWN_PLAYER_HOUSE_1F          (3 | (1 << 8))
+#define MAP_FLOTT_TOWN_PLAYER_HOUSE_2F          (4 | (1 << 8))
+#define MAP_FLOTT_TOWN_ABANDONED_GYM            (5 | (1 << 8))
+#define MAP_FLOTT_TOWN_FLOTT_CAVE               (6 | (1 << 8))
+#define MAP_FLOTT_TOWN_BARNEYS_HOUSE            (7 | (1 << 8))
+#define MAP_FLOTT_TOWN_HOUSE1                   (8 | (1 << 8))
+#define MAP_FLOTT_TOWN_PLAYER_HOUSE_2F_UNPACKED (9 | (1 << 8))
 
 // gMapGroup_IndoorOldale
 #define MAP_OLDALE_TOWN_HOUSE1            (0 | (2 << 8))
@@ -578,8 +581,8 @@
 #define MAP_ROUTE110_TRICK_HOUSE_PUZZLE6                 (8 | (29 << 8))
 #define MAP_ROUTE110_TRICK_HOUSE_PUZZLE7                 (9 | (29 << 8))
 #define MAP_ROUTE110_TRICK_HOUSE_PUZZLE8                 (10 | (29 << 8))
-#define MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE (11 | (29 << 8))
-#define MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE (12 | (29 << 8))
+#define MAP_ROUTE110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE (11 | (29 << 8))
+#define MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE (12 | (29 << 8))
 
 // gMapGroup_IndoorRoute113
 #define MAP_ROUTE113_GLASS_WORKSHOP (0 | (30 << 8))

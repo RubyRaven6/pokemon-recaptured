@@ -103,13 +103,32 @@
 #define METATILE_BikeShop_Wall_Edge_Top            0x281
 
 // gTileset_BrendansMaysHouse
-#define METATILE_BrendansMaysHouse_BookOnTable       0x293
-#define METATILE_BrendansMaysHouse_BrendanPC_Off     0x25A
-#define METATILE_BrendansMaysHouse_BrendanPC_On      0x27F
-#define METATILE_BrendansMaysHouse_MayPC_Off         0x259
-#define METATILE_BrendansMaysHouse_MayPC_On          0x27E
-#define METATILE_BrendansMaysHouse_MovingBox_Closed  0x268
-#define METATILE_BrendansMaysHouse_MovingBox_Open    0x270
+#define METATILE_BrendansMaysHouse_BlueRugCenter         0x2A1
+#define METATILE_BrendansMaysHouse_Blue_RugBottomCenter  0x2A9
+#define METATILE_BrendansMaysHouse_Blue_RugBottomLeft    0x2A8
+#define METATILE_BrendansMaysHouse_Blue_RugCenterLeft    0x2A0
+#define METATILE_BrendansMaysHouse_Blue_RugCenterRight   0x2A2
+#define METATILE_BrendansMaysHouse_Blue_RugUpperCenter   0x299
+#define METATILE_BrendansMaysHouse_Blue_RugUpperLeft     0x298
+#define METATILE_BrendansMaysHouse_Blue_RugUpperRight    0x29A
+#define METATILE_BrendansMaysHouse_BookOnTable           0x293
+#define METATILE_BrendansMaysHouse_BrendanPC_Off         0x25A
+#define METATILE_BrendansMaysHouse_BrendanPC_On          0x27F
+#define METATILE_BrendansMaysHouse_FloorWithWallShadow   0x205
+#define METATILE_BrendansMaysHouse_LowerLeftChair        0x221
+#define METATILE_BrendansMaysHouse_LowerRightChair       0x224
+#define METATILE_BrendansMaysHouse_MayPC_Off             0x259
+#define METATILE_BrendansMaysHouse_MayPC_On              0x27E
+#define METATILE_BrendansMaysHouse_MovingBox_Closed      0x268
+#define METATILE_BrendansMaysHouse_MovingBox_Open        0x270
+#define METATILE_BrendansMaysHouse_NormalFloor           0x201
+#define METATILE_BrendansMaysHouse_RugBottomRight        0x2AA
+#define METATILE_BrendansMaysHouse_TV_Bottom             0x25E
+#define METATILE_BrendansMaysHouse_TV_Top                0x256
+#define METATILE_BrendansMaysHouse_UpperLeftChair        0x219
+#define METATILE_BrendansMaysHouse_UpperRightChair       0x21C
+#define METATILE_BrendansMaysHouse_WallBottom            0x25C
+#define METATILE_BrendansMaysHouse_WallCornerShadow      0x278
 
 // gTileset_Building
 #define METATILE_Building_PC_Off  0x004

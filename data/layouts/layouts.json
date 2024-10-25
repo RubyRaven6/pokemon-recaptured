@@ -4397,7 +4397,7 @@
       "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GenericBuilding",
+      "secondary_tileset": "gTileset_BrendansMaysHouse",
       "border_filepath": "data/layouts/FlottTown_PlayerHouse_1F/border.bin",
       "blockdata_filepath": "data/layouts/FlottTown_PlayerHouse_1F/map.bin"
     },
@@ -4440,6 +4440,36 @@
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/FlottTown_BarneysHouse/border.bin",
       "blockdata_filepath": "data/layouts/FlottTown_BarneysHouse/map.bin"
+    },
+    {
+      "id": "LAYOUT_FLOTT_TOWN_HOUSE1",
+      "name": "FlottTown_House1_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/FlottTown_House1/border.bin",
+      "blockdata_filepath": "data/layouts/FlottTown_House1/map.bin"
+    },
+    {
+      "id": "LAYOUT_BLACK_HOLE",
+      "name": "BlackHole_Layout",
+      "width": 9,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/BlackHole/border.bin",
+      "blockdata_filepath": "data/layouts/BlackHole/map.bin"
+    },
+    {
+      "id": "LAYOUT_FLOTT_TOWN_PLAYER_HOUSE_2F_UNPACKED",
+      "name": "FlottTown_PlayerHouse_2F_Unpacked_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "border_filepath": "data/layouts/FlottTown_PlayerHouse_2F_Unpacked/border.bin",
+      "blockdata_filepath": "data/layouts/FlottTown_PlayerHouse_2F_Unpacked/map.bin"
     }
   ]
 }

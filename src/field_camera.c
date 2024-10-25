@@ -423,7 +423,7 @@ void CameraUpdate(void)
     gTotalCameraPixelOffsetY -= movementSpeedY;
 }
 
-void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
+void MoveCameraAndRedrawMap(int deltaX, int deltaY)
 {
     CameraMove(deltaX, deltaY);
     UpdateObjectEventsForCameraUpdate(deltaX, deltaY);
@@ -431,6 +431,14 @@ void MoveCameraAndRedrawMap(int deltaX, int deltaY) //unused
     gTotalCameraPixelOffsetX -= deltaX * 16;
     gTotalCameraPixelOffsetY -= deltaY * 16;
 }
+
+void UpdateSavedPos(void)
+{
+    gSaveBlock1Ptr->savedPos.x = gSaveBlock1Ptr->pos.x;
+    gSaveBlock1Ptr->savedPos.y = gSaveBlock1Ptr->pos.y;
+}
+
+
 
 void SetCameraPanningCallback(void (*callback)(void))
 {

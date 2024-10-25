@@ -25,7 +25,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_ELSIE_GOES_INSIDE"
     }
   ],
   "warp_events": [
@@ -54,7 +54,7 @@
       "x": 7,
       "y": 16,
       "elevation": 0,
-      "dest_map": "MAP_FLOTT_TOWN_ABANDONED_GYM",
+      "dest_map": "MAP_FLOTT_TOWN_HOUSE1",
       "dest_warp_id": "0"
     },
     {

@@ -45,20 +45,20 @@
 
 #define FLAG_BOAT_DEPARTS              0x20 // For S.S. Anne
 #define FLAG_ELSIE_DISEMBARKS          0x21 //Used for when Elsie departs from the S.S. Anne
-#define FLAG_ELSIE_ENTERS_GYM          0x22 // When Elsie Enters Gym
-#define FLAG_FALLEN_INTO_CAVE          0x23 // When player falls into cave. Used for step counting.
-#define FLAG_BARNEY_IN_CAVE            0x24 // For when Barney appears in the cave.
-#define FLAG_ELSIE_IN_CAVE             0x25 // For when Elsie appears in the cave.
-#define FLAG_ELSIE_IN_BARNEYS_HOUSE    0x26 // Unused Flag
-#define FLAG_BARNEY_IN_HOUSE    0x27 // Unused Flag
-#define FLAG_UNUSED_0x028    0x28 // Unused Flag
-#define FLAG_UNUSED_0x029    0x29 // Unused Flag
-#define FLAG_UNUSED_0x02A    0x2A // Unused Flag
-#define FLAG_UNUSED_0x02B    0x2B // Unused Flag
-#define FLAG_UNUSED_0x02C    0x2C // Unused Flag
-#define FLAG_UNUSED_0x02D    0x2D // Unused Flag
-#define FLAG_UNUSED_0x02E    0x2E // Unused Flag
-#define FLAG_UNUSED_0x02F    0x2F // Unused Flag
+#define FLAG_ELSIE_GOES_INSIDE         0x22 // To hide the Elsie at the entrance of Flott_Town
+#define FLAG_UNPACKED_ROOM             0x23 // Unused Flag
+#define FLAG_VISITED_GYM               0x24 // For when the player has visited the gym
+#define FLAG_ELSIE_ENTERS_GYM          0x25 // When Elsie Enters Gym
+#define FLAG_GYM_POKE_BALL             0x26 // For the Pokéball in the gym
+#define FLAG_FALLEN_INTO_CAVE          0x27 // When player falls into cave. Used for step counting.
+#define FLAG_BARNEY_IN_CAVE            0x28 // For when Barney appears in the cave.
+#define FLAG_ELSIE_IN_CAVE             0x29 // For when Elsie appears in the cave.
+#define FLAG_ELSIE_IN_BARNEYS_HOUSE    0x2A // Hiding Elsie in Barney's house
+#define FLAG_BARNEY_IN_HOUSE           0x2B // Hiding Barney in his house
+#define FLAG_HIDE_ZUBAT                0x2C // Hides Zubat in the corner of Flott Cave
+#define FLAG_HIDE_MANKEY               0x2D // Hides Mankey in the corner of Flott Cave
+#define FLAG_HIDE_TINKATINK            0x2E // Hides Tinkatink in the corner of Flott Cave
+#define FLAG_HIDE_TEDDIURSA            0x2F // Hides Teddiursa in the corner of Flott Cave
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag

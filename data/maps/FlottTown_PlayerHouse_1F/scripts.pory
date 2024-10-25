@@ -1,0 +1,115 @@
+const LOCALID_ELSIE = 1
+
+mapscripts FlottTown_PlayerHouse_1F_MapScripts {
+    MAP_SCRIPT_ON_LOAD: FlottTown_PlayerHouse_1F_OnLoad
+}
+
+script FlottTown_PlayerHouse_1F_OnLoad{
+    if(flag(FLAG_UNPACKED_ROOM)){
+        setdynamicwarp(MAP_FLOTT_TOWN_PLAYER_HOUSE_2F, 5, 1)
+    }
+    else{
+        setdynamicwarp(MAP_FLOTT_TOWN_PLAYER_HOUSE_2F_UNPACKED, 5, 1)
+    }
+    if(flag(FLAG_VISITED_GYM)){
+        setmetatile(3, 1, METATILE_BrendansMaysHouse_WallBottom, FALSE)
+        setmetatile(3, 2, METATILE_BrendansMaysHouse_WallCornerShadow, FALSE)
+        setmetatile(0, 3, METATILE_BrendansMaysHouse_FloorWithWallShadow, FALSE)
+        setmetatile(0, 4, METATILE_BrendansMaysHouse_NormalFloor, FALSE)
+        setmetatile(1, 4, METATILE_BrendansMaysHouse_NormalFloor, FALSE)
+        setmetatile(5, 4, METATILE_BrendansMaysHouse_UpperLeftChair, FALSE)
+        setmetatile(5, 5, METATILE_BrendansMaysHouse_LowerLeftChair, FALSE)
+        setmetatile(8, 4, METATILE_BrendansMaysHouse_UpperRightChair, FALSE)
+        setmetatile(8, 5, METATILE_BrendansMaysHouse_LowerRightChair, FALSE)
+        setmetatile(7, 0, METATILE_BrendansMaysHouse_TV_Top, FALSE)
+        setmetatile(7, 1, METATILE_Building_TV_Off, FALSE)
+        setmetatile(7, 2, METATILE_BrendansMaysHouse_TV_Bottom, FALSE)
+    }
+}
+
+script FlottTown_PlayerHouse_1F_Elsie{
+    faceplayer
+    if(!flag(FLAG_VISITED_GYM)){
+        msgbox(FlottTown_PlayerHouse_1F_Text_CheckOurRoom, MSGBOX_NPC)
+    }
+    elif(flag(FLAG_VISITED_GYM) && var(VAR_FLOTT_TOWN_STATE) < 9){
+        clearflag(FLAG_ELSIE_ENTERS_GYM)
+        setvar(VAR_FLOTT_TOWN_STATE, 3)
+        msgbox(FlottTown_PlayerHouse_1F_Text_AnAbandonedGym, MSGBOX_DEFAULT)
+        warp(MAP_FLOTT_TOWN_ABANDONED_GYM, 13, 18)
+    }
+    elif(var(VAR_FLOTT_TOWN_STATE) == 10){
+        call(FlottTown_PlayerHouse_1F_StartYourAdventure)
+    }
+    else{
+        call(FlottTown_PlayerHouse_1F_NPCElsie)
+    }
+}
+
+script FlottTown_PlayerHouse_1F_StartYourAdventure{
+    lockall
+    msgbox(FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut,MSGBOX_DEFAULT)
+    closemessage
+    applymovement(LOCALID_ELSIE, Common_Movement_FaceLeft)
+    waitmovement(0)
+    delay(120)
+    applymovement(LOCALID_ELSIE, Common_Movement_FaceDown)
+    waitmovement(0)
+    msgbox(FlottTown_PlayerHouse_1F_Text_CallingYouChamp,MSGBOX_DEFAULT)
+    giveitem(ITEM_TOWN_MAP)
+    setflag(FLAG_RECEIVED_RUNNING_SHOES)
+    setflag(FLAG_SYS_B_DASH)
+    playbgm(MUS_OBTAIN_ITEM, TRUE)
+    msgbox(format("Elsie gave the Running Shoes!"))
+    msgbox(FlottTown_PlayerHouse_1F_Text_ILoveYou,MSGBOX_DEFAULT)
+    setvar(VAR_FLOTT_TOWN_STATE, 11)
+    releaseall
+}
+
+script FlottTown_PlayerHouse_1F_NPCElsie{
+    lockall
+    msgbox("Is my Champ tired?", MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    playbgm(MUS_HEAL, FALSE)
+    special(HealPlayerParty)
+    msgbox("There. Go get 'em, tiger.", MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    releaseall
+    end
+}
+
+text FlottTown_PlayerHouse_1F_Text_AnAbandonedGym {
+    format("Hey! I just got finished unpacking the boxes.\l"
+            "How was the town?"
+            "…\p"
+            "Woah, a gym? That sounds super cool! Let's check it out!"
+    )
+}
+
+text FlottTown_PlayerHouse_1F_Text_CheckOurRoom{
+    format("Pretty nice place, huh? Why not check our room out? I'll tidy some stuff up here.")
+}
+
+text FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut{
+    format("ELSIE: Oh, hey, {PLAYER}.\pI'm… sorry for walking out. I hope Mr. Heinrich didn't think it was too rude.\p"
+            "…\p" 
+            "I'm not mad at you for having a Pokémon. Really, I'm not."
+            "But… I saw that twinkle in your eye when Mr. Heinrich talked about training it. I'm sure he means taking on the gym challenge."
+            "You know what's waiting at the end of that, right?\pz"
+            "Sooner or later, you'll have to challenge the Pokémon League… and go toe to toe with Dad.\p"
+            "I've spent so long trying to get us away from him, and now you might go on a path that leads you straight to him."
+    )
+}
+
+text FlottTown_PlayerHouse_1F_Text_CallingYouChamp{
+    format("ELSIE: Hmph. Who am I kidding? I've been the one calling you Champ all of these years. It's on me for not seeing this coming someday."
+            "Go get 'im, Champ. I'll always be here for you.\p"
+            "In fact, here's a little something for the road."
+        )
+}
+
+text FlottTown_PlayerHouse_1F_Text_ILoveYou{
+    format("I love you, {PLAYER}. Remember to stop by sometime, okay?")
+}

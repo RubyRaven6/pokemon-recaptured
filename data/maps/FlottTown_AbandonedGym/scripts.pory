@@ -5,8 +5,20 @@ raw`
 
 mapscripts FlottTown_AbandonedGym_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE[
+        VAR_FLOTT_TOWN_STATE, 2: FlottTown_AbandonedGym_BeforeEvent
         VAR_FLOTT_TOWN_STATE, 3: FlottTown_AbandonedGym_OnFrame
     ]
+}
+
+script FlottTown_AbandonedGym_BeforeEvent{
+    setflag(FLAG_ELSIE_ENTERS_GYM)
+    setflag(FLAG_VISITED_GYM)
+    msgbox(format("This place seems pretty rundown. You should probably leave for now."), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
+    warp(MAP_FLOTT_TOWN, 9, 25)
+    waitstate
 }
 
 script FlottTown_AbandonedGym_OnFrame{
@@ -56,8 +68,7 @@ script FlottTown_AbandonedGym_EventScript_GymCollapses{
     setmetatile(14, 18, METATILE_Cave_CrackedFloor, FALSE)
     special(DrawWholeMapView)
     applymovement(OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer)
-    msgbox(format("ELSIE:{PLAYER}! Watch out!"), MSGBOX_DEFAULT)
-    closemessage
+    msgbox(format("ELSIE: {PLAYER}! Watch out!"))
     setmetatile(12, 17, METATILE_Cave_CrackedFloor_Hole, FALSE)
     setmetatile(13, 17, METATILE_Cave_CrackedFloor_Hole, FALSE)
     setmetatile(14, 17, METATILE_Cave_CrackedFloor_Hole, FALSE)
@@ -97,5 +108,5 @@ text FlottTown_AbandonedGym_Text_LetsStayUp {
 }
 
 text FlottTown_AbandonedGym_Text_BeforeCollapse{
-    format("ELSIE: Oh hey, a Pokéball! Maybe you can catch your own Pokémon with that someday?\p There doesn't seem to be anything else in here though. We'd best get home.")
+    format("ELSIE: Huh, it's just a Pokéball. Will you ever use it, though?\p There doesn't seem to be anything else in here though. We'd best get home.")
 }

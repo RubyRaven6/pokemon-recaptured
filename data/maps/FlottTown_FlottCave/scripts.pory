@@ -39,9 +39,6 @@ script FlottTown_FlottCave_CaveLightLevel{
         case 6:
             setflashlevel(6)
             break
-        case 8:
-            setflashlevel(0)
-            break
     }
 }
 
@@ -66,11 +63,19 @@ script FlottTown_FlottCave_EventScript_ZubatAttacks{
     call(FlottTown_FlottCave_StarterWantsToJoin)
     clearflag(FLAG_FALLEN_INTO_CAVE)
     setvar(VAR_FLOTT_TOWN_STATE, 8)
+    fadescreen(FADE_TO_BLACK)
+    setvar(VAR_0x8004, 13) # x
+    setvar(VAR_0x8005, 12) # y
+    special(TeleportCamera)
+    setobjectxy(OBJ_EVENT_ID_PLAYER, 13, 12)
+    msgbox(format("You decide to wait with your new partner for your sister to return."))
+    waitmessage
     call(FlottTown_FlottCave_EventScript_RockSmash)
     end
 }
 
 script FlottTown_FlottCave_EventScript_RockSmash{
+    fadescreen(FADE_FROM_BLACK)
     msgbox(format("???: Golurk! Use Rock Smash!"), MSGBOX_DEFAULT)
     playmoncry(SPECIES_GOLURK, CRY_MODE_NORMAL)
     playse(SE_M_ROCK_THROW)
@@ -78,6 +83,7 @@ script FlottTown_FlottCave_EventScript_RockSmash{
     clearflag(FLAG_BARNEY_IN_CAVE)
     setflag(FLAG_TEMP_11)
     removeobject(6)
+    waitse
     msgbox(format("That sounded like it came from the smashable rocks!"), MSGBOX_DEFAULT)
     closemessage
     end
@@ -88,8 +94,7 @@ script FlottTown_FlottCave_RightTrigger{
     call(FlottTown_FlottCave_EventScript_ElsieRescue)
 }
 script FlottTown_FlottCave_BottomTrigger{
-    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp)
-    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    applymovement(OBJ_EVENT_ID_PLAYER, FlottTown_FlottCave_PlayerFacesBarneyFromBottomTrigger)
     call(FlottTown_FlottCave_EventScript_ElsieRescue)
 }
 
@@ -97,10 +102,9 @@ script FlottTown_FlottCave_EventScript_ElsieRescue{
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     msgbox(FlottTown_FlottCave_Text_Rescue, MSGBOX_DEFAULT)
     closemessage
-    applymovement(LOCALID_BARNEY, FlottTown_FlottCave_Movement_BarneyWalksToPlayer)
-    waitmovement(LOCALID_BARNEY)
-    applymovement(LOCALID_ELSIE, FlottTown_FlottCave_Movement_ElsieWalksUp)
+    applymovement(LOCALID_BARNEY, FlottTown_FlottCave_Movement_BarneyWalksUp)
     applymovement(OBJ_EVENT_ID_PLAYER, FlottTown_FlottCave_Movement_PlayerWalksUp)
+    applymovement(LOCALID_ELSIE, FlottTown_FlottCave_Movement_ElsieWalksUp)
     waitmovement(LOCALID_BARNEY)
     waitmovement(LOCALID_ELSIE)
     waitmovement(OBJ_EVENT_ID_PLAYER)
@@ -113,32 +117,32 @@ script FlottTown_FlottCave_EventScript_ElsieRescue{
     msgbox(FlottTown_FlottCave_Text_LetsGoHome, MSGBOX_DEFAULT)
     setflag(FLAG_ELSIE_IN_CAVE)
     setflag(FLAG_BARNEY_IN_CAVE)
+    clearflag(FLAG_BARNEY_IN_HOUSE)
+    clearflag(FLAG_ELSIE_IN_BARNEYS_HOUSE)
     setvar(VAR_FLOTT_TOWN_STATE, 9)
-    warp(MAP_FLOTT_TOWN_BARNEYS_HOUSE, 7, 4)
+    warpwhitefade(MAP_FLOTT_TOWN_BARNEYS_HOUSE, 7, 4)
     end
 }
 
-script Holder{
-
-}
-
 script FlottTown_FlottCave_FacePlayerDirection{
-    specialvar(VAR_ZUBAT_DIR, GetPlayerFacingDirection)
     switch(var(VAR_ZUBAT_DIR)){
-        case DIR_NORTH:
+        //Player is facing North
+        case 1:
             applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
             return
-        case DIR_SOUTH:
-            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+        //Player is facing West
+        case 2:
+            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
             return
-        case DIR_EAST:
+        //Player is facing East
+        case 3:
             applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
             return
-        case DIR_WEST:
-            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight)
-            return            
+        //Player is Facing South
+        case 4:
+            applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+            return
     }
-    return
 }
 
 script FlottTown_FlottCave_StarterChoice{
@@ -279,7 +283,14 @@ script FlottTown_FlottCave_NicknamePartyMon{
     return
 }
 
-movement FlottTown_FlottCave_Movement_BarneyWalksToPlayer{
+movement FlottTown_FlottCave_PlayerFacesBarneyFromBottomTrigger{
+    walk_up
+    face_left
+    step_end
+}
+
+
+movement FlottTown_FlottCave_Movement_BarneyWalksUp{
     walk_up * 4
     face_down
     step_end

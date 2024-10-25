@@ -4297,45 +4297,79 @@ void CheckZubatSpawning(void)
     switch (playerDirection)
         {
         case DIR_NORTH:
-            zubatY =   -2;
-            starterY = -1;
+            zubatY =   +2;
+            starterY = +1;
             VarSet(VAR_ZUBAT_DIR, 1);
             break;
         case DIR_WEST:
-            zubatX =   -2;
-            starterX = -1;
+            zubatX =   +2;
+            starterX = +1;
             VarSet(VAR_ZUBAT_DIR, 2);
             break;
         case DIR_EAST:
-            zubatX =   +2;
-            starterX = +1;
+            zubatX =   -2;
+            starterX = -1;
             VarSet(VAR_ZUBAT_DIR, 3);
             break;
         case DIR_SOUTH:
-            zubatY =   +2;
-            starterY = +1;
+            zubatY =   -2;
+            starterY = -1;
             VarSet(VAR_ZUBAT_DIR, 4);
             break;
         }
-
+    //assigns var coords according to player's position and direction
+    //uses these coords for if there's no collision two tiles behind player
+    VarSet(VAR_TEMP_4, 0);
+    VarSet(VAR_TEMP_0, (playerX-MAP_OFFSET)+zubatX);
+    VarSet(VAR_TEMP_1, (playerY-MAP_OFFSET)+zubatY);
+    VarSet(VAR_TEMP_2, (playerX-MAP_OFFSET)+starterX);
+    VarSet(VAR_TEMP_3, (playerY-MAP_OFFSET)+starterY);
+    MgbaPrintf(MGBA_LOG_WARN, "variable value: %u", VarGet(VAR_TEMP_0));
+    MgbaPrintf(MGBA_LOG_WARN, "variable value: %u", VarGet(VAR_TEMP_1));
     // Checks if the tiles behind player are impassible. If they are, runs opposite code to put it in front of player instead
-    if(MapGridGetCollisionAt(VAR_TEMP_0, VAR_TEMP_1)){
+    if(MapGridGetCollisionAt(VarGet(VAR_TEMP_0), VarGet(VAR_TEMP_1))){
+        VarSet(VAR_TEMP_4, 1);
+            switch (playerDirection){
+                case DIR_NORTH:
+                    VarSet(VAR_ZUBAT_DIR, 4);
+                    break;
+                case DIR_WEST:
+                    VarSet(VAR_ZUBAT_DIR, 3);
+                    break;
+                case DIR_EAST:
+                    VarSet(VAR_ZUBAT_DIR, 2);
+                    break;
+                case DIR_SOUTH:
+                    VarSet(VAR_ZUBAT_DIR, 1);
+                    break;
+                }
         VarSet(VAR_TEMP_0, (playerX-MAP_OFFSET)-zubatX);
         VarSet(VAR_TEMP_1, (playerY-MAP_OFFSET)-zubatY);
         VarSet(VAR_TEMP_2, (playerX-MAP_OFFSET)-starterX);
         VarSet(VAR_TEMP_3, (playerY-MAP_OFFSET)-starterY);
-
-        //coords for if there's collision two tiles behind player, which just inverts the coordinate addition
-    }
-    else{
-        //assigns var coords according to player's position and direction
-        VarSet(VAR_TEMP_0, (playerX-MAP_OFFSET)+zubatX);
-        VarSet(VAR_TEMP_1, (playerY-MAP_OFFSET)+zubatY);
-        VarSet(VAR_TEMP_2, (playerX-MAP_OFFSET)+starterX);
-        VarSet(VAR_TEMP_3, (playerY-MAP_OFFSET)+starterY);
+            if(VarGet(VAR_TEMP_0) == 3 && VarGet(VAR_TEMP_1) == 18)
+            {
+                VarSet(VAR_TEMP_0, 5);
+                VarSet(VAR_TEMP_1, 18);
+                VarSet(VAR_TEMP_2, 4);
+                VarSet(VAR_TEMP_3, 18);
+            }
+        MgbaPrintf(MGBA_LOG_WARN, "variable value: %u", VarGet(VAR_TEMP_0));
+        MgbaPrintf(MGBA_LOG_WARN, "variable value: %u", VarGet(VAR_TEMP_1));
         return;
-        //coords for if there's no collision two tiles behind player
     }
-
     return;
+}
+
+void TeleportCamera(void)
+{
+    UpdateSavedPos();
+    MoveCameraAndRedrawMap(gSpecialVar_0x8004 - gSaveBlock1Ptr->pos.x,
+                           gSpecialVar_0x8005 - gSaveBlock1Ptr->pos.y);
+}
+
+void ReturnCameraToPlayer(void)
+{
+    MoveCameraAndRedrawMap(gSaveBlock1Ptr->savedPos.x - gSaveBlock1Ptr->pos.x,
+                           gSaveBlock1Ptr->savedPos.y - gSaveBlock1Ptr->pos.y);
 }

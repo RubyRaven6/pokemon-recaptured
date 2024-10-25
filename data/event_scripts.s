@@ -1037,7 +1037,6 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/profile_man.inc"
 	.include "data/scripts/day_care.inc"
 	.include "data/scripts/flash.inc"
-	.include "data/scripts/players_house.inc"
 	.include "data/scripts/berry_blender.inc"
 	.include "data/text/mauville_man.inc"
 	.include "data/text/trainers.inc"
@@ -1084,3 +1083,9 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/FlottTown_FlottCave/scripts.inc"
 
 	.include "data/maps/FlottTown_BarneysHouse/scripts.inc"
+
+	.include "data/maps/FlottTown_House1/scripts.inc"
+
+	.include "data/maps/BlackHole/scripts.inc"
+
+	.include "data/maps/FlottTown_PlayerHouse_2F_Unpacked/scripts.inc"

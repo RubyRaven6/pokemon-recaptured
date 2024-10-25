@@ -1,0 +1,129 @@
+{
+  "id": "MAP_FLOTT_TOWN_PLAYER_HOUSE_2F_UNPACKED",
+  "name": "FlottTown_PlayerHouse_2F_Unpacked",
+  "layout": "LAYOUT_FLOTT_TOWN_PLAYER_HOUSE_2F_UNPACKED",
+  "music": "MUS_DEWFORD",
+  "region_map_section": "MAPSEC_FLOTT_TOWN",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 5,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_FLOTT_TOWN_PLAYER_HOUSE_1F",
+      "dest_warp_id": "2"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 5,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 1,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "FlottTown_PlayerHouse_2F_Unpacked_Boxes"
+    }
+  ]
+}

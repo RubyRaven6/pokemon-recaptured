@@ -1,7 +1,7 @@
 {
   "group_order": [
     "gMapGroup_TownsAndRoutes",
-    "gMapGroup_IndoorLittleroot",
+    "gMapGroup_IndoorFlott",
     "gMapGroup_IndoorOldale",
     "gMapGroup_IndoorDewford",
     "gMapGroup_IndoorLavaridge",
@@ -93,9 +93,10 @@
     "Underwater_Route129",
     "Underwater_Route105",
     "Underwater_Route125",
-    "FlottTown"
+    "FlottTown",
+    "BlackHole"
   ],
-  "gMapGroup_IndoorLittleroot": [
+  "gMapGroup_IndoorFlott": [
     "FlottTown_InsideHarbor",
     "FlottTown_ShipCabin",
     "FlottTown_ShipHallway",
@@ -103,7 +104,9 @@
     "FlottTown_PlayerHouse_2F",
     "FlottTown_AbandonedGym",
     "FlottTown_FlottCave",
-    "FlottTown_BarneysHouse"
+    "FlottTown_BarneysHouse",
+    "FlottTown_House1",
+    "FlottTown_PlayerHouse_2F_Unpacked"
   ],
   "gMapGroup_IndoorOldale": [
     "OldaleTown_House1",

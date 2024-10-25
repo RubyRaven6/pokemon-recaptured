@@ -1,2 +1,101 @@
+const LOCALID_ADELAIDE = 1
+const LOCALID_BARNEY = 2
+const LOCALID_ELSIE = 3
+const LOCALID_MANKEY = 4
+const LOCALID_TINKATINK = 5
+const LOCALID_TEDDIURSA = 6
+
 mapscripts FlottTown_BarneysHouse_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_FLOTT_TOWN_STATE, 9: FlottTown_BarneysHouse_EventScript_BarneysLecture
+    ]
+}
+
+script FlottTown_BarneysHouse_EventScript_BarneysLecture{
+    lockall
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    msgbox(FlottTown_BarneysHouse_Text_BarneysLecture, MSGBOX_DEFAULT)
+    applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    msgbox(format("ELSIE: What's Mr. Barney talking about, {PLAYER}? Who else was in the cave?"), MSGBOX_DEFAULT)
+    applymovement(LOCALID_BARNEY, Common_Movement_WalkInPlaceDown)
+    applymovement(LOCALID_ELSIE, Common_Movement_FaceUp)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    msgbox(format("BARNEY: Hm? That's a Pokéball on your side, right? I assumed you used a Pokémon."), MSGBOX_DEFAULT)
+    msgbox(format("ELSIE: ..."), MSGBOX_DEFAULT)
+    closemessage
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
+    applymovement(LOCALID_ELSIE, FlottTown_BarneysHouse_Movement_ElsieWalksOut)
+    waitmovement(LOCALID_ELSIE)
+    removeobject(LOCALID_ELSIE)
+    playse(SE_DOOR)
+    waitse
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    msgbox(FlottTown_BarneysHouse_Text_ImTerriblySorry, MSGBOX_DEFAULT)
+    setvar(VAR_FLOTT_TOWN_STATE, 10)
+    releaseall
+    end
+}
+
+script FlottTown_BarneysHouse_Barney{
+    switch (var(VAR_FLOTT_TOWN_STATE)){
+        case 10:
+            msgbox(FlottTown_BarneysHouse_Text_GoToYourSister, MSGBOX_NPC)
+        case 11:
+            msgbox(FlottTown_BarneysHouse_Text_GymLeaderChallenge, MSGBOX_NPC)
+    }
+}
+
+
+script FlottTown_BarneysHouse_Adelaide {
+    if(var(VAR_FLOTT_TOWN_STATE) < 9){
+        msgbox(FlottTown_BarneysHouse_Text_BarneysOut, MSGBOX_NPC)
+    }
+    else{
+        msgbox(FlottTown_BarneysHouse_Text_GladYoureOkay, MSGBOX_NPC)
+    }
+}
+
+movement FlottTown_BarneysHouse_Movement_ElsieWalksOut {
+    walk_down * 2
+    walk_left * 2
+    walk_down * 2
+}
+
+text FlottTown_BarneysHouse_Text_BarneysLecture{
+    format(
+        "Now, I wouldn't be a responsible adult if I don't reprimand you for what you did in the first place.\p"
+        "See here: what you did was incredibly reckless. The gym is closed for a reason. As much as it breaks my heart for it to be unmaintained, such is its state.\p"
+        "Normally, this is also the part where I emphasize how dangerous it was.\p"
+        "But, it seems that you had no reason to be scared; after all, you weren't alone, were you?"
+    )
+}
+
+text FlottTown_BarneysHouse_Text_ImTerriblySorry{
+    format("BARNEY: Oh my, I didn't expect her to be upset. I'm terribly sorry. That being said, if you'd like to know more about training, you can come back to me.")
+}
+
+text FlottTown_BarneysHouse_Text_BarneysOut{
+    format(
+        "Oh my, a visitor! Are you the girls that just moved in?\p"
+        "My name is Adelaide. It's a pleaesure to meet you. Unfortunately, my husband is out at the moment.\p"
+        "He's currently in the mainland attending to Gym Leader business. I'll say, you can take the man out of the gym, but not the gym out of the man!\p"
+        "Sigh... but that conviction of him is definitely one of his best traits.\p"
+        "Oh, look at me! Going off to someone likely tired from their journey. I'm sure we'll see each other soon."
+    )
+}
+
+text FlottTown_BarneysHouse_Text_GladYoureOkay{
+    format("My goodness, your first day and already making quite a ruckus!\p"
+            "But nonetheless, I'm happy that you and your sister are safe."
+    )
+}
+
+text FlottTown_BarneysHouse_Text_GoToYourSister{
+    format("I appreciate your enthusiasm, but I believe it's apt that you check-in on your sister first."
+    )
+}
+
+text FlottTown_BarneysHouse_Text_GymLeaderChallenge{
+    format("Oh, you've returned! I imagine you're interested in growing as a trainer, no?")
 }

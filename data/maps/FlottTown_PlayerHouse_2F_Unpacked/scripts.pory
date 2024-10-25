@@ -1,0 +1,21 @@
+mapscripts FlottTown_PlayerHouse_2F_Unpacked_MapScripts {
+}
+
+script FlottTown_PlayerHouse_2F_Unpacked_Boxes{
+    lockall
+    msgbox(format("It's a pile of boxes full of stuff your sister bought for the new house."), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    msgbox(format("Do you wanna unbox all of it?"), MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_UNPACKED_ROOM)
+        fadescreen(FADE_TO_BLACK)
+        msgbox(format("You take about an hour or so to unpack all the stuff inside."), MSGBOX_DEFAULT)
+        waitmessage
+        closemessage
+        warpsilent(MAP_FLOTT_TOWN_PLAYER_HOUSE_2F, 5, 2)
+        waitmessage
+        closemessage
+        end
+    }
+}
