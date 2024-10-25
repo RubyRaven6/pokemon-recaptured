@@ -6,9 +6,17 @@ const LOCALID_TINKATINK = 5
 const LOCALID_TEDDIURSA = 6
 
 mapscripts FlottTown_BarneysHouse_MapScripts {
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_FLOTT_TOWN_STATE, 9: FlottTown_BarneysHouse_FacePlayerUp
+    ]
+
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_FLOTT_TOWN_STATE, 9: FlottTown_BarneysHouse_EventScript_BarneysLecture
     ]
+}
+
+script FlottTown_BarneysHouse_FacePlayerUp{
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
 }
 
 script FlottTown_BarneysHouse_EventScript_BarneysLecture{
@@ -21,7 +29,7 @@ script FlottTown_BarneysHouse_EventScript_BarneysLecture{
     applymovement(LOCALID_BARNEY, Common_Movement_WalkInPlaceDown)
     applymovement(LOCALID_ELSIE, Common_Movement_FaceUp)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
-    msgbox(format("BARNEY: Hm? That's a Pokéball on your side, right? I assumed you used a Pokémon."), MSGBOX_DEFAULT)
+    msgbox(FlottTown_BarneysHouse_Text_GoodBattler, MSGBOX_DEFAULT)
     msgbox(format("ELSIE: ..."), MSGBOX_DEFAULT)
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
@@ -83,6 +91,10 @@ text FlottTown_BarneysHouse_Text_BarneysOut{
         "Sigh... but that conviction of him is definitely one of his best traits.\p"
         "Oh, look at me! Going off to someone likely tired from their journey. I'm sure we'll see each other soon."
     )
+}
+
+text FlottTown_BarneysHouse_Text_GoodBattler{
+    format("BARNEY: Hm? That's a Pokéball on your side, right? I assumed you used a Pokémon. I even heard the faint sounds of battling. I'm sure you've got a good head on your shoulders to be a trainer!")
 }
 
 text FlottTown_BarneysHouse_Text_GladYoureOkay{

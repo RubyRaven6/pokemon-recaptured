@@ -80,10 +80,14 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
     waitmovement(1)
     waitmovement(OBJ_EVENT_ID_PLAYER)
+    msgbox(FlottTown_Text_ThisIsIt, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
     delay(180)
     applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     msgbox(FlottTown_Text_LetsTakeALook, MSGBOX_DEFAULT)
+    waitmessage
     closemessage
     applymovement(LOCALID_ELSIE, ElsieWalksUp)
     waitmovement(0)
@@ -191,12 +195,16 @@ text FlottTown_Text_TookYourTime{
     format("Hey! You really took your time, huh?")
 }
 
+text FlottTown_Text_ThisIsIt{
+    format("This is it! Our new home.")
+}
+
 text FlottTown_Text_LetsTakeALook{
     format("Well, that's enough sight-seeing. Let's go check our our new house!")
 }
 
 text FlottTown_Text_OurNewHome{
-    format("This is it! This is where we'll be living from now on.")
+    format("Say hello to the new place! This is where we'll be living from now on.")
 }
 
 text FlottTown_Text_DoYouLikeIt{

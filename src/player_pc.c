@@ -113,7 +113,7 @@ static void Mailbox_MailOptionsProcessInput(u8);
 static void PlayerPC_ItemStorage(u8);
 static void PlayerPC_Mailbox(u8);
 static void PlayerPC_Decoration(u8);
-// static void PlayerPC_TurnOff(u8);
+static void PlayerPC_TurnOff(u8);
 
 static void Mailbox_DoMailMoveToBag(u8);
 static void Mailbox_DoMailRead(u8);
@@ -194,7 +194,7 @@ static const struct MenuAction sPlayerPCMenuActions[] =
     [MENU_ITEMSTORAGE] = { gText_ItemStorage, {PlayerPC_ItemStorage} },
     [MENU_MAILBOX]     = { gText_Mailbox,     {PlayerPC_Mailbox} },
     [MENU_DECORATION]  = { gText_Decoration,  {PlayerPC_Decoration} },
-//  [MENU_TURNOFF]     = { gText_TurnOff,     {PlayerPC_TurnOff} }
+    [MENU_TURNOFF]     = { gText_TurnOff,     {PlayerPC_TurnOff} }
 };
 
 static const u8 sBedroomPC_OptionOrder[] =
@@ -432,7 +432,7 @@ static void PlayerPCProcessMenuInput(u8 taskId)
         ClearWindowTilemap(tWindowId);
         RemoveWindow(tWindowId);
         ScheduleBgCopyTilemapToVram(0);
-//        gTasks[taskId].func = PlayerPC_TurnOff;
+        gTasks[taskId].func = PlayerPC_TurnOff;
         break;
     default:
         ClearStdWindowAndFrameToTransparent(tWindowId, FALSE);
@@ -490,18 +490,18 @@ static void PlayerPC_Decoration(u8 taskId)
     DoPlayerRoomDecorationMenu(taskId);
 }
 
-// static void PlayerPC_TurnOff(u8 taskId)
-// {
-//     if (sTopMenuNumOptions == NUM_BEDROOM_PC_OPTIONS) // Flimsy way to determine if Bedroom PC is in use
-//     {
-//         ScriptContext_SetupScript(FlottTown_PlayerHouse_2F_EventScript_TurnOffPlayerPC);
-//     }
-//     else
-//     {
-//         ScriptContext_Enable();
-//     }
-//     DestroyTask(taskId);
-// }
+static void PlayerPC_TurnOff(u8 taskId)
+{
+     if (sTopMenuNumOptions == NUM_BEDROOM_PC_OPTIONS) // Flimsy way to determine if Bedroom PC is in use
+     {
+         ScriptContext_SetupScript(FlottTown_PlayerHouse_2F_EventScript_TurnOffPlayerPC);
+     }
+     else
+     {
+         ScriptContext_Enable();
+     }
+     DestroyTask(taskId);
+}
 
 static void InitItemStorageMenu(u8 taskId, u8 var)
 {

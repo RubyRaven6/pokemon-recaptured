@@ -2,7 +2,47 @@ mapscripts FlottTown_PlayerHouse_2F_MapScripts {
     
 }
 
-script Holder {
-    fadescreen(FADE_FROM_BLACK)
-    msgbox(format("There! All done."), MSGBOX_DEFAULT)
+script FlottTown_PlayerHouse_2F_PlayerPC{
+	setvar(VAR_0x8004, PC_LOCATION_PLAYERS_HOUSE)
+	special(DoPCTurnOnEffect)
+	playse(SE_PC_ON)
+	msgbox(gText_PlayerHouseBootPC, MSGBOX_DEFAULT)
+	special(BedroomPC)
+	waitstate
+	releaseall
+	end
+}
+
+script FlottTown_PlayerHouse_2F_EventScript_TurnOffPlayerPC{
+	setvar(VAR_0x8004, PC_LOCATION_PLAYERS_HOUSE)
+	playse(SE_PC_OFF)
+	special(DoPCTurnOffEffect)
+	releaseall
+	end
+}
+script FlottTown_PlayerHouse_2F_Gamecube{
+    msgbox(format("It's your sister's old Gamecube.\p You recall fond memories playing on it with her."), MSGBOX_SIGN)
+}
+
+script FlottTown_PlayerHouse_2F_Dresser{
+    msgbox(format("It's a dresser your share with your sister."), MSGBOX_SIGN)
+}
+
+script FlottTown_PlayerHouse_2F_FinancialBooks{
+    msgbox(format("It's a book of financial statements."), MSGBOX_SIGN)
+}
+
+script FlottTown_PlayerHouse_2F_Diary{
+    msgbox(format("It's your journal."), MSGBOX_SIGN)
+    closemessage
+}
+
+script FlottTown_PlayerHouse_2F_SistersPC{
+    msgbox(FlottTown_PlayerHouse_2F_Text_SistersPC, MSGBOX_SIGN)
+    closemessage
+}
+
+text FlottTown_PlayerHouse_2F_Text_SistersPC{
+format("It's your Sister's PC. It has a lot of documents about her classes and students.\l"
+        "It's way too much information for you to really parse.\p")
 }

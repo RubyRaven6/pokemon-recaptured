@@ -21,29 +21,29 @@ FlottTown_PlayerHouse_1F_OnLoad_2:
 
 FlottTown_PlayerHouse_1F_OnLoad_5:
 # 15 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 3, 1, METATILE_BrendansMaysHouse_WallBottom, FALSE
+	setmetatile 3, 1, METATILE_PlayersHouse_WallBottom, FALSE
 # 16 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 3, 2, METATILE_BrendansMaysHouse_WallCornerShadow, FALSE
+	setmetatile 3, 2, METATILE_PlayersHouse_WallCornerShadow, FALSE
 # 17 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 0, 3, METATILE_BrendansMaysHouse_FloorWithWallShadow, FALSE
+	setmetatile 0, 3, METATILE_PlayersHouse_FloorWithWallShadow, FALSE
 # 18 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 0, 4, METATILE_BrendansMaysHouse_NormalFloor, FALSE
+	setmetatile 0, 4, METATILE_PlayersHouse_NormalFloor, FALSE
 # 19 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 1, 4, METATILE_BrendansMaysHouse_NormalFloor, FALSE
+	setmetatile 1, 4, METATILE_PlayersHouse_NormalFloor, FALSE
 # 20 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 5, 4, METATILE_BrendansMaysHouse_UpperLeftChair, FALSE
+	setmetatile 5, 4, METATILE_PlayersHouse_UpperLeftChair, FALSE
 # 21 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 5, 5, METATILE_BrendansMaysHouse_LowerLeftChair, FALSE
+	setmetatile 5, 5, METATILE_PlayersHouse_LowerLeftChair, FALSE
 # 22 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 8, 4, METATILE_BrendansMaysHouse_UpperRightChair, FALSE
+	setmetatile 8, 4, METATILE_PlayersHouse_UpperRightChair, FALSE
 # 23 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 8, 5, METATILE_BrendansMaysHouse_LowerRightChair, FALSE
+	setmetatile 8, 5, METATILE_PlayersHouse_LowerRightChair, FALSE
 # 24 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 7, 0, METATILE_BrendansMaysHouse_TV_Top, FALSE
+	setmetatile 7, 0, METATILE_PlayersHouse_TV_Top, FALSE
 # 25 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	setmetatile 7, 1, METATILE_Building_TV_Off, FALSE
 # 26 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 7, 2, METATILE_BrendansMaysHouse_TV_Bottom, FALSE
+	setmetatile 7, 2, METATILE_PlayersHouse_TV_Bottom, FALSE
 	return
 
 
@@ -116,71 +116,81 @@ FlottTown_PlayerHouse_1F_StartYourAdventure::
 # 61 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	setflag FLAG_SYS_B_DASH
 # 62 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	playbgm MUS_OBTAIN_ITEM, TRUE
-# 63 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	msgbox FlottTown_PlayerHouse_1F_StartYourAdventure_Text_0
+# 63 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+	playfanfare MUS_OBTAIN_ITEM
 # 64 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	msgbox FlottTown_PlayerHouse_1F_Text_ILoveYou, MSGBOX_DEFAULT
+	waitfanfare
 # 65 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setvar VAR_FLOTT_TOWN_STATE, 11
+	msgbox FlottTown_PlayerHouse_1F_Text_ILoveYou, MSGBOX_DEFAULT
 # 66 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+	setvar VAR_FLOTT_TOWN_STATE, 11
+# 67 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	releaseall
 	return
 
 
 FlottTown_PlayerHouse_1F_NPCElsie::
-# 70 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	lockall
 # 71 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	msgbox FlottTown_PlayerHouse_1F_NPCElsie_Text_0, MSGBOX_DEFAULT
+	lockall
 # 72 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	waitmessage
+	msgbox FlottTown_PlayerHouse_1F_NPCElsie_Text_0, MSGBOX_DEFAULT
 # 73 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	closemessage
-# 74 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	playbgm MUS_HEAL, FALSE
-# 75 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	special HealPlayerParty
-# 76 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	msgbox FlottTown_PlayerHouse_1F_NPCElsie_Text_1, MSGBOX_DEFAULT
-# 77 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	waitmessage
-# 78 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+# 74 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	closemessage
+# 75 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+	playfanfare MUS_HEAL
+# 76 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+	waitfanfare
+# 77 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+	special HealPlayerParty
+# 78 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+	msgbox FlottTown_PlayerHouse_1F_NPCElsie_Text_1, MSGBOX_DEFAULT
 # 79 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+	waitmessage
+# 80 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+	closemessage
+# 81 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	releaseall
 	end
 
 
 FlottTown_PlayerHouse_1F_StartYourAdventure_Text_0:
-# 63 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+# 62 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	.string "Elsie gave the Running Shoes!$"
 
 FlottTown_PlayerHouse_1F_NPCElsie_Text_0:
-# 71 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	.string "Is my Champ tired?$"
+# 72 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+	.string "Is my Champ tired? Come rest for a while.$"
 
 FlottTown_PlayerHouse_1F_NPCElsie_Text_1:
-# 76 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+# 78 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	.string "There. Go get 'em, tiger.$"
 
 FlottTown_PlayerHouse_1F_Text_AnAbandonedGym::
-# 83 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+# 85 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	.string "Hey! I just got finished unpacking the\n"
 	.string "boxes.\l"
-	.string "How was the town? …\p"
-	.string "Woah, a gym? That sounds super cool!\n"
-	.string "Let's check it out!$"
+	.string "How was the town?\p"
+	.string "…\p"
+	.string "An abanonded gym, huh? Are you sure you\n"
+	.string "want to go in?\p"
+	.string "…\p"
+	.string "Well, it's better than you sneaking in\n"
+	.string "yourself. Sure, I'll come with you.\p"
+	.string "$"
 
 FlottTown_PlayerHouse_1F_Text_CheckOurRoom::
-# 91 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+# 96 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	.string "Pretty nice place, huh? Why not check\n"
 	.string "our room out? I'll tidy some stuff up\l"
 	.string "here.$"
 
 FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut::
-# 95 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+# 100 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	.string "ELSIE: Oh, hey, {PLAYER}.\p"
+	.string "…\p"
 	.string "I'm… sorry for walking out. I hope Mr.\n"
 	.string "Heinrich didn't think it was too rude.\p"
 	.string "…\p"
@@ -191,15 +201,16 @@ FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut::
 	.string "taking on the gym challenge. You know\l"
 	.string "what's waiting at the end of that,\l"
 	.string "right?\p"
-	.string "z Sooner or later, you'll have to\n"
+	.string "Sooner or later, you'll have to\n"
 	.string "challenge the Pokémon League… and go\l"
-	.string "toe to toe with Dad.\p"
+	.string "toe to toe with…\p"
+	.string "With Dad.\p"
 	.string "I've spent so long trying to get us away\n"
 	.string "from him, and now you might go on a path\l"
 	.string "that leads you straight to him.$"
 
 FlottTown_PlayerHouse_1F_Text_CallingYouChamp::
-# 106 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+# 114 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	.string "ELSIE: Hmph. Who am I kidding? I've been\n"
 	.string "the one calling you Champ all of these\l"
 	.string "years. It's on me for not seeing this\l"
@@ -209,6 +220,6 @@ FlottTown_PlayerHouse_1F_Text_CallingYouChamp::
 	.string "the road.$"
 
 FlottTown_PlayerHouse_1F_Text_ILoveYou::
-# 113 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
+# 121 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	.string "I love you, {PLAYER}. Remember to\n"
 	.string "stop by sometime, okay?$"

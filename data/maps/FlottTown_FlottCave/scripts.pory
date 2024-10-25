@@ -68,6 +68,7 @@ script FlottTown_FlottCave_EventScript_ZubatAttacks{
     setvar(VAR_0x8005, 12) # y
     special(TeleportCamera)
     setobjectxy(OBJ_EVENT_ID_PLAYER, 13, 12)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
     msgbox(format("You decide to wait with your new partner for your sister to return."))
     waitmessage
     call(FlottTown_FlottCave_EventScript_RockSmash)
@@ -78,7 +79,9 @@ script FlottTown_FlottCave_EventScript_RockSmash{
     fadescreen(FADE_FROM_BLACK)
     msgbox(format("???: Golurk! Use Rock Smash!"), MSGBOX_DEFAULT)
     playmoncry(SPECIES_GOLURK, CRY_MODE_NORMAL)
+    waitmoncry
     playse(SE_M_ROCK_THROW)
+    waitse
     clearflag(FLAG_ELSIE_IN_CAVE)
     clearflag(FLAG_BARNEY_IN_CAVE)
     setflag(FLAG_TEMP_11)
@@ -110,17 +113,23 @@ script FlottTown_FlottCave_EventScript_ElsieRescue{
     waitmovement(OBJ_EVENT_ID_PLAYER)
     applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
     msgbox(format("ELSIE: {PLAYER}! Thank goodness you're alright. I don't know what I'd do if you got hurt."), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
     applymovement(LOCALID_ELSIE, Common_Movement_WalkInPlaceRight)
     msgbox(format("ELSIE: This is Mr. Heinrich. This was his old gym."), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
     applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
     applymovement(LOCALID_BARNEY, Common_Movement_WalkInPlaceDown)
     msgbox(FlottTown_FlottCave_Text_LetsGoHome, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
     setflag(FLAG_ELSIE_IN_CAVE)
     setflag(FLAG_BARNEY_IN_CAVE)
     clearflag(FLAG_BARNEY_IN_HOUSE)
     clearflag(FLAG_ELSIE_IN_BARNEYS_HOUSE)
     setvar(VAR_FLOTT_TOWN_STATE, 9)
-    warpwhitefade(MAP_FLOTT_TOWN_BARNEYS_HOUSE, 7, 4)
+    warpsilent(MAP_FLOTT_TOWN_BARNEYS_HOUSE, 7, 4)
     end
 }
 

@@ -27,8 +27,8 @@ script FlottTown_AbandonedGym_OnFrame{
     waitmovement(0)
     clearflag(FLAG_ELSIE_ENTERS_GYM)
     addobject(LOCALID_ELSIE)
-    lock
     applymovement(LOCALID_ELSIE, Common_Movement_FaceUp)
+    lock
     waitmovement(LOCALID_ELSIE)
     msgbox(format("ELSIE: Huh, this gym is pretty run down. I wonder what's inside?"), MSGBOX_DEFAULT)
     msgbox(format("Elsie decided to follow you!"), MSGBOX_DEFAULT)
@@ -75,8 +75,8 @@ script FlottTown_AbandonedGym_EventScript_GymCollapses{
     setmetatile(12, 18, METATILE_Cave_CrackedFloor_Hole, FALSE)
     setmetatile(13, 18, METATILE_Cave_CrackedFloor_Hole, FALSE)
     setmetatile(14, 18, METATILE_Cave_CrackedFloor_Hole, FALSE)
+    warphole(MAP_FLOTT_TOWN_FLOTT_CAVE)
     special(DrawWholeMapView)
-    setholewarp(MAP_FLOTT_TOWN_FLOTT_CAVE)
     setvar(VAR_FLOTT_TOWN_STATE, 6)
 }
 

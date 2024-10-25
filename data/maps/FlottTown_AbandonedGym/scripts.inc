@@ -50,9 +50,9 @@ FlottTown_AbandonedGym_OnFrame::
 # 29 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	addobject LOCALID_ELSIE
 # 30 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	lock
-# 31 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	applymovement LOCALID_ELSIE, Common_Movement_FaceUp
+# 31 "data/maps/FlottTown_AbandonedGym/scripts.pory"
+	lock
 # 32 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	waitmovement LOCALID_ELSIE
 # 33 "data/maps/FlottTown_AbandonedGym/scripts.pory"
@@ -136,9 +136,9 @@ FlottTown_AbandonedGym_EventScript_GymCollapses::
 # 77 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	setmetatile 14, 18, METATILE_Cave_CrackedFloor_Hole, FALSE
 # 78 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	special DrawWholeMapView
+	warphole MAP_FLOTT_TOWN_FLOTT_CAVE
 # 79 "data/maps/FlottTown_AbandonedGym/scripts.pory"
-	setholewarp MAP_FLOTT_TOWN_FLOTT_CAVE
+	special DrawWholeMapView
 # 80 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	setvar VAR_FLOTT_TOWN_STATE, 6
 	return

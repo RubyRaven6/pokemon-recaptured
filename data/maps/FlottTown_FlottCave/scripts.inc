@@ -123,450 +123,468 @@ FlottTown_FlottCave_EventScript_ZubatAttacks::
 # 70 "data/maps/FlottTown_FlottCave/scripts.pory"
 	setobjectxy OBJ_EVENT_ID_PLAYER, 13, 12
 # 71 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_EventScript_ZubatAttacks_Text_2
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
 # 72 "data/maps/FlottTown_FlottCave/scripts.pory"
-	waitmessage
+	msgbox FlottTown_FlottCave_EventScript_ZubatAttacks_Text_2
 # 73 "data/maps/FlottTown_FlottCave/scripts.pory"
+	waitmessage
+# 74 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_EventScript_RockSmash
 	end
 
 
 FlottTown_FlottCave_EventScript_RockSmash::
-# 78 "data/maps/FlottTown_FlottCave/scripts.pory"
-	fadescreen FADE_FROM_BLACK
 # 79 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_EventScript_RockSmash_Text_0, MSGBOX_DEFAULT
+	fadescreen FADE_FROM_BLACK
 # 80 "data/maps/FlottTown_FlottCave/scripts.pory"
-	playmoncry SPECIES_GOLURK, CRY_MODE_NORMAL
+	msgbox FlottTown_FlottCave_EventScript_RockSmash_Text_0, MSGBOX_DEFAULT
 # 81 "data/maps/FlottTown_FlottCave/scripts.pory"
-	playse SE_M_ROCK_THROW
+	playmoncry SPECIES_GOLURK, CRY_MODE_NORMAL
 # 82 "data/maps/FlottTown_FlottCave/scripts.pory"
-	clearflag FLAG_ELSIE_IN_CAVE
+	waitmoncry
 # 83 "data/maps/FlottTown_FlottCave/scripts.pory"
-	clearflag FLAG_BARNEY_IN_CAVE
+	playse SE_M_ROCK_THROW
 # 84 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setflag FLAG_TEMP_11
-# 85 "data/maps/FlottTown_FlottCave/scripts.pory"
-	removeobject 6
-# 86 "data/maps/FlottTown_FlottCave/scripts.pory"
 	waitse
+# 85 "data/maps/FlottTown_FlottCave/scripts.pory"
+	clearflag FLAG_ELSIE_IN_CAVE
+# 86 "data/maps/FlottTown_FlottCave/scripts.pory"
+	clearflag FLAG_BARNEY_IN_CAVE
 # 87 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_EventScript_RockSmash_Text_1, MSGBOX_DEFAULT
+	setflag FLAG_TEMP_11
 # 88 "data/maps/FlottTown_FlottCave/scripts.pory"
+	removeobject 6
+# 89 "data/maps/FlottTown_FlottCave/scripts.pory"
+	waitse
+# 90 "data/maps/FlottTown_FlottCave/scripts.pory"
+	msgbox FlottTown_FlottCave_EventScript_RockSmash_Text_1, MSGBOX_DEFAULT
+# 91 "data/maps/FlottTown_FlottCave/scripts.pory"
 	closemessage
 	end
 
 
 FlottTown_FlottCave_RightTrigger::
-# 93 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 96 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkLeft
-# 94 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 97 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_EventScript_ElsieRescue
 	return
 
 
 FlottTown_FlottCave_BottomTrigger::
-# 97 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 100 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, FlottTown_FlottCave_PlayerFacesBarneyFromBottomTrigger
-# 98 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 101 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_EventScript_ElsieRescue
 	return
 
 
 FlottTown_FlottCave_EventScript_ElsieRescue::
-# 102 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
-# 103 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_Text_Rescue, MSGBOX_DEFAULT
-# 104 "data/maps/FlottTown_FlottCave/scripts.pory"
-	closemessage
 # 105 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement LOCALID_BARNEY, FlottTown_FlottCave_Movement_BarneyWalksUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
 # 106 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, FlottTown_FlottCave_Movement_PlayerWalksUp
+	msgbox FlottTown_FlottCave_Text_Rescue, MSGBOX_DEFAULT
 # 107 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement LOCALID_ELSIE, FlottTown_FlottCave_Movement_ElsieWalksUp
+	closemessage
 # 108 "data/maps/FlottTown_FlottCave/scripts.pory"
-	waitmovement LOCALID_BARNEY
+	applymovement LOCALID_BARNEY, FlottTown_FlottCave_Movement_BarneyWalksUp
 # 109 "data/maps/FlottTown_FlottCave/scripts.pory"
-	waitmovement LOCALID_ELSIE
+	applymovement OBJ_EVENT_ID_PLAYER, FlottTown_FlottCave_Movement_PlayerWalksUp
 # 110 "data/maps/FlottTown_FlottCave/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
+	applymovement LOCALID_ELSIE, FlottTown_FlottCave_Movement_ElsieWalksUp
 # 111 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement LOCALID_ELSIE, Common_Movement_FaceRight
+	waitmovement LOCALID_BARNEY
 # 112 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_0, MSGBOX_DEFAULT
+	waitmovement LOCALID_ELSIE
 # 113 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement LOCALID_ELSIE, Common_Movement_WalkInPlaceRight
+	waitmovement OBJ_EVENT_ID_PLAYER
 # 114 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_1, MSGBOX_DEFAULT
-# 115 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement LOCALID_ELSIE, Common_Movement_FaceRight
+# 115 "data/maps/FlottTown_FlottCave/scripts.pory"
+	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_0, MSGBOX_DEFAULT
 # 116 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement LOCALID_BARNEY, Common_Movement_WalkInPlaceDown
+	waitmessage
 # 117 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_Text_LetsGoHome, MSGBOX_DEFAULT
+	closemessage
 # 118 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setflag FLAG_ELSIE_IN_CAVE
+	applymovement LOCALID_ELSIE, Common_Movement_WalkInPlaceRight
 # 119 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setflag FLAG_BARNEY_IN_CAVE
+	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_1, MSGBOX_DEFAULT
 # 120 "data/maps/FlottTown_FlottCave/scripts.pory"
-	clearflag FLAG_BARNEY_IN_HOUSE
+	waitmessage
 # 121 "data/maps/FlottTown_FlottCave/scripts.pory"
-	clearflag FLAG_ELSIE_IN_BARNEYS_HOUSE
+	closemessage
 # 122 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setvar VAR_FLOTT_TOWN_STATE, 9
+	applymovement LOCALID_ELSIE, Common_Movement_FaceRight
 # 123 "data/maps/FlottTown_FlottCave/scripts.pory"
-	warpwhitefade MAP_FLOTT_TOWN_BARNEYS_HOUSE, 7, 4
+	applymovement LOCALID_BARNEY, Common_Movement_WalkInPlaceDown
+# 124 "data/maps/FlottTown_FlottCave/scripts.pory"
+	msgbox FlottTown_FlottCave_Text_LetsGoHome, MSGBOX_DEFAULT
+# 125 "data/maps/FlottTown_FlottCave/scripts.pory"
+	waitmessage
+# 126 "data/maps/FlottTown_FlottCave/scripts.pory"
+	closemessage
+# 127 "data/maps/FlottTown_FlottCave/scripts.pory"
+	setflag FLAG_ELSIE_IN_CAVE
+# 128 "data/maps/FlottTown_FlottCave/scripts.pory"
+	setflag FLAG_BARNEY_IN_CAVE
+# 129 "data/maps/FlottTown_FlottCave/scripts.pory"
+	clearflag FLAG_BARNEY_IN_HOUSE
+# 130 "data/maps/FlottTown_FlottCave/scripts.pory"
+	clearflag FLAG_ELSIE_IN_BARNEYS_HOUSE
+# 131 "data/maps/FlottTown_FlottCave/scripts.pory"
+	setvar VAR_FLOTT_TOWN_STATE, 9
+# 132 "data/maps/FlottTown_FlottCave/scripts.pory"
+	warpsilent MAP_FLOTT_TOWN_BARNEYS_HOUSE, 7, 4
 	end
 
 
 FlottTown_FlottCave_FacePlayerDirection::
-# 128 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 137 "data/maps/FlottTown_FlottCave/scripts.pory"
 	switch VAR_ZUBAT_DIR
-# 130 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 139 "data/maps/FlottTown_FlottCave/scripts.pory"
 	case 1, FlottTown_FlottCave_FacePlayerDirection_2
-# 134 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 143 "data/maps/FlottTown_FlottCave/scripts.pory"
 	case 2, FlottTown_FlottCave_FacePlayerDirection_3
-# 138 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 147 "data/maps/FlottTown_FlottCave/scripts.pory"
 	case 3, FlottTown_FlottCave_FacePlayerDirection_4
-# 142 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 151 "data/maps/FlottTown_FlottCave/scripts.pory"
 	case 4, FlottTown_FlottCave_FacePlayerDirection_5
 	return
 
 FlottTown_FlottCave_FacePlayerDirection_2:
-# 131 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 140 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
 	return
 
 FlottTown_FlottCave_FacePlayerDirection_3:
-# 135 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 144 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
 	return
 
 FlottTown_FlottCave_FacePlayerDirection_4:
-# 139 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 148 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
 	return
 
 FlottTown_FlottCave_FacePlayerDirection_5:
-# 143 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 152 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	return
 
 
 FlottTown_FlottCave_StarterChoice::
-# 149 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 158 "data/maps/FlottTown_FlottCave/scripts.pory"
 	lockall
-# 150 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 159 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterChoice_Text_0
-# 151 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 160 "data/maps/FlottTown_FlottCave/scripts.pory"
 	multichoice 10, 4, 115, 1
-# 152 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 161 "data/maps/FlottTown_FlottCave/scripts.pory"
 	compare VAR_RESULT, 0
 	goto_if_eq FlottTown_FlottCave_StarterChoice_2
-# 166 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 175 "data/maps/FlottTown_FlottCave/scripts.pory"
 	compare VAR_RESULT, 1
 	goto_if_eq FlottTown_FlottCave_StarterChoice_5
-# 180 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 189 "data/maps/FlottTown_FlottCave/scripts.pory"
 	compare VAR_RESULT, 2
 	goto_if_eq FlottTown_FlottCave_StarterChoice_7
 	return
 
 FlottTown_FlottCave_StarterChoice_2:
-# 153 "data/maps/FlottTown_FlottCave/scripts.pory"
-	addobject LOCALID_MANKEY
-# 154 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement LOCALID_MANKEY, Common_Movement_FaceAwayPlayer
-# 155 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setobjectxy LOCALID_MANKEY, VAR_TEMP_2, VAR_TEMP_3
-# 156 "data/maps/FlottTown_FlottCave/scripts.pory"
-	fadescreen FADE_FROM_BLACK
-# 157 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_StarterChoice_Text_1, MSGBOX_DEFAULT
-# 158 "data/maps/FlottTown_FlottCave/scripts.pory"
-	playmoncry SPECIES_MANKEY, CRY_MODE_NORMAL
-# 159 "data/maps/FlottTown_FlottCave/scripts.pory"
-	waitmoncry
-# 160 "data/maps/FlottTown_FlottCave/scripts.pory"
-	givemon SPECIES_MANKEY, 10, ITEM_NONE
-# 161 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setvar VAR_STARTER_MON, 0
 # 162 "data/maps/FlottTown_FlottCave/scripts.pory"
-	removeobject LOCALID_TINKATINK
+	addobject LOCALID_MANKEY
 # 163 "data/maps/FlottTown_FlottCave/scripts.pory"
+	applymovement LOCALID_MANKEY, Common_Movement_FaceAwayPlayer
+# 164 "data/maps/FlottTown_FlottCave/scripts.pory"
+	setobjectxy LOCALID_MANKEY, VAR_TEMP_2, VAR_TEMP_3
+# 165 "data/maps/FlottTown_FlottCave/scripts.pory"
+	fadescreen FADE_FROM_BLACK
+# 166 "data/maps/FlottTown_FlottCave/scripts.pory"
+	msgbox FlottTown_FlottCave_StarterChoice_Text_1, MSGBOX_DEFAULT
+# 167 "data/maps/FlottTown_FlottCave/scripts.pory"
+	playmoncry SPECIES_MANKEY, CRY_MODE_NORMAL
+# 168 "data/maps/FlottTown_FlottCave/scripts.pory"
+	waitmoncry
+# 169 "data/maps/FlottTown_FlottCave/scripts.pory"
+	givemon SPECIES_MANKEY, 10, ITEM_NONE
+# 170 "data/maps/FlottTown_FlottCave/scripts.pory"
+	setvar VAR_STARTER_MON, 0
+# 171 "data/maps/FlottTown_FlottCave/scripts.pory"
+	removeobject LOCALID_TINKATINK
+# 172 "data/maps/FlottTown_FlottCave/scripts.pory"
 	removeobject LOCALID_TEDDIURSA
 	return
 
 FlottTown_FlottCave_StarterChoice_5:
-# 167 "data/maps/FlottTown_FlottCave/scripts.pory"
-	addobject LOCALID_TINKATINK
-# 168 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement LOCALID_TINKATINK, Common_Movement_FaceAwayPlayer
-# 169 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setobjectxy LOCALID_TINKATINK, VAR_TEMP_2, VAR_TEMP_3
-# 170 "data/maps/FlottTown_FlottCave/scripts.pory"
-	fadescreen FADE_FROM_BLACK
-# 171 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_StarterChoice_Text_2, MSGBOX_DEFAULT
-# 172 "data/maps/FlottTown_FlottCave/scripts.pory"
-	playmoncry SPECIES_TINKATINK, CRY_MODE_NORMAL
-# 173 "data/maps/FlottTown_FlottCave/scripts.pory"
-	waitmoncry
-# 174 "data/maps/FlottTown_FlottCave/scripts.pory"
-	givemon SPECIES_TINKATINK, 10, ITEM_NONE
-# 175 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setvar VAR_STARTER_MON, 1
 # 176 "data/maps/FlottTown_FlottCave/scripts.pory"
-	removeobject LOCALID_MANKEY
+	addobject LOCALID_TINKATINK
 # 177 "data/maps/FlottTown_FlottCave/scripts.pory"
+	applymovement LOCALID_TINKATINK, Common_Movement_FaceAwayPlayer
+# 178 "data/maps/FlottTown_FlottCave/scripts.pory"
+	setobjectxy LOCALID_TINKATINK, VAR_TEMP_2, VAR_TEMP_3
+# 179 "data/maps/FlottTown_FlottCave/scripts.pory"
+	fadescreen FADE_FROM_BLACK
+# 180 "data/maps/FlottTown_FlottCave/scripts.pory"
+	msgbox FlottTown_FlottCave_StarterChoice_Text_2, MSGBOX_DEFAULT
+# 181 "data/maps/FlottTown_FlottCave/scripts.pory"
+	playmoncry SPECIES_TINKATINK, CRY_MODE_NORMAL
+# 182 "data/maps/FlottTown_FlottCave/scripts.pory"
+	waitmoncry
+# 183 "data/maps/FlottTown_FlottCave/scripts.pory"
+	givemon SPECIES_TINKATINK, 10, ITEM_NONE
+# 184 "data/maps/FlottTown_FlottCave/scripts.pory"
+	setvar VAR_STARTER_MON, 1
+# 185 "data/maps/FlottTown_FlottCave/scripts.pory"
+	removeobject LOCALID_MANKEY
+# 186 "data/maps/FlottTown_FlottCave/scripts.pory"
 	removeobject LOCALID_TEDDIURSA
 	return
 
 FlottTown_FlottCave_StarterChoice_7:
-# 181 "data/maps/FlottTown_FlottCave/scripts.pory"
-	addobject LOCALID_TEDDIURSA
-# 182 "data/maps/FlottTown_FlottCave/scripts.pory"
-	applymovement LOCALID_TEDDIURSA, Common_Movement_FaceAwayPlayer
-# 183 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setobjectxy LOCALID_TEDDIURSA, VAR_TEMP_2, VAR_TEMP_3
-# 184 "data/maps/FlottTown_FlottCave/scripts.pory"
-	fadescreen FADE_FROM_BLACK
-# 185 "data/maps/FlottTown_FlottCave/scripts.pory"
-	msgbox FlottTown_FlottCave_StarterChoice_Text_3, MSGBOX_DEFAULT
-# 186 "data/maps/FlottTown_FlottCave/scripts.pory"
-	playmoncry SPECIES_TEDDIURSA, CRY_MODE_NORMAL
-# 187 "data/maps/FlottTown_FlottCave/scripts.pory"
-	waitmoncry
-# 188 "data/maps/FlottTown_FlottCave/scripts.pory"
-	givemon SPECIES_TEDDIURSA, 10, ITEM_NONE
-# 189 "data/maps/FlottTown_FlottCave/scripts.pory"
-	setvar VAR_STARTER_MON, 2
 # 190 "data/maps/FlottTown_FlottCave/scripts.pory"
-	removeobject LOCALID_MANKEY
+	addobject LOCALID_TEDDIURSA
 # 191 "data/maps/FlottTown_FlottCave/scripts.pory"
+	applymovement LOCALID_TEDDIURSA, Common_Movement_FaceAwayPlayer
+# 192 "data/maps/FlottTown_FlottCave/scripts.pory"
+	setobjectxy LOCALID_TEDDIURSA, VAR_TEMP_2, VAR_TEMP_3
+# 193 "data/maps/FlottTown_FlottCave/scripts.pory"
+	fadescreen FADE_FROM_BLACK
+# 194 "data/maps/FlottTown_FlottCave/scripts.pory"
+	msgbox FlottTown_FlottCave_StarterChoice_Text_3, MSGBOX_DEFAULT
+# 195 "data/maps/FlottTown_FlottCave/scripts.pory"
+	playmoncry SPECIES_TEDDIURSA, CRY_MODE_NORMAL
+# 196 "data/maps/FlottTown_FlottCave/scripts.pory"
+	waitmoncry
+# 197 "data/maps/FlottTown_FlottCave/scripts.pory"
+	givemon SPECIES_TEDDIURSA, 10, ITEM_NONE
+# 198 "data/maps/FlottTown_FlottCave/scripts.pory"
+	setvar VAR_STARTER_MON, 2
+# 199 "data/maps/FlottTown_FlottCave/scripts.pory"
+	removeobject LOCALID_MANKEY
+# 200 "data/maps/FlottTown_FlottCave/scripts.pory"
 	removeobject LOCALID_TINKATINK
 	return
 
 
 FlottTown_FlottCave_WildZubatBattle::
-# 197 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 206 "data/maps/FlottTown_FlottCave/scripts.pory"
 	removeitem ITEM_POKE_BALL, 1
-# 198 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 207 "data/maps/FlottTown_FlottCave/scripts.pory"
 	setwildbattle SPECIES_ZUBAT, 10
-# 199 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 208 "data/maps/FlottTown_FlottCave/scripts.pory"
 	dowildbattle
-# 200 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 209 "data/maps/FlottTown_FlottCave/scripts.pory"
 	fadescreen FADE_TO_BLACK
-# 201 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 210 "data/maps/FlottTown_FlottCave/scripts.pory"
 	removeobject LOCALID_ZUBAT
-# 202 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 211 "data/maps/FlottTown_FlottCave/scripts.pory"
 	fadescreen FADE_FROM_BLACK
-# 203 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 212 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_WildZubatBattle_Text_0, MSGBOX_DEFAULT
-# 204 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 213 "data/maps/FlottTown_FlottCave/scripts.pory"
 	closemessage
 	return
 
 
 FlottTown_FlottCave_StarterWantsToJoin::
-# 209 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 218 "data/maps/FlottTown_FlottCave/scripts.pory"
 	switch VAR_STARTER_MON
-# 210 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 219 "data/maps/FlottTown_FlottCave/scripts.pory"
 	case 0, FlottTown_FlottCave_StarterWantsToJoin_3
-# 221 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 230 "data/maps/FlottTown_FlottCave/scripts.pory"
 	case 1, FlottTown_FlottCave_StarterWantsToJoin_4
-# 232 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 241 "data/maps/FlottTown_FlottCave/scripts.pory"
 	case 2, FlottTown_FlottCave_StarterWantsToJoin_5
 FlottTown_FlottCave_StarterWantsToJoin_1:
 	return
 
 FlottTown_FlottCave_StarterWantsToJoin_3:
-# 211 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 220 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement LOCALID_MANKEY, Common_Movement_FacePlayer
-# 212 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 221 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_0, MSGBOX_DEFAULT
-# 213 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 222 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_1, MSGBOX_YESNO
-# 214 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 223 "data/maps/FlottTown_FlottCave/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_6
-# 218 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 227 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_2, MSGBOX_DEFAULT
-# 219 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 228 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_StarterWantsToJoin
 	goto FlottTown_FlottCave_StarterWantsToJoin_1
 
 FlottTown_FlottCave_StarterWantsToJoin_4:
-# 222 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 231 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement LOCALID_TINKATINK, Common_Movement_FacePlayer
-# 223 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 232 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_3, MSGBOX_DEFAULT
-# 224 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 233 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_4, MSGBOX_YESNO
-# 225 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 234 "data/maps/FlottTown_FlottCave/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_9
-# 229 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 238 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_5, MSGBOX_DEFAULT
-# 230 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 239 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_StarterWantsToJoin
 	goto FlottTown_FlottCave_StarterWantsToJoin_1
 
 FlottTown_FlottCave_StarterWantsToJoin_5:
-# 233 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 242 "data/maps/FlottTown_FlottCave/scripts.pory"
 	applymovement LOCALID_TEDDIURSA, Common_Movement_FacePlayer
-# 234 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 243 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_6, MSGBOX_DEFAULT
-# 235 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 244 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_1, MSGBOX_YESNO
-# 236 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 245 "data/maps/FlottTown_FlottCave/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_12
-# 240 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 249 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_7, MSGBOX_DEFAULT
-# 241 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 250 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_StarterWantsToJoin
 	goto FlottTown_FlottCave_StarterWantsToJoin_1
 
 FlottTown_FlottCave_StarterWantsToJoin_6:
-# 215 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 224 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_StarterYesNo
 	goto FlottTown_FlottCave_StarterWantsToJoin_1
 
 FlottTown_FlottCave_StarterWantsToJoin_9:
-# 226 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 235 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_StarterYesNo
 	goto FlottTown_FlottCave_StarterWantsToJoin_1
 
 FlottTown_FlottCave_StarterWantsToJoin_12:
-# 237 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 246 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_StarterYesNo
 	goto FlottTown_FlottCave_StarterWantsToJoin_1
 
 
 FlottTown_FlottCave_StarterYesNo::
-# 248 "data/maps/FlottTown_FlottCave/scripts.pory"
-	switch VAR_STARTER_MON
-# 249 "data/maps/FlottTown_FlottCave/scripts.pory"
-	case 0, FlottTown_FlottCave_StarterYesNo_2
 # 257 "data/maps/FlottTown_FlottCave/scripts.pory"
+	switch VAR_STARTER_MON
+# 258 "data/maps/FlottTown_FlottCave/scripts.pory"
+	case 0, FlottTown_FlottCave_StarterYesNo_2
+# 266 "data/maps/FlottTown_FlottCave/scripts.pory"
 	case 1, FlottTown_FlottCave_StarterYesNo_3
-# 265 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 274 "data/maps/FlottTown_FlottCave/scripts.pory"
 	case 2, FlottTown_FlottCave_StarterYesNo_4
 	return
 
 FlottTown_FlottCave_StarterYesNo_2:
-# 250 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 259 "data/maps/FlottTown_FlottCave/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
-# 251 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 260 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterYesNo_Text_0, MSGBOX_DEFAULT
-# 252 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 261 "data/maps/FlottTown_FlottCave/scripts.pory"
 	waitfanfare
-# 253 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 262 "data/maps/FlottTown_FlottCave/scripts.pory"
 	setflag FLAG_SYS_POKEMON_GET
-# 254 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 263 "data/maps/FlottTown_FlottCave/scripts.pory"
 	removeobject LOCALID_MANKEY
-# 255 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 264 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_NicknamePartyMon
 	return
 
 FlottTown_FlottCave_StarterYesNo_3:
-# 258 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 267 "data/maps/FlottTown_FlottCave/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
-# 259 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 268 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterYesNo_Text_1, MSGBOX_DEFAULT
-# 260 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 269 "data/maps/FlottTown_FlottCave/scripts.pory"
 	waitfanfare
-# 261 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 270 "data/maps/FlottTown_FlottCave/scripts.pory"
 	setflag FLAG_SYS_POKEMON_GET
-# 262 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 271 "data/maps/FlottTown_FlottCave/scripts.pory"
 	removeobject LOCALID_TINKATINK
-# 263 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 272 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_NicknamePartyMon
 	return
 
 FlottTown_FlottCave_StarterYesNo_4:
-# 266 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 275 "data/maps/FlottTown_FlottCave/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
-# 267 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 276 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_StarterYesNo_Text_2, MSGBOX_DEFAULT
-# 268 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 277 "data/maps/FlottTown_FlottCave/scripts.pory"
 	waitfanfare
-# 269 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 278 "data/maps/FlottTown_FlottCave/scripts.pory"
 	setflag FLAG_SYS_POKEMON_GET
-# 270 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 279 "data/maps/FlottTown_FlottCave/scripts.pory"
 	removeobject LOCALID_TEDDIURSA
-# 271 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 280 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call FlottTown_FlottCave_NicknamePartyMon
 	return
 
 
 FlottTown_FlottCave_NicknamePartyMon::
-# 277 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 286 "data/maps/FlottTown_FlottCave/scripts.pory"
 	msgbox FlottTown_FlottCave_NicknamePartyMon_Text_0, MSGBOX_YESNO
-# 278 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 287 "data/maps/FlottTown_FlottCave/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq FlottTown_FlottCave_NicknamePartyMon_2
-# 282 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 291 "data/maps/FlottTown_FlottCave/scripts.pory"
 	closemessage
 FlottTown_FlottCave_NicknamePartyMon_1:
 	return
 
 FlottTown_FlottCave_NicknamePartyMon_2:
-# 279 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 288 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call Common_EventScript_GetGiftMonPartySlot
-# 280 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 289 "data/maps/FlottTown_FlottCave/scripts.pory"
 	call Common_EventScript_NameReceivedPartyMon
 	goto FlottTown_FlottCave_NicknamePartyMon_1
 
 
-# 286 "data/maps/FlottTown_FlottCave/scripts.pory"
-FlottTown_FlottCave_PlayerFacesBarneyFromBottomTrigger:
-# 287 "data/maps/FlottTown_FlottCave/scripts.pory"
-	walk_up
-# 288 "data/maps/FlottTown_FlottCave/scripts.pory"
-	face_left
-# 289 "data/maps/FlottTown_FlottCave/scripts.pory"
-	step_end
-
-# 293 "data/maps/FlottTown_FlottCave/scripts.pory"
-FlottTown_FlottCave_Movement_BarneyWalksUp:
-# 294 "data/maps/FlottTown_FlottCave/scripts.pory"
-	walk_up
-# 294 "data/maps/FlottTown_FlottCave/scripts.pory"
-	walk_up
-# 294 "data/maps/FlottTown_FlottCave/scripts.pory"
-	walk_up
-# 294 "data/maps/FlottTown_FlottCave/scripts.pory"
-	walk_up
 # 295 "data/maps/FlottTown_FlottCave/scripts.pory"
-	face_down
+FlottTown_FlottCave_PlayerFacesBarneyFromBottomTrigger:
 # 296 "data/maps/FlottTown_FlottCave/scripts.pory"
+	walk_up
+# 297 "data/maps/FlottTown_FlottCave/scripts.pory"
+	face_left
+# 298 "data/maps/FlottTown_FlottCave/scripts.pory"
 	step_end
 
-# 299 "data/maps/FlottTown_FlottCave/scripts.pory"
-FlottTown_FlottCave_Movement_ElsieWalksUp:
-# 300 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 302 "data/maps/FlottTown_FlottCave/scripts.pory"
+FlottTown_FlottCave_Movement_BarneyWalksUp:
+# 303 "data/maps/FlottTown_FlottCave/scripts.pory"
 	walk_up
-# 300 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 303 "data/maps/FlottTown_FlottCave/scripts.pory"
 	walk_up
-# 300 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 303 "data/maps/FlottTown_FlottCave/scripts.pory"
 	walk_up
-# 301 "data/maps/FlottTown_FlottCave/scripts.pory"
-	step_end
-
+# 303 "data/maps/FlottTown_FlottCave/scripts.pory"
+	walk_up
 # 304 "data/maps/FlottTown_FlottCave/scripts.pory"
-FlottTown_FlottCave_Movement_PlayerWalksUp:
+	face_down
 # 305 "data/maps/FlottTown_FlottCave/scripts.pory"
+	step_end
+
+# 308 "data/maps/FlottTown_FlottCave/scripts.pory"
+FlottTown_FlottCave_Movement_ElsieWalksUp:
+# 309 "data/maps/FlottTown_FlottCave/scripts.pory"
+	walk_up
+# 309 "data/maps/FlottTown_FlottCave/scripts.pory"
+	walk_up
+# 309 "data/maps/FlottTown_FlottCave/scripts.pory"
+	walk_up
+# 310 "data/maps/FlottTown_FlottCave/scripts.pory"
+	step_end
+
+# 313 "data/maps/FlottTown_FlottCave/scripts.pory"
+FlottTown_FlottCave_Movement_PlayerWalksUp:
+# 314 "data/maps/FlottTown_FlottCave/scripts.pory"
 	walk_left
-# 306 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 315 "data/maps/FlottTown_FlottCave/scripts.pory"
 	walk_up
-# 306 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 315 "data/maps/FlottTown_FlottCave/scripts.pory"
 	walk_up
-# 306 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 315 "data/maps/FlottTown_FlottCave/scripts.pory"
 	walk_up
-# 307 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 316 "data/maps/FlottTown_FlottCave/scripts.pory"
 	step_end
 
 FlottTown_FlottCave_EventScript_ZubatAttacks_Text_0:
@@ -580,105 +598,105 @@ FlottTown_FlottCave_EventScript_ZubatAttacks_Text_1:
 	.string "feel a presence approach.$"
 
 FlottTown_FlottCave_EventScript_ZubatAttacks_Text_2:
-# 71 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 72 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "You decide to wait with your new\n"
 	.string "partner for your sister to return.$"
 
 FlottTown_FlottCave_EventScript_RockSmash_Text_0:
-# 79 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 80 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "???: Golurk! Use Rock Smash!$"
 
 FlottTown_FlottCave_EventScript_RockSmash_Text_1:
-# 87 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 90 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "That sounded like it came from the\n"
 	.string "smashable rocks!$"
 
 FlottTown_FlottCave_EventScript_ElsieRescue_Text_0:
-# 112 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 115 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "ELSIE: {PLAYER}! Thank goodness\n"
 	.string "you're alright. I don't know what I'd do\l"
 	.string "if you got hurt.$"
 
 FlottTown_FlottCave_EventScript_ElsieRescue_Text_1:
-# 114 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 119 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "ELSIE: This is Mr. Heinrich. This was his\n"
 	.string "old gym.$"
 
 FlottTown_FlottCave_StarterChoice_Text_0:
-# 150 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 159 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "What presence do you feel intervenes?$"
 
 FlottTown_FlottCave_StarterChoice_Text_1:
-# 157 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 166 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Mankey jumped in to save you!$"
 
 FlottTown_FlottCave_StarterChoice_Text_2:
-# 171 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 180 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Tinkatink jumped in to save you!$"
 
 FlottTown_FlottCave_StarterChoice_Text_3:
-# 185 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 194 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Teddiursa jumped in to save you!$"
 
 FlottTown_FlottCave_WildZubatBattle_Text_0:
-# 203 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 212 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "The wild Zubat ran away!$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_0:
-# 212 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 221 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Mankey is looking at you curiously. It\n"
 	.string "seems to want to join you.$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_1:
-# 213 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 222 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Do you accept?$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_2:
-# 218 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 227 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Mankey looks like it's about to hit you\n"
 	.string "next.$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_3:
-# 223 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 232 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Tinkatink is too busy playing with its\n"
 	.string "hammer to notice you.$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_4:
-# 224 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 233 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Do you want to convince it to join you?$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_5:
-# 229 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 238 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Are you sure? It looks really cute.$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_6:
-# 234 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 243 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Teddiursa is looking at you curiously.\n"
 	.string "It seems to want to join you.$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_7:
-# 240 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 249 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Teddiursa looks at you with Baby-Doll\n"
 	.string "eyes.$"
 
 FlottTown_FlottCave_StarterYesNo_Text_0:
-# 251 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 260 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Mankey joined you!$"
 
 FlottTown_FlottCave_StarterYesNo_Text_1:
-# 259 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 268 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Tinkatink joined you!$"
 
 FlottTown_FlottCave_StarterYesNo_Text_2:
-# 267 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 276 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Teddiursa joined you!$"
 
 FlottTown_FlottCave_NicknamePartyMon_Text_0:
-# 277 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 286 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "Give a nickname?$"
 
 FlottTown_FlottCave_Text_ElsieWorried::
-# 310 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 319 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "ELSIE: Oh my god! {PLAYER}! Are you\n"
 	.string "okay?! Sit tight in there, okay? I'll go\l"
 	.string "get help!\p"
@@ -686,14 +704,14 @@ FlottTown_FlottCave_Text_ElsieWorried::
 	.string "exiting the gym.$"
 
 FlottTown_FlottCave_Text_Rescue::
-# 314 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 323 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "???: Ah! There you are! Come, let's get\n"
 	.string "you out here.\p"
 	.string "ELSIE: {PLAYER}! Oh gods, I'm so glad\n"
 	.string "you're okay!$"
 
 FlottTown_FlottCave_Text_LetsGoHome::
-# 319 "data/maps/FlottTown_FlottCave/scripts.pory"
+# 328 "data/maps/FlottTown_FlottCave/scripts.pory"
 	.string "BARNEY: Indeed it were. Now, how about\n"
 	.string "we get you kids out of this dreadful\l"
 	.string "place? You both look tired. Seeing as\l"

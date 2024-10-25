@@ -886,9 +886,9 @@ const u16 gTilesetPalettes_LilycoveMuseum[][16] =
     INCBIN_U16("data/tilesets/secondary/lilycove_museum/palettes/15.gbapal"),
 };
 
-const u32 gTilesetTiles_BrendansMaysHouse[] = INCBIN_U32("data/tilesets/secondary/brendans_mays_house/tiles.4bpp.lz");
+const u32 gTilesetTiles_PlayersHouse[] = INCBIN_U32("data/tilesets/secondary/brendans_mays_house/tiles.4bpp.lz");
 
-const u16 gTilesetPalettes_BrendansMaysHouse[][16] =
+const u16 gTilesetPalettes_PlayersHouse[][16] =
 {
     INCBIN_U16("data/tilesets/secondary/brendans_mays_house/palettes/00.gbapal"),
     INCBIN_U16("data/tilesets/secondary/brendans_mays_house/palettes/01.gbapal"),

@@ -92,16 +92,6 @@
       "blockdata_filepath": "data/layouts/EverGrandeCity/map.bin"
     },
     {
-      "id": "LAYOUT_LITTLEROOT_TOWN",
-      "name": "LittlerootTown_Layout",
-      "width": 20,
-      "height": 20,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
-      "border_filepath": "data/layouts/LittlerootTown/border.bin",
-      "blockdata_filepath": "data/layouts/LittlerootTown/map.bin"
-    },
-    {
       "id": "LAYOUT_OLDALE_TOWN",
       "name": "OldaleTown_Layout",
       "width": 20,
@@ -4397,7 +4387,7 @@
       "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "secondary_tileset": "gTileset_PlayersHouse",
       "border_filepath": "data/layouts/FlottTown_PlayerHouse_1F/border.bin",
       "blockdata_filepath": "data/layouts/FlottTown_PlayerHouse_1F/map.bin"
     },
@@ -4407,7 +4397,7 @@
       "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "secondary_tileset": "gTileset_PlayersHouse",
       "border_filepath": "data/layouts/FlottTown_PlayerHouse_2F/border.bin",
       "blockdata_filepath": "data/layouts/FlottTown_PlayerHouse_2F/map.bin"
     },
@@ -4467,7 +4457,7 @@
       "width": 11,
       "height": 8,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "secondary_tileset": "gTileset_PlayersHouse",
       "border_filepath": "data/layouts/FlottTown_PlayerHouse_2F_Unpacked/border.bin",
       "blockdata_filepath": "data/layouts/FlottTown_PlayerHouse_2F_Unpacked/map.bin"
     }
