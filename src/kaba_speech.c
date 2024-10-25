@@ -55,6 +55,9 @@ enum SpriteTypes
 {
     SPRITE_TYPE_PLATFORM = 0,
     SPRITE_TYPE_POKE_BALL,
+    // these arent technically sprites but close nuff :)
+    SPRITE_TYPE_PIC_1,
+    SPRITE_TYPE_PIC_2,
     SPRITE_TYPE_NONE,
 };
 
@@ -80,7 +83,6 @@ enum Bgs
 enum WindowIds
 {
     WIN_TEXT = 0,
-    WIN_YESNO,
     WIN_COUNT,
 };
 
@@ -114,9 +116,11 @@ struct KabaSpeech
     u8 platformSpriteIds[PLAT_SPRITE_ID_COUNT]; // the platform is made out of 2 64x32sprites
     s16 alphaCoeff;
     s16 alphaCoeff2;
-    u16 timer:8;
-    u16 fadeTimer:8;
+    s16 timer;
+    s16 fadeTimer;
+    s16 counter;
     bool32 fadeFinished:1;
+    bool32 playerHasName:1;
     u8 chosenPic:2;
 };
 
@@ -137,6 +141,11 @@ static void Task_KabaSpeech_FadeOutEverything(u8);
 static void Task_KabaSpeech_FadeOutPlayerChoice(u8);
 static void Task_KabaSpeech_SpawnPlayerChoice(u8);
 static void Task_KabaSpeech_WaitForChoice(u8);
+static void Task_KabaSpeech_MoveChosenPic(u8);
+static void Task_KabaSpeech_SpawnYesNoMenu(u8);
+static void Task_KabaSpeech_ConfirmChosenPic(u8);
+static void Task_KabaSpeech_MovePicsBack(u8);
+static void Task_KabaSpeech_DoNamingScreen(u8);
 
 static void KabaSpeech_DrawCharacterPic(u8);
 static inline void KabaSpeech_PrintMessageBox(const u8 *);
@@ -219,17 +228,77 @@ static const struct WindowTemplate sKabaSpeech_WindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 0x1,
     },
-    [WIN_YESNO] = 
-    {
-        .bg = BG_TEXT,
-        .tilemapLeft = 21,
-        .tilemapTop = 9,
-        .width = 5,
-        .height = 4,
-        .paletteNum = 15,
-        .baseBlock = (26*4)+1,
-    },
     DUMMY_WIN_TEMPLATE,
+};
+
+static const struct WindowTemplate sKabaSpeech_YesNoWindow =
+{
+    .bg = BG_TEXT,
+    .tilemapLeft = 21,
+    .tilemapTop = 9,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = (26*4)+1,
+};
+
+static const struct SpriteSheet sKabaSpeech_PlatformSpriteSheet = 
+{
+    .data = sKabaSpeech_PlatformGfx,
+    .size = 2048, // 64x128/2
+    .tag = TAG_PLATFORM,
+};
+
+static const struct SpritePalette sKabaSpeech_PlatformSpritePalette =
+{
+    .data = sKabaSpeech_PlatformPal,
+    .tag = TAG_PLATFORM,
+};
+
+static const struct OamData sKabaSpeech_PlatformOamData =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(64x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(64x32),
+    .tileNum = 0,
+    .priority = 3,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sKabaSpeech_PlatformLeft[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sKabaSpeech_PlatformRight[] =
+{
+    ANIMCMD_FRAME(32, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sKabaSpeech_PlatformAnims[] =
+{
+    sKabaSpeech_PlatformLeft,
+    sKabaSpeech_PlatformRight
+};
+
+static const struct SpriteTemplate sKabaSpeech_PlatformTemplate =
+{
+    .tileTag = TAG_PLATFORM,
+    .paletteTag = TAG_PLATFORM,
+    .oam = &sKabaSpeech_PlatformOamData,
+    .anims = sKabaSpeech_PlatformAnims,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
 };
 
 // Code
@@ -320,7 +389,7 @@ static void Task_KabaSpeech_Begin(u8 taskId)
             ShowBg(BG_PIC_1);
             ShowBg(BG_TEXT);
             SetVBlankCallback(VBlankCB_KabaSpeech);
-            PlayBGM(MUS_RG_ROUTE24);
+            PlayBGM(MUS_ROUTE122);
             gTasks[taskId].func = Task_KabaSpeech_FadeInEverything;
             gMain.state = 0;
             return;
@@ -512,8 +581,94 @@ static void Task_KabaSpeech_WaitForChoice(u8 taskId)
 
     if (JOY_NEW(A_BUTTON))
     {
+        u32 blend1 = (sKabaSpeech->chosenPic == PIC_AO) ? BLDCNT_TGT1_BG2 : BLDCNT_TGT1_BG1;
+
+        SetGpuReg(REG_OFFSET_BLDCNT,
+            blend1 |
+            BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 |
+            BLDCNT_EFFECT_BLEND);
         DebugPrintf("%d is chosen", sKabaSpeech->chosenPic);
+        sKabaSpeech->counter = 0;
+        KabaSpeech_BeginFade(TRUE, 0, (sKabaSpeech->chosenPic == PIC_AO) ? SPRITE_TYPE_PIC_2 : SPRITE_TYPE_PIC_1);
+        gTasks[taskId].func = Task_KabaSpeech_MoveChosenPic;
     }
+}
+
+static void Task_KabaSpeech_MoveChosenPic(u8 taskId)
+{
+    u32 limit = (sKabaSpeech->chosenPic == PIC_AO) ? 29 : 30;
+    if (sKabaSpeech->counter == limit)
+    {
+        KabaSpeech_PrintMessageBox(COMPOUND_STRING("So you're this mofo?"));
+        CreateYesNoMenu(&sKabaSpeech_YesNoWindow, 0x214, 14, 0);
+        sKabaSpeech->timer = 30;
+        gTasks[taskId].func = Task_KabaSpeech_SpawnYesNoMenu;
+    }
+    else
+    {
+        s32 counter = (sKabaSpeech->chosenPic == PIC_AO) ? -sKabaSpeech->counter : sKabaSpeech->counter;
+        sKabaSpeech->counter++;
+        SetGpuReg(REG_OFFSET_BG1HOFS, counter);
+        SetGpuReg(REG_OFFSET_BG2HOFS, counter);
+    }
+}
+
+static void Task_KabaSpeech_SpawnYesNoMenu(u8 taskId)
+{
+    if (sKabaSpeech->timer)
+    {
+        sKabaSpeech->timer--;
+    }
+    else
+    {
+        CreateYesNoMenu(&sKabaSpeech_YesNoWindow, 0x214, 14, 0);
+        gTasks[taskId].func = Task_KabaSpeech_ConfirmChosenPic;
+    }
+}
+
+static void Task_KabaSpeech_ConfirmChosenPic(u8 taskId)
+{
+    s32 input = Menu_ProcessInputNoWrapClearOnChoose();
+
+    switch(input)
+    {
+    case 0: // YES
+        PlaySE(SE_SELECT);
+        KabaSpeech_PrintMessageBox(COMPOUND_STRING("ok, you're name ?\p"));
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        sKabaSpeech->playerHasName = FALSE;
+        gTasks[taskId].func = Task_KabaSpeech_DoNamingScreen;
+        break;
+    case 1: // NO
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        KabaSpeech_PrintMessageBox(COMPOUND_STRING("bruh\p"));
+        KabaSpeech_BeginFade(FALSE, 0, (sKabaSpeech->chosenPic == PIC_AO) ? SPRITE_TYPE_PIC_2 : SPRITE_TYPE_PIC_1);
+        gTasks[taskId].func = Task_KabaSpeech_MovePicsBack;
+        break;
+    }
+}
+
+static void Task_KabaSpeech_MovePicsBack(u8 taskId)
+{
+    u32 limit = 0;
+    if (sKabaSpeech->counter == limit)
+    {
+        sKabaSpeech->timer = 60;
+        gTasks[taskId].func = Task_KabaSpeech_SpawnPlayerChoice;
+    }
+    else
+    {
+        s32 counter = (sKabaSpeech->chosenPic == PIC_AO) ? -sKabaSpeech->counter : sKabaSpeech->counter;
+        sKabaSpeech->counter--;
+        SetGpuReg(REG_OFFSET_BG1HOFS, counter);
+        SetGpuReg(REG_OFFSET_BG2HOFS, counter);
+    }
+}
+
+static void Task_KabaSpeech_DoNamingScreen(u8 taskId)
+{
+
 }
 
 // misc. helper functions
@@ -675,22 +830,40 @@ static void KabaSpeech_BeginFade(u8 fadeOut, u8 delay, u8 spriteType)
     u32 taskId;
     u32 bldTarget1, bldTarget2;
 
-    bldTarget1 = fadeOut ? 16 : 0;
-    bldTarget2 = fadeOut ? 0 : 16;
-
     sKabaSpeech->fadeFinished = FALSE;
+    if (spriteType == SPRITE_TYPE_PIC_1 || spriteType == SPRITE_TYPE_PIC_2)
+    {
+        bldTarget1 = fadeOut ? 8 : 0;
+        bldTarget2 = fadeOut ? 8 : 16;
+    }
+    else
+    {
+        bldTarget1 = fadeOut ? 16 : 0;
+        bldTarget2 = fadeOut ? 0 : 16;
+    }
     sKabaSpeech->alphaCoeff = bldTarget1;
     sKabaSpeech->alphaCoeff2 = bldTarget2;
     sKabaSpeech->fadeTimer = delay;
 
-    if (spriteType != SPRITE_TYPE_NONE)
+    switch(spriteType)
     {
-        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
-    }
-    else
-    {
+    case SPRITE_TYPE_PLATFORM:
+    case SPRITE_TYPE_POKE_BALL:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
+        break;
+    case SPRITE_TYPE_PIC_1:
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
+        break;
+    case SPRITE_TYPE_PIC_2:
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
+        break;
+    case SPRITE_TYPE_NONE:
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
+        break;
+    default:
+        break;
     }
+
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(bldTarget1, bldTarget2));
     SetGpuReg(REG_OFFSET_BLDY, 0);
 
