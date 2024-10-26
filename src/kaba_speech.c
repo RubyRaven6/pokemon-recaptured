@@ -29,9 +29,6 @@
  * seperately from src/main_menu.c to avoid too big of
  * conflicts and just makes the sequence much cleaner to
  * read.
- * 
- * TODO:
- *      * use bigger pokeball eva made
  *
  * Below is the order of functions that'll run the intro.
  * 
@@ -723,7 +720,7 @@ static void Task_KabaSpeech_ReleaseJoltikFromPokeball(u8 taskId)
 
         spriteId = sKabaSpeech->monSpriteId;
         gSprites[spriteId].invisible = FALSE;
-        CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF, SPECIES_JOLTIK);
+        CreateKababallSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF, SPECIES_JOLTIK);
         gTasks[taskId].func = Task_KabaSpeech_JoltikAPokemon;
         sKabaSpeech->timer = 0;
     }
@@ -756,7 +753,7 @@ static void Task_KabaSpeech_ReturnJoltik(u8 taskId)
     if (!IsTextPrinterActive(WIN_TEXT))
     {
         u32 spriteId = sKabaSpeech->monSpriteId;
-        sKabaSpeech->ballSpriteId = CreateTradePokeballSprite(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF);
+        sKabaSpeech->ballSpriteId = CreateIntroPokeballSprite(spriteId, gSprites[spriteId].oam.paletteNum, MON_POS_X, MON_POS_Y, 0, 0, 32, 0x00007FFF);
         gTasks[taskId].func = Task_KabaSpeech_FadeOutPokeball;
     }
 }
