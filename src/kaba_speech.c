@@ -34,11 +34,226 @@
  *      * use bigger pokeball eva made
  *
  * Below is the order of functions that'll run the intro.
- * - DoKabaSpeech
- *   - Move the game state into Elder Kaba's Speech.
- *
- * - Task_KabaSpeech_Begin
- *   - Start the process of loading the intro resources.
+ * 
+ * DoKabaSpeech
+ *      Move the game state into Elder Kaba's Speech.
+ * 
+ * Task_KabaSpeech_Begin
+ *      Basic UI-loading code, so stuff like initializing
+ *      registers settings, bgs, windows and sprites goes
+ *      here.
+ *      There's two functions that do this, but
+ *      Task_KabaSpeech_Begin is only for loading
+ *      the intro the first time.
+ * 
+ * Task_KabaSpeech_FadeInEverything
+ *      Waits for the palette fading from black
+ *      (by Task_KabaSpeech_Begin) to slowly
+ *      fades in Kaba's mugshot and the messagebox
+ *      Also delays by 30 frames to perfectly
+ *      prints sKabaSpeech_Greetings.
+ * 
+ * Task_KabaSpeech_GreetingsTraveler
+ *      Waits for sKabaSpeech_Greetings to be done
+ *      printing. When its completely done, it'll
+ *      print sKabaSpeech_AndThis and continue to the
+ *      next function below.
+ * 
+ * Task_KabaSpeech_AndThis
+ *      Waits for sKabaSpeech_AndThis to be done
+ *      printing. When its completely done, it'll
+ *      starts the Joltik sequence.
+ * 
+ * Task_KabaSpeech_ReleaseJoltikFromPokeball
+ *      Delay 30 frames before releasing Joltik.
+ * 
+ * Task_KabaSpeech_JoltikAPokemon
+ *      Wait for Joltik's cry finished and delay for
+ *      192+ frames. After that, it'll print
+ *      sKabaSpeech_JoltikAPokemon and continue on.
+ * 
+ * Task_KabaSpeech_MainTalk
+ *      Waits for sKabaSpeech_JoltikAPokemon to be
+ *      done printing. When its completely done,
+ *      it'll print sKabaSpeech_MainTalk.
+ * 
+ * Task_KabaSpeech_ReturnJoltik
+ *      Waits for sKabaSpeech_MainTalk to be done
+ *      printing, Once its completely done, it'll
+ *      begin to do Joltik returning to its
+ *      Pokeball's sequence.
+ * 
+ * Task_KabaSpeech_FadeOutPokeball
+ *      Waits for the Joltik returning to its
+ *      Pokeball's sequence to be done. Once the
+ *      Pokeball sprite has SpriteCallbackDummy as
+ *      its sprite callback, begin fading out everything.
+ *      (except the background, of course)
+ * 
+ * Task_KabaSpeech_FadeOutEverything
+ *      Waits for sKabaSpeech->fadeFinished to be TRUE.
+ *      Once it is TRUE, it'll remove the Joltik and
+ *      Pokeball sprites, messagebox and Kaba's mugshot.
+ *      It'll also spawn Ao and Aka's mugshots. Everything
+ *      currently is faded out at this point aka unseen so
+ *      its "safe" to do.
+ * 
+ * Task_KabaSpeech_FadeInPlayerMugshotChoice
+ *      Starts fading in the player gender choice with a
+ *      delay of 60 frames. Also sets up delay to 60 frames.
+ * 
+ * Task_KabaSpeech_SetupPlayerMugshotChoice
+ *      Waits for the previous fade to finish with
+ *      fadeFinished. Once it is done, it'll first delay
+ *      by 60 frames and then prints sKabaSpeech_GenderChoice,
+ *      set MUGSHOT_AO as the chosenMugshot and set delay to 30
+ *      frames.
+ * 
+ * Task_KabaSpeech_WaitForPlayerMugshotChoice
+ *      Waits for player's input for selecting the gender.
+ *      However, it'll first delay by 30 frames prior once.
+ *      DPAD_LEFT/RIGHT for selecting between Ao and Aka
+ *      (wrapped selection so if you go DPAD_LEFT from Ao,
+ *      it'll go to Aka etc), and A_BUTTON to confirm
+ *      selection.
+ * 
+ * Task_KabaSpeech_MoveChosenMugshot
+ *      Move and fade away the unchosen mugshot, while also
+ *      moving the chosen mugshot to the center of the screen.
+ *      After all that cool jazz is done, print
+ *      sKabaSpeech_ConfirmChosenGender.
+ * 
+ * Task_KabaSpeech_SpawnYesNoMenuForPlayerMugshot
+ *      Spawns in the Yes/No menu for confirming chosen
+ *      gender mugshot, with a delay for 15 frames first.
+ *      Also sets sKabaSpeech->playerHasName to FALSE
+ *      for "safety".
+ * 
+ * Task_KabaSpeech_HandleConfirmChosenMugshotInput
+ *      Handles the Yes/No menu input. if YES, continue
+ *      to naming the player. Otherwise if NO/pressed B,
+ *      go back to the choosing gender mugshot sequence.
+ * 
+ * Task_KabaSpeech_AskForName
+ *      Either prints sKabaSpeech_ThisIsChildhoodFriend or
+ *      sKabaSpeech_AskPlayerName depending if the player
+ *      has already been named or not.
+ * 
+ * Task_KabaSpeech_MoveMugshotsBack
+ *      Similar to Task_KabaSpeech_MoveChosenMugshot, but
+ *      it restores back to the original position of the
+ *      character's pics for gender selection.
+ * 
+ * Task_KabaSpeech_WaitBeforeNamingScreen
+ *      Waits for the player to press the A/B button. If one
+ *      of them pressed, it'll fade the screen to back
+ * 
+ * Task_KabaSpeech_DoNamingScreen
+ *      Waits for the fade to black to be finished to
+ *      call the naming screen for either rival or player
+ *      depending if the player has a name yet, also sets
+ *      a default name for both to avoid having a null name
+ *      when the player is not writing anything in the
+ *      naming screen. This also destroys the platform
+ *      sprites and destroys the entire task.
+ * 
+ * Task_KabaSpeech_ConfirmChosenName
+ *      Returns from the naming screen, print either
+ *      sKabaSpeech_SoThisIsRival or sKabaSpeech_SoYourePlayer
+ *      depending on who is being named. Also creates the
+ *      Yes/No menu again, this time for confirming the
+ *      player's name.
+ * 
+ * Task_KabaSpeech_HandleConfirmNameInput
+ *      Handles player's input for confirming the rival/
+ *      player's name choice.
+ *      If YES, continue to name Rival or finishing both.
+ *      Otherwise if NO/B button pressed, do naming
+ *      sequence from the start again
+ * 
+ * Task_KabaSpeech_ConfirmPlayerName
+ *      Waits for sKabaSpeech_ConfirmPlayerName to be finished
+ *      AND also pressing either the A/B button. If conditions
+ *      were met, clear the messagebox and fade out player to
+ *      name rival.
+ * 
+ * Task_KabaSpeech_FadeSwitchUnchosenMugshot
+ *      while being faded out, setup the blend registers to
+ *      fades out both bgs for ao/aka's mugshot and then show
+ *      rival mugshot.
+ * 
+ * Task_KabaSpeech_BeginRivalNaming
+ *      similar to Task_KabaSpeech_AskForName, but it only
+ *      does the rival's text and also handles fadeFinished.
+ * 
+ * Task_KabaSpeech_ConfirmRivalName
+ *      Waits for sKabaSpeech_ConfirmRivalName to be finished
+ *      AND also pressing either the A/B button. If conditions
+ *      were met, clear the messagebox and fade back to the
+ *      player's picture.
+ * 
+ * Task_KabaSpeech_FadeSwitchChosenMugshot
+ *      Does similar thing to Task_KabaSpeech_FadeSwitchUnchosenMugshot,
+ *      but shows the player mugshot instead
+ * 
+ * Task_KabaSpeech_YourJourneyStartsHere
+ *      Delays for 30 frames, and then starts to print
+ *      sKabaSpeech_YourJourneyStartsHere.
+ * 
+ * Task_KabaSpeech_CloseMsgbox
+ *      Waits for sKabaSpeech_YourJourneyStartsHere to be
+ *      finished AND also pressing either the A/B button. If
+ *      conditions were met, clear the messagebox and fade
+ *      away.
+ * 
+ * Task_KabaSpeech_FadeAwayEverything
+ *      Waits for 40 frames delay, then fade everything
+ *      to black whilst playing SE_EXIT.
+ * 
+ * Task_KabaSpeech_Cleanup
+ *      When the fading is done, waits for 30 frames and
+ *      clean up everything and warp to new game to finish
+ *      off the intro.
+ * 
+ * Finally, here is the helper functions.
+ * 
+ * KabaSpeech_DrawCharacterMugshot (u8 id)
+ *      Draws the mugshot of either Kaba, Ao and Aka
+ *      depending on the `id` argument.
+ *      The way I did them is making them tilemaps.
+ * 
+ * KabaSpeech_PrintMessageBox (const u8 *str)
+ *      Prints a message from `str` to the messagebox's
+ *      window (WIN_TEXT) and copy everything to VRAM.
+ * 
+ * KabaSpeech_CreateMonSprite (void)
+ *      Creates a sprite of Joltik and hides it.
+ * 
+ * KabaSpeech_CreatePlatformSprites (bool32 hide)
+ *      Creates a platform consisting of 2 64x32 sprites.
+ *      Set `hide` to TRUE to hide these sprites, the reason
+ *      is because they can be both visible and invisible.
+ * 
+ * KabaSpeech_DestroyPlatformSprites (void)
+ *      Destroys the platform sprites, and set the spriteIds
+ *      to SPRITE_NONE.
+ * 
+ * KabaSpeech_BeginFade (u8 fadeOut, u8 delay, u8 spriteType)
+ *      A basic function taken from FRLG to either fade in or
+ *      fade out depending if `fadeOut` is set. It can also
+ *      delays for several frames before the fading. `spriteType`
+ *      indicates what value to be used for the
+ *      REG_OFFSET_BLDCNT register.
+ * 
+ * KabaSpeech_SetDefaultName
+ *      Sets a default name for both Player and Rival.
+ *      "Aka" for male, "Ao" for female.
+ * 
+ * CB2_KabaSpeech_ReturnFromNamingScreen
+ *      This basically does what Task_KabaSpeech_Begin did,
+ *      but as a callback2 and returns with either Aka/Ao
+ *      shown on a platform instead of Kaba.
+ * 
  */
 
 // Define, enum, struct definitions
@@ -55,8 +270,8 @@
 #define PLAT_POS_X2 64
 
 // bg pos
-#define AKA_PIC_CENTER_POS 30
-#define AO_PIC_CENTER_POS  29
+#define AKA_MUGSHOT_CENTER_POS 30
+#define AO_MUGSHOT_CENTER_POS  29
 
 #define PLAT_SPRITE_ID_COUNT 2
 
@@ -66,8 +281,8 @@ enum SpriteTypes
     SPRITE_TYPE_PLATFORM = 0,
     SPRITE_TYPE_POKE_BALL,
     // these arent technically sprites but close nuff :)
-    SPRITE_TYPE_PIC_1,
-    SPRITE_TYPE_PIC_2,
+    SPRITE_TYPE_MUGSHOT_1,
+    SPRITE_TYPE_MUGSHOT_2,
     // similar to above but not quite
     SPRITE_TYPE_PLAYER,
     SPRITE_TYPE_RIVAL,
@@ -85,8 +300,8 @@ enum Bgs
     BG_TEXT = 0,
     // generic names as their usage is both for
     // kaba and player/rival sprites
-    BG_PIC_1,
-    BG_PIC_2,
+    BG_MUGSHOT_1,
+    BG_MUGSHOT_2,
     // BG_BG feels stupid but this isn't any better either,
     // suggestions welcome (for context this is for the red bg)
     BG_INTRO,
@@ -113,10 +328,10 @@ enum SpeechLoadStates
 
 enum PicIds
 {
-    PIC_AKA = 0,
-    PIC_AO,
-    PIC_KABA,
-    PIC_COUNT
+    MUGSHOT_AKA = 0,
+    MUGSHOT_AO,
+    MUGSHOT_KABA,
+    MUGSHOT_COUNT
 };
 
 struct KabaSpeech
@@ -134,7 +349,7 @@ struct KabaSpeech
     s16 counter;
     bool32 fadeFinished:1;
     bool32 playerHasName:1;
-    u8 chosenPic:1;
+    u8 chosenMugshot:1;
 };
 
 // EWRAM data
@@ -151,29 +366,29 @@ static void Task_KabaSpeech_MainTalk(u8);
 static void Task_KabaSpeech_ReturnJoltik(u8);
 static void Task_KabaSpeech_FadeOutPokeball(u8);
 static void Task_KabaSpeech_FadeOutEverything(u8);
-static void Task_KabaSpeech_FadeOutPlayerChoice(u8);
-static void Task_KabaSpeech_SpawnPlayerChoice(u8);
-static void Task_KabaSpeech_WaitForChoice(u8);
-static void Task_KabaSpeech_MoveChosenPic(u8);
-static void Task_KabaSpeech_SpawnYesNoMenu(u8);
-static void Task_KabaSpeech_HandleConfirmChosenPicInput(u8);
-static void Task_KabaSpeech_MovePicsBack(u8);
+static void Task_KabaSpeech_FadeInPlayerMugshotChoice(u8);
+static void Task_KabaSpeech_SetupPlayerMugshotChoice(u8);
+static void Task_KabaSpeech_WaitForPlayerMugshotChoice(u8);
+static void Task_KabaSpeech_MoveChosenMugshot(u8);
+static void Task_KabaSpeech_SpawnYesNoMenuForPlayerMugshot(u8);
+static void Task_KabaSpeech_HandleConfirmChosenMugshotInput(u8);
+static void Task_KabaSpeech_MoveMugshotsBack(u8);
 static void Task_KabaSpeech_AskForName(u8);
 static void Task_KabaSpeech_WaitBeforeNamingScreen(u8);
 static void Task_KabaSpeech_DoNamingScreen(u8);
 static void Task_KabaSpeech_ConfirmChosenName(u8);
 static void Task_KabaSpeech_HandleConfirmNameInput(u8);
 static void Task_KabaSpeech_ConfirmPlayerName(u8);
-static void Task_KabaSpeech_FadeSwitchUnchosenPic(u8);
+static void Task_KabaSpeech_FadeSwitchUnchosenMugshot(u8);
 static void Task_KabaSpeech_BeginRivalNaming(u8);
 static void Task_KabaSpeech_ConfirmRivalName(u8);
-static void Task_KabaSpeech_FadeSwitchChosenPic(u8);
+static void Task_KabaSpeech_FadeSwitchChosenMugshot(u8);
 static void Task_KabaSpeech_YourJourneyStartsHere(u8);
 static void Task_KabaSpeech_CloseMsgbox(u8);
 static void Task_KabaSpeech_FadeAwayEverything(u8);
 static void Task_KabaSpeech_Cleanup(u8);
 
-static void KabaSpeech_DrawCharacterPic(u8);
+static void KabaSpeech_DrawCharacterMugshot(u8);
 static inline void KabaSpeech_PrintMessageBox(const u8 *);
 static void KabaSpeech_CreateMonSprite(void);
 static void KabaSpeech_CreatePlatformSprites(bool32 hide);
@@ -260,13 +475,13 @@ static const struct BgTemplate sKabaSpeech_BgTemplates[BG_COUNT] =
         .priority = 0,
         // other unspecified attributes defaults to 0
     },
-    [BG_PIC_1] = {
+    [BG_MUGSHOT_1] = {
         .bg = 1,
         .charBaseIndex = 2,
         .mapBaseIndex = 30,
         .priority = 1,
     },
-    [BG_PIC_2] = {
+    [BG_MUGSHOT_2] = {
         .bg = 2,
         .charBaseIndex = 2,
         .mapBaseIndex = 29,
@@ -420,8 +635,8 @@ static void Task_KabaSpeech_Begin(u8 taskId)
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(0, sKabaSpeech_BgTemplates, ARRAY_COUNT(sKabaSpeech_BgTemplates));
             SetBgTilemapBuffer(BG_INTRO, sKabaSpeech->introTilemapBuffer);
-            SetBgTilemapBuffer(BG_PIC_1, sKabaSpeech->pic1TilemapBuffer);
-            SetBgTilemapBuffer(BG_PIC_2, sKabaSpeech->pic2TilemapBuffer);
+            SetBgTilemapBuffer(BG_MUGSHOT_1, sKabaSpeech->pic1TilemapBuffer);
+            SetBgTilemapBuffer(BG_MUGSHOT_2, sKabaSpeech->pic2TilemapBuffer);
             ResetBgPositions();
             break;
         case STATE_BG_GFX:
@@ -431,11 +646,7 @@ static void Task_KabaSpeech_Begin(u8 taskId)
             LoadBgTiles(BG_INTRO, sKabaSpeech_BgGfx, 0x180, 0);
             CopyToBgTilemapBuffer(BG_INTRO, sKabaSpeech_BgMap, 0, 0);
             CopyBgTilemapBufferToVram(BG_INTRO);
-            FillBgTilemapBufferRect_Palette0(BG_PIC_2, 0, 0, 0, 32, 32);
-            CopyBgTilemapBufferToVram(BG_PIC_2);
-            FillBgTilemapBufferRect_Palette0(BG_TEXT, 0, 0, 0, 32, 32);
-            CopyBgTilemapBufferToVram(BG_TEXT);
-            KabaSpeech_DrawCharacterPic(PIC_KABA);
+            KabaSpeech_DrawCharacterMugshot(MUGSHOT_KABA);
             break;
         case STATE_WINDOWS:
             InitWindows(sKabaSpeech_WindowTemplates);
@@ -451,7 +662,8 @@ static void Task_KabaSpeech_Begin(u8 taskId)
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
             SetGpuReg(REG_OFFSET_BLDY, 0);
             ShowBg(BG_INTRO);
-            ShowBg(BG_PIC_1);
+            ShowBg(BG_MUGSHOT_1);
+            ShowBg(BG_MUGSHOT_2);
             ShowBg(BG_TEXT);
             SetVBlankCallback(VBlankCB_KabaSpeech);
             PlayBGM(MUS_ROUTE122);
@@ -566,23 +778,23 @@ static void Task_KabaSpeech_FadeOutEverything(u8 taskId)
         DestroySprite(&gSprites[sKabaSpeech->monSpriteId]);
         DestroySprite(&gSprites[sKabaSpeech->ballSpriteId]);
         ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
-        FillBgTilemapBufferRect_Palette0(BG_PIC_1, 0, 0, 0, 32, 32);
-        CopyBgTilemapBufferToVram(BG_PIC_1);
-        KabaSpeech_DrawCharacterPic(PIC_AO);
-        KabaSpeech_DrawCharacterPic(PIC_AKA);
-        gTasks[taskId].func = Task_KabaSpeech_FadeOutPlayerChoice;
+        FillBgTilemapBufferRect_Palette0(BG_MUGSHOT_1, 0, 0, 0, 32, 32);
+        CopyBgTilemapBufferToVram(BG_MUGSHOT_1);
+        KabaSpeech_DrawCharacterMugshot(MUGSHOT_AO);
+        KabaSpeech_DrawCharacterMugshot(MUGSHOT_AKA);
+        gTasks[taskId].func = Task_KabaSpeech_FadeInPlayerMugshotChoice;
     }
 }
 
-static void Task_KabaSpeech_FadeOutPlayerChoice(u8 taskId)
+static void Task_KabaSpeech_FadeInPlayerMugshotChoice(u8 taskId)
 {
     sKabaSpeech->timer = 60;
     KabaSpeech_BeginFade(FALSE, 60, SPRITE_TYPE_PLATFORM);
-    gTasks[taskId].func = Task_KabaSpeech_SpawnPlayerChoice;
+    gTasks[taskId].func = Task_KabaSpeech_SetupPlayerMugshotChoice;
 
 }
 
-static void Task_KabaSpeech_SpawnPlayerChoice(u8 taskId)
+static void Task_KabaSpeech_SetupPlayerMugshotChoice(u8 taskId)
 {
     if (sKabaSpeech->fadeFinished)
     {
@@ -596,13 +808,13 @@ static void Task_KabaSpeech_SpawnPlayerChoice(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 0);
         KabaSpeech_PrintMessageBox(sKabaSpeech_GenderChoice);
-        sKabaSpeech->chosenPic = PIC_AO;
+        sKabaSpeech->chosenMugshot = MUGSHOT_AO;
         sKabaSpeech->timer = 30;
-        gTasks[taskId].func = Task_KabaSpeech_WaitForChoice;
+        gTasks[taskId].func = Task_KabaSpeech_WaitForPlayerMugshotChoice;
     }
 }
 
-static void Task_KabaSpeech_WaitForChoice(u8 taskId)
+static void Task_KabaSpeech_WaitForPlayerMugshotChoice(u8 taskId)
 {
     if (sKabaSpeech->timer)
     {
@@ -610,16 +822,16 @@ static void Task_KabaSpeech_WaitForChoice(u8 taskId)
         return;
     }
 
-    switch (sKabaSpeech->chosenPic)
+    switch (sKabaSpeech->chosenMugshot)
     {
     default:
-    case PIC_AO: // female
+    case MUGSHOT_AO: // female
         SetGpuReg(REG_OFFSET_BLDCNT,
             BLDCNT_TGT1_BG2 |
             BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 |
             BLDCNT_EFFECT_BLEND);
         break;
-    case PIC_AKA: // male
+    case MUGSHOT_AKA: // male
         SetGpuReg(REG_OFFSET_BLDCNT,
             BLDCNT_TGT1_BG1 |
             BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 |
@@ -630,54 +842,54 @@ static void Task_KabaSpeech_WaitForChoice(u8 taskId)
 
     if (JOY_NEW(DPAD_LEFT))
     {
-        if (sKabaSpeech->chosenPic > 0)
-            sKabaSpeech->chosenPic--;
+        if (sKabaSpeech->chosenMugshot > 0)
+            sKabaSpeech->chosenMugshot--;
         else
-            sKabaSpeech->chosenPic++;
+            sKabaSpeech->chosenMugshot++;
     }
 
     if (JOY_NEW(DPAD_RIGHT))
     {
-        if (sKabaSpeech->chosenPic < 1)
-            sKabaSpeech->chosenPic++;
+        if (sKabaSpeech->chosenMugshot < 1)
+            sKabaSpeech->chosenMugshot++;
         else
-            sKabaSpeech->chosenPic--;
+            sKabaSpeech->chosenMugshot--;
     }
 
     if (JOY_NEW(A_BUTTON))
     {
-        u32 blend1 = (sKabaSpeech->chosenPic == PIC_AO) ? BLDCNT_TGT1_BG2 : BLDCNT_TGT1_BG1;
+        u32 blend1 = (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? BLDCNT_TGT1_BG2 : BLDCNT_TGT1_BG1;
 
         SetGpuReg(REG_OFFSET_BLDCNT,
             blend1 |
             BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 |
             BLDCNT_EFFECT_BLEND);
-        DebugPrintf("%d is chosen", sKabaSpeech->chosenPic);
+        DebugPrintf("%d is chosen", sKabaSpeech->chosenMugshot);
         sKabaSpeech->counter = 0;
-        KabaSpeech_BeginFade(TRUE, 0, (sKabaSpeech->chosenPic == PIC_AO) ? SPRITE_TYPE_PIC_2 : SPRITE_TYPE_PIC_1);
-        gTasks[taskId].func = Task_KabaSpeech_MoveChosenPic;
+        KabaSpeech_BeginFade(TRUE, 0, (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? SPRITE_TYPE_MUGSHOT_2 : SPRITE_TYPE_MUGSHOT_1);
+        gTasks[taskId].func = Task_KabaSpeech_MoveChosenMugshot;
     }
 }
 
-static void Task_KabaSpeech_MoveChosenPic(u8 taskId)
+static void Task_KabaSpeech_MoveChosenMugshot(u8 taskId)
 {
-    u32 limit = (sKabaSpeech->chosenPic == PIC_AO) ? AO_PIC_CENTER_POS : AKA_PIC_CENTER_POS;
+    u32 limit = (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? AO_MUGSHOT_CENTER_POS : AKA_MUGSHOT_CENTER_POS;
     if (sKabaSpeech->counter == limit)
     {
         KabaSpeech_PrintMessageBox(sKabaSpeech_ConfirmChosenGender);
         sKabaSpeech->timer = 15;
-        gTasks[taskId].func = Task_KabaSpeech_SpawnYesNoMenu;
+        gTasks[taskId].func = Task_KabaSpeech_SpawnYesNoMenuForPlayerMugshot;
     }
     else
     {
-        s32 counter = (sKabaSpeech->chosenPic == PIC_AO) ? -sKabaSpeech->counter : sKabaSpeech->counter;
+        s32 counter = (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? -sKabaSpeech->counter : sKabaSpeech->counter;
         sKabaSpeech->counter++;
         SetGpuReg(REG_OFFSET_BG1HOFS, counter);
         SetGpuReg(REG_OFFSET_BG2HOFS, counter);
     }
 }
 
-static void Task_KabaSpeech_SpawnYesNoMenu(u8 taskId)
+static void Task_KabaSpeech_SpawnYesNoMenuForPlayerMugshot(u8 taskId)
 {
     if (sKabaSpeech->timer)
     {
@@ -687,11 +899,11 @@ static void Task_KabaSpeech_SpawnYesNoMenu(u8 taskId)
     {
         sKabaSpeech->playerHasName = FALSE;
         CreateYesNoMenu(&sKabaSpeech_YesNoWindow, 0x214, 14, 0);
-        gTasks[taskId].func = Task_KabaSpeech_HandleConfirmChosenPicInput;
+        gTasks[taskId].func = Task_KabaSpeech_HandleConfirmChosenMugshotInput;
     }
 }
 
-static void Task_KabaSpeech_HandleConfirmChosenPicInput(u8 taskId)
+static void Task_KabaSpeech_HandleConfirmChosenMugshotInput(u8 taskId)
 {
     s32 input = Menu_ProcessInputNoWrapClearOnChoose();
 
@@ -705,23 +917,23 @@ static void Task_KabaSpeech_HandleConfirmChosenPicInput(u8 taskId)
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         KabaSpeech_PrintMessageBox(sKabaSpeech_CancelChosenGender);
-        KabaSpeech_BeginFade(FALSE, 0, (sKabaSpeech->chosenPic == PIC_AO) ? SPRITE_TYPE_PIC_2 : SPRITE_TYPE_PIC_1);
-        gTasks[taskId].func = Task_KabaSpeech_MovePicsBack;
+        KabaSpeech_BeginFade(FALSE, 0, (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? SPRITE_TYPE_MUGSHOT_2 : SPRITE_TYPE_MUGSHOT_1);
+        gTasks[taskId].func = Task_KabaSpeech_MoveMugshotsBack;
         break;
     }
 }
 
-static void Task_KabaSpeech_MovePicsBack(u8 taskId)
+static void Task_KabaSpeech_MoveMugshotsBack(u8 taskId)
 {
     u32 limit = 0;
     if (sKabaSpeech->counter == limit)
     {
         sKabaSpeech->timer = 60;
-        gTasks[taskId].func = Task_KabaSpeech_SpawnPlayerChoice;
+        gTasks[taskId].func = Task_KabaSpeech_SetupPlayerMugshotChoice;
     }
     else
     {
-        s32 counter = (sKabaSpeech->chosenPic == PIC_AO) ? -sKabaSpeech->counter : sKabaSpeech->counter;
+        s32 counter = (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? -sKabaSpeech->counter : sKabaSpeech->counter;
         sKabaSpeech->counter--;
         SetGpuReg(REG_OFFSET_BG1HOFS, counter);
         SetGpuReg(REG_OFFSET_BG2HOFS, counter);
@@ -761,11 +973,11 @@ static void Task_KabaSpeech_DoNamingScreen(u8 taskId)
         KabaSpeech_SetDefaultName();
         if (sKabaSpeech->playerHasName)
         {
-            DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock2Ptr->rivalName, sKabaSpeech->chosenPic, 0, 0, CB2_KabaSpeech_ReturnFromNamingScreen);
+            DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock2Ptr->rivalName, sKabaSpeech->chosenMugshot, 0, 0, CB2_KabaSpeech_ReturnFromNamingScreen);
         }
         else
         {
-            DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, sKabaSpeech->chosenPic, 0, 0, CB2_KabaSpeech_ReturnFromNamingScreen);
+            DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, sKabaSpeech->chosenMugshot, 0, 0, CB2_KabaSpeech_ReturnFromNamingScreen);
         }
         KabaSpeech_DestroyPlatformSprites();
         FreeAllWindowBuffers();
@@ -838,27 +1050,27 @@ static void Task_KabaSpeech_ConfirmPlayerName(u8 taskId)
     {
         ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
         KabaSpeech_BeginFade(TRUE, 30, SPRITE_TYPE_PLAYER);
-        gTasks[taskId].func = Task_KabaSpeech_FadeSwitchUnchosenPic;
+        gTasks[taskId].func = Task_KabaSpeech_FadeSwitchUnchosenMugshot;
     }
 }
 
-static void Task_KabaSpeech_FadeSwitchUnchosenPic(u8 taskId)
+static void Task_KabaSpeech_FadeSwitchUnchosenMugshot(u8 taskId)
 {
     if (sKabaSpeech->fadeFinished)
     {
         u32 hideBg, showBg;
-        // "hide" both pic bg before we fade in rival
+        // "hide" both mugshot bg before we fade in rival
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
-        if (sKabaSpeech->chosenPic == PIC_AO)
+        if (sKabaSpeech->chosenMugshot == MUGSHOT_AO)
         {
-            hideBg = BG_PIC_1;
-            showBg = BG_PIC_2;
+            hideBg = BG_MUGSHOT_1;
+            showBg = BG_MUGSHOT_2;
         }
         else
         {
-            hideBg = BG_PIC_2;
-            showBg = BG_PIC_1;
+            hideBg = BG_MUGSHOT_2;
+            showBg = BG_MUGSHOT_1;
         }
         ShowBg(showBg);
         HideBg(hideBg);
@@ -883,27 +1095,27 @@ static void Task_KabaSpeech_ConfirmRivalName(u8 taskId)
     {
         ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
         KabaSpeech_BeginFade(TRUE, 30, SPRITE_TYPE_RIVAL);
-        gTasks[taskId].func = Task_KabaSpeech_FadeSwitchChosenPic;
+        gTasks[taskId].func = Task_KabaSpeech_FadeSwitchChosenMugshot;
     }
 }
 
-static void Task_KabaSpeech_FadeSwitchChosenPic(u8 taskId)
+static void Task_KabaSpeech_FadeSwitchChosenMugshot(u8 taskId)
 {
     if (sKabaSpeech->fadeFinished)
     {
         u32 hideBg, showBg;
-        // "hide" both pic bg before we fade in player again
+        // "hide" both mugshot bg before we fade in player again
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
-        if (sKabaSpeech->chosenPic == PIC_AO)
+        if (sKabaSpeech->chosenMugshot == MUGSHOT_AO)
         {
-            hideBg = BG_PIC_2;
-            showBg = BG_PIC_1;
+            hideBg = BG_MUGSHOT_2;
+            showBg = BG_MUGSHOT_1;
         }
         else
         {
-            hideBg = BG_PIC_1;
-            showBg = BG_PIC_2;
+            hideBg = BG_MUGSHOT_1;
+            showBg = BG_MUGSHOT_2;
         }
         ShowBg(showBg);
         HideBg(hideBg);
@@ -965,10 +1177,9 @@ static void Task_KabaSpeech_Cleanup(u8 taskId)
         else
         {
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-            gSaveBlock2Ptr->playerGender = sKabaSpeech->chosenPic;
+            gSaveBlock2Ptr->playerGender = sKabaSpeech->chosenMugshot;
             FreeAllWindowBuffers();
-            DestroySprite(&gSprites[sKabaSpeech->platformSpriteIds[1]]);
-            DestroySpriteAndFreeResources(&gSprites[sKabaSpeech->platformSpriteIds[0]]);
+            KabaSpeech_DestroyPlatformSprites();
             FREE_AND_SET_NULL(sKabaSpeech);
             SetMainCallback2(CB2_NewGame);
             DestroyTask(taskId);
@@ -978,19 +1189,27 @@ static void Task_KabaSpeech_Cleanup(u8 taskId)
 
 // misc. helper functions
 
-static void KabaSpeech_DrawCharacterPic(u8 id)
+static void KabaSpeech_DrawCharacterMugshot(u8 id)
 {
     switch(id)
     {
-        case PIC_AKA: // male
+        case MUGSHOT_AKA: // male
+            LoadPalette(sKabaSpeech_PlayerPicPal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
+            LoadBgTiles(BG_MUGSHOT_2, sKabaSpeech_AkaPicGfx, sizeof(sKabaSpeech_AkaPicGfx), 0);
+            CopyToBgTilemapBufferRect(BG_MUGSHOT_2, sKabaSpeech_AkaPicMap, 14, 0, 9, 13);
+            CopyBgTilemapBufferToVram(BG_MUGSHOT_2);
             return;
-        case PIC_AO: // female
+        case MUGSHOT_AO: // female
+            LoadPalette(sKabaSpeech_PlayerPicPal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
+            LoadBgTiles(BG_MUGSHOT_1, sKabaSpeech_AoPicGfx, sizeof(sKabaSpeech_AoPicGfx), 0x50);
+            CopyToBgTilemapBufferRect(BG_MUGSHOT_1, sKabaSpeech_AoPicMap, 7, 0, 9, 13);
+            CopyBgTilemapBufferToVram(BG_MUGSHOT_1);
             return;
-        case PIC_KABA:
+        case MUGSHOT_KABA:
             LoadPalette(sKabaSpeech_KabaPicPal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
-            LoadBgTiles(BG_PIC_1, sKabaSpeech_KabaPicGfx, 0x1800, 0);
-            CopyToBgTilemapBuffer(BG_PIC_1, sKabaSpeech_KabaPicMap, 0, 0);
-            CopyBgTilemapBufferToVram(BG_PIC_1);
+            LoadBgTiles(BG_MUGSHOT_1, sKabaSpeech_KabaPicGfx, sizeof(sKabaSpeech_KabaPicGfx), 0);
+            CopyToBgTilemapBuffer(BG_MUGSHOT_1, sKabaSpeech_KabaPicMap, 0, 0);
+            CopyBgTilemapBufferToVram(BG_MUGSHOT_1);
             return;
         default:
             return;
@@ -1155,7 +1374,7 @@ static void KabaSpeech_BeginFade(u8 fadeOut, u8 delay, u8 spriteType)
     u32 bldTarget1, bldTarget2;
 
     sKabaSpeech->fadeFinished = FALSE;
-    if (spriteType == SPRITE_TYPE_PIC_1 || spriteType == SPRITE_TYPE_PIC_2)
+    if (spriteType == SPRITE_TYPE_MUGSHOT_1 || spriteType == SPRITE_TYPE_MUGSHOT_2)
     {
         bldTarget1 = fadeOut ? 8 : 0;
         bldTarget2 = fadeOut ? 8 : 16;
@@ -1171,11 +1390,11 @@ static void KabaSpeech_BeginFade(u8 fadeOut, u8 delay, u8 spriteType)
 
     if (spriteType == SPRITE_TYPE_PLAYER)
     {
-        spriteType = (sKabaSpeech->chosenPic == PIC_AO) ? SPRITE_TYPE_PIC_1 : SPRITE_TYPE_PIC_2;
+        spriteType = (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? SPRITE_TYPE_MUGSHOT_1 : SPRITE_TYPE_MUGSHOT_2;
     }
     else if (spriteType == SPRITE_TYPE_RIVAL)
     {
-        spriteType = (sKabaSpeech->chosenPic == PIC_AO) ? SPRITE_TYPE_PIC_2 : SPRITE_TYPE_PIC_1;
+        spriteType = (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? SPRITE_TYPE_MUGSHOT_2 : SPRITE_TYPE_MUGSHOT_1;
     }
 
     switch(spriteType)
@@ -1184,10 +1403,10 @@ static void KabaSpeech_BeginFade(u8 fadeOut, u8 delay, u8 spriteType)
     case SPRITE_TYPE_POKE_BALL:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
         break;
-    case SPRITE_TYPE_PIC_1:
+    case SPRITE_TYPE_MUGSHOT_1:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
         break;
-    case SPRITE_TYPE_PIC_2:
+    case SPRITE_TYPE_MUGSHOT_2:
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
         break;
     case SPRITE_TYPE_NONE:
@@ -1213,12 +1432,12 @@ static void KabaSpeech_SetDefaultName(void)
 
     if (sKabaSpeech->playerHasName) // rival
     {
-        src = (sKabaSpeech->chosenPic == PIC_AO) ? sKabaSpeech_Aka : sKabaSpeech_Ao;
+        src = (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? sKabaSpeech_Aka : sKabaSpeech_Ao;
         dst = gSaveBlock2Ptr->rivalName;
     }
     else // player
     {
-        src = (sKabaSpeech->chosenPic == PIC_AO) ? sKabaSpeech_Ao : sKabaSpeech_Aka;
+        src = (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? sKabaSpeech_Ao : sKabaSpeech_Aka;
         dst = gSaveBlock2Ptr->playerName;
     }
 
@@ -1265,8 +1484,8 @@ static void CB2_KabaSpeech_ReturnFromNamingScreen(void)
             ResetBgsAndClearDma3BusyFlags(0);
             InitBgsFromTemplates(0, sKabaSpeech_BgTemplates, ARRAY_COUNT(sKabaSpeech_BgTemplates));
             SetBgTilemapBuffer(BG_INTRO, sKabaSpeech->introTilemapBuffer);
-            SetBgTilemapBuffer(BG_PIC_1, sKabaSpeech->pic1TilemapBuffer);
-            SetBgTilemapBuffer(BG_PIC_2, sKabaSpeech->pic2TilemapBuffer);
+            SetBgTilemapBuffer(BG_MUGSHOT_1, sKabaSpeech->pic1TilemapBuffer);
+            SetBgTilemapBuffer(BG_MUGSHOT_2, sKabaSpeech->pic2TilemapBuffer);
             ResetBgPositions();
             break;
         case STATE_BG_GFX:
@@ -1277,8 +1496,8 @@ static void CB2_KabaSpeech_ReturnFromNamingScreen(void)
             CopyBgTilemapBufferToVram(BG_INTRO);
             // we're still loading both even though
             // only one of them will be shown at this point
-            KabaSpeech_DrawCharacterPic(PIC_AO);
-            KabaSpeech_DrawCharacterPic(PIC_AKA);
+            KabaSpeech_DrawCharacterMugshot(MUGSHOT_AO);
+            KabaSpeech_DrawCharacterMugshot(MUGSHOT_AKA);
             break;
         case STATE_WINDOWS:
             InitWindows(sKabaSpeech_WindowTemplates);
@@ -1292,31 +1511,31 @@ static void CB2_KabaSpeech_ReturnFromNamingScreen(void)
 
             if (sKabaSpeech->playerHasName)
             {
-                if (sKabaSpeech->chosenPic == PIC_AO)
+                if (sKabaSpeech->chosenMugshot == MUGSHOT_AO)
                 {
-                    hideBg = BG_PIC_1;
-                    showBg = BG_PIC_2;
+                    hideBg = BG_MUGSHOT_1;
+                    showBg = BG_MUGSHOT_2;
                     bldBg  = BLDCNT_TGT1_BG1;
                 }
                 else
                 {
-                    hideBg = BG_PIC_2;
-                    showBg = BG_PIC_1;
+                    hideBg = BG_MUGSHOT_2;
+                    showBg = BG_MUGSHOT_1;
                     bldBg  = BLDCNT_TGT1_BG2;
                 }
             }
             else
             {
-                if (sKabaSpeech->chosenPic == PIC_AO)
+                if (sKabaSpeech->chosenMugshot == MUGSHOT_AO)
                 {
-                    hideBg = BG_PIC_2;
-                    showBg = BG_PIC_1;
+                    hideBg = BG_MUGSHOT_2;
+                    showBg = BG_MUGSHOT_1;
                     bldBg  = BLDCNT_TGT1_BG2;
                 }
                 else
                 {
-                    hideBg = BG_PIC_1;
-                    showBg = BG_PIC_2;
+                    hideBg = BG_MUGSHOT_1;
+                    showBg = BG_MUGSHOT_2;
                     bldBg  = BLDCNT_TGT1_BG1;
                 }
             }
@@ -1328,8 +1547,8 @@ static void CB2_KabaSpeech_ReturnFromNamingScreen(void)
                 BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
             SetGpuReg(REG_OFFSET_BLDY, 0);
-            SetGpuReg(REG_OFFSET_BG1HOFS, -AO_PIC_CENTER_POS);
-            SetGpuReg(REG_OFFSET_BG2HOFS, AKA_PIC_CENTER_POS);
+            SetGpuReg(REG_OFFSET_BG1HOFS, -AO_MUGSHOT_CENTER_POS);
+            SetGpuReg(REG_OFFSET_BG2HOFS, AKA_MUGSHOT_CENTER_POS);
             ShowBg(BG_INTRO);
             ShowBg(showBg);
             HideBg(hideBg);
