@@ -19,6 +19,7 @@
 #include "trainer_pokemon_sprites.h"
 #include "pokeball.h"
 #include "naming_screen.h"
+#include "overworld.h"
 #include "kaba_speech.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -28,6 +29,9 @@
  * seperately from src/main_menu.c to avoid too big of
  * conflicts and just makes the sequence much cleaner to
  * read.
+ * 
+ * TODO:
+ *      * use bigger pokeball eva made
  *
  * Below is the order of functions that'll run the intro.
  * - DoKabaSpeech
@@ -64,6 +68,9 @@ enum SpriteTypes
     // these arent technically sprites but close nuff :)
     SPRITE_TYPE_PIC_1,
     SPRITE_TYPE_PIC_2,
+    // similar to above but not quite
+    SPRITE_TYPE_PLAYER,
+    SPRITE_TYPE_RIVAL,
     SPRITE_TYPE_NONE,
 };
 
@@ -127,7 +134,7 @@ struct KabaSpeech
     s16 counter;
     bool32 fadeFinished:1;
     bool32 playerHasName:1;
-    u8 chosenPic:2;
+    u8 chosenPic:1;
 };
 
 // EWRAM data
@@ -156,6 +163,14 @@ static void Task_KabaSpeech_WaitBeforeNamingScreen(u8);
 static void Task_KabaSpeech_DoNamingScreen(u8);
 static void Task_KabaSpeech_ConfirmChosenName(u8);
 static void Task_KabaSpeech_HandleConfirmNameInput(u8);
+static void Task_KabaSpeech_ConfirmPlayerName(u8);
+static void Task_KabaSpeech_FadeSwitchUnchosenPic(u8);
+static void Task_KabaSpeech_BeginRivalNaming(u8);
+static void Task_KabaSpeech_ConfirmRivalName(u8);
+static void Task_KabaSpeech_FadeSwitchChosenPic(u8);
+static void Task_KabaSpeech_YourJourneyStartsHere(u8);
+static void Task_KabaSpeech_FadeAwayEverything(u8);
+static void Task_KabaSpeech_Cleanup(u8);
 
 static void KabaSpeech_DrawCharacterPic(u8);
 static inline void KabaSpeech_PrintMessageBox(const u8 *);
@@ -208,6 +223,23 @@ static const u8 sKabaSpeech_CancelChosenGender[] = _(
 );
 static const u8 sKabaSpeech_SoYourePlayer[] = _(
     "so {PLAYER} is you ?"
+);
+static const u8 sKabaSpeech_ConfirmPlayerName[] = _(
+    "ok"
+);
+static const u8 sKabaSpeech_ThisIsChildhoodFriend[] = _(
+    "who tf is this"
+);
+static const u8 sKabaSpeech_SoThisIsRival[] = _(
+    "ohh its {RIVAL} ?"
+);
+static const u8 sKabaSpeech_ConfirmRivalName[] = _(
+    "ah mb"
+);
+static const u8 sKabaSpeech_YourJourneyStartsHere[] = _(
+    "{PLAYER}!\p"
+    "Your journey is about to start.\n"
+    "Meet me in my totally legit shack ok\p"
 );
 
 static const u16 sKabaSpeech_BgGfx[] = INCBIN_U16("graphics/kaba_speech/bg.4bpp");
@@ -652,6 +684,7 @@ static void Task_KabaSpeech_SpawnYesNoMenu(u8 taskId)
     }
     else
     {
+        sKabaSpeech->playerHasName = FALSE;
         CreateYesNoMenu(&sKabaSpeech_YesNoWindow, 0x214, 14, 0);
         gTasks[taskId].func = Task_KabaSpeech_HandleConfirmChosenPicInput;
     }
@@ -696,8 +729,18 @@ static void Task_KabaSpeech_MovePicsBack(u8 taskId)
 
 static void Task_KabaSpeech_AskForName(u8 taskId)
 {
+    const u8 *str;
     sKabaSpeech->timer = 60;
-    KabaSpeech_PrintMessageBox(sKabaSpeech_AskPlayerName);
+    if (sKabaSpeech->playerHasName) // rival
+    {
+        str = sKabaSpeech_ThisIsChildhoodFriend;
+    }
+    else
+    {
+        str = sKabaSpeech_AskPlayerName;
+    }
+
+    KabaSpeech_PrintMessageBox(str);
     gTasks[taskId].func = Task_KabaSpeech_WaitBeforeNamingScreen;
 }
 
@@ -712,7 +755,6 @@ static void Task_KabaSpeech_WaitBeforeNamingScreen(u8 taskId)
         else
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            sKabaSpeech->playerHasName = FALSE;
             gTasks[taskId].func = Task_KabaSpeech_DoNamingScreen;
         }
     }
@@ -725,8 +767,7 @@ static void Task_KabaSpeech_DoNamingScreen(u8 taskId)
         KabaSpeech_SetDefaultName();
         if (sKabaSpeech->playerHasName)
         {
-            // sKabaSpeech->chosenPic ^ 1 is opposite
-            DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock2Ptr->rivalName, (sKabaSpeech->chosenPic ^ 1), 0, 0, CB2_KabaSpeech_ReturnFromNamingScreen);
+            DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock2Ptr->rivalName, sKabaSpeech->chosenPic, 0, 0, CB2_KabaSpeech_ReturnFromNamingScreen);
         }
         else
         {
@@ -750,7 +791,16 @@ static void Task_KabaSpeech_ConfirmChosenName(u8 taskId)
         }
         else
         {
-            KabaSpeech_PrintMessageBox(sKabaSpeech_SoYourePlayer);
+            const u8 *str;
+            if (sKabaSpeech->playerHasName)
+            {
+                str = sKabaSpeech_SoThisIsRival;
+            }
+            else
+            {
+                str = sKabaSpeech_SoYourePlayer;
+            }
+            KabaSpeech_PrintMessageBox(str);
             CreateYesNoMenu(&sKabaSpeech_YesNoWindow, 0x214, 14, 0);
             gTasks[taskId].func = Task_KabaSpeech_HandleConfirmNameInput;
         }
@@ -764,9 +814,22 @@ static void Task_KabaSpeech_HandleConfirmNameInput(u8 taskId)
     switch(input)
     {
     case 0: // YES
+    {
         PlaySE(SE_SELECT);
-        sKabaSpeech->playerHasName = TRUE;
+        sKabaSpeech->timer = 40;
+        if (sKabaSpeech->playerHasName)
+        {
+            KabaSpeech_PrintMessageBox(sKabaSpeech_ConfirmRivalName);
+            gTasks[taskId].func = Task_KabaSpeech_ConfirmRivalName;
+        }
+        else
+        {
+            sKabaSpeech->playerHasName = TRUE;
+            KabaSpeech_PrintMessageBox(sKabaSpeech_ConfirmPlayerName);
+            gTasks[taskId].func = Task_KabaSpeech_ConfirmPlayerName;
+        }
         break;
+    }
     case 1: // NO
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
@@ -775,9 +838,157 @@ static void Task_KabaSpeech_HandleConfirmNameInput(u8 taskId)
     }
 }
 
+static void Task_KabaSpeech_ConfirmPlayerName(u8 taskId)
+{
+    if (sKabaSpeech->timer)
+    {
+        sKabaSpeech->timer--;
+    }
+    else
+    {
+        if (!IsTextPrinterActive(WIN_TEXT))
+        {
+            ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
+            KabaSpeech_BeginFade(TRUE, 30, SPRITE_TYPE_PLAYER);
+            gTasks[taskId].func = Task_KabaSpeech_FadeSwitchUnchosenPic;
+        }
+    }
+}
+
+static void Task_KabaSpeech_FadeSwitchUnchosenPic(u8 taskId)
+{
+    if (sKabaSpeech->fadeFinished)
+    {
+        u32 hideBg, showBg;
+        // "hide" both pic bg before we fade in rival
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
+        if (sKabaSpeech->chosenPic == PIC_AO)
+        {
+            hideBg = BG_PIC_1;
+            showBg = BG_PIC_2;
+        }
+        else
+        {
+            hideBg = BG_PIC_2;
+            showBg = BG_PIC_1;
+        }
+        ShowBg(showBg);
+        HideBg(hideBg);
+        KabaSpeech_BeginFade(FALSE, 30, SPRITE_TYPE_RIVAL);
+        gTasks[taskId].func = Task_KabaSpeech_BeginRivalNaming;
+    }
+}
+
 static void Task_KabaSpeech_BeginRivalNaming(u8 taskId)
 {
+    if (sKabaSpeech->fadeFinished)
+    {
+        sKabaSpeech->timer = 60;
+        KabaSpeech_PrintMessageBox(sKabaSpeech_ThisIsChildhoodFriend);
+        gTasks[taskId].func = Task_KabaSpeech_WaitBeforeNamingScreen;
+    }
+}
 
+static void Task_KabaSpeech_ConfirmRivalName(u8 taskId)
+{
+    if (sKabaSpeech->timer)
+    {
+        sKabaSpeech->timer--;
+    }
+    else
+    {
+        if (!IsTextPrinterActive(WIN_TEXT))
+        {
+            ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
+            KabaSpeech_BeginFade(TRUE, 30, SPRITE_TYPE_RIVAL);
+            gTasks[taskId].func = Task_KabaSpeech_FadeSwitchChosenPic;
+        }
+    }
+}
+
+static void Task_KabaSpeech_FadeSwitchChosenPic(u8 taskId)
+{
+    if (sKabaSpeech->fadeFinished)
+    {
+        u32 hideBg, showBg;
+        // "hide" both pic bg before we fade in player again
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_BLEND);
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
+        if (sKabaSpeech->chosenPic == PIC_AO)
+        {
+            hideBg = BG_PIC_2;
+            showBg = BG_PIC_1;
+        }
+        else
+        {
+            hideBg = BG_PIC_1;
+            showBg = BG_PIC_2;
+        }
+        ShowBg(showBg);
+        HideBg(hideBg);
+        KabaSpeech_BeginFade(FALSE, 30, SPRITE_TYPE_PLAYER);
+        sKabaSpeech->timer = 30;
+        gTasks[taskId].func = Task_KabaSpeech_YourJourneyStartsHere;
+    }
+}
+
+static void Task_KabaSpeech_YourJourneyStartsHere(u8 taskId)
+{
+    if (sKabaSpeech->fadeFinished)
+    {
+        if (sKabaSpeech->timer)
+        {
+            sKabaSpeech->timer--;
+        }
+        else
+        {
+            sKabaSpeech->timer = 40;
+            KabaSpeech_PrintMessageBox(sKabaSpeech_YourJourneyStartsHere);
+            gTasks[taskId].func = Task_KabaSpeech_FadeAwayEverything;
+        }
+    }
+}
+
+static void Task_KabaSpeech_FadeAwayEverything(u8 taskId)
+{
+    if (!IsTextPrinterActive(WIN_TEXT) && (JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
+    {
+        if (sKabaSpeech->timer)
+        {
+            sKabaSpeech->timer--;
+        }
+        else
+        {
+            ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
+            PlaySE(SE_WARP_IN);
+            sKabaSpeech->timer = 60;
+            BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_WHITE);
+            gTasks[taskId].func = Task_KabaSpeech_Cleanup;
+        }
+    }
+}
+
+static void Task_KabaSpeech_Cleanup(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        if (sKabaSpeech->timer)
+        {
+            sKabaSpeech->timer--;
+        }
+        else
+        {
+            SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+            gSaveBlock2Ptr->playerGender = sKabaSpeech->chosenPic;
+            FreeAllWindowBuffers();
+            DestroySprite(&gSprites[sKabaSpeech->platformSpriteIds[1]]);
+            DestroySpriteAndFreeResources(&gSprites[sKabaSpeech->platformSpriteIds[0]]);
+            FREE_AND_SET_NULL(sKabaSpeech);
+            SetMainCallback2(CB2_NewGame);
+            DestroyTask(taskId);
+        }
+    }
 }
 
 // misc. helper functions
@@ -973,6 +1184,15 @@ static void KabaSpeech_BeginFade(u8 fadeOut, u8 delay, u8 spriteType)
     sKabaSpeech->alphaCoeff2 = bldTarget2;
     sKabaSpeech->fadeTimer = delay;
 
+    if (spriteType == SPRITE_TYPE_PLAYER)
+    {
+        spriteType = (sKabaSpeech->chosenPic == PIC_AO) ? SPRITE_TYPE_PIC_1 : SPRITE_TYPE_PIC_2;
+    }
+    else if (spriteType == SPRITE_TYPE_RIVAL)
+    {
+        spriteType = (sKabaSpeech->chosenPic == PIC_AO) ? SPRITE_TYPE_PIC_2 : SPRITE_TYPE_PIC_1;
+    }
+
     switch(spriteType)
     {
     case SPRITE_TYPE_PLATFORM:
@@ -1079,24 +1299,41 @@ static void CB2_KabaSpeech_ReturnFromNamingScreen(void)
             InitWindows(sKabaSpeech_WindowTemplates);
             InitTextBoxGfxAndPrinters();
             Menu_LoadStdPalAt(BG_PLTT_ID(13));
-            DrawDialogueFrame(WIN_TEXT, TRUE);
             BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
             break;
         case STATE_FINISH:
         {
             u32 hideBg, showBg, bldBg;
 
-            if (sKabaSpeech->chosenPic == PIC_AO)
+            if (sKabaSpeech->playerHasName)
             {
-                hideBg = BG_PIC_2;
-                showBg = BG_PIC_1;
-                bldBg  = BLDCNT_TGT1_BG2;
+                if (sKabaSpeech->chosenPic == PIC_AO)
+                {
+                    hideBg = BG_PIC_1;
+                    showBg = BG_PIC_2;
+                    bldBg  = BLDCNT_TGT1_BG1;
+                }
+                else
+                {
+                    hideBg = BG_PIC_2;
+                    showBg = BG_PIC_1;
+                    bldBg  = BLDCNT_TGT1_BG2;
+                }
             }
             else
             {
-                hideBg = BG_PIC_1;
-                showBg = BG_PIC_2;
-                bldBg  = BLDCNT_TGT1_BG1;
+                if (sKabaSpeech->chosenPic == PIC_AO)
+                {
+                    hideBg = BG_PIC_2;
+                    showBg = BG_PIC_1;
+                    bldBg  = BLDCNT_TGT1_BG2;
+                }
+                else
+                {
+                    hideBg = BG_PIC_1;
+                    showBg = BG_PIC_2;
+                    bldBg  = BLDCNT_TGT1_BG1;
+                }
             }
 
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
