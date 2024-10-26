@@ -169,6 +169,7 @@ static void Task_KabaSpeech_BeginRivalNaming(u8);
 static void Task_KabaSpeech_ConfirmRivalName(u8);
 static void Task_KabaSpeech_FadeSwitchChosenPic(u8);
 static void Task_KabaSpeech_YourJourneyStartsHere(u8);
+static void Task_KabaSpeech_CloseMsgbox(u8);
 static void Task_KabaSpeech_FadeAwayEverything(u8);
 static void Task_KabaSpeech_Cleanup(u8);
 
@@ -239,7 +240,7 @@ static const u8 sKabaSpeech_ConfirmRivalName[] = _(
 static const u8 sKabaSpeech_YourJourneyStartsHere[] = _(
     "{PLAYER}!\p"
     "Your journey is about to start.\n"
-    "Meet me in my totally legit shack ok\p"
+    "Meet me in my totally legit shack ok"
 );
 
 static const u16 sKabaSpeech_BgGfx[] = INCBIN_U16("graphics/kaba_speech/bg.4bpp");
@@ -746,17 +747,10 @@ static void Task_KabaSpeech_AskForName(u8 taskId)
 
 static void Task_KabaSpeech_WaitBeforeNamingScreen(u8 taskId)
 {
-    if (!IsTextPrinterActive(WIN_TEXT))
+    if ((!IsTextPrinterActive(WIN_TEXT)) && (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON)))
     {
-        if (sKabaSpeech->timer)
-        {
-            sKabaSpeech->timer--;
-        }
-        else
-        {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_KabaSpeech_DoNamingScreen;
-        }
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_KabaSpeech_DoNamingScreen;
     }
 }
 
@@ -840,18 +834,11 @@ static void Task_KabaSpeech_HandleConfirmNameInput(u8 taskId)
 
 static void Task_KabaSpeech_ConfirmPlayerName(u8 taskId)
 {
-    if (sKabaSpeech->timer)
+    if ((!IsTextPrinterActive(WIN_TEXT)) && (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON)))
     {
-        sKabaSpeech->timer--;
-    }
-    else
-    {
-        if (!IsTextPrinterActive(WIN_TEXT))
-        {
-            ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
-            KabaSpeech_BeginFade(TRUE, 30, SPRITE_TYPE_PLAYER);
-            gTasks[taskId].func = Task_KabaSpeech_FadeSwitchUnchosenPic;
-        }
+        ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
+        KabaSpeech_BeginFade(TRUE, 30, SPRITE_TYPE_PLAYER);
+        gTasks[taskId].func = Task_KabaSpeech_FadeSwitchUnchosenPic;
     }
 }
 
@@ -892,18 +879,11 @@ static void Task_KabaSpeech_BeginRivalNaming(u8 taskId)
 
 static void Task_KabaSpeech_ConfirmRivalName(u8 taskId)
 {
-    if (sKabaSpeech->timer)
+    if ((!IsTextPrinterActive(WIN_TEXT)) && (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON)))
     {
-        sKabaSpeech->timer--;
-    }
-    else
-    {
-        if (!IsTextPrinterActive(WIN_TEXT))
-        {
-            ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
-            KabaSpeech_BeginFade(TRUE, 30, SPRITE_TYPE_RIVAL);
-            gTasks[taskId].func = Task_KabaSpeech_FadeSwitchChosenPic;
-        }
+        ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
+        KabaSpeech_BeginFade(TRUE, 30, SPRITE_TYPE_RIVAL);
+        gTasks[taskId].func = Task_KabaSpeech_FadeSwitchChosenPic;
     }
 }
 
@@ -945,27 +925,32 @@ static void Task_KabaSpeech_YourJourneyStartsHere(u8 taskId)
         {
             sKabaSpeech->timer = 40;
             KabaSpeech_PrintMessageBox(sKabaSpeech_YourJourneyStartsHere);
-            gTasks[taskId].func = Task_KabaSpeech_FadeAwayEverything;
+            gTasks[taskId].func = Task_KabaSpeech_CloseMsgbox;
         }
+    }
+}
+
+static void Task_KabaSpeech_CloseMsgbox(u8 taskId)
+{
+    if ((!IsTextPrinterActive(WIN_TEXT)) && (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON)))
+    {
+        ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
+        gTasks[taskId].func = Task_KabaSpeech_FadeAwayEverything;
     }
 }
 
 static void Task_KabaSpeech_FadeAwayEverything(u8 taskId)
 {
-    if (!IsTextPrinterActive(WIN_TEXT) && (JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
+    if (sKabaSpeech->timer)
     {
-        if (sKabaSpeech->timer)
-        {
-            sKabaSpeech->timer--;
-        }
-        else
-        {
-            ClearDialogWindowAndFrameToTransparent(WIN_TEXT, TRUE);
-            PlaySE(SE_WARP_IN);
-            sKabaSpeech->timer = 60;
-            BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_WHITE);
-            gTasks[taskId].func = Task_KabaSpeech_Cleanup;
-        }
+        sKabaSpeech->timer--;
+    }
+    else
+    {
+        PlaySE(SE_EXIT);
+        sKabaSpeech->timer = 30;
+        BeginNormalPaletteFade(0xEFFFEFFF, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_KabaSpeech_Cleanup;
     }
 }
 
