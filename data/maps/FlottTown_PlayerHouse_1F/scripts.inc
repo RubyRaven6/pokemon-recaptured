@@ -39,9 +39,9 @@ FlottTown_PlayerHouse_1F_OnLoad_5:
 # 23 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	setmetatile 8, 5, METATILE_PlayersHouse_LowerRightChair, FALSE
 # 24 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 7, 0, METATILE_PlayersHouse_TV_Top, FALSE
+	setmetatile 7, 0, METATILE_PlayersHouse_TV_Top, TRUE
 # 25 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 7, 1, METATILE_Building_TV_Off, FALSE
+	setmetatile 7, 1, METATILE_Building_TV_Off, TRUE
 # 26 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	setmetatile 7, 2, METATILE_PlayersHouse_TV_Bottom, FALSE
 	return

@@ -1088,3 +1088,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/BlackHole/scripts.inc"
 
 	.include "data/maps/FlottTown_PlayerHouse_2F_Unpacked/scripts.inc"
+
+	.include "data/maps/Route1/scripts.inc"

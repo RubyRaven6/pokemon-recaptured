@@ -130,6 +130,14 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     end
 }
 
+script FlottTown_LittleGirl{
+    msgbox(format("My mommy says I shouldn't go too far to the edge.\pBut I like seeing all the cool Water-type Pokémon!"), MSGBOX_NPC)
+}
+
+script FlottTown_TechGirl{
+    msgbox(FlottTown_Text_TechnologyIsAmazing, MSGBOX_NPC)
+}
+
 script FlottTown_PlayerHouseSign{
     msgbox(FlottTown_Text_PlayerHouseSign, MSGBOX_SIGN)
 }
@@ -221,6 +229,15 @@ text FlottTown_Text_ImSorryChamp{
 
 text FlottTown_Text_IllPrepareInside{
     format("I'll get some stuff ready inside. Why not take a look around town?")
+}
+
+text FlottTown_Text_TechnologyIsAmazing{
+    format("So many scientific breakthroughs have happened recently, it's staggering!\p"
+            "First, it's unbelievably easy to create your own ROM Hack these days! Decompilations have come so far!\p"
+            "You can change the game however you like to a practically atomic level!\p"
+            "Speaking of change, I heard they've had incredible advancements in changing Pokémon down to an atomic level, like changing what gender they are.\p"
+            "I wonder if they can do that for humans too..."
+    )
 }
 
 text FlottTown_Text_PlayerHouseSign{

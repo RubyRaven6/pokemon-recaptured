@@ -64,6 +64,7 @@
 #define MAP_UNDERWATER_ROUTE125 (55 | (0 << 8))
 #define MAP_FLOTT_TOWN          (56 | (0 << 8))
 #define MAP_BLACK_HOLE          (57 | (0 << 8))
+#define MAP_ROUTE1              (58 | (0 << 8))
 
 // gMapGroup_IndoorFlott
 #define MAP_FLOTT_TOWN_INSIDE_HARBOR            (0 | (1 << 8))

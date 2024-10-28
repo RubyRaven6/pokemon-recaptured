@@ -1,0 +1,37 @@
+mapscripts FlottTown_House1_MapScripts {
+}
+
+script FlottTown_House1_Dad {
+    msgbox(FlottTown_House1_Text_FlottTownsQuiet, MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script FlottTown_House1_Mom {
+    msgbox(FlottTown_House1_Text_ItsPeacefulOutHere, MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script FlottTown_House1_Doll {
+    msgbox(FlottTown_House1_Text_CrushYou, MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+text FlottTown_House1_Text_CrushYou{
+    format("It's an enormous Snorlax doll. You fear that it may somehow crush you with it's immense size.")
+}
+
+text FlottTown_House1_Text_FlottTownsQuiet{
+    format("Oh, you must be one of the new girls that just moved in! I hope you like it here. It's really quiet and peaceful.")
+}
+
+text FlottTown_House1_Text_ItsPeacefulOutHere{
+    format("Hello! It's nice to meet you! You're one of the new girls that just moved in, right? You're going to have a wonderful time here in Flott Town."
+            "Our family moved from the big city, and it's been a wonderful change of pace."
+    )
+}

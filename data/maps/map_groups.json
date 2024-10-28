@@ -93,7 +93,8 @@
     "Underwater_Route105",
     "Underwater_Route125",
     "FlottTown",
-    "BlackHole"
+    "BlackHole",
+    "Route1"
   ],
   "gMapGroup_IndoorFlott": [
     "FlottTown_InsideHarbor",
