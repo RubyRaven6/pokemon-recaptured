@@ -216,12 +216,12 @@ FlottTown_AbandonedGym_ElsieFollowerScript_Text_1:
 	.string "Once we get home, I can cook you up a\n"
 	.string "hamburg steak.$"
 
-FlottTown_AbandonedGym_Text_LetsStayUp::
+FlottTown_AbandonedGym_Text_LetsStayUp:
 # 106 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	.string "ELSIE: A ladder? Hmm...let's not go down\n"
 	.string "there.$"
 
-FlottTown_AbandonedGym_Text_BeforeCollapse::
+FlottTown_AbandonedGym_Text_BeforeCollapse:
 # 110 "data/maps/FlottTown_AbandonedGym/scripts.pory"
 	.string "ELSIE: Huh, it's just a Pokéball. Will you\n"
 	.string "ever use it, though?\p"

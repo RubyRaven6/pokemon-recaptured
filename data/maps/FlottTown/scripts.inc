@@ -217,221 +217,227 @@ FlottTown_LittleGirl::
 	return
 
 
-FlottTown_TechGirl::
+FlottTown_TempTeleporter:
 # 138 "data/maps/FlottTown/scripts.pory"
+	warp MAP_DOCKSIDE_CITY, 36, 15
+	return
+
+
+FlottTown_TechGirl::
+# 142 "data/maps/FlottTown/scripts.pory"
 	msgbox FlottTown_Text_TechnologyIsAmazing, MSGBOX_NPC
 	return
 
 
 FlottTown_PlayerHouseSign::
-# 142 "data/maps/FlottTown/scripts.pory"
+# 146 "data/maps/FlottTown/scripts.pory"
 	msgbox FlottTown_Text_PlayerHouseSign, MSGBOX_SIGN
 	return
 
 
 FlottTown_BarneyHouseSign::
-# 146 "data/maps/FlottTown/scripts.pory"
+# 150 "data/maps/FlottTown/scripts.pory"
 	msgbox FlottTown_Text_BarneyHouseSign, MSGBOX_SIGN
 	return
 
 
 FlottTown_OldGymSign::
-# 150 "data/maps/FlottTown/scripts.pory"
+# 154 "data/maps/FlottTown/scripts.pory"
 	msgbox FlottTown_Text_OldGymSign, MSGBOX_SIGN
 	return
 
 
-# 153 "data/maps/FlottTown/scripts.pory"
+# 157 "data/maps/FlottTown/scripts.pory"
 MoveNextToElsie1:
-# 154 "data/maps/FlottTown/scripts.pory"
+# 158 "data/maps/FlottTown/scripts.pory"
 	walk_up
-# 154 "data/maps/FlottTown/scripts.pory"
+# 158 "data/maps/FlottTown/scripts.pory"
 	walk_up
-# 155 "data/maps/FlottTown/scripts.pory"
-	walk_right
-# 156 "data/maps/FlottTown/scripts.pory"
-	walk_up
-	step_end
-
 # 159 "data/maps/FlottTown/scripts.pory"
-MoveNextToElsie2:
-# 160 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 160 "data/maps/FlottTown/scripts.pory"
-	walk_up
+	walk_right
 # 160 "data/maps/FlottTown/scripts.pory"
 	walk_up
 	step_end
 
 # 163 "data/maps/FlottTown/scripts.pory"
-MoveNextToElsie3:
+MoveNextToElsie2:
 # 164 "data/maps/FlottTown/scripts.pory"
 	walk_up
 # 164 "data/maps/FlottTown/scripts.pory"
 	walk_up
-# 165 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 166 "data/maps/FlottTown/scripts.pory"
+# 164 "data/maps/FlottTown/scripts.pory"
 	walk_up
 	step_end
 
+# 167 "data/maps/FlottTown/scripts.pory"
+MoveNextToElsie3:
+# 168 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 168 "data/maps/FlottTown/scripts.pory"
+	walk_up
 # 169 "data/maps/FlottTown/scripts.pory"
-ElsieWalksUp:
+	walk_left
 # 170 "data/maps/FlottTown/scripts.pory"
 	walk_up
-# 171 "data/maps/FlottTown/scripts.pory"
-	walk_right
 	step_end
 
+# 173 "data/maps/FlottTown/scripts.pory"
+ElsieWalksUp:
 # 174 "data/maps/FlottTown/scripts.pory"
-ElsieWalksToHouse:
+	walk_up
 # 175 "data/maps/FlottTown/scripts.pory"
 	walk_right
-# 176 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 177 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 177 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 177 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 177 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 177 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 177 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 177 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 177 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 177 "data/maps/FlottTown/scripts.pory"
-	walk_up
+	step_end
+
 # 178 "data/maps/FlottTown/scripts.pory"
-	walk_left
+ElsieWalksToHouse:
 # 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-# 179 "data/maps/FlottTown/scripts.pory"
-	walk_left
-	step_end
-
+	walk_right
+# 180 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 181 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 181 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 181 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 181 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 181 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 181 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 181 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 181 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 181 "data/maps/FlottTown/scripts.pory"
+	walk_up
 # 182 "data/maps/FlottTown/scripts.pory"
-PlayerWalksToHouse:
+	walk_left
 # 183 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 184 "data/maps/FlottTown/scripts.pory"
-	walk_right
-# 185 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 185 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 185 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 185 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 185 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 185 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 185 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 185 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 185 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 186 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 187 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
-# 187 "data/maps/FlottTown/scripts.pory"
+# 183 "data/maps/FlottTown/scripts.pory"
 	walk_left
 	step_end
 
-# 190 "data/maps/FlottTown/scripts.pory"
-ElsieGoesInside1:
-# 191 "data/maps/FlottTown/scripts.pory"
+# 186 "data/maps/FlottTown/scripts.pory"
+PlayerWalksToHouse:
+# 187 "data/maps/FlottTown/scripts.pory"
 	walk_up
-# 191 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 191 "data/maps/FlottTown/scripts.pory"
-	walk_up
-# 192 "data/maps/FlottTown/scripts.pory"
+# 188 "data/maps/FlottTown/scripts.pory"
 	walk_right
-# 193 "data/maps/FlottTown/scripts.pory"
+# 189 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 189 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 189 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 189 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 189 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 189 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 189 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 189 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 189 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 190 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+# 191 "data/maps/FlottTown/scripts.pory"
+	walk_left
+	step_end
+
+# 194 "data/maps/FlottTown/scripts.pory"
+ElsieGoesInside1:
+# 195 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 195 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 195 "data/maps/FlottTown/scripts.pory"
+	walk_up
+# 196 "data/maps/FlottTown/scripts.pory"
+	walk_right
+# 197 "data/maps/FlottTown/scripts.pory"
 	face_up
 	step_end
 
-# 196 "data/maps/FlottTown/scripts.pory"
+# 200 "data/maps/FlottTown/scripts.pory"
 ElsieGoesInside2:
-# 197 "data/maps/FlottTown/scripts.pory"
+# 201 "data/maps/FlottTown/scripts.pory"
 	walk_up
-# 198 "data/maps/FlottTown/scripts.pory"
+# 202 "data/maps/FlottTown/scripts.pory"
 	set_invisible
-# 199 "data/maps/FlottTown/scripts.pory"
+# 203 "data/maps/FlottTown/scripts.pory"
 	step_end
 
 FlottTown_LittleGirl_Text_0:
@@ -442,36 +448,36 @@ FlottTown_LittleGirl_Text_0:
 	.string "Water-type Pokémon!$"
 
 FlottTown_Text_TookYourTime::
-# 202 "data/maps/FlottTown/scripts.pory"
+# 206 "data/maps/FlottTown/scripts.pory"
 	.string "Hey! You really took your time, huh?$"
 
 FlottTown_Text_ThisIsIt::
-# 206 "data/maps/FlottTown/scripts.pory"
+# 210 "data/maps/FlottTown/scripts.pory"
 	.string "This is it! Our new home.$"
 
 FlottTown_Text_LetsTakeALook::
-# 210 "data/maps/FlottTown/scripts.pory"
+# 214 "data/maps/FlottTown/scripts.pory"
 	.string "Well, that's enough sight-seeing. Let's\n"
 	.string "go check our our new house!$"
 
 FlottTown_Text_OurNewHome::
-# 214 "data/maps/FlottTown/scripts.pory"
+# 218 "data/maps/FlottTown/scripts.pory"
 	.string "Say hello to the new place! This is\n"
 	.string "where we'll be living from now on.$"
 
 FlottTown_Text_DoYouLikeIt::
-# 218 "data/maps/FlottTown/scripts.pory"
+# 222 "data/maps/FlottTown/scripts.pory"
 	.string "So Champ, do you like the new place?$"
 
 FlottTown_Text_ImGladYouLikeIt::
-# 222 "data/maps/FlottTown/scripts.pory"
+# 226 "data/maps/FlottTown/scripts.pory"
 	.string "Good to hear! Of course, anyone's gonna\n"
 	.string "be glad we got out of that old hole. We\l"
 	.string "don't have to suffer under his roof\l"
 	.string "anymore. Plus, we got a killer view.$"
 
 FlottTown_Text_ImSorryChamp::
-# 226 "data/maps/FlottTown/scripts.pory"
+# 230 "data/maps/FlottTown/scripts.pory"
 	.string "...\p"
 	.string "I'm sorry, Champ. I know you miss all\n"
 	.string "your friends back...well I don't even\l"
@@ -481,12 +487,12 @@ FlottTown_Text_ImSorryChamp::
 	.string "see all of them again soon.$"
 
 FlottTown_Text_IllPrepareInside::
-# 230 "data/maps/FlottTown/scripts.pory"
+# 234 "data/maps/FlottTown/scripts.pory"
 	.string "I'll get some stuff ready inside. Why\n"
 	.string "not take a look around town?$"
 
 FlottTown_Text_TechnologyIsAmazing::
-# 234 "data/maps/FlottTown/scripts.pory"
+# 238 "data/maps/FlottTown/scripts.pory"
 	.string "So many scientific breakthroughs have\n"
 	.string "happened recently, it's staggering!\p"
 	.string "First, it's unbelievably easy to create\n"
@@ -502,15 +508,15 @@ FlottTown_Text_TechnologyIsAmazing::
 	.string "too...$"
 
 FlottTown_Text_PlayerHouseSign::
-# 243 "data/maps/FlottTown/scripts.pory"
+# 247 "data/maps/FlottTown/scripts.pory"
 	.string "ASTER RESIDENCE$"
 
 FlottTown_Text_BarneyHouseSign::
-# 247 "data/maps/FlottTown/scripts.pory"
+# 251 "data/maps/FlottTown/scripts.pory"
 	.string "HEINRICH RESIDNECE$"
 
 FlottTown_Text_OldGymSign::
-# 251 "data/maps/FlottTown/scripts.pory"
+# 255 "data/maps/FlottTown/scripts.pory"
 	.string "The text is faded, but you can just\n"
 	.string "barely make out the text written on it.\p"
 	.string "FLOTT TOWN GYM\p"

@@ -134,6 +134,10 @@ script FlottTown_LittleGirl{
     msgbox(format("My mommy says I shouldn't go too far to the edge.\pBut I like seeing all the cool Water-type Pokémon!"), MSGBOX_NPC)
 }
 
+script(local) FlottTown_TempTeleporter{
+    warp(MAP_DOCKSIDE_CITY, 36, 15)
+}
+
 script FlottTown_TechGirl{
     msgbox(FlottTown_Text_TechnologyIsAmazing, MSGBOX_NPC)
 }

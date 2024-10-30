@@ -129,7 +129,7 @@ FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_1:
 # 33 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "ELSIE: ...$"
 
-FlottTown_BarneysHouse_Text_BarneysLecture::
+FlottTown_BarneysHouse_Text_BarneysLecture:
 # 73 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "Now, I wouldn't be a responsible adult if\n"
 	.string "I don't reprimand you for what you did\l"
@@ -145,14 +145,14 @@ FlottTown_BarneysHouse_Text_BarneysLecture::
 	.string "be scared; after all, you weren't alone,\l"
 	.string "were you?$"
 
-FlottTown_BarneysHouse_Text_ImTerriblySorry::
+FlottTown_BarneysHouse_Text_ImTerriblySorry:
 # 82 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "BARNEY: Oh my, I didn't expect her to be\n"
 	.string "upset. I'm terribly sorry. That being\l"
 	.string "said, if you'd like to know more about\l"
 	.string "training, you can come back to me.$"
 
-FlottTown_BarneysHouse_Text_BarneysOut::
+FlottTown_BarneysHouse_Text_BarneysOut:
 # 86 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "Oh my, a visitor! Are you the girls that\n"
 	.string "just moved in?\p"
@@ -169,7 +169,7 @@ FlottTown_BarneysHouse_Text_BarneysOut::
 	.string "likely tired from their journey. I'm sure\l"
 	.string "we'll see each other soon.$"
 
-FlottTown_BarneysHouse_Text_GoodBattler::
+FlottTown_BarneysHouse_Text_GoodBattler:
 # 96 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "BARNEY: Hm? That's a Pokéball on your\n"
 	.string "side, right? I assumed you used a\l"
@@ -177,20 +177,20 @@ FlottTown_BarneysHouse_Text_GoodBattler::
 	.string "of battling. I'm sure you've got a good\l"
 	.string "head on your shoulders to be a trainer!$"
 
-FlottTown_BarneysHouse_Text_GladYoureOkay::
+FlottTown_BarneysHouse_Text_GladYoureOkay:
 # 100 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "My goodness, your first day and already\n"
 	.string "making quite a ruckus!\p"
 	.string "But nonetheless, I'm happy that you and\n"
 	.string "your sister are safe.$"
 
-FlottTown_BarneysHouse_Text_GoToYourSister::
+FlottTown_BarneysHouse_Text_GoToYourSister:
 # 106 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "I appreciate your enthusiasm, but I\n"
 	.string "believe it's apt that you check-in on\l"
 	.string "your sister first.$"
 
-FlottTown_BarneysHouse_Text_GymLeaderChallenge::
+FlottTown_BarneysHouse_Text_GymLeaderChallenge:
 # 111 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "Oh, you've returned! I imagine you're\n"
 	.string "interested in growing as a trainer, no?$"

@@ -70,7 +70,7 @@ movement FlottTown_BarneysHouse_Movement_ElsieWalksOut {
     walk_down * 2
 }
 
-text FlottTown_BarneysHouse_Text_BarneysLecture{
+text(local) FlottTown_BarneysHouse_Text_BarneysLecture{
     format(
         "Now, I wouldn't be a responsible adult if I don't reprimand you for what you did in the first place.\p"
         "See here: what you did was incredibly reckless. The gym is closed for a reason. As much as it breaks my heart for it to be unmaintained, such is its state.\p"
@@ -79,11 +79,11 @@ text FlottTown_BarneysHouse_Text_BarneysLecture{
     )
 }
 
-text FlottTown_BarneysHouse_Text_ImTerriblySorry{
+text(local) FlottTown_BarneysHouse_Text_ImTerriblySorry{
     format("BARNEY: Oh my, I didn't expect her to be upset. I'm terribly sorry. That being said, if you'd like to know more about training, you can come back to me.")
 }
 
-text FlottTown_BarneysHouse_Text_BarneysOut{
+text(local) FlottTown_BarneysHouse_Text_BarneysOut{
     format(
         "Oh my, a visitor! Are you the girls that just moved in?\p"
         "My name is Adelaide. It's a pleaesure to meet you. Unfortunately, my husband is out at the moment.\p"
@@ -93,21 +93,21 @@ text FlottTown_BarneysHouse_Text_BarneysOut{
     )
 }
 
-text FlottTown_BarneysHouse_Text_GoodBattler{
+text(local) FlottTown_BarneysHouse_Text_GoodBattler{
     format("BARNEY: Hm? That's a Pokéball on your side, right? I assumed you used a Pokémon. I even heard the faint sounds of battling. I'm sure you've got a good head on your shoulders to be a trainer!")
 }
 
-text FlottTown_BarneysHouse_Text_GladYoureOkay{
+text(local) FlottTown_BarneysHouse_Text_GladYoureOkay{
     format("My goodness, your first day and already making quite a ruckus!\p"
             "But nonetheless, I'm happy that you and your sister are safe."
     )
 }
 
-text FlottTown_BarneysHouse_Text_GoToYourSister{
+text(local) FlottTown_BarneysHouse_Text_GoToYourSister{
     format("I appreciate your enthusiasm, but I believe it's apt that you check-in on your sister first."
     )
 }
 
-text FlottTown_BarneysHouse_Text_GymLeaderChallenge{
+text(local) FlottTown_BarneysHouse_Text_GymLeaderChallenge{
     format("Oh, you've returned! I imagine you're interested in growing as a trainer, no?")
 }

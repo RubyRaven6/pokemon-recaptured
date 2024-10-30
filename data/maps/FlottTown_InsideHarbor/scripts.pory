@@ -13,6 +13,10 @@ script FlottTown_InsideHarbor_EventScript_BoatLeaves{
     release
 }
 
+script FlottTown_InsideHarbor_TempTeleporter{
+    warp(MAP_DOCKSIDE_CITY, 38, 18)
+}
+
 movement LookAtBoat{
     face_down
 }

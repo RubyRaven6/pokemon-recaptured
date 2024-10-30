@@ -4446,8 +4446,8 @@
       "name": "BlackHole_Layout",
       "width": 9,
       "height": 9,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GenericBuilding",
+      "primary_tileset": "gTileset_SecretBase",
+      "secondary_tileset": "gTileset_SecretBaseYellowCave",
       "border_filepath": "data/layouts/BlackHole/border.bin",
       "blockdata_filepath": "data/layouts/BlackHole/map.bin"
     },
@@ -4470,6 +4470,26 @@
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Route1/border.bin",
       "blockdata_filepath": "data/layouts/Route1/map.bin"
+    },
+    {
+      "id": "LAYOUT_DOCKSIDE_CITY",
+      "name": "DocksideCity_Layout",
+      "width": 65,
+      "height": 40,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Slateport",
+      "border_filepath": "data/layouts/DocksideCity/border.bin",
+      "blockdata_filepath": "data/layouts/DocksideCity/map.bin"
+    },
+    {
+      "id": "LAYOUT_DOCKSIDE_CITY_PORT",
+      "name": "DocksideCity_Port_Layout",
+      "width": 24,
+      "height": 15,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/DocksideCity_Port/border.bin",
+      "blockdata_filepath": "data/layouts/DocksideCity_Port/map.bin"
     }
   ]
 }

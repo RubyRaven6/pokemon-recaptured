@@ -103,10 +103,10 @@ movement WalkAway{
     step_end
 }
 
-text FlottTown_AbandonedGym_Text_LetsStayUp {
+text(local) FlottTown_AbandonedGym_Text_LetsStayUp {
     format("ELSIE: A ladder? Hmm...let's not go down there.")
 }
 
-text FlottTown_AbandonedGym_Text_BeforeCollapse{
+text(local) FlottTown_AbandonedGym_Text_BeforeCollapse{
     format("ELSIE: Huh, it's just a Pokéball. Will you ever use it, though?\p There doesn't seem to be anything else in here though. We'd best get home.")
 }

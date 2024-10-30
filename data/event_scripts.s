@@ -1090,3 +1090,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/FlottTown_PlayerHouse_2F_Unpacked/scripts.inc"
 
 	.include "data/maps/Route1/scripts.inc"
+
+	.include "data/maps/DocksideCity/scripts.inc"
+
+	.include "data/maps/DocksideCity_Port/scripts.inc"

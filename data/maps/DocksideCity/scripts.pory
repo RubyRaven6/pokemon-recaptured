@@ -1,0 +1,7 @@
+mapscripts DocksideCity_MapScripts {
+    
+}
+
+script DocksideCity_TempTeleporter{
+    warp(MAP_FLOTT_TOWN, 25, 13)
+}
