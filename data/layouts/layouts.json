@@ -4490,6 +4490,16 @@
       "secondary_tileset": "gTileset_Facility",
       "border_filepath": "data/layouts/DocksideCity_Port/border.bin",
       "blockdata_filepath": "data/layouts/DocksideCity_Port/map.bin"
+    },
+    {
+      "id": "LAYOUT_DOCKSIDE_CITY_SHIPYARD",
+      "name": "DocksideCity_Shipyard_Layout",
+      "width": 21,
+      "height": 15,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/DocksideCity_Shipyard/border.bin",
+      "blockdata_filepath": "data/layouts/DocksideCity_Shipyard/map.bin"
     }
   ]
 }

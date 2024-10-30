@@ -1094,3 +1094,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/DocksideCity/scripts.inc"
 
 	.include "data/maps/DocksideCity_Port/scripts.inc"
+
+	.include "data/maps/DocksideCity_Shipyard/scripts.inc"

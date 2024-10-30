@@ -115,7 +115,8 @@
     "OldaleTown_PokemonCenter_1F",
     "OldaleTown_PokemonCenter_2F",
     "OldaleTown_Mart",
-    "DocksideCity_Port"
+    "DocksideCity_Port",
+    "DocksideCity_Shipyard"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",
