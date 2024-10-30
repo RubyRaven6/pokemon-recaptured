@@ -24,42 +24,36 @@ FlottTown_InsideHarbor_EventScript_BoatLeaves::
 	return
 
 
-FlottTown_InsideHarbor_TempTeleporter::
-# 17 "data/maps/FlottTown_InsideHarbor/scripts.pory"
-	warp MAP_DOCKSIDE_CITY, 38, 18
-	return
-
-
-# 20 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 18 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 LookAtBoat:
-# 21 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 19 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	face_down
 	step_end
 
-# 24 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 22 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 BoatDeparts:
-# 25 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 23 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 25 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 23 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 25 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 23 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 25 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 23 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 25 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 23 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 25 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 23 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 25 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 23 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 25 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 23 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 26 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 24 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 26 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 24 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 26 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 24 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
-# 26 "data/maps/FlottTown_InsideHarbor/scripts.pory"
+# 24 "data/maps/FlottTown_InsideHarbor/scripts.pory"
 	walk_left
 	step_end

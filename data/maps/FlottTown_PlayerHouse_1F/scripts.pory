@@ -48,19 +48,20 @@ script FlottTown_PlayerHouse_1F_Elsie{
 
 script FlottTown_PlayerHouse_1F_StartYourAdventure{
     lockall
+    faceplayer
     msgbox(FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut,MSGBOX_DEFAULT)
     closemessage
-    applymovement(LOCALID_ELSIE, Common_Movement_FaceLeft)
+    applymovement(LOCALID_ELSIE, Common_Movement_FaceAwayPlayer)
     waitmovement(0)
     delay(120)
-    applymovement(LOCALID_ELSIE, Common_Movement_FaceDown)
+    applymovement(LOCALID_ELSIE, Common_Movement_FacePlayer)
     waitmovement(0)
     msgbox(FlottTown_PlayerHouse_1F_Text_CallingYouChamp,MSGBOX_DEFAULT)
     giveitem(ITEM_TOWN_MAP)
     setflag(FLAG_RECEIVED_RUNNING_SHOES)
     setflag(FLAG_SYS_B_DASH)
-    msgbox(format("Elsie gave the Running Shoes!"))
     playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(format("Elsie gave the Running Shoes!"))
     waitfanfare
     msgbox(FlottTown_PlayerHouse_1F_Text_ILoveYou,MSGBOX_DEFAULT)
     setvar(VAR_FLOTT_TOWN_STATE, 11)

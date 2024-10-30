@@ -15,7 +15,7 @@ mapscripts FlottTown_BarneysHouse_MapScripts {
     ]
 }
 
-script FlottTown_BarneysHouse_FacePlayerUp{
+script(local) FlottTown_BarneysHouse_FacePlayerUp{
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
 }
 
@@ -50,7 +50,14 @@ script FlottTown_BarneysHouse_Barney{
         case 10:
             msgbox(FlottTown_BarneysHouse_Text_GoToYourSister, MSGBOX_NPC)
         case 11:
-            msgbox(FlottTown_BarneysHouse_Text_GymLeaderChallenge, MSGBOX_NPC)
+            msgbox(FlottTown_BarneysHouse_Text_GymLeaderChallenge, MSGBOX_DEFAULT)
+            waitmessage
+            closemessage
+            setflag(FLAG_SYS_QUEST_MENU_GET)
+            playfanfare(MUS_OBTAIN_ITEM)
+            msgbox(format("Barney gave you a Quest Journal!"), MSGBOX_DEFAULT)
+            waitfanfare
+            closemessage
     }
 }
 
@@ -79,8 +86,15 @@ text(local) FlottTown_BarneysHouse_Text_BarneysLecture{
     )
 }
 
+text(local) FlottTown_BarneysHouse_Text_GoodBattler{
+    format("BARNEY: Hm? That's a Pokéball on your side, right? I assumed you used a Pokémon. I even heard the faint sounds of battling. I'm sure you've got a good head on your shoulders to be a trainer!")
+}
+
 text(local) FlottTown_BarneysHouse_Text_ImTerriblySorry{
-    format("BARNEY: Oh my, I didn't expect her to be upset. I'm terribly sorry. That being said, if you'd like to know more about training, you can come back to me.")
+    format(
+        "BARNEY: Oh my, I didn't expect her to be upset. I'm terribly sorry. That being said, if you'd like to know more about training, you can come back to me."
+        "In the meantime, why not let your new partner out? I'm sure its itching to get out of its ball."
+    )
 }
 
 text(local) FlottTown_BarneysHouse_Text_BarneysOut{
@@ -91,10 +105,6 @@ text(local) FlottTown_BarneysHouse_Text_BarneysOut{
         "Sigh... but that conviction of him is definitely one of his best traits.\p"
         "Oh, look at me! Going off to someone likely tired from their journey. I'm sure we'll see each other soon."
     )
-}
-
-text(local) FlottTown_BarneysHouse_Text_GoodBattler{
-    format("BARNEY: Hm? That's a Pokéball on your side, right? I assumed you used a Pokémon. I even heard the faint sounds of battling. I'm sure you've got a good head on your shoulders to be a trainer!")
 }
 
 text(local) FlottTown_BarneysHouse_Text_GladYoureOkay{
@@ -109,5 +119,20 @@ text(local) FlottTown_BarneysHouse_Text_GoToYourSister{
 }
 
 text(local) FlottTown_BarneysHouse_Text_GymLeaderChallenge{
-    format("Oh, you've returned! I imagine you're interested in growing as a trainer, no?")
+    format(
+    "Oh, you've returned! I hope all is well with your sister.\p"
+    "I imagine you're interested in growing as a trainer, no? Well dear, the way to get there is through the Gym Challenge."
+    "You'll be challenging all the gyms in Aurelious and…\p"
+    "…\p"
+    "Well, you have a glint in your eye that says you already know what to expect.\p"
+    "As a new trainer, you'll definitely be needing one of these, though…"
+    )
+}
+
+text(local) FlottTown_BarneysHouse_Text_BrandNewAdventure{
+    format(
+        "I had one of these myself in my youth. It's a simple journal to mark down requests people have for you. As you do your adventure, you're bound to come across countless people to help.\p"
+        "People will always be grateful for the help. If you return to them after completing their request, more often than not, they'll give you a gift.\p"
+        "Now, normally this is the point in a young adventurer's life they receive a Pokédex. Unfortuantely, as I'm not a professor, I don't have one to offer. But I can point you in the right direction.\p"
+        )
 }

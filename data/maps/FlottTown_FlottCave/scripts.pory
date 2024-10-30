@@ -11,18 +11,18 @@ mapscripts FlottTown_FlottCave_MapScripts {
     MAP_SCRIPT_ON_TRANSITION: FlottTown_FlottCave_OnTransition
     MAP_SCRIPT_ON_FRAME_TABLE [ 
         VAR_FLOTT_TOWN_STATE, 6: FlottTown_FlottCave_OnFrame
-        VAR_FLOTT_TOWN_STATE, 9: FlottTown_FlottCave_TurnOn
+        // VAR_FLOTT_TOWN_STATE, 9: FlottTown_FlottCave_TurnOn
     ]
 }
 
-script FlottTown_FlottCave_OnTransition {
+script(local) FlottTown_FlottCave_OnTransition {
     destroyfollower
     setflag(FLAG_BARNEY_IN_CAVE)
     setflag(FLAG_ELSIE_IN_CAVE)
     call(FlottTown_FlottCave_CaveLightLevel)
 }
 
-script FlottTown_FlottCave_OnFrame{
+script(local) FlottTown_FlottCave_OnFrame{
     msgbox(FlottTown_FlottCave_Text_ElsieWorried, MSGBOX_DEFAULT)
     closemessage
     setflag(FLAG_FALLEN_INTO_CAVE)
@@ -30,17 +30,14 @@ script FlottTown_FlottCave_OnFrame{
     end
 }
 
-script FlottTown_FlottCave_TurnOn{
-    setflashlevel(0)
+script(local) FlottTown_FlottCave_CaveLightLevel{
+    setflashlevel(6)
+    end
 }
 
-script FlottTown_FlottCave_CaveLightLevel{
-    switch (var(VAR_FLOTT_TOWN_STATE)) {
-        case 6:
-            setflashlevel(6)
-            break
-    }
-}
+// script FlottTown_FlottCave_TurnOn{
+//     setflashlevel(0)
+// }
 
 script FlottTown_FlottCave_EventScript_ZubatAttacks{
     lockall
@@ -86,6 +83,7 @@ script FlottTown_FlottCave_EventScript_RockSmash{
     clearflag(FLAG_BARNEY_IN_CAVE)
     setflag(FLAG_TEMP_11)
     removeobject(6)
+    callnative(RemoveFollowingPokemon)
     waitse
     msgbox(format("That sounded like it came from the smashable rocks!"), MSGBOX_DEFAULT)
     closemessage
@@ -133,7 +131,7 @@ script FlottTown_FlottCave_EventScript_ElsieRescue{
     end
 }
 
-script FlottTown_FlottCave_FacePlayerDirection{
+script(local) FlottTown_FlottCave_FacePlayerDirection{
     switch(var(VAR_ZUBAT_DIR)){
         //Player is facing North
         case 1:
@@ -154,7 +152,7 @@ script FlottTown_FlottCave_FacePlayerDirection{
     }
 }
 
-script FlottTown_FlottCave_StarterChoice{
+script(local) FlottTown_FlottCave_StarterChoice{
     lockall
 	msgbox(format("What presence do you feel intervenes?"))
     multichoice(10, 4, 115, 1)
@@ -202,7 +200,7 @@ script FlottTown_FlottCave_StarterChoice{
     }
 }
 
-script FlottTown_FlottCave_WildZubatBattle{
+script(local) FlottTown_FlottCave_WildZubatBattle{
     removeitem(ITEM_POKE_BALL, 1)
     setwildbattle(SPECIES_ZUBAT, 10)
     dowildbattle
@@ -214,7 +212,7 @@ script FlottTown_FlottCave_WildZubatBattle{
     return
 }
 
-script FlottTown_FlottCave_StarterWantsToJoin{
+script(local) FlottTown_FlottCave_StarterWantsToJoin{
     switch(var(VAR_STARTER_MON)){
         case 0:
             applymovement(LOCALID_MANKEY, Common_Movement_FacePlayer)
@@ -253,7 +251,7 @@ script FlottTown_FlottCave_StarterWantsToJoin{
     return
 }
 
-script FlottTown_FlottCave_StarterYesNo{
+script(local) FlottTown_FlottCave_StarterYesNo{
     switch(var(VAR_STARTER_MON)){
         case 0:
             playfanfare(MUS_OBTAIN_ITEM)
@@ -282,7 +280,7 @@ script FlottTown_FlottCave_StarterYesNo{
     }
 }
 
-script FlottTown_FlottCave_NicknamePartyMon{
+script(local) FlottTown_FlottCave_NicknamePartyMon{
     msgbox("Give a nickname?", MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
         call(Common_EventScript_GetGiftMonPartySlot)
@@ -316,15 +314,15 @@ movement FlottTown_FlottCave_Movement_PlayerWalksUp{
     step_end
 }
 
-text FlottTown_FlottCave_Text_ElsieWorried{
+text(local) FlottTown_FlottCave_Text_ElsieWorried{
     format("ELSIE: Oh my god! {PLAYER}! Are you okay?! Sit tight in there, okay? I'll go get help!\pYou here the footsteps of your sister exiting the gym.")
 }
 
-text FlottTown_FlottCave_Text_Rescue{
+text(local) FlottTown_FlottCave_Text_Rescue{
     format("???: Ah! There you are! Come, let's get you out here.\p" 
             "ELSIE: {PLAYER}! Oh gods, I'm so glad you're okay!")
 }
 
-text FlottTown_FlottCave_Text_LetsGoHome {
+text(local) FlottTown_FlottCave_Text_LetsGoHome {
     format("BARNEY: Indeed it were. Now, how about we get you kids out of this dreadful place? You both look tired. Seeing as it's my gym, anything that happens here is on my head. My home is nearby; let's take a rest there.")
 }
