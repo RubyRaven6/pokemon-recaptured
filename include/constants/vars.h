@@ -267,7 +267,7 @@
 #define VAR_UNUSED_0x40F7                                0x40F7 // Unused Var
 #define VAR_UNUSED_0x40F8                                0x40F8 // Unused Var
 #define VAR_UNUSED_0x40F9                                0x40F9 // Unused Var
-#define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
+#define VAR_DOCKED_CITY                                  0x40FA // 0 = Flott Town, 1 = Dockside City, 3 = Ocean City, 4=Mountport
 #define VAR_ZUBAT_DIR                                    0x40FB // Checks intro's Zubat direction
 #define VAR_UNUSED_0x40FC                                0x40FC // For Starter's Spawn X Coordinate
 #define VAR_UNUSED_0x40FD                                0x40FD // For Starter's Spawn Y Coordinate

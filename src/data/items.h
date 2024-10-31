@@ -12487,6 +12487,23 @@ const struct Item gItemsInfo[] =
 
 // Story Key Items
 
+    [ITEM_JOURNAL] =
+    {
+        .name = _("Journal"),
+        .price = 0,
+        .description = COMPOUND_STRING(
+            "A journal for you\n"
+            "to log down a lot\n"
+            "of requests."),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .secondaryId = 1,
+        .iconPic = gItemIcon_EonTicket,
+        .iconPalette = gItemIconPalette_EonTicket,
+    },
+
     [ITEM_SS_TICKET] =
     {
         .name = _("S.S. Ticket"),
@@ -12501,23 +12518,6 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .iconPic = gItemIcon_SSTicket,
         .iconPalette = gItemIconPalette_SSTicket,
-    },
-
-    [ITEM_EON_TICKET] =
-    {
-        .name = _("Eon Ticket"),
-        .price = 0,
-        .description = COMPOUND_STRING(
-            "The ticket for a\n"
-            "ferry to a distant\n"
-            "southern island."),
-        .importance = 1,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .secondaryId = 1,
-        .iconPic = gItemIcon_EonTicket,
-        .iconPalette = gItemIconPalette_EonTicket,
     },
 
     [ITEM_MYSTIC_TICKET] =

@@ -1,0 +1,74 @@
+// 0 = Flott Town, 1 = Dockside City, 3 = Ocean City, 4=Mountport
+
+script SSTidal_Harbor_EventScript_SailorWarpScript{
+    msgbox("Ahoy! Where do you want to go to today?", MSGBOX_DEFAULT)
+    checkitem(ITEM_JOURNAL)
+    if(var(VAR_RESULT) == TRUE){
+        dynmultipush("Flott Town", 0)
+        dynmultipush("Dockside City", 1)
+        dynmultipush("Mountport", 2)
+    }
+    dynmultistack(16, 0, FALSE, 10, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
+    switch(var(VAR_RESULT)){
+        case 0:
+            if(var(VAR_DOCKED_CITY) == 0){
+                msgbox(format("But…we're already here?"), MSGBOX_DEFAULT)
+                call(PlayerSelectsSameTown)
+            }
+            else{
+                warp(MAP_FLOTT_TOWN_INSIDE_HARBOR, 8, 11)
+            }
+        case 1:
+        if(var(VAR_DOCKED_CITY) == 1){
+                msgbox(format("But…we're already here?"), MSGBOX_DEFAULT)
+                call(PlayerSelectsSameTown)
+            }
+            else{
+                warp(MAP_DOCKSIDE_CITY_PORT, 8, 11)
+            }
+        case 4: 
+            if(var(VAR_DOCKED_CITY) == 4){     
+                msgbox(format("But…we're already here?"), MSGBOX_DEFAULT)
+                call(PlayerSelectsSameTown)
+            }
+            else{
+            msgbox("Test", MSGBOX_DEFAULT)
+            closemessage
+            }
+    }
+}
+
+script(local) PlayerSelectsSameTown{
+    msgbox("Where do you want to go to today?", MSGBOX_DEFAULT)
+    dynmultipush("Flott Town", 0)
+    dynmultipush("Dockside City", 1)
+    dynmultipush("Mountport", 2)
+    dynmultistack(16, 0, FALSE, 10, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
+        switch(var(VAR_RESULT)){
+        case 0:
+            if(var(VAR_DOCKED_CITY) == 0){
+                msgbox(format("But…we're already here?"), MSGBOX_DEFAULT)
+                call(PlayerSelectsSameTown)
+            }
+            else{
+                warp(MAP_FLOTT_TOWN_INSIDE_HARBOR, 8, 4)
+            }
+        case 1:
+        if(var(VAR_DOCKED_CITY) == 1){
+                msgbox(format("But…we're already here?"), MSGBOX_DEFAULT)
+                call(PlayerSelectsSameTown)
+            }
+            else{
+                warp(MAP_DOCKSIDE_CITY_PORT, 8, 11)
+            }
+        case 4: 
+            if(var(VAR_DOCKED_CITY) == 4){     
+                msgbox(format("But…we're already here?"), MSGBOX_DEFAULT)
+                call(PlayerSelectsSameTown)
+            }
+            else{
+            msgbox("Test", MSGBOX_DEFAULT)
+            closemessage
+            }
+    }
+}

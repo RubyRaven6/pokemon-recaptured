@@ -1,0 +1,7 @@
+mapscripts DocksideCity_Port_MapScripts {
+    MAP_SCRIPT_ON_LOAD: DocksideCity_Port_OnLoad
+}
+
+script(local) DocksideCity_Port_OnLoad{
+    setvar(VAR_DOCKED_CITY, 1)
+}

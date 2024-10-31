@@ -75,62 +75,94 @@ FlottTown_BarneysHouse_Barney::
 	switch VAR_FLOTT_TOWN_STATE
 # 50 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	case 10, FlottTown_BarneysHouse_Barney_2
-# 52 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 53 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	case 11, FlottTown_BarneysHouse_Barney_3
 	return
 
 FlottTown_BarneysHouse_Barney_2:
 # 51 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	faceplayer
+# 52 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	msgbox FlottTown_BarneysHouse_Text_GoToYourSister, MSGBOX_NPC
 	return
 
 FlottTown_BarneysHouse_Barney_3:
-# 53 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	msgbox FlottTown_BarneysHouse_Text_GymLeaderChallenge, MSGBOX_DEFAULT
 # 54 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	waitmessage
+	checkitem ITEM_SS_TICKET
 # 55 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	closemessage
-# 56 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	setflag FLAG_SYS_QUEST_MENU_GET
-# 57 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	playfanfare MUS_OBTAIN_ITEM
-# 58 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	msgbox FlottTown_BarneysHouse_Barney_Text_0, MSGBOX_DEFAULT
-# 59 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	waitfanfare
-# 60 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	compare VAR_RESULT, FALSE
+	goto_if_eq FlottTown_BarneysHouse_Barney_4
+# 75 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	msgbox FlottTown_BarneysHouse_Barney_Text_0, MSGBOX_NPC
+# 76 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	waitmessage
+# 77 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	closemessage
 	return
 
+FlottTown_BarneysHouse_Barney_4:
+# 56 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	faceplayer
+# 57 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	msgbox FlottTown_BarneysHouse_Text_GymLeaderChallenge, MSGBOX_DEFAULT
+# 58 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	waitmessage
+# 59 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	closemessage
+# 60 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	setflag FLAG_SYS_QUEST_MENU_GET
+# 61 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	giveitem ITEM_JOURNAL, 1
+# 62 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	closemessage
+# 63 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	msgbox FlottTown_BarneysHouse_Text_BrandNewAdventure, MSGBOX_DEFAULT
+# 64 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	giveitem ITEM_SS_TICKET, 1
+# 65 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	closemessage
+# 66 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	msgbox FlottTown_BarneysHouse_Text_GoToDockside, MSGBOX_DEFAULT
+# 67 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	waitmessage
+# 68 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	closemessage
+# 69 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	clearflag FLAG_BOAT_DEPARTS
+# 70 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	clearflag FLAG_FLOTT_HARBOR_SAILOR
+# 71 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	clearflag FLAG_BOAT_DEPARTS
+	end
+
 
 FlottTown_BarneysHouse_Adelaide::
-# 66 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 84 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	compare VAR_FLOTT_TOWN_STATE, 9
 	goto_if_lt FlottTown_BarneysHouse_Adelaide_1
-# 70 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 88 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	msgbox FlottTown_BarneysHouse_Text_GladYoureOkay, MSGBOX_NPC
 	return
 
 FlottTown_BarneysHouse_Adelaide_1:
-# 67 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 85 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	msgbox FlottTown_BarneysHouse_Text_BarneysOut, MSGBOX_NPC
 	return
 
 
-# 74 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 92 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 FlottTown_BarneysHouse_Movement_ElsieWalksOut:
-# 75 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 93 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	walk_down
-# 75 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 93 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	walk_down
-# 76 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 94 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	walk_left
-# 76 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 94 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	walk_left
-# 77 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 95 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	walk_down
-# 77 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 95 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	walk_down
 	step_end
 
@@ -141,14 +173,14 @@ FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0:
 
 FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_1:
 # 33 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	.string "ELSIE: ...$"
+	.string "ELSIE: …$"
 
 FlottTown_BarneysHouse_Barney_Text_0:
-# 58 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	.string "Barney gave you a Quest Journal!$"
+# 75 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	.string "Get a move on now! Adventure awaits!$"
 
 FlottTown_BarneysHouse_Text_BarneysLecture:
-# 80 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 98 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "Now, I wouldn't be a responsible adult if\n"
 	.string "I don't reprimand you for what you did\l"
 	.string "in the first place.\p"
@@ -164,7 +196,7 @@ FlottTown_BarneysHouse_Text_BarneysLecture:
 	.string "were you?$"
 
 FlottTown_BarneysHouse_Text_GoodBattler:
-# 89 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 107 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "BARNEY: Hm? That's a Pokéball on your\n"
 	.string "side, right? I assumed you used a\l"
 	.string "Pokémon. I even heard the faint sounds\l"
@@ -172,7 +204,7 @@ FlottTown_BarneysHouse_Text_GoodBattler:
 	.string "head on your shoulders to be a trainer!$"
 
 FlottTown_BarneysHouse_Text_ImTerriblySorry:
-# 93 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+# 111 "data/maps/FlottTown_BarneysHouse/scripts.pory"
 	.string "BARNEY: Oh my, I didn't expect her to be\n"
 	.string "upset. I'm terribly sorry. That being\l"
 	.string "said, if you'd like to know more about\l"
@@ -182,9 +214,9 @@ FlottTown_BarneysHouse_Text_ImTerriblySorry:
 	.string "out of its ball.$"
 
 FlottTown_BarneysHouse_Text_BarneysOut:
-# 100 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	.string "Oh my, a visitor! Are you the girls that\n"
-	.string "just moved in?\p"
+# 118 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	.string "ADELDAIDE: Oh my, a visitor! Are you the\n"
+	.string "girls that just moved in?\p"
 	.string "My name is Adelaide. It's a pleaesure to\n"
 	.string "meet you. Unfortunately, my husband is\l"
 	.string "out at the moment.\p"
@@ -192,29 +224,29 @@ FlottTown_BarneysHouse_Text_BarneysOut:
 	.string "attending to Gym Leader business. I'll\l"
 	.string "say, you can take the man out of the\l"
 	.string "gym, but not the gym out of the man!\p"
-	.string "Sigh... but that conviction of him is\n"
+	.string "Sigh… but that conviction of him is\n"
 	.string "definitely one of his best traits.\p"
 	.string "Oh, look at me! Going off to someone\n"
 	.string "likely tired from their journey. I'm sure\l"
 	.string "we'll see each other soon.$"
 
 FlottTown_BarneysHouse_Text_GladYoureOkay:
-# 110 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	.string "My goodness, your first day and already\n"
-	.string "making quite a ruckus!\p"
+# 128 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	.string "ADELDAIDE: My goodness, your first day\n"
+	.string "and already making quite a ruckus!\p"
 	.string "But nonetheless, I'm happy that you and\n"
 	.string "your sister are safe.$"
 
 FlottTown_BarneysHouse_Text_GoToYourSister:
-# 116 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	.string "I appreciate your enthusiasm, but I\n"
-	.string "believe it's apt that you check-in on\l"
-	.string "your sister first.$"
+# 134 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	.string "BARNEY: I appreciate your enthusiasm,\n"
+	.string "but I believe it's apt that you check-in\l"
+	.string "on your sister first.$"
 
 FlottTown_BarneysHouse_Text_GymLeaderChallenge:
-# 121 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	.string "Oh, you've returned! I hope all is well\n"
-	.string "with your sister.\p"
+# 139 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	.string "BARNEY: Oh, you've returned! I hope all\n"
+	.string "is well with your sister.\p"
 	.string "I imagine you're interested in growing\n"
 	.string "as a trainer, no? Well dear, the way to\l"
 	.string "get there is through the Gym Challenge.\l"
@@ -227,12 +259,12 @@ FlottTown_BarneysHouse_Text_GymLeaderChallenge:
 	.string "needing one of these, though…$"
 
 FlottTown_BarneysHouse_Text_BrandNewAdventure:
-# 132 "data/maps/FlottTown_BarneysHouse/scripts.pory"
-	.string "I had one of these myself in my youth.\n"
-	.string "It's a simple journal to mark down\l"
-	.string "requests people have for you. As you do\l"
-	.string "your adventure, you're bound to come\l"
-	.string "across countless people to help.\p"
+# 150 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	.string "BARNEY: I had one of these myself in my\n"
+	.string "youth. It's a simple journal to mark\l"
+	.string "down requests people have for you. As\l"
+	.string "you do your adventure, you're bound to\l"
+	.string "come across countless people to help.\p"
 	.string "People will always be grateful for the\n"
 	.string "help. If you return to them after\l"
 	.string "completing their request, more often\l"
@@ -242,4 +274,15 @@ FlottTown_BarneysHouse_Text_BrandNewAdventure:
 	.string "Pokédex. Unfortuantely, as I'm not a\l"
 	.string "professor, I don't have one to offer.\l"
 	.string "But I can point you in the right\l"
-	.string "direction.$"
+	.string "direction.\p"
+	.string "Here, this is my second gift to you\n"
+	.string "starting your new adventure.$"
+
+FlottTown_BarneysHouse_Text_GoToDockside:
+# 159 "data/maps/FlottTown_BarneysHouse/scripts.pory"
+	.string "This is a ticket of mine for the S.S.\n"
+	.string "Anne. Unlike most, though, you can use\l"
+	.string "this to go back an forth from here to\l"
+	.string "Dockside and back! It's mighty\l"
+	.string "convenient. Once you get to Dockside\l"
+	.string "City, look for Professor Narra.$"

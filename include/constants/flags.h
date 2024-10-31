@@ -46,7 +46,7 @@
 #define FLAG_BOAT_DEPARTS              0x20 // For S.S. Anne
 #define FLAG_ELSIE_DISEMBARKS          0x21 //Used for when Elsie departs from the S.S. Anne
 #define FLAG_ELSIE_GOES_INSIDE         0x22 // To hide the Elsie at the entrance of Flott_Town
-#define FLAG_UNPACKED_ROOM             0x23 // Unused Flag
+#define FLAG_UNPACKED_ROOM             0x23 // Unpacks the player's room.
 #define FLAG_VISITED_GYM               0x24 // For when the player has visited the gym
 #define FLAG_ELSIE_ENTERS_GYM          0x25 // When Elsie Enters Gym
 #define FLAG_GYM_POKE_BALL             0x26 // For the Pokéball in the gym
@@ -59,7 +59,7 @@
 #define FLAG_HIDE_MANKEY               0x2D // Hides Mankey in the corner of Flott Cave
 #define FLAG_HIDE_TINKATINK            0x2E // Hides Tinkatink in the corner of Flott Cave
 #define FLAG_HIDE_TEDDIURSA            0x2F // Hides Teddiursa in the corner of Flott Cave
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
+#define FLAG_FLOTT_HARBOR_SAILOR       0x30 // Unhides the sailor in the Flott Town Harbor.
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag
 #define FLAG_UNUSED_0x033    0x33 // Unused Flag

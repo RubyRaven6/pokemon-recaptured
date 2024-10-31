@@ -970,7 +970,7 @@ static void ReceiveGiftItem(u16 *item, u8 multiplayerId)
         {
             VarSet(VAR_TEMP_RECORD_MIX_GIFT_ITEM, *item);
             StringCopy(gStringVar1, gLinkPlayers[0].name);
-            if (*item == ITEM_EON_TICKET)
+            if (*item == ITEM_JOURNAL)
                 FlagSet(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND);
         }
         else

@@ -3,7 +3,7 @@
   "name": "FlottTown_InsideHarbor",
   "layout": "LAYOUT_FLOTT_TOWN_INSIDE_HARBOR",
   "music": "MUS_SURF",
-  "region_map_section": "MAPSEC_NONE",
+  "region_map_section": "MAPSEC_FLOTT_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -26,6 +26,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "FLAG_BOAT_DEPARTS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+      "x": 8,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "SSTidal_Harbor_EventScript_SailorWarpScript",
+      "flag": "FLAG_FLOTT_HARBOR_SAILOR"
     }
   ],
   "warp_events": [

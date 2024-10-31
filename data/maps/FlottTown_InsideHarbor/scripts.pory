@@ -1,4 +1,15 @@
 mapscripts FlottTown_InsideHarbor_MapScripts {
+    MAP_SCRIPT_ON_LOAD: FlottTown_InsideHarbor_OnLoad
+}
+
+script(local) FlottTown_InsideHarbor_OnLoad{
+    checkitem(ITEM_JOURNAL)
+    if(var(VAR_RESULT) == FALSE)
+    {setflag(FLAG_FLOTT_HARBOR_SAILOR)}
+    setflag(FLAG_VISITED_FLOTT_TOWN)
+    setvar(VAR_DOCKED_CITY, 0)
+    addobject(1)
+    addobject(2)
 }
 
 script FlottTown_InsideHarbor_EventScript_BoatLeaves{

@@ -105,7 +105,7 @@ LilycoveCity_Harbor_EventScript_GoToBattleFrontier::
 LilycoveCity_Harbor_EventScript_GetEonTicketState::
 	setvar VAR_TEMP_E, 0
 	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, Common_EventScript_NopReturn
-	checkitem ITEM_EON_TICKET
+	checkitem ITEM_JOURNAL
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
 	setvar VAR_TEMP_E, 1
 	goto_if_set FLAG_SHOWN_EON_TICKET, Common_EventScript_NopReturn
