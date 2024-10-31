@@ -15,7 +15,7 @@
   "connections": [
     {
       "map": "MAP_DOCKSIDE_CITY",
-      "offset": -11,
+      "offset": 2,
       "direction": "up"
     }
   ],
