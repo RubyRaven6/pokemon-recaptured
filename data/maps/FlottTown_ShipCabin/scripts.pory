@@ -1,32 +1,55 @@
 mapscripts FlottTown_ShipCabin_MapScripts{
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE[
+        VAR_FLOTT_TOWN_STATE, 0: FlottTown_ShipCabin_OnLoad 
+    ]
+}
+
+
+script(local) FlottTown_ShipCabin_OnLoad{
+    call(FlottTown_ShipCabin_Clock)
 }
 
 script FlottTown_ShipCabin_ElsieBed{
-    lockall
-    msgbox(FlottTown_ShipCabin_Text_ElsieBed, MSGBOX_DEFAULT)
-    releaseall
+    msgbox(FlottTown_ShipCabin_Text_ElsieBed, MSGBOX_SIGN)
+    waitmessage
+    closemessage
 }
 
 script FlottTown_ShipCabin_Bed{
-    lockall
-    msgbox(FlottTown_ShipCabin_Text_Bed, MSGBOX_DEFAULT)
-    releaseall
+    msgbox(FlottTown_ShipCabin_Text_Bed, MSGBOX_SIGN)
+    waitmessage
+    closemessage
 }
 
 script FlottTown_ShipCabin_Trash{
-    lockall
-    msgbox(FlottTown_ShipCabin_Text_Trash, MSGBOX_DEFAULT)
-    releaseall
+    msgbox(FlottTown_ShipCabin_Text_Trash, MSGBOX_SIGN)
+    waitmessage
+    closemessage
 }
 
-text FlottTown_ShipCabin_Text_Bed{
+script(local) FlottTown_ShipCabin_Clock{
+    msgbox(format("That was quite the trip… What time is it anyway?"), MSGBOX_DEFAULT)
+    waitmessage
+    call(FlottTown_ShipCabin_EventScript_SetClock)
+    msgbox(format("P.A.: Attention, passengers. We've now arrived at Flott Town. Kindly disembark from the vessel in an orderly manner. Thank you for sailing with the S.S. Tidal."), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+}
+
+script FlottTown_ShipCabin_EventScript_SetClock{
+	fadescreen (FADE_TO_BLACK)
+	special (StartWallClock)
+	waitstate
+	return
+}
+text(local) FlottTown_ShipCabin_Text_Bed{
     format("It's your bed!")
 }
 
-text FlottTown_ShipCabin_Text_ElsieBed{
+text(local) FlottTown_ShipCabin_Text_ElsieBed{
     format("It's your sister's bed.")
 }
 
-text FlottTown_ShipCabin_Text_Trash{
+text(local) FlottTown_ShipCabin_Text_Trash{
     format("Just some trash.")
 }
