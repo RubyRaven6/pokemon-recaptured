@@ -43,13 +43,13 @@ FlottTown_PlayerHouse_1F_OnLoad_5:
 # 25 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
 	setmetatile 1, 6, METATILE_PlayersHouse_MovingBox_Open, TRUE
 # 26 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 5, 4, METATILE_PlayersHouse_BlueRugCenter, TRUE
+	setmetatile 5, 4, METATILE_PlayersHouse_BlueRugCenter, FALSE
 # 27 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 5, 5, METATILE_PlayersHouse_BlueRugCenter, TRUE
+	setmetatile 5, 5, METATILE_PlayersHouse_BlueRugCenter, FALSE
 # 28 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 8, 4, METATILE_PlayersHouse_BlueRugCenter, TRUE
+	setmetatile 8, 4, METATILE_PlayersHouse_BlueRugCenter, FALSE
 # 29 "data/maps/FlottTown_PlayerHouse_1F/scripts.pory"
-	setmetatile 8, 5, METATILE_PlayersHouse_BlueRugCenter, TRUE
+	setmetatile 8, 5, METATILE_PlayersHouse_BlueRugCenter, FALSE
 	return
 
 
