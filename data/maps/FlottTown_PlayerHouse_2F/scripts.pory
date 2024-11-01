@@ -13,6 +13,10 @@ script FlottTown_PlayerHouse_2F_PlayerPC{
 	end
 }
 
+script FlottTown_PlayerHouse_2F_EventScript_Map{
+
+}
+
 script FlottTown_PlayerHouse_2F_EventScript_TurnOffPlayerPC{
 	setvar(VAR_0x8004, PC_LOCATION_PLAYERS_HOUSE)
 	playse(SE_PC_OFF)
@@ -20,12 +24,13 @@ script FlottTown_PlayerHouse_2F_EventScript_TurnOffPlayerPC{
 	releaseall
 	end
 }
-script FlottTown_PlayerHouse_2F_Gamecube{
-    msgbox(format("It's your sister's old Gamecube.\p You recall fond memories playing on it with her."), MSGBOX_SIGN)
+
+script FlottTown_PlayerHouse_2F_ElsieDresser{
+    msgbox(format("It's your sister's dresser."), MSGBOX_SIGN)
 }
 
-script FlottTown_PlayerHouse_2F_Dresser{
-    msgbox(format("It's a dresser your share with your sister."), MSGBOX_SIGN)
+script FlottTown_PlayerHouse_2F_PlayerDresser{
+    msgbox(format("It's your dresser."), MSGBOX_SIGN)
 }
 
 script FlottTown_PlayerHouse_2F_FinancialBooks{

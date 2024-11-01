@@ -10,6 +10,9 @@ script(local) FlottTown_InsideHarbor_OnLoad{
     setvar(VAR_DOCKED_CITY, 0)
     addobject(1)
     addobject(2)
+    if(var(VAR_FLOTT_TOWN_STATE) == 2){
+        setvar(VAR_FLOTT_TOWN_STATE, 1)
+    }
 }
 
 script FlottTown_InsideHarbor_EventScript_BoatLeaves{

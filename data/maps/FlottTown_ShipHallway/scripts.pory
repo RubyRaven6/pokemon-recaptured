@@ -1,6 +1,6 @@
 mapscripts FlottTown_ShipHallway_MapScripts{
     MAP_SCRIPT_ON_FRAME_TABLE [
-            VAR_FLOTT_TOWN_STATE, 0: FlottTown_ShipHallway_EventScript_ElsieLeaves
+            VAR_FLOTT_TOWN_STATE, 1: FlottTown_ShipHallway_EventScript_ElsieLeaves
     ]
 }
 
@@ -14,7 +14,7 @@ script FlottTown_ShipHallway_EventScript_ElsieLeaves{
     applymovement(2, ElsieExits)
     waitmovement(0)
     removeobject(2)
-    setvar(VAR_FLOTT_TOWN_STATE, 1)
+    setvar(VAR_FLOTT_TOWN_STATE, 2)
 }
 
 script FlottTown_ShipHallway_EventScript_LowerStairway{
@@ -31,7 +31,6 @@ script FlottTown_ShipHallway_EventScript_Sailor{
     msgbox(FlottTown_ShipHallway_Text_Sailor, MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    setvar(VAR_FLOTT_TOWN_STATE, 1)
     warp(MAP_FLOTT_TOWN_INSIDE_HARBOR, 8, 5)
 }
 

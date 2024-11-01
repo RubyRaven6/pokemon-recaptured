@@ -11,19 +11,22 @@ script FlottTown_PlayerHouse_1F_OnLoad{
     else{
         setdynamicwarp(MAP_FLOTT_TOWN_PLAYER_HOUSE_2F_UNPACKED, 5, 1)
     }
-    if(flag(FLAG_VISITED_GYM)){
-        setmetatile(3, 1, METATILE_PlayersHouse_WallBottom, FALSE)
-        setmetatile(3, 2, METATILE_PlayersHouse_WallCornerShadow, FALSE)
-        setmetatile(0, 3, METATILE_PlayersHouse_FloorWithWallShadow, FALSE)
-        setmetatile(0, 4, METATILE_PlayersHouse_NormalFloor, FALSE)
-        setmetatile(1, 4, METATILE_PlayersHouse_NormalFloor, FALSE)
-        setmetatile(5, 4, METATILE_PlayersHouse_UpperLeftChair, FALSE)
-        setmetatile(5, 5, METATILE_PlayersHouse_LowerLeftChair, FALSE)
-        setmetatile(8, 4, METATILE_PlayersHouse_UpperRightChair, FALSE)
-        setmetatile(8, 5, METATILE_PlayersHouse_LowerRightChair, FALSE)
-        setmetatile(7, 0, METATILE_PlayersHouse_TV_Top, TRUE)
-        setmetatile(7, 1, METATILE_Building_TV_Off, TRUE)
-        setmetatile(7, 2, METATILE_PlayersHouse_TV_Bottom, FALSE)
+    if(!flag(FLAG_VISITED_GYM)){
+        setmetatile(8, 1, METATILE_PlayersHouse_WallBottom, TRUE)
+        setmetatile(8, 2, METATILE_PlayersHouse_FloorWithWallShadow, FALSE)
+        setmetatile(10, 1, METATILE_PlayersHouse_WallMovingBox_Top, TRUE)
+        setmetatile(10, 2, METATILE_PlayersHouse_WallMovingBox_Bottom, FALSE)
+        setmetatile(0, 3, METATILE_PlayersHouse_MovingBox_Closed, TRUE)
+        setmetatile(0, 4, METATILE_PlayersHouse_MovingBox_Stacked, TRUE)
+        setmetatile(0, 5, METATILE_PlayersHouse_MovingBoxPair_Top, TRUE)
+        setmetatile(0, 6, METATILE_PlayersHouse_MovingBoxPair_Bottom, TRUE)
+        setmetatile(1, 4, METATILE_PlayersHouse_MovingBox_StackNoShadow, TRUE)
+        setmetatile(1, 5, METATILE_PlayersHouse_MovingBox_Stacked, TRUE)
+        setmetatile(1, 6, METATILE_PlayersHouse_MovingBox_Open, TRUE)
+        setmetatile(5, 4, METATILE_PlayersHouse_BlueRugCenter, FALSE)
+        setmetatile(5, 5, METATILE_PlayersHouse_BlueRugCenter, FALSE)
+        setmetatile(8, 4, METATILE_PlayersHouse_BlueRugCenter, FALSE)
+        setmetatile(8, 5, METATILE_PlayersHouse_BlueRugCenter, FALSE)
     }
 }
 
@@ -66,6 +69,35 @@ script FlottTown_PlayerHouse_1F_StartYourAdventure{
     msgbox(FlottTown_PlayerHouse_1F_Text_ILoveYou,MSGBOX_DEFAULT)
     setvar(VAR_FLOTT_TOWN_STATE, 11)
     releaseall
+}
+
+script FlottTown_PlayerHouse_2F_Gamecube{
+    msgbox(format("It's your sister's old Gamecube.\p You recall fond memories playing on it with her."), MSGBOX_SIGN)
+    waitmessage
+    closemessage
+}
+
+script FlottTown_PlayerHouse_2F_Sink{
+    msgbox(format("It's a sink with a garbage disposal.\p You resist the urge to stick your hand in."), MSGBOX_SIGN)
+    waitmessage
+    closemessage
+}
+
+script FlottTown_PlayerHouse_2F_Cabinet{
+    if(var(VAR_FLOTT_TOWN_STATE) < 4){
+        msgbox(format("It's an empty dish cabinet."), MSGBOX_SIGN)
+    }
+    else{
+        msgbox(format("It's a cabinet full of dishes."), MSGBOX_SIGN)
+    }
+    waitmessage
+    closemessage
+}
+
+script FlottTown_PlayerHouse_2F_Fridge{
+    msgbox(format("It's a brand new fridge!\p It's so brand new, there's nothing in it yet."), MSGBOX_SIGN)
+    waitmessage
+    closemessage
 }
 
 script FlottTown_PlayerHouse_1F_NPCElsie{
@@ -120,5 +152,8 @@ text FlottTown_PlayerHouse_1F_Text_CallingYouChamp{
 }
 
 text FlottTown_PlayerHouse_1F_Text_ILoveYou{
-    format("I love you, {PLAYER}. Remember to stop by sometime, okay?")
+    format(
+        "Heh… just moved in and here you are flying out of the coop.\p"
+        "I love you, {PLAYER}. Remember to stop by sometime, okay?"
+        )
 }

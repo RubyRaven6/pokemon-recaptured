@@ -1,12 +1,19 @@
 mapscripts FlottTown_ShipCabin_MapScripts{
-    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE[
-        VAR_FLOTT_TOWN_STATE, 0: FlottTown_ShipCabin_OnLoad 
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_FLOTT_TOWN_STATE, 0: FlottTown_ShipCabin_OnFrame 
     ]
 }
 
 
-script(local) FlottTown_ShipCabin_OnLoad{
-    call(FlottTown_ShipCabin_Clock)
+script(local) FlottTown_ShipCabin_OnFrame{
+    delay(120)
+    msgbox(FlottTown_ShipCabin_Text_WokeUpLikeThis, MSGBOX_DEFAULT)
+    waitmessage
+    call(FlottTown_ShipCabin_EventScript_SetClock)
+    msgbox(FlottTown_ShipCabin_Text_ThanksForSailing, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    setvar(VAR_FLOTT_TOWN_STATE, 1)
 }
 
 script FlottTown_ShipCabin_ElsieBed{
@@ -27,15 +34,6 @@ script FlottTown_ShipCabin_Trash{
     closemessage
 }
 
-script(local) FlottTown_ShipCabin_Clock{
-    msgbox(format("That was quite the trip… What time is it anyway?"), MSGBOX_DEFAULT)
-    waitmessage
-    call(FlottTown_ShipCabin_EventScript_SetClock)
-    msgbox(format("P.A.: Attention, passengers. We've now arrived at Flott Town. Kindly disembark from the vessel in an orderly manner. Thank you for sailing with the S.S. Tidal."), MSGBOX_DEFAULT)
-    waitmessage
-    closemessage
-}
-
 script FlottTown_ShipCabin_EventScript_SetClock{
 	fadescreen (FADE_TO_BLACK)
 	special (StartWallClock)
@@ -52,4 +50,17 @@ text(local) FlottTown_ShipCabin_Text_ElsieBed{
 
 text(local) FlottTown_ShipCabin_Text_Trash{
     format("Just some trash.")
+}
+
+text(local) FlottTown_ShipCabin_Text_ThanksForSailing{
+    format("P.A.: Attention, passengers. We've now arrived at Flott Town.\l" 
+    "Kindly disembark from the vessel in an orderly manner.\lThank you for sailing with the S.S. Tidal.")
+}
+
+text(local) FlottTown_ShipCabin_Text_WokeUpLikeThis{
+    format(
+        "Yawn…\p"
+        "That was a nice trip… and an even better nap.\p"
+        "What time is it anyway?"
+    )
 }

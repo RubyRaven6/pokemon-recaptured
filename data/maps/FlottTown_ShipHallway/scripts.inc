@@ -5,7 +5,7 @@ FlottTown_ShipHallway_MapScripts::
 
 FlottTown_ShipHallway_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 # 3 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	map_script_2 VAR_FLOTT_TOWN_STATE, 0, FlottTown_ShipHallway_EventScript_ElsieLeaves
+	map_script_2 VAR_FLOTT_TOWN_STATE, 1, FlottTown_ShipHallway_EventScript_ElsieLeaves
 	.2byte 0
 
 
@@ -29,7 +29,7 @@ FlottTown_ShipHallway_EventScript_ElsieLeaves::
 # 16 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	removeobject 2
 # 17 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	setvar VAR_FLOTT_TOWN_STATE, 1
+	setvar VAR_FLOTT_TOWN_STATE, 2
 	return
 
 
@@ -59,91 +59,89 @@ FlottTown_ShipHallway_EventScript_Sailor::
 # 33 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	closemessage
 # 34 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	setvar VAR_FLOTT_TOWN_STATE, 1
-# 35 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	warp MAP_FLOTT_TOWN_INSIDE_HARBOR, 8, 5
 	return
 
 
 FlottTown_ShipHallway_GottaGo::
-# 39 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 38 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	lockall
-# 40 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 39 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	msgbox FlottTown_ShipHallway_Text_GottaGo, MSGBOX_DEFAULT
-# 41 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 40 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	releaseall
 	return
 
 
 FlottTown_ShipHallway_LockedDoor::
-# 45 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 44 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	lockall
-# 46 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 45 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	msgbox FlottTown_ShipHallway_Text_LockedDoor, MSGBOX_DEFAULT
-# 47 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 46 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	releaseall
 	return
 
 
-# 50 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 49 "data/maps/FlottTown_ShipHallway/scripts.pory"
 LookAtElsie:
-# 51 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 50 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	face_left
 	step_end
 
-# 54 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 53 "data/maps/FlottTown_ShipHallway/scripts.pory"
 LowerStairway:
-# 55 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 54 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
 	step_end
 
-# 58 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 57 "data/maps/FlottTown_ShipHallway/scripts.pory"
 ElsieLooks:
-# 59 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 58 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	face_right
 	step_end
 
-# 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 61 "data/maps/FlottTown_ShipHallway/scripts.pory"
 ElsieExits:
-# 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
-# 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
-# 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
-# 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
-# 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
-# 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
-# 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
-# 63 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 62 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	walk_left
 	step_end
 
 FlottTown_ShipHallway_Text_LetsGoChild::
-# 66 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 65 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	.string "ELSIE: Oh, {PLAYER}! You're finally up.\n"
 	.string "Just in time, too. We're finally at Flott\l"
 	.string "Town! Let's get off before the boat\l"
 	.string "departs.$"
 
 FlottTown_ShipHallway_Text_GottaGo::
-# 70 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 69 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	.string "No need to go back. We need to get off\n"
 	.string "the ship!$"
 
 FlottTown_ShipHallway_Text_LowerStairway::
-# 74 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 73 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	.string "I don't think I can pass through there.$"
 
 FlottTown_ShipHallway_Text_LockedDoor::
-# 78 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 77 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	.string "The door's locked.$"
 
 FlottTown_ShipHallway_Text_Sailor::
-# 82 "data/maps/FlottTown_ShipHallway/scripts.pory"
+# 81 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	.string "We've arrived at Flott Town! Thank you\n"
 	.string "for sailing with the S.S. Tidal.$"
