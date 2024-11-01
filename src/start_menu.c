@@ -512,6 +512,8 @@ static void ShowTimeWindow(void)
     PutWindowTilemap(sStartClockWindowId);
     DrawStdWindowFrame(sStartClockWindowId, FALSE);
 
+    RtcCalcLocalTime();
+
     if (gLocalTime.hours < 12)
     {
         if (gLocalTime.hours == 0)
