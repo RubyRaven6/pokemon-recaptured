@@ -94,5 +94,5 @@ FlottTown_ShipCabin_Text_WokeUpLikeThis:
 # 60 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "Yawn…\p"
 	.string "That was a nice trip… and an even\n"
-	.string "better nap.\p"
+	.string "better dream.\p"
 	.string "What time is it anyway?$"

@@ -1,0 +1,46 @@
+const LOCALID_DIANCIE = 7
+
+mapscripts DiancieCave_MapScripts {
+    
+}
+
+script DiancieCave_EventScript_MeetingDiancie{
+    faceplayer
+    msgbox(DiancieCave_Text_WowYoureHere, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    applymovement(LOCALID_DIANCIE, DiancieCave_Movement_DianceLooksAround)
+    waitmovement(LOCALID_DIANCIE)
+    msgbox(DiancieCave_Text_IWishYouCouldStay, MSGBOX_DEFAULT)
+    warpwhitefade(MAP_FLOTT_TOWN_SHIP_CABIN, 6, 4)
+}
+
+movement DiancieCave_Movement_DianceLooksAround {
+    face_up
+    delay_16
+    face_left
+    delay_16
+    face_down
+    delay_16
+    face_right
+    delay_16
+    face_player
+    delay_16
+    jump_in_place_down
+}
+
+text(local) DiancieCave_Text_WowYoureHere{
+    format(
+        "DIANCIE: Oh my stars! You're actually here! It's so nice to meet you, {PLAYER}!\p"
+        "We can't speak for long, but, know that I'm happy we got to meet.\p"
+        "Welcome to my domain!"
+    )
+}
+
+text(local) DiancieCave_Text_IWishYouCouldStay{
+    format(
+        "I wish you could stay, I really do..."
+        "But this is the most that we can talk for now.\p"
+        "I hope to meet you soon!"
+    )
+}

@@ -31,8 +31,13 @@ gText_Birch_MainSpeech::
 gText_Intro_AndYourName::
 	.string "Input your name.$"
 
-gText_Birch_ChooseApperance::
-	.string "Choose your appearance.$"
+gText_Diance_CanYouHearMe::
+	.string "…\p"
+	.string "Hello? Can you hear me?\p"
+	.string "$"
+
+gText_Diancie_ChooseApperance::
+	.string "What do you look like?$"
 
 gText_Birch_WhatsYourName::
 	.string "What's your name?$"
@@ -40,11 +45,10 @@ gText_Birch_WhatsYourName::
 gText_Birch_SoItsPlayer::
 	.string "Is it {PLAYER}{KUN}?$"
 
-gText_Birch_YourePlayer::
-	.string "Ah, okay!\p"
-	.string "You're {PLAYER}{KUN} who's moving to my\n"
-	.string "hometown of LITTLEROOT.\l"
-	.string "I get it now!\p"
+gText_Diancie_HowBeautiful::
+	.string "Wow…\n"
+	.string "What a beautiful name, {PLAYER}!\l"
+	.string "Can we meet? Even for just a moment…\p"
 	.string "$"
 
 gText_Birch_AreYouReady::

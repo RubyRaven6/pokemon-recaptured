@@ -1100,3 +1100,5 @@ EventScript_VsSeekerChargingDone::
 
 	.include "data/maps/DocksideCity_Shipyard/scripts.inc"
 	
+
+	.include "data/maps/DiancieCave/scripts.inc"

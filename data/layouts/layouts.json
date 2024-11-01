@@ -4500,6 +4500,16 @@
       "secondary_tileset": "gTileset_Facility",
       "border_filepath": "data/layouts/DocksideCity_Shipyard/border.bin",
       "blockdata_filepath": "data/layouts/DocksideCity_Shipyard/map.bin"
+    },
+    {
+      "id": "LAYOUT_DIANCIE_CAVE",
+      "name": "DiancieCave_Layout",
+      "width": 17,
+      "height": 29,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/DiancieCave/border.bin",
+      "blockdata_filepath": "data/layouts/DiancieCave/map.bin"
     }
   ]
 }

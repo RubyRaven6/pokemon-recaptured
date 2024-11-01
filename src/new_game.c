@@ -50,7 +50,7 @@
 extern const u8 EventScript_ResetAllMapFlags[];
 
 static void ClearFrontierRecord(void);
-static void WarpToTruck(void);
+static void WarpToDiancieCave(void);
 static void ResetMiniGamesRecords(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
@@ -125,9 +125,9 @@ static void ClearFrontierRecord(void)
     gSaveBlock2Ptr->frontier.opponentNames[1][0] = EOS;
 }
 
-static void WarpToTruck(void)
+static void WarpToDiancieCave(void)
 {
-    SetWarpDestination(MAP_GROUP(FLOTT_TOWN_SHIP_CABIN), MAP_NUM(FLOTT_TOWN_SHIP_CABIN), WARP_ID_NONE, -1, -1);
+    SetWarpDestination(MAP_GROUP(DIANCIE_CAVE), MAP_NUM(DIANCIE_CAVE), WARP_ID_NONE, 8, 26);
     WarpIntoMap();
 }
 
@@ -193,7 +193,7 @@ void NewGameInitData(void)
     InitDewfordTrend();
     ResetFanClub();
     ResetLotteryCorner();
-    WarpToTruck();
+    WarpToDiancieCave();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();

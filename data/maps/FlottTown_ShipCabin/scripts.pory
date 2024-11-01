@@ -60,7 +60,7 @@ text(local) FlottTown_ShipCabin_Text_ThanksForSailing{
 text(local) FlottTown_ShipCabin_Text_WokeUpLikeThis{
     format(
         "Yawn…\p"
-        "That was a nice trip… and an even better nap.\p"
+        "That was a nice trip… and an even better dream.\p"
         "What time is it anyway?"
     )
 }

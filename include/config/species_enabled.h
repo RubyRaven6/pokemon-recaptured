@@ -411,7 +411,7 @@
 #define P_FAMILY_AMAURA                  FALSE
 #define P_FAMILY_HAWLUCHA                FALSE
 #define P_FAMILY_DEDENNE                 FALSE
-#define P_FAMILY_CARBINK                 FALSE
+#define P_FAMILY_CARBINK                 P_GEN_6_POKEMON
 #define P_FAMILY_GOOMY                   FALSE
 #define P_FAMILY_KLEFKI                  FALSE
 #define P_FAMILY_PHANTUMP                FALSE
@@ -421,7 +421,7 @@
 #define P_FAMILY_XERNEAS                 FALSE
 #define P_FAMILY_YVELTAL                 FALSE
 #define P_FAMILY_ZYGARDE                 FALSE
-#define P_FAMILY_DIANCIE                 FALSE
+#define P_FAMILY_DIANCIE                 P_GEN_6_POKEMON
 #define P_FAMILY_HOOPA                   FALSE
 #define P_FAMILY_VOLCANION               FALSE
 
@@ -433,7 +433,7 @@
 #define P_FAMILY_GRUBBIN                 FALSE
 #define P_FAMILY_CRABRAWLER              FALSE
 #define P_FAMILY_ORICORIO                FALSE
-#define P_FAMILY_CUTIEFLY                P_GEN_6_POKEMON
+#define P_FAMILY_CUTIEFLY                P_GEN_7_POKEMON
 #define P_FAMILY_ROCKRUFF                FALSE
 #define P_FAMILY_WISHIWASHI              FALSE
 #define P_FAMILY_MAREANIE                FALSE
