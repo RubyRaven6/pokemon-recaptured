@@ -29,6 +29,7 @@
 #include "constants/field_tasks.h"
 #include "constants/field_weather.h"
 #include "constants/flags.h"
+#include "constants/story.h"
 #include "constants/follow_me.h"
 #include "constants/frontier_util.h"
 #include "constants/game_stat.h"
@@ -1098,3 +1099,4 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/DocksideCity_Port/scripts.inc"
 
 	.include "data/maps/DocksideCity_Shipyard/scripts.inc"
+	

@@ -29,7 +29,7 @@ FlottTown_ShipHallway_EventScript_ElsieLeaves::
 # 16 "data/maps/FlottTown_ShipHallway/scripts.pory"
 	removeobject 2
 # 17 "data/maps/FlottTown_ShipHallway/scripts.pory"
-	setvar VAR_FLOTT_TOWN_STATE, 2
+	setvar VAR_FLOTT_TOWN_STATE, FLOTT_TOWN_EXITED_CABIN
 	return
 
 
