@@ -506,23 +506,24 @@ static void ShowTimeWindow(void)
     const u8 *suffix;
     u8* ptr;
     u8 convertedHours;
-
+    if(!FlagGet(FLAG_IN_DIANCIE_CAVE)){
     // print window
     sStartClockWindowId = AddWindow(&sWindowTemplate_StartClock);
     PutWindowTilemap(sStartClockWindowId);
     DrawStdWindowFrame(sStartClockWindowId, FALSE);
+    }
 
     RtcCalcLocalTime();
 
-    if (gLocalTime.hours < 12)
+    if (GetHour() < 12)
     {
-        if (gLocalTime.hours == 0)
+        if (GetHour() == 0)
             convertedHours = 12;
         else
-            convertedHours = gLocalTime.hours;
+            convertedHours = GetHour();
         suffix = gText_AM;
     }
-    else if (gLocalTime.hours == 12)
+    else if (GetHour() == 12)
     {
         convertedHours = 12;
         if (suffix == gText_AM);
@@ -530,7 +531,7 @@ static void ShowTimeWindow(void)
     }
     else
     {
-        convertedHours = gLocalTime.hours - 12;
+        convertedHours = GetHour() - 12;
         suffix = gText_PM;
     }
 

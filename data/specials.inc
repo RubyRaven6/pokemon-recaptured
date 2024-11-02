@@ -166,7 +166,7 @@ gSpecials::
 	def_special CableCarWarp
 	def_special CableCar
 	def_special Overworld_PlaySpecialMapMusic
-	def_special StartWallClock
+	@ def_special StartWallClock
 	def_special Special_ViewWallClock
 	def_special ChooseStarter
 	def_special StartWallyTutorialBattle

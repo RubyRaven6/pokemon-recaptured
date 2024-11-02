@@ -17,7 +17,7 @@ FlottTown_ShipCabin_OnFrame:
 # 11 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	waitmessage
 # 12 "data/maps/FlottTown_ShipCabin/scripts.pory"
-	call FlottTown_ShipCabin_EventScript_SetClock
+	callnative SetIngameTime
 # 13 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	playse SE_DING_DONG
 # 14 "data/maps/FlottTown_ShipCabin/scripts.pory"
@@ -65,26 +65,24 @@ FlottTown_ShipCabin_EventScript_SetClock::
 # 39 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	fadescreen FADE_TO_BLACK
 # 40 "data/maps/FlottTown_ShipCabin/scripts.pory"
-	special StartWallClock
-# 41 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	waitstate
 	return
 
 
 FlottTown_ShipCabin_Text_Bed:
-# 44 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 43 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "It's your bed!$"
 
 FlottTown_ShipCabin_Text_ElsieBed:
-# 48 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 47 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "It's your sister's bed.$"
 
 FlottTown_ShipCabin_Text_Trash:
-# 52 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 51 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "Just some trash.$"
 
 FlottTown_ShipCabin_Text_ThanksForSailing:
-# 56 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 55 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "P.A.: Attention, passengers. We've now\n"
 	.string "arrived at Flott Town.\l"
 	.string "Kindly disembark from the vessel in an\l"
@@ -93,7 +91,7 @@ FlottTown_ShipCabin_Text_ThanksForSailing:
 	.string "Tidal.$"
 
 FlottTown_ShipCabin_Text_WokeUpLikeThis:
-# 61 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 60 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "Yawn…\p"
 	.string "That was a nice trip… and an even\n"
 	.string "better dream.\p"

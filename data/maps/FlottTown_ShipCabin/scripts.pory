@@ -9,7 +9,7 @@ script(local) FlottTown_ShipCabin_OnFrame{
     delay(120)
     msgbox(FlottTown_ShipCabin_Text_WokeUpLikeThis, MSGBOX_DEFAULT)
     waitmessage
-    call(FlottTown_ShipCabin_EventScript_SetClock)
+    callnative(SetIngameTime)
     playse(SE_DING_DONG)
     msgbox(FlottTown_ShipCabin_Text_ThanksForSailing, MSGBOX_DEFAULT)
     waitmessage
@@ -37,7 +37,6 @@ script FlottTown_ShipCabin_Trash{
 
 script FlottTown_ShipCabin_EventScript_SetClock{
 	fadescreen (FADE_TO_BLACK)
-	special (StartWallClock)
 	waitstate
 	return
 }

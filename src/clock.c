@@ -1,6 +1,7 @@
 #include "global.h"
 #include "event_data.h"
 #include "rtc.h"
+#include "fake_rtc.h"
 #include "time_events.h"
 #include "field_specials.h"
 #include "lottery_corner.h"
@@ -98,9 +99,20 @@ static void ReturnFromStartWallClock(void)
     InitTimeBasedEvents();
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
-
+/*
 void StartWallClock(void)
 {
     SetMainCallback2(CB2_StartWallClock);
     gMain.savedCallback = ReturnFromStartWallClock;
+}
+*/
+
+void SetIngameTime(void)
+{
+    u32 day = 2;
+    u32 hour = 11;
+    u32 minute = 0;
+    u32 second = 0;
+    FakeRtc_ManuallySetTime(day, hour, minute, second);
+
 }

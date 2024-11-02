@@ -32,15 +32,16 @@ void FakeRtc_TickTimeForward(void)
     if (FlagGet(OW_FLAG_PAUSE_TIME))
         return;
 
-    FakeRtc_AdvanceTimeBy(0, 0, FakeRtc_GetSecondsRatio());
+    FakeRtc_AdvanceTimeBy(0, 0, 0, FakeRtc_GetSecondsRatio());
 }
 
-void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
+void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)
 {
     struct Time* time = FakeRtc_GetCurrentTime();
     seconds += time->seconds;
     minutes += time->minutes;
     hours += time->hours;
+    days += time->days;
 
     while(seconds >= SECONDS_PER_MINUTE)
     {
@@ -63,9 +64,10 @@ void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
     time->seconds = seconds;
     time->minutes = minutes;
     time->hours = hours;
+    time->days = days;
 }
 
-void FakeRtc_ManuallySetTime(u32 hour, u32 minute, u32 second)
+void FakeRtc_ManuallySetTime(u32 dayOfWeek, u32 hour, u32 minute, u32 second)
 {
     struct Time diff, target;
     RtcCalcLocalTime();
@@ -73,10 +75,10 @@ void FakeRtc_ManuallySetTime(u32 hour, u32 minute, u32 second)
     target.hours = hour;
     target.minutes = minute;
     target.seconds = second;
-    target.days = gLocalTime.days;
+    target.days = dayOfWeek;
 
     CalcTimeDifference(&diff, &gLocalTime, &target);
-    FakeRtc_AdvanceTimeBy(diff.hours, diff.minutes, diff.seconds);
+    FakeRtc_AdvanceTimeBy(diff.days, diff.hours, diff.minutes, diff.seconds);
 }
 
 u32 FakeRtc_GetSecondsRatio(void)
