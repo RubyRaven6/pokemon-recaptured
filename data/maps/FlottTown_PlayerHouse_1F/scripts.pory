@@ -39,6 +39,8 @@ script FlottTown_PlayerHouse_1F_Elsie{
         clearflag(FLAG_ELSIE_ENTERS_GYM)
         setvar(VAR_FLOTT_TOWN_STATE, 3)
         msgbox(FlottTown_PlayerHouse_1F_Text_AnAbandonedGym, MSGBOX_DEFAULT)
+        waitmessage
+        closemessage
         warp(MAP_FLOTT_TOWN_ABANDONED_GYM, 13, 18)
     }
     elif(var(VAR_FLOTT_TOWN_STATE) == 10){

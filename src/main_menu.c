@@ -1262,7 +1262,7 @@ static void Task_NewGameBirchSpeech_Init(u8 taskId)
     gTasks[taskId].tPlayerSpriteId = SPRITE_NONE;
     gTasks[taskId].data[3] = 0xFF;
     gTasks[taskId].tTimer = 0x0;
-    // PlayBGM(MUS_ROUTE122);
+    PlayBGM(MUS_CREDITS);
     ShowBg(0);
     ShowBg(1);
 }
@@ -1425,7 +1425,6 @@ static void Task_NewGameBirchSpeech_CanYouHearMe(u8 taskId)
     NewGameBirchSpeech_ShowDialogueWindow(0, 1);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_GFX);
-    NewGameBirchSpeech_ClearWindow(0);
     StringExpandPlaceholders(gStringVar4, gText_Diance_CanYouHearMe);
     AddTextPrinterForMessage(TRUE);
     gTasks[taskId].func = Task_NewGameBirchSpeech_StartPlayerFadeIn;
@@ -1459,6 +1458,7 @@ static void Task_NewGameBirchSpeech_WaitForPlayerFadeIn(u8 taskId)
 
 static void Task_NewGameBirchSpeech_Presentation(u8 taskId)
 {
+    NewGameBirchSpeech_ClearWindow(0);
     StringExpandPlaceholders(gStringVar4, gText_Diancie_ChooseApperance);
     AddTextPrinterForMessage(TRUE);
     gTasks[taskId].func = Task_NewGameBirchSpeech_WaitToShowGenderMenu;

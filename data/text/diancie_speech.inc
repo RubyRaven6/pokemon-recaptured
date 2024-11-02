@@ -1,3 +1,30 @@
+gText_Diance_CanYouHearMe::
+	.string "…\p"
+	.string "Hello? Can you hear me?\p"
+	.string "…\p"
+	.string "Oh! A presence! I knew this would work!\l"
+	.string "Tell me…\p"
+	.string "$"
+
+gText_Diancie_ChooseApperance::
+	.string "What do you look like?"
+	.string "$"
+
+gText_Birch_WhatsYourName::
+	.string "What about your name?"
+	.string "$"
+
+gText_Birch_SoItsPlayer::
+	.string "Is it {PLAYER}{KUN}?"
+	.string "$"
+
+gText_Diancie_HowBeautiful::
+	.string "Wow…\n"
+	.string "What a beautiful name, {PLAYER}!\l"
+	.string "Can we meet? Even for just a moment…\p"
+	.string "$"
+
+
 gText_Birch_Welcome::
 	.string "Hi! Sorry to keep you waiting!\p"
 	.string "Welcome to the world of POKéMON!\p"
@@ -30,26 +57,6 @@ gText_Birch_MainSpeech::
 
 gText_Intro_AndYourName::
 	.string "Input your name.$"
-
-gText_Diance_CanYouHearMe::
-	.string "…\p"
-	.string "Hello? Can you hear me?\p"
-	.string "$"
-
-gText_Diancie_ChooseApperance::
-	.string "What do you look like?$"
-
-gText_Birch_WhatsYourName::
-	.string "What's your name?$"
-
-gText_Birch_SoItsPlayer::
-	.string "Is it {PLAYER}{KUN}?$"
-
-gText_Diancie_HowBeautiful::
-	.string "Wow…\n"
-	.string "What a beautiful name, {PLAYER}!\l"
-	.string "Can we meet? Even for just a moment…\p"
-	.string "$"
 
 gText_Birch_AreYouReady::
 	.string "All right, are you ready?\p"

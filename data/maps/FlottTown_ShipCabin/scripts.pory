@@ -10,6 +10,7 @@ script(local) FlottTown_ShipCabin_OnFrame{
     msgbox(FlottTown_ShipCabin_Text_WokeUpLikeThis, MSGBOX_DEFAULT)
     waitmessage
     call(FlottTown_ShipCabin_EventScript_SetClock)
+    playse(SE_DING_DONG)
     msgbox(FlottTown_ShipCabin_Text_ThanksForSailing, MSGBOX_DEFAULT)
     waitmessage
     closemessage
