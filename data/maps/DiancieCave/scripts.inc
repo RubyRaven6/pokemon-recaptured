@@ -27,59 +27,37 @@ DiancieCave_EventScript_MeetingDiancie::
 # 20 "data/maps/DiancieCave/scripts.pory"
 DiancieCave_Movement_DianceLooksAround:
 # 21 "data/maps/DiancieCave/scripts.pory"
-	face_down
-# 22 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 23 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 24 "data/maps/DiancieCave/scripts.pory"
-	face_left
-# 25 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 26 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 27 "data/maps/DiancieCave/scripts.pory"
-	face_up
-# 28 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 29 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 30 "data/maps/DiancieCave/scripts.pory"
-	face_right
-# 31 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 32 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 33 "data/maps/DiancieCave/scripts.pory"
-	face_player
-# 34 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 35 "data/maps/DiancieCave/scripts.pory"
-	delay_16
-# 36 "data/maps/DiancieCave/scripts.pory"
 	jump_in_place_down
+# 22 "data/maps/DiancieCave/scripts.pory"
+	delay_4
+# 23 "data/maps/DiancieCave/scripts.pory"
+	jump_in_place_down
+# 24 "data/maps/DiancieCave/scripts.pory"
+	delay_4
+# 25 "data/maps/DiancieCave/scripts.pory"
+	jump_in_place_down
+# 26 "data/maps/DiancieCave/scripts.pory"
+	delay_4
+# 27 "data/maps/DiancieCave/scripts.pory"
 	step_end
 
-# 39 "data/maps/DiancieCave/scripts.pory"
-
-# 40 "data/maps/DiancieCave/scripts.pory"
 DiancieCave_Text_WowYoureHere:
-# 41 "data/maps/DiancieCave/scripts.pory"
-# 37 "data/maps/DiancieCave/scripts.pory"
-# 42 "data/maps/DiancieCave/scripts.pory"
+# 30 "data/maps/DiancieCave/scripts.pory"
 	.string "DIANCIE: Oh my stars! You're actually\n"
-# 43 "data/maps/DiancieCave/scripts.pory"
 	.string "here! It's so nice to meet you, {PLAYER}!\l"
-# 44 "data/maps/DiancieCave/scripts.pory"
 	.string "We can't speak for long, but, know that\l"
-# 45 "data/maps/DiancieCave/scripts.pory"
 	.string "I'm happy we got to meet.\p"
-# 46 "data/maps/DiancieCave/scripts.pory"
 	.string "Welcome to my domain!$"
 
 DiancieCave_Text_IWishYouCouldStay:
-# 49 "data/maps/DiancieCave/scripts.pory"
-	.string "I wish you could stay, I really do... But\n"
-	.string "this is the most that we can talk for\l"
-	.string "now.\p"
+# 37 "data/maps/DiancieCave/scripts.pory"
+	.string "You know, after I assumed my duties as\n"
+	.string "Princess, I couldn't explore again. And\l"
+	.string "I missed it so! I used my connection\l"
+	.string "with the earth to find a soul that I\l"
+	.string "might befriend. When I found yours, my\l"
+	.string "interest was so piqued, I had to know\l"
+	.string "more! I wish you could stay, I really\l"
+	.string "do... But this is the most that we can\l"
+	.string "talk for now.\p"
 	.string "I hope to meet you soon!$"

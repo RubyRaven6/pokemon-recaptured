@@ -1684,7 +1684,7 @@ static void Task_NewGameBirchSpeech_CanWeMeet(u8 taskId)
 
 static void Task_NewGameBirchSpeech_LetsMeet(u8 taskId)
 {
-    FlagSet(FLAG_IN_DIANCIE_CAVE)
+    FlagSet(FLAG_IN_DIANCIE_CAVE);
     if (!RunTextPrintersAndIsPrinter0Active())
     {
         u8 spriteId;

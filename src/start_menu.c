@@ -506,12 +506,12 @@ static void ShowTimeWindow(void)
     const u8 *suffix;
     u8* ptr;
     u8 convertedHours;
-    if(!FlagGet(FLAG_IN_DIANCIE_CAVE)){
+
     // print window
     sStartClockWindowId = AddWindow(&sWindowTemplate_StartClock);
     PutWindowTilemap(sStartClockWindowId);
     DrawStdWindowFrame(sStartClockWindowId, FALSE);
-    }
+    
 
     RtcCalcLocalTime();
 

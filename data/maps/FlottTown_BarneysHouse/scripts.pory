@@ -66,6 +66,11 @@ script FlottTown_BarneysHouse_Barney{
             msgbox(FlottTown_BarneysHouse_Text_GoToDockside, MSGBOX_DEFAULT)
             waitmessage
             closemessage
+            questmenu(QUEST_MENU_SET_ACTIVE, 0)
+            questmenu(QUEST_MENU_SET_ACTIVE, 1)
+            startquest(QUEST_HEARTS_AND_DIAMONDS)
+            startquest(QUEST_AURELIOUS_LEAGUE)
+            openquestmenu
             clearflag(FLAG_BOAT_DEPARTS)
             clearflag(FLAG_FLOTT_HARBOR_SAILOR)
             clearflag(FLAG_BOAT_DEPARTS)

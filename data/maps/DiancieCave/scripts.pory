@@ -18,36 +18,27 @@ script DiancieCave_EventScript_MeetingDiancie{
 }
 
 movement DiancieCave_Movement_DianceLooksAround {
-    face_down
-    delay_16
-    delay_16
-    face_left
-    delay_16
-    delay_16
-    face_up
-    delay_16
-    delay_16
-    face_right
-    delay_16
-    delay_16
-    face_player
-    delay_16
-    delay_16
     jump_in_place_down
+    delay_4
+    jump_in_place_down
+    delay_4
+    jump_in_place_down
+    delay_4
+    step_end
 }
 
-raw`
-DiancieCave_Text_WowYoureHere:
-# 37 "data/maps/DiancieCave/scripts.pory"
-	.string "DIANCIE: Oh my stars! You're actually\n"
-	.string "here! It's so nice to meet you, {PLAYER}!\l"
-	.string "We can't speak for long, but, know that\l"
-	.string "I'm happy we got to meet.\p"
-	.string "Welcome to my domain!$"
-`
-
+text(local) DiancieCave_Text_WowYoureHere{
+	"DIANCIE: Oh my stars! You're actually\n"
+	"here! It's so nice to meet you, {PLAYER}!\l"
+	"We can't speak for long, but, know that\l"
+	"I'm happy we got to meet.\p"
+	"Welcome to my domain!"
+}
 text(local) DiancieCave_Text_IWishYouCouldStay{
     format(
+        "You know, after I assumed my duties as Princess, I couldn't explore again. And I missed it so!"
+        "I used my connection with the earth to find a soul that I might befriend."
+        "When I found yours, my interest was so piqued, I had to know more!"
         "I wish you could stay, I really do..."
         "But this is the most that we can talk for now.\p"
         "I hope to meet you soon!"

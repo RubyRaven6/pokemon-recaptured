@@ -1942,13 +1942,13 @@
 	.endm
 
     .macro questmenu case:req, questId:req
-    .byte 0xe3
+    .byte 0xeb
     .byte \case
     .byte \questId
     .endm
 
     .macro subquestmenu case:req, parentId:req, childId:req
-    .byte 0xe4
+    .byte 0xec
     .byte \case
     .2byte \parentId
     .2byte \childId
@@ -1956,7 +1956,7 @@
 
     @ Check the quest state and return a number associated with quest state
     .macro returnqueststate questId:req
-    .byte 0xe5
+    .byte 0xed
     .byte \questId
     .endm
     
@@ -2528,4 +2528,14 @@
 	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will resume the flow of time if paused, and stop the flow of time otherwise.
 	.macro togglefakertc
 	callnative Script_ToggleFakeRtc
+	.endm
+
+	@ Use to advance time by a specific amount. 
+	.macro advfakertc days:req, hours:req, minutes:req, seconds:req, 
+	callnative FakeRtc_AdvanceTimeBy
+	.byte 0xee
+	.4byte \days 
+	.4byte \hours
+	.4byte \minutes
+	.4byte \seconds
 	.endm

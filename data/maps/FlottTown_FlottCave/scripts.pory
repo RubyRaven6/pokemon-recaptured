@@ -79,6 +79,7 @@ script FlottTown_FlottCave_EventScript_RockSmash{
     waitmoncry
     playse(SE_M_ROCK_THROW)
     waitse
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     clearflag(FLAG_ELSIE_IN_CAVE)
     clearflag(FLAG_BARNEY_IN_CAVE)
     setflag(FLAG_TEMP_11)
