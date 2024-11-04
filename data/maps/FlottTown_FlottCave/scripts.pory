@@ -155,49 +155,47 @@ script(local) FlottTown_FlottCave_FacePlayerDirection{
 
 script(local) FlottTown_FlottCave_StarterChoice{
     lockall
-	msgbox(format("What presence do you feel intervenes?"))
-    multichoice(10, 4, 115, 1)
-    if(var(VAR_RESULT) == 0){
-        addobject(LOCALID_MANKEY)
-        applymovement(LOCALID_MANKEY, Common_Movement_FaceAwayPlayer)
-        setobjectxy(LOCALID_MANKEY, VAR_TEMP_2, VAR_TEMP_3)
-        fadescreen(FADE_FROM_BLACK)
-        msgbox(format("Mankey jumped in to save you!"), MSGBOX_DEFAULT)
-        playmoncry(SPECIES_MANKEY, CRY_MODE_NORMAL)
-        waitmoncry
-        givemon(SPECIES_MANKEY, 10, ITEM_NONE)
-        setvar(VAR_STARTER_MON, 0)
-        removeobject(LOCALID_TINKATINK)
-        removeobject(LOCALID_TEDDIURSA)
-        return
-    }
-    if(var(VAR_RESULT) == 1){
-        addobject(LOCALID_TINKATINK)
-        applymovement(LOCALID_TINKATINK, Common_Movement_FaceAwayPlayer)
-        setobjectxy(LOCALID_TINKATINK, VAR_TEMP_2, VAR_TEMP_3)
-        fadescreen(FADE_FROM_BLACK)
-        msgbox(format("Tinkatink jumped in to save you!"), MSGBOX_DEFAULT)
-        playmoncry(SPECIES_TINKATINK, CRY_MODE_NORMAL)
-        waitmoncry
-        givemon(SPECIES_TINKATINK, 10, ITEM_NONE)
-        setvar(VAR_STARTER_MON, 1)
-        removeobject(LOCALID_MANKEY)
-        removeobject(LOCALID_TEDDIURSA)
-        return
-    }
-    if(var(VAR_RESULT) == 2){
-        addobject(LOCALID_TEDDIURSA)
-        applymovement(LOCALID_TEDDIURSA, Common_Movement_FaceAwayPlayer)
-        setobjectxy(LOCALID_TEDDIURSA, VAR_TEMP_2, VAR_TEMP_3)
-        fadescreen(FADE_FROM_BLACK)
-        msgbox(format("Teddiursa jumped in to save you!"), MSGBOX_DEFAULT)
-        playmoncry(SPECIES_TEDDIURSA, CRY_MODE_NORMAL)
-        waitmoncry
-        givemon(SPECIES_TEDDIURSA, 10, ITEM_NONE)
-        setvar(VAR_STARTER_MON, 2)
-        removeobject(LOCALID_MANKEY)
-        removeobject(LOCALID_TINKATINK)
-        return
+	msgbox(format("But…before it could hurt you, something intervenes."))
+    switch(var(VAR_STARTER_MON)){
+        case 0:
+            addobject(LOCALID_MANKEY)
+            applymovement(LOCALID_MANKEY, Common_Movement_FaceAwayPlayer)
+            setobjectxy(LOCALID_MANKEY, VAR_TEMP_2, VAR_TEMP_3)
+            fadescreen(FADE_FROM_BLACK)
+            msgbox(format("Mankey jumped in to save you!"), MSGBOX_DEFAULT)
+            playmoncry(SPECIES_MANKEY, CRY_MODE_NORMAL)
+            waitmoncry
+            givemon(SPECIES_MANKEY, 10, ITEM_NONE)
+            setvar(VAR_STARTER_MON, 0)
+            removeobject(LOCALID_TINKATINK)
+            removeobject(LOCALID_TEDDIURSA)
+            return
+        case 1:
+            addobject(LOCALID_TINKATINK)
+            applymovement(LOCALID_TINKATINK, Common_Movement_FaceAwayPlayer)
+            setobjectxy(LOCALID_TINKATINK, VAR_TEMP_2, VAR_TEMP_3)
+            fadescreen(FADE_FROM_BLACK)
+            msgbox(format("Tinkatink jumped in to save you!"), MSGBOX_DEFAULT)
+            playmoncry(SPECIES_TINKATINK, CRY_MODE_NORMAL)
+            waitmoncry
+            givemon(SPECIES_TINKATINK, 10, ITEM_NONE)
+            setvar(VAR_STARTER_MON, 1)
+            removeobject(LOCALID_MANKEY)
+            removeobject(LOCALID_TEDDIURSA)
+            return
+        case 2:
+            addobject(LOCALID_TEDDIURSA)
+            applymovement(LOCALID_TEDDIURSA, Common_Movement_FaceAwayPlayer)
+            setobjectxy(LOCALID_TEDDIURSA, VAR_TEMP_2, VAR_TEMP_3)
+            fadescreen(FADE_FROM_BLACK)
+            msgbox(format("Teddiursa jumped in to save you!"), MSGBOX_DEFAULT)
+            playmoncry(SPECIES_TEDDIURSA, CRY_MODE_NORMAL)
+            waitmoncry
+            givemon(SPECIES_TEDDIURSA, 10, ITEM_NONE)
+            setvar(VAR_STARTER_MON, 2)
+            removeobject(LOCALID_MANKEY)
+            removeobject(LOCALID_TINKATINK)
+            return
     }
 }
 

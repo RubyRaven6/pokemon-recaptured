@@ -2515,6 +2515,8 @@
 	callnative ScriptSetDoubleBattleFlag
 	.endm
 
+@ Added in
+
 	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will stop the flow of time.
 	.macro pausefakertc
 	callnative Script_PauseFakeRtc
@@ -2530,9 +2532,9 @@
 	callnative Script_ToggleFakeRtc
 	.endm
 
+@By me
 	@ Use to advance time by a specific amount. 
-	.macro advfakertc days:req, hours:req, minutes:req, seconds:req, 
-	callnative FakeRtc_AdvanceTimeBy
+	.macro addtime days:req, hours:req, minutes:req, seconds:req
 	.byte 0xee
 	.4byte \days 
 	.4byte \hours

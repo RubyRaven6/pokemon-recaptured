@@ -18,10 +18,15 @@ gText_Birch_SoItsPlayer::
 	.string "Is it {PLAYER}{KUN}?"
 	.string "$"
 
-gText_Diancie_HowBeautiful::
-	.string "Wow…\n"
-	.string "What a beautiful name, {PLAYER}!\l"
-	.string "Can we meet? Even for just a moment…\p"
+gText_Diancie_Resonate::
+	.string "What a beautiful name!\n"
+	.string "Can you tell me more about yourself?\l"
+	.string "What do you resonate with the most?"
+	.string "$"
+
+gText_Diancie_CanIMeetYou::
+	.string "I see…! Can we meet, {PLAYER}? I'd love\n"
+	.string "to hear more about you…\p"
 	.string "$"
 
 

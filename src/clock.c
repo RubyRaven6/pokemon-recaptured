@@ -109,10 +109,18 @@ void StartWallClock(void)
 
 void SetIngameTime(void)
 {
-    u32 day = 2;
-    u32 hour = 11;
-    u32 minute = 0;
-    u32 second = 0;
-    FakeRtc_ManuallySetTime(day, hour, minute, second);
-
+    if(!FlagGet(FLAG_IN_DIANCIE_CAVE)){
+        u32 day = 2;
+        u32 hour = 11;
+        u32 minute = 0;
+        u32 second = 0;
+        FakeRtc_ManuallySetTime(day, hour, minute, second);
+    }
+    else{
+        u32 day = 2;
+        u32 hour = 0;
+        u32 minute = 0;
+        u32 second = 0;
+        FakeRtc_ManuallySetTime(day, hour, minute, second);
+    }
 }

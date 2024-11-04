@@ -129,6 +129,7 @@ static void WarpToDiancieCave(void)
 {
     SetWarpDestination(MAP_GROUP(DIANCIE_CAVE), MAP_NUM(DIANCIE_CAVE), WARP_ID_NONE, 8, 26);
     WarpIntoMap();
+    SetIngameTime(void);
 }
 
 void Sav2_ClearSetDefault(void)

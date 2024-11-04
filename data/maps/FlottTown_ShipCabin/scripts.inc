@@ -83,18 +83,17 @@ FlottTown_ShipCabin_Text_Trash:
 # 52 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "Just some trash.$"
 
-FlottTown_ShipCabin_Text_ThanksForSailing:
+FlottTown_ShipCabin_Text_WokeUpLikeThis:
 # 56 "data/maps/FlottTown_ShipCabin/scripts.pory"
+	.string "Yawn…\p"
+	.string "That was a nice trip… and an even\n"
+	.string "better dream.$"
+
+FlottTown_ShipCabin_Text_ThanksForSailing:
+# 63 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "P.A.: Attention, passengers. We've now\n"
 	.string "arrived at Flott Town.\l"
 	.string "Kindly disembark from the vessel in an\l"
 	.string "orderly manner.\l"
 	.string "Thank you for sailing with the S.S.\l"
 	.string "Tidal.$"
-
-FlottTown_ShipCabin_Text_WokeUpLikeThis:
-# 61 "data/maps/FlottTown_ShipCabin/scripts.pory"
-	.string "Yawn…\p"
-	.string "That was a nice trip… and an even\n"
-	.string "better dream.\p"
-	.string "What time is it anyway?$"
