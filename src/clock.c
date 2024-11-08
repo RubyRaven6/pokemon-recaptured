@@ -105,7 +105,7 @@ void StartWallClock(void)
     SetMainCallback2(CB2_StartWallClock);
     gMain.savedCallback = ReturnFromStartWallClock;
 }
-*/
+
 
 void SetIngameTime(void)
 {
@@ -124,3 +124,4 @@ void SetIngameTime(void)
         FakeRtc_ManuallySetTime(day, hour, minute, second);
     }
 }
+*/

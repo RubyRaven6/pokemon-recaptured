@@ -6,11 +6,10 @@ mapscripts FlottTown_ShipCabin_MapScripts{
 
 
 script(local) FlottTown_ShipCabin_OnFrame{
-    setflag(FLAG_IN_DIANCIE_CAVE)
+    clearflag(FLAG_IN_DIANCIE_CAVE)
     delay(120)
     msgbox(FlottTown_ShipCabin_Text_WokeUpLikeThis, MSGBOX_DEFAULT)
     waitmessage
-    callnative(SetIngameTime)
     playse(SE_DING_DONG)
     msgbox(FlottTown_ShipCabin_Text_ThanksForSailing, MSGBOX_DEFAULT)
     waitmessage

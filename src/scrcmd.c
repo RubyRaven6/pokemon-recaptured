@@ -2653,17 +2653,3 @@ bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
 
     return TRUE;
 }
-
-#include "fake_rtc.h"
-bool8 ScrCmd_addtime(struct ScriptContext *ctx)
-{
-    u32 days = ScriptReadWord(ctx);
-    u32 hours = ScriptReadWord(ctx);
-    u32 minutes = ScriptReadWord(ctx);
-    u32 seconds = ScriptReadWord(ctx);
-
-    FakeRtc_AdvanceTimeBy(days, hours, minutes, seconds);
-
-    return FALSE;
-    
-}

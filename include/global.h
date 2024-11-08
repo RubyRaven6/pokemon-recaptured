@@ -187,7 +187,6 @@ struct Time
 #define DAY_THURSDAY        4
 #define DAY_FRIDAY          5
 #define DAY_SATURDAY        6
-#define DAYS_PER_WEEK       DAY_SATURDAY + 1
 
 #define    MONTH_ONE            1
 #define    MONTH_TWO            2

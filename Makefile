@@ -360,7 +360,7 @@ generated: $(AUTO_GEN_TARGETS)
 %.lz:     %      ; $(GFX) $< $@
 %.rl:     %      ; $(GFX) $< $@
 
-data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -fc tools/poryscript/font_config.json -cc tools/poryscript/command_config.json
+data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -fc tools/poryscript/font_config.json -cc tools/poryscript/command_config.json -lm=false
 
 clean-generated:
 	-rm -f $(AUTO_GEN_TARGETS)

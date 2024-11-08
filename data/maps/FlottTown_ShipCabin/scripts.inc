@@ -11,7 +11,7 @@ FlottTown_ShipCabin_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 
 FlottTown_ShipCabin_OnFrame:
 # 9 "data/maps/FlottTown_ShipCabin/scripts.pory"
-	setflag FLAG_IN_DIANCIE_CAVE
+	clearflag FLAG_IN_DIANCIE_CAVE
 # 10 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	delay 120
 # 11 "data/maps/FlottTown_ShipCabin/scripts.pory"
@@ -19,78 +19,76 @@ FlottTown_ShipCabin_OnFrame:
 # 12 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	waitmessage
 # 13 "data/maps/FlottTown_ShipCabin/scripts.pory"
-	callnative SetIngameTime
-# 14 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	playse SE_DING_DONG
-# 15 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 14 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	msgbox FlottTown_ShipCabin_Text_ThanksForSailing, MSGBOX_DEFAULT
-# 16 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 15 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	waitmessage
-# 17 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 16 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	closemessage
-# 18 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 17 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	setvar VAR_FLOTT_TOWN_STATE, 1
 	return
 
 
 FlottTown_ShipCabin_ElsieBed::
-# 22 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 21 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	msgbox FlottTown_ShipCabin_Text_ElsieBed, MSGBOX_SIGN
-# 23 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 22 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	waitmessage
-# 24 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 23 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	closemessage
 	return
 
 
 FlottTown_ShipCabin_Bed::
-# 28 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 27 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	msgbox FlottTown_ShipCabin_Text_Bed, MSGBOX_SIGN
-# 29 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 28 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	waitmessage
-# 30 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 29 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	closemessage
 	return
 
 
 FlottTown_ShipCabin_Trash::
-# 34 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 33 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	msgbox FlottTown_ShipCabin_Text_Trash, MSGBOX_SIGN
-# 35 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 34 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	waitmessage
-# 36 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 35 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	closemessage
 	return
 
 
 FlottTown_ShipCabin_EventScript_SetClock::
-# 40 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 39 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	fadescreen FADE_TO_BLACK
-# 41 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 40 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	waitstate
 	return
 
 
 FlottTown_ShipCabin_Text_Bed:
-# 44 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 43 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "It's your bed!$"
 
 FlottTown_ShipCabin_Text_ElsieBed:
-# 48 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 47 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "It's your sister's bed.$"
 
 FlottTown_ShipCabin_Text_Trash:
-# 52 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 51 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "Just some trash.$"
 
 FlottTown_ShipCabin_Text_WokeUpLikeThis:
-# 56 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 55 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "Yawn…\p"
 	.string "That was a nice trip… and an even\n"
 	.string "better dream.$"
 
 FlottTown_ShipCabin_Text_ThanksForSailing:
-# 63 "data/maps/FlottTown_ShipCabin/scripts.pory"
+# 62 "data/maps/FlottTown_ShipCabin/scripts.pory"
 	.string "P.A.: Attention, passengers. We've now\n"
 	.string "arrived at Flott Town.\l"
 	.string "Kindly disembark from the vessel in an\l"

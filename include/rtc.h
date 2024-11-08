@@ -119,9 +119,5 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);
 u32 RtcGetMinuteCount(void);
 u32 RtcGetLocalDayCount(void);
 void FormatDecimalTimeWithoutSeconds(u8 *dest, s8 hour, s8 minute, bool32 is24Hour);
-// Under this cut is all the rtc madness between me and mako
-u8 GetHour(void);
-u8 GetMinute(void);
-u8 GetDayOfWeek(void);
 
 #endif // GUARD_RTC_UTIL_H

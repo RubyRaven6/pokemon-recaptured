@@ -2,10 +2,13 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
+#include "siirtc.h"
 #include "rtc.h"
 #include "fake_rtc.h"
 #include "event_data.h"
 #include "script.h"
+
+static struct SiiRtcInfo sRtc;
 
 struct Time *FakeRtc_GetCurrentTime(void)
 {
@@ -18,11 +21,14 @@ struct Time *FakeRtc_GetCurrentTime(void)
 
 void FakeRtc_GetRawInfo(struct SiiRtcInfo *rtc)
 {
-    struct Time* time = FakeRtc_GetCurrentTime();
+    struct Time *time = FakeRtc_GetCurrentTime();
     rtc->second = time->seconds;
     rtc->minute = time->minutes;
     rtc->hour = time->hours;
     rtc->day = time->days;
+    rtc->month = time->months;
+    rtc->year = time->years;
+    rtc->dayOfWeek = time->dayOfWeek;
 }
 
 void FakeRtc_TickTimeForward(void)
@@ -33,16 +39,62 @@ void FakeRtc_TickTimeForward(void)
     if (FlagGet(OW_FLAG_PAUSE_TIME))
         return;
 
-    FakeRtc_AdvanceTimeBy(0, 0, 0, FakeRtc_GetSecondsRatio());
+    FakeRtc_AdvanceTimeBy(0, 0, 0, 0, 0, FakeRtc_GetSecondsRatio());
+
 }
 
-void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)
+void FakeRtc_ResetDayCount(void)
 {
     struct Time* time = FakeRtc_GetCurrentTime();
+    time->days = 1;
+    //RtcSetDayOfWeek(DAY_MONDAY);
+}
+
+void FakeRtc_AdvanceTimeBy(u32 years, u32 months, u32 days, u32 hours, u32 minutes, u32 seconds)
+{
+    struct Time* time = FakeRtc_GetCurrentTime();
+    if (time->seconds < 0)
+    {
+        time->seconds += SECONDS_PER_MINUTE;
+        --time->minutes;
+    }
+
+    if (time->minutes < 0)
+    {
+        time->minutes += MINUTES_PER_HOUR;
+        --time->hours;
+    }
+
+    if (time->hours < 0)
+    {
+        time->hours += HOURS_PER_DAY;
+        --time->days;
+        --time->dayOfWeek;
+    }
+
+    if (time->dayOfWeek < 0)
+    {
+        time->dayOfWeek += DAYS_PER_WEEK;
+    }
+
+    if(time->days < 1)
+    {
+        time->days += DAYS_PER_MONTH;
+        --time->months;
+    }
+
+    if (time->months < 1)
+    {
+        time->months += MONTHS_PER_YEAR;
+        --time->years;
+    }
+    u32 dayOfWeek = time->dayOfWeek + days;
     seconds += time->seconds;
     minutes += time->minutes;
     hours += time->hours;
     days += time->days;
+    months += time->months;
+    years += time->years;
 
     while(seconds >= SECONDS_PER_MINUTE)
     {
@@ -58,17 +110,38 @@ void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)
 
     while(hours >= HOURS_PER_DAY)
     {
-        time->days++;
+        days++;
+        dayOfWeek++;
         hours -= HOURS_PER_DAY;
+    }
+
+    while(dayOfWeek >= DAYS_PER_WEEK)
+    {
+        dayOfWeek -= DAYS_PER_WEEK;
+    }
+
+    while(days > DAYS_PER_MONTH)
+    {
+        months++;
+        days -= DAYS_PER_MONTH;
+    }
+
+    while(months > MONTHS_PER_YEAR)
+    {
+        years++;
+        months -= MONTHS_PER_YEAR;
     }
 
     time->seconds = seconds;
     time->minutes = minutes;
     time->hours = hours;
     time->days = days;
+    time->months = months;
+    time->years = years;
+    time->dayOfWeek = dayOfWeek;
 }
 
-void FakeRtc_ManuallySetTime(u32 dayOfWeek, u32 hour, u32 minute, u32 second)
+void FakeRtc_ManuallySetTime(u32 year, u32 month, u32 day, u32 hour, u32 minute, u32 second)
 {
     u8 weekday = ((day - 1) % 7);
 
@@ -120,6 +193,56 @@ void Script_ResumeFakeRtc(void)
 void Script_ToggleFakeRtc(void)
 {
     FlagToggle(OW_FLAG_PAUSE_TIME);
+}
+
+// Get Time
+u8 GetSecond(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.second);
+}
+
+u8 GetMinute(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.minute);
+}
+
+u8 GetHour(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.hour);
+}
+
+u8 GetDay(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.day);
+}
+
+u8 GetDayOfWeek(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.dayOfWeek);
+}
+
+u8 GetMonth(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.month);
+}
+
+u8 GetYear(void)
+{
+    RtcGetInfo(&sRtc);
+
+    return ConvertBcdToBinary(sRtc.year);
 }
 
 //These are the scripts which control the time macros in event.inc
