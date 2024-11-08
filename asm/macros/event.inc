@@ -1398,6 +1398,11 @@
 	.byte 0xa0
 	.endm
 
+	@ Checks the player's gender. Stores the result (Fury (1), Mischief (2), or Friendship(3)) in VAR_RESULT.
+	.macro checkplayerpersonality
+	callnative ScrCmd_checkplayerpersonality
+	.endm
+
 	@ Plays the cry of the given species. Mode is any CRY_MODE_* constant.
 	@ You can use waitmoncry to block script execution until the cry finishes.
 	.macro playmoncry species:req, mode:req

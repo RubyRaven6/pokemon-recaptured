@@ -128,9 +128,9 @@
 #define FEMALE 1
 #define GENDER_COUNT 2
 
-#define FURY 0
-#define MISCHIEF 1
-#define FRIENDSHIP 2
+#define FURY 1
+#define MISCHIEF 2
+#define FRIENDSHIP 3
 #define STARTER_COUNT 3
 
 #define BARD_SONG_LENGTH       6

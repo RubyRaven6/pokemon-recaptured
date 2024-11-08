@@ -2653,3 +2653,10 @@ bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
 
     return TRUE;
 }
+
+bool8 ScrCmd_checkplayerpersonality(struct ScriptContext *ctx)
+{
+    gSpecialVar_Result = gSaveBlock2Ptr->personalityType;
+    MgbaPrintf(MGBA_LOG_WARN, "Var_Result is currently %u", gSpecialVar_Result);
+    return FALSE;
+}

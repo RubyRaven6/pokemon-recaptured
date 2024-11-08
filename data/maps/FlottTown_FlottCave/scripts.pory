@@ -157,7 +157,7 @@ script(local) FlottTown_FlottCave_StarterChoice{
     lockall
 	msgbox(format("But…before it could hurt you, something intervenes."))
     switch(var(VAR_STARTER_MON)){
-        case 0:
+        case 1:
             addobject(LOCALID_MANKEY)
             applymovement(LOCALID_MANKEY, Common_Movement_FaceAwayPlayer)
             setobjectxy(LOCALID_MANKEY, VAR_TEMP_2, VAR_TEMP_3)
@@ -170,7 +170,7 @@ script(local) FlottTown_FlottCave_StarterChoice{
             removeobject(LOCALID_TINKATINK)
             removeobject(LOCALID_TEDDIURSA)
             return
-        case 1:
+        case 2:
             addobject(LOCALID_TINKATINK)
             applymovement(LOCALID_TINKATINK, Common_Movement_FaceAwayPlayer)
             setobjectxy(LOCALID_TINKATINK, VAR_TEMP_2, VAR_TEMP_3)
@@ -183,7 +183,7 @@ script(local) FlottTown_FlottCave_StarterChoice{
             removeobject(LOCALID_MANKEY)
             removeobject(LOCALID_TEDDIURSA)
             return
-        case 2:
+        case 3:
             addobject(LOCALID_TEDDIURSA)
             applymovement(LOCALID_TEDDIURSA, Common_Movement_FaceAwayPlayer)
             setobjectxy(LOCALID_TEDDIURSA, VAR_TEMP_2, VAR_TEMP_3)
@@ -213,7 +213,7 @@ script(local) FlottTown_FlottCave_WildZubatBattle{
 
 script(local) FlottTown_FlottCave_StarterWantsToJoin{
     switch(var(VAR_STARTER_MON)){
-        case 0:
+        case 1:
             applymovement(LOCALID_MANKEY, Common_Movement_FacePlayer)
             msgbox(format("Mankey is looking at you curiously. It seems to want to join you."), MSGBOX_DEFAULT)
             msgbox(format("Do you accept?"), MSGBOX_YESNO)
@@ -224,7 +224,7 @@ script(local) FlottTown_FlottCave_StarterWantsToJoin{
                 msgbox(format("Mankey looks like it's about to hit you next."), MSGBOX_DEFAULT)
                 call(FlottTown_FlottCave_StarterWantsToJoin)
             }
-        case 1:
+        case 2:
             applymovement(LOCALID_TINKATINK, Common_Movement_FacePlayer)
             msgbox(format("Tinkatink is too busy playing with its hammer to notice you."), MSGBOX_DEFAULT)
             msgbox(format("Do you want to convince it to join you?"), MSGBOX_YESNO)
@@ -235,7 +235,7 @@ script(local) FlottTown_FlottCave_StarterWantsToJoin{
                 msgbox(format("Are you sure? It looks really cute."), MSGBOX_DEFAULT)
                 call(FlottTown_FlottCave_StarterWantsToJoin)
             }        
-        case 2:
+        case 3:
             applymovement(LOCALID_TEDDIURSA, Common_Movement_FacePlayer)
             msgbox(format("Teddiursa is looking at you curiously. It seems to want to join you."), MSGBOX_DEFAULT)
             msgbox(format("Do you accept?"), MSGBOX_YESNO)
