@@ -20,6 +20,7 @@
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "fake_rtc.h"
 
 static void CB2_WallClock(void);
 static void Task_SetClock_WaitFadeIn(u8 taskId);
@@ -1006,7 +1007,7 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
 
 static void InitClockWithRtc(u8 taskId)
 {
-    RtcCalcLocalTime();
+    FakeRtc_GetCurrentTime();
     gTasks[taskId].tHours = GetHour();
     gTasks[taskId].tMinutes = GetMinute();
     gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;

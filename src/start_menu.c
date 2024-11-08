@@ -50,6 +50,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "rtc.h"
+#include "fake_rtc.h"
 
 // Menu actions
 enum
@@ -96,6 +97,7 @@ EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
 EWRAM_DATA static u8 sSaveDialogTimer = 0;
 EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
+EWRAM_DATA static u8 sCurrentTimeWindowId = 0;
 
 // Menu action callbacks
 static bool8 StartMenuPokedexCallback(void);
@@ -250,11 +252,21 @@ static const struct WindowTemplate sWindowTemplates_LinkBattleSave[] =
 static const struct WindowTemplate sSaveInfoWindowTemplate = {
     .bg = 0,
     .tilemapLeft = 1,
-    .tilemapTop = 1,
+    .tilemapTop = 5,
     .width = 14,
     .height = 10,
     .paletteNum = 15,
     .baseBlock = 8
+};
+
+static const struct WindowTemplate sCurrentTimeWindowTemplate = {
+    .bg = 0, 
+    .tilemapLeft = 1, 
+    .tilemapTop = 1, 
+    .width = 9,
+    .height = 6,
+    .paletteNum = 15,
+    .baseBlock = 0x30
 };
 
 // Local functions
@@ -620,6 +632,7 @@ static bool32 InitStartMenuStep(void)
         sInitStartMenuData[0]++;
         break;
     case 3:
+        ShowCurrentTimeWindow();
         if (GetSafariZoneFlag())
             ShowSafariBallsWindow();
         else if (InBattlePyramid())

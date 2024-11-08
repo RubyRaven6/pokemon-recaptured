@@ -46,6 +46,7 @@
 #include "union_room_chat.h"
 #include "quests.h"
 #include "constants/items.h"
+#include "fake_rtc.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -150,9 +151,6 @@ void ResetMenuAndMonGlobals(void)
 
 void NewGameInitData(void)
 {
-    if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
-        RtcReset();
-
     gDifferentSaveFile = TRUE;
     gSaveBlock2Ptr->encryptionKey = 0;
     ZeroPlayerPartyMons();
@@ -161,6 +159,14 @@ void NewGameInitData(void)
     ClearFrontierRecord();
     ClearSav1();
     ClearSav3();
+
+    #if OW_USE_FAKE_RTC == TRUE
+        SetNewIngameTime();
+    #else
+        if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
+        RtcReset();
+    #endif
+
     ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;
