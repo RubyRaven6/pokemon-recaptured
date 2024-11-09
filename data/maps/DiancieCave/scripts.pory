@@ -6,7 +6,7 @@ mapscripts DiancieCave_MapScripts {
 
 script DiancieCave_OnLoad{
     checkplayerpersonality
-    setvar(VAR_STARTER_MON, VAR_RESULT)
+    copyvar(VAR_STARTER_MON, VAR_RESULT)
 }
 
 script DiancieCave_EventScript_MeetingDiancie{

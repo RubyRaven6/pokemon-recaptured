@@ -5,7 +5,7 @@ DiancieCave_MapScripts::
 
 DiancieCave_OnLoad::
 	checkplayerpersonality
-	setvar VAR_STARTER_MON, VAR_RESULT
+	copyvar VAR_STARTER_MON, VAR_RESULT
 	return
 
 
