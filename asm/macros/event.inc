@@ -672,7 +672,7 @@
 	.macro faceplayer
 	.byte 0x5a
 	.endm
-
+	
 	@ Turns the specified object in the specified direction.
 	.macro turnobject localId:req, direction:req
 	.byte 0x5b

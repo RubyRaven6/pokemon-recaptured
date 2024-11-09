@@ -1853,7 +1853,7 @@ const u8 gText_SideQuestName_30[] = _("Side Quest 30");
 
 //descriptions
 const u8 gText_SideQuestDesc_1[] = _("Find Diancie!");
-const u8 gText_SideQuestDesc_2[] = _("Challenge the Aurelious Pokémon League!");
+const u8 gText_SideQuestDesc_2[] = _("Challenge the Aurelious Pokémon\nLeague!");
 const u8 gText_SideQuestDesc_3[] = _("Description 3");
 const u8 gText_SideQuestDesc_4[] = _("Description 4");
 const u8 gText_SideQuestDesc_5[] = _("Description 5");

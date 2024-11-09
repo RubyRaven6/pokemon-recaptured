@@ -1,7 +1,64 @@
+const LOCALID_BETTER = 1
+const LOCALID_MACHOKE_TRAINER = 2
+const LOCALID_POLIWRATH_TRAINER = 3
+const LOCALID_MACHOKE = 4
+const LOCALID_POLIWRATH = 5
+
 mapscripts DocksideCity_MapScripts {
-    
+    MAP_SCRIPT_ON_LOAD: DocksideCity_OnLoad
 }
 
-script DocksideCity_TempTeleporter{
-    warp(MAP_FLOTT_TOWN, 25, 13)
+script DocksideCity_OnLoad{
+    gettime
+    if(var(VAR_0x8000) < 12 && var(VAR_0x8000) > 14){
+        removeobject(LOCALID_BETTER)
+        removeobject(LOCALID_MACHOKE_TRAINER)
+        removeobject(LOCALID_POLIWRATH_TRAINER)
+        removeobject(LOCALID_MACHOKE)
+        removeobject(LOCALID_POLIWRATH)
+    }
+}
+
+script DocksideCity_EventScript_SailorMachoke{
+    faceplayer
+    msgbox(DocksideCity_Text_SailorMachoke, MSGBOX_NPC)
+    waitmessage
+    closemessage
+    applymovement(0, Common_Movement_FaceRight)
+    end
+}
+
+script DocksideCity_EventScript_SailorPoliwrath{
+    faceplayer
+    msgbox(DocksideCity_Text_SailorPoliwrath, MSGBOX_NPC)
+    waitmessage
+    closemessage
+    applymovement(0, Common_Movement_FaceLeft)
+    end
+}
+
+script DocksideCity_EventScript_SailorSpectator{
+    faceplayer
+    msgbox(DocksideCity_Text_SailorSpectator, MSGBOX_NPC)
+    waitmessage
+    closemessage
+    applymovement(0, Common_Movement_FaceDown)
+    end
+}
+
+text(local) DocksideCity_Text_SailorMachoke{
+    format(
+        "We're currently on our break. We decided to have a battle while we're at it!"
+        "He doesn't know that I made sure to give my buddy Machoke some moves to match up against Poliwrath!"
+    )
+}
+
+text(local) DocksideCity_Text_SailorPoliwrath{
+    format(
+        "It's our union-mandated break at the moment."
+    )
+}
+
+text(local) DocksideCity_Text_SailorSpectator{
+    format("Im the spectator.")
 }
