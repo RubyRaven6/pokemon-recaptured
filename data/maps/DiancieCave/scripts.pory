@@ -43,9 +43,10 @@ text(local) DiancieCave_Text_IWishYouCouldStay{
     format(
         "You know, after I assumed my duties as Princess, I couldn't explore again. And I missed it so!"
         "I used my connection with the earth to find a soul that I might befriend."
-        "When I found yours, my interest was so piqued, I had to know more!"
-        "I wish you could stay, I really do..."
+        "While I was searching, I found you. And I felt that you were… hurting…"
+        "I wanted to reach out and help you.\p" 
+        "I wish you could stay, I really do…"
         "But this is the most that we can talk for now.\p"
-        "I hope to meet you soon!"
+        "I hope to meet you again soon!"
     )
 }

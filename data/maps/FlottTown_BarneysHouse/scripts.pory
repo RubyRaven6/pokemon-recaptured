@@ -68,7 +68,6 @@ script FlottTown_BarneysHouse_Barney{
             closemessage
             questmenu(QUEST_MENU_SET_ACTIVE, 0)
             questmenu(QUEST_MENU_SET_ACTIVE, 1)
-            startquest(QUEST_HEARTS_AND_DIAMONDS)
             startquest(QUEST_AURELIOUS_LEAGUE)
             openquestmenu
             clearflag(FLAG_BOAT_DEPARTS)
@@ -116,7 +115,6 @@ text(local) FlottTown_BarneysHouse_Text_GoodBattler{
 text(local) FlottTown_BarneysHouse_Text_ImTerriblySorry{
     format(
         "BARNEY: Oh my, I didn't expect her to be upset. I'm terribly sorry. That being said, if you'd like to know more about training, you can come back to me."
-        "In the meantime, why not let your new partner out? I'm sure its itching to get out of its ball."
     )
 }
 

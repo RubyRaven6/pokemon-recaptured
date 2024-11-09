@@ -21,6 +21,8 @@ FlottTown_PlayerHouse_2F_Unpacked_Boxes_1:
 	warpsilent MAP_FLOTT_TOWN_PLAYER_HOUSE_2F, 5, 2
 	waitmessage
 	closemessage
+	addhour 2
+	addminute 42
 	end
 
 
@@ -32,5 +34,5 @@ FlottTown_PlayerHouse_2F_Unpacked_Boxes_Text_1:
 	.string "Do you wanna unbox all of it?$"
 
 FlottTown_PlayerHouse_2F_Unpacked_Boxes_Text_2:
-	.string "You take about an hour or so to unpack\n"
-	.string "all the stuff inside.$"
+	.string "You take a while to unpack all the stuff\n"
+	.string "inside.$"

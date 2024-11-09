@@ -3,13 +3,17 @@ mapscripts FlottTown_InsideHarbor_MapScripts {
 }
 
 script(local) FlottTown_InsideHarbor_OnLoad{
-    checkitem(ITEM_JOURNAL)
-    if(var(VAR_RESULT) == FALSE)
-    {setflag(FLAG_FLOTT_HARBOR_SAILOR)}
     setflag(FLAG_VISITED_FLOTT_TOWN)
     setvar(VAR_DOCKED_CITY, 0)
-    addobject(1)
-    addobject(2)
+    checkitem(ITEM_JOURNAL)
+    if(var(VAR_RESULT) == FALSE){
+        setflag(FLAG_FLOTT_HARBOR_SAILOR)
+        addobject(1)
+        addobject(2)
+    }
+    else{
+        removeobject(1)
+    }
     if(var(VAR_FLOTT_TOWN_STATE) == 2){
         setvar(VAR_FLOTT_TOWN_STATE, 1)
     }

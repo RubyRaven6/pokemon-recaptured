@@ -10,12 +10,14 @@ script FlottTown_PlayerHouse_2F_Unpacked_Boxes{
     if(var(VAR_RESULT) == YES){
         setflag(FLAG_UNPACKED_ROOM)
         fadescreen(FADE_TO_BLACK)
-        msgbox(format("You take about an hour or so to unpack all the stuff inside."), MSGBOX_DEFAULT)
+        msgbox(format("You take a while to unpack all the stuff inside."), MSGBOX_DEFAULT)
         waitmessage
         closemessage
         warpsilent(MAP_FLOTT_TOWN_PLAYER_HOUSE_2F, 5, 2)
         waitmessage
         closemessage
+        addhour(2)
+        addminute(42)
         end
     }
 }

@@ -164,7 +164,7 @@ static const struct WindowTemplate sWindowTemplate_StartClock = {
     .width = 9, // If you want to shorten the dates to Sat., Sun., etc., change this to 9
     .height = 2, 
     .paletteNum = 15,
-    .baseBlock = 0x30
+    .baseBlock = 0x78
 };
 
 static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
@@ -256,16 +256,6 @@ static const struct WindowTemplate sSaveInfoWindowTemplate = {
     .height = 10,
     .paletteNum = 15,
     .baseBlock = 8
-};
-
-static const struct WindowTemplate sCurrentTimeWindowTemplate = {
-    .bg = 0, 
-    .tilemapLeft = 1, 
-    .tilemapTop = 1, 
-    .width = 9,
-    .height = 6,
-    .paletteNum = 15,
-    .baseBlock = 0x30
 };
 
 // Local functions
@@ -1147,6 +1137,7 @@ static u8 SaveConfirmSaveCallback(void)
 {
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
+    RemoveExtraStartMenuWindows();
     ShowSaveInfoWindow();
 
     if (InBattlePyramid())

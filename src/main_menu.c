@@ -1602,30 +1602,31 @@ static void Task_NewGameDiancieSpeech_ChooseStarter(u8 taskId)
 
     switch (starter)
     {
-        case FURY:
+        case 0:
             PlaySE(SE_SELECT);
             gSaveBlock2Ptr->personalityType = FURY;
             NewGameDiancieSpeech_ClearStarterWindow(3, 1);
             NewGameDiancieSpeech_ClearWindow(0);
+            MgbaPrintf(MGBA_LOG_WARN, "Personality type is set to %u", gSaveBlock2Ptr->personalityType);
             gTasks[taskId].func = Task_NewGameDiancieSpeech_WhatsYourName;
             break;
-        case MISCHIEF:
+        case 1:
             PlaySE(SE_SELECT);
             gSaveBlock2Ptr->personalityType = MISCHIEF;
             NewGameDiancieSpeech_ClearStarterWindow(3, 1);
             NewGameDiancieSpeech_ClearWindow(0);
+            MgbaPrintf(MGBA_LOG_WARN, "Personality type is set to %u", gSaveBlock2Ptr->personalityType);
             gTasks[taskId].func = Task_NewGameDiancieSpeech_WhatsYourName;
             break;
-        case FRIENDSHIP:
+        case 2:
             PlaySE(SE_SELECT);
             gSaveBlock2Ptr->personalityType = FRIENDSHIP;
             NewGameDiancieSpeech_ClearStarterWindow(3, 1);
             NewGameDiancieSpeech_ClearWindow(0);
+            MgbaPrintf(MGBA_LOG_WARN, "Personality type is set to %u", gSaveBlock2Ptr->personalityType);
             gTasks[taskId].func = Task_NewGameDiancieSpeech_WhatsYourName;
             break;
     }
-
-    MgbaPrintf(MGBA_LOG_WARN, "Var is set to %u", VarGet(VAR_STARTER_MON));
 }
 
 static void Task_NewGameDiancieSpeech_WhatsYourName(u8 taskId)
@@ -1768,7 +1769,6 @@ static void Task_NewGameDiancieSpeech_CanWeMeet(u8 taskId)
 
 static void Task_NewGameDiancieSpeech_LetsMeet(u8 taskId)
 {
-    FlagSet(FLAG_IN_DIANCIE_CAVE);
     if (!RunTextPrintersAndIsPrinter0Active())
     {
         u8 spriteId;

@@ -79,7 +79,6 @@ FlottTown_BarneysHouse_Barney_4:
 	closemessage
 	questmenu QUEST_MENU_SET_ACTIVE, 0
 	questmenu QUEST_MENU_SET_ACTIVE, 1
-	startquest QUEST_HEARTS_AND_DIAMONDS
 	startquest QUEST_AURELIOUS_LEAGUE
 	openquestmenu
 	clearflag FLAG_BOAT_DEPARTS
@@ -144,10 +143,7 @@ FlottTown_BarneysHouse_Text_ImTerriblySorry:
 	.string "BARNEY: Oh my, I didn't expect her to be\n"
 	.string "upset. I'm terribly sorry. That being\l"
 	.string "said, if you'd like to know more about\l"
-	.string "training, you can come back to me. In\l"
-	.string "the meantime, why not let your new\l"
-	.string "partner out? I'm sure its itching to get\l"
-	.string "out of its ball.$"
+	.string "training, you can come back to me.$"
 
 FlottTown_BarneysHouse_Text_BarneysOut:
 	.string "ADELDAIDE: Oh my, a visitor! Are you the\n"

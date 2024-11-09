@@ -570,7 +570,7 @@ struct SaveBlock2
              //u16 padding1:4;
              //u16 padding2;
     /*0x18*/ struct Pokedex pokedex;
-    /*0x90*/ u8 personalityType; // 1 = Fury/Mankey, 2 = Mischief/Tinkatink, 3 = Friendship/Teddiursa
+    /*0x90*/ u8 personalityType; // 0 = Fury/Mankey, 1 = Mischief/Tinkatink, 2 = Friendship/Teddiursa
     /*0x91*/ u8 filler_91[0x7];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;

@@ -162,9 +162,9 @@ FlottTown_FlottCave_StarterChoice:
 	lockall
 	msgbox FlottTown_FlottCave_StarterChoice_Text_0
 	switch VAR_STARTER_MON
-	case 1, FlottTown_FlottCave_StarterChoice_2
-	case 2, FlottTown_FlottCave_StarterChoice_3
-	case 3, FlottTown_FlottCave_StarterChoice_4
+	case 0, FlottTown_FlottCave_StarterChoice_2
+	case 1, FlottTown_FlottCave_StarterChoice_3
+	case 2, FlottTown_FlottCave_StarterChoice_4
 	return
 
 FlottTown_FlottCave_StarterChoice_2:
@@ -176,7 +176,6 @@ FlottTown_FlottCave_StarterChoice_2:
 	playmoncry SPECIES_MANKEY, CRY_MODE_NORMAL
 	waitmoncry
 	givemon SPECIES_MANKEY, 10, ITEM_NONE
-	setvar VAR_STARTER_MON, 0
 	removeobject LOCALID_TINKATINK
 	removeobject LOCALID_TEDDIURSA
 	return
@@ -190,7 +189,6 @@ FlottTown_FlottCave_StarterChoice_3:
 	playmoncry SPECIES_TINKATINK, CRY_MODE_NORMAL
 	waitmoncry
 	givemon SPECIES_TINKATINK, 10, ITEM_NONE
-	setvar VAR_STARTER_MON, 1
 	removeobject LOCALID_MANKEY
 	removeobject LOCALID_TEDDIURSA
 	return
@@ -204,7 +202,6 @@ FlottTown_FlottCave_StarterChoice_4:
 	playmoncry SPECIES_TEDDIURSA, CRY_MODE_NORMAL
 	waitmoncry
 	givemon SPECIES_TEDDIURSA, 10, ITEM_NONE
-	setvar VAR_STARTER_MON, 2
 	removeobject LOCALID_MANKEY
 	removeobject LOCALID_TINKATINK
 	return
@@ -224,9 +221,9 @@ FlottTown_FlottCave_WildZubatBattle:
 
 FlottTown_FlottCave_StarterWantsToJoin:
 	switch VAR_STARTER_MON
-	case 1, FlottTown_FlottCave_StarterWantsToJoin_3
-	case 2, FlottTown_FlottCave_StarterWantsToJoin_4
-	case 3, FlottTown_FlottCave_StarterWantsToJoin_5
+	case 0, FlottTown_FlottCave_StarterWantsToJoin_3
+	case 1, FlottTown_FlottCave_StarterWantsToJoin_4
+	case 2, FlottTown_FlottCave_StarterWantsToJoin_5
 FlottTown_FlottCave_StarterWantsToJoin_1:
 	return
 

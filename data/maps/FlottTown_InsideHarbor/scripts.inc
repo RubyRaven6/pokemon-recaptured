@@ -4,23 +4,24 @@ FlottTown_InsideHarbor_MapScripts::
 
 
 FlottTown_InsideHarbor_OnLoad:
+	setflag FLAG_VISITED_FLOTT_TOWN
+	setvar VAR_DOCKED_CITY, 0
 	checkitem ITEM_JOURNAL
 	compare VAR_RESULT, FALSE
 	goto_if_eq FlottTown_InsideHarbor_OnLoad_2
+	removeobject 1
 FlottTown_InsideHarbor_OnLoad_1:
-	setflag FLAG_VISITED_FLOTT_TOWN
-	setvar VAR_DOCKED_CITY, 0
-	addobject 1
-	addobject 2
 	compare VAR_FLOTT_TOWN_STATE, 2
-	goto_if_eq FlottTown_InsideHarbor_OnLoad_4
+	goto_if_eq FlottTown_InsideHarbor_OnLoad_5
 	return
 
 FlottTown_InsideHarbor_OnLoad_2:
 	setflag FLAG_FLOTT_HARBOR_SAILOR
+	addobject 1
+	addobject 2
 	goto FlottTown_InsideHarbor_OnLoad_1
 
-FlottTown_InsideHarbor_OnLoad_4:
+FlottTown_InsideHarbor_OnLoad_5:
 	setvar VAR_FLOTT_TOWN_STATE, 1
 	return
 

@@ -6,7 +6,6 @@ mapscripts FlottTown_ShipCabin_MapScripts{
 
 
 script(local) FlottTown_ShipCabin_OnFrame{
-    clearflag(FLAG_IN_DIANCIE_CAVE)
     delay(120)
     msgbox(FlottTown_ShipCabin_Text_WokeUpLikeThis, MSGBOX_DEFAULT)
     waitmessage
@@ -61,5 +60,6 @@ text(local) FlottTown_ShipCabin_Text_WokeUpLikeThis{
 
 text(local) FlottTown_ShipCabin_Text_ThanksForSailing{
     format("P.A.: Attention, passengers. We've now arrived at Flott Town.\l" 
-    "Kindly disembark from the vessel in an orderly manner.\lThank you for sailing with the S.S. Tidal.")
+    "Kindly disembark from the vessel in an orderly manner.\p"
+    "Thank you for sailing with the S.S. Tidal.")
 }

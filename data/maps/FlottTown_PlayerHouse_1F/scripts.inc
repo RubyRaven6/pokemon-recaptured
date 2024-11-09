@@ -178,8 +178,7 @@ FlottTown_PlayerHouse_1F_Text_AnAbandonedGym::
 	.string "want to go in?\p"
 	.string "…\p"
 	.string "Well, it's better than you sneaking in\n"
-	.string "yourself. Sure, I'll come with you.\p"
-	.string "$"
+	.string "yourself. Sure, I'll come with you.$"
 
 FlottTown_PlayerHouse_1F_Text_CheckOurRoom::
 	.string "Pretty nice place, huh? Why not check\n"

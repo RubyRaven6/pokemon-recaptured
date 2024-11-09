@@ -8,7 +8,6 @@ FlottTown_ShipCabin_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 
 
 FlottTown_ShipCabin_OnFrame:
-	clearflag FLAG_IN_DIANCIE_CAVE
 	delay 120
 	msgbox FlottTown_ShipCabin_Text_WokeUpLikeThis, MSGBOX_DEFAULT
 	waitmessage
@@ -65,6 +64,6 @@ FlottTown_ShipCabin_Text_ThanksForSailing:
 	.string "P.A.: Attention, passengers. We've now\n"
 	.string "arrived at Flott Town.\l"
 	.string "Kindly disembark from the vessel in an\l"
-	.string "orderly manner.\l"
-	.string "Thank you for sailing with the S.S.\l"
+	.string "orderly manner.\p"
+	.string "Thank you for sailing with the S.S.\n"
 	.string "Tidal.$"
