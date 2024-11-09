@@ -1070,6 +1070,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/diancie_speech.inc"
+	.include "data/scripts/script_time_menu.inc"
 
 	.include "data/maps/FlottTown/scripts.inc"
 	.include "data/maps/FlottTown_InsideHarbor/scripts.inc"
@@ -1093,12 +1094,23 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/FlottTown_PlayerHouse_2F_Unpacked/scripts.inc"
 
 	.include "data/maps/Route1/scripts.inc"
-
 	.include "data/maps/DocksideCity/scripts.inc"
-
 	.include "data/maps/DocksideCity_Port/scripts.inc"
-
 	.include "data/maps/DocksideCity_Shipyard/scripts.inc"
-	
-
 	.include "data/maps/DiancieCave/scripts.inc"
+
+	.include "data/maps/Route6/scripts.inc"
+
+	.include "data/maps/DocksideCity_Mart/scripts.inc"
+
+	.include "data/maps/DocksideCity_PokemonCenter/scripts.inc"
+
+	.include "data/maps/DocksideCity_House1/scripts.inc"
+
+	.include "data/maps/DocksideCity_House2/scripts.inc"
+
+	.include "data/maps/DocksideCity_ResearchHouse/scripts.inc"
+
+	.include "data/maps/DocksideCity_House3/scripts.inc"
+
+	.include "data/maps/DocksideCity_TrainingHouse/scripts.inc"

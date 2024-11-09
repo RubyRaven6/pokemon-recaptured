@@ -3224,6 +3224,8 @@ extern const u8 gText_PlantBerry[];
 extern const u8 gText_AM[];
 extern const u8 gText_PM[];
 
+extern const u8 gText_WaitingMenu[];
+
 //Starters
 extern const u8 gText_Fury[];
 extern const u8 gText_Mischief[];

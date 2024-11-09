@@ -1812,6 +1812,7 @@ const u8 gText_PM[] = _("PM");
 const u8 gText_Fury[] = _("FURY");
 const u8 gText_Mischief[] = _("MISCHIEF");
 const u8 gText_Friendship[] = _("FRIENDSHIP");
+const u8 gText_WaitingMenu[] = _("Wait");
 
 //// side quest data
 //generic strings

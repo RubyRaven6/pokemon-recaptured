@@ -1,5 +1,28 @@
 DocksideCity_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, DocksideCity_OnTransition
 	.byte 0
+
+
+DocksideCity_OnTransition::
+	gettime
+	compare VAR_0x8000, 12
+	goto_if_ge DocksideCity_OnTransition_4
+DocksideCity_OnTransition_3:
+	setflag FLAG_TEMP_1
+	setflag FLAG_TEMP_1
+	setflag FLAG_TEMP_1
+	setflag FLAG_TEMP_1
+	setflag FLAG_TEMP_1
+DocksideCity_OnTransition_1:
+	end
+
+DocksideCity_OnTransition_2:
+	goto DocksideCity_OnTransition_1
+
+DocksideCity_OnTransition_4:
+	compare VAR_0x8000, 14
+	goto_if_le DocksideCity_OnTransition_2
+	goto DocksideCity_OnTransition_3
 
 
 DocksideCity_EventScript_SailorMachoke::
@@ -7,29 +30,38 @@ DocksideCity_EventScript_SailorMachoke::
 	msgbox DocksideCity_Text_SailorMachoke, MSGBOX_NPC
 	waitmessage
 	closemessage
-	faceawayplayer 0
+	applymovement 2, Common_Movement_FaceRight
 	end
 
 
 DocksideCity_EventScript_SailorPoliwrath::
+	faceplayer
 	msgbox DocksideCity_Text_SailorPoliwrath, MSGBOX_NPC
 	waitmessage
 	closemessage
-	return
+	applymovement 1, Common_Movement_FaceRight
+	end
 
 
 DocksideCity_EventScript_SailorSpectator::
+	faceplayer
 	msgbox DocksideCity_Text_SailorSpectator, MSGBOX_NPC
 	waitmessage
 	closemessage
-	return
+	applymovement 3, Common_Movement_FaceDown
+	end
 
 
 DocksideCity_Text_SailorMachoke:
-	.string "Im the Machoke trainer.$"
+	.string "We're currently on our break. We decided\n"
+	.string "to have a battle while we're at it! He\l"
+	.string "doesn't know that I made sure to give\l"
+	.string "my buddy Machoke some moves to match\l"
+	.string "up against Poliwrath!$"
 
 DocksideCity_Text_SailorPoliwrath:
-	.string "Im the Poliwrath trainer.$"
+	.string "It's our union-mandated break at the\n"
+	.string "moment.$"
 
 DocksideCity_Text_SailorSpectator:
 	.string "Im the spectator.$"

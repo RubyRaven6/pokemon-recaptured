@@ -1,22 +1,22 @@
-const LOCALID_BETTER = 1
+//Temp Flag 1
+const LOCALID_POLIWRATH_TRAINER = 1
 const LOCALID_MACHOKE_TRAINER = 2
-const LOCALID_POLIWRATH_TRAINER = 3
+const LOCALID_SPECTATOR = 3
 const LOCALID_MACHOKE = 4
 const LOCALID_POLIWRATH = 5
 
 mapscripts DocksideCity_MapScripts {
-    MAP_SCRIPT_ON_LOAD: DocksideCity_OnLoad
+    MAP_SCRIPT_ON_TRANSITION: DocksideCity_OnTransition
 }
 
-script DocksideCity_OnLoad{
+script DocksideCity_OnTransition{
     gettime
-    if(var(VAR_0x8000) < 12 && var(VAR_0x8000) > 14){
-        removeobject(LOCALID_BETTER)
-        removeobject(LOCALID_MACHOKE_TRAINER)
-        removeobject(LOCALID_POLIWRATH_TRAINER)
-        removeobject(LOCALID_MACHOKE)
-        removeobject(LOCALID_POLIWRATH)
+    if(var(VAR_0x8000) >= 12 && var(VAR_0x8000) <= 14){
     }
+    else{
+        setflag(FLAG_TEMP_1)
+    }
+    end
 }
 
 script DocksideCity_EventScript_SailorMachoke{
@@ -24,7 +24,7 @@ script DocksideCity_EventScript_SailorMachoke{
     msgbox(DocksideCity_Text_SailorMachoke, MSGBOX_NPC)
     waitmessage
     closemessage
-    applymovement(0, Common_Movement_FaceRight)
+    applymovement(LOCALID_MACHOKE_TRAINER, Common_Movement_FaceRight)
     end
 }
 
@@ -33,7 +33,7 @@ script DocksideCity_EventScript_SailorPoliwrath{
     msgbox(DocksideCity_Text_SailorPoliwrath, MSGBOX_NPC)
     waitmessage
     closemessage
-    applymovement(0, Common_Movement_FaceLeft)
+    applymovement(LOCALID_POLIWRATH_TRAINER, Common_Movement_FaceRight)
     end
 }
 
@@ -42,7 +42,7 @@ script DocksideCity_EventScript_SailorSpectator{
     msgbox(DocksideCity_Text_SailorSpectator, MSGBOX_NPC)
     waitmessage
     closemessage
-    applymovement(0, Common_Movement_FaceDown)
+    applymovement(LOCALID_SPECTATOR, Common_Movement_FaceDown)
     end
 }
 
@@ -55,10 +55,15 @@ text(local) DocksideCity_Text_SailorMachoke{
 
 text(local) DocksideCity_Text_SailorPoliwrath{
     format(
-        "It's our union-mandated break at the moment."
+        "It's our union-mandated break at the moment. So, we decided to spar and give our Pokémon a workout."
+        "Joke's on him though. My Poliwrath is gonna wipe the floor with his Machoke!"
+
     )
 }
 
 text(local) DocksideCity_Text_SailorSpectator{
-    format("Im the spectator.")
+    format(
+        "I'm just here to watch."
+        "These two always spar and somehow always end up in a dead-tie."
+    )
 }

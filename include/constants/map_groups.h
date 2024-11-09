@@ -66,6 +66,7 @@
 #define MAP_UNDERWATER_ROUTE129 (57 | (0 << 8))
 #define MAP_UNDERWATER_ROUTE105 (58 | (0 << 8))
 #define MAP_UNDERWATER_ROUTE125 (59 | (0 << 8))
+#define MAP_ROUTE6              (60 | (0 << 8))
 
 // gMapGroup_IndoorFlott
 #define MAP_FLOTT_TOWN_INSIDE_HARBOR            (0 | (1 << 8))
@@ -87,6 +88,13 @@
 #define MAP_OLDALE_TOWN_MART              (4 | (2 << 8))
 #define MAP_DOCKSIDE_CITY_PORT            (5 | (2 << 8))
 #define MAP_DOCKSIDE_CITY_SHIPYARD        (6 | (2 << 8))
+#define MAP_DOCKSIDE_CITY_MART            (7 | (2 << 8))
+#define MAP_DOCKSIDE_CITY_POKEMON_CENTER  (8 | (2 << 8))
+#define MAP_DOCKSIDE_CITY_HOUSE1          (9 | (2 << 8))
+#define MAP_DOCKSIDE_CITY_HOUSE2          (10 | (2 << 8))
+#define MAP_DOCKSIDE_CITY_RESEARCH_HOUSE  (11 | (2 << 8))
+#define MAP_DOCKSIDE_CITY_HOUSE3          (12 | (2 << 8))
+#define MAP_DOCKSIDE_CITY_TRAINING_HOUSE  (13 | (2 << 8))
 
 // gMapGroup_IndoorDewford
 #define MAP_DEWFORD_TOWN_HOUSE1            (0 | (3 << 8))

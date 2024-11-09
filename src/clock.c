@@ -23,7 +23,7 @@ void InitTimeBasedEvents(void)
     FlagSet(FLAG_SYS_CLOCK_SET);
     RtcCalcLocalTime();
     gSaveBlock2Ptr->lastBerryTreeUpdate = gLocalTime;
-    VarSet(VAR_DAYS, gLocalTime.days);
+    VarSet(VAR_DAYS, GetDay());
 }
 
 void DoTimeBasedEvents(void)

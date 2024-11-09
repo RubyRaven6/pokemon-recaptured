@@ -95,7 +95,8 @@
     "Underwater_Route128",
     "Underwater_Route129",
     "Underwater_Route105",
-    "Underwater_Route125"
+    "Underwater_Route125",
+    "Route6"
   ],
   "gMapGroup_IndoorFlott": [
     "FlottTown_InsideHarbor",
@@ -116,7 +117,14 @@
     "OldaleTown_PokemonCenter_2F",
     "OldaleTown_Mart",
     "DocksideCity_Port",
-    "DocksideCity_Shipyard"
+    "DocksideCity_Shipyard",
+    "DocksideCity_Mart",
+    "DocksideCity_PokemonCenter",
+    "DocksideCity_House1",
+    "DocksideCity_House2",
+    "DocksideCity_ResearchHouse",
+    "DocksideCity_House3",
+    "DocksideCity_TrainingHouse"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",

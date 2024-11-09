@@ -54,6 +54,7 @@
 #include "quests.h"
 #include "constants/event_objects.h"
 #include "constants/map_types.h"
+#include "fake_rtc.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(struct ScriptContext *ctx);
@@ -704,10 +705,15 @@ bool8 ScrCmd_dotimebasedevents(struct ScriptContext *ctx)
 
 bool8 ScrCmd_gettime(struct ScriptContext *ctx)
 {
-    RtcCalcLocalTime();
-    gSpecialVar_0x8000 = gLocalTime.hours;
-    gSpecialVar_0x8001 = gLocalTime.minutes;
-    gSpecialVar_0x8002 = gLocalTime.seconds;
+    MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", GetHour());
+    MgbaPrintf(MGBA_LOG_WARN, "Minute: %u", GetMinute());
+    MgbaPrintf(MGBA_LOG_WARN, "Second: %u", GetSecond());
+    gSpecialVar_0x8000 = GetHour();
+    gSpecialVar_0x8001 = GetMinute();
+    gSpecialVar_0x8002 = GetSecond();
+    MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", gSpecialVar_0x8000);
+    MgbaPrintf(MGBA_LOG_WARN, "Minute: %u", gSpecialVar_0x8001);
+    MgbaPrintf(MGBA_LOG_WARN, "Second: %u", gSpecialVar_0x8002);
     return FALSE;
 }
 
