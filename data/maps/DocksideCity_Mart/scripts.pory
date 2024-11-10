@@ -13,7 +13,7 @@ script DocksideCity_Mart_EventScript_Clerk{
 	end
 }
 
-mart Generic_MartItems{
+mart DocksideCity_Mart_Pokemart{
 	ITEM_GREAT_BALL
 	ITEM_SUPER_POTION
 	ITEM_ANTIDOTE

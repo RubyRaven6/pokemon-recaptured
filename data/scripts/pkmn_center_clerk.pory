@@ -3,37 +3,36 @@ script GeneralMart_EventScript_Clerk{
 	faceplayer
 	message(gText_HowMayIServeYou)
 	waitmessage
-    if(flag(FLAG_SYS_GAME_CLEAR)){
-        pokemart(Generic_MartItems_Tier4)
-    }
     if(flag(FLAG_BADGE08_GET)){
         pokemart(Generic_MartItems_Tier3)
     }
-    if(flag(FLAG_BADGE05_GET)){
+	if(flag(FLAG_BADGE05_GET)){
         pokemart(Generic_MartItems_Tier2)
     }
-	if(flag(FLAG_BADGE01_GET)){
+    if(flag(FLAG_BADGE01_GET)){
         pokemart(Generic_MartItems_Tier1)
+    }
+	else{
+        pokemart(Generic_MartItems_Tier0)
     }
 	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
 	release
 	end
 }
 
-mart Generic_MartItems_Tier1{
+mart Generic_MartItems_Tier0{
 	ITEM_POKE_BALL
 	ITEM_POTION
 	ITEM_ANTIDOTE
 	ITEM_PARALYZE_HEAL
 	ITEM_AWAKENING
     ITEM_REPEL
-    ITEM_ESCAPE_ROPE
 	ITEM_NONE
 	release
 	end
 }
 
-mart Generic_MartItems_Tier2{
+mart Generic_MartItems_Tier1{
 	ITEM_POKE_BALL
     ITEM_GREAT_BALL
 	ITEM_POTION
@@ -43,6 +42,56 @@ mart Generic_MartItems_Tier2{
 	ITEM_AWAKENING
     ITEM_BURN_HEAL
     ITEM_ICE_HEAL
+	ITEM_REPEL
+	ITEM_SUPER_REPEL
+	ITEM_POKE_DOLL
+	ITEM_NONE
+	release
+	end
+}
+
+mart Generic_MartItems_Tier2{
+	ITEM_POKE_BALL
+    ITEM_GREAT_BALL
+	ITEM_ULTRA_BALL
+	ITEM_POTION
+    ITEM_SUPER_POTION
+	ITEM_HYPER_POTION
+	ITEM_ANTIDOTE
+	ITEM_PARALYZE_HEAL
+	ITEM_AWAKENING
+    ITEM_BURN_HEAL
+    ITEM_ICE_HEAL
+	ITEM_FULL_HEAL
+	ITEM_REPEL
+	ITEM_SUPER_REPEL
+	ITEM_MAX_REPEL
+	ITEM_POKE_DOLL
+	ITEM_NONE
+	release
+	end
+}
+
+mart Generic_MartItems_Tier3{
+	ITEM_POKE_BALL
+    ITEM_GREAT_BALL
+	ITEM_ULTRA_BALL
+	ITEM_POTION
+    ITEM_SUPER_POTION
+	ITEM_HYPER_POTION
+	ITEM_MAX_POTION
+	ITEM_REVIVE
+	ITEM_ANTIDOTE
+	ITEM_PARALYZE_HEAL
+	ITEM_AWAKENING
+    ITEM_BURN_HEAL
+    ITEM_ICE_HEAL
+	ITEM_FULL_HEAL
+	ITEM_FULL_RESTORE
+	ITEM_REPEL
+	ITEM_SUPER_REPEL
+	ITEM_MAX_REPEL
+	ITEM_POKE_DOLL
 	ITEM_NONE
 	release
 	end

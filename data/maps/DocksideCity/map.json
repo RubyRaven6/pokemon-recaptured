@@ -373,7 +373,7 @@
       "x": 20,
       "y": 33,
       "elevation": 0,
-      "dest_map": "MAP_DOCKSIDE_CITY_RESEARCH_HOUSE",
+      "dest_map": "MAP_DOCKSIDE_CITY_TRAINING_HOUSE",
       "dest_warp_id": "0"
     },
     {
