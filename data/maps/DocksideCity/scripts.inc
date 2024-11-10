@@ -9,10 +9,6 @@ DocksideCity_OnTransition::
 	goto_if_ge DocksideCity_OnTransition_4
 DocksideCity_OnTransition_3:
 	setflag FLAG_TEMP_1
-	setflag FLAG_TEMP_1
-	setflag FLAG_TEMP_1
-	setflag FLAG_TEMP_1
-	setflag FLAG_TEMP_1
 DocksideCity_OnTransition_1:
 	end
 
@@ -61,7 +57,12 @@ DocksideCity_Text_SailorMachoke:
 
 DocksideCity_Text_SailorPoliwrath:
 	.string "It's our union-mandated break at the\n"
-	.string "moment.$"
+	.string "moment. So, we decided to spar and give\l"
+	.string "our Pokémon a workout. Joke's on him\l"
+	.string "though. My Poliwrath is gonna wipe the\l"
+	.string "floor with his Machoke!$"
 
 DocksideCity_Text_SailorSpectator:
-	.string "Im the spectator.$"
+	.string "I'm just here to watch. These two\n"
+	.string "always spar and somehow always end up\l"
+	.string "in a dead-tie.$"

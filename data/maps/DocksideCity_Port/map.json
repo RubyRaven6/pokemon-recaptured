@@ -3,7 +3,7 @@
   "name": "DocksideCity_Port",
   "layout": "LAYOUT_DOCKSIDE_CITY_PORT",
   "music": "MUS_SLATEPORT",
-  "region_map_section": "MAPSEC_OLDALE_TOWN",
+  "region_map_section": "MAPSEC_DOCKSIDE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_NONE",

@@ -1368,7 +1368,7 @@
 
 // Towns and Cities
 #define FLAG_VISITED_FLOTT_TOWN                     (SYSTEM_FLAGS + 0xF)
-#define FLAG_VISITED_OLDALE_TOWN                    (SYSTEM_FLAGS + 0x10)
+#define FLAG_VISITED_DOCKSIDE_CITY                  (SYSTEM_FLAGS + 0x10)
 #define FLAG_VISITED_DEWFORD_TOWN                   (SYSTEM_FLAGS + 0x11)
 #define FLAG_VISITED_LAVARIDGE_TOWN                 (SYSTEM_FLAGS + 0x12)
 #define FLAG_VISITED_FALLARBOR_TOWN                 (SYSTEM_FLAGS + 0x13)

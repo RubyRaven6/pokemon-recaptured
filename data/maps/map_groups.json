@@ -2,7 +2,7 @@
   "group_order": [
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorFlott",
-    "gMapGroup_IndoorOldale",
+    "gMapGroup_IndoorDockside",
     "gMapGroup_IndoorDewford",
     "gMapGroup_IndoorLavaridge",
     "gMapGroup_IndoorFallarbor",
@@ -39,7 +39,8 @@
     "FlottTown",
     "BlackHole",
     "DocksideCity",
-    "Route1",
+    "Route_1",
+    "Route_6",
     "PetalburgCity",
     "SlateportCity",
     "MauvilleCity",
@@ -49,7 +50,6 @@
     "MossdeepCity",
     "SootopolisCity",
     "EverGrandeCity",
-    "OldaleTown",
     "DewfordTown",
     "LavaridgeTown",
     "FallarborTown",
@@ -95,8 +95,7 @@
     "Underwater_Route128",
     "Underwater_Route129",
     "Underwater_Route105",
-    "Underwater_Route125",
-    "Route6"
+    "Underwater_Route125"
   ],
   "gMapGroup_IndoorFlott": [
     "FlottTown_InsideHarbor",
@@ -110,21 +109,16 @@
     "FlottTown_House1",
     "FlottTown_PlayerHouse_2F_Unpacked"
   ],
-  "gMapGroup_IndoorOldale": [
-    "OldaleTown_House1",
-    "OldaleTown_House2",
-    "OldaleTown_PokemonCenter_1F",
-    "OldaleTown_PokemonCenter_2F",
-    "OldaleTown_Mart",
+  "gMapGroup_IndoorDockside": [
     "DocksideCity_Port",
     "DocksideCity_Shipyard",
     "DocksideCity_Mart",
     "DocksideCity_PokemonCenter",
+    "DocksideCity_ResearchHouse",
+    "DocksideCity_TrainingHouse",
     "DocksideCity_House1",
     "DocksideCity_House2",
-    "DocksideCity_ResearchHouse",
-    "DocksideCity_House3",
-    "DocksideCity_TrainingHouse"
+    "DocksideCity_House3"    
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",

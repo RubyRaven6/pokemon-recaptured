@@ -92,16 +92,6 @@
       "blockdata_filepath": "data/layouts/EverGrandeCity/map.bin"
     },
     {
-      "id": "LAYOUT_OLDALE_TOWN",
-      "name": "OldaleTown_Layout",
-      "width": 20,
-      "height": 20,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
-      "border_filepath": "data/layouts/OldaleTown/border.bin",
-      "blockdata_filepath": "data/layouts/OldaleTown/map.bin"
-    },
-    {
       "id": "LAYOUT_DEWFORD_TOWN",
       "name": "DewfordTown_Layout",
       "width": 20,
@@ -4462,14 +4452,14 @@
       "blockdata_filepath": "data/layouts/FlottTown_PlayerHouse_2F_Unpacked/map.bin"
     },
     {
-      "id": "LAYOUT_ROUTE1",
+      "id": "LAYOUT_ROUTE_1",
       "name": "Route1_Layout",
       "width": 36,
       "height": 47,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
-      "border_filepath": "data/layouts/Route1/border.bin",
-      "blockdata_filepath": "data/layouts/Route1/map.bin"
+      "border_filepath": "data/layouts/Route_1/border.bin",
+      "blockdata_filepath": "data/layouts/Route_1/map.bin"
     },
     {
       "id": "LAYOUT_DOCKSIDE_CITY",
@@ -4512,14 +4502,14 @@
       "blockdata_filepath": "data/layouts/DiancieCave/map.bin"
     },
     {
-      "id": "LAYOUT_ROUTE6",
-      "name": "Route6_Layout",
+      "id": "LAYOUT_ROUTE_6",
+      "name": "Route_6_Layout",
       "width": 20,
       "height": 20,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
-      "border_filepath": "data/layouts/Route6/border.bin",
-      "blockdata_filepath": "data/layouts/Route6/map.bin"
+      "border_filepath": "data/layouts/Route_6/border.bin",
+      "blockdata_filepath": "data/layouts/Route_6/map.bin"
     },
     {
       "id": "LAYOUT_DOCKSIDE_CITY_MART",

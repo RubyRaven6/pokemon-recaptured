@@ -116,7 +116,6 @@ gStdScripts_End::
 	.include "data/maps/MossdeepCity/scripts.inc"
 	.include "data/maps/SootopolisCity/scripts.inc"
 	.include "data/maps/EverGrandeCity/scripts.inc"
-	.include "data/maps/OldaleTown/scripts.inc"
 	.include "data/maps/DewfordTown/scripts.inc"
 	.include "data/maps/LavaridgeTown/scripts.inc"
 	.include "data/maps/FallarborTown/scripts.inc"
@@ -163,11 +162,6 @@ gStdScripts_End::
 	.include "data/maps/Underwater_Route129/scripts.inc"
 	.include "data/maps/Underwater_Route105/scripts.inc"
 	.include "data/maps/Underwater_Route125/scripts.inc"
-	.include "data/maps/OldaleTown_House1/scripts.inc"
-	.include "data/maps/OldaleTown_House2/scripts.inc"
-	.include "data/maps/OldaleTown_PokemonCenter_1F/scripts.inc"
-	.include "data/maps/OldaleTown_PokemonCenter_2F/scripts.inc"
-	.include "data/maps/OldaleTown_Mart/scripts.inc"
 	.include "data/maps/DewfordTown_House1/scripts.inc"
 	.include "data/maps/DewfordTown_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/DewfordTown_PokemonCenter_2F/scripts.inc"
@@ -1071,46 +1065,28 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/save.inc"
 	.include "data/text/diancie_speech.inc"
 	.include "data/scripts/script_time_menu.inc"
-
 	.include "data/maps/FlottTown/scripts.inc"
 	.include "data/maps/FlottTown_InsideHarbor/scripts.inc"
 	.include "data/maps/FlottTown_ShipCabin/scripts.inc"
 	.include "data/maps/FlottTown_ShipHallway/scripts.inc"
-
 	.include "data/maps/FlottTown_PlayerHouse_1F/scripts.inc"
-
 	.include "data/maps/FlottTown_PlayerHouse_2F/scripts.inc"
-
 	.include "data/maps/FlottTown_AbandonedGym/scripts.inc"
-
 	.include "data/maps/FlottTown_FlottCave/scripts.inc"
-
 	.include "data/maps/FlottTown_BarneysHouse/scripts.inc"
-
 	.include "data/maps/FlottTown_House1/scripts.inc"
-
 	.include "data/maps/BlackHole/scripts.inc"
-
 	.include "data/maps/FlottTown_PlayerHouse_2F_Unpacked/scripts.inc"
-
-	.include "data/maps/Route1/scripts.inc"
+	.include "data/maps/Route_1/scripts.inc"
 	.include "data/maps/DocksideCity/scripts.inc"
 	.include "data/maps/DocksideCity_Port/scripts.inc"
 	.include "data/maps/DocksideCity_Shipyard/scripts.inc"
 	.include "data/maps/DiancieCave/scripts.inc"
-
-	.include "data/maps/Route6/scripts.inc"
-
+	.include "data/maps/Route_6/scripts.inc"
 	.include "data/maps/DocksideCity_Mart/scripts.inc"
-
 	.include "data/maps/DocksideCity_PokemonCenter/scripts.inc"
-
 	.include "data/maps/DocksideCity_House1/scripts.inc"
-
 	.include "data/maps/DocksideCity_House2/scripts.inc"
-
 	.include "data/maps/DocksideCity_ResearchHouse/scripts.inc"
-
 	.include "data/maps/DocksideCity_House3/scripts.inc"
-
 	.include "data/maps/DocksideCity_TrainingHouse/scripts.inc"

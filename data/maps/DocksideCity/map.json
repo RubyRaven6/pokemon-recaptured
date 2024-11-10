@@ -3,7 +3,7 @@
   "name": "DocksideCity",
   "layout": "LAYOUT_DOCKSIDE_CITY",
   "music": "MUS_SLATEPORT",
-  "region_map_section": "MAPSEC_OLDALE_TOWN",
+  "region_map_section": "MAPSEC_DOCKSIDE_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_CITY",
@@ -19,7 +19,7 @@
       "direction": "down"
     },
     {
-      "map": "MAP_ROUTE6",
+      "map": "MAP_ROUTE_6",
       "offset": 15,
       "direction": "left"
     }
