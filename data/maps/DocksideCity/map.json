@@ -14,11 +14,6 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_ROUTE1",
-      "offset": -2,
-      "direction": "down"
-    },
-    {
       "map": "MAP_ROUTE_6",
       "offset": 15,
       "direction": "left"
@@ -351,6 +346,55 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY_SHIPYARD",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 35,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY_MART",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 30,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY_POKEMON_CENTER",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 12,
+      "y": 17,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY_RESEARCH_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 20,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY_RESEARCH_HOUSE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 18,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY_HOUSE1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 23,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY_HOUSE2",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 14,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY_HOUSE3",
       "dest_warp_id": "0"
     }
   ],

@@ -10,14 +10,27 @@
   "allow_cycling": false,
   "allow_escaping": false,
   "allow_running": false,
-  "show_map_name": true,
+  "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
 
   ],
   "warp_events": [
-
+    {
+      "x": 5,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY",
+      "dest_warp_id": "4"
+    },
+    {
+      "x": 6,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY",
+      "dest_warp_id": "4"
+    }
   ],
   "coord_events": [
 

@@ -1,0 +1,49 @@
+script GeneralMart_EventScript_Clerk{
+	lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+    if(flag(FLAG_SYS_GAME_CLEAR)){
+        pokemart(Generic_MartItems_Tier4)
+    }
+    if(flag(FLAG_BADGE08_GET)){
+        pokemart(Generic_MartItems_Tier3)
+    }
+    if(flag(FLAG_BADGE05_GET)){
+        pokemart(Generic_MartItems_Tier2)
+    }
+	if(flag(FLAG_BADGE01_GET)){
+        pokemart(Generic_MartItems_Tier1)
+    }
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart Generic_MartItems_Tier1{
+	ITEM_POKE_BALL
+	ITEM_POTION
+	ITEM_ANTIDOTE
+	ITEM_PARALYZE_HEAL
+	ITEM_AWAKENING
+    ITEM_REPEL
+    ITEM_ESCAPE_ROPE
+	ITEM_NONE
+	release
+	end
+}
+
+mart Generic_MartItems_Tier2{
+	ITEM_POKE_BALL
+    ITEM_GREAT_BALL
+	ITEM_POTION
+    ITEM_SUPER_POTION
+	ITEM_ANTIDOTE
+	ITEM_PARALYZE_HEAL
+	ITEM_AWAKENING
+    ITEM_BURN_HEAL
+    ITEM_ICE_HEAL
+	ITEM_NONE
+	release
+	end
+}

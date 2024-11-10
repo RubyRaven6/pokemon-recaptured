@@ -1,0 +1,21 @@
+const LOCALID_NURSE = 1
+
+mapscripts  DocksideCity_PokemonCenter_MapScripts{
+    MAP_SCRIPT_ON_TRANSITION: DocksideCity_PokemonCenter_1F_OnTransition
+}
+	
+
+script DocksideCity_PokemonCenter_1F_OnTransition {
+	setrespawn(HEAL_LOCATION_DOCKSIDE_CITY)
+	setvar(VAR_DOCKED_CITY, 1)
+	end
+}
+
+script DocksideCity_PokemonCenter_1F_EventScript_Nurse{
+	setvar(VAR_0x800B, LOCALID_NURSE)
+	call(Common_EventScript_PkmnCenterNurse)
+	waitmessage
+	waitbuttonpress
+	release
+	end
+}
