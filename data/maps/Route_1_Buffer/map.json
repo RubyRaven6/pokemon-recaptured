@@ -1,21 +1,26 @@
 {
-  "id": "MAP_ROUTE_1",
-  "name": "Route_1",
-  "layout": "LAYOUT_ROUTE_1",
+  "id": "MAP_ROUTE_1_BUFFER",
+  "name": "Route_1_Buffer",
+  "layout": "LAYOUT_ROUTE_1_BUFFER",
   "music": "MUS_DUMMY",
-  "region_map_section": "MAPSEC_NONE",
+  "region_map_section": "MAPSEC_ABANDONED_SHIP",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_INDOOR",
-  "allow_cycling": true,
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
   "allow_escaping": false,
-  "allow_running": true,
+  "allow_running": false,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
+      "map": "MAP_ROUTE_1",
+      "offset": -7,
+      "direction": "down"
+    },
+    {
       "map": "MAP_DOCKSIDE_CITY",
-      "offset": -3,
+      "offset": -11,
       "direction": "up"
     }
   ],

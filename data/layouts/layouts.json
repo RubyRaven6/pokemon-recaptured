@@ -4457,7 +4457,7 @@
       "width": 36,
       "height": 47,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_Mauville",
       "border_filepath": "data/layouts/Route_1/border.bin",
       "blockdata_filepath": "data/layouts/Route_1/map.bin"
     },
@@ -4580,6 +4580,16 @@
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/DocksideCity_TrainingHouse/border.bin",
       "blockdata_filepath": "data/layouts/DocksideCity_TrainingHouse/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE_1_BUFFER",
+      "name": "Route_1_Buffer_Layout",
+      "width": 24,
+      "height": 7,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Mauville",
+      "border_filepath": "data/layouts/Route_1_Buffer/border.bin",
+      "blockdata_filepath": "data/layouts/Route_1_Buffer/map.bin"
     }
   ]
 }

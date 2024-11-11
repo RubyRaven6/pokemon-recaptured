@@ -1091,3 +1091,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/DocksideCity_ResearchHouse/scripts.inc"
 	.include "data/maps/DocksideCity_House3/scripts.inc"
 	.include "data/maps/DocksideCity_TrainingHouse/scripts.inc"
+
+	.include "data/maps/Route_1_Buffer/scripts.inc"
