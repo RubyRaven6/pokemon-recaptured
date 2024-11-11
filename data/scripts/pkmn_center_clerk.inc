@@ -48,6 +48,8 @@ Generic_MartItems_Tier1:
 	.2byte ITEM_AWAKENING
 	.2byte ITEM_BURN_HEAL
 	.2byte ITEM_ICE_HEAL
+	.2byte ITEM_REPEL
+	.2byte ITEM_SUPER_REPEL
 	.2byte ITEM_POKE_DOLL
 	.2byte ITEM_NONE
 
@@ -65,6 +67,9 @@ Generic_MartItems_Tier2:
 	.2byte ITEM_BURN_HEAL
 	.2byte ITEM_ICE_HEAL
 	.2byte ITEM_FULL_HEAL
+	.2byte ITEM_REPEL
+	.2byte ITEM_SUPER_REPEL
+	.2byte ITEM_MAX_REPEL
 	.2byte ITEM_POKE_DOLL
 	.2byte ITEM_NONE
 
@@ -77,6 +82,7 @@ Generic_MartItems_Tier3:
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION
+	.2byte ITEM_REVIVE
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_AWAKENING
@@ -84,5 +90,8 @@ Generic_MartItems_Tier3:
 	.2byte ITEM_ICE_HEAL
 	.2byte ITEM_FULL_HEAL
 	.2byte ITEM_FULL_RESTORE
+	.2byte ITEM_REPEL
+	.2byte ITEM_SUPER_REPEL
+	.2byte ITEM_MAX_REPEL
 	.2byte ITEM_POKE_DOLL
 	.2byte ITEM_NONE

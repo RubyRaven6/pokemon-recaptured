@@ -2319,7 +2319,7 @@
 	goto_if_eq \dest
 	.endm
 
-	@ Message box types
+	@ Message box types 
 	MSGBOX_NPC = 2
 	MSGBOX_SIGN = 3
 	MSGBOX_DEFAULT = 4

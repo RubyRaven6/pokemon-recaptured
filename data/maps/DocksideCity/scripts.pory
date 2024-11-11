@@ -10,11 +10,26 @@ mapscripts DocksideCity_MapScripts {
 }
 
 script DocksideCity_OnTransition{
+    setvar(VAR_DOCKED_CITY, 1)
     gettime
-    if(var(VAR_0x8000) >= 12 && var(VAR_0x8000) <= 14){
-    }
-    else{
+    if(var(VAR_0x8000) < 12 || var(VAR_0x8000) > 14){
         setflag(FLAG_TEMP_1)
+    }
+    gettime
+    if(var(VAR_0x8000) < 10 || var(VAR_0x8000) > 12){
+        setflag(FLAG_TEMP_2)
+    }
+    gettime
+    if(var(VAR_0x8000) < 14 || var(VAR_0x8000) > 15){
+        setflag(FLAG_TEMP_3)
+    }
+    gettime
+    if(var(VAR_0x8000) < 16 || var(VAR_0x8000) > 17){
+        setflag(FLAG_TEMP_4)
+    }
+    gettime
+    if(var(VAR_0x8000) < 17 || var(VAR_0x8000) > 20){
+        setflag(FLAG_TEMP_5)
     }
     end
 }
@@ -43,6 +58,54 @@ script DocksideCity_EventScript_SailorSpectator{
     waitmessage
     closemessage
     applymovement(LOCALID_SPECTATOR, Common_Movement_FaceDown)
+    end
+}
+
+script DocksideCity_EventScript_MomEatingOut{
+    applymovement(20, moves(walk_in_place_right))
+    msgbox(format("Jana! I told you to stop playing with your food!"), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_SonEatingOut{
+    msgbox("Huh, this pasta is staler than usual…", MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_DaughterEatingOut{
+    msgbox("PAsta!", MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_Lesbian1EatingOut{
+    applymovement(19, moves(walk_in_place_right))
+    msgbox(format("Hey… thanks for saying yes. I was really looking forward to spending the day with you."), MSGBOX_DEFAULT)
+    applymovement(18, moves(walk_in_place_left))
+    msgbox(format("Of course! I always love spending time with you. You know that, right?"), MSGBOX_DEFAULT)
+    applymovement(19, moves(emote_heart))
+    applymovement(18, moves(emote_heart))
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_Lesbian2EatingOut{
+    applymovement(18, moves(walk_in_place_left))
+    msgbox(format("Huh… this pasta tastes better than when I went here last time."), MSGBOX_DEFAULT)
+    applymovement(19, moves(walk_in_place_right))
+    msgbox(format("Really? I don't think they changed the recipe…"), MSGBOX_DEFAULT)
+    applymovement(18, moves(walk_in_place_left))
+    msgbox(format("Well… maybe there's just something better about today?"), MSGBOX_DEFAULT)
+    applymovement(19, moves(emote_heart))
+    applymovement(18, moves(emote_heart))
+    waitmessage
+    closemessage
     end
 }
 
