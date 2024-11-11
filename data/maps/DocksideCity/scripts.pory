@@ -12,23 +12,23 @@ mapscripts DocksideCity_MapScripts {
 script DocksideCity_OnTransition{
     setvar(VAR_DOCKED_CITY, 1)
     gettime
-    if(var(VAR_0x8000) < 12 || var(VAR_0x8000) > 14){
+    if(var(VAR_0x8004) < 12 || var(VAR_0x8004) > 14){
         setflag(FLAG_TEMP_1)
     }
     gettime
-    if(var(VAR_0x8000) < 10 || var(VAR_0x8000) > 12){
+    if((var(VAR_0x8004) < 10 || var(VAR_0x8004) > 12) && var(VAR_0x8003) != 0){
         setflag(FLAG_TEMP_2)
     }
     gettime
-    if(var(VAR_0x8000) < 14 || var(VAR_0x8000) > 15){
+    if((var(VAR_0x8004) < 14 || var(VAR_0x8004) > 15) && var(VAR_0x8003) != 4){
         setflag(FLAG_TEMP_3)
     }
     gettime
-    if(var(VAR_0x8000) < 16 || var(VAR_0x8000) > 17){
+    if((var(VAR_0x8004) < 16 || var(VAR_0x8004) > 17) && var(VAR_0x8003) != 5){
         setflag(FLAG_TEMP_4)
     }
     gettime
-    if(var(VAR_0x8000) < 17 || var(VAR_0x8000) > 20){
+    if((var(VAR_0x8004) < 17 || var(VAR_0x8004) > 20)){
         setflag(FLAG_TEMP_5)
     }
     end
@@ -104,6 +104,22 @@ script DocksideCity_EventScript_Lesbian2EatingOut{
     msgbox(format("Well… maybe there's just something better about today?"), MSGBOX_DEFAULT)
     applymovement(19, moves(emote_heart))
     applymovement(18, moves(emote_heart))
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_Date1EatingOut{
+    applymovement(23, moves(walk_in_place_right, step_end))
+    msgbox(format("Hm… I'm getting kind of bored going here each week…"), MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_Date2EatingOut{
+    applymovement(24, moves(walk_in_place_left, step_end))
+    msgbox(format("What? But this is the best pasta place in the city!"), MSGBOX_NPC)
     waitmessage
     closemessage
     end

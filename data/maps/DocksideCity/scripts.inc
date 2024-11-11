@@ -6,35 +6,35 @@ DocksideCity_MapScripts::
 DocksideCity_OnTransition::
 	setvar VAR_DOCKED_CITY, 1
 	gettime
-	compare VAR_0x8000, 12
+	compare VAR_0x8004, 12
 	goto_if_lt DocksideCity_OnTransition_2
-	compare VAR_0x8000, 14
+	compare VAR_0x8004, 14
 	goto_if_gt DocksideCity_OnTransition_2
 DocksideCity_OnTransition_1:
 	gettime
-	compare VAR_0x8000, 10
-	goto_if_lt DocksideCity_OnTransition_7
-	compare VAR_0x8000, 12
-	goto_if_gt DocksideCity_OnTransition_7
+	compare VAR_0x8004, 10
+	goto_if_lt DocksideCity_OnTransition_8
+	compare VAR_0x8004, 12
+	goto_if_gt DocksideCity_OnTransition_8
 DocksideCity_OnTransition_6:
 	gettime
-	compare VAR_0x8000, 14
-	goto_if_lt DocksideCity_OnTransition_12
-	compare VAR_0x8000, 15
-	goto_if_gt DocksideCity_OnTransition_12
-DocksideCity_OnTransition_11:
+	compare VAR_0x8004, 14
+	goto_if_lt DocksideCity_OnTransition_15
+	compare VAR_0x8004, 15
+	goto_if_gt DocksideCity_OnTransition_15
+DocksideCity_OnTransition_13:
 	gettime
-	compare VAR_0x8000, 16
-	goto_if_lt DocksideCity_OnTransition_17
-	compare VAR_0x8000, 17
-	goto_if_gt DocksideCity_OnTransition_17
-DocksideCity_OnTransition_16:
-	gettime
-	compare VAR_0x8000, 17
+	compare VAR_0x8004, 16
 	goto_if_lt DocksideCity_OnTransition_22
-	compare VAR_0x8000, 20
+	compare VAR_0x8004, 17
 	goto_if_gt DocksideCity_OnTransition_22
-DocksideCity_OnTransition_21:
+DocksideCity_OnTransition_20:
+	gettime
+	compare VAR_0x8004, 17
+	goto_if_lt DocksideCity_OnTransition_28
+	compare VAR_0x8004, 20
+	goto_if_gt DocksideCity_OnTransition_28
+DocksideCity_OnTransition_27:
 	end
 
 DocksideCity_OnTransition_2:
@@ -45,17 +45,32 @@ DocksideCity_OnTransition_7:
 	setflag FLAG_TEMP_2
 	goto DocksideCity_OnTransition_6
 
-DocksideCity_OnTransition_12:
-	setflag FLAG_TEMP_3
-	goto DocksideCity_OnTransition_11
+DocksideCity_OnTransition_8:
+	compare VAR_0x8003, 0
+	goto_if_ne DocksideCity_OnTransition_7
+	goto DocksideCity_OnTransition_6
 
-DocksideCity_OnTransition_17:
+DocksideCity_OnTransition_14:
+	setflag FLAG_TEMP_3
+	goto DocksideCity_OnTransition_13
+
+DocksideCity_OnTransition_15:
+	compare VAR_0x8003, 4
+	goto_if_ne DocksideCity_OnTransition_14
+	goto DocksideCity_OnTransition_13
+
+DocksideCity_OnTransition_21:
 	setflag FLAG_TEMP_4
-	goto DocksideCity_OnTransition_16
+	goto DocksideCity_OnTransition_20
 
 DocksideCity_OnTransition_22:
+	compare VAR_0x8003, 5
+	goto_if_ne DocksideCity_OnTransition_21
+	goto DocksideCity_OnTransition_20
+
+DocksideCity_OnTransition_28:
 	setflag FLAG_TEMP_5
-	goto DocksideCity_OnTransition_21
+	goto DocksideCity_OnTransition_27
 
 
 DocksideCity_EventScript_SailorMachoke::
@@ -133,6 +148,22 @@ DocksideCity_EventScript_Lesbian2EatingOut::
 	end
 
 
+DocksideCity_EventScript_Date1EatingOut::
+	applymovement 23, DocksideCity_EventScript_Date1EatingOut_Movement_0
+	msgbox DocksideCity_EventScript_Date1EatingOut_Text_0, MSGBOX_NPC
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_Date2EatingOut::
+	applymovement 24, DocksideCity_EventScript_Date2EatingOut_Movement_0
+	msgbox DocksideCity_EventScript_Date2EatingOut_Text_0, MSGBOX_NPC
+	waitmessage
+	closemessage
+	end
+
+
 DocksideCity_EventScript_MomEatingOut_Movement_0:
 	walk_in_place_right
 	step_end
@@ -143,6 +174,14 @@ DocksideCity_EventScript_Lesbian1EatingOut_Movement_0:
 
 DocksideCity_EventScript_Lesbian1EatingOut_Movement_1:
 	emote_heart
+	step_end
+
+DocksideCity_EventScript_Date1EatingOut_Movement_0:
+	walk_in_place_right
+	step_end
+
+DocksideCity_EventScript_Date2EatingOut_Movement_0:
+	walk_in_place_left
 	step_end
 
 DocksideCity_EventScript_MomEatingOut_Text_0:
@@ -175,6 +214,14 @@ DocksideCity_EventScript_Lesbian2EatingOut_Text_1:
 DocksideCity_EventScript_Lesbian2EatingOut_Text_2:
 	.string "Well… maybe there's just something\n"
 	.string "better about today?$"
+
+DocksideCity_EventScript_Date1EatingOut_Text_0:
+	.string "Hm… I'm getting kind of bored going here\n"
+	.string "each week…$"
+
+DocksideCity_EventScript_Date2EatingOut_Text_0:
+	.string "What? But this is the best pasta place\n"
+	.string "in the city!$"
 
 DocksideCity_Text_SailorMachoke:
 	.string "We're currently on our break. We decided\n"

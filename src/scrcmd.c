@@ -705,15 +705,13 @@ bool8 ScrCmd_dotimebasedevents(struct ScriptContext *ctx)
 
 bool8 ScrCmd_gettime(struct ScriptContext *ctx)
 {
-    MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", GetHour());
-    MgbaPrintf(MGBA_LOG_WARN, "Minute: %u", GetMinute());
-    MgbaPrintf(MGBA_LOG_WARN, "Second: %u", GetSecond());
-    gSpecialVar_0x8000 = GetHour();
-    gSpecialVar_0x8001 = GetMinute();
-    gSpecialVar_0x8002 = GetSecond();
-    MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", gSpecialVar_0x8000);
-    MgbaPrintf(MGBA_LOG_WARN, "Minute: %u", gSpecialVar_0x8001);
-    MgbaPrintf(MGBA_LOG_WARN, "Second: %u", gSpecialVar_0x8002);
+    gSpecialVar_0x8000 = GetYear();
+    gSpecialVar_0x8001 = GetMonth();
+    gSpecialVar_0x8002 = GetDay();
+    gSpecialVar_0x8003 = GetDayOfWeek();
+    gSpecialVar_0x8004 = GetHour();
+    gSpecialVar_0x8005 = GetMinute();
+    gSpecialVar_0x8006 = GetSecond();
     return FALSE;
 }
 
