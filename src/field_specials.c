@@ -4328,62 +4328,6 @@ void UseBlankMessageToCancelPokemonPic(void)
     ScriptMenu_HidePokemonPic();
 }
 
-void GetObjectPosition(u16* xPointer, u16* yPointer, u32 localId, u32 useTemplate)
-{
-    u32 objectId;
-    struct ObjectEvent* objEvent;
-
-    if (useTemplate)
-    {
-        const struct ObjectEventTemplate *objTemplate = FindObjectEventTemplateByLocalId(localId, gSaveBlock1Ptr->objectEventTemplates, gMapHeader.events->objectEventCount);
-        *xPointer = objTemplate->x;
-        *yPointer = objTemplate->y;
-        return;
-    }
-
-    objectId = GetObjectEventIdByLocalId(localId);
-    objEvent = &gObjectEvents[objectId];
-    *xPointer = objEvent->currentCoords.x - 7;
-    *yPointer = objEvent->currentCoords.y - 7;
-}
-
-bool32 CheckObjectAtXY(u32 x, u32 y)
-{
-    u32 i;
-
-    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
-    {
-        if (!gObjectEvents[i].active)
-            continue;
-
-        if (gObjectEvents[i].currentCoords.x != x)
-            continue;
-
-        if (gObjectEvents[i].currentCoords.y != y)
-            continue;
-        return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 CheckPartyHasSpecies(u32 givenSpecies)
-{
-    u32 partyIndex;
-
-    for (partyIndex = 0; partyIndex < CalculatePlayerPartyCount(); partyIndex++)
-        if (GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES) == givenSpecies)
-            return TRUE;
-
-    return FALSE;
-}
-
-void UseBlankMessageToCancelPokemonPic(void)
-{
-    u8 t = EOS;
-    AddTextPrinterParameterized(0, FONT_NORMAL, &t, 0, 1, 0, NULL);
-    ScriptMenu_HidePokemonPic();
-}
-
 void CheckZubatSpawning(void)
 {
     s16 playerX;
