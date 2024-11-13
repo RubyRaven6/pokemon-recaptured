@@ -359,7 +359,7 @@ const struct SpriteTemplate gSkyAttackBirdSpriteTemplate =
 // same as AnimEllipticalGust but centered on targets in a double battle
 static void AnimEllipticalGustCentered(struct Sprite *sprite)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
         InitSpritePosToAnimTargetsCentre(sprite, FALSE);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);

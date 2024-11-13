@@ -557,3 +557,4 @@ gSpecials::
 	def_special CheckZubatSpawning
 	def_special TeleportCamera
 	def_special ReturnCameraToPlayer
+	def_special UseBlankMessageToCancelPokemonPic
