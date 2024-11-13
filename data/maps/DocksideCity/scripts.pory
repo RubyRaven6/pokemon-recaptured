@@ -28,22 +28,24 @@ script DocksideCity_OnTransition{
         clearflag(FLAG_TEMP_2)
     }
 
-    if(var(VAR_WEEKDAY) == 0
+    if(var(VAR_WEEKDAY) == 4
     && var(VAR_HOUR) >= 14
     && var(VAR_HOUR) <= 15){
         clearflag(FLAG_TEMP_3)
     }
 
-    if(var(VAR_WEEKDAY) == 0
+    if(var(VAR_WEEKDAY) == 6
     && var(VAR_HOUR) >= 16
     && var(VAR_HOUR) <= 18){
         clearflag(FLAG_TEMP_4)
     }
 
     if((var(VAR_HOUR) < 17 || var(VAR_HOUR) > 20)){
-        debugprint("Before printing Temp 5")
         setflag(FLAG_TEMP_5)
-        debugprint("After printing Temp 5")
+    }
+
+    if((var(VAR_HOUR) < 12 || var(VAR_HOUR) > 17)){
+        setflag(FLAG_TEMP_6)
     }
     end
 }
@@ -137,15 +139,52 @@ script DocksideCity_EventScript_Date1EatingOut{
 
 script DocksideCity_EventScript_Date2EatingOut{
     applymovement(24, moves(walk_in_place_left, step_end))
-    msgbox(format("LAD: The lad seems to just eating his food in peace."), MSGBOX_NPC)
+    msgbox(format("LAD: The lad seems to just eating his food in peace."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
 }
 
 script DocksideCity_EventScript_Custodian{
-    faceplayer
     msgbox(format("CUSTODIAN: I'll tell ya, it's astounding how much mess people can leave around after they eat."), MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_GirlTuber{
+    msgbox(format("TUBER: I love the beach! It's so nice to swim in the water."), MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_BoyTuber{
+    msgbox(format("TUBER: We can't go too far into the water. It's fine though."), MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_TuberDad{
+    msgbox(format("SAILOR: My kids love coming to the beach, so I always come with them when I have time."), MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_BuriedGuy{
+    lock
+    msgbox(DocksideCity_Text_BuriedGuy, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    release
+    end
+}
+
+script DocksideCity_EventScript_LighthouseFan{
+    faceplayer
+    msgbox(format("SAILOR: Whenever I dock here, I love looking at the wide vision of the sea. It's such a majestic view."), MSGBOX_NPC)
     waitmessage
     closemessage
     end
@@ -170,5 +209,13 @@ text(local) DocksideCity_Text_SailorSpectator{
     format(
         "I'm just here to watch."
         "These two always spar and somehow always end up in a dead-tie."
+    )
+}
+
+text(local) DocksideCity_Text_BuriedGuy{
+    format(
+        "BURIED GUY: So, I asked my friends to bury me in the sand. As a bit, y'know?"
+        "I asked them to do it days ago. I think they forgot me here."
+        "It's not all too bad though. I still get food whenever the kids want some company."
     )
 }

@@ -16,10 +16,10 @@ DocksideCity_OnTransition_1:
 	compare VAR_0x8003, 0
 	goto_if_eq DocksideCity_OnTransition_9
 DocksideCity_OnTransition_6:
-	compare VAR_0x8003, 0
+	compare VAR_0x8003, 4
 	goto_if_eq DocksideCity_OnTransition_16
 DocksideCity_OnTransition_13:
-	compare VAR_0x8003, 0
+	compare VAR_0x8003, 6
 	goto_if_eq DocksideCity_OnTransition_23
 DocksideCity_OnTransition_20:
 	compare VAR_0x8004, 17
@@ -27,6 +27,11 @@ DocksideCity_OnTransition_20:
 	compare VAR_0x8004, 20
 	goto_if_gt DocksideCity_OnTransition_28
 DocksideCity_OnTransition_27:
+	compare VAR_0x8004, 12
+	goto_if_lt DocksideCity_OnTransition_33
+	compare VAR_0x8004, 17
+	goto_if_gt DocksideCity_OnTransition_33
+DocksideCity_OnTransition_32:
 	end
 
 DocksideCity_OnTransition_2:
@@ -78,10 +83,12 @@ DocksideCity_OnTransition_23:
 	goto DocksideCity_OnTransition_20
 
 DocksideCity_OnTransition_28:
-	debugprint DocksideCity_OnTransition_Text_2
 	setflag FLAG_TEMP_5
-	debugprint DocksideCity_OnTransition_Text_3
 	goto DocksideCity_OnTransition_27
+
+DocksideCity_OnTransition_33:
+	setflag FLAG_TEMP_6
+	goto DocksideCity_OnTransition_32
 
 
 DocksideCity_EventScript_SailorMachoke::
@@ -173,7 +180,52 @@ DocksideCity_EventScript_Date1EatingOut::
 
 DocksideCity_EventScript_Date2EatingOut::
 	applymovement 24, DocksideCity_EventScript_Date1EatingOut_Movement_1
-	msgbox DocksideCity_EventScript_Date2EatingOut_Text_0, MSGBOX_NPC
+	msgbox DocksideCity_EventScript_Date2EatingOut_Text_0, MSGBOX_DEFAULT
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_Custodian::
+	msgbox DocksideCity_EventScript_Custodian_Text_0, MSGBOX_NPC
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_GirlTuber::
+	msgbox DocksideCity_EventScript_GirlTuber_Text_0, MSGBOX_NPC
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_BoyTuber::
+	msgbox DocksideCity_EventScript_BoyTuber_Text_0, MSGBOX_NPC
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_TuberDad::
+	msgbox DocksideCity_EventScript_TuberDad_Text_0, MSGBOX_NPC
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_BuriedGuy::
+	lock
+	msgbox DocksideCity_Text_BuriedGuy, MSGBOX_DEFAULT
+	waitmessage
+	closemessage
+	release
+	end
+
+
+DocksideCity_EventScript_LighthouseFan::
+	faceplayer
+	msgbox DocksideCity_EventScript_LighthouseFan_Text_0, MSGBOX_NPC
 	waitmessage
 	closemessage
 	end
@@ -204,12 +256,6 @@ DocksideCity_OnTransition_Text_0:
 
 DocksideCity_OnTransition_Text_1:
 	.string "After printing Temp 1$"
-
-DocksideCity_OnTransition_Text_2:
-	.string "Before printing Temp 5$"
-
-DocksideCity_OnTransition_Text_3:
-	.string "After printing Temp 5$"
 
 DocksideCity_EventScript_MomEatingOut_Text_0:
 	.string "MOM: Jaiden! I told you to stop playing\n"
@@ -254,6 +300,29 @@ DocksideCity_EventScript_Date2EatingOut_Text_0:
 	.string "LAD: The lad seems to just eating his\n"
 	.string "food in peace.$"
 
+DocksideCity_EventScript_Custodian_Text_0:
+	.string "CUSTODIAN: I'll tell ya, it's astounding\n"
+	.string "how much mess people can leave around\l"
+	.string "after they eat.$"
+
+DocksideCity_EventScript_GirlTuber_Text_0:
+	.string "TUBER: I love the beach! It's so nice to\n"
+	.string "swim in the water.$"
+
+DocksideCity_EventScript_BoyTuber_Text_0:
+	.string "TUBER: We can't go too far into the\n"
+	.string "water. It's fine though.$"
+
+DocksideCity_EventScript_TuberDad_Text_0:
+	.string "SAILOR: My kids love coming to the\n"
+	.string "beach, so I always come with them when\l"
+	.string "I have time.$"
+
+DocksideCity_EventScript_LighthouseFan_Text_0:
+	.string "SAILOR: Whenever I dock here, I love\n"
+	.string "looking at the wide vision of the sea.\l"
+	.string "It's such a majestic view.$"
+
 DocksideCity_Text_SailorMachoke:
 	.string "We're currently on our break. We decided\n"
 	.string "to have a battle while we're at it! He\l"
@@ -272,3 +341,11 @@ DocksideCity_Text_SailorSpectator:
 	.string "I'm just here to watch. These two\n"
 	.string "always spar and somehow always end up\l"
 	.string "in a dead-tie.$"
+
+DocksideCity_Text_BuriedGuy:
+	.string "BURIED GUY: So, I asked my friends to\n"
+	.string "bury me in the sand. As a bit, y'know? I\l"
+	.string "asked them to do it days ago. I think\l"
+	.string "they forgot me here. It's not all too\l"
+	.string "bad though. I still get food whenever\l"
+	.string "the kids want some company.$"
