@@ -10,7 +10,7 @@ script WaitingMenu{
 }
 
 script(local) Add_Time{
-    dynmultichoice(1, 1, FALSE, 1, 0, DYN_MULTICHOICE_CB_NONE, "Add Day", "Add Hour")
+    dynmultichoice(1, 1, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Add Day", "Add Hour")
     switch(var(VAR_RESULT)){
         case 0:
             goto(Add_Days)
@@ -20,31 +20,61 @@ script(local) Add_Time{
 }
 
 script(local) Add_Days{
-    dynmultichoice(1, 1, FALSE, 1, 0, DYN_MULTICHOICE_CB_NONE, "Add 1", "Add 6", "Add 12")
+    dynmultichoice(1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, "Add 1", "Add 6", "Add 12")
     switch(var(VAR_RESULT)){
         case 0:
+            fadescreen(FADE_TO_BLACK)
             addday(1)
+            msgbox(format("You wait for a while…"))
+            waitmessage
+            closemessage
+            fadescreen(FADE_FROM_BLACK)
             end
         case 1:
+            fadescreen(FADE_TO_BLACK)
             addday(6)
+            msgbox(format("You wait for a while…"))
+            waitmessage
+            closemessage
+            fadescreen(FADE_FROM_BLACK)
             end
         case 2:
+            fadescreen(FADE_TO_BLACK)
             addday(12)
+            msgbox(format("You wait for a while…"))
+            waitmessage
+            closemessage
+            fadescreen(FADE_FROM_BLACK)
             end
     }
 }
 
 script(local) Add_Hours{
-    dynmultichoice(1, 1, FALSE, 1, 0, DYN_MULTICHOICE_CB_NONE, "Add 1", "Add 6", "Add 12")
+    dynmultichoice(1, 1, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Add 1", "Add 6", "Add 12")
     switch(var(VAR_RESULT)){
         case 0:
+            fadescreen(FADE_TO_BLACK)
             addhour(1)
+            msgbox(format("You wait for a while…"))
+            waitmessage
+            closemessage
+            fadescreen(FADE_FROM_BLACK)
             end
         case 1:
+            fadescreen(FADE_TO_BLACK)
             addhour(6)
+            msgbox(format("You wait for a while…"))
+            waitmessage
+            closemessage
+            fadescreen(FADE_FROM_BLACK)
             end
         case 2:
+            fadescreen(FADE_TO_BLACK)
             addhour(12)
+            msgbox(format("You wait for a while…"))
+            waitmessage
+            closemessage
+            fadescreen(FADE_FROM_BLACK)
             end
     }
 }

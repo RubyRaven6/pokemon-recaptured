@@ -16,7 +16,7 @@ WaitingMenu_3:
 
 
 Add_Time:
-	dynmultichoice 1, 1, FALSE, 1, 0, DYN_MULTICHOICE_CB_NONE, Add_Time_Text_0, Add_Time_Text_1
+	dynmultichoice 1, 1, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, Add_Time_Text_0, Add_Time_Text_1
 	switch VAR_RESULT
 	case 0, Add_Time_2
 	case 1, Add_Time_3
@@ -32,7 +32,7 @@ Add_Time_3:
 
 
 Add_Days:
-	dynmultichoice 1, 1, FALSE, 1, 0, DYN_MULTICHOICE_CB_NONE, Add_Days_Text_0, Add_Days_Text_1, Add_Days_Text_2
+	dynmultichoice 1, 1, FALSE, 3, 0, DYN_MULTICHOICE_CB_NONE, Add_Days_Text_0, Add_Days_Text_1, Add_Days_Text_2
 	switch VAR_RESULT
 	case 0, Add_Days_2
 	case 1, Add_Days_3
@@ -40,20 +40,35 @@ Add_Days:
 	return
 
 Add_Days_2:
+	fadescreen FADE_TO_BLACK
 	addday 1
+	msgbox Add_Days_Text_3
+	waitmessage
+	closemessage
+	fadescreen FADE_FROM_BLACK
 	end
 
 Add_Days_3:
+	fadescreen FADE_TO_BLACK
 	addday 6
+	msgbox Add_Days_Text_3
+	waitmessage
+	closemessage
+	fadescreen FADE_FROM_BLACK
 	end
 
 Add_Days_4:
+	fadescreen FADE_TO_BLACK
 	addday 12
+	msgbox Add_Days_Text_3
+	waitmessage
+	closemessage
+	fadescreen FADE_FROM_BLACK
 	end
 
 
 Add_Hours:
-	dynmultichoice 1, 1, FALSE, 1, 0, DYN_MULTICHOICE_CB_NONE, Add_Days_Text_0, Add_Days_Text_1, Add_Days_Text_2
+	dynmultichoice 1, 1, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, Add_Days_Text_0, Add_Days_Text_1, Add_Days_Text_2
 	switch VAR_RESULT
 	case 0, Add_Hours_2
 	case 1, Add_Hours_3
@@ -61,15 +76,30 @@ Add_Hours:
 	return
 
 Add_Hours_2:
+	fadescreen FADE_TO_BLACK
 	addhour 1
+	msgbox Add_Days_Text_3
+	waitmessage
+	closemessage
+	fadescreen FADE_FROM_BLACK
 	end
 
 Add_Hours_3:
+	fadescreen FADE_TO_BLACK
 	addhour 6
+	msgbox Add_Days_Text_3
+	waitmessage
+	closemessage
+	fadescreen FADE_FROM_BLACK
 	end
 
 Add_Hours_4:
+	fadescreen FADE_TO_BLACK
 	addhour 12
+	msgbox Add_Days_Text_3
+	waitmessage
+	closemessage
+	fadescreen FADE_FROM_BLACK
 	end
 
 
@@ -381,6 +411,9 @@ Add_Days_Text_1:
 
 Add_Days_Text_2:
 	.string "Add 12$"
+
+Add_Days_Text_3:
+	.string "You wait for a while…$"
 
 Set_Time_Text_0:
 	.string "Set Day$"

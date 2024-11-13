@@ -1,7 +1,7 @@
 mapscripts DocksideCity_House3_MapScripts {
 }
 
-script DocksideCity_EventScript_Chef{
+script DocksideCity_House3_EventScript_Chef{
     msgbox(format("GET OUTTA THE WAY! I'M COOKIN' OVA HERE!"), MSGBOX_NPC)
     waitmessage
     closemessage

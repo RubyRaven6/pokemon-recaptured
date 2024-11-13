@@ -4,32 +4,46 @@ const LOCALID_MACHOKE_TRAINER = 2
 const LOCALID_SPECTATOR = 3
 const LOCALID_MACHOKE = 4
 const LOCALID_POLIWRATH = 5
+const VAR_HOUR = VAR_0x8004
+const VAR_WEEKDAY = VAR_0x8003
 
 mapscripts DocksideCity_MapScripts {
     MAP_SCRIPT_ON_TRANSITION: DocksideCity_OnTransition
 }
 
 script DocksideCity_OnTransition{
-    setvar(VAR_DOCKED_CITY, 1)
     gettime
-    if(var(VAR_0x8004) < 12 || var(VAR_0x8004) > 14){
+    setflag(FLAG_TEMP_2)
+    setflag(FLAG_TEMP_3)
+    setflag(FLAG_TEMP_4)
+    if(var(VAR_HOUR) < 12 || var(VAR_HOUR) > 14){
+        debugprint("Before printing Temp 1")
         setflag(FLAG_TEMP_1)
+        debugprint("After printing Temp 1")
+        
     }
-    gettime
-    if((var(VAR_0x8004) < 10 || var(VAR_0x8004) > 12) && var(VAR_0x8003) != 0){
-        setflag(FLAG_TEMP_2)
+    if(var(VAR_WEEKDAY) == 0
+    && var(VAR_HOUR) >= 10
+    && var(VAR_HOUR) <= 12){
+        clearflag(FLAG_TEMP_2)
     }
-    gettime
-    if((var(VAR_0x8004) < 14 || var(VAR_0x8004) > 15) && var(VAR_0x8003) != 4){
-        setflag(FLAG_TEMP_3)
+
+    if(var(VAR_WEEKDAY) == 0
+    && var(VAR_HOUR) >= 14
+    && var(VAR_HOUR) <= 15){
+        clearflag(FLAG_TEMP_3)
     }
-    gettime
-    if((var(VAR_0x8004) < 16 || var(VAR_0x8004) > 17) && var(VAR_0x8003) != 5){
-        setflag(FLAG_TEMP_4)
+
+    if(var(VAR_WEEKDAY) == 0
+    && var(VAR_HOUR) >= 16
+    && var(VAR_HOUR) <= 18){
+        clearflag(FLAG_TEMP_4)
     }
-    gettime
-    if((var(VAR_0x8004) < 17 || var(VAR_0x8004) > 20)){
+
+    if((var(VAR_HOUR) < 17 || var(VAR_HOUR) > 20)){
+        debugprint("Before printing Temp 5")
         setflag(FLAG_TEMP_5)
+        debugprint("After printing Temp 5")
     }
     end
 }
@@ -63,21 +77,21 @@ script DocksideCity_EventScript_SailorSpectator{
 
 script DocksideCity_EventScript_MomEatingOut{
     applymovement(20, moves(walk_in_place_right))
-    msgbox(format("Jana! I told you to stop playing with your food!"), MSGBOX_DEFAULT)
+    msgbox(format("MOM: Jaiden! I told you to stop playing with your food!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
 }
 
 script DocksideCity_EventScript_SonEatingOut{
-    msgbox("Huh, this pasta is staler than usual…", MSGBOX_DEFAULT)
+    msgbox("SON: Huh, this pasta is staler than usual…", MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
 }
 
 script DocksideCity_EventScript_DaughterEatingOut{
-    msgbox("PAsta!", MSGBOX_DEFAULT)
+    msgbox("JAIDEN: PAsta!", MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
@@ -85,9 +99,9 @@ script DocksideCity_EventScript_DaughterEatingOut{
 
 script DocksideCity_EventScript_Lesbian1EatingOut{
     applymovement(19, moves(walk_in_place_right))
-    msgbox(format("Hey… thanks for saying yes. I was really looking forward to spending the day with you."), MSGBOX_DEFAULT)
+    msgbox(format("LASS: Hey… thanks for saying yes. I was really looking forward to spending the day with you."), MSGBOX_DEFAULT)
     applymovement(18, moves(walk_in_place_left))
-    msgbox(format("Of course! I always love spending time with you. You know that, right?"), MSGBOX_DEFAULT)
+    msgbox(format("LADY: Of course! I always love spending time with you. You know that, right?"), MSGBOX_DEFAULT)
     applymovement(19, moves(emote_heart))
     applymovement(18, moves(emote_heart))
     waitmessage
@@ -97,11 +111,11 @@ script DocksideCity_EventScript_Lesbian1EatingOut{
 
 script DocksideCity_EventScript_Lesbian2EatingOut{
     applymovement(18, moves(walk_in_place_left))
-    msgbox(format("Huh… this pasta tastes better than when I went here last time."), MSGBOX_DEFAULT)
+    msgbox(format("LADY: Huh… this pasta tastes better than when I went here last time."), MSGBOX_DEFAULT)
     applymovement(19, moves(walk_in_place_right))
-    msgbox(format("Really? I don't think they changed the recipe…"), MSGBOX_DEFAULT)
+    msgbox(format("LASS: Really? I don't think they changed the recipe…"), MSGBOX_DEFAULT)
     applymovement(18, moves(walk_in_place_left))
-    msgbox(format("Well… maybe there's just something better about today?"), MSGBOX_DEFAULT)
+    msgbox(format("LADY: Well… maybe there's just something better about today?"), MSGBOX_DEFAULT)
     applymovement(19, moves(emote_heart))
     applymovement(18, moves(emote_heart))
     waitmessage
@@ -111,7 +125,11 @@ script DocksideCity_EventScript_Lesbian2EatingOut{
 
 script DocksideCity_EventScript_Date1EatingOut{
     applymovement(23, moves(walk_in_place_right, step_end))
-    msgbox(format("Hm… I'm getting kind of bored going here each week…"), MSGBOX_NPC)
+    msgbox(format("LASS: Hm… I'm getting kind of bored going here each week…"), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    applymovement(24, moves(walk_in_place_left, step_end))
+    msgbox(format("LAD: What? But this is the best pasta place in the city!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
@@ -119,7 +137,15 @@ script DocksideCity_EventScript_Date1EatingOut{
 
 script DocksideCity_EventScript_Date2EatingOut{
     applymovement(24, moves(walk_in_place_left, step_end))
-    msgbox(format("What? But this is the best pasta place in the city!"), MSGBOX_NPC)
+    msgbox(format("LAD: The lad seems to just eating his food in peace."), MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_Custodian{
+    faceplayer
+    msgbox(format("CUSTODIAN: I'll tell ya, it's astounding how much mess people can leave around after they eat."), MSGBOX_NPC)
     waitmessage
     closemessage
     end

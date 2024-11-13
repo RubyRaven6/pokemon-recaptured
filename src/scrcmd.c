@@ -712,6 +712,8 @@ bool8 ScrCmd_gettime(struct ScriptContext *ctx)
     gSpecialVar_0x8004 = GetHour();
     gSpecialVar_0x8005 = GetMinute();
     gSpecialVar_0x8006 = GetSecond();
+    MgbaPrintf(MGBA_LOG_WARN, "Day of the week: %u", gSpecialVar_0x8003);
+    MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", gSpecialVar_0x8004);
     return FALSE;
 }
 
@@ -2662,5 +2664,26 @@ bool8 ScrCmd_checkplayerpersonality(struct ScriptContext *ctx)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->personalityType;
     MgbaPrintf(MGBA_LOG_WARN, "Var_Result is currently %u", gSpecialVar_Result);
+    return FALSE;
+}
+
+bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
+{
+    u16 num;
+    const u8 *str = (const u8*)ScriptReadWord(ctx);
+    u16 numOrVar = ScriptReadHalfword(ctx);
+
+    if (str != NULL)
+    {
+        if (numOrVar != 65535)
+        {
+            num = VarGet(numOrVar);
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S, %u", str, num);
+        }
+        else
+        {
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S", str);
+        }
+    }
     return FALSE;
 }

@@ -499,13 +499,13 @@ const u8 gText_Thursday[] = _("Thu.,");
 const u8 gText_Friday[] = _("Fri.,");
 
 const u8 *const gDayNameStringsTable[7] = {
-    gText_Saturday,
     gText_Sunday,
     gText_Monday,
     gText_Tuesday,
     gText_Wednesday,
     gText_Thursday,
     gText_Friday,
+    gText_Saturday,
 };
 
 static void ShowTimeWindow(void)
