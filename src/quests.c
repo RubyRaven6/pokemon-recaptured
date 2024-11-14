@@ -250,7 +250,7 @@ static const u8 sText_AZ[] = _(" A-Z");
 static const u16 HeartQuestSprites[3]={
 	SPECIES_DIANCIE,
 	OBJ_EVENT_GFX_WALLY,
-	OBJ_EVENT_GFX_PROF_BIRCH,
+	OBJ_EVENT_GFX_WALLY,
 };
 
 static const u8 HeartQuestSpriteTypes[3]={
@@ -260,13 +260,13 @@ static const u8 HeartQuestSpriteTypes[3]={
 };
 
 static const u16 LeagueQuestSprites[3]={
-	ITEM_ACRO_BIKE,
-	OBJ_EVENT_GFX_WALLY,
 	OBJ_EVENT_GFX_PROF_BIRCH,
+	OBJ_EVENT_GFX_PROF_BIRCH,
+	OBJ_EVENT_GFX_WALLY,
 };
 
 static const u8 LeagueQuestSpriteTypes[3]={
-	ITEM,
+	OBJECT,
 	OBJECT,
 	OBJECT,
 };
@@ -480,24 +480,26 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 	      OBJECT,
 	      sText_Found
 	),
-};
 
-static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
-{
-		sub_quest(
+	sub_quest(
 			20,
-			gText_SubQuest2_Name1,
-			gText_SubQuest2_Desc1,
+			gText_SubQuest1_Name21,
+			gText_SubQuest1_Desc21,
 			gText_SideQuestMap21,
 			OBJ_EVENT_GFX_WALLY,
 			OBJECT,
 			sText_Found
 	),
+};
+
+static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
+{
+		
 
 	sub_quest(
 			21,
-			gText_SubQuest2_Name2,
-			gText_SubQuest2_Desc2,
+			gText_SubQuest2_Name1,
+			gText_SubQuest2_Desc1,
 			gText_SideQuestMap22,
 			OBJ_EVENT_GFX_WALLY,
 			OBJECT,
@@ -506,8 +508,8 @@ static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
 
 	sub_quest(
 			22,
-			gText_SubQuest2_Name3,
-			gText_SubQuest2_Desc3,
+			gText_SubQuest2_Name2,
+			gText_SubQuest2_Desc2,
 			gText_SideQuestMap23,
 			OBJ_EVENT_GFX_WALLY,
 			OBJECT,
@@ -516,8 +518,8 @@ static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
 
 	sub_quest(
 			23,
-			gText_SubQuest2_Name4,
-			gText_SubQuest2_Desc4,
+			gText_SubQuest2_Name3,
+			gText_SubQuest2_Desc3,
 			gText_SideQuestMap24,
 			OBJ_EVENT_GFX_WALLY,
 			OBJECT,
@@ -526,8 +528,8 @@ static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
 
 	sub_quest(
 			24,
-			gText_SubQuest2_Name5,
-			gText_SubQuest2_Desc5,
+			gText_SubQuest2_Name4,
+			gText_SubQuest2_Desc4,
 			gText_SideQuestMap25,
 			OBJ_EVENT_GFX_WALLY,
 			OBJECT,
@@ -536,8 +538,8 @@ static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
 
 	sub_quest(
 			25,
-			gText_SubQuest2_Name6,
-			gText_SubQuest2_Desc6,
+			gText_SubQuest2_Name5,
+			gText_SubQuest2_Desc5,
 			gText_SideQuestMap26,
 			OBJ_EVENT_GFX_WALLY,
 			OBJECT,
@@ -546,8 +548,8 @@ static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
 
 	sub_quest(
 			26,
-			gText_SubQuest2_Name7,
-			gText_SubQuest2_Desc7,
+			gText_SubQuest2_Name6,
+			gText_SubQuest2_Desc6,
 			gText_SideQuestMap27,
 			OBJ_EVENT_GFX_WALLY,
 			OBJECT,
@@ -556,8 +558,8 @@ static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
 
 	sub_quest(
 			27,
-			gText_SubQuest2_Name8,
-			gText_SubQuest2_Desc8,
+			gText_SubQuest2_Name7,
+			gText_SubQuest2_Desc7,
 			gText_SideQuestMap28,
 			OBJ_EVENT_GFX_WALLY,
 			OBJECT,
@@ -566,6 +568,16 @@ static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
 
 	sub_quest(
 			28,
+			gText_SubQuest2_Name8,
+			gText_SubQuest2_Desc8,
+			gText_SideQuestMap29,
+			OBJ_EVENT_GFX_WALLY,
+			OBJECT,
+			sText_Found
+	),
+
+	sub_quest(
+			29,
 			gText_SubQuest2_Name9,
 			gText_SubQuest2_Desc9,
 			gText_SideQuestMap29,
@@ -594,7 +606,7 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 	      OBJ_EVENT_GFX_WALLY,
 	      OBJECT,
 	      sSubQuests1,
-	      QUEST_1_SUB_COUNT
+	      NULL
 	),
 	side_quest(
 	      gText_SideQuestName_2,

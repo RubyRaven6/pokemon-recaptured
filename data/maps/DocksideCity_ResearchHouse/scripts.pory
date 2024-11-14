@@ -2,17 +2,48 @@ mapscripts DocksideCity_ResearchHouse_MapScripts {
     
 }
 
-script DocksideCity_ResearchHouse_ProfNarra {
-    msgbox(DocksideCity_ResearchHouse_Text_WhoAreYou, MSGBOX_DEFAULT)
-    waitmessage
-    closemessage
-    fadescreen(FADE_TO_BLACK)
-    msgbox(format("Prof. Narra takes a few minutes to explain what a Pokédex is to you."), MSGBOX_DEFAULT)
-    waitmessage
-    closemessage
-    fadescreen(FADE_FROM_BLACK)
-    msgbox(DocksideCity_ResearchHouse_Text_Pokedex, MSGBOX_DEFAULT)
+script DocksideCity_ResearchHouse_EventScript_ProfNarra {
+    switch(var(VAR_DOCKSIDE_CITY_STATE)){
+        case 0:
+            faceplayer
+            msgbox(DocksideCity_ResearchHouse_Text_WhoAreYou, MSGBOX_DEFAULT)
+            waitmessage
+            closemessage
+            fadescreen(FADE_TO_BLACK)
+            msgbox(format("Prof. Narra takes a few minutes to explain what a Pokédex is to you."), MSGBOX_DEFAULT)
+            waitmessage
+            closemessage
+            fadescreen(FADE_FROM_BLACK)
+            msgbox(DocksideCity_ResearchHouse_Text_Pokedex, MSGBOX_DEFAULT)
+            waitmessage
+            closemessage
+            setvar(VAR_DOCKSIDE_CITY_STATE, 1)
+            playse(SE_PIN)
+            msgbox(format("Your quest, The Aurelious League, has been updated!"), MSGBOX_DEFAULT)
+            setvar(VAR_LEAGUE_QUEST, 1)
+            waitmessage
+            closemessage
+            end
+        case 1:
+            msgbox(format("Have you caught a Pokémon yet? I can't trust you with a Pokédex if not."), MSGBOX_NPC)
+            waitmessage
+            closemessage
+            end
+    }
+}
 
+script DocksideCity_ResearchHouse_EventScript_Aide1{
+    msgbox(DocksideCity_ResearchHouse_Text_WhoIsNarra, MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_ResearchHouse_EventScript_Aide2{
+    msgbox(format("The aide seems to be drowned in work. Best not to disturb him."), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    end
 }
 
 text(local) DocksideCity_ResearchHouse_Text_WhoAreYou{
@@ -28,6 +59,16 @@ text(local) DocksideCity_ResearchHouse_Text_WhoAreYou{
 
 text(local) DocksideCity_ResearchHouse_Text_Pokedex{
     format(
-        "There, I hope that explanation was succinct enough. Now, with all of that in mind, I have an assignment for you to do."
+        "There, I hope that explanation was succinct enough. Now, with all of that in mind, I have an assignment for you to do.\p"
+        "If you can prove that you can catch yourself a Pokémon on your own, I'll consider you one of my research aides.\p"
+        "Not just any Pokémon though: I'd like for you to return a Drilbur, which is one of rare Pokémon in the nearby Route 1.\p"
+        "Once you prove your determination to me, I'll grant you a Pokédex."
+    )
+}
+
+text(local) DocksideCity_ResearchHouse_Text_WhoIsNarra{
+    format(
+        "Prof. Narra is one of the leading expert in Pokémon medicine. His father was one of the first inventors of potions.\p"
+        "Because he likes working in the lab more, we're actually the ones that get sent out do more fieldwork…"
     )
 }

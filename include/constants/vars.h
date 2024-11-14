@@ -98,8 +98,8 @@
 #define VAR_TIME_MENU                                    0x404E // Used for the Time Start Menu
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
 //town vars begin
-#define VAR_FLOTT_TOWN_STATE                             0x4050 //FLott Town state guide in scripts.inc for flott town
-#define VAR_DOCKSIDE_CITY_STATE                          0x4051
+#define VAR_FLOTT_TOWN_STATE                             0x4050 //Flott Town state guide in its scripts.pory
+#define VAR_DOCKSIDE_CITY_STATE                          0x4051 //Dockside City state guide in its scripts.pory
 #define VAR_DEWFORD_TOWN_STATE                           0x4052 // Unused Var
 #define VAR_LAVARIDGE_TOWN_STATE                         0x4053
 #define VAR_CURRENT_SECRET_BASE                          0x4054 // was probably allocated for VAR_FALLARBOR_TOWN_STATE at one point

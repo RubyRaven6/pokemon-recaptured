@@ -10,25 +10,25 @@ gText_Diancie_ChooseApperance::
 	.string "What do you look like?"
 	.string "$"
 
+
+gText_Diancie_Resonate::
+	.string "Can you tell me more about yourself?\n"
+	.string "What do you resonate with the most?\p"
+	.string "$"
+
 gText_Birch_WhatAUniqueAura::
 	.string "Wow… what a unique aura you have. What\n"
 	.string "about your name?"
 	.string "$"
 
-gText_Diancie_Resonate::
-	.string "Can you tell me more about yourself?\n"
-	.string "What do you resonate with the most?"
-	.string "$"
-
 gText_Birch_SoItsPlayer::
-	.string "Is it {PLAYER}{KUN}?"
+	.string "Is it {PLAYER}{KUN}?\p"
 	.string "$"
 
 gText_Diancie_CanIMeetYou::
 	.string "I see… What a beautiful name! Can we\n"
 	.string "meet, {PLAYER}? I'd love to know more…\p"
 	.string "$"
-
 
 gText_Birch_Welcome::
 	.string "Hi! Sorry to keep you waiting!\p"

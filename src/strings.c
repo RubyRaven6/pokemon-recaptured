@@ -1632,7 +1632,7 @@ const u8 gText_SideQuestName_30[] = _("Side Quest 30");
 ////////////Main Quests////////////
 
 //Hearts and Diamonds Strings
-const u8 gText_HeartsQuestDesc_1[] = _("Find a way to meet\nDiancie again!");
+const u8 gText_HeartsQuestDesc_1[] = _("Find a way to meet Diancie again!");
 const u8 gText_HeartsQuestDesc_2[] = _("Content 2");
 const u8 gText_HeartsQuestDesc_3[] = _("Content 3");
 
@@ -1643,8 +1643,8 @@ const u8 *const gTable_HeartQuestStrings[3] = {
 };
 
 //Aurelious League Strings
-const u8 gText_LeagueQuestDesc_1[] = _("Find Professor Narra at\nDockside City!");
-const u8 gText_LeagueQuestDesc_2[] = _("Content 2");
+const u8 gText_LeagueQuestDesc_1[] = _("Find Professor Narra at Dockside\nCity!");
+const u8 gText_LeagueQuestDesc_2[] = _("Catch a Pokémon for Professor Narra!");
 const u8 gText_LeagueQuestDesc_3[] = _("Content 3");
 
 const u8 *const gTable_LeagueQuestStrings[3] = {
@@ -1729,8 +1729,8 @@ const u8 *const gTable_HeartQuestMaps[3] = {
     gText_HeartsQuestMap_3,
 };
 
-const u8 gText_LeagueQuestMap_1[] = _("Oasis Town");
-const u8 gText_LeagueQuestMap_2[] = _("Town 2");
+const u8 gText_LeagueQuestMap_1[] = _("Dockside City");
+const u8 gText_LeagueQuestMap_2[] = _("Route 1");
 const u8 gText_LeagueQuestMap_3[] = _("Town 3");
 
 const u8 *const gTable_LeagueQuestMaps[3] = {

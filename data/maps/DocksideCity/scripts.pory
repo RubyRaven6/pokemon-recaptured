@@ -7,6 +7,10 @@
 //6 = Beach family
 //7 = Garden lady & pokemon
 
+//Var Guide for VAR_DOCKSIDE_CITY_STATE
+// 0 = Base
+// 1 = Talked to Professor Narra
+
 const LOCALID_POLIWRATH_TRAINER = 1
 const LOCALID_MACHOKE_TRAINER = 2
 const LOCALID_SPECTATOR = 3
