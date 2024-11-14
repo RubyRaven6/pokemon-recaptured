@@ -1,4 +1,12 @@
-//Temp Flag 1
+//Temp Flag Guide
+//1 = Sailors
+//2 = Family eating out
+//3 = Lesbians
+//4 = Het couple
+//5 = Janitor
+//6 = Beach family
+//7 = Garden lady & pokemon
+
 const LOCALID_POLIWRATH_TRAINER = 1
 const LOCALID_MACHOKE_TRAINER = 2
 const LOCALID_SPECTATOR = 3
@@ -16,6 +24,7 @@ script DocksideCity_OnTransition{
     setflag(FLAG_TEMP_2)
     setflag(FLAG_TEMP_3)
     setflag(FLAG_TEMP_4)
+    setflag(FLAG_TEMP_7)
     if(var(VAR_HOUR) < 12 || var(VAR_HOUR) > 14){
         debugprint("Before printing Temp 1")
         setflag(FLAG_TEMP_1)
@@ -44,8 +53,14 @@ script DocksideCity_OnTransition{
         setflag(FLAG_TEMP_5)
     }
 
-    if((var(VAR_HOUR) < 12 || var(VAR_HOUR) > 17)){
+    if((var(VAR_HOUR) < 12 || var(VAR_HOUR) > 18)){
         setflag(FLAG_TEMP_6)
+    }
+
+    if(var(VAR_WEEKDAY) == 0
+    && var(VAR_HOUR) >= 10
+    && var(VAR_HOUR) <= 13){
+        clearflag(FLAG_TEMP_7)
     }
     end
 }
@@ -185,6 +200,42 @@ script DocksideCity_EventScript_BuriedGuy{
 script DocksideCity_EventScript_LighthouseFan{
     faceplayer
     msgbox(format("SAILOR: Whenever I dock here, I love looking at the wide vision of the sea. It's such a majestic view."), MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_GardenLady{
+    faceplayer
+    msgbox(format("LADY: This is a community garden for the city. I like to take care of it with my Pokémon when I have the time."), MSGBOX_NPC)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_ResearchHouse_Sign{
+    msgbox(format("Prof. Narra's Research House"), MSGBOX_SIGN)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_Shipyard_Sign{
+    msgbox(format("Dockside Shipyard"), MSGBOX_SIGN)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_Harbor_Sign{
+    msgbox(format("Dockside Harbor"), MSGBOX_SIGN)
+    waitmessage
+    closemessage
+    end
+}
+
+script DocksideCity_EventScript_Sign{
+    msgbox(format("Dockside City\pWhere dreams meet the sea."), MSGBOX_SIGN)
     waitmessage
     closemessage
     end

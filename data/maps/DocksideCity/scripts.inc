@@ -8,6 +8,7 @@ DocksideCity_OnTransition::
 	setflag FLAG_TEMP_2
 	setflag FLAG_TEMP_3
 	setflag FLAG_TEMP_4
+	setflag FLAG_TEMP_7
 	compare VAR_0x8004, 12
 	goto_if_lt DocksideCity_OnTransition_2
 	compare VAR_0x8004, 14
@@ -29,9 +30,12 @@ DocksideCity_OnTransition_20:
 DocksideCity_OnTransition_27:
 	compare VAR_0x8004, 12
 	goto_if_lt DocksideCity_OnTransition_33
-	compare VAR_0x8004, 17
+	compare VAR_0x8004, 18
 	goto_if_gt DocksideCity_OnTransition_33
 DocksideCity_OnTransition_32:
+	compare VAR_0x8003, 0
+	goto_if_eq DocksideCity_OnTransition_40
+DocksideCity_OnTransition_37:
 	end
 
 DocksideCity_OnTransition_2:
@@ -89,6 +93,20 @@ DocksideCity_OnTransition_28:
 DocksideCity_OnTransition_33:
 	setflag FLAG_TEMP_6
 	goto DocksideCity_OnTransition_32
+
+DocksideCity_OnTransition_38:
+	clearflag FLAG_TEMP_7
+	goto DocksideCity_OnTransition_37
+
+DocksideCity_OnTransition_39:
+	compare VAR_0x8004, 13
+	goto_if_le DocksideCity_OnTransition_38
+	goto DocksideCity_OnTransition_37
+
+DocksideCity_OnTransition_40:
+	compare VAR_0x8004, 10
+	goto_if_ge DocksideCity_OnTransition_39
+	goto DocksideCity_OnTransition_37
 
 
 DocksideCity_EventScript_SailorMachoke::
@@ -231,6 +249,42 @@ DocksideCity_EventScript_LighthouseFan::
 	end
 
 
+DocksideCity_EventScript_GardenLady::
+	faceplayer
+	msgbox DocksideCity_EventScript_GardenLady_Text_0, MSGBOX_NPC
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_ResearchHouse_Sign::
+	msgbox DocksideCity_EventScript_ResearchHouse_Sign_Text_0, MSGBOX_SIGN
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_Shipyard_Sign::
+	msgbox DocksideCity_EventScript_Shipyard_Sign_Text_0, MSGBOX_SIGN
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_Harbor_Sign::
+	msgbox DocksideCity_EventScript_Harbor_Sign_Text_0, MSGBOX_SIGN
+	waitmessage
+	closemessage
+	end
+
+
+DocksideCity_EventScript_Sign::
+	msgbox DocksideCity_EventScript_Sign_Text_0, MSGBOX_SIGN
+	waitmessage
+	closemessage
+	end
+
+
 DocksideCity_EventScript_MomEatingOut_Movement_0:
 	walk_in_place_right
 	step_end
@@ -322,6 +376,24 @@ DocksideCity_EventScript_LighthouseFan_Text_0:
 	.string "SAILOR: Whenever I dock here, I love\n"
 	.string "looking at the wide vision of the sea.\l"
 	.string "It's such a majestic view.$"
+
+DocksideCity_EventScript_GardenLady_Text_0:
+	.string "LADY: This is a community garden for\n"
+	.string "the city. I like to take care of it with\l"
+	.string "my Pokémon when I have the time.$"
+
+DocksideCity_EventScript_ResearchHouse_Sign_Text_0:
+	.string "Prof. Narra's Research House$"
+
+DocksideCity_EventScript_Shipyard_Sign_Text_0:
+	.string "Dockside Shipyard$"
+
+DocksideCity_EventScript_Harbor_Sign_Text_0:
+	.string "Dockside Harbor$"
+
+DocksideCity_EventScript_Sign_Text_0:
+	.string "Dockside City\p"
+	.string "Where dreams meet the sea.$"
 
 DocksideCity_Text_SailorMachoke:
 	.string "We're currently on our break. We decided\n"

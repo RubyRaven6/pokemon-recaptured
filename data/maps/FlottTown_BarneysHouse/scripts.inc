@@ -69,7 +69,6 @@ FlottTown_BarneysHouse_Barney_4:
 	waitmessage
 	closemessage
 	setflag FLAG_SYS_QUEST_MENU_GET
-	giveitem ITEM_JOURNAL, 1
 	closemessage
 	msgbox FlottTown_BarneysHouse_Text_BrandNewAdventure, MSGBOX_DEFAULT
 	giveitem ITEM_SS_TICKET, 1

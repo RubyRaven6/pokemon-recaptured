@@ -1,0 +1,7 @@
+mapscripts DocksideCity_ResearchHouse_MapScripts {
+    
+}
+
+script DocksideCity_ResearchHouse_ProfNarra {
+    msgbox("Hi.", MSGBOX_NPC)
+}
