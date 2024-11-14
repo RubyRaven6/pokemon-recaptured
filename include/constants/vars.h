@@ -47,11 +47,11 @@
 #define VAR_OBJ_GFX_ID_F           0x401F
 
 // general purpose vars
-#define VAR_RECYCLE_GOODS                                0x4020
+#define VAR_DOCKED_CITY                                  0x4020 // 0 = Flott Town, 1 = Dockside City, 3 = Ocean City, 4=Mountport
 #define VAR_REPEL_STEP_COUNT                             0x4021
 #define VAR_ICE_STEP_COUNT                               0x4022
 #define VAR_STARTER_MON                                  0x4023 // 0 = Fury/Mankey, 1 = Mischief/Tinkatink, 2 = Friendship/Teddiursa
-#define VAR_MIRAGE_RND_H                                 0x4024
+#define VAR_ZUBAT_DIR                                    0x4024 // Checks intro's Zubat direction
 #define VAR_MIRAGE_RND_L                                 0x4025
 #define VAR_SECRET_BASE_MAP                              0x4026
 #define VAR_CYCLING_ROAD_RECORD_COLLISIONS               0x4027
@@ -95,10 +95,11 @@
 #define VAR_POKELOT_RND1                                 0x404B
 #define VAR_POKELOT_RND2                                 0x404C
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
-#define VAR_TIME_MENU                                0x404E // Unused Var
+#define VAR_TIME_MENU                                    0x404E // Used for the Time Start Menu
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
-#define VAR_LITTLEROOT_TOWN_STATE                        0x4050
-#define VAR_OLDALE_TOWN_STATE                            0x4051
+//town vars begin
+#define VAR_FLOTT_TOWN_STATE                             0x4050 //FLott Town state guide in scripts.inc for flott town
+#define VAR_DOCKSIDE_CITY_STATE                          0x4051
 #define VAR_DEWFORD_TOWN_STATE                           0x4052 // Unused Var
 #define VAR_LAVARIDGE_TOWN_STATE                         0x4053
 #define VAR_CURRENT_SECRET_BASE                          0x4054 // was probably allocated for VAR_FALLARBOR_TOWN_STATE at one point
@@ -112,9 +113,11 @@
 #define VAR_LILYCOVE_CITY_STATE                          0x405C // Unused Var
 #define VAR_MOSSDEEP_CITY_STATE                          0x405D
 #define VAR_SOOTOPOLIS_CITY_STATE                        0x405E
+//town vars end
+//route vars begin
 #define VAR_EVER_GRANDE_CITY_STATE                       0x405F // Unused Var
 #define VAR_ROUTE101_STATE                               0x4060
-#define VAR_FLOTT_TOWN_STATE                             0x4061
+#define VAR_UNUSED_0x4061                                0x4061
 #define VAR_ROUTE103_STATE                               0x4062 // Unused Var
 #define VAR_ROUTE104_STATE                               0x4063
 #define VAR_ROUTE105_STATE                               0x4064 // Unused Var
@@ -131,6 +134,7 @@
 #define VAR_ROUTE116_STATE                               0x406F
 #define VAR_ROUTE117_STATE                               0x4070 // Unused Var
 #define VAR_ROUTE118_STATE                               0x4071
+//route vars end
 #define VAR_ROUTE119_STATE                               0x4072
 #define VAR_ROUTE120_STATE                               0x4073 // Unused Var
 #define VAR_ROUTE121_STATE                               0x4074
@@ -147,8 +151,10 @@
 #define VAR_ROUTE132_STATE                               0x407F // Unused Var
 #define VAR_ROUTE133_STATE                               0x4080 // Unused Var
 #define VAR_ROUTE134_STATE                               0x4081 // Unused Var
-#define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
-#define VAR_UNUSED_0x4083                                0x4083 // Unused Var
+//route vars end
+//complex quests vars begin
+#define VAR_HEARTS_QUEST                                 0x4082
+#define VAR_LEAGUE_QUEST                                 0x4083 // Unused Var
 #define VAR_BIRCH_LAB_STATE                              0x4084
 #define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
 #define VAR_CONTEST_HALL_STATE                           0x4086
@@ -177,6 +183,7 @@
 #define VAR_UNUSED_0x409D                                0x409D // Unused Var
 #define VAR_MOSSDEEP_SPACE_CENTER_STAIR_GUARD_STATE      0x409E
 #define VAR_MOSSDEEP_SPACE_CENTER_STATE                  0x409F
+//complex quest vars end
 #define VAR_SLATEPORT_HARBOR_STATE                       0x40A0
 #define VAR_UNUSED_0x40A1                                0x40A1 // Unused var
 #define VAR_SEAFLOOR_CAVERN_STATE                        0x40A2
@@ -267,12 +274,12 @@
 #define VAR_UNUSED_0x40F7                                0x40F7 // Unused Var
 #define VAR_UNUSED_0x40F8                                0x40F8 // Unused Var
 #define VAR_UNUSED_0x40F9                                0x40F9 // Unused Var
-#define VAR_DOCKED_CITY                                  0x40FA // 0 = Flott Town, 1 = Dockside City, 3 = Ocean City, 4=Mountport
-#define VAR_ZUBAT_DIR                                    0x40FB // Checks intro's Zubat direction
-#define VAR_UNUSED_0x40FC                                0x40FC // For Starter's Spawn X Coordinate
-#define VAR_UNUSED_0x40FD                                0x40FD // For Starter's Spawn Y Coordinate
-#define VAR_UNUSED_0x40FE                                0x40FE // For intro's Zubat X coordinate
-#define VAR_UNUSED_0x40FF                                0x40FF // For intro's Zubat Y coordinate
+#define VAR_UNUSED_0x40FA                                0x40FA // Unused
+#define VAR_MIRAGE_RND_H                                 0x40FB 
+#define VAR_UNUSED_0x40FC                                0x40FC // Unused
+#define VAR_UNUSED_0x40FD                                0x40FD // Unused
+#define VAR_UNUSED_0x40FE                                0x40FE // Unused
+#define VAR_UNUSED_0x40FF                                0x40FF // Unused
 
 #define VARS_END                                         0x40FF
 #define VARS_COUNT                                       (VARS_END - VARS_START + 1)

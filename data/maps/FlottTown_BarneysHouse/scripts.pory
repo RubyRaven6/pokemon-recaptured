@@ -67,7 +67,7 @@ script FlottTown_BarneysHouse_Barney{
             closemessage
             questmenu(QUEST_MENU_SET_ACTIVE, 0)
             questmenu(QUEST_MENU_SET_ACTIVE, 1)
-            startquest(QUEST_AURELIOUS_LEAGUE)
+            startquest(QUEST_2_AURELIOUS_LEAGUE)
             openquestmenu
             clearflag(FLAG_BOAT_DEPARTS)
             clearflag(FLAG_FLOTT_HARBOR_SAILOR)

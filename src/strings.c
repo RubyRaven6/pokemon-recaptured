@@ -1628,8 +1628,34 @@ const u8 gText_SideQuestName_29[] = _("Side Quest 29");
 const u8 gText_SideQuestName_30[] = _("Side Quest 30");
 
 //descriptions
-const u8 gText_SideQuestDesc_1[] = _("Find Diancie!");
-const u8 gText_SideQuestDesc_2[] = _("Challenge the Aurelious Pokémon\nLeague!");
+
+////////////Main Quests////////////
+
+//Hearts and Diamonds Strings
+const u8 gText_HeartsQuestDesc_1[] = _("Find a way to meet\nDiancie again!");
+const u8 gText_HeartsQuestDesc_2[] = _("Content 2");
+const u8 gText_HeartsQuestDesc_3[] = _("Content 3");
+
+const u8 *const gTable_HeartQuestStrings[3] = {
+    gText_HeartsQuestDesc_1,
+    gText_HeartsQuestDesc_2,
+    gText_HeartsQuestDesc_3,
+};
+
+//Aurelious League Strings
+const u8 gText_LeagueQuestDesc_1[] = _("Find Professor Narra at\nDockside City!");
+const u8 gText_LeagueQuestDesc_2[] = _("Content 2");
+const u8 gText_LeagueQuestDesc_3[] = _("Content 3");
+
+const u8 *const gTable_LeagueQuestStrings[3] = {
+    gText_LeagueQuestDesc_1,
+    gText_LeagueQuestDesc_2,
+    gText_LeagueQuestDesc_3,
+};
+
+////////////Side Quests////////////
+const u8 gText_SideQuestDesc_1[] = _("Description 1");
+const u8 gText_SideQuestDesc_2[] = _("Description 2");
 const u8 gText_SideQuestDesc_3[] = _("Description 3");
 const u8 gText_SideQuestDesc_4[] = _("Description 4");
 const u8 gText_SideQuestDesc_5[] = _("Description 5");
@@ -1691,9 +1717,34 @@ const u8 gText_SideQuestDoneDesc_28[] = _("Completed Quest 28");
 const u8 gText_SideQuestDoneDesc_29[] = _("Completed Quest 29");
 const u8 gText_SideQuestDoneDesc_30[] = _("Completed Quest 30");
 
-//map
-const u8 gText_SideQuestMap1[] = _("?????");
-const u8 gText_SideQuestMap2[] = _("Dockside City");
+//maps
+//main quest maps
+const u8 gText_HeartsQuestMap_1[] = _("?????");
+const u8 gText_HeartsQuestMap_2[] = _("Route 1");
+const u8 gText_HeartsQuestMap_3[] = _("Oasis Town");
+
+const u8 *const gTable_HeartQuestMaps[3] = {
+    gText_HeartsQuestMap_1,
+    gText_HeartsQuestMap_2,
+    gText_HeartsQuestMap_3,
+};
+
+const u8 gText_LeagueQuestMap_1[] = _("Oasis Town");
+const u8 gText_LeagueQuestMap_2[] = _("Town 2");
+const u8 gText_LeagueQuestMap_3[] = _("Town 3");
+
+const u8 *const gTable_LeagueQuestMaps[3] = {
+    gText_LeagueQuestMap_1,
+    gText_LeagueQuestMap_2,
+    gText_LeagueQuestMap_3,
+};
+//defaults
+
+const u8 gText_SideQuestMap1[] = _("Map 1");
+const u8 gText_SideQuestMap2[] = _("Map 2");
+
+
+//sidequest maps
 const u8 gText_SideQuestMap3[] = _("Map 3");
 const u8 gText_SideQuestMap4[] = _("Map 4");
 const u8 gText_SideQuestMap5[] = _("Map 5");
@@ -1787,5 +1838,7 @@ const u8 gText_SubQuest2_Desc6[] = _("Description Sub 6");
 const u8 gText_SubQuest2_Desc7[] = _("Description Sub 7");
 const u8 gText_SubQuest2_Desc8[] = _("Description Sub 8");
 const u8 gText_SubQuest2_Desc9[] = _("Description Sub 9");
+
 const u8 gText_Relearn[] = _("{START_BUTTON} RELEARN"); // future note: don't decap this, because it mimics the summary screen BG graphics which will not get decapped
 const u8 gText_Rename[] = _("RENAME");
+

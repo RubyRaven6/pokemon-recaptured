@@ -35,6 +35,7 @@
 #include "pokemon_icon.h"
 
 #include "random.h"
+#include "debug.h"
 
 #define tPageItems      data[4]
 #define tItemPcParam    data[6]
@@ -143,6 +144,8 @@ static void PrintQuestLocation(s32 questId);
 static void GenerateQuestFlavorText(s32 questId);
 static void UpdateQuestFlavorText(s32 questId);
 static void PrintQuestFlavorText(s32 questId);
+static const u8 *GetQuestDesc(s32 questId);
+static const u8 *GetQuestLocation(s32 questId);
 
 static bool8 IsQuestUnlocked(s32 questId);
 static bool8 IsQuestActiveState(s32 questId);
@@ -155,6 +158,8 @@ static void DetermineSpriteType(s32 questId);
 static void QuestMenu_CreateSprite(u16 itemId, u8 idx, u8 spriteType);
 static void ResetSpriteState(void);
 static void QuestMenu_DestroySprite(u8 idx);
+static u16 GetSpriteId_Complex(s32 questId);
+static u8 GetSpriteType_Complex(s32 questId);
 
 static void GenerateStateAndPrint(u8 windowId, u32 itemId, u8 y);
 static u8 GenerateSubquestState(u8 questId);
@@ -237,6 +242,37 @@ static const u8 sText_DotSpace[] = _(". ");
 static const u8 sText_Close[] = _("Close");
 static const u8 sText_ColorGreen[] = _("{COLOR}{GREEN}");
 static const u8 sText_AZ[] = _(" A-Z");
+
+//////////////////////////////////
+///////////Quest Info arrays//////
+
+//Main Quest 1 Arrays
+static const u16 HeartQuestSprites[3]={
+	SPECIES_DIANCIE,
+	OBJ_EVENT_GFX_WALLY,
+	OBJ_EVENT_GFX_PROF_BIRCH,
+};
+
+static const u8 HeartQuestSpriteTypes[3]={
+	PKMN,
+	OBJECT,
+	OBJECT,
+};
+
+static const u16 LeagueQuestSprites[3]={
+	ITEM_ACRO_BIKE,
+	OBJ_EVENT_GFX_WALLY,
+	OBJ_EVENT_GFX_PROF_BIRCH,
+};
+
+static const u8 LeagueQuestSpriteTypes[3]={
+	ITEM,
+	OBJECT,
+	OBJECT,
+};
+
+//////End quest Info Arrays//////
+/////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////BEGIN SUBQUEST CUSTOMIZATION/////////////////////////////
@@ -555,8 +591,8 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 	      gText_SideQuestDesc_1,
 	      gText_SideQuestDoneDesc_1,
 	      gText_SideQuestMap1,
-	      SPECIES_DIANCIE,
-	      PKMN,
+	      OBJ_EVENT_GFX_WALLY,
+	      OBJECT,
 	      sSubQuests1,
 	      QUEST_1_SUB_COUNT
 	),
@@ -575,8 +611,8 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 	      gText_SideQuestDesc_3,
 	      gText_SideQuestDoneDesc_3,
 	      gText_SideQuestMap3,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
+	      ITEM_ACRO_BIKE,
+	      ITEM,
 	      NULL,
 	      0
 	),
@@ -585,8 +621,8 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 	      gText_SideQuestDesc_4,
 	      gText_SideQuestDoneDesc_4,
 	      gText_SideQuestMap4,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
+	      SPECIES_DIANCIE,
+	      PKMN,
 	      NULL,
 	      0
 	),
@@ -1994,7 +2030,7 @@ void GenerateQuestLocation(s32 questId)
 {
 	if (!IsSubquestMode())
 	{
-		StringCopy(gStringVar2, sSideQuests[questId].map);
+		StringCopy(gStringVar2, GetQuestLocation(questId));
 	}
 	else
 	{
@@ -2004,6 +2040,19 @@ void GenerateQuestLocation(s32 questId)
 
 	StringExpandPlaceholders(gStringVar4, sText_ShowLocation);
 }
+
+static const u8 *GetQuestLocation(s32 questId)
+{
+    switch (questId) {
+        case QUEST_1_HEARTS_DIAMONDS:
+            return gTable_HeartQuestMaps[VarGet(VAR_HEARTS_QUEST)];
+		case QUEST_2_AURELIOUS_LEAGUE:
+			return gTable_LeagueQuestMaps[VarGet(VAR_LEAGUE_QUEST)];
+        default:
+            return sSideQuests[questId].map;
+    }
+}
+
 void PrintQuestLocation(s32 questId)
 {
 	FillWindowPixelBuffer(1, 0);
@@ -2046,10 +2095,24 @@ void GenerateQuestFlavorText(s32 questId)
 
 	StringExpandPlaceholders(gStringVar3, gStringVar1);
 }
+
 void UpdateQuestFlavorText(s32 questId)
 {
-	StringCopy(gStringVar1, sSideQuests[questId].desc);
+	StringExpandPlaceholders(gStringVar1, GetQuestDesc(questId));
 }
+
+static const u8 *GetQuestDesc(s32 questId)
+{
+    switch (questId) {
+        case QUEST_1_HEARTS_DIAMONDS:
+            return gTable_HeartQuestStrings[VarGet(VAR_HEARTS_QUEST)];
+		case QUEST_2_AURELIOUS_LEAGUE:
+			return gTable_LeagueQuestStrings[VarGet(VAR_LEAGUE_QUEST)];
+        default:
+            return sSideQuests[questId].desc;
+    }
+}
+
 void PrintQuestFlavorText(s32 questId)
 {
 	QuestMenu_AddTextPrinterParameterized(1, 2, gStringVar3, 40, 19, 5, 0, 0,
@@ -2136,8 +2199,8 @@ void DetermineSpriteType(s32 questId)
 
 	if (IsSubquestMode() == FALSE)
 	{
-		spriteId = sSideQuests[questId].sprite;
-		spriteType = sSideQuests[questId].spritetype;
+		spriteId = GetSpriteId_Complex(questId);
+		spriteType = GetSpriteType_Complex(questId);
 
 		QuestMenu_CreateSprite(spriteId, sStateDataPtr->spriteIconSlot,
 		                       spriteType);
@@ -2158,6 +2221,7 @@ void DetermineSpriteType(s32 questId)
 	QuestMenu_DestroySprite(sStateDataPtr->spriteIconSlot ^ 1);
 	sStateDataPtr->spriteIconSlot ^= 1;
 }
+
 static void QuestMenu_CreateSprite(u16 itemId, u8 idx, u8 spriteType)
 {
 	u8 *ptr = &sItemMenuIconSpriteIds[10];
@@ -2178,6 +2242,7 @@ static void QuestMenu_CreateSprite(u16 itemId, u8 idx, u8 spriteType)
 				spriteId = AddItemIconSprite(102 + idx, 102 + idx, itemId);
 				break;
 			case PKMN:
+				MgbaPrintf(MGBA_LOG_WARN, "IT'S PRINTING TO POKEMON!");
 				LoadMonIconPalettes();
 				spriteId = CreateMonIcon(itemId, SpriteCallbackDummy, 20, 132, 0, 1);
 				break;
@@ -2231,6 +2296,33 @@ static void QuestMenu_DestroySprite(u8 idx)
 		}
 	}
 }
+
+static u16 GetSpriteId_Complex(s32 questId)
+{
+	switch (questId)
+    {
+		case QUEST_1_HEARTS_DIAMONDS:
+		    return HeartQuestSprites[VarGet(VAR_HEARTS_QUEST)];
+		case QUEST_2_AURELIOUS_LEAGUE:
+			return LeagueQuestSprites[VarGet(VAR_LEAGUE_QUEST)];
+		default:
+		    return sSideQuests[questId].sprite;
+	} 
+}
+
+static u8 GetSpriteType_Complex(s32 questId)
+{
+	switch (questId)
+    {
+		case QUEST_1_HEARTS_DIAMONDS:
+		    return HeartQuestSpriteTypes[VarGet(VAR_HEARTS_QUEST)];
+		case QUEST_2_AURELIOUS_LEAGUE:
+			return LeagueQuestSpriteTypes[VarGet(VAR_LEAGUE_QUEST)];
+		default:
+		    return sSideQuests[questId].spritetype;
+	} 
+}
+
 static void GenerateStateAndPrint(u8 windowId, u32 questId,
                                   u8 y)
 {

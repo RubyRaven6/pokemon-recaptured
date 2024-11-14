@@ -3,5 +3,31 @@ mapscripts DocksideCity_ResearchHouse_MapScripts {
 }
 
 script DocksideCity_ResearchHouse_ProfNarra {
-    msgbox("Hi.", MSGBOX_NPC)
+    msgbox(DocksideCity_ResearchHouse_Text_WhoAreYou, MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    fadescreen(FADE_TO_BLACK)
+    msgbox(format("Prof. Narra takes a few minutes to explain what a Pokédex is to you."), MSGBOX_DEFAULT)
+    waitmessage
+    closemessage
+    fadescreen(FADE_FROM_BLACK)
+    msgbox(DocksideCity_ResearchHouse_Text_Pokedex, MSGBOX_DEFAULT)
+
+}
+
+text(local) DocksideCity_ResearchHouse_Text_WhoAreYou{
+    format(
+        "PROF. NARRA: Oh, hello there. I'm Professor Narra. Can I help you with something?\p"
+        "…A Pokédex? Why would- Oh, you say Barney sent you here? Well, that certainly makes a lot of sense.\p"
+        "To tell the truth, I haven't given out any Pokédexes yet, because frankly, it's much too expensive to handily give out."
+        "That being said, I do need some additional help for research; if you can convince me that I can trust you with a Pokédex, I can grant you one.\p"
+        "…\p"
+        "PROF. NARRA: What do you mean you don't know what a Pokédex is? Did Barney not- gah, fine."
+    )
+}
+
+text(local) DocksideCity_ResearchHouse_Text_Pokedex{
+    format(
+        "There, I hope that explanation was succinct enough. Now, with all of that in mind, I have an assignment for you to do."
+    )
 }
