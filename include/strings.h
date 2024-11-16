@@ -2711,24 +2711,12 @@ extern const u8 gText_SideQuestName_29[];
 extern const u8 gText_SideQuestName_30[];
 
 //descriptions
-//Complex Missions
-//Hearts and Diamonds
-extern const u8 gText_HeartsQuestDesc_1[];
-extern const u8 gText_HeartsQuestDesc_2[];
-extern const u8 gText_HeartsQuestDesc_3[];
 
-extern const u8 *const gTable_HeartQuestStrings[];
-
-//Aurelious League
-extern const u8 gText_LeagueQuestDesc_1[];
-extern const u8 gText_LeagueQuestDesc_2[];
-extern const u8 gText_LeagueQuestDesc_3[];
-
-extern const u8 *const gTable_LeagueQuestStrings[];
-
-//Side missions
+//default strings
 extern const u8 gText_SideQuestDesc_1[];
 extern const u8 gText_SideQuestDesc_2[];
+
+//sidemissions
 extern const u8 gText_SideQuestDesc_3[];
 extern const u8 gText_SideQuestDesc_4[];
 extern const u8 gText_SideQuestDesc_5[];
@@ -2791,20 +2779,6 @@ extern const u8 gText_SideQuestDoneDesc_29[];
 extern const u8 gText_SideQuestDoneDesc_30[];
 
 //maps
-//Complex missions
-
-//Heart Quest, Ques1
-extern const u8 gText_HeartsQuestMap_1[];
-extern const u8 gText_HeartsQuestMap_2[];
-extern const u8 gText_HeartsQuestMap_3[];
-
-extern const u8 *const gTable_HeartQuestMaps[];
-
-extern const u8 gText_LeagueQuestMap_1[];
-extern const u8 gText_LeagueQuestMap_2[];
-extern const u8 gText_LeagueQuestMap_3[];
-
-extern const u8 *const gTable_LeagueQuestMaps[];
 
 //Default strings
 extern const u8 gText_SideQuestMap1[]; // Default. Needed for things not to break.

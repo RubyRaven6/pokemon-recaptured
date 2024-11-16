@@ -1631,33 +1631,11 @@ const u8 gText_SideQuestName_30[] = _("Side Quest 30");
 
 //descriptions
 
-////////////Main Quests////////////
-
-//Hearts and Diamonds Strings
-const u8 gText_HeartsQuestDesc_1[] = _("Find a way to meet Diancie again!");
-const u8 gText_HeartsQuestDesc_2[] = _("Content 2");
-const u8 gText_HeartsQuestDesc_3[] = _("Content 3");
-
-const u8 *const gTable_HeartQuestStrings[3] = {
-    gText_HeartsQuestDesc_1,
-    gText_HeartsQuestDesc_2,
-    gText_HeartsQuestDesc_3,
-};
-
-//Aurelious League Strings
-const u8 gText_LeagueQuestDesc_1[] = _("Find Professor Narra at Dockside\nCity!");
-const u8 gText_LeagueQuestDesc_2[] = _("Catch a Pokémon for Professor Narra!");
-const u8 gText_LeagueQuestDesc_3[] = _("Content 3");
-
-const u8 *const gTable_LeagueQuestStrings[3] = {
-    gText_LeagueQuestDesc_1,
-    gText_LeagueQuestDesc_2,
-    gText_LeagueQuestDesc_3,
-};
-
-////////////Side Quests////////////
+//Default Strings
 const u8 gText_SideQuestDesc_1[] = _("Description 1");
 const u8 gText_SideQuestDesc_2[] = _("Description 2");
+
+////////////Side Quests////////////
 const u8 gText_SideQuestDesc_3[] = _("Description 3");
 const u8 gText_SideQuestDesc_4[] = _("Description 4");
 const u8 gText_SideQuestDesc_5[] = _("Description 5");
@@ -1720,31 +1698,10 @@ const u8 gText_SideQuestDoneDesc_29[] = _("Completed Quest 29");
 const u8 gText_SideQuestDoneDesc_30[] = _("Completed Quest 30");
 
 //maps
-//main quest maps
-const u8 gText_HeartsQuestMap_1[] = _("?????");
-const u8 gText_HeartsQuestMap_2[] = _("Route 1");
-const u8 gText_HeartsQuestMap_3[] = _("Oasis Town");
-
-const u8 *const gTable_HeartQuestMaps[3] = {
-    gText_HeartsQuestMap_1,
-    gText_HeartsQuestMap_2,
-    gText_HeartsQuestMap_3,
-};
-
-const u8 gText_LeagueQuestMap_1[] = _("Dockside City");
-const u8 gText_LeagueQuestMap_2[] = _("Route 1");
-const u8 gText_LeagueQuestMap_3[] = _("Town 3");
-
-const u8 *const gTable_LeagueQuestMaps[3] = {
-    gText_LeagueQuestMap_1,
-    gText_LeagueQuestMap_2,
-    gText_LeagueQuestMap_3,
-};
 //defaults
 
 const u8 gText_SideQuestMap1[] = _("Map 1");
 const u8 gText_SideQuestMap2[] = _("Map 2");
-
 
 //sidequest maps
 const u8 gText_SideQuestMap3[] = _("Map 3");

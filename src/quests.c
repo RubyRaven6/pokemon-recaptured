@@ -34,6 +34,8 @@
 #include "event_object_movement.h"
 #include "pokemon_icon.h"
 
+#include "complex_quests.h"
+
 #include "random.h"
 #include "debug.h"
 
@@ -242,37 +244,6 @@ static const u8 sText_DotSpace[] = _(". ");
 static const u8 sText_Close[] = _("Close");
 static const u8 sText_ColorGreen[] = _("{COLOR}{GREEN}");
 static const u8 sText_AZ[] = _(" A-Z");
-
-//////////////////////////////////
-///////////Quest Info arrays//////
-
-//Main Quest 1 Arrays
-static const u16 HeartQuestSprites[3]={
-	SPECIES_DIANCIE,
-	OBJ_EVENT_GFX_WALLY,
-	OBJ_EVENT_GFX_WALLY,
-};
-
-static const u8 HeartQuestSpriteTypes[3]={
-	PKMN,
-	OBJECT,
-	OBJECT,
-};
-
-static const u16 LeagueQuestSprites[3]={
-	OBJ_EVENT_GFX_PROF_BIRCH,
-	OBJ_EVENT_GFX_PROF_BIRCH,
-	OBJ_EVENT_GFX_WALLY,
-};
-
-static const u8 LeagueQuestSpriteTypes[3]={
-	OBJECT,
-	OBJECT,
-	OBJECT,
-};
-
-//////End quest Info Arrays//////
-/////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////BEGIN SUBQUEST CUSTOMIZATION/////////////////////////////
@@ -2117,9 +2088,9 @@ static const u8 *GetQuestDesc(s32 questId)
 {
     switch (questId) {
         case QUEST_1_HEARTS_DIAMONDS:
-            return gTable_HeartQuestStrings[VarGet(VAR_HEARTS_QUEST)];
+            return gTable_HeartQuestDescs[VarGet(VAR_HEARTS_QUEST)];
 		case QUEST_2_AURELIOUS_LEAGUE:
-			return gTable_LeagueQuestStrings[VarGet(VAR_LEAGUE_QUEST)];
+			return gTable_LeagueQuestDescs[VarGet(VAR_LEAGUE_QUEST)];
         default:
             return sSideQuests[questId].desc;
     }
