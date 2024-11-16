@@ -319,7 +319,7 @@
 #define P_FAMILY_BLITZLE                 FALSE
 #define P_FAMILY_ROGGENROLA              FALSE
 #define P_FAMILY_WOOBAT                  FALSE
-#define P_FAMILY_DRILBUR                 FALSE
+#define P_FAMILY_DRILBUR                 P_GEN_5_POKEMON
 #define P_FAMILY_AUDINO                  FALSE
 #define P_FAMILY_TIMBURR                 FALSE
 #define P_FAMILY_TYMPOLE                 FALSE

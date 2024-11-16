@@ -134,7 +134,6 @@ static const u8 HeartQuestSpriteTypes[3]={
 };
 
 
-
 //League Quest Descriptions
 const u8 *const gTable_LeagueQuestDescs[3] = {
     gText_LeagueQuestDesc_1,
@@ -152,13 +151,13 @@ const u8 *const gTable_LeagueQuestMaps[3] = {
 //League Quest Sprites
 static const u16 LeagueQuestSprites[3]={
 	OBJ_EVENT_GFX_PROF_BIRCH,
-	OBJ_EVENT_GFX_PROF_BIRCH,
+	SPECIES_DRILBUR,
 	OBJ_EVENT_GFX_WALLY,
 };
 
 static const u8 LeagueQuestSpriteTypes[3]={
 	OBJECT,
-	OBJECT,
+	PKMN,
 	OBJECT,
 };
 
