@@ -22,15 +22,11 @@ DocksideCity_ResearchHouse_EventScript_ProfNarra_2:
 	waitmessage
 	closemessage
 	setvar VAR_DOCKSIDE_CITY_STATE, 1
-	playse SE_PIN
-	msgbox DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_1, MSGBOX_DEFAULT
-	setvar VAR_LEAGUE_QUEST, 1
-	waitmessage
-	closemessage
+	updatequest QUEST_2_AURELIOUS_LEAGUE, VAR_LEAGUE_QUEST
 	end
 
 DocksideCity_ResearchHouse_EventScript_ProfNarra_3:
-	msgbox DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_2, MSGBOX_NPC
+	msgbox DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_1, MSGBOX_NPC
 	waitmessage
 	closemessage
 	end
@@ -44,7 +40,7 @@ DocksideCity_ResearchHouse_EventScript_Aide1::
 
 
 DocksideCity_ResearchHouse_EventScript_Aide2::
-	msgbox DocksideCity_ResearchHouse_EventScript_Aide2_Text_0, MSGBOX_NPC
+	msgbox DocksideCity_ResearchHouse_EventScript_Aide2_Text_0, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	end
@@ -55,10 +51,6 @@ DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_0:
 	.string "explain what a Pokédex is to you.$"
 
 DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_1:
-	.string "Your quest, The Aurelious League, has\n"
-	.string "been updated!$"
-
-DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_2:
 	.string "Have you caught a Pokémon yet? I can't\n"
 	.string "trust you with a Pokédex if not.$"
 

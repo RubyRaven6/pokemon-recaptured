@@ -18,11 +18,7 @@ script DocksideCity_ResearchHouse_EventScript_ProfNarra {
             waitmessage
             closemessage
             setvar(VAR_DOCKSIDE_CITY_STATE, 1)
-            playse(SE_PIN)
-            msgbox(format("Your quest, The Aurelious League, has been updated!"), MSGBOX_DEFAULT)
-            setvar(VAR_LEAGUE_QUEST, 1)
-            waitmessage
-            closemessage
+            updatequest(QUEST_2_AURELIOUS_LEAGUE, VAR_LEAGUE_QUEST)
             end
         case 1:
             msgbox(format("Have you caught a Pokémon yet? I can't trust you with a Pokédex if not."), MSGBOX_NPC)
