@@ -1170,3 +1170,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/DocksideCity_TrainingHouse/scripts.inc"
 
 	.include "data/maps/Route_1_Buffer/scripts.inc"
+
+	.include "data/maps/PorytilesTutorial_Primary/scripts.inc"

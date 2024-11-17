@@ -4436,8 +4436,8 @@
       "name": "BlackHole_Layout",
       "width": 9,
       "height": 9,
-      "primary_tileset": "gTileset_SecretBase",
-      "secondary_tileset": "gTileset_SecretBaseYellowCave",
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_OasisTown",
       "border_filepath": "data/layouts/BlackHole/border.bin",
       "blockdata_filepath": "data/layouts/BlackHole/map.bin"
     },
@@ -4457,7 +4457,7 @@
       "width": 36,
       "height": 58,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Mauville",
+      "secondary_tileset": "gTileset_OasisTown",
       "border_filepath": "data/layouts/Route_1/border.bin",
       "blockdata_filepath": "data/layouts/Route_1/map.bin"
     },
@@ -4590,6 +4590,16 @@
       "secondary_tileset": "gTileset_Mauville",
       "border_filepath": "data/layouts/Route_1_Buffer/border.bin",
       "blockdata_filepath": "data/layouts/Route_1_Buffer/map.bin"
+    },
+    {
+      "id": "LAYOUT_PORYTILES_TUTORIAL_PRIMARY",
+      "name": "PorytilesTutorial_Primary_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_PrimaryTutorial",
+      "secondary_tileset": "gTileset_SecondaryTutorial",
+      "border_filepath": "data/layouts/PorytilesTutorial_Primary/border.bin",
+      "blockdata_filepath": "data/layouts/PorytilesTutorial_Primary/map.bin"
     }
   ]
 }

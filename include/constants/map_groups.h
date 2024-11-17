@@ -568,6 +568,7 @@
 #define MAP_TRAINER_HILL_ELEVATOR                           (88 | (26 << 8))
 #define MAP_DIANCIE_CAVE                                    (89 | (26 << 8))
 #define MAP_ROUTE_1_BUFFER                                  (90 | (26 << 8))
+#define MAP_PORYTILES_TUTORIAL_PRIMARY                      (91 | (26 << 8))
 
 // gMapGroup_IndoorRoute104Prototype
 #define MAP_ROUTE104_PROTOTYPE                          (0 | (27 << 8))

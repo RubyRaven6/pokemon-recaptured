@@ -597,7 +597,8 @@
     "NavelRock_Bottom",
     "TrainerHill_Elevator",
     "DiancieCave",
-    "Route_1_Buffer"
+    "Route_1_Buffer",
+    "PorytilesTutorial_Primary"
   ],
   "gMapGroup_IndoorRoute104Prototype": [
     "Route104_Prototype",
