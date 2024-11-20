@@ -4456,7 +4456,7 @@
       "name": "Route1_Layout",
       "width": 36,
       "height": 58,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_RecompiledGeneral",
       "secondary_tileset": "gTileset_OasisTown",
       "border_filepath": "data/layouts/Route_1/border.bin",
       "blockdata_filepath": "data/layouts/Route_1/map.bin"

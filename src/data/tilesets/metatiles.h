@@ -215,3 +215,6 @@ const u16 gMetatileAttributes_SecondaryTutorial[] = INCBIN_U16("data/tilesets/se
 
 const u16 gMetatiles_OasisTown[] = INCBIN_U16("data/tilesets/secondary/oasis_town/metatiles.bin");
 const u16 gMetatileAttributes_OasisTown[] = INCBIN_U16("data/tilesets/secondary/oasis_town/metatile_attributes.bin");
+
+const u16 gMetatiles_RecompiledGeneral[] = INCBIN_U16("data/tilesets/primary/recompiled_general/metatiles.bin");
+const u16 gMetatileAttributes_RecompiledGeneral[] = INCBIN_U16("data/tilesets/primary/recompiled_general/metatile_attributes.bin");
