@@ -1171,7 +1171,7 @@ bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
 
 bool32 ShouldTeraShellDistortTypeMatchups(u32 move, u32 battlerDef)
 {
-    if (!(gBattleStruct->distortedTypeMatchups & (1u << battlerDef))
+    if (!gSpecialStatuses[battlerDef].distortedTypeMatchups
      && GetBattlerAbility(battlerDef) == ABILITY_TERA_SHELL
      && gBattleMons[battlerDef].species == SPECIES_TERAPAGOS_TERASTAL
      && !IS_MOVE_STATUS(move)
@@ -1893,7 +1893,7 @@ static void Cmd_ppreduce(void)
 
     if (ShouldTeraShellDistortTypeMatchups(gCurrentMove, gBattlerTarget))
     {
-        gBattleStruct->distortedTypeMatchups |= 1u << gBattlerTarget;
+        gSpecialStatuses[gBattlerTarget].distortedTypeMatchups = TRUE;
         gBattlerAbility = gBattlerTarget;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_TeraShellDistortingTypeMatchups;
@@ -1950,19 +1950,21 @@ static inline u32 GetHoldEffectCritChanceIncrease(u32 battler, u32 holdEffect)
     return critStageIncrease;
 }
 
+#define CRITICAL_HIT_BLOCKED -1
+#define CRITICAL_HIT_ALWAYS  -2
 s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, u32 abilityAtk, u32 abilityDef, u32 holdEffectAtk)
 {
     s32 critChance = 0;
 
     if (gSideStatuses[battlerDef] & SIDE_STATUS_LUCKY_CHANT)
     {
-        critChance = -1;
+        critChance = CRITICAL_HIT_BLOCKED;
     }
     else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
         || gMovesInfo[move].alwaysCriticalHit
         || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
     {
-        critChance = -2;
+        critChance = CRITICAL_HIT_ALWAYS;
     }
     else
     {
@@ -1978,21 +1980,23 @@ s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
             critChance = ARRAY_COUNT(sCriticalHitOdds) - 1;
     }
 
-    if (critChance != -1 && (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR))
+    if (critChance != CRITICAL_HIT_BLOCKED && (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR))
     {
         // Record ability only if move had 100% chance to get a crit
         if (recordAbility)
         {
-            if (critChance == -2)
+            if (critChance == CRITICAL_HIT_ALWAYS)
                 RecordAbilityBattle(battlerDef, abilityDef);
             else if (GetCriticalHitOdds(critChance) == 1)
                 RecordAbilityBattle(battlerDef, abilityDef);
         }
-        critChance = -1;
+        critChance = CRITICAL_HIT_BLOCKED;
     }
 
     return critChance;
 }
+#undef CRIT_BLOCKED
+#undef ALWAYS_CRITS
 
 s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility)
 {
@@ -5708,6 +5712,39 @@ static void Cmd_moveend(void)
             }
             gBattleScripting.moveendState++;
             break;
+        case MOVEEND_ABSORB:
+            if (gMovesInfo[gCurrentMove].effect == EFFECT_ABSORB)
+            {
+                if (gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK && gMovesInfo[gCurrentMove].healingMove)
+                {
+                    gBattleScripting.moveendState++;
+                    break;
+                }
+                else if (IsBattlerAlive(gBattlerAttacker) && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+                {
+                    gBattleMoveDamage = (gHpDealt * gMovesInfo[gCurrentMove].argument / 100);
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    gBattleMoveDamage = GetDrainedBigRootHp(gBattlerAttacker, gBattleMoveDamage);
+                    gHitMarker |= HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE;
+                    effect = TRUE;
+                    if (GetBattlerAbility(gBattlerTarget) == ABILITY_LIQUID_OOZE)
+                    {
+                        gBattleMoveDamage *= -1;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABSORB_OOZE;
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_EffectAbsorbLiquidOoze;
+                    }
+                    else
+                    {
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ABSORB;
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_EffectAbsorb;
+                    }
+                }
+            }
+            gBattleScripting.moveendState++;
+            break;
         case MOVEEND_RAGE: // rage check
             if (gBattleMons[gBattlerTarget].status2 & STATUS2_RAGE
                 && IsBattlerAlive(gBattlerTarget)
@@ -6631,6 +6668,7 @@ static void Cmd_moveend(void)
             gSpecialStatuses[gBattlerAttacker].damagedMons = 0;
             gSpecialStatuses[gBattlerAttacker].preventLifeOrbDamage = 0;
             gSpecialStatuses[gBattlerTarget].berryReduced = FALSE;
+            gSpecialStatuses[gBattlerTarget].distortedTypeMatchups = FALSE;
             gBattleScripting.moveEffect = 0;
             gBattleStruct->hitSwitchTargetFailed = FALSE;
             gBattleStruct->isAtkCancelerForCalledMove = FALSE;
@@ -6642,7 +6680,6 @@ static void Cmd_moveend(void)
             gBattleStruct->additionalEffectsCounter = 0;
             gBattleStruct->poisonPuppeteerConfusion = FALSE;
             gBattleStruct->fickleBeamBoosted = FALSE;
-            gBattleStruct->distortedTypeMatchups = 0;
             gBattleStruct->redCardActivates = FALSE;
             gBattleStruct->usedMicleBerry &= ~(1u << gBattlerAttacker);
             if (gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
@@ -7484,7 +7521,6 @@ static bool32 DoSwitchInEffectsForBattler(u32 battler)
                 break;
             case ABILITY_FORECAST:
             case ABILITY_FLOWER_GIFT:
-            case ABILITY_ICE_FACE:
             case ABILITY_PROTOSYNTHESIS:
                 if (AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, i, 0, 0, 0))
                     return TRUE;
@@ -8767,6 +8803,7 @@ static void RemoveAllTerrains(void)
         break;
     }
     gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;    // remove the terrain
+    TryToRevertMimicryAndFlags();
 }
 
 #define DEFOG_CLEAR(status, structField, battlescript, move)\
@@ -11340,11 +11377,11 @@ static void Cmd_manipulatedamage(void)
     case DMG_FULL_ATTACKER_HP:
         gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker);
         break;
-    case DMG_CURR_ATTACKER_HP:
-        gBattleMoveDamage = GetNonDynamaxHP(gBattlerAttacker);
-        break;
     case DMG_BIG_ROOT:
         gBattleMoveDamage = GetDrainedBigRootHp(gBattlerAttacker, gBattleMoveDamage);
+        break;
+    case DMG_CURR_ATTACKER_HP:
+        gBattleMoveDamage = GetNonDynamaxHP(gBattlerAttacker);
         break;
     case DMG_RECOIL_FROM_IMMUNE:
         gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
