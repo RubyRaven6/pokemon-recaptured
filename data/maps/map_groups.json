@@ -95,7 +95,8 @@
     "Underwater_Route128",
     "Underwater_Route129",
     "Underwater_Route105",
-    "Underwater_Route125"
+    "Underwater_Route125",
+    "Route_1Buffer"
   ],
   "gMapGroup_IndoorFlott": [
     "FlottTown_InsideHarbor",
@@ -597,8 +598,8 @@
     "NavelRock_Bottom",
     "TrainerHill_Elevator",
     "DiancieCave",
-    "Route_1_Buffer",
-    "PorytilesTutorial_Primary"
+    "PorytilesTutorial_Primary",
+    "Route_1_Gate"
   ],
   "gMapGroup_IndoorRoute104Prototype": [
     "Route104_Prototype",

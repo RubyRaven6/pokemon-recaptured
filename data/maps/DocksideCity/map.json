@@ -17,11 +17,6 @@
       "map": "MAP_ROUTE_6",
       "offset": 15,
       "direction": "left"
-    },
-    {
-      "map": "MAP_ROUTE_1",
-      "offset": 3,
-      "direction": "down"
     }
   ],
   "object_events": [
@@ -349,6 +344,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "DocksideCity_EventScript_Custodian",
       "flag": "FLAG_TEMP_5"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ANABEL",
+      "x": -8,
+      "y": 11,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -381,15 +389,15 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 12,
-      "y": 17,
+      "x": 20,
+      "y": 32,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY_RESEARCH_HOUSE",
       "dest_warp_id": "0"
     },
     {
-      "x": 20,
-      "y": 33,
+      "x": 12,
+      "y": 22,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY_TRAINING_HOUSE",
       "dest_warp_id": "0"
@@ -409,18 +417,25 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 14,
-      "y": 33,
+      "x": 12,
+      "y": 17,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY_HOUSE3",
       "dest_warp_id": "0"
     },
     {
-      "x": 14,
-      "y": 29,
+      "x": 22,
+      "y": 39,
       "elevation": 0,
-      "dest_map": "MAP_DOCKSIDE_CITY_HOUSE3",
-      "dest_warp_id": "3"
+      "dest_map": "MAP_ROUTE_1",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 23,
+      "y": 39,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE_1",
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [
@@ -469,8 +484,8 @@
     },
     {
       "type": "sign",
-      "x": 9,
-      "y": 17,
+      "x": 23,
+      "y": 33,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "DocksideCity_EventScript_ResearchHouse_Sign"

@@ -7,9 +7,9 @@ dir_raw_tilesets="/mnt/c/Users/Evan/Desktop/Pokemon/romhacks/for-tiles/raw-tiles
 dir_raw_tilesets_primary="${dir_raw_tilesets}primary/"
 dir_raw_tilesets_secondary="${dir_raw_tilesets}secondary/"
 dir_aseprite_folder="/mnt/c/Program Files/"
-dir_compiled_primary="/mnt/c/Users/Evan/Desktop/Pokemon/romhacks/pokemon-recaptured/data/tilesets/primary/"
-dir_compiled_secondary="/mnt/c/Users/Evan/Desktop/Pokemon/romhacks/pokemon-recaptured/data/tilesets/secondary/"
-metatile_behaviors="/mnt/c/Users/Evan/Desktop/Pokemon/romhacks/pokemon-recaptured/include/constants/metatile_behaviors.h"
+dir_compiled_primary="./data/tilesets/primary/"
+dir_compiled_secondary="./data/tilesets/secondary/"
+metatile_behaviors="./include/constants/metatile_behaviors.h"
 normalize_py="/mnt/c/Users/Evan/Desktop/Pokemon/romhacks/for-tiles/raw-tilesets/normalize.py"
 
 ## WINDOWS PATH

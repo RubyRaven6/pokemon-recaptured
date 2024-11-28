@@ -23,7 +23,20 @@
 
   ],
   "warp_events": [
-
+    {
+      "x": 19,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY",
+      "dest_warp_id": "10"
+    },
+    {
+      "x": 20,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY",
+      "dest_warp_id": "11"
+    }
   ],
   "coord_events": [
 

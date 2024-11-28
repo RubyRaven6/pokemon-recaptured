@@ -868,3 +868,14 @@ const struct Tileset gTileset_RecompiledGeneral =
     .metatileAttributes = gMetatileAttributes_RecompiledGeneral,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Gate =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Gate,
+    .palettes = gTilesetPalettes_Gate,
+    .metatiles = gMetatiles_Gate,
+    .metatileAttributes = gMetatileAttributes_Gate,
+    .callback = NULL,
+};

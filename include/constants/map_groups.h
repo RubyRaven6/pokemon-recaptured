@@ -66,6 +66,7 @@
 #define MAP_UNDERWATER_ROUTE129 (57 | (0 << 8))
 #define MAP_UNDERWATER_ROUTE105 (58 | (0 << 8))
 #define MAP_UNDERWATER_ROUTE125 (59 | (0 << 8))
+#define MAP_ROUTE_1BUFFER       (60 | (0 << 8))
 
 // gMapGroup_IndoorFlott
 #define MAP_FLOTT_TOWN_INSIDE_HARBOR            (0 | (1 << 8))
@@ -567,8 +568,8 @@
 #define MAP_NAVEL_ROCK_BOTTOM                               (87 | (26 << 8))
 #define MAP_TRAINER_HILL_ELEVATOR                           (88 | (26 << 8))
 #define MAP_DIANCIE_CAVE                                    (89 | (26 << 8))
-#define MAP_ROUTE_1_BUFFER                                  (90 | (26 << 8))
-#define MAP_PORYTILES_TUTORIAL_PRIMARY                      (91 | (26 << 8))
+#define MAP_PORYTILES_TUTORIAL_PRIMARY                      (90 | (26 << 8))
+#define MAP_ROUTE_1_GATE                                    (91 | (26 << 8))
 
 // gMapGroup_IndoorRoute104Prototype
 #define MAP_ROUTE104_PROTOTYPE                          (0 | (27 << 8))

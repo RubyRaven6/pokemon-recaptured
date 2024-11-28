@@ -4455,7 +4455,7 @@
       "id": "LAYOUT_ROUTE_1",
       "name": "Route1_Layout",
       "width": 36,
-      "height": 58,
+      "height": 62,
       "primary_tileset": "gTileset_RecompiledGeneral",
       "secondary_tileset": "gTileset_OasisTown",
       "border_filepath": "data/layouts/Route_1/border.bin",
@@ -4582,16 +4582,6 @@
       "blockdata_filepath": "data/layouts/DocksideCity_TrainingHouse/map.bin"
     },
     {
-      "id": "LAYOUT_ROUTE_1_BUFFER",
-      "name": "Route_1_Buffer_Layout",
-      "width": 24,
-      "height": 7,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Mauville",
-      "border_filepath": "data/layouts/Route_1_Buffer/border.bin",
-      "blockdata_filepath": "data/layouts/Route_1_Buffer/map.bin"
-    },
-    {
       "id": "LAYOUT_PORYTILES_TUTORIAL_PRIMARY",
       "name": "PorytilesTutorial_Primary_Layout",
       "width": 20,
@@ -4600,6 +4590,26 @@
       "secondary_tileset": "gTileset_SecondaryTutorial",
       "border_filepath": "data/layouts/PorytilesTutorial_Primary/border.bin",
       "blockdata_filepath": "data/layouts/PorytilesTutorial_Primary/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE_1BUFFER",
+      "name": "Route_1Buffer_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Gate",
+      "border_filepath": "data/layouts/Route_1Buffer/border.bin",
+      "blockdata_filepath": "data/layouts/Route_1Buffer/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE_1_GATE",
+      "name": "Route_1_Gate_Layout",
+      "width": 10,
+      "height": 15,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonCenter",
+      "border_filepath": "data/layouts/Route_1_Gate/border.bin",
+      "blockdata_filepath": "data/layouts/Route_1_Gate/map.bin"
     }
   ]
 }
