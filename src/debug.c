@@ -1275,7 +1275,7 @@ static u8 Debug_CheckToggleFlags(u8 id)
         case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS:
             result = FlagGet(FLAG_VISITED_FLOTT_TOWN) &&
                 FlagGet(FLAG_VISITED_DOCKSIDE_CITY) &&
-                FlagGet(FLAG_VISITED_DEWFORD_TOWN) &&
+                FlagGet(FLAG_VISITED_OASIS_TOWN) &&
                 FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) &&
                 FlagGet(FLAG_VISITED_FALLARBOR_TOWN) &&
                 FlagGet(FLAG_VISITED_VERDANTURF_TOWN) &&
@@ -2772,7 +2772,7 @@ static void DebugAction_FlagsVars_ToggleFlyFlags(u8 taskId)
         PlaySE(SE_PC_OFF);
         FlagClear(FLAG_VISITED_FLOTT_TOWN);
         FlagClear(FLAG_VISITED_DOCKSIDE_CITY);
-        FlagClear(FLAG_VISITED_DEWFORD_TOWN);
+        FlagClear(FLAG_VISITED_OASIS_TOWN);
         FlagClear(FLAG_VISITED_LAVARIDGE_TOWN);
         FlagClear(FLAG_VISITED_FALLARBOR_TOWN);
         FlagClear(FLAG_VISITED_VERDANTURF_TOWN);
@@ -2794,7 +2794,7 @@ static void DebugAction_FlagsVars_ToggleFlyFlags(u8 taskId)
         PlaySE(SE_PC_LOGIN);
         FlagSet(FLAG_VISITED_FLOTT_TOWN);
         FlagSet(FLAG_VISITED_DOCKSIDE_CITY);
-        FlagSet(FLAG_VISITED_DEWFORD_TOWN);
+        FlagSet(FLAG_VISITED_OASIS_TOWN);
         FlagSet(FLAG_VISITED_LAVARIDGE_TOWN);
         FlagSet(FLAG_VISITED_FALLARBOR_TOWN);
         FlagSet(FLAG_VISITED_VERDANTURF_TOWN);
