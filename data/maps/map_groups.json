@@ -5,7 +5,8 @@
     "gMapGroup_IndoorDockside",
     "gMapGroup_Special",
     "gMapGroup_Dungeons",
-    "gMapGroup_VanillaMaps"
+    "gMapGroup_VanillaMaps1",
+    "gMapGroup_VanillaMaps2"
   ],
   "gMapGroup_TownsAndRoutes": [
     "FlottTown",
@@ -37,13 +38,13 @@
     "DocksideCity_House2",
     "DocksideCity_House3"
   ],
-  "gMapGroup_Special":[
+  "gMapGroup_Special": [
     "DiancieCave"
   ],
-  "gMapGroup_Dungeons":[
+  "gMapGroup_Dungeons": [
 
   ],
-  "gMapGroup_VanillaMaps": [
+  "gMapGroup_VanillaMaps1": [
     "PetalburgCity",
     "SlateportCity",
     "MauvilleCity",
@@ -298,7 +299,9 @@
     "AquaHideout_B1F",
     "AquaHideout_B2F",
     "Underwater_SeafloorCavern",
-    "SeafloorCavern_Entrance",
+    "SeafloorCavern_Entrance"
+  ],
+  "gMapGroup_VanillaMaps2": [
     "SeafloorCavern_Room1",
     "SeafloorCavern_Room2",
     "SeafloorCavern_Room3",
@@ -552,6 +555,6 @@
     "Route119_WeatherInstitute_1F",
     "Route119_WeatherInstitute_2F",
     "Route119_House",
-    "Route124_DivingTreasureHuntersHouse"    
+    "Route124_DivingTreasureHuntersHouse"
   ]
 }

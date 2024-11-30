@@ -28,14 +28,14 @@
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY",
-      "dest_warp_id": "10"
+      "dest_warp_id": "9"
     },
     {
       "x": 20,
       "y": 6,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY",
-      "dest_warp_id": "11"
+      "dest_warp_id": "10"
     }
   ],
   "coord_events": [

@@ -11,13 +11,13 @@ LilycoveCity_DepartmentStoreElevator_EventScript_Attendant::
 	message gText_WhichFloorWouldYouLike
 	waitmessage
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, GetDeptStoreDefaultFloorChoice
-	switch VAR_RESULT
-	case 0, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom5th
-	case 1, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom4th
-	case 2, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom3rd
-	case 3, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom2nd
-	case 4, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom1st
+//	specialvar VAR_RESULT, GetDeptStoreDefaultFloorChoice
+//	switch VAR_RESULT
+//	case 0, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom5th
+//	case 1, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom4th
+//	case 2, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom3rd
+//	case 3, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom2nd
+//	case 4, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom1st
 	end
 
 @ Below scripts ensure the cursor for floor select always starts on the current floor
@@ -119,6 +119,6 @@ LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator::
 	return
 
 LilycoveCity_DepartmentStoreElevator_EventScript_SetFloor::
-	special SetDeptStoreFloor
+//	special SetDeptStoreFloor
 	return
 

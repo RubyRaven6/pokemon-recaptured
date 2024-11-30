@@ -1761,7 +1761,7 @@ static const u16 sElevatorWindowTiles_Descending[ELEVATOR_WINDOW_HEIGHT][ELEVATO
         METATILE_BattleFrontier_Elevator_Bottom1
     },
 };
-
+/*
 void SetDeptStoreFloor(void)
 {
     u8 deptStoreFloor;
@@ -1826,7 +1826,7 @@ u16 GetDeptStoreDefaultFloorChoice(void)
 
     return sLilycoveDeptStore_DefaultFloorChoice;
 }
-
+*/
 // Task data for Task_MoveElevator
 #define tTimer       data[1]
 #define tMoveCounter data[2]
