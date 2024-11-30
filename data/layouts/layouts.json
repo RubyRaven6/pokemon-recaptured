@@ -4454,7 +4454,7 @@
     {
       "id": "LAYOUT_ROUTE_1",
       "name": "Route1_Layout",
-      "width": 36,
+      "width": 41,
       "height": 62,
       "primary_tileset": "gTileset_RecompiledGeneral",
       "secondary_tileset": "gTileset_OasisTown",
