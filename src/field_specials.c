@@ -86,8 +86,8 @@ static EWRAM_DATA u32 sBikeCyclingTimer = 0;
 static EWRAM_DATA u8 sSlidingDoorNextFrameCounter = 0;
 static EWRAM_DATA u8 sSlidingDoorFrame = 0;
 static EWRAM_DATA u8 sTutorMoveAndElevatorWindowId = 0;
-static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
-static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
+//static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
+//static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
 
 static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;

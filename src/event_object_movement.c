@@ -1723,7 +1723,7 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     UpdateObjectEventVisibility(objectEvent, sprite);
     return objectEventId;
 }
-
+/*
 // Pack pokemon form info into a graphicsId, from a template's script
 static u16 PackGraphicsId(const struct ObjectEventTemplate *template)
 {
@@ -1746,7 +1746,7 @@ static u16 PackGraphicsId(const struct ObjectEventTemplate *template)
     }
     return graphicsId;
 }
-
+*/
 u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     u8 objectEventId;
