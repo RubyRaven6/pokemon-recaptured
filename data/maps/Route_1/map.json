@@ -14,9 +14,9 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_DOCKSIDE_CITY",
-      "offset": -3,
-      "direction": "up"
+      "map": "MAP_OASIS_TOWN",
+      "offset": 22,
+      "direction": "left"
     }
   ],
   "object_events": [

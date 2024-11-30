@@ -1174,3 +1174,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/Route_1Buffer/scripts.inc"
 
 	.include "data/maps/Route_1_Gate/scripts.inc"
+
+	.include "data/maps/OasisTown/scripts.inc"
