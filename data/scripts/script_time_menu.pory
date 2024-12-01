@@ -3,20 +3,22 @@ script WaitingMenu{
     dynmultichoice(1, 1, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Add time", "Set time")
     switch(var(VAR_RESULT)){
         case 0:
-            goto(Add_Time)
+            call(Add_Time)
         case 1:
-            goto(Set_Time)
+            call(Set_Time)
     }
+    releaseall
 }
 
 script(local) Add_Time{
     dynmultichoice(1, 1, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Add Day", "Add Hour")
     switch(var(VAR_RESULT)){
         case 0:
-            goto(Add_Days)
+            call(Add_Days)
         case 1:
-            goto(Add_Hours)
+            call(Add_Hours)
     }
+    releaseall
 }
 
 script(local) Add_Days{
@@ -29,7 +31,7 @@ script(local) Add_Days{
             waitmessage
             closemessage
             fadescreen(FADE_FROM_BLACK)
-            end
+            releaseall
         case 1:
             fadescreen(FADE_TO_BLACK)
             addday(6)
@@ -37,7 +39,7 @@ script(local) Add_Days{
             waitmessage
             closemessage
             fadescreen(FADE_FROM_BLACK)
-            end
+            releaseall
         case 2:
             fadescreen(FADE_TO_BLACK)
             addday(12)
@@ -45,8 +47,9 @@ script(local) Add_Days{
             waitmessage
             closemessage
             fadescreen(FADE_FROM_BLACK)
-            end
+            releaseall
     }
+    releaseall
 }
 
 script(local) Add_Hours{
@@ -59,7 +62,7 @@ script(local) Add_Hours{
             waitmessage
             closemessage
             fadescreen(FADE_FROM_BLACK)
-            end
+            releaseall
         case 1:
             fadescreen(FADE_TO_BLACK)
             addhour(6)
@@ -67,7 +70,7 @@ script(local) Add_Hours{
             waitmessage
             closemessage
             fadescreen(FADE_FROM_BLACK)
-            end
+            releaseall
         case 2:
             fadescreen(FADE_TO_BLACK)
             addhour(12)
@@ -75,18 +78,20 @@ script(local) Add_Hours{
             waitmessage
             closemessage
             fadescreen(FADE_FROM_BLACK)
-            end
+            releaseall
     }
+    releaseall
 }
 
 script(local) Set_Time{
     dynmultichoice(1, 1, FALSE, 1, 0, DYN_MULTICHOICE_CB_NONE, "Set Day", "Set Hour")
     switch(var(VAR_RESULT)){
         case 0:
-            goto(Set_Days)
+            call(Set_Days)
         case 1:
-            goto(Set_Hours)
+            call(Set_Hours)
     }
+    releaseall
 }
 
 script(local) Set_Days{
@@ -94,89 +99,90 @@ script(local) Set_Days{
     switch(var(VAR_RESULT)){
         case 0:
             setday(1)
-            end
+            releaseall
         case 1:
             setday(2)
-            end
+            releaseall
         case 2:
             setday(3)
-            end
+            releaseall
         case 3:
             setday(4)
-            end
+            releaseall
         case 4:
             setday(5)
-            end
+            releaseall
         case 5:
             setday(6)
-            end
+            releaseall
         case 6:
             setday(7)
-            end
+            releaseall
         case 7:
             setday(8)
-            end
+            releaseall
         case 8:
             setday(9)
-            end
+            releaseall
         case 9:
             setday(10)
-            end
+            releaseall
         case 10:
             setday(11)
-            end
+            releaseall
         case 11:
             setday(12)
-            end
+            releaseall
         case 12:
             setday(13)
-            end
+            releaseall
         case 13:
             setday(14)
-            end
+            releaseall
         case 14:
             setday(15)
-            end
+            releaseall
         case 15:
             setday(16)
-            end
+            releaseall
         case 16:
             setday(17)
-            end
+            releaseall
         case 17:
             setday(18)
-            end
+            releaseall
         case 18:
             setday(19)
-            end
+            releaseall
         case 19:
             setday(20)
-            end
+            releaseall
         case 20:
             setday(21)
-            end
+            releaseall
         case 21:
             setday(22)
-            end
+            releaseall
         case 22:
             setday(23)
-            end
+            releaseall
         case 23:
             setday(24)
-            end
+            releaseall
         case 24:
             setday(25)
-            end
+            releaseall
         case 25:
             setday(26)
-            end
+            releaseall
         case 26:
             setday(27)
-            end
+            releaseall
         case 27:
             setday(28)
-            end
+            releaseall
     }
+    releaseall
 }
 
 script(local) Set_Hours{
@@ -184,75 +190,76 @@ script(local) Set_Hours{
     switch(var(VAR_RESULT)){
         case 0:
             sethour(0)
-            end
+            releaseall
         case 1:
             sethour(1)
-            end
+            releaseall
         case 2:
             sethour(2)
-            end
+            releaseall
         case 3:
             sethour(3)
-            end
+            releaseall
         case 4:
             sethour(4)
-            end
+            releaseall
         case 5:
             sethour(5)
-            end
+            releaseall
         case 6:
             sethour(6)
-            end
+            releaseall
         case 7:
             sethour(7)
-            end
+            releaseall
         case 8:
             sethour(8)
-            end
+            releaseall
         case 9:
             sethour(9)
-            end
+            releaseall
         case 10:
             sethour(10)
-            end
+            releaseall
         case 11:
             sethour(11)
-            end
+            releaseall
         case 12:
             sethour(12)
-            end
+            releaseall
         case 13:
             sethour(13)
-            end
+            releaseall
         case 14:
             sethour(14)
-            end
+            releaseall
         case 15:
             sethour(15)
-            end
+            releaseall
         case 16:
             sethour(16)
-            end
+            releaseall
         case 17:
             sethour(17)
-            end
+            releaseall
         case 18:
             sethour(18)
-            end
+            releaseall
         case 19:
             sethour(19)
-            end
+            releaseall
         case 20:
             sethour(20)
-            end
+            releaseall
         case 21:
             sethour(21)
-            end
+            releaseall
         case 22:
             sethour(22)
-            end
+            releaseall
         case 23:
             sethour(23)
-            end
+            releaseall
     }
+    releaseall
 }
