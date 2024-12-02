@@ -89,6 +89,9 @@
 #define STARTING_MINUTE                 0
 #define STARTING_SECOND                 0
 
+// Lighting
+#define OW_SHADOW_INTENSITY             4          // Ranges from 0 to 16, where 0 is fully transparent and 16 is black.
+
 // Overworld flags
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
