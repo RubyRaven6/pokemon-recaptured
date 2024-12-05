@@ -9,9 +9,9 @@
 #define MAP_FLOTT_TOWN    (0 | (0 << 8))
 #define MAP_BLACK_HOLE    (1 | (0 << 8))
 #define MAP_DOCKSIDE_CITY (2 | (0 << 8))
-#define MAP_ROUTE_1       (3 | (0 << 8))
-#define MAP_ROUTE_6       (4 | (0 << 8))
-#define MAP_OASIS_TOWN    (5 | (0 << 8))
+#define MAP_OASIS_TOWN    (3 | (0 << 8))
+#define MAP_ROUTE_1       (4 | (0 << 8))
+#define MAP_ROUTE_6       (5 | (0 << 8))
 
 // gMapGroup_IndoorFlott
 #define MAP_FLOTT_TOWN_INSIDE_HARBOR            (0 | (1 << 8))

@@ -4454,8 +4454,8 @@
     {
       "id": "LAYOUT_ROUTE_1",
       "name": "Route1_Layout",
-      "width": 41,
-      "height": 62,
+      "width": 30,
+      "height": 60,
       "primary_tileset": "gTileset_RecompiledGeneral",
       "secondary_tileset": "gTileset_OasisTown",
       "border_filepath": "data/layouts/Route_1/border.bin",
@@ -4614,7 +4614,7 @@
     {
       "id": "LAYOUT_OASIS_TOWN",
       "name": "OasisTown_Layout",
-      "width": 35,
+      "width": 40,
       "height": 35,
       "primary_tileset": "gTileset_RecompiledGeneral",
       "secondary_tileset": "gTileset_OasisTown",

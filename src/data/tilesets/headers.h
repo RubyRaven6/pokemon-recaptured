@@ -855,7 +855,7 @@ const struct Tileset gTileset_OasisTown =
     .palettes = gTilesetPalettes_OasisTown,
     .metatiles = gMetatiles_OasisTown,
     .metatileAttributes = gMetatileAttributes_OasisTown,
-    .callback = NULL,
+    .callback = InitTilesetAnim_OasisTown,
 };
 
 const struct Tileset gTileset_RecompiledGeneral =

@@ -15,8 +15,13 @@
   "connections": [
     {
       "map": "MAP_OASIS_TOWN",
-      "offset": 22,
+      "offset": 21,
       "direction": "left"
+    },
+    {
+      "map": "MAP_DOCKSIDE_CITY",
+      "offset": -7,
+      "direction": "up"
     }
   ],
   "object_events": [
@@ -24,15 +29,15 @@
   ],
   "warp_events": [
     {
-      "x": 19,
-      "y": 6,
+      "x": 15,
+      "y": 5,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY",
       "dest_warp_id": "9"
     },
     {
-      "x": 20,
-      "y": 6,
+      "x": 16,
+      "y": 5,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY",
       "dest_warp_id": "10"

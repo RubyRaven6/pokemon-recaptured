@@ -12,9 +12,9 @@
     "FlottTown",
     "BlackHole",
     "DocksideCity",
+    "OasisTown",
     "Route_1",
-    "Route_6",
-    "OasisTown"
+    "Route_6"
   ],
   "gMapGroup_IndoorFlott": [
     "FlottTown_InsideHarbor",
