@@ -20,4 +20,7 @@ script FlottTown_PlayerHouse_2F_Unpacked_Boxes{
         addminute(42)
         end
     }
+    else{
+        closemessage
+    }
 }

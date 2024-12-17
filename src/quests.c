@@ -577,7 +577,7 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 	      OBJ_EVENT_GFX_WALLY,
 	      OBJECT,
 	      sSubQuests1,
-	      NULL
+	      0
 	),
 	side_quest(
 	      gText_SideQuestName_2,
