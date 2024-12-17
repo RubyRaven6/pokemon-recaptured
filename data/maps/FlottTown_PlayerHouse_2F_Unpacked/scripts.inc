@@ -10,6 +10,7 @@ FlottTown_PlayerHouse_2F_Unpacked_Boxes::
 	msgbox FlottTown_PlayerHouse_2F_Unpacked_Boxes_Text_1, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq FlottTown_PlayerHouse_2F_Unpacked_Boxes_1
+	closemessage
 	return
 
 FlottTown_PlayerHouse_2F_Unpacked_Boxes_1:
