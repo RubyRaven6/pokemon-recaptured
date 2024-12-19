@@ -1007,13 +1007,13 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
 
 static void InitClockWithRtc(u8 taskId)
 {
-    FakeRtc_GetCurrentTime();
-    gTasks[taskId].tHours = GetHour();
-    gTasks[taskId].tMinutes = GetMinute();
+    RtcCalcLocalTime();
+    gTasks[taskId].tHours = gLocalTime.hours;
+    gTasks[taskId].tMinutes = gLocalTime.minutes;
     gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;
     gTasks[taskId].tHourHandAngle = (gTasks[taskId].tHours % 12) * 30 + (gTasks[taskId].tMinutes / 10) * 5;
 
-    if (GetHour() < 12)
+    if (gLocalTime.hours < 12)
         gTasks[taskId].tPeriod = PERIOD_AM;
     else
         gTasks[taskId].tPeriod = PERIOD_PM;

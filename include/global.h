@@ -200,9 +200,6 @@ struct Time
     /*0x02*/  s8 hours;
     /*0x03*/  s8 minutes;
     /*0x04*/  s8 seconds;
-    /*0x05*/  s8 dayOfWeek;
-    /*0x06*/  s8 months;
-    /*0x07*/ s16 years; 
 };
 
 #define DAY_SUNDAY          0
@@ -212,20 +209,6 @@ struct Time
 #define DAY_THURSDAY        4
 #define DAY_FRIDAY          5
 #define DAY_SATURDAY        6
-
-#define    MONTH_ONE            1
-#define    MONTH_TWO            2
-#define    MONTH_THREE          3
-#define    MONTH_FOUR           4
-#define    MONTH_FIVE           5
-#define    MONTH_SIX            6
-#define    MONTH_SEVEN          7
-#define    MONTH_EIGHT          8
-#define    MONTH_NINE           9
-#define    MONTH_TEN           10
-#define    MONTH_ELEVEN        11
-#define    MONTH_TWELVE        12
-#define    MONTH_COUNT      MONTH_TWELVE
 
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))

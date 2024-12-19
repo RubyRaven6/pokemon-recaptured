@@ -22,8 +22,6 @@ FlottTown_PlayerHouse_2F_Unpacked_Boxes_1:
 	warpsilent MAP_FLOTT_TOWN_PLAYER_HOUSE_2F, 5, 2
 	waitmessage
 	closemessage
-	addhour 2
-	addminute 42
 	end
 
 

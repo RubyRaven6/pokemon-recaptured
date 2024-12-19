@@ -707,13 +707,10 @@ bool8 ScrCmd_dotimebasedevents(struct ScriptContext *ctx)
 
 bool8 ScrCmd_gettime(struct ScriptContext *ctx)
 {
-    gSpecialVar_0x8000 = GetYear();
-    gSpecialVar_0x8001 = GetMonth();
-    gSpecialVar_0x8002 = GetDay();
-    gSpecialVar_0x8003 = GetDayOfWeek();
-    gSpecialVar_0x8004 = GetHour();
-    gSpecialVar_0x8005 = GetMinute();
-    gSpecialVar_0x8006 = GetSecond();
+    struct Time* time = FakeRtc_GetCurrentTime();
+    gSpecialVar_0x8000 = time->hours;
+    gSpecialVar_0x8001 = time->minutes;
+    gSpecialVar_0x8002 = time->seconds;
     MgbaPrintf(MGBA_LOG_WARN, "Day of the week: %u", gSpecialVar_0x8003);
     MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", gSpecialVar_0x8004);
     return FALSE;
