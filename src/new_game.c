@@ -47,6 +47,7 @@
 #include "quests.h"
 #include "constants/items.h"
 #include "fake_rtc.h"
+#include "clock.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -159,9 +160,9 @@ void NewGameInitData(void)
     ClearFrontierRecord();
     ClearSav1();
     ClearSav3();
-
+    InitTimeBasedEvents();
     #if OW_USE_FAKE_RTC == TRUE
-        SetNewIngameTime();
+        //SetNewIngameTime();
     #else
         if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         RtcReset();
