@@ -58,7 +58,6 @@ FlottTown_FlottCave_EventScript_ZubatAttacks::
 	call FlottTown_FlottCave_StarterWantsToJoin
 	clearflag FLAG_FALLEN_INTO_CAVE
 	setvar VAR_FLOTT_TOWN_STATE, 8
-	addminute 10
 	fadescreen FADE_TO_BLACK
 	setvar VAR_0x8004, 13
 	setvar VAR_0x8005, 12

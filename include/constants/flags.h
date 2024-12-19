@@ -61,7 +61,7 @@
 #define FLAG_HIDE_TEDDIURSA            0x2F // Hides Teddiursa in the corner of Flott Cave
 #define FLAG_FLOTT_HARBOR_SAILOR       0x30 // Unhides the sailor in the Flott Town Harbor.
 #define FLAG_UNUSED_0x031           0x31 // Flag for when player is in Diancie Cave
-#define FLAG_UNUSED_0x032    0x32 // Unused Flag
+#define FLAG_UNUSED_0x032    0x32 // Flag for time pausing
 #define FLAG_UNUSED_0x033    0x33 // Unused Flag
 #define FLAG_UNUSED_0x034    0x34 // Unused Flag
 #define FLAG_UNUSED_0x035    0x35 // Unused Flag
