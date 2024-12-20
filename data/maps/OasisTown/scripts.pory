@@ -1,0 +1,8 @@
+mapscripts OasisTown_MapScripts{
+
+}
+
+script OasisTown_EventScript_TreeItem {
+    msgbox("Hi.", MSGBOX_DEFAULT)
+    closemessage
+}

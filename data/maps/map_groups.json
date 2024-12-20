@@ -3,6 +3,7 @@
     "gMapGroup_TownsAndRoutes",
     "gMapGroup_IndoorFlott",
     "gMapGroup_IndoorDockside",
+    "gMapGroup_IndoorOasis",
     "gMapGroup_Special",
     "gMapGroup_Dungeons",
     "gMapGroup_VanillaMaps1",
@@ -38,6 +39,9 @@
     "DocksideCity_House1",
     "DocksideCity_House2",
     "DocksideCity_House3"
+  ],
+  "gMapGroup_IndoorOasis": [
+    "OasisTown_House1"
   ],
   "gMapGroup_Special": [
     "DiancieCave"

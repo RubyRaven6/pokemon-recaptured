@@ -4620,6 +4620,16 @@
       "secondary_tileset": "gTileset_OasisTown",
       "border_filepath": "data/layouts/OasisTown/border.bin",
       "blockdata_filepath": "data/layouts/OasisTown/map.bin"
+    },
+    {
+      "id": "LAYOUT_OASIS_TOWN_HOUSE1",
+      "name": "OasisTown_House1_Layout",
+      "width": 10,
+      "height": 7,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/OasisTown_House1/border.bin",
+      "blockdata_filepath": "data/layouts/OasisTown_House1/map.bin"
     }
   ]
 }

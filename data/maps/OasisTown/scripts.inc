@@ -4,6 +4,7 @@ OasisTown_MapScripts::
 
 OasisTown_EventScript_TreeItem::
 	msgbox OasisTown_EventScript_TreeItem_Text_0, MSGBOX_DEFAULT
+	closemessage
 	return
 
 
