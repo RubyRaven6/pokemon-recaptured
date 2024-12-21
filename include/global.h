@@ -566,7 +566,7 @@ struct Follower
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x08*/ u8 playerGender; // MALE, FEMALE
+    /*0x08*/ u8 playerGender; // MASC, FEMME, QUEER
     /*0x09*/ u8 specialSaveWarpFlags;
     /*0x0A*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x0E*/ u16 playTimeHours;
@@ -583,7 +583,7 @@ struct SaveBlock2
              //u16 padding1:4;
              //u16 padding2;
     /*0x18*/ struct Pokedex pokedex;
-    /*0x90*/ u8 personalityType; // 0 = Fury/Mankey, 1 = Mischief/Tinkatink, 2 = Friendship/Teddiursa
+    /*0x90*/ u8 personalityType; // 1 = Fury, 2 = Mischief, 3 = Friendship
     /*0x91*/ u8 filler_91[0x7];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;

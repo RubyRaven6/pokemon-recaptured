@@ -73,7 +73,7 @@ Route119_EventScript_PlayBrendanMusic::
 
 Route119_EventScript_BattleMay::
 	msgbox Route119_Text_MayIntro, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	switch VAR_UNUSED_0x4023
 	case 0, Route119_EventScript_BattleMayTreecko
 	case 1, Route119_EventScript_BattleMayTorchic
 	case 2, Route119_EventScript_BattleMayMudkip
@@ -103,7 +103,7 @@ Route119_EventScript_DefeatedMay::
 
 Route119_EventScript_BattleBrendan::
 	msgbox Route119_Text_BrendanIntro, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	switch VAR_UNUSED_0x4023
 	case 0, Route119_EventScript_BattleBrendanTreecko
 	case 1, Route119_EventScript_BattleBrendanTorchic
 	case 2, Route119_EventScript_BattleBrendanMudkip

@@ -129,10 +129,15 @@
 #define FEMALE 1
 #define GENDER_COUNT 2
 
-#define FURY 0
-#define MISCHIEF 1
-#define FRIENDSHIP 2
-#define STARTER_COUNT 3
+#define MASC 0
+#define FEMME 1
+#define QUEER 2
+#define PRESENT_COUNT 3
+
+#define FURY 1
+#define MISCHIEF 2
+#define FRIENDSHIP 3
+#define STARTER_COUNT FRIENDSHIP
 
 #define BARD_SONG_LENGTH       6
 #define NUM_STORYTELLER_TALES  4

@@ -1,11 +1,3 @@
-
-.set LOCALID_ZUBAT, 1
-.set LOCALID_MANKEY, 2
-.set LOCALID_TINKATINK, 3
-.set LOCALID_TEDDIURSA, 4
-.set LOCALID_ELSIE, 7
-.set LOCALID_BARNEY, 8
-
 FlottTown_FlottCave_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FlottTown_FlottCave_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
@@ -44,15 +36,12 @@ FlottTown_FlottCave_EventScript_ZubatAttacks::
 	closemessage
 	playmoncry SPECIES_ZUBAT, CRY_MODE_NORMAL
 	waitmoncry
-	special CheckZubatSpawning
-	addobject LOCALID_ZUBAT
-	setobjectxy LOCALID_ZUBAT, VAR_TEMP_0, VAR_TEMP_1
-	applymovement LOCALID_ZUBAT, Common_Movement_FacePlayer
-	call FlottTown_FlottCave_FacePlayerDirection
+	call FlottTown_FlottCave_ZubatSpawn
+	applymovement 10, Common_Movement_FacePlayer
 	fadescreen FADE_TO_BLACK
 	msgbox FlottTown_FlottCave_EventScript_ZubatAttacks_Text_1
+	call StarterSelection_GFXSetting
 	call FlottTown_FlottCave_StarterChoice
-	fadescreen FADE_FROM_BLACK
 	call FlottTown_FlottCave_WildZubatBattle
 	delay 60
 	call FlottTown_FlottCave_StarterWantsToJoin
@@ -68,6 +57,48 @@ FlottTown_FlottCave_EventScript_ZubatAttacks::
 	waitmessage
 	call FlottTown_FlottCave_EventScript_RockSmash
 	end
+
+
+FlottTown_FlottCave_ZubatSpawn::
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	getobjectfacingdirection OBJ_EVENT_ID_PLAYER, VAR_TEMP_4
+	copyvar VAR_TEMP_2, VAR_TEMP_0
+	copyvar VAR_TEMP_3, VAR_TEMP_1
+	copyvar VAR_TEMP_5, VAR_TEMP_0
+	copyvar VAR_TEMP_6, VAR_TEMP_1
+	switch VAR_TEMP_4
+	case 2, FlottTown_FlottCave_ZubatSpawn_3
+	case 1, FlottTown_FlottCave_ZubatSpawn_4
+	case 3, FlottTown_FlottCave_ZubatSpawn_5
+	case 4, FlottTown_FlottCave_ZubatSpawn_6
+FlottTown_FlottCave_ZubatSpawn_1:
+	addobject 10
+	setobjectxy 10, VAR_TEMP_2, VAR_TEMP_3
+	return
+
+FlottTown_FlottCave_ZubatSpawn_3:
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+	addvar VAR_TEMP_3, 2
+	addvar VAR_TEMP_6, 1
+	goto FlottTown_FlottCave_ZubatSpawn_1
+
+FlottTown_FlottCave_ZubatSpawn_4:
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	subvar VAR_TEMP_3, 2
+	subvar VAR_TEMP_6, 1
+	goto FlottTown_FlottCave_ZubatSpawn_1
+
+FlottTown_FlottCave_ZubatSpawn_5:
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	addvar VAR_TEMP_2, 2
+	addvar VAR_TEMP_5, 1
+	goto FlottTown_FlottCave_ZubatSpawn_1
+
+FlottTown_FlottCave_ZubatSpawn_6:
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	subvar VAR_TEMP_2, 2
+	subvar VAR_TEMP_5, 1
+	goto FlottTown_FlottCave_ZubatSpawn_1
 
 
 FlottTown_FlottCave_EventScript_RockSmash::
@@ -105,22 +136,22 @@ FlottTown_FlottCave_EventScript_ElsieRescue::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
 	msgbox FlottTown_FlottCave_Text_Rescue, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_BARNEY, FlottTown_FlottCave_Movement_BarneyWalksUp
+	applymovement 8, FlottTown_FlottCave_Movement_BarneyWalksUp
 	applymovement OBJ_EVENT_ID_PLAYER, FlottTown_FlottCave_Movement_PlayerWalksUp
-	applymovement LOCALID_ELSIE, FlottTown_FlottCave_Movement_ElsieWalksUp
-	waitmovement LOCALID_BARNEY
-	waitmovement LOCALID_ELSIE
+	applymovement 7, FlottTown_FlottCave_Movement_ElsieWalksUp
+	waitmovement 8
+	waitmovement 7
 	waitmovement OBJ_EVENT_ID_PLAYER
-	applymovement LOCALID_ELSIE, Common_Movement_FaceRight
+	applymovement 7, Common_Movement_FaceRight
 	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_0, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	applymovement LOCALID_ELSIE, Common_Movement_WalkInPlaceRight
+	applymovement 7, Common_Movement_WalkInPlaceRight
 	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_1, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	applymovement LOCALID_ELSIE, Common_Movement_FaceRight
-	applymovement LOCALID_BARNEY, Common_Movement_WalkInPlaceDown
+	applymovement 7, Common_Movement_FaceRight
+	applymovement 8, Common_Movement_WalkInPlaceDown
 	msgbox FlottTown_FlottCave_Text_LetsGoHome, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -133,78 +164,33 @@ FlottTown_FlottCave_EventScript_ElsieRescue::
 	end
 
 
-FlottTown_FlottCave_FacePlayerDirection:
-	switch VAR_ZUBAT_DIR
-	case 1, FlottTown_FlottCave_FacePlayerDirection_2
-	case 2, FlottTown_FlottCave_FacePlayerDirection_3
-	case 3, FlottTown_FlottCave_FacePlayerDirection_4
-	case 4, FlottTown_FlottCave_FacePlayerDirection_5
-	return
-
-FlottTown_FlottCave_FacePlayerDirection_2:
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
-	return
-
-FlottTown_FlottCave_FacePlayerDirection_3:
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
-	return
-
-FlottTown_FlottCave_FacePlayerDirection_4:
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
-	return
-
-FlottTown_FlottCave_FacePlayerDirection_5:
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
-	return
-
-
 FlottTown_FlottCave_StarterChoice:
 	lockall
-	msgbox FlottTown_FlottCave_StarterChoice_Text_0
-	switch VAR_STARTER_MON
-	case 0, FlottTown_FlottCave_StarterChoice_2
-	case 1, FlottTown_FlottCave_StarterChoice_3
-	case 2, FlottTown_FlottCave_StarterChoice_4
-	return
-
-FlottTown_FlottCave_StarterChoice_2:
-	addobject LOCALID_MANKEY
-	applymovement LOCALID_MANKEY, Common_Movement_FaceAwayPlayer
-	setobjectxy LOCALID_MANKEY, VAR_TEMP_2, VAR_TEMP_3
+	msgbox FlottTown_FlottCave_StarterChoice_Text_0, MSGBOX_DEFAULT
+	checkplayerpersonality
+	switch VAR_RESULT
+	case 0, FlottTown_FlottCave_StarterChoice_3
+	case 1, FlottTown_FlottCave_StarterChoice_4
+	case 2, FlottTown_FlottCave_StarterChoice_5
+FlottTown_FlottCave_StarterChoice_1:
 	fadescreen FADE_FROM_BLACK
 	msgbox FlottTown_FlottCave_StarterChoice_Text_1, MSGBOX_DEFAULT
-	playmoncry SPECIES_MANKEY, CRY_MODE_NORMAL
+	playmoncry VAR_TEMP_7, CRY_MODE_NORMAL
 	waitmoncry
-	givemon SPECIES_MANKEY, 10, ITEM_NONE
-	removeobject LOCALID_TINKATINK
-	removeobject LOCALID_TEDDIURSA
+	givemon VAR_TEMP_7, 10, ITEM_NONE
 	return
 
 FlottTown_FlottCave_StarterChoice_3:
-	addobject LOCALID_TINKATINK
-	applymovement LOCALID_TINKATINK, Common_Movement_FaceAwayPlayer
-	setobjectxy LOCALID_TINKATINK, VAR_TEMP_2, VAR_TEMP_3
-	fadescreen FADE_FROM_BLACK
-	msgbox FlottTown_FlottCave_StarterChoice_Text_2, MSGBOX_DEFAULT
-	playmoncry SPECIES_TINKATINK, CRY_MODE_NORMAL
-	waitmoncry
-	givemon SPECIES_TINKATINK, 10, ITEM_NONE
-	removeobject LOCALID_MANKEY
-	removeobject LOCALID_TEDDIURSA
-	return
+	call StarterSelection_FuryPersonality
+	goto FlottTown_FlottCave_StarterChoice_1
 
 FlottTown_FlottCave_StarterChoice_4:
-	addobject LOCALID_TEDDIURSA
-	applymovement LOCALID_TEDDIURSA, Common_Movement_FaceAwayPlayer
-	setobjectxy LOCALID_TEDDIURSA, VAR_TEMP_2, VAR_TEMP_3
-	fadescreen FADE_FROM_BLACK
-	msgbox FlottTown_FlottCave_StarterChoice_Text_3, MSGBOX_DEFAULT
-	playmoncry SPECIES_TEDDIURSA, CRY_MODE_NORMAL
-	waitmoncry
-	givemon SPECIES_TEDDIURSA, 10, ITEM_NONE
-	removeobject LOCALID_MANKEY
-	removeobject LOCALID_TINKATINK
-	return
+	call StarterSelection_MischiefPersonality
+	goto FlottTown_FlottCave_StarterChoice_1
+
+FlottTown_FlottCave_StarterChoice_5:
+	call StarterSelection_FriendshipPersonality
+	goto FlottTown_FlottCave_StarterChoice_1
 
 
 FlottTown_FlottCave_WildZubatBattle:
@@ -212,7 +198,7 @@ FlottTown_FlottCave_WildZubatBattle:
 	setwildbattle SPECIES_ZUBAT, 10
 	dowildbattle
 	fadescreen FADE_TO_BLACK
-	removeobject LOCALID_ZUBAT
+	removeobject 10
 	fadescreen FADE_FROM_BLACK
 	msgbox FlottTown_FlottCave_WildZubatBattle_Text_0, MSGBOX_DEFAULT
 	closemessage
@@ -220,87 +206,20 @@ FlottTown_FlottCave_WildZubatBattle:
 
 
 FlottTown_FlottCave_StarterWantsToJoin:
-	switch VAR_STARTER_MON
-	case 0, FlottTown_FlottCave_StarterWantsToJoin_3
-	case 1, FlottTown_FlottCave_StarterWantsToJoin_4
-	case 2, FlottTown_FlottCave_StarterWantsToJoin_5
-FlottTown_FlottCave_StarterWantsToJoin_1:
-	return
-
-FlottTown_FlottCave_StarterWantsToJoin_3:
-	applymovement LOCALID_MANKEY, Common_Movement_FacePlayer
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_0, MSGBOX_DEFAULT
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_1, MSGBOX_YESNO
+	applymovement VAR_TEMP_8, Common_Movement_FacePlayer
+	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_0, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_6
+	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_1
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_2, MSGBOX_DEFAULT
 	call FlottTown_FlottCave_StarterWantsToJoin
-	goto FlottTown_FlottCave_StarterWantsToJoin_1
-
-FlottTown_FlottCave_StarterWantsToJoin_4:
-	applymovement LOCALID_TINKATINK, Common_Movement_FacePlayer
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_3, MSGBOX_DEFAULT
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_4, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_9
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_5, MSGBOX_DEFAULT
-	call FlottTown_FlottCave_StarterWantsToJoin
-	goto FlottTown_FlottCave_StarterWantsToJoin_1
-
-FlottTown_FlottCave_StarterWantsToJoin_5:
-	applymovement LOCALID_TEDDIURSA, Common_Movement_FacePlayer
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_6, MSGBOX_DEFAULT
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_1, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_12
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_7, MSGBOX_DEFAULT
-	call FlottTown_FlottCave_StarterWantsToJoin
-	goto FlottTown_FlottCave_StarterWantsToJoin_1
-
-FlottTown_FlottCave_StarterWantsToJoin_6:
-	call FlottTown_FlottCave_StarterYesNo
-	goto FlottTown_FlottCave_StarterWantsToJoin_1
-
-FlottTown_FlottCave_StarterWantsToJoin_9:
-	call FlottTown_FlottCave_StarterYesNo
-	goto FlottTown_FlottCave_StarterWantsToJoin_1
-
-FlottTown_FlottCave_StarterWantsToJoin_12:
-	call FlottTown_FlottCave_StarterYesNo
-	goto FlottTown_FlottCave_StarterWantsToJoin_1
-
-
-FlottTown_FlottCave_StarterYesNo:
-	switch VAR_STARTER_MON
-	case 0, FlottTown_FlottCave_StarterYesNo_2
-	case 1, FlottTown_FlottCave_StarterYesNo_3
-	case 2, FlottTown_FlottCave_StarterYesNo_4
 	return
 
-FlottTown_FlottCave_StarterYesNo_2:
+FlottTown_FlottCave_StarterWantsToJoin_1:
 	playfanfare MUS_OBTAIN_ITEM
-	msgbox FlottTown_FlottCave_StarterYesNo_Text_0, MSGBOX_DEFAULT
+	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_1, MSGBOX_DEFAULT
 	waitfanfare
 	setflag FLAG_SYS_POKEMON_GET
-	removeobject LOCALID_MANKEY
-	call FlottTown_FlottCave_NicknamePartyMon
-	return
-
-FlottTown_FlottCave_StarterYesNo_3:
-	playfanfare MUS_OBTAIN_ITEM
-	msgbox FlottTown_FlottCave_StarterYesNo_Text_1, MSGBOX_DEFAULT
-	waitfanfare
-	setflag FLAG_SYS_POKEMON_GET
-	removeobject LOCALID_TINKATINK
-	call FlottTown_FlottCave_NicknamePartyMon
-	return
-
-FlottTown_FlottCave_StarterYesNo_4:
-	playfanfare MUS_OBTAIN_ITEM
-	msgbox FlottTown_FlottCave_StarterYesNo_Text_2, MSGBOX_DEFAULT
-	waitfanfare
-	setflag FLAG_SYS_POKEMON_GET
-	removeobject LOCALID_TEDDIURSA
+	removeobject VAR_TEMP_8
 	call FlottTown_FlottCave_NicknamePartyMon
 	return
 
@@ -375,57 +294,23 @@ FlottTown_FlottCave_EventScript_ElsieRescue_Text_1:
 
 FlottTown_FlottCave_StarterChoice_Text_0:
 	.string "But…before it could hurt you, something\n"
-	.string "intervenes.$"
+	.string "intervenes.\l"
+	.string "What is it?$"
 
 FlottTown_FlottCave_StarterChoice_Text_1:
-	.string "Mankey jumped in to save you!$"
-
-FlottTown_FlottCave_StarterChoice_Text_2:
-	.string "Tinkatink jumped in to save you!$"
-
-FlottTown_FlottCave_StarterChoice_Text_3:
-	.string "Teddiursa jumped in to save you!$"
+	.string "{STR_VAR_1} jumped in to save you!$"
 
 FlottTown_FlottCave_WildZubatBattle_Text_0:
 	.string "The wild Zubat ran away!$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_0:
-	.string "Mankey is looking at you curiously. It\n"
-	.string "seems to want to join you.$"
+	.string "It looks like the {STR_VAR_1} wants\nto join you. Let it?$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_1:
-	.string "Do you accept?$"
+	.string "{STR_VAR_1} joined you!$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_2:
-	.string "Mankey looks like it's about to hit you\n"
-	.string "next.$"
-
-FlottTown_FlottCave_StarterWantsToJoin_Text_3:
-	.string "Tinkatink is too busy playing with its\n"
-	.string "hammer to notice you.$"
-
-FlottTown_FlottCave_StarterWantsToJoin_Text_4:
-	.string "Do you want to convince it to join you?$"
-
-FlottTown_FlottCave_StarterWantsToJoin_Text_5:
-	.string "Are you sure? It looks really cute.$"
-
-FlottTown_FlottCave_StarterWantsToJoin_Text_6:
-	.string "Teddiursa is looking at you curiously.\n"
-	.string "It seems to want to join you.$"
-
-FlottTown_FlottCave_StarterWantsToJoin_Text_7:
-	.string "Teddiursa looks at you with Baby-Doll\n"
-	.string "eyes.$"
-
-FlottTown_FlottCave_StarterYesNo_Text_0:
-	.string "Mankey joined you!$"
-
-FlottTown_FlottCave_StarterYesNo_Text_1:
-	.string "Tinkatink joined you!$"
-
-FlottTown_FlottCave_StarterYesNo_Text_2:
-	.string "Teddiursa joined you!$"
+	.string "The Pokémon looks sad.$"
 
 FlottTown_FlottCave_NicknamePartyMon_Text_0:
 	.string "Give a nickname?$"
