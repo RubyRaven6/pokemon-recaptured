@@ -1,12 +1,5 @@
 DiancieCave_MapScripts::
-	map_script MAP_SCRIPT_ON_LOAD, DiancieCave_OnLoad
 	.byte 0
-
-
-DiancieCave_OnLoad::
-	checkplayerpersonality
-	copyvar VAR_STARTER_MON, VAR_RESULT
-	return
 
 
 DiancieCave_EventScript_MeetingDiancie::

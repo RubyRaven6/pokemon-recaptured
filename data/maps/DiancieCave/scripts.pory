@@ -1,12 +1,6 @@
 const LOCALID_DIANCIE = 7
 
 mapscripts DiancieCave_MapScripts {
-    MAP_SCRIPT_ON_LOAD: DiancieCave_OnLoad
-}
-
-script DiancieCave_OnLoad{
-    checkplayerpersonality
-    copyvar(VAR_STARTER_MON, VAR_RESULT)
 }
 
 script DiancieCave_EventScript_MeetingDiancie{

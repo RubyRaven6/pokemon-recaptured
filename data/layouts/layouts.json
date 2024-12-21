@@ -4404,8 +4404,8 @@
     {
       "id": "LAYOUT_FLOTT_TOWN_FLOTT_CAVE",
       "name": "FlottTown_FlottCave_Layout",
-      "width": 20,
-      "height": 21,
+      "width": 25,
+      "height": 26,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/FlottTown_FlottCave/border.bin",

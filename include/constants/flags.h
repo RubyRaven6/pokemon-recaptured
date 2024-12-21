@@ -56,13 +56,13 @@
 #define FLAG_ELSIE_IN_BARNEYS_HOUSE    0x2A // Hiding Elsie in Barney's house
 #define FLAG_BARNEY_IN_HOUSE           0x2B // Hiding Barney in his house
 #define FLAG_HIDE_ZUBAT                0x2C // Hides Zubat in the corner of Flott Cave
-#define FLAG_HIDE_MANKEY               0x2D // Hides Mankey in the corner of Flott Cave
-#define FLAG_HIDE_TINKATINK            0x2E // Hides Tinkatink in the corner of Flott Cave
-#define FLAG_HIDE_TEDDIURSA            0x2F // Hides Teddiursa in the corner of Flott Cave
-#define FLAG_FLOTT_HARBOR_SAILOR       0x30 // Unhides the sailor in the Flott Town Harbor.
-#define FLAG_UNUSED_0x031           0x31 // Flag for when player is in Diancie Cave
-#define FLAG_UNUSED_0x032    0x32 // Flag for time pausing
-#define FLAG_UNUSED_0x033    0x33 // Unused Flag
+#define FLAG_HIDE_MON0                 0x2D // Hides Mankey in the corner of Flott Cave
+#define FLAG_HIDE_MON1                 0x2E // Hides Tinkatink in the corner of Flott Cave
+#define FLAG_HIDE_MON2                 0x2F // Hides Teddiursa in the corner of Flott Cave
+#define FLAG_HIDE_MON3                 0x30 // Unused Flag
+#define FLAG_HIDE_MON4                 0x31 // Unused Flag
+#define FLAG_FLOTT_HARBOR_SAILOR       0x32 // Unhides the sailor in the Flott Town Harbor.
+#define FLAG_UNUSED_0x031              0x33 // Unused Flag
 #define FLAG_UNUSED_0x034    0x34 // Unused Flag
 #define FLAG_UNUSED_0x035    0x35 // Unused Flag
 #define FLAG_UNUSED_0x036    0x36 // Unused Flag

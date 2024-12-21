@@ -865,7 +865,7 @@ RustboroCity_EventScript_MayAskToBattle::
 
 RustboroCity_EventScript_BattleMay::
 	msgbox RustboroCity_Text_MayImNotGoingToLose, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	switch VAR_UNUSED_0x4023
 	case 0, RustboroCity_EventScript_BattleMayTreecko
 	case 1, RustboroCity_EventScript_BattleMayTorchic
 	case 2, RustboroCity_EventScript_BattleMayMudkip
@@ -931,7 +931,7 @@ RustboroCity_EventScript_BrendanAskToBattle::
 
 RustboroCity_EventScript_BattleBrendan::
 	msgbox RustboroCity_Text_BrendanIWontGoEasy, MSGBOX_DEFAULT
-	switch VAR_STARTER_MON
+	switch VAR_UNUSED_0x4023
 	case 0, RustboroCity_EventScript_BattleBrendanTreecko
 	case 1, RustboroCity_EventScript_BattleBrendanTorchic
 	case 2, RustboroCity_EventScript_BattleBrendanMudkip

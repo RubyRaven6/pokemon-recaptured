@@ -1143,6 +1143,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/save.inc"
 	.include "data/text/diancie_speech.inc"
 @	.include "data/scripts/script_time_menu.inc"
+	.include "data/scripts/starter_selection.inc"
 	.include "data/maps/FlottTown/scripts.inc"
 	.include "data/maps/FlottTown_InsideHarbor/scripts.inc"
 	.include "data/maps/FlottTown_ShipCabin/scripts.inc"

@@ -50,7 +50,7 @@
 #define VAR_DOCKED_CITY                                  0x4020 // 0 = Flott Town, 1 = Dockside City, 3 = Ocean City, 4=Mountport
 #define VAR_REPEL_STEP_COUNT                             0x4021
 #define VAR_ICE_STEP_COUNT                               0x4022
-#define VAR_STARTER_MON                                  0x4023 // 0 = Fury/Mankey, 1 = Mischief/Tinkatink, 2 = Friendship/Teddiursa
+#define VAR_UNUSED_0x4023                                0x4023 // Unused
 #define VAR_ZUBAT_DIR                                    0x4024 // Checks intro's Zubat direction
 #define VAR_MIRAGE_RND_L                                 0x4025
 #define VAR_SECRET_BASE_MAP                              0x4026

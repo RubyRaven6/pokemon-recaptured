@@ -213,7 +213,7 @@
 #define P_FAMILY_PLUSLE                  FALSE
 #define P_FAMILY_MINUN                   FALSE
 #define P_FAMILY_VOLBEAT_ILLUMISE        FALSE
-#define P_FAMILY_ROSELIA                 FALSE
+#define P_FAMILY_ROSELIA                 P_GEN_3_POKEMON
 #define P_FAMILY_GULPIN                  FALSE
 #define P_FAMILY_CARVANHA                FALSE
 #define P_FAMILY_WAILMER                 FALSE
@@ -221,7 +221,7 @@
 #define P_FAMILY_TORKOAL                 FALSE
 #define P_FAMILY_SPOINK                  FALSE
 #define P_FAMILY_SPINDA                  FALSE
-#define P_FAMILY_TRAPINCH                FALSE
+#define P_FAMILY_TRAPINCH                P_GEN_3_POKEMON
 #define P_FAMILY_CACNEA                  P_GEN_3_POKEMON
 #define P_FAMILY_SWABLU                  FALSE
 #define P_FAMILY_ZANGOOSE                FALSE
@@ -342,7 +342,7 @@
 #define P_FAMILY_TRUBBISH                FALSE
 #define P_FAMILY_ZORUA                   FALSE
 #define P_FAMILY_MINCCINO                FALSE
-#define P_FAMILY_GOTHITA                 FALSE
+#define P_FAMILY_GOTHITA                 P_GEN_5_POKEMON
 #define P_FAMILY_SOLOSIS                 FALSE
 #define P_FAMILY_DUCKLETT                FALSE
 #define P_FAMILY_VANILLITE               FALSE
@@ -357,7 +357,7 @@
 #define P_FAMILY_KLINK                   FALSE
 #define P_FAMILY_TYNAMO                  FALSE
 #define P_FAMILY_ELGYEM                  FALSE
-#define P_FAMILY_LITWICK                 FALSE
+#define P_FAMILY_LITWICK                 P_GEN_5_POKEMON
 #define P_FAMILY_AXEW                    FALSE
 #define P_FAMILY_CUBCHOO                 FALSE
 #define P_FAMILY_CRYOGONAL               FALSE
@@ -394,7 +394,7 @@
 #define P_FAMILY_FLETCHLING              FALSE
 #define P_FAMILY_SCATTERBUG              FALSE
 #define P_FAMILY_LITLEO                  FALSE
-#define P_FAMILY_FLABEBE                 FALSE
+#define P_FAMILY_FLABEBE                 P_GEN_6_POKEMON
 #define P_FAMILY_SKIDDO                  FALSE
 #define P_FAMILY_PANCHAM                 FALSE
 #define P_FAMILY_FURFROU                 FALSE
@@ -486,7 +486,7 @@
 #define P_FAMILY_SOBBLE                  FALSE
 #define P_FAMILY_SKWOVET                 FALSE
 #define P_FAMILY_ROOKIDEE                FALSE
-#define P_FAMILY_BLIPBUG                 FALSE
+#define P_FAMILY_BLIPBUG                 P_GEN_8_POKEMON
 #define P_FAMILY_NICKIT                  FALSE
 #define P_FAMILY_GOSSIFLEUR              FALSE
 #define P_FAMILY_WOOLOO                  FALSE
@@ -501,7 +501,7 @@
 #define P_FAMILY_SIZZLIPEDE              FALSE
 #define P_FAMILY_CLOBBOPUS               FALSE
 #define P_FAMILY_SINISTEA                FALSE
-#define P_FAMILY_HATENNA                 FALSE
+#define P_FAMILY_HATENNA                 P_GEN_8_POKEMON
 #define P_FAMILY_IMPIDIMP                FALSE
 #define P_FAMILY_MILCERY                 FALSE
 #define P_FAMILY_FALINKS                 FALSE
@@ -541,7 +541,7 @@
 #define P_FAMILY_FIDOUGH                 FALSE
 #define P_FAMILY_SMOLIV                  FALSE
 #define P_FAMILY_SQUAWKABILLY            FALSE
-#define P_FAMILY_NACLI                   FALSE
+#define P_FAMILY_NACLI                   P_GEN_9_POKEMON
 #define P_FAMILY_CHARCADET               FALSE
 #define P_FAMILY_TADBULB                 FALSE
 #define P_FAMILY_WATTREL                 FALSE
@@ -553,7 +553,7 @@
 #define P_FAMILY_CAPSAKID                FALSE
 #define P_FAMILY_RELLOR                  FALSE
 #define P_FAMILY_FLITTLE                 FALSE
-#define P_FAMILY_TINKATINK               P_GEN_1_POKEMON
+#define P_FAMILY_TINKATINK               P_GEN_9_POKEMON
 #define P_FAMILY_WIGLETT                 FALSE
 #define P_FAMILY_BOMBIRDIER              FALSE
 #define P_FAMILY_FINIZEN                 FALSE
