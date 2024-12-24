@@ -145,7 +145,7 @@
 #define P_FAMILY_TOGEPI                  FALSE
 #define P_FAMILY_NATU                    FALSE
 #define P_FAMILY_MAREEP                  FALSE
-#define P_FAMILY_MARILL                  FALSE
+#define P_FAMILY_MARILL                  P_GEN_2_POKEMON
 #define P_FAMILY_SUDOWOODO               FALSE
 #define P_FAMILY_HOPPIP                  FALSE
 #define P_FAMILY_AIPOM                   FALSE
@@ -207,7 +207,7 @@
 #define P_FAMILY_SKITTY                  FALSE
 #define P_FAMILY_SABLEYE                 FALSE
 #define P_FAMILY_MAWILE                  FALSE
-#define P_FAMILY_ARON                    FALSE
+#define P_FAMILY_ARON                    P_GEN_3_POKEMON
 #define P_FAMILY_MEDITITE                FALSE
 #define P_FAMILY_ELECTRIKE               FALSE
 #define P_FAMILY_PLUSLE                  FALSE
@@ -237,7 +237,7 @@
 #define P_FAMILY_CASTFORM                FALSE
 #define P_FAMILY_KECLEON                 FALSE
 #define P_FAMILY_SHUPPET                 FALSE
-#define P_FAMILY_DUSKULL                 FALSE
+#define P_FAMILY_DUSKULL                 P_GEN_2_POKEMON
 #define P_FAMILY_TROPIUS                 FALSE
 #define P_FAMILY_CHIMECHO                FALSE
 #define P_FAMILY_ABSOL                   FALSE

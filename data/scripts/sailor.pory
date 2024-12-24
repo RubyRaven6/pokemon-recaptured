@@ -2,7 +2,6 @@
 
 script SSTidal_Harbor_EventScript_SailorWarpScript{
     msgbox("Ahoy! Where do you want to go to today?", MSGBOX_DEFAULT)
-    checkitem(ITEM_JOURNAL)
     if(var(VAR_RESULT) == TRUE){
         dynmultipush("Flott Town", 0)
         dynmultipush("Dockside City", 1)

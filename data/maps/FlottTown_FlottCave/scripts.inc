@@ -210,7 +210,7 @@ FlottTown_FlottCave_StarterWantsToJoin:
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_0, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_1
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_2, MSGBOX_DEFAULT
+	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_3, MSGBOX_DEFAULT
 	call FlottTown_FlottCave_StarterWantsToJoin
 	return
 
@@ -220,22 +220,17 @@ FlottTown_FlottCave_StarterWantsToJoin_1:
 	waitfanfare
 	setflag FLAG_SYS_POKEMON_GET
 	removeobject VAR_TEMP_8
-	call FlottTown_FlottCave_NicknamePartyMon
-	return
-
-
-FlottTown_FlottCave_NicknamePartyMon:
-	msgbox FlottTown_FlottCave_NicknamePartyMon_Text_0, MSGBOX_YESNO
+	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_2, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq FlottTown_FlottCave_NicknamePartyMon_2
+	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_5
 	closemessage
-FlottTown_FlottCave_NicknamePartyMon_1:
+FlottTown_FlottCave_StarterWantsToJoin_4:
 	return
 
-FlottTown_FlottCave_NicknamePartyMon_2:
+FlottTown_FlottCave_StarterWantsToJoin_5:
 	call Common_EventScript_GetGiftMonPartySlot
 	call Common_EventScript_NameReceivedPartyMon
-	goto FlottTown_FlottCave_NicknamePartyMon_1
+	goto FlottTown_FlottCave_StarterWantsToJoin_4
 
 
 FlottTown_FlottCave_PlayerFacesBarneyFromBottomTrigger:
@@ -310,10 +305,10 @@ FlottTown_FlottCave_StarterWantsToJoin_Text_1:
 	.string "{STR_VAR_1} joined you!$"
 
 FlottTown_FlottCave_StarterWantsToJoin_Text_2:
-	.string "The Pokémon looks sad.$"
-
-FlottTown_FlottCave_NicknamePartyMon_Text_0:
 	.string "Give a nickname?$"
+
+FlottTown_FlottCave_StarterWantsToJoin_Text_3:
+	.string "The Pokémon looks sad.$"
 
 FlottTown_FlottCave_Text_ElsieWorried:
 	.string "ELSIE: Oh my god! {PLAYER}! Are you\n"
