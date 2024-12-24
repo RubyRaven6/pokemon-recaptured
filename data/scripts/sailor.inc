@@ -1,6 +1,5 @@
 SSTidal_Harbor_EventScript_SailorWarpScript::
 	msgbox SSTidal_Harbor_EventScript_SailorWarpScript_Text_0, MSGBOX_DEFAULT
-	checkitem ITEM_JOURNAL
 	compare VAR_RESULT, TRUE
 	goto_if_eq SSTidal_Harbor_EventScript_SailorWarpScript_2
 SSTidal_Harbor_EventScript_SailorWarpScript_1:

@@ -6,10 +6,10 @@ FlottTown_InsideHarbor_MapScripts::
 FlottTown_InsideHarbor_OnLoad:
 	setflag FLAG_VISITED_FLOTT_TOWN
 	setvar VAR_DOCKED_CITY, 0
-	checkitem ITEM_JOURNAL
-	compare VAR_RESULT, FALSE
+	compare FLAG_SYS_QUEST_MENU_GET, TRUE
 	goto_if_eq FlottTown_InsideHarbor_OnLoad_2
 	removeobject 1
+	removeobject 2
 FlottTown_InsideHarbor_OnLoad_1:
 	compare VAR_FLOTT_TOWN_STATE, 2
 	goto_if_eq FlottTown_InsideHarbor_OnLoad_5
