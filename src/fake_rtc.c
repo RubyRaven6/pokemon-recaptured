@@ -9,7 +9,7 @@
 
 struct Time *FakeRtc_GetCurrentTime(void)
 {
-#if OW_USE_FAKE_RTC
+#if OW_USE_FAKE_RTC == TRUE
     return &gSaveBlock3Ptr->fakeRTC;
 #else
     return NULL;
@@ -68,17 +68,41 @@ void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
 
 void FakeRtc_ManuallySetTime(u32 dayOfWeek, u32 hour, u32 minute, u32 second)
 {
+    Script_ToggleFakeRtc();
+
     struct Time diff, target;
     RtcCalcLocalTime();
 
     target.hours = hour;
     target.minutes = minute;
     target.seconds = second;
-    target.days = dayOfWeek;
 
     CalcTimeDifference(&diff, &gLocalTime, &target);
     FakeRtc_AdvanceTimeBy(diff.hours, diff.minutes, diff.seconds);
+    
+    MgbaPrintf(MGBA_LOG_WARN, "dayOfWeek: %u", dayOfWeek);
+    MgbaPrintf(MGBA_LOG_WARN, "gLocalTime.days: %u", gLocalTime.days);
+    u32 dayOffset = (dayOfWeek - gLocalTime.days + 7) % 7;
+    MgbaPrintf(MGBA_LOG_WARN, "dayOffset: %u", dayOffset);
+    u32 dayAdvance = dayOffset * 24; // converts dayOffset to equivalent number of hours, to bring it to the specified day.
+    MgbaPrintf(MGBA_LOG_WARN, "dayAdvance: %u", dayAdvance);
+   
+    
+    MgbaPrintf(MGBA_LOG_WARN, "gLocalTime.days after 2nd advancetimeby: %u", gLocalTime.days);
+
+    Script_ToggleFakeRtc();
 }
+
+// void FakeRtc_ManuallySetDayOfWeek(u32 dayOfWeek){
+//     Script_ToggleFakeRtc();
+//     struct Time* time = FakeRtc_GetCurrentTime();
+//     MgbaPrintf(MGBA_LOG_WARN, "dayOffset: %u", 0);
+//     u32 dayOffset = (dayOfWeek - gLocalTime.days + 7) % 7;
+//     MgbaPrintf(MGBA_LOG_WARN, "dayOffset: %u", dayOffset);
+//     dayOffset += time->days;
+//     MgbaPrintf(MGBA_LOG_WARN, "time->days: %u", time->days);
+//     Script_ToggleFakeRtc();
+// }
 
 u32 FakeRtc_GetSecondsRatio(void)
 {
@@ -104,3 +128,33 @@ void Script_ToggleFakeRtc(void)
 {
     FlagToggle(OW_FLAG_PAUSE_TIME);
 }
+
+bool8 ScrCmd_addtime(struct ScriptContext *ctx)
+{
+    u32 addedhours = ScriptReadWord(ctx);
+    u32 addedminutes = ScriptReadWord(ctx);
+    FakeRtc_AdvanceTimeBy(addedhours, addedminutes, 0);
+    return FALSE;
+}
+
+bool8 ScrCmd_settime(struct ScriptContext *ctx)
+{
+    u32 setDayOfWeek = ScriptReadWord(ctx);
+    u32 setHour = ScriptReadWord(ctx);
+    u32 setMinute = ScriptReadWord(ctx);
+    MgbaPrintf(MGBA_LOG_WARN, "gLocalTime.days modulo 7 b4: %u", gLocalTime.days % 7);
+    MgbaPrintf(MGBA_LOG_WARN, "gLocalTime.hours b4: %u", gLocalTime.hours);
+    FakeRtc_ManuallySetTime(setDayOfWeek, setHour, setMinute, 0);
+    MgbaPrintf(MGBA_LOG_WARN, "gLocalTime.days modulo 7 after: %u", gLocalTime.days % 7);
+    MgbaPrintf(MGBA_LOG_WARN, "gLocalTime.hour after: %u", gLocalTime.hours);
+    return FALSE;
+}
+
+// bool8 ScrCmd_setdayofweek(struct ScriptContext *ctx)
+// {
+//     u32 setDayOfWeek = ScriptReadWord(ctx);
+//     MgbaPrintf(MGBA_LOG_WARN, "gLocalTime.days modulo 7 b4: %u", gLocalTime.days % 7);
+//     FakeRtc_ManuallySetDayOfWeek(setDayOfWeek);
+//     MgbaPrintf(MGBA_LOG_WARN, "gLocalTime.days modulo 7 after: %u", gLocalTime.days % 7);
+//     return FALSE;
+// }

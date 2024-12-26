@@ -554,7 +554,7 @@ gSpecials::
 	def_special Script_GetChosenMonDefensiveEVs
 	def_special Script_GetChosenMonOffensiveIVs
 	def_special Script_GetChosenMonDefensiveIVs
-	def_special CheckZubatSpawning
+@	def_special CheckZubatSpawning
 	def_special TeleportCamera
 	def_special ReturnCameraToPlayer
 	def_special UseBlankMessageToCancelPokemonPic

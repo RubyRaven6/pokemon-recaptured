@@ -1,0 +1,18 @@
+mapscripts Route_6_MapScripts {
+    
+}
+script SetTheTime{
+    msgbox(format("This sets the time to Monday, 10:32 PM"))
+    waitmessage
+    closemessage
+    settime(1, 22, 32)
+    releaseall
+}
+
+script Addtime{
+    msgbox(format("Adds 2 hours and 20 minutes"))
+    waitmessage
+    closemessage
+    addtime(2, 20)
+    releaseall
+}
