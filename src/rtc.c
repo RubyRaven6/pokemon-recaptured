@@ -95,9 +95,6 @@ u16 RtcGetDayCount(struct SiiRtcInfo *rtc)
 {
     u8 year, month, day;
 
-    if (OW_USE_FAKE_RTC)
-        return rtc->day;
-
     year = ConvertBcdToBinary(rtc->year);
     month = ConvertBcdToBinary(rtc->month);
     day = ConvertBcdToBinary(rtc->day);
@@ -228,6 +225,12 @@ u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
 
 void RtcReset(void)
 {
+    if (OW_USE_FAKE_RTC)
+    {
+        FakeRtc_Reset();
+        return;
+    }
+
     RtcDisableInterrupts();
     SiiRtcReset();
     RtcRestoreInterrupts();
