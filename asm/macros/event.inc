@@ -2678,9 +2678,13 @@
 	.4byte \minutes
 	.endm
 
-	.macro settime dayOfWeek:req hours:req, minutes:req
+	.macro settime hours:req, minutes:req
 	callnative ScrCmd_settime
-	.4byte \dayOfWeek
 	.4byte \hours
 	.4byte \minutes
+	.endm
+
+	.macro setweekday dayOfWeek:req
+	callnative ScrCmd_setdayofweek
+	.4byte \dayOfWeek
 	.endm
