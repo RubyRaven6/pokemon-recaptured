@@ -2678,8 +2678,8 @@
 	.4byte \minutes
 	.endm
 
-	.macro settime hours:req, minutes:req
-	callnative ScrCmd_settime
+	.macro forwardtime hours:req, minutes:req
+	callnative ScrCmd_forwardtime
 	.4byte \hours
 	.4byte \minutes
 	.endm

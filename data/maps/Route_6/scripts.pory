@@ -1,81 +1,81 @@
 mapscripts Route_6_MapScripts {
     
 }
-script SetTheTime{
-    msgbox(format("Set the time you like."))
-    dynmultichoice(3, 3, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Weekday", "Time")
-    switch(var(VAR_RESULT)){
-        case 0:
-            call(SetTheTimeDate)
-            closemessage
-            end
-        case 1:
-            call(SetTheTimeJustTime)
-            closemessage
-            end
-    }
-}
+// script SetTheTime{
+//     msgbox(format("Set the time you like."))
+//     dynmultichoice(3, 3, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Weekday", "Time")
+//     switch(var(VAR_RESULT)){
+//         case 0:
+//             call(SetTheTimeDate)
+//             closemessage
+//             end
+//         case 1:
+//             call(SetTheTimeJustTime)
+//             closemessage
+//             end
+//     }
+// }
 
-script SetTheTimeDate{
-    dynmultichoice(3, 3, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
-    switch(var(VAR_RESULT)){
-        case 0:
-            setweekday(0)
-            closemessage
-            end
-        case 1:
-            setweekday(1)
-            closemessage
-            end
-        case 2:
-            setweekday(2)
-            closemessage
-            end
-        case 3:
-            setweekday(3)
-            closemessage
-            end
-        case 4:
-            setweekday(4)
-            closemessage
-            end
-        case 5:
-            setweekday(5)
-            closemessage
-            end
-        case 6:
-            setweekday(6)
-            closemessage
-            end
-    }
-}
+// script SetTheTimeDate{
+//     dynmultichoice(3, 3, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+//     switch(var(VAR_RESULT)){
+//         case 0:
+//             setweekday(0)
+//             closemessage
+//             end
+//         case 1:
+//             setweekday(1)
+//             closemessage
+//             end
+//         case 2:
+//             setweekday(2)
+//             closemessage
+//             end
+//         case 3:
+//             setweekday(3)
+//             closemessage
+//             end
+//         case 4:
+//             setweekday(4)
+//             closemessage
+//             end
+//         case 5:
+//             setweekday(5)
+//             closemessage
+//             end
+//         case 6:
+//             setweekday(6)
+//             closemessage
+//             end
+//     }
+// }
 
-script SetTheTimeJustTime{
-    dynmultichoice(3, 3, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "12 AM", "6AM", "6 PM", "12 PM")
-    switch(var(VAR_RESULT)){
-        case 0:
-            settime(0, 0)
-            closemessage
-            end
-        case 1:
-            settime(6, 0)
-            closemessage
-            end
-        case 2:
-            settime(12, 0)
-            closemessage
-            end
-        case 3:
-            settime(18, 0)
-            closemessage
-            end
-    }
-}
+// script SetTheTimeJustTime{
+//     dynmultichoice(3, 3, FALSE, 2, 0, DYN_MULTICHOICE_CB_NONE, "12 AM", "6AM", "12 PM", "6 PM")
+//     switch(var(VAR_RESULT)){
+//         case 0:
+//             settime(0, 0)
+//             closemessage
+//             end
+//         case 1:
+//             settime(6, 0)
+//             closemessage
+//             end
+//         case 2:
+//             settime(12, 0)
+//             closemessage
+//             end
+//         case 3:
+//             settime(18, 0)
+//             closemessage
+//             end
+//     }
+// }
 
-script Addtime{
-    msgbox(format("Adds 2 hours and 20 minutes"))
-    waitmessage
-    closemessage
-    addtime(2, 20)
-    releaseall
-}
+// script Addtime{
+//     msgbox(format("Adds 2 hours and 20 minutes"))
+//     waitmessage
+//     closemessage
+//     addtime(2, 20)
+//     releaseall
+// }
