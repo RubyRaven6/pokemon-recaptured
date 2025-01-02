@@ -191,6 +191,10 @@ void Script_ToggleFakeRtc(void)
     FlagToggle(OW_FLAG_PAUSE_TIME);
 }
 
+/////////////////////////////
+//////// TIME MACROS ////////
+/////////////////////////////
+
 bool8 ScrCmd_addtime(struct ScriptContext *ctx)
 {
     u32 addedDays = ScriptReadWord(ctx);
@@ -202,14 +206,24 @@ bool8 ScrCmd_addtime(struct ScriptContext *ctx)
 
 bool8 ScrCmd_forwardtime(struct ScriptContext *ctx)
 {
-    // u32 setDayOfWeek = ScriptReadWord(ctx);
-    // u32 setHour = ScriptReadWord(ctx);
-    // u32 setMinute = ScriptReadWord(ctx);
+    u32 setHour = ScriptReadWord(ctx);
+    u32 setMinute = ScriptReadWord(ctx);
+    FakeRtc_ForwardTimeTo(setHour, setMinute, 0);
     return FALSE;
 }
 
 bool8 ScrCmd_setdayofweek(struct ScriptContext *ctx)
 {
+    
+    struct SiiRtcInfo *rtc = FakeRtc_GetCurrentTime();
+    
+    u32 weekdayTarget = ScriptReadWord(ctx);
+    u32 weekdayCurrent = rtc->dayOfWeek;
+    u32 daysToAdd;
+
+    daysToAdd = ((weekdayTarget - weekdayCurrent) + 7) % 7;
+
+    FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
     return FALSE;
 }
 
@@ -217,6 +231,7 @@ bool8 ScrCmd_setdayofweek(struct ScriptContext *ctx)
 //////// TESTING FUNCTIONS ////////
 ///////////////////////////////////
 
+/*
 void Script_Testing1(void)
 {
     struct SiiRtcInfo *fakeRtc = FakeRtc_GetCurrentTime();
@@ -233,12 +248,11 @@ void Script_Testing1(void)
 
 void Script_Testing2(void)
 {
-    //struct SiiRtcInfo *rtc = FakeRtc_GetCurrentTime();
-    // MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", rtc->hour);
-    // MgbaPrintf(MGBA_LOG_WARN, "Minute: %u", rtc->minute);
+    MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", rtc->hour);
+    MgbaPrintf(MGBA_LOG_WARN, "Minute: %u", rtc->minute);
     FakeRtc_ForwardTimeTo(20, 12, 0);
-    // MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", rtc->hour);
-    // MgbaPrintf(MGBA_LOG_WARN, "Minute: %u", rtc->minute);
+    MgbaPrintf(MGBA_LOG_WARN, "Hour: %u", rtc->hour);
+    MgbaPrintf(MGBA_LOG_WARN, "Minute: %u", rtc->minute);
 }
 
 void Script_Testing3(void)
@@ -253,3 +267,4 @@ void Script_Testing3(void)
 
     FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
 }
+*/
