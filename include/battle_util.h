@@ -125,6 +125,7 @@ enum
     CANCELLER_EXPLODING_DAMP,
     CANCELLER_MULTIHIT_MOVES,
     CANCELLER_Z_MOVES,
+    CANCELLER_MULTI_TARGET_MOVES,
     CANCELLER_END,
     CANCELLER_PSYCHIC_TERRAIN,
     CANCELLER_END2,
@@ -151,6 +152,12 @@ struct DamageCalculationData
     u32 randomFactor:1;
     u32 updateFlags:1;
     u32 padding:2;
+};
+
+enum SleepClauseBlock
+{
+    NOT_BLOCKED_BY_SLEEP_CLAUSE,
+    BLOCKED_BY_SLEEP_CLAUSE,
 };
 
 void HandleAction_ThrowBall(void);
@@ -292,12 +299,12 @@ bool32 IsGen6ExpShareEnabled(void);
 bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect);
 bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance);
 bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect);
-bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument);
+bool32 IsMoveEffectRemoveSpeciesType(u32 move, u32 moveEffect, u32 argument);
 bool32 MoveHasChargeTurnAdditionalEffect(u32 move);
 bool32 CanTargetPartner(u32 battlerAtk, u32 battlerDef);
 bool32 TargetFullyImmuneToCurrMove(u32 battlerAtk, u32 battlerDef);
 
-bool32 CanBeSlept(u32 battler, u32 ability);
+bool32 CanBeSlept(u32 battler, u32 ability, enum SleepClauseBlock isBlockedBySleepClause);
 bool32 CanBePoisoned(u32 battlerAtk, u32 battlerDef, u32 defAbility);
 bool32 CanBeBurned(u32 battler, u32 ability);
 bool32 CanBeParalyzed(u32 battler, u32 ability);
@@ -315,10 +322,17 @@ bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2);
 bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2);
 u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
 bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
-u8 GetBattlerType(u32 battler, u8 typeIndex, bool32 ignoreTera);
+void GetBattlerTypes(u32 battler, bool32 ignoreTera, u32 types[static 3]);
+u32 GetBattlerType(u32 battler, u32 typeIndex, bool32 ignoreTera);
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
 bool8 IsMonBannedFromSkyBattles(u16 species);
 void RemoveBattlerType(u32 battler, u8 type);
 u32 GetMoveType(u32 move);
+void TryActivateSleepClause(u32 battler, u32 indexInParty);
+void TryDeactivateSleepClause(u32 battlerSide, u32 indexInParty);
+bool32 IsSleepClauseActiveForSide(u32 battlerSide);
+bool32 IsSleepClauseEnabled();
+void ClearDamageCalcResults(void);
+u32 DoesDestinyBondFail(u32 battler);
 
 #endif // GUARD_BATTLE_UTIL_H
