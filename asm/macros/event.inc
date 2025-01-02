@@ -1898,90 +1898,6 @@
 	.macro dynmultistack left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
 	.endm
-
-	@ Fake RTC macros
-	@ Use to advance time by a specific amount. 
-	.macro addtime years:req, months:req, days:req, hours:req, minutes:req, seconds:req
-	callnative RtcCmd_addtime
-	.4byte \years
-	.4byte \months
-	.4byte \days 
-	.4byte \hours
-	.4byte \minutes
-	.4byte \seconds
-	.endm
-
-	@ Sets the time to a specific year, date, and time.
-	.macro settime years:req, months:req, days:req, hours:req, minutes:req, seconds:req
-	callnative RtcCmd_settime
-	.4byte \years
-	.4byte \months
-	.4byte \days 
-	.4byte \hours
-	.4byte \minutes
-	.4byte \seconds
-	.endm
-
-	@ Specific Time Unit macros
-	@ Adds a number of years to the current time.
-	.macro addyear years:req
-	callnative RtcCmd_addyear
-	.4byte \years
-	.endm
-
-	@ Adds a number of months to the current time.
-	.macro addmonth months:req
-	callnative RtcCmd_addmonth
-	.4byte \months
-	.endm
-
-	@ Adds a number of days to the current time.
-	.macro addday days:req
-	callnative RtcCmd_addday
-	.4byte \days
-	.endm
-
-	@ Adds a number of hours to the current time.
-	.macro addhour hours:req
-	callnative RtcCmd_addhour
-	.4byte \hours
-	.endm
-
-	@ Adds a number of minutes to the current time.
-	.macro addminute minutes:req
-	callnative RtcCmd_addminute
-	.4byte \minutes
-	.endm
-
-	@ Sets the time to the specified number of years.
-	.macro setyear years:req
-	callnative RtcCmd_setyear
-	.4byte \years
-	.endm
-
-	@ Sets the time to the specified number of months.
-	.macro setmonth months:req
-	callnative RtcCmd_setmonth
-	.4byte \months
-	.endm
-
-	@ Sets the time to the specified number of days.
-	.macro setday days:req
-	callnative RtcCmd_setday
-	.4byte \days
-	.endm
-
-	@ Sets the time to the specified number of hours.
-	.macro sethour hours:req
-	callnative RtcCmd_sethour
-	.4byte \hours
-	.endm
-
-	@ Sets the time to the specified number of minutes.
-	.macro setminute minutes:req
-	callnative RtcCmd_setminute
-	.4byte \minutes
-	.endm
 	
 	@ Sets an NPC up to follow the player.
 	@ If you want to specify a battle partner without specifying a custom script, you can set the script parameter to 0.
@@ -2756,3 +2672,19 @@
 	.2byte \dest
 	.endm
 
+	.macro addtime hours:req, minutes:req
+	callnative ScrCmd_addtime
+	.4byte \hours
+	.4byte \minutes
+	.endm
+
+	.macro forwardtime hours:req, minutes:req
+	callnative ScrCmd_forwardtime
+	.4byte \hours
+	.4byte \minutes
+	.endm
+
+	.macro setweekday dayOfWeek:req
+	callnative ScrCmd_setdayofweek
+	.4byte \dayOfWeek
+	.endm

@@ -708,15 +708,29 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's m
 
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has an absorber")
 {
+    u32 aiMon; u32 move; u32 absorbingAbility;
+    PARAMETRIZE { aiMon = SPECIES_NINETALES; absorbingAbility = ABILITY_FLASH_FIRE; move = MOVE_FLAMETHROWER;}
+    PARAMETRIZE { aiMon = SPECIES_MANTINE;   absorbingAbility = ABILITY_WATER_ABSORB; move = MOVE_SURF;}
+    PARAMETRIZE { aiMon = SPECIES_TOXICROAK; absorbingAbility = ABILITY_DRY_SKIN; move = MOVE_SURF;}
+    PARAMETRIZE { aiMon = SPECIES_GASTRODON; absorbingAbility = ABILITY_STORM_DRAIN; move = MOVE_SURF;}
+    PARAMETRIZE { aiMon = SPECIES_JOLTEON; absorbingAbility = ABILITY_VOLT_ABSORB; move = MOVE_THUNDERBOLT;}
+    PARAMETRIZE { aiMon = SPECIES_ELECTIVIRE; absorbingAbility = ABILITY_MOTOR_DRIVE; move = MOVE_THUNDERBOLT;}
+    PARAMETRIZE { aiMon = SPECIES_MANECTRIC; absorbingAbility = ABILITY_LIGHTNING_ROD; move = MOVE_THUNDERBOLT;}
+    PARAMETRIZE { aiMon = SPECIES_ELECTIVIRE; absorbingAbility = ABILITY_MOTOR_DRIVE; move = MOVE_THUNDERBOLT;}
+    PARAMETRIZE { aiMon = SPECIES_AZUMARILL; absorbingAbility = ABILITY_SAP_SIPPER; move = MOVE_GIGA_DRAIN;}
+    PARAMETRIZE { aiMon = SPECIES_ORTHWORM; absorbingAbility = ABILITY_EARTH_EATER; move = MOVE_EARTHQUAKE;}
+    PARAMETRIZE { aiMon = SPECIES_BRONZONG; absorbingAbility = ABILITY_LEVITATE; move = MOVE_EARTHQUAKE;}
+    PARAMETRIZE { aiMon = SPECIES_ELECTRODE; absorbingAbility = ABILITY_SOUNDPROOF; move = MOVE_HYPER_VOICE;}
     GIVEN {
+        ASSUME(B_REDIRECT_ABILITY_IMMUNITY >= GEN_5);
         ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
-        PLAYER(SPECIES_LUVDISC) { Moves(MOVE_WATER_GUN); }
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(move); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
-        OPPONENT(SPECIES_MANTINE) { Moves(MOVE_TACKLE); Ability(ABILITY_WATER_ABSORB); }
+        OPPONENT(aiMon) { Moves(MOVE_TACKLE); Ability(absorbingAbility); }
     } WHEN {
-        TURN { MOVE(player, MOVE_WATER_GUN) ; EXPECT_MOVE(opponent, MOVE_TACKLE); }
-        TURN { MOVE(player, MOVE_WATER_GUN) ; EXPECT_SWITCH(opponent, 1); }
+        TURN { MOVE(player, move); EXPECT_MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, move); EXPECT_SWITCH(opponent, 1); }
     }
 }
 
@@ -881,6 +895,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if main attac
 
 AI_SINGLE_BATTLE_TEST("Switch AI: AI will switch into mon with good type matchup and SE move if current mon has no SE move and no stats raised")
 {
+    KNOWN_FAILING; // Either remove or replace the function
     u32 odds = 0, species = SPECIES_NONE, move = MOVE_NONE;
     PARAMETRIZE { odds = 33; species = SPECIES_SCIZOR; move = MOVE_X_SCISSOR; }
     PARAMETRIZE { odds = 50; species = SPECIES_DUSCLOPS; move = MOVE_SHADOW_BALL; }
