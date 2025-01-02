@@ -4435,10 +4435,6 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
          || gBattleMons[BATTLE_PARTNER(battlerAtk)].status1 & STATUS1_ANY)
             ADJUST_SCORE(GOOD_EFFECT);
         break;
-    case EFFECT_SALT_CURE:
-        if (IS_BATTLER_ANY_TYPE(battlerDef, TYPE_WATER, TYPE_STEEL))
-            ADJUST_SCORE(DECENT_EFFECT);
-        break;
     } // move effect checks
 
     // check move additional effects that are likely to happen
