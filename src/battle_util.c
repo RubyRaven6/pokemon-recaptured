@@ -3144,19 +3144,6 @@ void SetAtkCancellerForCalledMove(void)
     gBattleStruct->isAtkCancelerForCalledMove = TRUE;
 }
 
-static inline bool32 TryFormChangeBeforeMove(void)
-{
-    bool32 result = TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_BEFORE_MOVE);
-    if (!result)
-        result = TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_BEFORE_MOVE_CATEGORY);
-    if (!result)
-        return FALSE;
-
-    BattleScriptPushCursor();
-    gBattlescriptCurrInstr = BattleScript_AttackerFormChange;
-    return TRUE;
-}
-
 static void CancellerFlags(u32 *effect)
 {
     gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_DESTINY_BOND;
@@ -11996,8 +11983,6 @@ bool32 MoveIsAffectedBySheerForce(u32 move)
             return TRUE;
         if (additionalEffect->sheerForceBoost == SHEER_FORCE_BOOST)
             return TRUE;
-        if (gMovesInfo[move].additionalEffects[i].sheerForceBoost == SHEER_FORCE_BOOST)
-            return TRUE;
     }
     return FALSE;
 }
@@ -12183,7 +12168,44 @@ u32 GetBattleMoveType(u32 move)
           || move == MOVE_FUTURE_SIGHT
           || move == MOVE_DOOM_DESIRE))
           return TYPE_MYSTERY;
-    return gMovesInfo[move].type;
+    return GetMoveType(move);
+}
+
+void TryActivateSleepClause(u32 battler, u32 indexInParty)
+{
+    if (gBattleStruct->battlerState[battler].sleepClauseEffectExempt)
+    {
+        gBattleStruct->battlerState[battler].sleepClauseEffectExempt = FALSE;
+        return;
+    }
+
+    if (IsSleepClauseEnabled())
+        gBattleStruct->monCausingSleepClause[GetBattlerSide(battler)] = indexInParty;
+}
+
+void TryDeactivateSleepClause(u32 battlerSide, u32 indexInParty)
+{
+    // If the pokemon on the given side at the given index in the party is the one causing Sleep Clause to be active,
+    // set monCausingSleepClause[battlerSide] = PARTY_SIZE, which means Sleep Clause is not active for the given side
+    if (IsSleepClauseEnabled() && gBattleStruct->monCausingSleepClause[battlerSide] == indexInParty)
+        gBattleStruct->monCausingSleepClause[battlerSide] = PARTY_SIZE;
+}
+
+bool32 IsSleepClauseActiveForSide(u32 battlerSide)
+{
+    // If monCausingSleepClause[battlerSide] == PARTY_SIZE, Sleep Clause is not active for the given side.
+    // If monCausingSleepClause[battlerSide] < PARTY_SIZE, it means it is storing the index of the mon that is causing Sleep Clause to be active,
+    // from which it follows that Sleep Clause is active.
+    return (IsSleepClauseEnabled() && (gBattleStruct->monCausingSleepClause[battlerSide] < PARTY_SIZE));
+}
+
+bool32 IsSleepClauseEnabled()
+{
+    if (B_SLEEP_CLAUSE)
+        return TRUE;
+    if (FlagGet(B_FLAG_SLEEP_CLAUSE))
+        return TRUE;
+    return FALSE;
 }
 
 void ClearDamageCalcResults(void)
