@@ -200,7 +200,6 @@ static void CreateLevitateMovementTask(struct ObjectEvent *);
 static void DestroyLevitateMovementTask(u8);
 static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny);
 static bool8 NpcTakeStep(struct Sprite *);
-static bool8 IsElevationMismatchAt(u8, s16, s16);
 static bool8 AreElevationsCompatible(u8, u8);
 static void CopyObjectGraphicsInfoToSpriteTemplate_WithMovementType(u16 graphicsId, u16 movementType, struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables);
 
@@ -6051,9 +6050,15 @@ u8 GetDirectionToFace(s16 x, s16 y, s16 targetX, s16 targetY)
 // Uses the above, but script accessible, and uses localIds
 void GetDirectionToFaceScript(struct ScriptContext *ctx)
 {
-    u16 *var = GetVarPointer(ScriptReadHalfword(ctx));
+    u32 varId = ScriptReadHalfword(ctx);
     u8 sourceId = GetObjectEventIdByLocalId(ScriptReadByte(ctx));
     u8 targetId = GetObjectEventIdByLocalId(ScriptReadByte(ctx));
+
+    Script_RequestEffects(SCREFF_V1);
+    Script_RequestWriteVar(varId);
+
+    u16 *var = GetVarPointer(varId);
+
     if (var == NULL)
         return;
     if (sourceId >= OBJECT_EVENTS_COUNT || targetId >= OBJECT_EVENTS_COUNT)
@@ -6069,7 +6074,12 @@ void GetDirectionToFaceScript(struct ScriptContext *ctx)
 // Intended to be called before the field effect itself
 void IsFollowerFieldMoveUser(struct ScriptContext *ctx)
 {
-    u16 *var = GetVarPointer(ScriptReadHalfword(ctx));
+    u32 varId = ScriptReadHalfword(ctx);
+
+    Script_RequestEffects(SCREFF_V1);
+    Script_RequestWriteVar(varId);
+
+    u16 *var = GetVarPointer(varId);
     u16 userIndex = gFieldEffectArguments[0]; // field move user index
     struct Pokemon *follower = GetFirstLiveMon();
     struct ObjectEvent *obj = GetFollowerObject();
@@ -9619,7 +9629,7 @@ static void SetObjectEventSpriteOamTableForLongGrass(struct ObjectEvent *objEven
         sprite->subspriteTableNum = 5;
 }
 
-static bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y)
+bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y)
 {
     u8 mapElevation;
 
@@ -11059,6 +11069,13 @@ void GetDaycareGraphics(struct ScriptContext *ctx)
     u8 form;
     u8 shiny;
     s32 i;
+
+    Script_RequestEffects(SCREFF_V1);
+    Script_RequestWriteVar(varGfx[0]);
+    Script_RequestWriteVar(varGfx[1]);
+    Script_RequestWriteVar(varForm[0]);
+    Script_RequestWriteVar(varForm[1]);
+
     for (i = 0; i < 2; i++)
     {
         GetMonInfo((struct Pokemon *) &gSaveBlock1Ptr->daycare.mons[i].mon, &specGfx, &form, &shiny);

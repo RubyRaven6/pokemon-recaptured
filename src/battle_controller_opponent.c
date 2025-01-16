@@ -101,10 +101,6 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
     [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
-    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,
-    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,
-    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,
-    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
@@ -609,7 +605,7 @@ static void OpponentHandleChooseMove(u32 battler)
             } while (!CanTargetBattler(battler, target, move));
 
             // Don't bother to loop through table if the move can't attack ally
-            if (B_WILD_NATURAL_ENEMIES == TRUE && !(gMovesInfo[move].target & MOVE_TARGET_BOTH))
+            if (B_WILD_NATURAL_ENEMIES == TRUE && !(GetBattlerMoveTargetType(battler, move) & MOVE_TARGET_BOTH))
             {
                 u16 i, speciesAttacker, speciesTarget, isPartnerEnemy = FALSE;
                 static const u16 naturalEnemies[][2] =

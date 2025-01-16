@@ -20,6 +20,7 @@
 #include "constants/contest.h"
 #include "constants/daycare.h"
 #include "constants/decorations.h"
+#include "constants/difficulty.h"
 #include "constants/easy_chat.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
@@ -1142,6 +1143,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/follower.inc"
 	.include "data/text/save.inc"
 	.include "data/text/diancie_speech.inc"
+	.include "data/scripts/dexnav.inc"
 @	.include "data/scripts/script_time_menu.inc"
 	.include "data/scripts/starter_selection.inc"
 	.include "data/maps/FlottTown/scripts.inc"
@@ -1179,3 +1181,4 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/OasisTown/scripts.inc"
 
 	.include "data/maps/OasisTown_House1/scripts.inc"
+
