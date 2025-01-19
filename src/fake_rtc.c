@@ -2,6 +2,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
+#include "datetime.h"
 #include "rtc.h"
 #include "fake_rtc.h"
 #include "event_data.h"
@@ -12,9 +13,10 @@ void FakeRtc_Reset(void)
 {
 #if OW_USE_FAKE_RTC
     memset(&gSaveBlock3Ptr->fakeRTC, 0, sizeof(gSaveBlock3Ptr->fakeRTC));
-    gSaveBlock3Ptr->fakeRTC.month = MONTH_JAN;
-    gSaveBlock3Ptr->fakeRTC.day = 1;
-    gSaveBlock3Ptr->fakeRTC.dayOfWeek = WEEKDAY_SAT;
+    gSaveBlock3Ptr->fakeRTC.year = 0; // offset by gGen3Epoch.year
+    gSaveBlock3Ptr->fakeRTC.month = gGen3Epoch.month;
+    gSaveBlock3Ptr->fakeRTC.day = gGen3Epoch.day;
+    gSaveBlock3Ptr->fakeRTC.dayOfWeek = gGen3Epoch.dayOfWeek;
 #endif
 }
 
@@ -47,29 +49,15 @@ void FakeRtc_TickTimeForward(void)
 
 static void FakeRtc_AdvanceSeconds(struct SiiRtcInfo *rtc, u32 *days, u32*hours, u32 *minutes, u32 *seconds)
 {
-    *seconds += rtc->second;
-    *minutes += rtc->minute;
-    *hours += rtc->hour;
+    struct DateTime dateTime;
+    struct SiiRtcInfo *rtc = FakeRtc_GetCurrentTime();
 
-    while (*seconds >= SECONDS_PER_MINUTE)
-    {
-        (*minutes)++;
-        *seconds -= SECONDS_PER_MINUTE;
-    }
-    while (*minutes >= MINUTES_PER_HOUR)
-    {
-        (*hours)++;
-        *minutes -= MINUTES_PER_HOUR;
-    }
-    while (*hours >= HOURS_PER_DAY)
-    {
-        (*days)++;
-        *hours -= HOURS_PER_DAY;
-    }
-    
-    rtc->second = *seconds;
-    rtc->minute = *minutes;
-    rtc->hour = *hours;
+    ConvertRtcToDateTime(&dateTime, rtc);
+    DateTime_AddSeconds(&dateTime, seconds);
+    DateTime_AddMinutes(&dateTime, minutes);
+    DateTime_AddHours(&dateTime, hours);
+    DateTime_AddDays(&dateTime, days);
+    ConvertDateTimeToRtc(rtc, &dateTime);
 }
 
 static void FakeRtc_SetDayOfWeek(struct SiiRtcInfo *rtc, u32 daysToAdd)

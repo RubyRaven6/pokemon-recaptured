@@ -14,7 +14,7 @@
 #define SECONDS_PER_MINUTE  60
 #define MONTH_COUNT         MONTH_DEC
 
-enum
+enum Weekday
 {
     WEEKDAY_SUN,
     WEEKDAY_MON,
@@ -26,7 +26,7 @@ enum
     WEEKDAY_COUNT,
 };
 
-enum
+enum Month
 {
     MONTH_JAN = 1,
     MONTH_FEB = 2,
