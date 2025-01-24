@@ -20,53 +20,10 @@ const VAR_HOUR = VAR_0x8004
 const VAR_WEEKDAY = VAR_0x8003
 
 mapscripts DocksideCity_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: DocksideCity_OnTransition
 }
 
 script DocksideCity_OnTransition{
-    gettime
-    setflag(FLAG_TEMP_2)
-    setflag(FLAG_TEMP_3)
-    setflag(FLAG_TEMP_4)
-    setflag(FLAG_TEMP_7)
-    if(var(VAR_HOUR) < 12 || var(VAR_HOUR) > 14){
-        debugprint("Before printing Temp 1")
-        setflag(FLAG_TEMP_1)
-        debugprint("After printing Temp 1")
-        
-    }
-    if(var(VAR_WEEKDAY) == 0
-    && var(VAR_HOUR) >= 10
-    && var(VAR_HOUR) <= 12){
-        clearflag(FLAG_TEMP_2)
-    }
 
-    if(var(VAR_WEEKDAY) == 4
-    && var(VAR_HOUR) >= 14
-    && var(VAR_HOUR) <= 15){
-        clearflag(FLAG_TEMP_3)
-    }
-
-    if(var(VAR_WEEKDAY) == 6
-    && var(VAR_HOUR) >= 16
-    && var(VAR_HOUR) <= 18){
-        clearflag(FLAG_TEMP_4)
-    }
-
-    if((var(VAR_HOUR) < 17 || var(VAR_HOUR) > 20)){
-        setflag(FLAG_TEMP_5)
-    }
-
-    if((var(VAR_HOUR) < 12 || var(VAR_HOUR) > 18)){
-        setflag(FLAG_TEMP_6)
-    }
-
-    if(var(VAR_WEEKDAY) == 0
-    && var(VAR_HOUR) >= 10
-    && var(VAR_HOUR) <= 13){
-        clearflag(FLAG_TEMP_7)
-    }
-    end
 }
 
 script DocksideCity_EventScript_SailorMachoke{

@@ -1,112 +1,9 @@
 DocksideCity_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, DocksideCity_OnTransition
 	.byte 0
 
 
 DocksideCity_OnTransition::
-	gettime
-	setflag FLAG_TEMP_2
-	setflag FLAG_TEMP_3
-	setflag FLAG_TEMP_4
-	setflag FLAG_TEMP_7
-	compare VAR_0x8004, 12
-	goto_if_lt DocksideCity_OnTransition_2
-	compare VAR_0x8004, 14
-	goto_if_gt DocksideCity_OnTransition_2
-DocksideCity_OnTransition_1:
-	compare VAR_0x8003, 0
-	goto_if_eq DocksideCity_OnTransition_9
-DocksideCity_OnTransition_6:
-	compare VAR_0x8003, 4
-	goto_if_eq DocksideCity_OnTransition_16
-DocksideCity_OnTransition_13:
-	compare VAR_0x8003, 6
-	goto_if_eq DocksideCity_OnTransition_23
-DocksideCity_OnTransition_20:
-	compare VAR_0x8004, 17
-	goto_if_lt DocksideCity_OnTransition_28
-	compare VAR_0x8004, 20
-	goto_if_gt DocksideCity_OnTransition_28
-DocksideCity_OnTransition_27:
-	compare VAR_0x8004, 12
-	goto_if_lt DocksideCity_OnTransition_33
-	compare VAR_0x8004, 18
-	goto_if_gt DocksideCity_OnTransition_33
-DocksideCity_OnTransition_32:
-	compare VAR_0x8003, 0
-	goto_if_eq DocksideCity_OnTransition_40
-DocksideCity_OnTransition_37:
-	end
-
-DocksideCity_OnTransition_2:
-	debugprint DocksideCity_OnTransition_Text_0
-	setflag FLAG_TEMP_1
-	debugprint DocksideCity_OnTransition_Text_1
-	goto DocksideCity_OnTransition_1
-
-DocksideCity_OnTransition_7:
-	clearflag FLAG_TEMP_2
-	goto DocksideCity_OnTransition_6
-
-DocksideCity_OnTransition_8:
-	compare VAR_0x8004, 12
-	goto_if_le DocksideCity_OnTransition_7
-	goto DocksideCity_OnTransition_6
-
-DocksideCity_OnTransition_9:
-	compare VAR_0x8004, 10
-	goto_if_ge DocksideCity_OnTransition_8
-	goto DocksideCity_OnTransition_6
-
-DocksideCity_OnTransition_14:
-	clearflag FLAG_TEMP_3
-	goto DocksideCity_OnTransition_13
-
-DocksideCity_OnTransition_15:
-	compare VAR_0x8004, 15
-	goto_if_le DocksideCity_OnTransition_14
-	goto DocksideCity_OnTransition_13
-
-DocksideCity_OnTransition_16:
-	compare VAR_0x8004, 14
-	goto_if_ge DocksideCity_OnTransition_15
-	goto DocksideCity_OnTransition_13
-
-DocksideCity_OnTransition_21:
-	clearflag FLAG_TEMP_4
-	goto DocksideCity_OnTransition_20
-
-DocksideCity_OnTransition_22:
-	compare VAR_0x8004, 18
-	goto_if_le DocksideCity_OnTransition_21
-	goto DocksideCity_OnTransition_20
-
-DocksideCity_OnTransition_23:
-	compare VAR_0x8004, 16
-	goto_if_ge DocksideCity_OnTransition_22
-	goto DocksideCity_OnTransition_20
-
-DocksideCity_OnTransition_28:
-	setflag FLAG_TEMP_5
-	goto DocksideCity_OnTransition_27
-
-DocksideCity_OnTransition_33:
-	setflag FLAG_TEMP_6
-	goto DocksideCity_OnTransition_32
-
-DocksideCity_OnTransition_38:
-	clearflag FLAG_TEMP_7
-	goto DocksideCity_OnTransition_37
-
-DocksideCity_OnTransition_39:
-	compare VAR_0x8004, 13
-	goto_if_le DocksideCity_OnTransition_38
-	goto DocksideCity_OnTransition_37
-
-DocksideCity_OnTransition_40:
-	compare VAR_0x8004, 10
-	goto_if_ge DocksideCity_OnTransition_39
-	goto DocksideCity_OnTransition_37
+	return
 
 
 DocksideCity_EventScript_SailorMachoke::
@@ -304,12 +201,6 @@ DocksideCity_EventScript_Date1EatingOut_Movement_0:
 DocksideCity_EventScript_Date1EatingOut_Movement_1:
 	walk_in_place_left
 	step_end
-
-DocksideCity_OnTransition_Text_0:
-	.string "Before printing Temp 1$"
-
-DocksideCity_OnTransition_Text_1:
-	.string "After printing Temp 1$"
 
 DocksideCity_EventScript_MomEatingOut_Text_0:
 	.string "MOM: Jaiden! I told you to stop playing\n"
