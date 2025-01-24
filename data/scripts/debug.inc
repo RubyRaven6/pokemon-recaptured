@@ -1,4 +1,3 @@
-
 Debug_MessageEnd:
 	waitmessage
 	waitbuttonpress
@@ -138,50 +137,36 @@ Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
-	msgbox Debug_EventScript_Script_1_Text_0, MSGBOX_DEFAULT
-	waitmessage
-	closemessage
 	release
 	end
-
 
 Debug_EventScript_Script_2::
-	msgbox Debug_EventScript_Script_2_Text_0, MSGBOX_DEFAULT
 	release
 	end
-
 
 Debug_EventScript_Script_3::
-	msgbox Debug_EventScript_Script_3_Text_0, MSGBOX_DEFAULT
 	release
 	end
-
 
 Debug_EventScript_Script_4::
 	release
 	end
 
-
 Debug_EventScript_Script_5::
 	release
 	end
-
 
 Debug_EventScript_Script_6::
 	release
 	end
 
-
 Debug_EventScript_Script_7::
 	release
 	end
 
-
 Debug_EventScript_Script_8::
 	release
 	end
-
-
 
 Debug_CheckSaveBlock::
 	callnative CheckSaveBlock1Size
@@ -284,6 +269,11 @@ Debug_ShowExpansionVersion::
 
 Debug_ExpansionVersion:
 	.string "pokeemerald-expansion {STR_VAR_1}$"
+
+Debug_EventScript_Steven_Multi::
+	call MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
+	release
+	end
 
 Debug_BerryPestsDisabled::
 	msgbox DebugText_BerryPestsDisabled, MSGBOX_DEFAULT
@@ -463,6 +453,29 @@ Debug_EventScript_EWRAMCounters_Text::
 	.string "Follower Steps: {STR_VAR_1}.\n"
 	.string "Fishing Chain: {STR_VAR_2}.$"
 
+Debug_EventScript_TellTheTime::
+	callnative DebugMenu_CalculateTime
+	msgbox Debug_EventScript_TellTheTime_Text_0, MSGBOX_DEFAULT
+	waitmessage
+	closemessage
+	end
+
+
+Debug_EventScript_PrintTimeOfDay::
+	callnative DebugMenu_CalculateTimeOfDay
+	msgbox DebugEventScript_PrintWeekday_Text_0, MSGBOX_DEFAULT
+	waitmessage
+	closemessage
+	end
+
+
+Debug_EventScript_TellTheTime_Text_0:
+	.string "Time and Date:\n"
+	.string "{STR_VAR_1} {STR_VAR_2}:{STR_VAR_3}$"
+
+DebugEventScript_PrintWeekday_Text_0:
+	.string "Time of day: {STR_VAR_1}$"
+
 Debug_EventScript_FontTest_Text_1::
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
 	.string "Angel Adept Blind Bodice Clique\n"
@@ -594,13 +607,3 @@ Debug_EventScript_FontTest::
 @Debug_EventScript_InflictStatus1_Close:
 @	releaseall
 @	end
-
-Debug_EventScript_Script_1_Text_0:
-	.string "This forwards the time by 1 day, 6\n"
-	.string "hours, and 6 minutes$"
-
-Debug_EventScript_Script_2_Text_0:
-	.string "This forwards the time to 8:12 PM.$"
-
-Debug_EventScript_Script_3_Text_0:
-	.string "This forwards the time to Friday.$"

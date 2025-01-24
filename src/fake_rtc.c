@@ -6,6 +6,7 @@
 #include "rtc.h"
 #include "fake_rtc.h"
 #include "event_data.h"
+#include "script.h"
 
 static void FakeRtc_CalcTimeDifference(struct Time *result, struct SiiRtcInfo *t1, struct Time *t2);
 
@@ -47,7 +48,7 @@ void FakeRtc_TickTimeForward(void)
     FakeRtc_AdvanceTimeBy(0, 0, 0, FakeRtc_GetSecondsRatio());
 }
 
-static void FakeRtc_AdvanceSeconds(struct SiiRtcInfo *rtc, u32 *days, u32*hours, u32 *minutes, u32 *seconds)
+void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)
 {
     struct DateTime dateTime;
     struct SiiRtcInfo *rtc = FakeRtc_GetCurrentTime();
@@ -58,47 +59,6 @@ static void FakeRtc_AdvanceSeconds(struct SiiRtcInfo *rtc, u32 *days, u32*hours,
     DateTime_AddHours(&dateTime, hours);
     DateTime_AddDays(&dateTime, days);
     ConvertDateTimeToRtc(rtc, &dateTime);
-}
-
-static void FakeRtc_SetDayOfWeek(struct SiiRtcInfo *rtc, u32 daysToAdd)
-{
-    rtc->dayOfWeek = (rtc->dayOfWeek + daysToAdd) % WEEKDAY_COUNT;
-}
-
-static void FakeRtc_AdvanceDays(struct SiiRtcInfo *rtc, u32 *days)
-{
-    Script_ToggleFakeRtc();
-    u32 remainingDaysInMonth = (sNumDaysInMonths[rtc->month - 1] + (rtc->month == MONTH_FEB && IsLeapYear(rtc->year)) - rtc->day);
-    if (*days > remainingDaysInMonth)
-    {
-        rtc->day = 1;
-        rtc->month++;
-        if (rtc->month > MONTH_DEC)
-        {
-            rtc->month = MONTH_JAN;
-            rtc->year++;
-        }
-        *days -= (remainingDaysInMonth + 1);
-        FakeRtc_SetDayOfWeek(rtc, remainingDaysInMonth + 1);
-    }
-    else
-    {
-        rtc->day += *days;
-        FakeRtc_SetDayOfWeek(rtc, *days);
-        *days = 0;
-    }
-    Script_ToggleFakeRtc();
-}
-
-void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)
-{
-    Script_ToggleFakeRtc();
-    struct SiiRtcInfo *rtc = FakeRtc_GetCurrentTime();
-    FakeRtc_AdvanceSeconds(rtc, &days, &hours, &minutes, &seconds);
-
-    while (days > 0)
-        FakeRtc_AdvanceDays(rtc, &days);
-    Script_ToggleFakeRtc();
 }
 
 void FakeRtc_ForwardTimeTo(u32 hour, u32 minute, u32 second)
@@ -142,6 +102,7 @@ static void FakeRtc_CalcTimeDifference(struct Time *result, struct SiiRtcInfo *t
     }
 }
 
+
 void FakeRtc_ForceSetTime(u32 day, u32 hour, u32 minute, u32 second)
 {
     FakeRtc_Reset();
@@ -150,25 +111,30 @@ void FakeRtc_ForceSetTime(u32 day, u32 hour, u32 minute, u32 second)
 
 u32 FakeRtc_GetSecondsRatio(void)
 {
-    return (OW_ALTERED_TIME_RATIO == GEN_8_PLA)   ? 60 :
-           (OW_ALTERED_TIME_RATIO == GEN_9)       ? 20 :
-           (OW_ALTERED_TIME_RATIO == RTC_CUSTOM)  ? 12 :
-                                                     1;
+    return (OW_ALTERED_TIME_RATIO == GEN_8_PLA) ? 60 :
+           (OW_ALTERED_TIME_RATIO == GEN_9)     ? 20 :
+                                                  1;
 }
 
 STATIC_ASSERT((OW_FLAG_PAUSE_TIME == 0 || OW_USE_FAKE_RTC == TRUE), FakeRtcMustBeTrueToPauseTime);
 
 void Script_PauseFakeRtc(void)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
     FlagSet(OW_FLAG_PAUSE_TIME);
 }
 
 void Script_ResumeFakeRtc(void)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
     FlagClear(OW_FLAG_PAUSE_TIME);
 }
 
 void Script_ToggleFakeRtc(void)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
     FlagToggle(OW_FLAG_PAUSE_TIME);
 }
