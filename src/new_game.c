@@ -165,12 +165,8 @@ void NewGameInitData(void)
     ClearSav1();
     ClearSav3();
     InitTimeBasedEvents();
-    #if OW_USE_FAKE_RTC == TRUE
-        //SetNewIngameTime();
-    #else
-        if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
+    if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
         RtcReset();
-    #endif
 
     ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;

@@ -164,6 +164,7 @@ u32 FakeRtc_GetSecondsRatio(void)
 {
     return (OW_ALTERED_TIME_RATIO == GEN_8_PLA)   ? 60 :
            (OW_ALTERED_TIME_RATIO == GEN_9)       ? 20 :
+           (OW_ALTERED_TIME_RATIO == RTC_CUSTOM)  ? 12 :
                                                      1;
 }
 
