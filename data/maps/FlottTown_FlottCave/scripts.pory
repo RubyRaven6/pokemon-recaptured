@@ -27,18 +27,17 @@ const MON_NAME = VAR_TEMP_7
 const MON_ID = VAR_TEMP_8
 
 mapscripts FlottTown_FlottCave_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: FlottTown_FlottCave_OnTransition
+    MAP_SCRIPT_ON_TRANSITION {
+        destroyfollower
+        setflag(FLAG_BARNEY_IN_CAVE)
+        setflag(FLAG_ELSIE_IN_CAVE)
+        call(FlottTown_FlottCave_CaveLightLevel)
+        call(StarterSelection_GFXSetting)            
+    }
     MAP_SCRIPT_ON_FRAME_TABLE [ 
         VAR_FLOTT_TOWN_STATE, 6: FlottTown_FlottCave_OnFrame
         // VAR_FLOTT_TOWN_STATE, 9: FlottTown_FlottCave_TurnOn
     ]
-}
-
-script(local) FlottTown_FlottCave_OnTransition {
-    destroyfollower
-    setflag(FLAG_BARNEY_IN_CAVE)
-    setflag(FLAG_ELSIE_IN_CAVE)
-    call(FlottTown_FlottCave_CaveLightLevel)
 }
 
 script(local) FlottTown_FlottCave_OnFrame{
@@ -70,7 +69,6 @@ script FlottTown_FlottCave_EventScript_ZubatAttacks{
     applymovement(LOCALID_ZUBAT, Common_Movement_FacePlayer)
     fadescreen(FADE_TO_BLACK)
     msgbox(format("As the Pokémon is about to attack, you feel a presence approach."))
-    call(StarterSelection_GFXSetting)
     call(FlottTown_FlottCave_StarterChoice)
     call(FlottTown_FlottCave_WildZubatBattle)
     delay(60)

@@ -5566,3 +5566,8 @@ static void DebugAction_Util_CheckEWRAMCounters(u8 taskId)
 {
     Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_EWRAMCounters);
 }
+
+void CallNativeForVariousPurposes (void)
+{
+    MgbaPrintf(MGBA_LOG_WARN, "VAR_FLOTT_TOWN_STATE: %u", VarGet(VAR_FLOTT_TOWN_STATE));
+}

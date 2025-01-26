@@ -1,19 +1,19 @@
 FlottTown_FlottCave_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, FlottTown_FlottCave_OnTransition
+	map_script MAP_SCRIPT_ON_TRANSITION, FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_TRANSITION
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE
 	.byte 0
 
-FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
-	map_script_2 VAR_FLOTT_TOWN_STATE, 6, FlottTown_FlottCave_OnFrame
-	.2byte 0
-
-
-FlottTown_FlottCave_OnTransition:
+FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_TRANSITION:
 	destroyfollower
 	setflag FLAG_BARNEY_IN_CAVE
 	setflag FLAG_ELSIE_IN_CAVE
 	call FlottTown_FlottCave_CaveLightLevel
+	call StarterSelection_GFXSetting
 	return
+
+FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
+	map_script_2 VAR_FLOTT_TOWN_STATE, 6, FlottTown_FlottCave_OnFrame
+	.2byte 0
 
 
 FlottTown_FlottCave_OnFrame:
@@ -40,7 +40,6 @@ FlottTown_FlottCave_EventScript_ZubatAttacks::
 	applymovement 10, Common_Movement_FacePlayer
 	fadescreen FADE_TO_BLACK
 	msgbox FlottTown_FlottCave_EventScript_ZubatAttacks_Text_1
-	call StarterSelection_GFXSetting
 	call FlottTown_FlottCave_StarterChoice
 	call FlottTown_FlottCave_WildZubatBattle
 	delay 60

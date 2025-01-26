@@ -26,6 +26,7 @@ FlottTown_AbandonedGym_BeforeEvent::
 
 FlottTown_AbandonedGym_OnFrame::
 	lock
+	setvar VAR_FLOTT_TOWN_STATE, 4
 	applymovement OBJ_EVENT_ID_PLAYER, FlottTown_AbandonedGym_WalkingIn
 	waitmovement 0
 	clearflag FLAG_ELSIE_ENTERS_GYM
@@ -38,7 +39,7 @@ FlottTown_AbandonedGym_OnFrame::
 	waitmessage
 	closemessage
 	setfollower LOCALID_ELSIE, FOLLOWER_ALL, FlottTown_AbandonedGym_ElsieFollowerScript, 0
-	setvar VAR_FLOTT_TOWN_STATE, 4
+	callnative CallNativeForVariousPurposes
 	end
 
 

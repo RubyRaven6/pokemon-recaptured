@@ -240,6 +240,9 @@ gScriptCmdTable::
 	cmd ScrCmd_bufferitemnameplural, requests_effects=1        @ 0xe2
 	cmd ScrCmd_dynmultichoice, requests_effects=1              @ 0xe3
 	cmd ScrCmd_dynmultipush, requests_effects=1                @ 0xe4
+	.4byte ScrCmd_questmenu                         		   @ 0xe5
+    .4byte ScrCmd_subquestmenu                      		   @ 0xe6
+    .4byte ScrCmd_returnqueststate                  		   @ 0xe7
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

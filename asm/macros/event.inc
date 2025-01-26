@@ -1940,7 +1940,7 @@
 	.else
 		.set setScript, FALSE
 	.endif
-    .byte 0xe5
+    callnative ScrCmd_setfollower
     .byte \localId
     .2byte \flags
 	.byte setScript
@@ -1956,38 +1956,38 @@
     
     @ Remove the following NPC (assumes there will only ever be one).
     .macro destroyfollower
-    .byte 0xe6
+    callnative ScrCmd_destroyfollower
     .endm
     
     @ Makes the player and follower face one another.
     .macro facefollower
-    .byte 0xe7
+    callnative ScrCmd_facefollower
     .endm
     
     @ Checks if you have a follower. returns the result to VAR_RESULT.
     .macro checkfollower
-    .byte 0xe8
+    callnative ScrCmd_checkfollower
     .endm
 
 	@ Updates Pokemon follower.
 	.macro updatefollowingmon
-    .byte 0xe9
+    callnative ScrCmd_updatefollowingmon
     .endm
 
 	@ Returns Pokemon follower to ball.
 	.macro ballfollowingmon
-	.byte 0xea
+	callnative ScrCmd_updatefollowingmon
 	delay 16
 	.endm
 
     .macro questmenu case:req, questId:req
-    .byte 0xeb
+    .byte 0xe5
     .byte \case
     .byte \questId
     .endm
 
     .macro subquestmenu case:req, parentId:req, childId:req
-    .byte 0xec
+    .byte 0xe6
     .byte \case
     .2byte \parentId
     .2byte \childId
@@ -1995,7 +1995,7 @@
 
     @ Check the quest state and return a number associated with quest state
     .macro returnqueststate questId:req
-    .byte 0xed
+    .byte 0xe7
     .byte \questId
     .endm
     
