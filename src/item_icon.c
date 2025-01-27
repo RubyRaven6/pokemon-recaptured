@@ -7,6 +7,7 @@
 #include "malloc.h"
 #include "palette.h"
 #include "move.h"
+#include "menu.h"
 #include "sprite.h"
 #include "window.h"
 #include "constants/items.h"
@@ -135,9 +136,11 @@ u8 BlitItemIconToWindow(u16 itemId, u8 windowId, u16 x, u16 y, void * paletteDes
 
     // if paletteDest is nonzero, copies the decompressed palette directly into it
     // otherwise, loads the compressed palette into the windowId's BG palette ID
-    if (paletteDest) {
-        LZDecompressWram(GetItemIconPalette(itemId), gDecompressionBuffer);
-        CpuFastCopy(gDecompressionBuffer, paletteDest, PLTT_SIZE_4BPP);
+    if (paletteDest) 
+    {
+        void *buffer = malloc_and_decompress(GetItemIconPalette(itemId), NULL);
+        CpuFastCopy(buffer, paletteDest, PLTT_SIZE_4BPP);
+        Free(buffer);
     } else {
         LoadCompressedPalette(GetItemIconPalette(itemId), BG_PLTT_ID(gWindows[windowId].window.paletteNum), PLTT_SIZE_4BPP);
     }
