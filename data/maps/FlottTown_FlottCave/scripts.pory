@@ -36,8 +36,8 @@ mapscripts FlottTown_FlottCave_MapScripts {
         setflag(FLAG_HIDE_MON2)
         setflag(FLAG_HIDE_MON3)
         setflag(FLAG_HIDE_MON4)
+        call(StarterSelection_GFXSetting)
         call(FlottTown_FlottCave_CaveLightLevel)
-        call(StarterSelection_GFXSetting)            
     }
     MAP_SCRIPT_ON_FRAME_TABLE [ 
         VAR_FLOTT_TOWN_STATE, 6: FlottTown_FlottCave_OnFrame

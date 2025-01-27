@@ -12,8 +12,8 @@ FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_TRANSITION:
 	setflag FLAG_HIDE_MON2
 	setflag FLAG_HIDE_MON3
 	setflag FLAG_HIDE_MON4
-	call FlottTown_FlottCave_CaveLightLevel
 	call StarterSelection_GFXSetting
+	call FlottTown_FlottCave_CaveLightLevel
 	return
 
 FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
