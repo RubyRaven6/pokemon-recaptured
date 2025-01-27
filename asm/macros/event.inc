@@ -1981,13 +1981,13 @@
 	.endm
 
     .macro questmenu case:req, questId:req
-    .byte 0xe5
+    callnative ScrCmd_questmenu
     .byte \case
     .byte \questId
     .endm
 
     .macro subquestmenu case:req, parentId:req, childId:req
-    .byte 0xe6
+    callnative ScrCmd_subquestmenu
     .byte \case
     .2byte \parentId
     .2byte \childId
@@ -1995,7 +1995,7 @@
 
     @ Check the quest state and return a number associated with quest state
     .macro returnqueststate questId:req
-    .byte 0xe7
+    callnative ScrCmd_returnqueststate
     .byte \questId
     .endm
     
