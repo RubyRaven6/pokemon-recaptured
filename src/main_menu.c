@@ -517,7 +517,7 @@ static const u8 *const sMalePresetNames[] = {
 };
 
 static const u8 *const sFemalePresetNames[] = {
-    COMPOUND_STRING("Diance")
+    COMPOUND_STRING("Diane")
 };
 
 // The number of male vs. female names is assumed to be the same.
@@ -1468,7 +1468,7 @@ static void Task_NewGameDiancieSpeech_CanYouHearMe(u8 taskId)
     NewGameDiancieSpeech_ShowDialogueWindow(0, 1);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_GFX);
-    StringExpandPlaceholders(gStringVar4, gText_Diance_CanYouHearMe);
+    StringExpandPlaceholders(gStringVar4, gText_Diancie_CanYouHearMe);
     AddTextPrinterForMessage(TRUE);
     gTasks[taskId].func = Task_NewGameDiancieSpeech_StartPlayerFadeIn;
 }

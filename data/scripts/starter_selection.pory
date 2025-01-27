@@ -1,4 +1,3 @@
-const VAR_PERSONALITY = VAR_RESULT
 const FURY = 0
 const MISCHIEF = 1
 const FRIENDSHIP = 2
@@ -14,10 +13,9 @@ const STARTERY = VAR_TEMP_6
 const MON_NAME = VAR_TEMP_7
 const MON_ID = VAR_TEMP_8
 
-
 script StarterSelection_GFXSetting {
     checkplayerpersonality
-    switch(var(VAR_PERSONALITY)){
+    switch(var(VAR_RESULT)){
         case FURY:
             setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(MANKEY))
             setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_SPECIES(BUDEW))

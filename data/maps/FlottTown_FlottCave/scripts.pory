@@ -31,6 +31,11 @@ mapscripts FlottTown_FlottCave_MapScripts {
         destroyfollower
         setflag(FLAG_BARNEY_IN_CAVE)
         setflag(FLAG_ELSIE_IN_CAVE)
+        setflag(FLAG_HIDE_MON0)
+        setflag(FLAG_HIDE_MON1)
+        setflag(FLAG_HIDE_MON2)
+        setflag(FLAG_HIDE_MON3)
+        setflag(FLAG_HIDE_MON4)
         call(FlottTown_FlottCave_CaveLightLevel)
         call(StarterSelection_GFXSetting)            
     }
@@ -40,7 +45,7 @@ mapscripts FlottTown_FlottCave_MapScripts {
     ]
 }
 
-script(local) FlottTown_FlottCave_OnFrame{
+script FlottTown_FlottCave_OnFrame{
     msgbox(FlottTown_FlottCave_Text_ElsieWorried, MSGBOX_DEFAULT)
     closemessage
     setflag(FLAG_FALLEN_INTO_CAVE)
@@ -48,7 +53,7 @@ script(local) FlottTown_FlottCave_OnFrame{
     end
 }
 
-script(local) FlottTown_FlottCave_CaveLightLevel{
+script FlottTown_FlottCave_CaveLightLevel{
     setflashlevel(6)
     end
 }
@@ -177,7 +182,7 @@ script FlottTown_FlottCave_EventScript_ElsieRescue{
     end
 }
 
-script(local) FlottTown_FlottCave_StarterChoice{
+script FlottTown_FlottCave_StarterChoice{
     lockall
 	msgbox(format("But…before it could hurt you, something intervenes.\l What is it?"), MSGBOX_DEFAULT)
     checkplayerpersonality
@@ -197,7 +202,7 @@ script(local) FlottTown_FlottCave_StarterChoice{
     return
 }
 
-script(local) FlottTown_FlottCave_WildZubatBattle{
+script FlottTown_FlottCave_WildZubatBattle{
     removeitem(ITEM_POKE_BALL, 1)
     setwildbattle(SPECIES_ZUBAT, 10)
     dowildbattle
@@ -209,7 +214,7 @@ script(local) FlottTown_FlottCave_WildZubatBattle{
     return
 }
 
-script(local) FlottTown_FlottCave_StarterWantsToJoin{
+script FlottTown_FlottCave_StarterWantsToJoin{
     applymovement(MON_ID, Common_Movement_FacePlayer)
     msgbox("It looks like the {STR_VAR_1} wants\nto join you. Let it?", MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
@@ -256,15 +261,15 @@ movement FlottTown_FlottCave_Movement_PlayerWalksUp{
     step_end
 }
 
-text(local) FlottTown_FlottCave_Text_ElsieWorried{
+text FlottTown_FlottCave_Text_ElsieWorried{
     format("ELSIE: Oh my god! {PLAYER}! Are you okay?! Sit tight in there, okay? I'll go get help!\pYou here the footsteps of your sister exiting the gym.")
 }
 
-text(local) FlottTown_FlottCave_Text_Rescue{
+text FlottTown_FlottCave_Text_Rescue{
     format("???: Ah! There you are! Come, let's get you out here.\p" 
             "ELSIE: {PLAYER}! Oh gods, I'm so glad you're okay!")
 }
 
-text(local) FlottTown_FlottCave_Text_LetsGoHome {
+text FlottTown_FlottCave_Text_LetsGoHome {
     format("BARNEY: Indeed it were. Now, how about we get you kids out of this dreadful place? You both look tired. Seeing as it's my gym, anything that happens here is on my head. My home is nearby; let's take a rest there.")
 }

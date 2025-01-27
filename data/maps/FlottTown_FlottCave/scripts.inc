@@ -7,6 +7,11 @@ FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_TRANSITION:
 	destroyfollower
 	setflag FLAG_BARNEY_IN_CAVE
 	setflag FLAG_ELSIE_IN_CAVE
+	setflag FLAG_HIDE_MON0
+	setflag FLAG_HIDE_MON1
+	setflag FLAG_HIDE_MON2
+	setflag FLAG_HIDE_MON3
+	setflag FLAG_HIDE_MON4
 	call FlottTown_FlottCave_CaveLightLevel
 	call StarterSelection_GFXSetting
 	return
@@ -16,7 +21,7 @@ FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 	.2byte 0
 
 
-FlottTown_FlottCave_OnFrame:
+FlottTown_FlottCave_OnFrame::
 	msgbox FlottTown_FlottCave_Text_ElsieWorried, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_FALLEN_INTO_CAVE
@@ -24,7 +29,7 @@ FlottTown_FlottCave_OnFrame:
 	end
 
 
-FlottTown_FlottCave_CaveLightLevel:
+FlottTown_FlottCave_CaveLightLevel::
 	setflashlevel 6
 	end
 
@@ -163,7 +168,7 @@ FlottTown_FlottCave_EventScript_ElsieRescue::
 	end
 
 
-FlottTown_FlottCave_StarterChoice:
+FlottTown_FlottCave_StarterChoice::
 	lockall
 	msgbox FlottTown_FlottCave_StarterChoice_Text_0, MSGBOX_DEFAULT
 	checkplayerpersonality
@@ -192,7 +197,7 @@ FlottTown_FlottCave_StarterChoice_5:
 	goto FlottTown_FlottCave_StarterChoice_1
 
 
-FlottTown_FlottCave_WildZubatBattle:
+FlottTown_FlottCave_WildZubatBattle::
 	removeitem ITEM_POKE_BALL, 1
 	setwildbattle SPECIES_ZUBAT, 10
 	dowildbattle
@@ -204,7 +209,7 @@ FlottTown_FlottCave_WildZubatBattle:
 	return
 
 
-FlottTown_FlottCave_StarterWantsToJoin:
+FlottTown_FlottCave_StarterWantsToJoin::
 	applymovement VAR_TEMP_8, Common_Movement_FacePlayer
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_0, MSGBOX_YESNO
 	compare VAR_RESULT, YES
@@ -309,20 +314,20 @@ FlottTown_FlottCave_StarterWantsToJoin_Text_2:
 FlottTown_FlottCave_StarterWantsToJoin_Text_3:
 	.string "The Pokémon looks sad.$"
 
-FlottTown_FlottCave_Text_ElsieWorried:
+FlottTown_FlottCave_Text_ElsieWorried::
 	.string "ELSIE: Oh my god! {PLAYER}! Are you\n"
 	.string "okay?! Sit tight in there, okay? I'll go\l"
 	.string "get help!\p"
 	.string "You here the footsteps of your sister\n"
 	.string "exiting the gym.$"
 
-FlottTown_FlottCave_Text_Rescue:
+FlottTown_FlottCave_Text_Rescue::
 	.string "???: Ah! There you are! Come, let's get\n"
 	.string "you out here.\p"
 	.string "ELSIE: {PLAYER}! Oh gods, I'm so glad\n"
 	.string "you're okay!$"
 
-FlottTown_FlottCave_Text_LetsGoHome:
+FlottTown_FlottCave_Text_LetsGoHome::
 	.string "BARNEY: Indeed it were. Now, how about\n"
 	.string "we get you kids out of this dreadful\l"
 	.string "place? You both look tired. Seeing as\l"

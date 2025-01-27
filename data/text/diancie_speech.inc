@@ -1,4 +1,4 @@
-gText_Diance_CanYouHearMe::
+gText_Diancie_CanYouHearMe::
 	.string "…\p"
 	.string "Hello? Can you hear me?\p"
 	.string "…\p"

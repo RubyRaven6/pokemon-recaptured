@@ -8,7 +8,7 @@ script DiancieCave_EventScript_MeetingDiancie{
     msgbox(DiancieCave_Text_WowYoureHere, MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    applymovement(LOCALID_DIANCIE, DiancieCave_Movement_DianceLooksAround)
+    applymovement(LOCALID_DIANCIE, DiancieCave_Movement_DiancieLooksAround)
     waitmovement(LOCALID_DIANCIE)
     msgbox(DiancieCave_Text_IWishYouCouldStay, MSGBOX_DEFAULT)
     warpwhitefade(MAP_FLOTT_TOWN_SHIP_CABIN, 6, 4)
@@ -16,7 +16,7 @@ script DiancieCave_EventScript_MeetingDiancie{
     end
 }
 
-movement DiancieCave_Movement_DianceLooksAround {
+movement DiancieCave_Movement_DiancieLooksAround {
     jump_in_place_down
     delay_4
     jump_in_place_down

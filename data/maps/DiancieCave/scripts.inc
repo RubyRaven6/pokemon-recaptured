@@ -7,7 +7,7 @@ DiancieCave_EventScript_MeetingDiancie::
 	msgbox DiancieCave_Text_WowYoureHere, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	applymovement 7, DiancieCave_Movement_DianceLooksAround
+	applymovement 7, DiancieCave_Movement_DiancieLooksAround
 	waitmovement 7
 	msgbox DiancieCave_Text_IWishYouCouldStay, MSGBOX_DEFAULT
 	warpwhitefade MAP_FLOTT_TOWN_SHIP_CABIN, 6, 4
@@ -15,7 +15,7 @@ DiancieCave_EventScript_MeetingDiancie::
 	end
 
 
-DiancieCave_Movement_DianceLooksAround:
+DiancieCave_Movement_DiancieLooksAround:
 	jump_in_place_down
 	delay_4
 	jump_in_place_down
