@@ -50,3 +50,7 @@ tools/poryscript
 *.mp4
 *.gif
 assign.cache
+*.Identifier
+*.smol
+*.fastSmol
+*.smolTM
