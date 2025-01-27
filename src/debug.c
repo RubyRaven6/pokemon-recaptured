@@ -98,6 +98,7 @@ enum UtilDebugMenu
     DEBUG_UTIL_MENU_ITEM_PLAYER_NAME,
     DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER,
     DEBUG_UTIL_MENU_ITEM_PLAYER_ID,
+    DEBUG_UTIL_MENU_ITEM_PLAYER_PERSONALITY,
     DEBUG_UTIL_MENU_ITEM_CHEAT,
     DEBUG_UTIL_MENU_ITEM_EXPANSION_VER,
     DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS,
@@ -130,6 +131,13 @@ enum TimeSkipWeekdays
     DEBUG_TIME_SKIP_MENU_THURSDAY,
     DEBUG_TIME_SKIP_MENU_FRIDAY,
     DEBUG_TIME_SKIP_MENU_SATURDAY,
+};
+
+enum PlayerPersonalities
+{
+    DEBUG_PLAYER_PERSONALITY_FURY,
+    DEBUG_PLAYER_PERSONALITY_MISCHIEF,
+    DEBUG_PLAYER_PERSONALITY_FRIENDSHIP,
 };
 
 enum GivePCBagDebugMenu
@@ -402,6 +410,7 @@ static void DebugAction_Util_WatchCredits(u8 taskId);
 static void DebugAction_Util_Player_Name(u8 taskId);
 static void DebugAction_Util_Player_Gender(u8 taskId);
 static void DebugAction_Util_Player_Id(u8 taskId);
+static void DebugAction_Util_Player_Personality(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
 static void DebugAction_Util_ExpansionVersion(u8 taskId);
 static void DebugAction_Util_BerryFunctions(u8 taskId);
@@ -425,6 +434,10 @@ static void DebugAction_TimeSkip_Wednesday(u8 taskId);
 static void DebugAction_TimeSkip_Thursday(u8 taskId);
 static void DebugAction_TimeSkip_Friday(u8 taskId);
 static void DebugAction_TimeSkip_Saturday(u8 taskId);
+
+static void DebugAction_PersonalityChange_Fury(u8 taskId);
+static void DebugAction_PersonalityChange_Mischief(u8 taskId);
+static void DebugAction_PersonalityChange_Friendship(u8 taskId);
 
 static void DebugAction_OpenPCBagFillMenu(u8 taskId);
 static void DebugAction_PCBag_Fill_PCBoxes_Fast(u8 taskId);
@@ -583,11 +596,17 @@ static const u8 sDebugText_Util_WatchCredits[] =             _("Watch credits…
 static const u8 sDebugText_Util_Player_Name[] =              _("Player name");
 static const u8 sDebugText_Util_Player_Gender[] =            _("Toggle gender");
 static const u8 sDebugText_Util_Player_Id[] =                _("New Trainer ID");
+static const u8 sDebugText_Util_Player_Personality[] =       _("Change Personality");
 static const u8 sDebugText_Util_CheatStart[] =               _("Cheat start");
 static const u8 sDebugText_Util_ExpansionVersion[] =         _("Expansion Version");
 static const u8 sDebugText_Util_BerryFunctions[] =           _("Berry Functions…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_EWRAMCounters[] =            _("EWRAM Counters…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Util_TimeSkipping[] =             _("Time Skipper");
+
+//Player Personality
+static const u8 sDebugText_PlayerPersonality_Fury[] = _("Fury");
+static const u8 sDebugText_PlayerPersonality_Mischief[] = _("Mischief");
+static const u8 sDebugText_PlayerPersonality_Friendship[] = _("Friendship");
 
 //Time Menu
 static const u8 sDebugText_TimeSkip_PrintTime[] = _("Print time");
@@ -814,22 +833,23 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 {
-    [DEBUG_UTIL_MENU_ITEM_FLY]             = {sDebugText_Util_FlyToMap,         DEBUG_UTIL_MENU_ITEM_FLY},
-    [DEBUG_UTIL_MENU_ITEM_WARP]            = {sDebugText_Util_WarpToMap,        DEBUG_UTIL_MENU_ITEM_WARP},
-    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]       = {sDebugText_Util_SaveBlockSpace,   DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
-    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]       = {sDebugText_Util_ROMSpace,         DEBUG_UTIL_MENU_ITEM_ROM_SPACE},
-    [DEBUG_UTIL_MENU_ITEM_WEATHER]         = {sDebugText_Util_Weather,          DEBUG_UTIL_MENU_ITEM_WEATHER},
-    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]  = {sDebugText_Util_CheckWallClock,   DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]    = {sDebugText_Util_SetWallClock,     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]    = {sDebugText_Util_WatchCredits,     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = {sDebugText_Util_Player_Name,      DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = {sDebugText_Util_Player_Gender,    DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
-    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = {sDebugText_Util_Player_Id,        DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
-    [DEBUG_UTIL_MENU_ITEM_CHEAT]           = {sDebugText_Util_CheatStart,       DEBUG_UTIL_MENU_ITEM_CHEAT},
-    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = {sDebugText_Util_ExpansionVersion, DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
-    [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = {sDebugText_Util_BerryFunctions,   DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS},
-    [DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS]  = {sDebugText_Util_EWRAMCounters,    DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS},
-    [DEBUG_UTIL_MENU_ITEM_TIME_SKIPPER]    = {sDebugText_Util_TimeSkipping,    DEBUG_UTIL_MENU_ITEM_TIME_SKIPPER},
+    [DEBUG_UTIL_MENU_ITEM_FLY]                    = {sDebugText_Util_FlyToMap,           DEBUG_UTIL_MENU_ITEM_FLY},
+    [DEBUG_UTIL_MENU_ITEM_WARP]                   = {sDebugText_Util_WarpToMap,          DEBUG_UTIL_MENU_ITEM_WARP},
+    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]              = {sDebugText_Util_SaveBlockSpace,     DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
+    [DEBUG_UTIL_MENU_ITEM_ROM_SPACE]              = {sDebugText_Util_ROMSpace,           DEBUG_UTIL_MENU_ITEM_ROM_SPACE},
+    [DEBUG_UTIL_MENU_ITEM_WEATHER]                = {sDebugText_Util_Weather,            DEBUG_UTIL_MENU_ITEM_WEATHER},
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]         = {sDebugText_Util_CheckWallClock,     DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]           = {sDebugText_Util_SetWallClock,       DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]           = {sDebugText_Util_WatchCredits,       DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]            = {sDebugText_Util_Player_Name,        DEBUG_UTIL_MENU_ITEM_PLAYER_NAME},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]          = {sDebugText_Util_Player_Gender,      DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]              = {sDebugText_Util_Player_Id,          DEBUG_UTIL_MENU_ITEM_PLAYER_ID},
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_PERSONALITY]     = {sDebugText_Util_Player_Personality, DEBUG_UTIL_MENU_ITEM_PLAYER_PERSONALITY},
+    [DEBUG_UTIL_MENU_ITEM_CHEAT]                  = {sDebugText_Util_CheatStart,         DEBUG_UTIL_MENU_ITEM_CHEAT},
+    [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]          = {sDebugText_Util_ExpansionVersion,   DEBUG_UTIL_MENU_ITEM_EXPANSION_VER},
+    [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS]        = {sDebugText_Util_BerryFunctions,     DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS},
+    [DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS]         = {sDebugText_Util_EWRAMCounters,      DEBUG_UTIL_MENU_ITEM_EWRAM_COUNTERS},
+    [DEBUG_UTIL_MENU_ITEM_TIME_SKIPPER]           = {sDebugText_Util_TimeSkipping,      DEBUG_UTIL_MENU_ITEM_TIME_SKIPPER},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_TimeSkip[] =
@@ -858,6 +878,13 @@ static const struct ListMenuItem sDebugMenu_Items_TimeSkip_Weekdays[] =
     [DEBUG_TIME_SKIP_MENU_THURSDAY] = {sDebugText_TimeSkip_ForwardThursday, DEBUG_TIME_SKIP_MENU_THURSDAY},
     [DEBUG_TIME_SKIP_MENU_FRIDAY] = {sDebugText_TimeSkip_ForwardFriday, DEBUG_TIME_SKIP_MENU_FRIDAY},
     [DEBUG_TIME_SKIP_MENU_SATURDAY] = {sDebugText_TimeSkip_ForwardSaturday, DEBUG_TIME_SKIP_MENU_SATURDAY},
+};
+
+static const struct ListMenuItem sDebugMenu_Items_PlayerPersonality[] =
+{
+    [DEBUG_PLAYER_PERSONALITY_FURY] = {sDebugText_PlayerPersonality_Fury, DEBUG_PLAYER_PERSONALITY_FURY},
+    [DEBUG_PLAYER_PERSONALITY_MISCHIEF] = {sDebugText_PlayerPersonality_Mischief, DEBUG_PLAYER_PERSONALITY_MISCHIEF},
+    [DEBUG_PLAYER_PERSONALITY_FRIENDSHIP] = {sDebugText_PlayerPersonality_Friendship, DEBUG_PLAYER_PERSONALITY_FRIENDSHIP},
 };
 
 static const struct ListMenuItem sDebugMenu_Items_PCBag[] =
@@ -1024,6 +1051,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_PLAYER_NAME]     = DebugAction_Util_Player_Name,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_GENDER]   = DebugAction_Util_Player_Gender,
     [DEBUG_UTIL_MENU_ITEM_PLAYER_ID]       = DebugAction_Util_Player_Id,
+    [DEBUG_UTIL_MENU_ITEM_PLAYER_PERSONALITY]     = DebugAction_Util_Player_Personality,
     [DEBUG_UTIL_MENU_ITEM_CHEAT]           = DebugAction_Util_CheatStart,
     [DEBUG_UTIL_MENU_ITEM_EXPANSION_VER]   = DebugAction_Util_ExpansionVersion,
     [DEBUG_UTIL_MENU_ITEM_BERRY_FUNCTIONS] = DebugAction_Util_BerryFunctions,
@@ -1145,6 +1173,13 @@ static void (*const sDebugMenu_Actions_TimeMenu_Weekdays[])(u8) =
     [DEBUG_TIME_SKIP_MENU_THURSDAY] = DebugAction_TimeSkip_Thursday,
     [DEBUG_TIME_SKIP_MENU_FRIDAY] = DebugAction_TimeSkip_Friday,
     [DEBUG_TIME_SKIP_MENU_SATURDAY] = DebugAction_TimeSkip_Saturday,
+};
+
+static void (*const sDebugMenu_Actions_PlayerPersonality[])(u8) =
+{
+    [DEBUG_PLAYER_PERSONALITY_FURY] = DebugAction_PersonalityChange_Fury,
+    [DEBUG_PLAYER_PERSONALITY_MISCHIEF] = DebugAction_PersonalityChange_Mischief,
+    [DEBUG_PLAYER_PERSONALITY_FRIENDSHIP] = DebugAction_PersonalityChange_Friendship,
 };
 
 // *******************************
@@ -1316,6 +1351,13 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_TimeSkip_Weekdays =
     .items = sDebugMenu_Items_TimeSkip_Weekdays,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_TimeSkip_Weekdays),
+};
+
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_PlayerPersonality =
+{
+    .items = sDebugMenu_Items_PlayerPersonality,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_PlayerPersonality),
 };
 
 // *******************************
@@ -1824,6 +1866,25 @@ static void DebugTask_HandleMenuInput_TimeSkip_Weekdays(u8 taskId)
     }
 }
 
+static void DebugTask_HandleMenuInput_PlayerPersonality(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_PlayerPersonality[input]) != NULL)
+            func(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ReShowMainMenu();
+    }
+}
+
 static void DebugTask_HandleMenuInput_FlagsVars(u8 taskId)
 {
     void (*func)(u8);
@@ -2141,6 +2202,13 @@ static void DebugAction_TimeSkip_Weekdays(u8 taskId)
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_TimeSkip_Weekdays, sDebugMenu_ListTemplate_TimeSkip_Weekdays);
 }
+
+static void DebugAction_Util_Player_Personality(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_PlayerPersonality, sDebugMenu_ListTemplate_PlayerPersonality);
+}
+
 
 // *******************************
 // Actions Utilities
@@ -4513,6 +4581,35 @@ static void DebugAction_TimeSkip_Saturday(u8 taskId)
     FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);    
     Debug_DestroyMenu_Full(taskId);
     SilentWarpForTime();
+}
+
+// *******************************
+// Actions Player Personality
+
+static void PersonalityChanger(u8 newPersonality)
+{
+    gSaveBlock2Ptr->personalityType = newPersonality;
+}
+
+static void DebugAction_PersonalityChange_Fury(u8 taskId)
+{
+    Debug_DestroyMenu_Full(taskId);
+    PersonalityChanger(0);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_PersonalityChange_Mischief(u8 taskId)
+{
+    Debug_DestroyMenu_Full(taskId);
+    PersonalityChanger(1);
+    ScriptContext_Enable();
+}
+
+static void DebugAction_PersonalityChange_Friendship(u8 taskId)
+{
+    Debug_DestroyMenu_Full(taskId);
+    PersonalityChanger(2);
+    ScriptContext_Enable();
 }
 
 // *******************************
