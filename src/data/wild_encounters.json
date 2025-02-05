@@ -11546,7 +11546,7 @@
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_TRAPINCH"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 5,
@@ -11556,7 +11556,7 @@
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_TRAPINCH"
+                "species": "SPECIES_HIPPOPOTAS"
               }
             ]
           }
