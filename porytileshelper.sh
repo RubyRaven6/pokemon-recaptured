@@ -3,17 +3,17 @@
 # CUSTOM PATHS
 
 ## WSL PATHS
-dir_raw_tilesets="/mnt/c/Users/Evan/Desktop/Pokemon/romhacks/for-tiles/raw-tilesets/"
+dir_raw_tilesets="../tilesets/"
 dir_raw_tilesets_primary="${dir_raw_tilesets}primary/"
 dir_raw_tilesets_secondary="${dir_raw_tilesets}secondary/"
-dir_aseprite_folder="/mnt/c/Program Files/"
+dir_aseprite_folder="/Users/rubyraven/Applications/"
 dir_compiled_primary="./data/tilesets/primary/"
 dir_compiled_secondary="./data/tilesets/secondary/"
 metatile_behaviors="./include/constants/metatile_behaviors.h"
-normalize_py="/mnt/c/Users/Evan/Desktop/Pokemon/romhacks/for-tiles/raw-tilesets/normalize.py"
+normalize_py="./normalize.py"
 
 ## WINDOWS PATH
-dir_aseprite_raw_tilesets="C:/Users/Evan/Desktop/Pokemon/romhacks/for-tiles/raw-tilesets/" 
+dir_aseprite_raw_tilesets="/Users/rubyraven/Desktop/raven/decomps/tilesets" 
 
 # END OF CUSTOM PATHS
 
@@ -75,7 +75,7 @@ while(true); do
             fi
 
             # separates each layer of the tileset into individual .png files
-            "${dir_aseprite_folder}Aseprite/aseprite.exe" -b ${dir_aseprite_raw_tilesets}primary/${tilesetsrc}/tilesetase.aseprite --save-as ${dir_aseprite_raw_tilesets}primary/${tilesetsrc}/{layer}.png
+            "${dir_aseprite_folder}Aseprite.app" -b ${dir_aseprite_raw_tilesets}primary/${tilesetsrc}/tilesetase.aseprite --save-as ${dir_aseprite_raw_tilesets}primary/${tilesetsrc}/{layer}.png
 
             # check if the above cmd worked by checking if the file bottom.png exists
             if [ ! -f "${dir_raw_tilesets_primary}${tilesetsrc}/bottom.png" ]; then
@@ -139,7 +139,7 @@ while(true); do
             fi
             
             # separates each layer of the tileset into individual .png files
-            "${dir_aseprite_folder}Aseprite/aseprite.exe" -b ${dir_aseprite_raw_tilesets}secondary/${tilesetsrc}/tilesetase.aseprite --save-as ${dir_aseprite_raw_tilesets}secondary/${tilesetsrc}/{layer}.png
+            "${dir_aseprite_folder}Aseprite.app" -b ${dir_aseprite_raw_tilesets}secondary/${tilesetsrc}/tilesetase.aseprite --save-as ${dir_aseprite_raw_tilesets}secondary/${tilesetsrc}/{layer}.png
 
             # check if the above cmd worked by checking if the file bottom.png exists
             if [ ! -f "${dir_raw_tilesets_secondary}${tilesetsrc}/bottom.png" ]; then
@@ -169,11 +169,11 @@ while(true); do
             ;;
         3) 
             # DECOMPILE PRIMARY
-            read -p "Folder name for the resulting decompiled tileset in ${dir_raw_tilesets}: " destino
+            read -p "Folder name for the resulting decompiled tileset in ${dir_raw_tilesets_primary}: " destino
             read -p "Folder name for the primary tileset to be decompiled in ${dir_compiled_primary}: " tilesetsrc
 
             # run porytiles
-            porytiles decompile-primary -o ${dir_raw_tilesets}${destino} ${dir_compiled_primary}${tilesetsrc} ${metatile_behaviors}
+            porytiles decompile-primary -o ${dir_raw_tilesets_primary}${destino} ${dir_compiled_primary}${tilesetsrc} ${metatile_behaviors}
 
             lastcmd="porytiles decompile-primary -o ${dir_raw_tilesets}${destino} ${dir_compiled_primary}${tilesetsrc} ${metatile_behaviors}"
 
@@ -181,12 +181,12 @@ while(true); do
             ;;
         4)
             # DECOMPILE SECONDARY
-            read -p "Folder name for the resulting decompiled tileset in ${dir_raw_tilesets}: " destino
+            read -p "Folder name for the resulting decompiled tileset in ${dir_raw_tilesets_secondary}: " destino
             read -p "Folder name for the secondary tileset to be decompiled in ${dir_compiled_secondary}: " tilesetsrc
             read -p "Folder name for the linked primary tileset in ${dir_compiled_primary}: " tilesetsrc2
 
             # run porytiles
-            porytiles decompile-secondary -o ${dir_raw_tilesets}${destino} ${dir_compiled_secondary}${tilesetsrc} ${dir_compiled_primary}${tilesetsrc2} ${metatile_behaviors}
+            porytiles decompile-secondary -o ${dir_raw_tilesets_secondary}${destino} ${dir_compiled_secondary}${tilesetsrc} ${dir_compiled_primary}${tilesetsrc2} ${metatile_behaviors}
 
             lastcmd="porytiles decompile-secondary -o ${dir_raw_tilesets}${destino} ${dir_compiled_secondary}${tilesetsrc} ${dir_compiled_primary}${tilesetsrc2} ${metatile_behaviors}"
 
