@@ -6299,6 +6299,43 @@ static void Cmd_moveend(void)
             else
                 gBattleScripting.moveendState++;
             break;
+        case MOVEEND_HIT_SWITCH_TARGET:
+            if (gMovesInfo[gCurrentMove].effect == EFFECT_HIT_SWITCH_TARGET
+             && !(gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
+             && IsBattlerTurnDamaged(gBattlerTarget)
+             && IsBattlerAlive(gBattlerTarget)
+             && IsBattlerAlive(gBattlerAttacker)
+             && gSpecialStatuses[gBattlerAttacker].parentalBondState != PARENTAL_BOND_1ST_HIT)
+            {
+                u32 targetAbility = GetBattlerAbility(gBattlerTarget);
+                if (targetAbility == ABILITY_GUARD_DOG)
+                {
+                    gBattleScripting.moveendState++;
+                    break;
+                }
+
+                effect = TRUE;
+                BattleScriptPushCursor();
+                if (targetAbility == ABILITY_SUCTION_CUPS)
+                {
+                    gBattlescriptCurrInstr = BattleScript_AbilityPreventsPhasingOutRet;
+                }
+                else if (gStatuses3[gBattlerTarget] & STATUS3_ROOTED)
+                {
+                    gBattlescriptCurrInstr = BattleScript_PrintMonIsRootedRet;
+                }
+                else if (GetActiveGimmick(gBattlerTarget) == GIMMICK_DYNAMAX)
+                {
+                    gBattlescriptCurrInstr = BattleScript_HitSwitchTargetDynamaxed;
+                }
+                else
+                {
+                    gBattleScripting.switchCase = B_SWITCH_HIT;
+                    gBattlescriptCurrInstr = BattleScript_TryHitSwitchTarget;
+                }
+            }
+            gBattleScripting.moveendState++;
+            break;
         case MOVEEND_KINGSROCK: // King's rock
             // These effects will occur at each hit in a multi-strike move
             if (ItemBattleEffects(ITEMEFFECT_KINGSROCK, 0, FALSE))
@@ -9279,25 +9316,25 @@ u32 IsFlowerVeilProtected(u32 battler)
         return 0;
 }
 
-u32 IsLeafGuardProtected(u32 battler)
+u32 IsLeafGuardProtected(u32 battler, u32 ability)
 {
     if (IsBattlerWeatherAffected(battler, B_WEATHER_SUN))
-        return GetBattlerAbility(battler) == ABILITY_LEAF_GUARD;
+        return ability == ABILITY_LEAF_GUARD;
     else
         return 0;
 }
 
-bool32 IsShieldsDownProtected(u32 battler)
+bool32 IsShieldsDownProtected(u32 battler, u32 ability)
 {
-    return (GetBattlerAbility(battler) == ABILITY_SHIELDS_DOWN
+    return (ability == ABILITY_SHIELDS_DOWN
             && GetFormIdFromFormSpeciesId(gBattleMons[battler].species) < GetFormIdFromFormSpeciesId(SPECIES_MINIOR_CORE_RED)); // Minior is not in core form
 }
 
-u32 IsAbilityStatusProtected(u32 battler)
+u32 IsAbilityStatusProtected(u32 battler, u32 ability)
 {
-    return IsFlowerVeilProtected(battler)
-        || IsLeafGuardProtected(battler)
-        || IsShieldsDownProtected(battler);
+    return IsLeafGuardProtected(battler, ability)
+        || IsShieldsDownProtected(battler, ability)
+        || IsFlowerVeilProtected(battler);
 }
 
 u32 GetHighestStatId(u32 battler)
@@ -9571,7 +9608,7 @@ static void Cmd_various(void)
     case VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED:
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
-        if (IsShieldsDownProtected(battler))
+        if (IsShieldsDownProtected(battler, GetBattlerAbility(battler)))
         {
             gBattlerAbility = battler;
             gBattlescriptCurrInstr = cmd->jumpInstr;
@@ -11128,7 +11165,7 @@ static void Cmd_various(void)
     case VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED:
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
-        if (IsLeafGuardProtected(battler))
+        if (IsLeafGuardProtected(battler, GetBattlerAbility(battler)))
         {
             gBattlerAbility = battler;
             gBattlescriptCurrInstr = cmd->jumpInstr;
@@ -14714,16 +14751,9 @@ static void Cmd_trywish(void)
     case 1: // heal effect
         PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattlerTarget, gWishFutureKnock.wishPartyId[gBattlerTarget])
         if (B_WISH_HP_SOURCE >= GEN_5)
-        {
-            if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-                gBattleStruct->moveDamage[gBattlerTarget] = max(1, GetMonData(&gPlayerParty[gWishFutureKnock.wishPartyId[gBattlerTarget]], MON_DATA_MAX_HP) / 2);
-            else
-                gBattleStruct->moveDamage[gBattlerTarget] = max(1, GetMonData(&gEnemyParty[gWishFutureKnock.wishPartyId[gBattlerTarget]], MON_DATA_MAX_HP) / 2);
-        }
+            gBattleStruct->moveDamage[gBattlerTarget] = max(1, GetMonData(&GetBattlerParty(gBattlerTarget)[gWishFutureKnock.wishPartyId[gBattlerTarget]], MON_DATA_MAX_HP) / 2);
         else
-        {
             gBattleStruct->moveDamage[gBattlerTarget] = max(1, GetNonDynamaxMaxHP(gBattlerAttacker) / 2);
-        }
 
         gBattleStruct->moveDamage[gBattlerTarget] *= -1;
         if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
@@ -17676,26 +17706,6 @@ void BS_JumpIfBlockedBySoundproof(void)
     else
     {
         gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-}
-
-void BS_TryHitSwitchTarget(void)
-{
-    NATIVE_ARGS(const u8 *failInstr);
-
-    if (IsBattlerAlive(gBattlerAttacker)
-     && IsBattlerAlive(gBattlerTarget)
-     && !(gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
-     && IsBattlerTurnDamaged(gBattlerTarget)
-     && gSpecialStatuses[gBattlerAttacker].parentalBondState != PARENTAL_BOND_1ST_HIT
-     && GetBattlerAbility(gBattlerTarget) != ABILITY_GUARD_DOG)
-    {
-        gBattleScripting.switchCase = B_SWITCH_HIT;
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
     }
 }
 

@@ -424,18 +424,11 @@ bool32 IsDamageMoveUnusable(u32 battlerAtk, u32 battlerDef, u32 move, u32 moveTy
 {
     struct AiLogicData *aiData = AI_DATA;
     u32 battlerDefAbility;
-    u32 partnerBattlerDefAbility;
 
     if (DoesBattlerIgnoreAbilityChecks(battlerAtk, aiData->abilities[battlerAtk], move))
-    {
         battlerDefAbility = ABILITY_NONE;
-        partnerBattlerDefAbility = ABILITY_NONE;
-    }
     else
-    {
         battlerDefAbility = aiData->abilities[battlerDef];
-        partnerBattlerDefAbility = aiData->abilities[BATTLE_PARTNER(battlerDef)];
-    }
 
     if (battlerDef == BATTLE_PARTNER(battlerAtk))
         battlerDefAbility = aiData->abilities[battlerDef];
@@ -443,13 +436,10 @@ bool32 IsDamageMoveUnusable(u32 battlerAtk, u32 battlerDef, u32 move, u32 moveTy
     if (gBattleStruct->battlerState[battlerDef].commandingDondozo)
         return TRUE;
 
-    if (CanAbilityBlockMove(battlerAtk, battlerDef, move, aiData->abilities[battlerDef]))
+    if (CanAbilityBlockMove(battlerAtk, battlerDef, move, aiData->abilities[battlerDef], FALSE))
         return TRUE;
 
-    if (CanPartnerAbilityBlockMove(battlerAtk, battlerDef, move, partnerBattlerDefAbility))
-        return TRUE;
-
-    if (CanAbilityAbsorbMove(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, moveType))
+    if (CanAbilityAbsorbMove(battlerAtk, battlerDef, aiData->abilities[battlerDef], move, moveType, FALSE))
         return TRUE;
 
     switch (GetMoveEffect(move))
@@ -787,7 +777,11 @@ static bool32 AI_IsMoveEffectInPlus(u32 battlerAtk, u32 battlerDef, u32 move, s3
             return TRUE;
         break;
     case EFFECT_FELL_STINGER:
-        if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_ATK))
+        if (BattlerStatCanRise(battlerAtk, abilityAtk, STAT_ATK) && noOfHitsToKo == 1)
+            return TRUE;
+        break;
+    case EFFECT_PURSUIT:
+        if(noOfHitsToKo == 1)
             return TRUE;
         break;
     }
@@ -2695,19 +2689,9 @@ static bool32 AnyUsefulStatIsRaised(u32 battler)
     return FALSE;
 }
 
-struct Pokemon *GetPartyBattlerPartyData(u32 battlerId, u32 switchBattler)
-{
-    struct Pokemon *mon;
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        mon = &gPlayerParty[switchBattler];
-    else
-        mon = &gEnemyParty[switchBattler];
-    return mon;
-}
-
 static bool32 PartyBattlerShouldAvoidHazards(u32 currBattler, u32 switchBattler)
 {
-    struct Pokemon *mon = GetPartyBattlerPartyData(currBattler, switchBattler);
+    struct Pokemon *mon = &GetBattlerParty(currBattler)[switchBattler];
     u32 ability = GetMonAbility(mon);   // we know our own party data
     u32 holdEffect;
     u32 species = GetMonData(mon, MON_DATA_SPECIES);
@@ -3037,7 +3021,7 @@ bool32 AI_CanGetFrostbite(u32 battler, u32 ability)
       || ability == ABILITY_COMATOSE
       || IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
       || gBattleMons[battler].status1 & STATUS1_ANY
-      || IsAbilityStatusProtected(battler)
+      || IsAbilityStatusProtected(battler, ability)
       || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)
         return FALSE;
     return TRUE;
