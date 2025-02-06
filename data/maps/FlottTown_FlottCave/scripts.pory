@@ -46,6 +46,7 @@ mapscripts FlottTown_FlottCave_MapScripts {
 }
 
 script FlottTown_FlottCave_OnFrame{
+    speakername("Elsie")
     msgbox(FlottTown_FlottCave_Text_ElsieWorried, MSGBOX_DEFAULT)
     closemessage
     setflag(FLAG_FALLEN_INTO_CAVE)
@@ -124,7 +125,8 @@ script FlottTown_FlottCave_ZubatSpawn{
 
 script FlottTown_FlottCave_EventScript_RockSmash{
     fadescreen(FADE_FROM_BLACK)
-    msgbox(format("???: Golurk! Use Rock Smash!"), MSGBOX_DEFAULT)
+    speakername("???")
+    msgbox(format("Golurk! Use Rock Smash!"), MSGBOX_DEFAULT)
     playmoncry(SPECIES_GOLURK, CRY_MODE_NORMAL)
     waitmoncry
     playse(SE_M_ROCK_THROW)
@@ -152,6 +154,7 @@ script FlottTown_FlottCave_BottomTrigger{
 
 script FlottTown_FlottCave_EventScript_ElsieRescue{
     applymovement(PLAYER, Common_Movement_FaceLeft)
+    speakername("Barney")
     msgbox(FlottTown_FlottCave_Text_Rescue, MSGBOX_DEFAULT)
     closemessage
     applymovement(LOCALID_BARNEY, FlottTown_FlottCave_Movement_BarneyWalksUp)
@@ -161,15 +164,18 @@ script FlottTown_FlottCave_EventScript_ElsieRescue{
     waitmovement(LOCALID_ELSIE)
     waitmovement(PLAYER)
     applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
-    msgbox(format("ELSIE: {PLAYER}! Thank goodness you're alright. I don't know what I'd do if you got hurt."), MSGBOX_DEFAULT)
+    speakername("Elsie")
+    msgbox(format("{PLAYER}! Thank goodness you're alright. I don't know what I'd do if you got hurt."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     applymovement(LOCALID_ELSIE, Common_Movement_WalkInPlaceRight)
-    msgbox(format("ELSIE: This is Mr. Heinrich. This was his old gym."), MSGBOX_DEFAULT)
+    speakername("Elsie")
+    msgbox(format("This is Mr. Heinrich. This was his old gym."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
     applymovement(LOCALID_BARNEY, Common_Movement_WalkInPlaceDown)
+    speakername("Barney")
     msgbox(FlottTown_FlottCave_Text_LetsGoHome, MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -262,14 +268,14 @@ movement FlottTown_FlottCave_Movement_PlayerWalksUp{
 }
 
 text FlottTown_FlottCave_Text_ElsieWorried{
-    format("ELSIE: Oh my god! {PLAYER}! Are you okay?! Sit tight in there, okay? I'll go get help!\pYou here the footsteps of your sister exiting the gym.")
+    format("Oh my god! {PLAYER}! Are you okay?! Sit tight in there, okay? I'll go get help!\pYou here the footsteps of your sister exiting the gym.")
 }
 
 text FlottTown_FlottCave_Text_Rescue{
-    format("???: Ah! There you are! Come, let's get you out here.\p" 
-            "ELSIE: {PLAYER}! Oh gods, I'm so glad you're okay!")
+    format("Ah! There you are! Come, let's get you out here.\p" 
+            "{PLAYER}! Oh gods, I'm so glad you're okay!")
 }
 
 text FlottTown_FlottCave_Text_LetsGoHome {
-    format("BARNEY: Indeed it were. Now, how about we get you kids out of this dreadful place? You both look tired. Seeing as it's my gym, anything that happens here is on my head. My home is nearby; let's take a rest there.")
+    format("Indeed it were. Now, how about we get you kids out of this dreadful place? You both look tired. Seeing as it's my gym, anything that happens here is on my head. My home is nearby; let's take a rest there.")
 }

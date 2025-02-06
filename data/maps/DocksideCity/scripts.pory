@@ -55,21 +55,21 @@ script DocksideCity_EventScript_SailorSpectator{
 
 script DocksideCity_EventScript_MomEatingOut{
     applymovement(20, moves(walk_in_place_right))
-    msgbox(format("MOM: Jaiden! I told you to stop playing with your food!"), MSGBOX_DEFAULT)
+    msgbox(format("Jaiden! I told you to stop playing with your food!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
 }
 
 script DocksideCity_EventScript_SonEatingOut{
-    msgbox("SON: Huh, this pasta is staler than usual…", MSGBOX_DEFAULT)
+    msgbox("Huh, this pasta is staler than usual…", MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
 }
 
 script DocksideCity_EventScript_DaughterEatingOut{
-    msgbox("JAIDEN: PAsta!", MSGBOX_DEFAULT)
+    msgbox("PAsta!", MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
@@ -77,9 +77,9 @@ script DocksideCity_EventScript_DaughterEatingOut{
 
 script DocksideCity_EventScript_Lesbian1EatingOut{
     applymovement(19, moves(walk_in_place_right))
-    msgbox(format("LASS: Hey… thanks for saying yes. I was really looking forward to spending the day with you."), MSGBOX_DEFAULT)
+    msgbox(format("Hey… thanks for saying yes. I was really looking forward to spending the day with you."), MSGBOX_DEFAULT)
     applymovement(18, moves(walk_in_place_left))
-    msgbox(format("LADY: Of course! I always love spending time with you. You know that, right?"), MSGBOX_DEFAULT)
+    msgbox(format("Of course! I always love spending time with you. You know that, right?"), MSGBOX_DEFAULT)
     applymovement(19, moves(emote_heart))
     applymovement(18, moves(emote_heart))
     waitmessage
@@ -89,11 +89,11 @@ script DocksideCity_EventScript_Lesbian1EatingOut{
 
 script DocksideCity_EventScript_Lesbian2EatingOut{
     applymovement(18, moves(walk_in_place_left))
-    msgbox(format("LADY: Huh… this pasta tastes better than when I went here last time."), MSGBOX_DEFAULT)
+    msgbox(format("Huh… this pasta tastes better than when I went here last time."), MSGBOX_DEFAULT)
     applymovement(19, moves(walk_in_place_right))
-    msgbox(format("LASS: Really? I don't think they changed the recipe…"), MSGBOX_DEFAULT)
+    msgbox(format("Really? I don't think they changed the recipe…"), MSGBOX_DEFAULT)
     applymovement(18, moves(walk_in_place_left))
-    msgbox(format("LADY: Well… maybe there's just something better about today?"), MSGBOX_DEFAULT)
+    msgbox(format("Well… maybe there's just something better about today?"), MSGBOX_DEFAULT)
     applymovement(19, moves(emote_heart))
     applymovement(18, moves(emote_heart))
     waitmessage
@@ -103,11 +103,11 @@ script DocksideCity_EventScript_Lesbian2EatingOut{
 
 script DocksideCity_EventScript_Date1EatingOut{
     applymovement(23, moves(walk_in_place_right, step_end))
-    msgbox(format("LASS: Hm… I'm getting kind of bored going here each week…"), MSGBOX_DEFAULT)
+    msgbox(format("Hm… I'm getting kind of bored going here each week…"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     applymovement(24, moves(walk_in_place_left, step_end))
-    msgbox(format("LAD: What? But this is the best pasta place in the city!"), MSGBOX_DEFAULT)
+    msgbox(format("What? But this is the best pasta place in the city!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
@@ -115,35 +115,35 @@ script DocksideCity_EventScript_Date1EatingOut{
 
 script DocksideCity_EventScript_Date2EatingOut{
     applymovement(24, moves(walk_in_place_left, step_end))
-    msgbox(format("LAD: The lad seems to just eating his food in peace."), MSGBOX_DEFAULT)
+    msgbox(format("The lad seems to just eating his food in peace."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
     end
 }
 
 script DocksideCity_EventScript_Custodian{
-    msgbox(format("CUSTODIAN: I'll tell ya, it's astounding how much mess people can leave around after they eat."), MSGBOX_NPC)
+    msgbox(format("I'll tell ya, it's astounding how much mess people can leave around after they eat."), MSGBOX_NPC)
     waitmessage
     closemessage
     end
 }
 
 script DocksideCity_EventScript_GirlTuber{
-    msgbox(format("TUBER: I love the beach! It's so nice to swim in the water."), MSGBOX_NPC)
+    msgbox(format("I love the beach! It's so nice to swim in the water."), MSGBOX_NPC)
     waitmessage
     closemessage
     end
 }
 
 script DocksideCity_EventScript_BoyTuber{
-    msgbox(format("TUBER: We can't go too far into the water. It's fine though."), MSGBOX_NPC)
+    msgbox(format("We can't go too far into the water. It's fine though."), MSGBOX_NPC)
     waitmessage
     closemessage
     end
 }
 
 script DocksideCity_EventScript_TuberDad{
-    msgbox(format("SAILOR: My kids love coming to the beach, so I always come with them when I have time."), MSGBOX_NPC)
+    msgbox(format("My kids love coming to the beach, so I always come with them when I have time."), MSGBOX_NPC)
     waitmessage
     closemessage
     end
@@ -160,7 +160,7 @@ script DocksideCity_EventScript_BuriedGuy{
 
 script DocksideCity_EventScript_LighthouseFan{
     faceplayer
-    msgbox(format("SAILOR: Whenever I dock here, I love looking at the wide vision of the sea. It's such a majestic view."), MSGBOX_NPC)
+    msgbox(format("Whenever I dock here, I love looking at the wide vision of the sea. It's such a majestic view."), MSGBOX_NPC)
     waitmessage
     closemessage
     end
@@ -168,7 +168,7 @@ script DocksideCity_EventScript_LighthouseFan{
 
 script DocksideCity_EventScript_GardenLady{
     faceplayer
-    msgbox(format("LADY: This is a community garden for the city. I like to take care of it with my Pokémon when I have the time."), MSGBOX_NPC)
+    msgbox(format("This is a community garden for the city. I like to take care of it with my Pokémon when I have the time."), MSGBOX_NPC)
     waitmessage
     closemessage
     end
@@ -226,7 +226,7 @@ text(local) DocksideCity_Text_SailorSpectator{
 
 text(local) DocksideCity_Text_BuriedGuy{
     format(
-        "BURIED GUY: So, I asked my friends to bury me in the sand. As a bit, y'know?"
+        "BURIED So, I asked my friends to bury me in the sand. As a bit, y'know?"
         "I asked them to do it days ago. I think they forgot me here."
         "It's not all too bad though. I still get food whenever the kids want some company."
     )

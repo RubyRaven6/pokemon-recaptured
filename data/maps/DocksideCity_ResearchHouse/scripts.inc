@@ -10,11 +10,12 @@ DocksideCity_ResearchHouse_EventScript_ProfNarra::
 
 DocksideCity_ResearchHouse_EventScript_ProfNarra_2:
 	faceplayer
+	speakername DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_0
 	msgbox DocksideCity_ResearchHouse_Text_WhoAreYou, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	fadescreen FADE_TO_BLACK
-	msgbox DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_0, MSGBOX_DEFAULT
+	msgbox DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_1, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	fadescreen FADE_FROM_BLACK
@@ -26,7 +27,8 @@ DocksideCity_ResearchHouse_EventScript_ProfNarra_2:
 	end
 
 DocksideCity_ResearchHouse_EventScript_ProfNarra_3:
-	msgbox DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_1, MSGBOX_NPC
+	speakername DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_0
+	msgbox DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_2, MSGBOX_NPC
 	waitmessage
 	closemessage
 	end
@@ -47,10 +49,13 @@ DocksideCity_ResearchHouse_EventScript_Aide2::
 
 
 DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_0:
+	.string "Prof. Narra$"
+
+DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_1:
 	.string "Prof. Narra takes a few minutes to\n"
 	.string "explain what a Pokédex is to you.$"
 
-DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_1:
+DocksideCity_ResearchHouse_EventScript_ProfNarra_Text_2:
 	.string "Have you caught a Pokémon yet? I can't\n"
 	.string "trust you with a Pokédex if not.$"
 

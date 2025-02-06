@@ -31,7 +31,8 @@ script FlottTown_AbandonedGym_OnFrame{
     applymovement(LOCALID_ELSIE, Common_Movement_FaceUp)
     lock
     waitmovement(LOCALID_ELSIE)
-    msgbox(format("ELSIE: Huh, this gym is pretty run down. I wonder what's inside?"), MSGBOX_DEFAULT)
+    speakername("Elsie")
+    msgbox(format("Huh, this gym is pretty run down. I wonder what's inside?"), MSGBOX_DEFAULT)
     msgbox(format("Elsie decided to follow you!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -41,6 +42,7 @@ script FlottTown_AbandonedGym_OnFrame{
 }
 
 script FlottTown_AbandonedGym_LadderStopper{
+    speakername("Elsie")
     msgbox(FlottTown_AbandonedGym_Text_LetsStayUp, MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -53,6 +55,7 @@ script FlottTown_AbandonedGym_EventScript_FreePokeball{
     giveitem(ITEM_POKE_BALL, 1)
     setvar(VAR_FLOTT_TOWN_STATE, 5)
     closemessage
+    speakername("Elsie")
     msgbox(FlottTown_AbandonedGym_Text_BeforeCollapse, MSGBOX_NPC)
     waitmessage
     closemessage
@@ -69,7 +72,8 @@ script FlottTown_AbandonedGym_EventScript_GymCollapses{
     setmetatile(14, 18, METATILE_Cave_CrackedFloor, FALSE)
     special(DrawWholeMapView)
     applymovement(OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer)
-    msgbox(format("ELSIE: {PLAYER}! Watch out!"))
+    speakername("Elsie")
+    msgbox(format("{PLAYER}! Watch out!"))
     setmetatile(12, 17, METATILE_Cave_CrackedFloor_Hole, FALSE)
     setmetatile(13, 17, METATILE_Cave_CrackedFloor_Hole, FALSE)
     setmetatile(14, 17, METATILE_Cave_CrackedFloor_Hole, FALSE)
@@ -84,11 +88,13 @@ script FlottTown_AbandonedGym_EventScript_GymCollapses{
 script FlottTown_AbandonedGym_ElsieFollowerScript{
     facefollower
     if(var(VAR_FLOTT_TOWN_STATE) == 4){
-        msgbox(format("ELSIE: I wonder what's inside? There must be something interesting deeper in."))
+        speakername("Elsie")
+        msgbox(format("I wonder what's inside? There must be something interesting deeper in."))
         closemessage
     }
     else{
-        msgbox(format("ELSIE: What'cha waiting for? Let's get outta here!\p Once we get home, I can cook you up a hamburg steak."))
+        speakername("Elsie")
+        msgbox(format("What'cha waiting for? Let's get outta here!\p Once we get home, I can cook you up a hamburg steak."))
         closemessage
     }
 }
@@ -105,9 +111,9 @@ movement WalkAway{
 }
 
 text(local) FlottTown_AbandonedGym_Text_LetsStayUp {
-    format("ELSIE: A ladder? Hmm...let's not go down there.")
+    format("A ladder? Hmm...let's not go down there.")
 }
 
 text(local) FlottTown_AbandonedGym_Text_BeforeCollapse{
-    format("ELSIE: Huh, it's just a Pokéball. Will you ever use it, though?\p There doesn't seem to be anything else in here though. We'd best get home.")
+    format("Huh, it's just a Pokéball. Will you ever use it, though?\p There doesn't seem to be anything else in here though. We'd best get home.")
 }

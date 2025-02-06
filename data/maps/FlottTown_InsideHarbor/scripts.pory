@@ -1,4 +1,7 @@
 mapscripts FlottTown_InsideHarbor_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        setflag(FLAG_FLOTT_HARBOR_SAILOR)
+    }
     MAP_SCRIPT_ON_LOAD: FlottTown_InsideHarbor_OnLoad
 }
 
@@ -6,7 +9,6 @@ script(local) FlottTown_InsideHarbor_OnLoad{
     setflag(FLAG_VISITED_FLOTT_TOWN)
     setvar(VAR_DOCKED_CITY, 0) 
     if(var(FLAG_SYS_QUEST_MENU_GET) == TRUE){
-        setflag(FLAG_FLOTT_HARBOR_SAILOR)
         addobject(1)
         addobject(2)
     }

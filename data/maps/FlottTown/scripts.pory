@@ -73,6 +73,7 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     waitmovement(1)
     waitmovement(OBJ_EVENT_ID_PLAYER)
+    speakername("Elsie")
     msgbox(FlottTown_Text_TookYourTime, MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -80,12 +81,14 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
     waitmovement(1)
     waitmovement(OBJ_EVENT_ID_PLAYER)
+    speakername("Elsie")
     msgbox(FlottTown_Text_ThisIsIt, MSGBOX_DEFAULT)
     waitmessage
     closemessage
     delay(180)
     applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
+    speakername("Elsie")
     msgbox(FlottTown_Text_LetsTakeALook, MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -97,6 +100,7 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     waitmovement(OBJ_EVENT_ID_PLAYER)
     applymovement(LOCALID_ELSIE, Common_Movement_FaceUp)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    speakername("Elsie")
     msgbox(FlottTown_Text_OurNewHome, MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -104,15 +108,19 @@ script FlottTown_EventScript_ElsieBringsUsHome4{
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
     waitmovement(1)
     waitmovement(OBJ_EVENT_ID_PLAYER)
+    speakername("Elsie")
     msgbox(FlottTown_Text_DoYouLikeIt, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
+        speakername("Elsie")
         msgbox(FlottTown_Text_ImGladYouLikeIt, MSGBOX_DEFAULT)
         waitmessage
     }
     else{
+        speakername("Elsie")
         msgbox(FlottTown_Text_ImSorryChamp, MSGBOX_DEFAULT)
         waitmessage
     }
+    speakername("Elsie")
     msgbox(FlottTown_Text_IllPrepareInside,MSGBOX_DEFAULT)
     waitmessage
     closemessage

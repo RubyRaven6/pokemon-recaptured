@@ -1863,7 +1863,7 @@
 	
 	@ Sets the text of the name box in the next-shown message box.
 	.macro speakername text:req
-	.byte 0xe3
+	callnative ScrCmd_setspeaker
 	.4byte \text
 	.endm
 

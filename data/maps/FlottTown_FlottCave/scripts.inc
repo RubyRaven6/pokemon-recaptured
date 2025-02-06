@@ -22,6 +22,7 @@ FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 
 
 FlottTown_FlottCave_OnFrame::
+	speakername FlottTown_FlottCave_OnFrame_Text_0
 	msgbox FlottTown_FlottCave_Text_ElsieWorried, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_FALLEN_INTO_CAVE
@@ -107,7 +108,8 @@ FlottTown_FlottCave_ZubatSpawn_6:
 
 FlottTown_FlottCave_EventScript_RockSmash::
 	fadescreen FADE_FROM_BLACK
-	msgbox FlottTown_FlottCave_EventScript_RockSmash_Text_0, MSGBOX_DEFAULT
+	speakername FlottTown_FlottCave_EventScript_RockSmash_Text_0
+	msgbox FlottTown_FlottCave_EventScript_RockSmash_Text_1, MSGBOX_DEFAULT
 	playmoncry SPECIES_GOLURK, CRY_MODE_NORMAL
 	waitmoncry
 	playse SE_M_ROCK_THROW
@@ -119,7 +121,7 @@ FlottTown_FlottCave_EventScript_RockSmash::
 	removeobject 6
 	callnative RemoveFollowingPokemon
 	waitse
-	msgbox FlottTown_FlottCave_EventScript_RockSmash_Text_1, MSGBOX_DEFAULT
+	msgbox FlottTown_FlottCave_EventScript_RockSmash_Text_2, MSGBOX_DEFAULT
 	closemessage
 	end
 
@@ -138,6 +140,7 @@ FlottTown_FlottCave_BottomTrigger::
 
 FlottTown_FlottCave_EventScript_ElsieRescue::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	speakername FlottTown_FlottCave_EventScript_ElsieRescue_Text_0
 	msgbox FlottTown_FlottCave_Text_Rescue, MSGBOX_DEFAULT
 	closemessage
 	applymovement 8, FlottTown_FlottCave_Movement_BarneyWalksUp
@@ -147,15 +150,18 @@ FlottTown_FlottCave_EventScript_ElsieRescue::
 	waitmovement 7
 	waitmovement OBJ_EVENT_ID_PLAYER
 	applymovement 7, Common_Movement_FaceRight
-	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_0, MSGBOX_DEFAULT
+	speakername FlottTown_FlottCave_OnFrame_Text_0
+	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_1, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	applymovement 7, Common_Movement_WalkInPlaceRight
-	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_1, MSGBOX_DEFAULT
+	speakername FlottTown_FlottCave_OnFrame_Text_0
+	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_2, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	applymovement 7, Common_Movement_FaceRight
 	applymovement 8, Common_Movement_WalkInPlaceDown
+	speakername FlottTown_FlottCave_EventScript_ElsieRescue_Text_0
 	msgbox FlottTown_FlottCave_Text_LetsGoHome, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -263,6 +269,9 @@ FlottTown_FlottCave_Movement_PlayerWalksUp:
 	walk_up
 	step_end
 
+FlottTown_FlottCave_OnFrame_Text_0:
+	.string "Elsie$"
+
 FlottTown_FlottCave_EventScript_ZubatAttacks_Text_0:
 	.string "As you walk inside the dark cave, you\n"
 	.string "hear a noise coming from the darkness!$"
@@ -276,20 +285,26 @@ FlottTown_FlottCave_EventScript_ZubatAttacks_Text_2:
 	.string "partner for your sister to return.$"
 
 FlottTown_FlottCave_EventScript_RockSmash_Text_0:
-	.string "???: Golurk! Use Rock Smash!$"
+	.string "???$"
 
 FlottTown_FlottCave_EventScript_RockSmash_Text_1:
+	.string "Golurk! Use Rock Smash!$"
+
+FlottTown_FlottCave_EventScript_RockSmash_Text_2:
 	.string "That sounded like it came from the\n"
 	.string "smashable rocks!$"
 
 FlottTown_FlottCave_EventScript_ElsieRescue_Text_0:
-	.string "ELSIE: {PLAYER}! Thank goodness\n"
-	.string "you're alright. I don't know what I'd do\l"
-	.string "if you got hurt.$"
+	.string "Barney$"
 
 FlottTown_FlottCave_EventScript_ElsieRescue_Text_1:
-	.string "ELSIE: This is Mr. Heinrich. This was his\n"
-	.string "old gym.$"
+	.string "{PLAYER}! Thank goodness you're\n"
+	.string "alright. I don't know what I'd do if you\l"
+	.string "got hurt.$"
+
+FlottTown_FlottCave_EventScript_ElsieRescue_Text_2:
+	.string "This is Mr. Heinrich. This was his old\n"
+	.string "gym.$"
 
 FlottTown_FlottCave_StarterChoice_Text_0:
 	.string "But…before it could hurt you, something\n"
@@ -315,22 +330,22 @@ FlottTown_FlottCave_StarterWantsToJoin_Text_3:
 	.string "The Pokémon looks sad.$"
 
 FlottTown_FlottCave_Text_ElsieWorried::
-	.string "ELSIE: Oh my god! {PLAYER}! Are you\n"
-	.string "okay?! Sit tight in there, okay? I'll go\l"
-	.string "get help!\p"
+	.string "Oh my god! {PLAYER}! Are you okay?!\n"
+	.string "Sit tight in there, okay? I'll go get\l"
+	.string "help!\p"
 	.string "You here the footsteps of your sister\n"
 	.string "exiting the gym.$"
 
 FlottTown_FlottCave_Text_Rescue::
-	.string "???: Ah! There you are! Come, let's get\n"
-	.string "you out here.\p"
-	.string "ELSIE: {PLAYER}! Oh gods, I'm so glad\n"
-	.string "you're okay!$"
+	.string "Ah! There you are! Come, let's get you\n"
+	.string "out here.\p"
+	.string "{PLAYER}! Oh gods, I'm so glad you're\n"
+	.string "okay!$"
 
 FlottTown_FlottCave_Text_LetsGoHome::
-	.string "BARNEY: Indeed it were. Now, how about\n"
-	.string "we get you kids out of this dreadful\l"
-	.string "place? You both look tired. Seeing as\l"
-	.string "it's my gym, anything that happens here\l"
-	.string "is on my head. My home is nearby; let's\l"
-	.string "take a rest there.$"
+	.string "Indeed it were. Now, how about we get\n"
+	.string "you kids out of this dreadful place?\l"
+	.string "You both look tired. Seeing as it's my\l"
+	.string "gym, anything that happens here is on\l"
+	.string "my head. My home is nearby; let's take a\l"
+	.string "rest there.$"

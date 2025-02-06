@@ -203,75 +203,74 @@ DocksideCity_EventScript_Date1EatingOut_Movement_1:
 	step_end
 
 DocksideCity_EventScript_MomEatingOut_Text_0:
-	.string "MOM: Jaiden! I told you to stop playing\n"
-	.string "with your food!$"
+	.string "Jaiden! I told you to stop playing with\n"
+	.string "your food!$"
 
 DocksideCity_EventScript_SonEatingOut_Text_0:
-	.string "SON: Huh, this pasta is staler than usual…$"
+	.string "Huh, this pasta is staler than usual…$"
 
 DocksideCity_EventScript_DaughterEatingOut_Text_0:
-	.string "JAIDEN: PAsta!$"
+	.string "PAsta!$"
 
 DocksideCity_EventScript_Lesbian1EatingOut_Text_0:
-	.string "LASS: Hey… thanks for saying yes. I was\n"
-	.string "really looking forward to spending the\l"
-	.string "day with you.$"
+	.string "Hey… thanks for saying yes. I was really\n"
+	.string "looking forward to spending the day\l"
+	.string "with you.$"
 
 DocksideCity_EventScript_Lesbian1EatingOut_Text_1:
-	.string "LADY: Of course! I always love spending\n"
-	.string "time with you. You know that, right?$"
+	.string "Of course! I always love spending time\n"
+	.string "with you. You know that, right?$"
 
 DocksideCity_EventScript_Lesbian2EatingOut_Text_0:
-	.string "LADY: Huh… this pasta tastes better\n"
-	.string "than when I went here last time.$"
+	.string "Huh… this pasta tastes better than\n"
+	.string "when I went here last time.$"
 
 DocksideCity_EventScript_Lesbian2EatingOut_Text_1:
-	.string "LASS: Really? I don't think they\n"
-	.string "changed the recipe…$"
+	.string "Really? I don't think they changed the\n"
+	.string "recipe…$"
 
 DocksideCity_EventScript_Lesbian2EatingOut_Text_2:
-	.string "LADY: Well… maybe there's just\n"
-	.string "something better about today?$"
+	.string "Well… maybe there's just something\n"
+	.string "better about today?$"
 
 DocksideCity_EventScript_Date1EatingOut_Text_0:
-	.string "LASS: Hm… I'm getting kind of bored\n"
-	.string "going here each week…$"
+	.string "Hm… I'm getting kind of bored going here\n"
+	.string "each week…$"
 
 DocksideCity_EventScript_Date1EatingOut_Text_1:
-	.string "LAD: What? But this is the best pasta\n"
-	.string "place in the city!$"
+	.string "What? But this is the best pasta place\n"
+	.string "in the city!$"
 
 DocksideCity_EventScript_Date2EatingOut_Text_0:
-	.string "LAD: The lad seems to just eating his\n"
-	.string "food in peace.$"
+	.string "The lad seems to just eating his food in\n"
+	.string "peace.$"
 
 DocksideCity_EventScript_Custodian_Text_0:
-	.string "CUSTODIAN: I'll tell ya, it's astounding\n"
-	.string "how much mess people can leave around\l"
-	.string "after they eat.$"
+	.string "I'll tell ya, it's astounding how much\n"
+	.string "mess people can leave around after\l"
+	.string "they eat.$"
 
 DocksideCity_EventScript_GirlTuber_Text_0:
-	.string "TUBER: I love the beach! It's so nice to\n"
-	.string "swim in the water.$"
+	.string "I love the beach! It's so nice to swim in\n"
+	.string "the water.$"
 
 DocksideCity_EventScript_BoyTuber_Text_0:
-	.string "TUBER: We can't go too far into the\n"
-	.string "water. It's fine though.$"
+	.string "We can't go too far into the water. It's\n"
+	.string "fine though.$"
 
 DocksideCity_EventScript_TuberDad_Text_0:
-	.string "SAILOR: My kids love coming to the\n"
-	.string "beach, so I always come with them when\l"
-	.string "I have time.$"
+	.string "My kids love coming to the beach, so I\n"
+	.string "always come with them when I have time.$"
 
 DocksideCity_EventScript_LighthouseFan_Text_0:
-	.string "SAILOR: Whenever I dock here, I love\n"
-	.string "looking at the wide vision of the sea.\l"
-	.string "It's such a majestic view.$"
+	.string "Whenever I dock here, I love looking at\n"
+	.string "the wide vision of the sea. It's such a\l"
+	.string "majestic view.$"
 
 DocksideCity_EventScript_GardenLady_Text_0:
-	.string "LADY: This is a community garden for\n"
-	.string "the city. I like to take care of it with\l"
-	.string "my Pokémon when I have the time.$"
+	.string "This is a community garden for the city.\n"
+	.string "I like to take care of it with my\l"
+	.string "Pokémon when I have the time.$"
 
 DocksideCity_EventScript_ResearchHouse_Sign_Text_0:
 	.string "Prof. Narra's Research House$"
@@ -306,9 +305,9 @@ DocksideCity_Text_SailorSpectator:
 	.string "in a dead-tie.$"
 
 DocksideCity_Text_BuriedGuy:
-	.string "BURIED GUY: So, I asked my friends to\n"
-	.string "bury me in the sand. As a bit, y'know? I\l"
-	.string "asked them to do it days ago. I think\l"
-	.string "they forgot me here. It's not all too\l"
-	.string "bad though. I still get food whenever\l"
-	.string "the kids want some company.$"
+	.string "BURIED So, I asked my friends to bury\n"
+	.string "me in the sand. As a bit, y'know? I asked\l"
+	.string "them to do it days ago. I think they\l"
+	.string "forgot me here. It's not all too bad\l"
+	.string "though. I still get food whenever the\l"
+	.string "kids want some company.$"

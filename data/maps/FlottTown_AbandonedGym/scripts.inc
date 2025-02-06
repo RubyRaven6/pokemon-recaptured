@@ -34,8 +34,9 @@ FlottTown_AbandonedGym_OnFrame::
 	applymovement LOCALID_ELSIE, Common_Movement_FaceUp
 	lock
 	waitmovement LOCALID_ELSIE
-	msgbox FlottTown_AbandonedGym_OnFrame_Text_0, MSGBOX_DEFAULT
+	speakername FlottTown_AbandonedGym_OnFrame_Text_0
 	msgbox FlottTown_AbandonedGym_OnFrame_Text_1, MSGBOX_DEFAULT
+	msgbox FlottTown_AbandonedGym_OnFrame_Text_2, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	setfollower LOCALID_ELSIE, FOLLOWER_ALL, FlottTown_AbandonedGym_ElsieFollowerScript, 0
@@ -44,6 +45,7 @@ FlottTown_AbandonedGym_OnFrame::
 
 
 FlottTown_AbandonedGym_LadderStopper::
+	speakername FlottTown_AbandonedGym_OnFrame_Text_0
 	msgbox FlottTown_AbandonedGym_Text_LetsStayUp, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -57,6 +59,7 @@ FlottTown_AbandonedGym_EventScript_FreePokeball::
 	giveitem ITEM_POKE_BALL, 1
 	setvar VAR_FLOTT_TOWN_STATE, 5
 	closemessage
+	speakername FlottTown_AbandonedGym_OnFrame_Text_0
 	msgbox FlottTown_AbandonedGym_Text_BeforeCollapse, MSGBOX_NPC
 	waitmessage
 	closemessage
@@ -73,6 +76,7 @@ FlottTown_AbandonedGym_EventScript_GymCollapses::
 	setmetatile 14, 18, METATILE_Cave_CrackedFloor, FALSE
 	special DrawWholeMapView
 	applymovement OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer
+	speakername FlottTown_AbandonedGym_OnFrame_Text_0
 	msgbox FlottTown_AbandonedGym_EventScript_GymCollapses_Text_0
 	setmetatile 12, 17, METATILE_Cave_CrackedFloor_Hole, FALSE
 	setmetatile 13, 17, METATILE_Cave_CrackedFloor_Hole, FALSE
@@ -90,11 +94,13 @@ FlottTown_AbandonedGym_ElsieFollowerScript::
 	facefollower
 	compare VAR_FLOTT_TOWN_STATE, 4
 	goto_if_eq FlottTown_AbandonedGym_ElsieFollowerScript_1
+	speakername FlottTown_AbandonedGym_OnFrame_Text_0
 	msgbox FlottTown_AbandonedGym_ElsieFollowerScript_Text_1
 	closemessage
 	return
 
 FlottTown_AbandonedGym_ElsieFollowerScript_1:
+	speakername FlottTown_AbandonedGym_OnFrame_Text_0
 	msgbox FlottTown_AbandonedGym_ElsieFollowerScript_Text_0
 	closemessage
 	return
@@ -114,10 +120,13 @@ FlottTown_AbandonedGym_BeforeEvent_Text_0:
 	.string "should probably leave for now.$"
 
 FlottTown_AbandonedGym_OnFrame_Text_0:
-	.string "ELSIE: Huh, this gym is pretty run down.\n"
-	.string "I wonder what's inside?$"
+	.string "Elsie$"
 
 FlottTown_AbandonedGym_OnFrame_Text_1:
+	.string "Huh, this gym is pretty run down. I\n"
+	.string "wonder what's inside?$"
+
+FlottTown_AbandonedGym_OnFrame_Text_2:
 	.string "Elsie decided to follow you!$"
 
 FlottTown_AbandonedGym_EventScript_FreePokeball_Text_0:
@@ -125,25 +134,23 @@ FlottTown_AbandonedGym_EventScript_FreePokeball_Text_0:
 	.string "Pokémon inside it, though.$"
 
 FlottTown_AbandonedGym_EventScript_GymCollapses_Text_0:
-	.string "ELSIE: {PLAYER}! Watch out!$"
+	.string "{PLAYER}! Watch out!$"
 
 FlottTown_AbandonedGym_ElsieFollowerScript_Text_0:
-	.string "ELSIE: I wonder what's inside? There\n"
-	.string "must be something interesting deeper\l"
-	.string "in.$"
+	.string "I wonder what's inside? There must be\n"
+	.string "something interesting deeper in.$"
 
 FlottTown_AbandonedGym_ElsieFollowerScript_Text_1:
-	.string "ELSIE: What'cha waiting for? Let's get\n"
-	.string "outta here!\p"
+	.string "What'cha waiting for? Let's get outta\n"
+	.string "here!\p"
 	.string "Once we get home, I can cook you up a\n"
 	.string "hamburg steak.$"
 
 FlottTown_AbandonedGym_Text_LetsStayUp:
-	.string "ELSIE: A ladder? Hmm...let's not go down\n"
-	.string "there.$"
+	.string "A ladder? Hmm...let's not go down there.$"
 
 FlottTown_AbandonedGym_Text_BeforeCollapse:
-	.string "ELSIE: Huh, it's just a Pokéball. Will you\n"
-	.string "ever use it, though?\p"
+	.string "Huh, it's just a Pokéball. Will you ever\n"
+	.string "use it, though?\p"
 	.string "There doesn't seem to be anything else\n"
 	.string "in here though. We'd best get home.$"

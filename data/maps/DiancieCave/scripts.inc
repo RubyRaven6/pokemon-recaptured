@@ -4,11 +4,13 @@ DiancieCave_MapScripts::
 
 DiancieCave_EventScript_MeetingDiancie::
 	faceplayer
+	speakername DiancieCave_EventScript_MeetingDiancie_Text_0
 	msgbox DiancieCave_Text_WowYoureHere, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	applymovement 7, DiancieCave_Movement_DiancieLooksAround
 	waitmovement 7
+	speakername DiancieCave_EventScript_MeetingDiancie_Text_0
 	msgbox DiancieCave_Text_IWishYouCouldStay, MSGBOX_DEFAULT
 	warpwhitefade MAP_FLOTT_TOWN_SHIP_CABIN, 6, 4
 	waitstate
@@ -23,6 +25,9 @@ DiancieCave_Movement_DiancieLooksAround:
 	jump_in_place_down
 	delay_4
 	step_end
+
+DiancieCave_EventScript_MeetingDiancie_Text_0:
+	.string "Diancie$"
 
 DiancieCave_Text_WowYoureHere:
 	.string "DIANCIE: Oh my stars! You're actually\n"

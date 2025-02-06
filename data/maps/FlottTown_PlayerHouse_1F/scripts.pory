@@ -33,11 +33,13 @@ script FlottTown_PlayerHouse_1F_OnLoad{
 script FlottTown_PlayerHouse_1F_Elsie{
     faceplayer
     if(!flag(FLAG_VISITED_GYM)){
+        speakername("Elsie")
         msgbox(FlottTown_PlayerHouse_1F_Text_CheckOurRoom, MSGBOX_NPC)
     }
     elif(flag(FLAG_VISITED_GYM) && var(VAR_FLOTT_TOWN_STATE) < 9){
         clearflag(FLAG_ELSIE_ENTERS_GYM)
         setvar(VAR_FLOTT_TOWN_STATE, 3)
+        speakername("Elsie")
         msgbox(FlottTown_PlayerHouse_1F_Text_AnAbandonedGym, MSGBOX_DEFAULT)
         waitmessage
         closemessage
@@ -54,6 +56,7 @@ script FlottTown_PlayerHouse_1F_Elsie{
 script FlottTown_PlayerHouse_1F_StartYourAdventure{
     lockall
     faceplayer
+    speakername("Elsie")
     msgbox(FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut,MSGBOX_DEFAULT)
     closemessage
     applymovement(LOCALID_ELSIE, Common_Movement_FaceAwayPlayer)
@@ -61,13 +64,16 @@ script FlottTown_PlayerHouse_1F_StartYourAdventure{
     delay(120)
     applymovement(LOCALID_ELSIE, Common_Movement_FacePlayer)
     waitmovement(0)
+    speakername("Elsie")
     msgbox(FlottTown_PlayerHouse_1F_Text_CallingYouChamp,MSGBOX_DEFAULT)
     giveitem(ITEM_TOWN_MAP)
     setflag(FLAG_RECEIVED_RUNNING_SHOES)
     setflag(FLAG_SYS_B_DASH)
     playfanfare(MUS_OBTAIN_ITEM)
+    speakername("Elsie")
     msgbox(format("Elsie gave the Running Shoes!"))
     waitfanfare
+    speakername("Elsie")
     msgbox(FlottTown_PlayerHouse_1F_Text_ILoveYou,MSGBOX_DEFAULT)
     setvar(VAR_FLOTT_TOWN_STATE, 11)
     releaseall
@@ -104,12 +110,14 @@ script FlottTown_PlayerHouse_2F_Fridge{
 
 script FlottTown_PlayerHouse_1F_NPCElsie{
     lockall
+    speakername("Elsie")
     msgbox("Is my Champ tired? Come rest for a while.", MSGBOX_DEFAULT)
     waitmessage
     closemessage
     playfanfare(MUS_HEAL)
     waitfanfare
     special(HealPlayerParty)
+    speakername("Elsie")
     msgbox("There. Go get 'em, tiger.", MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -133,7 +141,7 @@ text FlottTown_PlayerHouse_1F_Text_CheckOurRoom{
 }
 
 text FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut{
-    format("ELSIE: Oh, hey, {PLAYER}.\p"
+    format("Oh, hey, {PLAYER}.\p"
             "…\p"
             "I'm… sorry for walking out. I hope Mr. Heinrich didn't think it was too rude.\p"
             "…\p" 
@@ -147,7 +155,7 @@ text FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut{
 }
 
 text FlottTown_PlayerHouse_1F_Text_CallingYouChamp{
-    format("ELSIE: Hmph. Who am I kidding? I've been the one calling you Champ all of these years. It's on me for not seeing this coming someday."
+    format("Hmph. Who am I kidding? I've been the one calling you Champ all of these years. It's on me for not seeing this coming someday."
             "Go get 'im, Champ. I'll always be here for you.\p"
             "In fact, here's a little something for the road."
         )

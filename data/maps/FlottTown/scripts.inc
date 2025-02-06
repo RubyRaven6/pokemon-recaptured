@@ -68,6 +68,7 @@ FlottTown_EventScript_ElsieBringsUsHome4::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
 	waitmovement 1
 	waitmovement OBJ_EVENT_ID_PLAYER
+	speakername FlottTown_EventScript_ElsieBringsUsHome4_Text_0
 	msgbox FlottTown_Text_TookYourTime, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -75,12 +76,14 @@ FlottTown_EventScript_ElsieBringsUsHome4::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 1
 	waitmovement OBJ_EVENT_ID_PLAYER
+	speakername FlottTown_EventScript_ElsieBringsUsHome4_Text_0
 	msgbox FlottTown_Text_ThisIsIt, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	delay 180
 	applymovement 1, Common_Movement_FaceRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	speakername FlottTown_EventScript_ElsieBringsUsHome4_Text_0
 	msgbox FlottTown_Text_LetsTakeALook, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -92,6 +95,7 @@ FlottTown_EventScript_ElsieBringsUsHome4::
 	waitmovement OBJ_EVENT_ID_PLAYER
 	applymovement 1, Common_Movement_FaceUp
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	speakername FlottTown_EventScript_ElsieBringsUsHome4_Text_0
 	msgbox FlottTown_Text_OurNewHome, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -99,12 +103,15 @@ FlottTown_EventScript_ElsieBringsUsHome4::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
 	waitmovement 1
 	waitmovement OBJ_EVENT_ID_PLAYER
+	speakername FlottTown_EventScript_ElsieBringsUsHome4_Text_0
 	msgbox FlottTown_Text_DoYouLikeIt, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq FlottTown_EventScript_ElsieBringsUsHome4_2
+	speakername FlottTown_EventScript_ElsieBringsUsHome4_Text_0
 	msgbox FlottTown_Text_ImSorryChamp, MSGBOX_DEFAULT
 	waitmessage
 FlottTown_EventScript_ElsieBringsUsHome4_1:
+	speakername FlottTown_EventScript_ElsieBringsUsHome4_Text_0
 	msgbox FlottTown_Text_IllPrepareInside, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -122,6 +129,7 @@ FlottTown_EventScript_ElsieBringsUsHome4_1:
 	end
 
 FlottTown_EventScript_ElsieBringsUsHome4_2:
+	speakername FlottTown_EventScript_ElsieBringsUsHome4_Text_0
 	msgbox FlottTown_Text_ImGladYouLikeIt, MSGBOX_DEFAULT
 	waitmessage
 	goto FlottTown_EventScript_ElsieBringsUsHome4_1
@@ -260,6 +268,9 @@ ElsieGoesInside2:
 	walk_up
 	set_invisible
 	step_end
+
+FlottTown_EventScript_ElsieBringsUsHome4_Text_0:
+	.string "Elsie$"
 
 FlottTown_LittleGirl_Text_0:
 	.string "My mommy says I shouldn't go too far to\n"

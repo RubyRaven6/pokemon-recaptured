@@ -5,11 +5,13 @@ mapscripts DiancieCave_MapScripts {
 
 script DiancieCave_EventScript_MeetingDiancie{
     faceplayer
+    speakername("Diancie")
     msgbox(DiancieCave_Text_WowYoureHere, MSGBOX_DEFAULT)
     waitmessage
     closemessage
     applymovement(LOCALID_DIANCIE, DiancieCave_Movement_DiancieLooksAround)
     waitmovement(LOCALID_DIANCIE)
+    speakername("Diancie")
     msgbox(DiancieCave_Text_IWishYouCouldStay, MSGBOX_DEFAULT)
     warpwhitefade(MAP_FLOTT_TOWN_SHIP_CABIN, 6, 4)
     waitstate

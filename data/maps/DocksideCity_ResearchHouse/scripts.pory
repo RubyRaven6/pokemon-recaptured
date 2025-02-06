@@ -6,6 +6,7 @@ script DocksideCity_ResearchHouse_EventScript_ProfNarra {
     switch(var(VAR_DOCKSIDE_CITY_STATE)){
         case 0:
             faceplayer
+            speakername("Prof. Narra")
             msgbox(DocksideCity_ResearchHouse_Text_WhoAreYou, MSGBOX_DEFAULT)
             waitmessage
             closemessage
@@ -21,6 +22,7 @@ script DocksideCity_ResearchHouse_EventScript_ProfNarra {
             updatequest(QUEST_2_AURELIOUS_LEAGUE, VAR_LEAGUE_QUEST)
             end
         case 1:
+            speakername("Prof. Narra")
             msgbox(format("Have you caught a Pokémon yet? I can't trust you with a Pokédex if not."), MSGBOX_NPC)
             waitmessage
             closemessage

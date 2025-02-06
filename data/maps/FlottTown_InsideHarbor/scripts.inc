@@ -1,6 +1,11 @@
 FlottTown_InsideHarbor_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, FlottTown_InsideHarbor_MapScripts_MAP_SCRIPT_ON_TRANSITION
 	map_script MAP_SCRIPT_ON_LOAD, FlottTown_InsideHarbor_OnLoad
 	.byte 0
+
+FlottTown_InsideHarbor_MapScripts_MAP_SCRIPT_ON_TRANSITION:
+	setflag FLAG_FLOTT_HARBOR_SAILOR
+	return
 
 
 FlottTown_InsideHarbor_OnLoad:
@@ -16,7 +21,6 @@ FlottTown_InsideHarbor_OnLoad_1:
 	return
 
 FlottTown_InsideHarbor_OnLoad_2:
-	setflag FLAG_FLOTT_HARBOR_SAILOR
 	addobject 1
 	addobject 2
 	goto FlottTown_InsideHarbor_OnLoad_1

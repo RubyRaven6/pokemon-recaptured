@@ -12,6 +12,7 @@ FlottTown_ShipCabin_OnFrame:
 	msgbox FlottTown_ShipCabin_Text_WokeUpLikeThis, MSGBOX_DEFAULT
 	waitmessage
 	playse SE_DING_DONG
+	speakername FlottTown_ShipCabin_OnFrame_Text_0
 	msgbox FlottTown_ShipCabin_Text_ThanksForSailing, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -46,6 +47,9 @@ FlottTown_ShipCabin_EventScript_SetClock::
 	return
 
 
+FlottTown_ShipCabin_OnFrame_Text_0:
+	.string "P.A.$"
+
 FlottTown_ShipCabin_Text_Bed:
 	.string "It's your bed!$"
 
@@ -61,7 +65,7 @@ FlottTown_ShipCabin_Text_WokeUpLikeThis:
 	.string "better dream.$"
 
 FlottTown_ShipCabin_Text_ThanksForSailing:
-	.string "P.A.: Attention, passengers. We've now\n"
+	.string "Attention, passengers. We've now\n"
 	.string "arrived at Flott Town.\l"
 	.string "Kindly disembark from the vessel in an\l"
 	.string "orderly manner.\p"

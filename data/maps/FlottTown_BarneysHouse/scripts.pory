@@ -22,15 +22,19 @@ script(local) FlottTown_BarneysHouse_FacePlayerUp{
 script FlottTown_BarneysHouse_EventScript_BarneysLecture{
     lockall
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    speakername("Barney")
     msgbox(FlottTown_BarneysHouse_Text_BarneysLecture, MSGBOX_DEFAULT)
     applymovement(LOCALID_ELSIE, Common_Movement_FaceRight)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft)
-    msgbox(format("ELSIE: What's Mr. Barney talking about, {PLAYER}? Who else was in the cave?"), MSGBOX_DEFAULT)
+    speakername("Elsie")
+    msgbox(format("What's Mr. Barney talking about, {PLAYER}? Who else was in the cave?"), MSGBOX_DEFAULT)
     applymovement(LOCALID_BARNEY, Common_Movement_WalkInPlaceDown)
     applymovement(LOCALID_ELSIE, Common_Movement_FaceUp)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    speakername("Barney")
     msgbox(FlottTown_BarneysHouse_Text_GoodBattler, MSGBOX_DEFAULT)
-    msgbox(format("ELSIE: …"), MSGBOX_DEFAULT)
+    speakername("Elsie")
+    msgbox(format("…"), MSGBOX_DEFAULT)
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown)
     applymovement(LOCALID_ELSIE, FlottTown_BarneysHouse_Movement_ElsieWalksOut)
@@ -39,6 +43,7 @@ script FlottTown_BarneysHouse_EventScript_BarneysLecture{
     playse(SE_DOOR)
     waitse
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp)
+    speakername("Barney")
     msgbox(FlottTown_BarneysHouse_Text_ImTerriblySorry, MSGBOX_DEFAULT)
     setvar(VAR_FLOTT_TOWN_STATE, 10)
     releaseall
@@ -49,19 +54,23 @@ script FlottTown_BarneysHouse_Barney{
     switch (var(VAR_FLOTT_TOWN_STATE)){
         case 10:
             faceplayer
+            speakername("Barney")
             msgbox(FlottTown_BarneysHouse_Text_GoToYourSister, MSGBOX_NPC)
         case 11:
         checkitem(ITEM_SS_TICKET)
         if(var(VAR_RESULT) == FALSE){
             faceplayer
+            speakername("Barney")
             msgbox(FlottTown_BarneysHouse_Text_GymLeaderChallenge, MSGBOX_DEFAULT)
             waitmessage
             closemessage
             setflag(FLAG_SYS_QUEST_MENU_GET)
             closemessage
+            speakername("Barney")
             msgbox(FlottTown_BarneysHouse_Text_BrandNewAdventure, MSGBOX_DEFAULT)
             giveitem(ITEM_SS_TICKET, 1)
             closemessage
+            speakername("Barney")
             msgbox(FlottTown_BarneysHouse_Text_GoToDockside, MSGBOX_DEFAULT)
             waitmessage
             closemessage
@@ -75,6 +84,7 @@ script FlottTown_BarneysHouse_Barney{
             end
         }
         else{
+            speakername("Barney")
             msgbox(format("Get a move on now! Adventure awaits!"), MSGBOX_NPC)
             waitmessage
             closemessage
@@ -85,9 +95,11 @@ script FlottTown_BarneysHouse_Barney{
 
 script FlottTown_BarneysHouse_Adelaide {
     if(var(VAR_FLOTT_TOWN_STATE) < 9){
+        speakername("Adelaide")
         msgbox(FlottTown_BarneysHouse_Text_BarneysOut, MSGBOX_NPC)
     }
     else{
+        speakername("Adelaide")
         msgbox(FlottTown_BarneysHouse_Text_GladYoureOkay, MSGBOX_NPC)
     }
 }
@@ -108,18 +120,18 @@ text(local) FlottTown_BarneysHouse_Text_BarneysLecture{
 }
 
 text(local) FlottTown_BarneysHouse_Text_GoodBattler{
-    format("BARNEY: Hm? That's a Pokéball on your side, right? I assumed you used a Pokémon. I even heard the faint sounds of battling. I'm sure you've got a good head on your shoulders to be a trainer!")
+    format("Hm? That's a Pokéball on your side, right? I assumed you used a Pokémon. I even heard the faint sounds of battling. I'm sure you've got a good head on your shoulders to be a trainer!")
 }
 
 text(local) FlottTown_BarneysHouse_Text_ImTerriblySorry{
     format(
-        "BARNEY: Oh my, I didn't expect her to be upset. I'm terribly sorry. That being said, if you'd like to know more about training, you can come back to me."
+        "Oh my, I didn't expect her to be upset. I'm terribly sorry. That being said, if you'd like to know more about training, you can come back to me."
     )
 }
 
 text(local) FlottTown_BarneysHouse_Text_BarneysOut{
     format(
-        "ADELDAIDE: Oh my, a visitor! Are you the girls that just moved in?\p"
+        "Oh my, a visitor! Are you the girls that just moved in?\p"
         "My name is Adelaide. It's a pleaesure to meet you. Unfortunately, my husband is out at the moment.\p"
         "He's currently in the mainland attending to Gym Leader business. I'll say, you can take the man out of the gym, but not the gym out of the man!\p"
         "Sigh… but that conviction of him is definitely one of his best traits.\p"
@@ -128,19 +140,19 @@ text(local) FlottTown_BarneysHouse_Text_BarneysOut{
 }
 
 text(local) FlottTown_BarneysHouse_Text_GladYoureOkay{
-    format("ADELDAIDE: My goodness, your first day and already making quite a ruckus!\p"
+    format("My goodness, your first day and already making quite a ruckus!\p"
             "But nonetheless, I'm happy that you and your sister are safe."
     )
 }
 
 text(local) FlottTown_BarneysHouse_Text_GoToYourSister{
-    format("BARNEY: I appreciate your enthusiasm, but I believe it's apt that you check-in on your sister first."
+    format("I appreciate your enthusiasm, but I believe it's apt that you check-in on your sister first."
     )
 }
 
 text(local) FlottTown_BarneysHouse_Text_GymLeaderChallenge{
     format(
-    "BARNEY: Oh, you've returned! I hope all is well with your sister.\p"
+    "Oh, you've returned! I hope all is well with your sister.\p"
     "I imagine you're interested in growing as a trainer, no? Well dear, the way to get there is through the Gym Challenge."
     "You'll be challenging all the gyms in Aurelious and…\p"
     "…\p"
@@ -151,7 +163,7 @@ text(local) FlottTown_BarneysHouse_Text_GymLeaderChallenge{
 
 text(local) FlottTown_BarneysHouse_Text_BrandNewAdventure{
     format(
-        "BARNEY: I had one of these myself in my youth. It's a simple journal to mark down requests people have for you. As you do your adventure, you're bound to come across countless people to help.\p"
+        "I had one of these myself in my youth. It's a simple journal to mark down requests people have for you. As you do your adventure, you're bound to come across countless people to help.\p"
         "People will always be grateful for the help. If you return to them after completing their request, more often than not, they'll give you a gift.\p"
         "Now, normally this is the point in a young adventurer's life they receive a Pokédex. Unfortuantely, as I'm not a professor, I don't have one to offer. But I can point you in the right direction.\p"
         "Here, this is my second gift to you starting your new adventure."

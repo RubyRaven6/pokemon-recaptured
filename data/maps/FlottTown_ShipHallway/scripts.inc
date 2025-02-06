@@ -11,6 +11,7 @@ FlottTown_ShipHallway_EventScript_ElsieLeaves::
 	applymovement OBJ_EVENT_ID_PLAYER, LookAtElsie
 	applymovement 2, ElsieLooks
 	waitmovement 0
+	speakername FlottTown_ShipHallway_EventScript_ElsieLeaves_Text_0
 	msgbox FlottTown_ShipHallway_Text_LetsGoChild, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -77,11 +78,13 @@ ElsieExits:
 	walk_left
 	step_end
 
+FlottTown_ShipHallway_EventScript_ElsieLeaves_Text_0:
+	.string "Elsie$"
+
 FlottTown_ShipHallway_Text_LetsGoChild::
-	.string "ELSIE: Oh, {PLAYER}! You're finally up.\n"
-	.string "Just in time, too. We're finally at Flott\l"
-	.string "Town! Let's get off before the boat\l"
-	.string "departs.$"
+	.string "Oh, {PLAYER}! You're finally up. Just\n"
+	.string "in time, too. We're finally at Flott Town!\l"
+	.string "Let's get off before the boat departs.$"
 
 FlottTown_ShipHallway_Text_GottaGo::
 	.string "No need to go back. We need to get off\n"

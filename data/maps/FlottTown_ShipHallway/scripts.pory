@@ -8,6 +8,7 @@ script FlottTown_ShipHallway_EventScript_ElsieLeaves{
     applymovement(OBJ_EVENT_ID_PLAYER, LookAtElsie)
     applymovement(2, ElsieLooks)
     waitmovement(0)
+    speakername("Elsie")
     msgbox(FlottTown_ShipHallway_Text_LetsGoChild, MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -63,7 +64,7 @@ movement ElsieExits{
 }
 
 text FlottTown_ShipHallway_Text_LetsGoChild{
-    format("ELSIE: Oh, {PLAYER}! You're finally up. Just in time, too. We're finally at Flott Town! Let's get off before the boat departs.")
+    format("Oh, {PLAYER}! You're finally up. Just in time, too. We're finally at Flott Town! Let's get off before the boat departs.")
 }
 
 text FlottTown_ShipHallway_Text_GottaGo{

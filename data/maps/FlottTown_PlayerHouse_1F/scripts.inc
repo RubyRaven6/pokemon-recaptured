@@ -44,12 +44,14 @@ FlottTown_PlayerHouse_1F_Elsie_5:
 	return
 
 FlottTown_PlayerHouse_1F_Elsie_1:
+	speakername FlottTown_PlayerHouse_1F_Elsie_Text_0
 	msgbox FlottTown_PlayerHouse_1F_Text_CheckOurRoom, MSGBOX_NPC
 	return
 
 FlottTown_PlayerHouse_1F_Elsie_2:
 	clearflag FLAG_ELSIE_ENTERS_GYM
 	setvar VAR_FLOTT_TOWN_STATE, 3
+	speakername FlottTown_PlayerHouse_1F_Elsie_Text_0
 	msgbox FlottTown_PlayerHouse_1F_Text_AnAbandonedGym, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -69,6 +71,7 @@ FlottTown_PlayerHouse_1F_Elsie_6:
 FlottTown_PlayerHouse_1F_StartYourAdventure::
 	lockall
 	faceplayer
+	speakername FlottTown_PlayerHouse_1F_Elsie_Text_0
 	msgbox FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut, MSGBOX_DEFAULT
 	closemessage
 	applymovement 1, Common_Movement_FaceAwayPlayer
@@ -76,13 +79,16 @@ FlottTown_PlayerHouse_1F_StartYourAdventure::
 	delay 120
 	applymovement 1, Common_Movement_FacePlayer
 	waitmovement 0
+	speakername FlottTown_PlayerHouse_1F_Elsie_Text_0
 	msgbox FlottTown_PlayerHouse_1F_Text_CallingYouChamp, MSGBOX_DEFAULT
 	giveitem ITEM_TOWN_MAP
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	setflag FLAG_SYS_B_DASH
 	playfanfare MUS_OBTAIN_ITEM
+	speakername FlottTown_PlayerHouse_1F_Elsie_Text_0
 	msgbox FlottTown_PlayerHouse_1F_StartYourAdventure_Text_0
 	waitfanfare
+	speakername FlottTown_PlayerHouse_1F_Elsie_Text_0
 	msgbox FlottTown_PlayerHouse_1F_Text_ILoveYou, MSGBOX_DEFAULT
 	setvar VAR_FLOTT_TOWN_STATE, 11
 	releaseall
@@ -126,18 +132,23 @@ FlottTown_PlayerHouse_2F_Fridge::
 
 FlottTown_PlayerHouse_1F_NPCElsie::
 	lockall
+	speakername FlottTown_PlayerHouse_1F_Elsie_Text_0
 	msgbox FlottTown_PlayerHouse_1F_NPCElsie_Text_0, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	playfanfare MUS_HEAL
 	waitfanfare
 	special HealPlayerParty
+	speakername FlottTown_PlayerHouse_1F_Elsie_Text_0
 	msgbox FlottTown_PlayerHouse_1F_NPCElsie_Text_1, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	releaseall
 	end
 
+
+FlottTown_PlayerHouse_1F_Elsie_Text_0:
+	.string "Elsie$"
 
 FlottTown_PlayerHouse_1F_StartYourAdventure_Text_0:
 	.string "Elsie gave the Running Shoes!$"
@@ -186,7 +197,7 @@ FlottTown_PlayerHouse_1F_Text_CheckOurRoom::
 	.string "here.$"
 
 FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut::
-	.string "ELSIE: Oh, hey, {PLAYER}.\p"
+	.string "Oh, hey, {PLAYER}.\p"
 	.string "…\p"
 	.string "I'm… sorry for walking out. I hope Mr.\n"
 	.string "Heinrich didn't think it was too rude.\p"
@@ -207,8 +218,8 @@ FlottTown_PlayerHouse_1F_Text_ImSorryForWalkingOut::
 	.string "that leads you straight to him.$"
 
 FlottTown_PlayerHouse_1F_Text_CallingYouChamp::
-	.string "ELSIE: Hmph. Who am I kidding? I've been\n"
-	.string "the one calling you Champ all of these\l"
+	.string "Hmph. Who am I kidding? I've been the\n"
+	.string "one calling you Champ all of these\l"
 	.string "years. It's on me for not seeing this\l"
 	.string "coming someday. Go get 'im, Champ. I'll\l"
 	.string "always be here for you.\p"

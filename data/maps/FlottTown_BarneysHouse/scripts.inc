@@ -20,15 +20,19 @@ FlottTown_BarneysHouse_FacePlayerUp:
 FlottTown_BarneysHouse_EventScript_BarneysLecture::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0
 	msgbox FlottTown_BarneysHouse_Text_BarneysLecture, MSGBOX_DEFAULT
 	applymovement 3, Common_Movement_FaceRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
-	msgbox FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0, MSGBOX_DEFAULT
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_1
+	msgbox FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_2, MSGBOX_DEFAULT
 	applymovement 2, Common_Movement_WalkInPlaceDown
 	applymovement 3, Common_Movement_FaceUp
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0
 	msgbox FlottTown_BarneysHouse_Text_GoodBattler, MSGBOX_DEFAULT
-	msgbox FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_1, MSGBOX_DEFAULT
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_1
+	msgbox FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_3, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
 	applymovement 3, FlottTown_BarneysHouse_Movement_ElsieWalksOut
@@ -37,6 +41,7 @@ FlottTown_BarneysHouse_EventScript_BarneysLecture::
 	playse SE_DOOR
 	waitse
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0
 	msgbox FlottTown_BarneysHouse_Text_ImTerriblySorry, MSGBOX_DEFAULT
 	setvar VAR_FLOTT_TOWN_STATE, 10
 	releaseall
@@ -51,6 +56,7 @@ FlottTown_BarneysHouse_Barney::
 
 FlottTown_BarneysHouse_Barney_2:
 	faceplayer
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0
 	msgbox FlottTown_BarneysHouse_Text_GoToYourSister, MSGBOX_NPC
 	return
 
@@ -58,6 +64,7 @@ FlottTown_BarneysHouse_Barney_3:
 	checkitem ITEM_SS_TICKET
 	compare VAR_RESULT, FALSE
 	goto_if_eq FlottTown_BarneysHouse_Barney_4
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0
 	msgbox FlottTown_BarneysHouse_Barney_Text_0, MSGBOX_NPC
 	waitmessage
 	closemessage
@@ -65,14 +72,17 @@ FlottTown_BarneysHouse_Barney_3:
 
 FlottTown_BarneysHouse_Barney_4:
 	faceplayer
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0
 	msgbox FlottTown_BarneysHouse_Text_GymLeaderChallenge, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	setflag FLAG_SYS_QUEST_MENU_GET
 	closemessage
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0
 	msgbox FlottTown_BarneysHouse_Text_BrandNewAdventure, MSGBOX_DEFAULT
 	giveitem ITEM_SS_TICKET, 1
 	closemessage
+	speakername FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0
 	msgbox FlottTown_BarneysHouse_Text_GoToDockside, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -89,10 +99,12 @@ FlottTown_BarneysHouse_Barney_4:
 FlottTown_BarneysHouse_Adelaide::
 	compare VAR_FLOTT_TOWN_STATE, 9
 	goto_if_lt FlottTown_BarneysHouse_Adelaide_1
+	speakername FlottTown_BarneysHouse_Adelaide_Text_0
 	msgbox FlottTown_BarneysHouse_Text_GladYoureOkay, MSGBOX_NPC
 	return
 
 FlottTown_BarneysHouse_Adelaide_1:
+	speakername FlottTown_BarneysHouse_Adelaide_Text_0
 	msgbox FlottTown_BarneysHouse_Text_BarneysOut, MSGBOX_NPC
 	return
 
@@ -107,14 +119,23 @@ FlottTown_BarneysHouse_Movement_ElsieWalksOut:
 	step_end
 
 FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_0:
-	.string "ELSIE: What's Mr. Barney talking about,\n"
-	.string "{PLAYER}? Who else was in the cave?$"
+	.string "Barney$"
 
 FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_1:
-	.string "ELSIE: …$"
+	.string "Elsie$"
+
+FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_2:
+	.string "What's Mr. Barney talking about,\n"
+	.string "{PLAYER}? Who else was in the cave?$"
+
+FlottTown_BarneysHouse_EventScript_BarneysLecture_Text_3:
+	.string "…$"
 
 FlottTown_BarneysHouse_Barney_Text_0:
 	.string "Get a move on now! Adventure awaits!$"
+
+FlottTown_BarneysHouse_Adelaide_Text_0:
+	.string "Adelaide$"
 
 FlottTown_BarneysHouse_Text_BarneysLecture:
 	.string "Now, I wouldn't be a responsible adult if\n"
@@ -132,21 +153,21 @@ FlottTown_BarneysHouse_Text_BarneysLecture:
 	.string "were you?$"
 
 FlottTown_BarneysHouse_Text_GoodBattler:
-	.string "BARNEY: Hm? That's a Pokéball on your\n"
-	.string "side, right? I assumed you used a\l"
-	.string "Pokémon. I even heard the faint sounds\l"
-	.string "of battling. I'm sure you've got a good\l"
+	.string "Hm? That's a Pokéball on your side,\n"
+	.string "right? I assumed you used a Pokémon. I\l"
+	.string "even heard the faint sounds of\l"
+	.string "battling. I'm sure you've got a good\l"
 	.string "head on your shoulders to be a trainer!$"
 
 FlottTown_BarneysHouse_Text_ImTerriblySorry:
-	.string "BARNEY: Oh my, I didn't expect her to be\n"
-	.string "upset. I'm terribly sorry. That being\l"
-	.string "said, if you'd like to know more about\l"
-	.string "training, you can come back to me.$"
+	.string "Oh my, I didn't expect her to be upset.\n"
+	.string "I'm terribly sorry. That being said, if\l"
+	.string "you'd like to know more about training,\l"
+	.string "you can come back to me.$"
 
 FlottTown_BarneysHouse_Text_BarneysOut:
-	.string "ADELDAIDE: Oh my, a visitor! Are you the\n"
-	.string "girls that just moved in?\p"
+	.string "Oh my, a visitor! Are you the girls that\n"
+	.string "just moved in?\p"
 	.string "My name is Adelaide. It's a pleaesure to\n"
 	.string "meet you. Unfortunately, my husband is\l"
 	.string "out at the moment.\p"
@@ -161,19 +182,19 @@ FlottTown_BarneysHouse_Text_BarneysOut:
 	.string "we'll see each other soon.$"
 
 FlottTown_BarneysHouse_Text_GladYoureOkay:
-	.string "ADELDAIDE: My goodness, your first day\n"
-	.string "and already making quite a ruckus!\p"
+	.string "My goodness, your first day and already\n"
+	.string "making quite a ruckus!\p"
 	.string "But nonetheless, I'm happy that you and\n"
 	.string "your sister are safe.$"
 
 FlottTown_BarneysHouse_Text_GoToYourSister:
-	.string "BARNEY: I appreciate your enthusiasm,\n"
-	.string "but I believe it's apt that you check-in\l"
-	.string "on your sister first.$"
+	.string "I appreciate your enthusiasm, but I\n"
+	.string "believe it's apt that you check-in on\l"
+	.string "your sister first.$"
 
 FlottTown_BarneysHouse_Text_GymLeaderChallenge:
-	.string "BARNEY: Oh, you've returned! I hope all\n"
-	.string "is well with your sister.\p"
+	.string "Oh, you've returned! I hope all is well\n"
+	.string "with your sister.\p"
 	.string "I imagine you're interested in growing\n"
 	.string "as a trainer, no? Well dear, the way to\l"
 	.string "get there is through the Gym Challenge.\l"
@@ -186,11 +207,11 @@ FlottTown_BarneysHouse_Text_GymLeaderChallenge:
 	.string "needing one of these, though…$"
 
 FlottTown_BarneysHouse_Text_BrandNewAdventure:
-	.string "BARNEY: I had one of these myself in my\n"
-	.string "youth. It's a simple journal to mark\l"
-	.string "down requests people have for you. As\l"
-	.string "you do your adventure, you're bound to\l"
-	.string "come across countless people to help.\p"
+	.string "I had one of these myself in my youth.\n"
+	.string "It's a simple journal to mark down\l"
+	.string "requests people have for you. As you do\l"
+	.string "your adventure, you're bound to come\l"
+	.string "across countless people to help.\p"
 	.string "People will always be grateful for the\n"
 	.string "help. If you return to them after\l"
 	.string "completing their request, more often\l"
