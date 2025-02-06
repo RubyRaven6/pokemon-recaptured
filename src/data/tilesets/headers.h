@@ -890,3 +890,14 @@ const struct Tileset gTileset_Recompiled_Building =
     .metatileAttributes = gMetatileAttributes_Recompiled_Building,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Recompiled_Pokemon_Center =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Recompiled_Pokemon_Center,
+    .palettes = gTilesetPalettes_Recompiled_Pokemon_Center,
+    .metatiles = gMetatiles_Recompiled_Pokemon_Center,
+    .metatileAttributes = gMetatileAttributes_Recompiled_Pokemon_Center,
+    .callback = NULL,
+};
