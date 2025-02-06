@@ -216,8 +216,11 @@ const u16 gMetatileAttributes_SecondaryTutorial[] = INCBIN_U16("data/tilesets/se
 const u16 gMetatiles_OasisTown[] = INCBIN_U16("data/tilesets/secondary/oasis_town/metatiles.bin");
 const u16 gMetatileAttributes_OasisTown[] = INCBIN_U16("data/tilesets/secondary/oasis_town/metatile_attributes.bin");
 
-const u16 gMetatiles_RecompiledGeneral[] = INCBIN_U16("data/tilesets/primary/recompiled_general/metatiles.bin");
-const u16 gMetatileAttributes_RecompiledGeneral[] = INCBIN_U16("data/tilesets/primary/recompiled_general/metatile_attributes.bin");
+const u16 gMetatiles_Recompiled_General[] = INCBIN_U16("data/tilesets/primary/recompiled_general/metatiles.bin");
+const u16 gMetatileAttributes_Recompiled_General[] = INCBIN_U16("data/tilesets/primary/recompiled_general/metatile_attributes.bin");
 
 const u16 gMetatiles_Gate[] = INCBIN_U16("data/tilesets/secondary/gate/metatiles.bin");
 const u16 gMetatileAttributes_Gate[] = INCBIN_U16("data/tilesets/secondary/gate/metatile_attributes.bin");
+
+const u16 gMetatiles_Recompiled_Building[] = INCBIN_U16("data/tilesets/primary/recompiled_building/metatiles.bin");
+const u16 gMetatileAttributes_Recompiled_Building[] = INCBIN_U16("data/tilesets/primary/recompiled_building/metatile_attributes.bin");

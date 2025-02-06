@@ -858,14 +858,14 @@ const struct Tileset gTileset_OasisTown =
     .callback = InitTilesetAnim_OasisTown,
 };
 
-const struct Tileset gTileset_RecompiledGeneral =
+const struct Tileset gTileset_Recompiled_General =
 {
     .isCompressed = TRUE,
     .isSecondary = FALSE,
-    .tiles = gTilesetTiles_RecompiledGeneral,
-    .palettes = gTilesetPalettes_RecompiledGeneral,
-    .metatiles = gMetatiles_RecompiledGeneral,
-    .metatileAttributes = gMetatileAttributes_RecompiledGeneral,
+    .tiles = gTilesetTiles_Recompiled_General,
+    .palettes = gTilesetPalettes_Recompiled_General,
+    .metatiles = gMetatiles_Recompiled_General,
+    .metatileAttributes = gMetatileAttributes_Recompiled_General,
     .callback = NULL,
 };
 
@@ -877,5 +877,16 @@ const struct Tileset gTileset_Gate =
     .palettes = gTilesetPalettes_Gate,
     .metatiles = gMetatiles_Gate,
     .metatileAttributes = gMetatileAttributes_Gate,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Recompiled_Building =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_Recompiled_Building,
+    .palettes = gTilesetPalettes_Recompiled_Building,
+    .metatiles = gMetatiles_Recompiled_Building,
+    .metatileAttributes = gMetatileAttributes_Recompiled_Building,
     .callback = NULL,
 };
