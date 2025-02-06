@@ -35,7 +35,7 @@ mapscripts FlottTown_FlottCave_MapScripts {
         setflag(FLAG_HIDE_MON1)
         setflag(FLAG_HIDE_MON2)
         setflag(FLAG_HIDE_MON3)
-        setflag(FLAG_HIDE_MON4)
+setflag(FLAG_HIDE_MON4)
         call(StarterSelection_GFXSetting)
         call(FlottTown_FlottCave_CaveLightLevel)
     }
@@ -188,21 +188,15 @@ script FlottTown_FlottCave_EventScript_ElsieRescue{
 }
 
 script FlottTown_FlottCave_StarterChoice{
-    debugprint("now in FlottTown_FlottCave_StarterChoice")
     lockall
 	msgbox(format("But…before it could hurt you, something intervenes.\l What is it?"), MSGBOX_DEFAULT)
-    debugprint("running check player personality")
     checkplayerpersonality
-    debugprint("check player personality complete")
     switch(var(VAR_RESULT)){
         case 0:
-            debugprint("running fury starter selection")
             call(StarterSelection_FuryPersonality)
         case 1:
-            debugprint("running mischief starter selection")
             call(StarterSelection_MischiefPersonality)
         case 2:
-            debugprint("running friend starter selection")
             call(StarterSelection_FriendshipPersonality)
     }
     fadescreen(FADE_FROM_BLACK)
