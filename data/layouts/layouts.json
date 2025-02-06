@@ -4504,8 +4504,8 @@
     {
       "id": "LAYOUT_ROUTE_6",
       "name": "Route_6_Layout",
-      "width": 20,
-      "height": 20,
+      "width": 50,
+      "height": 30,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Route_6/border.bin",
