@@ -33,7 +33,8 @@ StarterSelection_GFXSetting_5:
 
 
 StarterSelection_FuryPersonality::
-	dynmultichoice 9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, StarterSelection_FuryPersonality_Text_0, StarterSelection_FuryPersonality_Text_1, StarterSelection_FuryPersonality_Text_2, StarterSelection_FuryPersonality_Text_3, StarterSelection_FuryPersonality_Text_4
+	debugprint StarterSelection_FuryPersonality_Text_0
+	dynmultichoice 9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, StarterSelection_FuryPersonality_Text_1, StarterSelection_FuryPersonality_Text_2, StarterSelection_FuryPersonality_Text_3, StarterSelection_FuryPersonality_Text_4, StarterSelection_FuryPersonality_Text_5
 	switch VAR_RESULT
 	case 0, StarterSelection_FuryPersonality_2
 	case 1, StarterSelection_FuryPersonality_3
@@ -89,7 +90,8 @@ StarterSelection_FuryPersonality_6:
 
 
 StarterSelection_MischiefPersonality::
-	dynmultichoice 9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, StarterSelection_MischiefPersonality_Text_0, StarterSelection_MischiefPersonality_Text_1, StarterSelection_MischiefPersonality_Text_2, StarterSelection_MischiefPersonality_Text_3, StarterSelection_MischiefPersonality_Text_4
+	debugprint StarterSelection_MischiefPersonality_Text_0
+	dynmultichoice 9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, StarterSelection_MischiefPersonality_Text_1, StarterSelection_MischiefPersonality_Text_2, StarterSelection_MischiefPersonality_Text_3, StarterSelection_MischiefPersonality_Text_4, StarterSelection_MischiefPersonality_Text_5
 	switch VAR_RESULT
 	case 0, StarterSelection_MischiefPersonality_2
 	case 1, StarterSelection_MischiefPersonality_3
@@ -145,7 +147,8 @@ StarterSelection_MischiefPersonality_6:
 
 
 StarterSelection_FriendshipPersonality::
-	dynmultichoice 9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, StarterSelection_FriendshipPersonality_Text_0, StarterSelection_FriendshipPersonality_Text_1, StarterSelection_FriendshipPersonality_Text_2, StarterSelection_FriendshipPersonality_Text_3, StarterSelection_FriendshipPersonality_Text_4
+	debugprint StarterSelection_FriendshipPersonality_Text_0
+	dynmultichoice 9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, StarterSelection_FriendshipPersonality_Text_1, StarterSelection_FriendshipPersonality_Text_2, StarterSelection_FriendshipPersonality_Text_3, StarterSelection_FriendshipPersonality_Text_4, StarterSelection_FriendshipPersonality_Text_5
 	switch VAR_RESULT
 	case 0, StarterSelection_FriendshipPersonality_2
 	case 1, StarterSelection_FriendshipPersonality_3
@@ -201,46 +204,55 @@ StarterSelection_FriendshipPersonality_6:
 
 
 StarterSelection_FuryPersonality_Text_0:
-	.string "Rage Monkey$"
+	.string "running fury starter selection dynmultichoice$"
 
 StarterSelection_FuryPersonality_Text_1:
-	.string "Bouquet$"
+	.string "Rage Monkey$"
 
 StarterSelection_FuryPersonality_Text_2:
-	.string "Mystic$"
+	.string "Bouquet$"
 
 StarterSelection_FuryPersonality_Text_3:
-	.string "Luring$"
+	.string "Mystic$"
 
 StarterSelection_FuryPersonality_Text_4:
+	.string "Luring$"
+
+StarterSelection_FuryPersonality_Text_5:
 	.string "Silent$"
 
 StarterSelection_MischiefPersonality_Text_0:
-	.string "Hammer$"
+	.string "running mischief starter selection dynmultichoice$"
 
 StarterSelection_MischiefPersonality_Text_1:
-	.string "Seven Spots$"
+	.string "Hammer$"
 
 StarterSelection_MischiefPersonality_Text_2:
-	.string "Garden$"
+	.string "Seven Spots$"
 
 StarterSelection_MischiefPersonality_Text_3:
-	.string "Bat$"
+	.string "Garden$"
 
 StarterSelection_MischiefPersonality_Text_4:
+	.string "Bat$"
+
+StarterSelection_MischiefPersonality_Text_5:
 	.string "Astral Body$"
 
 StarterSelection_FriendshipPersonality_Text_0:
-	.string "Peat$"
+	.string "running friend starter selection dynmultichoice$"
 
 StarterSelection_FriendshipPersonality_Text_1:
-	.string "Gripper$"
+	.string "Peat$"
 
 StarterSelection_FriendshipPersonality_Text_2:
-	.string "Aqua Rabbit$"
+	.string "Gripper$"
 
 StarterSelection_FriendshipPersonality_Text_3:
-	.string "Iron Armor$"
+	.string "Aqua Rabbit$"
 
 StarterSelection_FriendshipPersonality_Text_4:
+	.string "Iron Armor$"
+
+StarterSelection_FriendshipPersonality_Text_5:
 	.string "Rock Salt$"

@@ -2225,7 +2225,6 @@ static void QuestMenu_CreateSprite(u16 itemId, u8 idx, u8 spriteType)
 				spriteId = AddItemIconSprite(102 + idx, 102 + idx, itemId);
 				break;
 			case PKMN:
-				MgbaPrintf(MGBA_LOG_WARN, "IT'S PRINTING TO POKEMON!");
 				LoadMonIconPalettes();
 				spriteId = CreateMonIcon(itemId, SpriteCallbackDummy, 20, 132, 0, 1);
 				break;

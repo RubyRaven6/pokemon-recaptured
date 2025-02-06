@@ -39,6 +39,7 @@ script StarterSelection_GFXSetting {
 }
 
 script StarterSelection_FuryPersonality{
+    debugprint("running fury starter selection dynmultichoice")
     dynmultichoice(9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, "Rage Monkey", "Bouquet", "Mystic", "Luring", "Silent")
     switch(var(VAR_RESULT)){
         case 0:
@@ -89,6 +90,7 @@ script StarterSelection_FuryPersonality{
 }
 
 script StarterSelection_MischiefPersonality{
+    debugprint("running mischief starter selection dynmultichoice")
     dynmultichoice(9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, "Hammer", "Seven Spots", "Garden", "Bat", "Astral Body")
     switch(var(VAR_RESULT)){
         case 0:
@@ -136,6 +138,7 @@ script StarterSelection_MischiefPersonality{
 }
 
 script StarterSelection_FriendshipPersonality{
+    debugprint("running friend starter selection dynmultichoice")
     dynmultichoice(9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, "Peat", "Gripper", "Aqua Rabbit", "Iron Armor", "Rock Salt")
     switch(var(VAR_RESULT)){
         case 0:

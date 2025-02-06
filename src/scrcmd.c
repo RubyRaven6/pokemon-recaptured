@@ -3321,7 +3321,6 @@ bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
 bool8 ScrCmd_checkplayerpersonality(struct ScriptContext *ctx)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->personalityType;
-    MgbaPrintf(MGBA_LOG_WARN, "Var_Result is currently %u", gSpecialVar_Result);
     return FALSE;
 }
 
@@ -3336,11 +3335,11 @@ bool8 ScrCmd_debugprint(struct ScriptContext *ctx)
         if (numOrVar != 65535)
         {
             num = VarGet(numOrVar);
-            DebugPrintfLevel(MGBA_LOG_WARN, "%S, %u", str, num);
+            DebugPrintfLevel(MGBA_LOG_ERROR, "%S, %u", str, num);
         }
         else
         {
-            DebugPrintfLevel(MGBA_LOG_WARN, "%S", str);
+            DebugPrintfLevel(MGBA_LOG_ERROR, "%S", str);
         }
     }
     return FALSE;

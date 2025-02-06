@@ -5292,5 +5292,5 @@ static void DebugAction_Util_CheckEWRAMCounters(u8 taskId)
 
 void CallNativeForVariousPurposes (void)
 {
-    MgbaPrintf(MGBA_LOG_WARN, "VAR_FLOTT_TOWN_STATE: %u", VarGet(VAR_FLOTT_TOWN_STATE));
+
 }

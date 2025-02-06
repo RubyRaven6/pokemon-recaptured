@@ -11,13 +11,14 @@ pret x RHH (pokeemerald and pokeemerald-expansion respectively)
 
 ## Fetaure Branches
 ### Unbound Quest Menu
+- Skeli & Ghoulslash
 - PSF
-- 
 
 ### Start Menu Clock
 - Pawkkie
 
-### 
+### Speaker namebox
+- Tustin
 
 ## Assets
 ### Oasis Town (Desert Village) & Desert Tileset

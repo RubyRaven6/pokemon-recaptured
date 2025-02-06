@@ -136,7 +136,6 @@ script FlottTown_FlottCave_EventScript_RockSmash{
     clearflag(FLAG_BARNEY_IN_CAVE)
     setflag(FLAG_TEMP_11)
     removeobject(6)
-    callnative(RemoveFollowingPokemon)
     waitse
     msgbox(format("That sounded like it came from the smashable rocks!"), MSGBOX_DEFAULT)
     closemessage
@@ -189,15 +188,21 @@ script FlottTown_FlottCave_EventScript_ElsieRescue{
 }
 
 script FlottTown_FlottCave_StarterChoice{
+    debugprint("now in FlottTown_FlottCave_StarterChoice")
     lockall
 	msgbox(format("But…before it could hurt you, something intervenes.\l What is it?"), MSGBOX_DEFAULT)
+    debugprint("running check player personality")
     checkplayerpersonality
+    debugprint("check player personality complete")
     switch(var(VAR_RESULT)){
         case 0:
+            debugprint("running fury starter selection")
             call(StarterSelection_FuryPersonality)
         case 1:
+            debugprint("running mischief starter selection")
             call(StarterSelection_MischiefPersonality)
         case 2:
+            debugprint("running friend starter selection")
             call(StarterSelection_FriendshipPersonality)
     }
     fadescreen(FADE_FROM_BLACK)
