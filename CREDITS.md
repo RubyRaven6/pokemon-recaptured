@@ -35,7 +35,10 @@ pret x RHH (pokeemerald and pokeemerald-expansion respectively)
 - Fangking Omega
 - Kyledove
  
-## Mega Evolution Overworld Sprite Credits:
+### Mega Evolution Overworld Sprite Credits:
 - [princess-phoenix](https://www.deviantart.com/princess-phoenix)
 - [larryturbo](https://www.deviantart.com/larryturbo)
 - [kidkatt](https://www.deviantart.com/kidkatt)
+
+### Designs
+- Pokecenter Pokemart: Nico

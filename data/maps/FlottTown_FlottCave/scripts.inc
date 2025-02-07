@@ -174,36 +174,30 @@ FlottTown_FlottCave_EventScript_ElsieRescue::
 
 
 FlottTown_FlottCave_StarterChoice::
-	debugprint FlottTown_FlottCave_StarterChoice_Text_0
 	lockall
-	msgbox FlottTown_FlottCave_StarterChoice_Text_1, MSGBOX_DEFAULT
-	debugprint FlottTown_FlottCave_StarterChoice_Text_2
+	msgbox FlottTown_FlottCave_StarterChoice_Text_0, MSGBOX_DEFAULT
 	checkplayerpersonality
-	debugprint FlottTown_FlottCave_StarterChoice_Text_3
 	switch VAR_RESULT
 	case 0, FlottTown_FlottCave_StarterChoice_3
 	case 1, FlottTown_FlottCave_StarterChoice_4
 	case 2, FlottTown_FlottCave_StarterChoice_5
 FlottTown_FlottCave_StarterChoice_1:
 	fadescreen FADE_FROM_BLACK
-	msgbox FlottTown_FlottCave_StarterChoice_Text_7, MSGBOX_DEFAULT
+	msgbox FlottTown_FlottCave_StarterChoice_Text_1, MSGBOX_DEFAULT
 	playmoncry VAR_TEMP_7, CRY_MODE_NORMAL
 	waitmoncry
 	givemon VAR_TEMP_7, 10, ITEM_NONE
 	return
 
 FlottTown_FlottCave_StarterChoice_3:
-	debugprint FlottTown_FlottCave_StarterChoice_Text_4
 	call StarterSelection_FuryPersonality
 	goto FlottTown_FlottCave_StarterChoice_1
 
 FlottTown_FlottCave_StarterChoice_4:
-	debugprint FlottTown_FlottCave_StarterChoice_Text_5
 	call StarterSelection_MischiefPersonality
 	goto FlottTown_FlottCave_StarterChoice_1
 
 FlottTown_FlottCave_StarterChoice_5:
-	debugprint FlottTown_FlottCave_StarterChoice_Text_6
 	call StarterSelection_FriendshipPersonality
 	goto FlottTown_FlottCave_StarterChoice_1
 
@@ -312,29 +306,11 @@ FlottTown_FlottCave_EventScript_ElsieRescue_Text_2:
 	.string "gym.$"
 
 FlottTown_FlottCave_StarterChoice_Text_0:
-	.string "now in FlottTown_FlottCave_StarterChoice$"
-
-FlottTown_FlottCave_StarterChoice_Text_1:
 	.string "But…before it could hurt you, something\n"
 	.string "intervenes.\l"
 	.string "What is it?$"
 
-FlottTown_FlottCave_StarterChoice_Text_2:
-	.string "running check player personality$"
-
-FlottTown_FlottCave_StarterChoice_Text_3:
-	.string "check player personality complete$"
-
-FlottTown_FlottCave_StarterChoice_Text_4:
-	.string "running fury starter selection$"
-
-FlottTown_FlottCave_StarterChoice_Text_5:
-	.string "running mischief starter selection$"
-
-FlottTown_FlottCave_StarterChoice_Text_6:
-	.string "running friend starter selection$"
-
-FlottTown_FlottCave_StarterChoice_Text_7:
+FlottTown_FlottCave_StarterChoice_Text_1:
 	.string "{STR_VAR_1} jumped in to save you!$"
 
 FlottTown_FlottCave_WildZubatBattle_Text_0:

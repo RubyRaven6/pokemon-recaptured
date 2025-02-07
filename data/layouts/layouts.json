@@ -4524,8 +4524,8 @@
     {
       "id": "LAYOUT_DOCKSIDE_CITY_POKEMON_CENTER",
       "name": "DocksideCity_PokemonCenter_Layout",
-      "width": 14,
-      "height": 10,
+      "width": 15,
+      "height": 19,
       "primary_tileset": "gTileset_Recompiled_Building",
       "secondary_tileset": "gTileset_Recompiled_Pokemon_Center",
       "border_filepath": "data/layouts/DocksideCity_PokemonCenter/border.bin",
