@@ -3729,7 +3729,7 @@ void Script_DoRayquazaScene(void)
     else
     {
         // Rayquaza arrives scene
-        DoRayqgituazaScene(1, FALSE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        DoRayquazaScene(1, FALSE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
 }
 
