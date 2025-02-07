@@ -41,7 +41,8 @@
     "DocksideCity_House3"
   ],
   "gMapGroup_IndoorOasis": [
-    "OasisTown_House1"
+    "OasisTown_House1",
+    "OasisTown_PokemonCenter"
   ],
   "gMapGroup_Special": [
     "DiancieCave"

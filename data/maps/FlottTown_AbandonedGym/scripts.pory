@@ -1,6 +1,6 @@
 raw`
-.set LOCALID_ELSIE, 1
-.set LOCALID_BALL, 2
+.set 1
+.set 2
 `
 
 mapscripts FlottTown_AbandonedGym_MapScripts {
@@ -27,16 +27,16 @@ script FlottTown_AbandonedGym_OnFrame{
     applymovement(OBJ_EVENT_ID_PLAYER, FlottTown_AbandonedGym_WalkingIn)
     waitmovement(0)
     clearflag(FLAG_ELSIE_ENTERS_GYM)
-    addobject(LOCALID_ELSIE)
-    applymovement(LOCALID_ELSIE, Common_Movement_FaceUp)
+    addobject
+    applymovement Common_Movement_FaceUp)
     lock
-    waitmovement(LOCALID_ELSIE)
+    waitmovement
     speakername("Elsie")
     msgbox(format("Huh, this gym is pretty run down. I wonder what's inside?"), MSGBOX_DEFAULT)
     msgbox(format("Elsie decided to follow you!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    setfollower(LOCALID_ELSIE, FOLLOWER_ALL, FlottTown_AbandonedGym_ElsieFollowerScript, 0)
+    setfollower FOLLOWER_ALL, FlottTown_AbandonedGym_ElsieFollowerScript, 0)
     callnative(CallNativeForVariousPurposes)
     end
 }
@@ -51,7 +51,7 @@ script FlottTown_AbandonedGym_LadderStopper{
 
 script FlottTown_AbandonedGym_EventScript_FreePokeball{
     msgbox(format("It's a Pokéball! It seems there's no Pokémon inside it, though."), MSGBOX_AUTOCLOSE)
-    removeobject(LOCALID_BALL, MAP_FLOTT_TOWN_ABANDONED_GYM)
+    removeobject MAP_FLOTT_TOWN_ABANDONED_GYM)
     giveitem(ITEM_POKE_BALL, 1)
     setvar(VAR_FLOTT_TOWN_STATE, 5)
     closemessage
@@ -110,10 +110,10 @@ movement WalkAway{
     step_end
 }
 
-text(local) FlottTown_AbandonedGym_Text_LetsStayUp {
+text FlottTown_AbandonedGym_Text_LetsStayUp {
     format("A ladder? Hmm...let's not go down there.")
 }
 
-text(local) FlottTown_AbandonedGym_Text_BeforeCollapse{
+text FlottTown_AbandonedGym_Text_BeforeCollapse{
     format("Huh, it's just a Pokéball. Will you ever use it, though?\p There doesn't seem to be anything else in here though. We'd best get home.")
 }
