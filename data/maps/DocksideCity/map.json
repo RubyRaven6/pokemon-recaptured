@@ -87,8 +87,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
-      "x": 26,
-      "y": 17,
+      "x": 25,
+      "y": 19,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -126,8 +126,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
-      "x": 25,
-      "y": 22,
+      "x": 24,
+      "y": 23,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -178,7 +178,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SWIMMER_M",
-      "x": 46,
+      "x": 47,
       "y": 35,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -389,8 +389,8 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 20,
-      "y": 32,
+      "x": 12,
+      "y": 17,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY_RESEARCH_HOUSE",
       "dest_warp_id": "0"
@@ -410,15 +410,15 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 23,
+      "x": 24,
       "y": 13,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY_HOUSE2",
       "dest_warp_id": "0"
     },
     {
-      "x": 12,
-      "y": 17,
+      "x": 14,
+      "y": 33,
       "elevation": 0,
       "dest_map": "MAP_DOCKSIDE_CITY_HOUSE3",
       "dest_warp_id": "0"
@@ -436,6 +436,13 @@
       "elevation": 0,
       "dest_map": "MAP_ROUTE_1",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 20,
+      "y": 33,
+      "elevation": 0,
+      "dest_map": "MAP_DOCKSIDE_CITY_TRAINING_HOUSE",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -484,8 +491,8 @@
     },
     {
       "type": "sign",
-      "x": 23,
-      "y": 33,
+      "x": 9,
+      "y": 17,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "DocksideCity_EventScript_ResearchHouse_Sign"

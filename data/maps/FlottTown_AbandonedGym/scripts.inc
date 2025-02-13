@@ -146,10 +146,10 @@ FlottTown_AbandonedGym_ElsieFollowerScript_Text_1:
 	.string "Once we get home, I can cook you up a\n"
 	.string "hamburg steak.$"
 
-FlottTown_AbandonedGym_Text_LetsStayUp:
+FlottTown_AbandonedGym_Text_LetsStayUp::
 	.string "A ladder? Hmm...let's not go down there.$"
 
-FlottTown_AbandonedGym_Text_BeforeCollapse:
+FlottTown_AbandonedGym_Text_BeforeCollapse::
 	.string "Huh, it's just a Pokéball. Will you ever\n"
 	.string "use it, though?\p"
 	.string "There doesn't seem to be anything else\n"
