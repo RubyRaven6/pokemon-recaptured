@@ -4466,8 +4466,8 @@
       "name": "DocksideCity_Layout",
       "width": 70,
       "height": 48,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Slateport",
+      "primary_tileset": "gTileset_Recompiled_General",
+      "secondary_tileset": "gTileset_DocksideCity",
       "border_filepath": "data/layouts/DocksideCity/border.bin",
       "blockdata_filepath": "data/layouts/DocksideCity/map.bin"
     },

@@ -43,3 +43,6 @@ pret x RHH (pokeemerald and pokeemerald-expansion respectively)
 ### Designs
 - Pokecenter Pokemart: Nico
 - Pokecenter Table: purrfectdoodle
+
+## Miscellaneous
+- der_saftmon on Youtube for the idea of Riker; a pirate with a megastone in an eyesocket hidden under his eyepatch.
