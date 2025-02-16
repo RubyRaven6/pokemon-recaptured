@@ -1945,18 +1945,63 @@
     callnative ScrCmd_checkfollower
     .endm
 
+	@ Sets an NPC up to follow the player.
+	@ If you want to specify a battle partner without specifying a custom script, you can set the script parameter to 0.
+    .macro setfollower localId:req, flags:req, script, battlePartner
+	checkfollower
+	goto_if_eq VAR_RESULT, TRUE, 1f
+	ballfollowingmon
+	.ifnb \script
+		.if \script == 0
+			.set setScript, FALSE
+		.else
+			loadword 0, \script
+			.set setScript, TRUE
+		.endif
+	.else
+		.set setScript, FALSE
+	.endif
+    callnative ScriptSetFollower
+    .byte \localId
+    .2byte \flags
+	.byte setScript
+	.ifb \battlePartner
+		.set battlePartner, 0
+		.2byte battlePartner
+	.else
+		.2byte \battlePartner
+	.endif
+	updatefollowingmon
+	1:
+    .endm
+    
+    @ Remove the following NPC (assumes there will only ever be one).
+    .macro destroyfollower
+    callnative ScriptDestroyFollower
+    .endm
+    
+    @ Makes the player and follower face one another.
+    .macro facefollower
+    callnative ScriptFaceFollower
+    .endm
+    
+    @ Checks if you have a follower. returns the result to VAR_RESULT.
+    .macro checkfollower
+    callnative ScriptCheckFollower
+    .endm
+
 	@ Updates Pokemon follower.
 	.macro updatefollowingmon
-    callnative ScrCmd_updatefollowingmon
+    callnative ScriptUpdateFollowingMon
     .endm
 
 	@ Returns Pokemon follower to ball.
 	.macro ballfollowingmon
-	callnative ScrCmd_updatefollowingmon
+	callnative ScriptBallFollowingMon
 	delay 16
 	.endm
 
-    .macro questmenu case:req, questId:req
+.macro questmenu case:req, questId:req
     callnative ScrCmd_questmenu
     .byte \case
     .byte \questId
@@ -2118,8 +2163,8 @@
     subquestmenu QUEST_MENU_CHECK_COMPLETE \parent \child
     call_if_eq VAR_RESULT, FALSE, \dest
     .endm
-	
-	@ Supplementary
+
+@ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req
 	checkflag \flag

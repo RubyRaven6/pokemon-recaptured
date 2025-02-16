@@ -247,7 +247,8 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].data[2] = follower->currentCoords.x;
             gTasks[taskId].data[3] = follower->currentCoords.y;
-            goto RESET;
+            ObjectEventClearHeldMovementIfFinished(follower);
+            return;
         }
         else if (gSaveBlock2Ptr->follower.comeOutDoorStairs == 2)
         {
@@ -273,25 +274,31 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
     dir = DetermineFollowerDirection(player, follower);
 
     if (dir == DIR_NONE)
-        goto RESET;
+    {
+        ObjectEventClearHeldMovementIfFinished(follower);
+        return;
+    }
 
     newState = DetermineFollowerState(follower, state, dir);
     if (newState == MOVEMENT_INVALID)
-        goto RESET;
+    {
+        ObjectEventClearHeldMovementIfFinished(follower);
+        return;
+    }
 
     if (gSaveBlock2Ptr->follower.createSurfBlob == 1) //Get on Surf Blob
     {
         gSaveBlock2Ptr->follower.createSurfBlob = 2;
         gPlayerAvatar.preventStep = TRUE; //Wait for finish
         SetSurfJump();
-        goto RESET;
+        ObjectEventClearHeldMovementIfFinished(follower);
+        return;
     }
     else if (gSaveBlock2Ptr->follower.createSurfBlob == 3) //Get off Surf Blob
     {
-        gSaveBlock2Ptr->follower.createSurfBlob = 0;
-        gPlayerAvatar.preventStep = TRUE; //Wait for finish
         SetSurfDismount();
-        goto RESET;
+        ObjectEventClearHeldMovementIfFinished(follower);
+        return;
     }
 
     ObjectEventClearHeldMovementIfActive(follower);
@@ -305,7 +312,6 @@ void FollowMe(struct ObjectEvent* npc, u8 state, bool8 ignoreScriptActive)
         gPlayerAvatar.preventStep = TRUE;   //allow follower to catch up
     }
 
-RESET:
     ObjectEventClearHeldMovementIfFinished(follower);
 }
 
@@ -314,10 +320,6 @@ static void Task_ReallowPlayerMovement(u8 taskId)
     bool8 animStatus = ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetFollowerMapObjId()]);
     if (animStatus == 0)
     {
-        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)
-        && ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gPlayerAvatar.objectEventId]))
-            SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT); //Temporarily stop running
-        return;
     }
 
     gPlayerAvatar.preventStep = FALSE;
@@ -1334,4 +1336,64 @@ void PlayerFaceFollowerSprite(void)
 void CheckPlayerHasFollower(void)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->follower.inProgress;
+}
+
+// follow me script commands
+void ScriptSetFollower(struct ScriptContext *ctx)
+{
+    u8 localId = ScriptReadByte(ctx);
+    u16 flags = ScriptReadHalfword(ctx);
+    u8 setScript = ScriptReadByte(ctx);
+    u16 battlePartner = ScriptReadHalfword(ctx);
+
+    gSaveBlock2Ptr->follower.battlePartner = battlePartner;
+    SetUpFollowerSprite(localId, flags, setScript);
+}
+
+void ScriptDestroyFollower(struct ScriptContext *ctx)
+{
+    gSaveBlock2Ptr->follower.battlePartner = 0;
+    DestroyFollower();
+    if (OW_FOLLOWERS_ENABLED == TRUE) {
+        UpdateFollowingPokemon();
+    }
+}
+
+void ScriptFaceFollower(struct ScriptContext *ctx)
+{
+    PlayerFaceFollowerSprite();
+}
+
+void ScriptCheckFollower(struct ScriptContext *ctx)
+{
+    CheckPlayerHasFollower();
+}
+
+void ScriptUpdateFollowingMon(struct ScriptContext *ctx)
+{
+    if (OW_FOLLOWERS_ENABLED == TRUE) {
+        UpdateFollowingPokemon();
+    }
+}
+
+void ScriptBallFollowingMon(struct ScriptContext *ctx)
+{
+    u32 species;
+    bool32 shiny;
+    bool32 female;
+
+    if (OW_POKEMON_OBJECT_EVENTS == FALSE
+     || OW_FOLLOWERS_ENABLED == FALSE
+     || FlagGet(B_FLAG_FOLLOWERS_DISABLED)
+     || !GetFollowerInfo(&species, &shiny, &female)
+     || SpeciesToGraphicsInfo(species, shiny, female) == NULL
+     || (gMapHeader.mapType == MAP_TYPE_INDOOR && SpeciesToGraphicsInfo(species, shiny, female)->oam->size > ST_OAM_SIZE_2)
+     || FlagGet(FLAG_TEMP_HIDE_FOLLOWER)
+     || gSaveBlock2Ptr->follower.inProgress)
+    {
+    }
+    else
+    {
+        ReturnFollowingMonToBall();
+    }
 }
