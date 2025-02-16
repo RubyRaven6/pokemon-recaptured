@@ -18,7 +18,7 @@ FlottTown_ShipHallway_EventScript_ElsieLeaves::
 	applymovement 2, ElsieExits
 	waitmovement 0
 	removeobject 2
-	setvar VAR_FLOTT_TOWN_STATE, FLOTT_TOWN_EXITED_CABIN
+	setvar VAR_FLOTT_TOWN_STATE, 2
 	return
 
 

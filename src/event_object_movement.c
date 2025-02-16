@@ -1962,6 +1962,7 @@ const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u32 species, bool32 
 {
     const struct ObjectEventGraphicsInfo *graphicsInfo = NULL;
 #if OW_POKEMON_OBJECT_EVENTS
+    switch (species)
     {
     case SPECIES_UNOWN: // Deal with Unown forms later
         graphicsInfo = &gSpeciesInfo[species].overworldData;
@@ -1981,9 +1982,13 @@ const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u32 species, bool32 
     }
 
     // Try to avoid OOB or undefined access
+    if ((graphicsInfo->tileTag == 0 && species < NUM_SPECIES) || (graphicsInfo->tileTag != TAG_NONE && species >= NUM_SPECIES))
+    {
+        if (OW_SUBSTITUTE_PLACEHOLDER)
             return &gSpeciesInfo[SPECIES_NONE].overworldData;
         return NULL;
     }
+#endif // OW_POKEMON_OBJECT_EVENTS
     return graphicsInfo;
 }
 
@@ -2198,6 +2203,7 @@ void UpdateFollowingPokemon(void)
     {
         RemoveFollowingPokemon();
         return;
+    }
 
     if (objEvent == NULL)
     {
@@ -2462,9 +2468,6 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
         case MAPSEC_RUSTBORO_CITY:
         case MAPSEC_PEWTER_CITY:
             multi = TYPE_ROCK;
-            break;
-        case MAPSEC_OASIS_TOWN:
-            multi = TYPE_FIGHTING;
             break;
         case MAPSEC_MAUVILLE_CITY:
         case MAPSEC_VERMILION_CITY:
@@ -6456,7 +6459,10 @@ bool8 ObjectEventSetHeldMovement(struct ObjectEvent *objectEvent, u8 movementAct
     {
         objectEvent->playerCopyableMovement = sActionIdToCopyableMovement[objectEvent->movementActionId];
     }
+
+    return FALSE;
 }
+
 void ObjectEventForceSetHeldMovement(struct ObjectEvent *objectEvent, u8 movementActionId)
 {
     movementActionId = TryUpdateMovementActionOnStairs(objectEvent, movementActionId);
@@ -6467,6 +6473,7 @@ void ObjectEventForceSetHeldMovement(struct ObjectEvent *objectEvent, u8 movemen
 void ObjectEventClearHeldMovementIfActive(struct ObjectEvent *objectEvent)
 {
     if (objectEvent->heldMovementActive)
+        ObjectEventClearHeldMovement(objectEvent);
 }
 
 void ObjectEventClearHeldMovement(struct ObjectEvent *objectEvent)
@@ -9604,7 +9611,7 @@ bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y)
 
     mapElevation = MapGridGetElevationAt(x, y);
 
-    if (mapElevation == 0 || mapElevation == MAX_ELEVATION_LEVEL)
+    if (mapElevation == 0 || mapElevation == 15)
         return FALSE;
 
     if (mapElevation != elevation)

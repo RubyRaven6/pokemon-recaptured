@@ -1899,51 +1899,6 @@
 	.macro dynmultistack left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
 	.endm
-	
-	@ Sets an NPC up to follow the player.
-	@ If you want to specify a battle partner without specifying a custom script, you can set the script parameter to 0.
-    .macro setfollower localId:req, flags:req, script, battlePartner
-	checkfollower
-	goto_if_eq VAR_RESULT, TRUE, 1f
-	ballfollowingmon
-	.ifnb \script
-		.if \script == 0
-			.set setScript, FALSE
-		.else
-			loadword 0, \script
-			.set setScript, TRUE
-		.endif
-	.else
-		.set setScript, FALSE
-	.endif
-    callnative ScrCmd_setfollower
-    .byte \localId
-    .2byte \flags
-	.byte setScript
-	.ifb \battlePartner
-		.set battlePartner, 0
-		.2byte battlePartner
-	.else
-		.2byte \battlePartner
-	.endif
-	updatefollowingmon
-	1:
-    .endm
-    
-    @ Remove the following NPC (assumes there will only ever be one).
-    .macro destroyfollower
-    callnative ScrCmd_destroyfollower
-    .endm
-    
-    @ Makes the player and follower face one another.
-    .macro facefollower
-    callnative ScrCmd_facefollower
-    .endm
-    
-    @ Checks if you have a follower. returns the result to VAR_RESULT.
-    .macro checkfollower
-    callnative ScrCmd_checkfollower
-    .endm
 
 	@ Sets an NPC up to follow the player.
 	@ If you want to specify a battle partner without specifying a custom script, you can set the script parameter to 0.
@@ -2001,7 +1956,7 @@
 	delay 16
 	.endm
 
-.macro questmenu case:req, questId:req
+	.macro questmenu case:req, questId:req
     callnative ScrCmd_questmenu
     .byte \case
     .byte \questId
