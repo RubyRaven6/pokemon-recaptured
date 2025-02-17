@@ -107,7 +107,6 @@ DocksideCity_EventScript_Date1EatingOut::
 
 
 DocksideCity_EventScript_Date2EatingOut::
-	applymovement 24, DocksideCity_EventScript_Date1EatingOut_Movement_1
 	msgbox DocksideCity_EventScript_Date2EatingOut_Text_0, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
@@ -165,7 +164,8 @@ DocksideCity_EventScript_LighthouseFan::
 
 
 DocksideCity_EventScript_GardenLady::
-	msgbox DocksideCity_EventScript_GardenLady_Text_0, MSGBOX_NPC
+	speakername DocksideCity_EventScript_GardenLady_Text_0
+	msgbox DocksideCity_EventScript_GardenLady_Text_1, MSGBOX_NPC
 	waitmessage
 	closemessage
 	end
@@ -333,6 +333,9 @@ DocksideCity_EventScript_LighthouseFan_Text_1:
 	.string "majestic view.$"
 
 DocksideCity_EventScript_GardenLady_Text_0:
+	.string "Gardener$"
+
+DocksideCity_EventScript_GardenLady_Text_1:
 	.string "This is a community garden for the city.\n"
 	.string "I like to take care of it with my\l"
 	.string "Pokémon when I have the time.$"

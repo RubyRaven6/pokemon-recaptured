@@ -33,6 +33,7 @@ void InitTilesetAnim_BattleDome(void);
 void InitTilesetAnim_BattlePyramid(void);
 
 //Custom
+void InitTilesetAnim_RecompiledGeneral(void);
 void InitTilesetAnim_OasisTown(void);
 
 #endif // GUARD_TILESET_ANIMS_H

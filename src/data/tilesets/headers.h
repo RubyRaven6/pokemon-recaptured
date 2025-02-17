@@ -866,7 +866,7 @@ const struct Tileset gTileset_Recompiled_General =
     .palettes = gTilesetPalettes_Recompiled_General,
     .metatiles = gMetatiles_Recompiled_General,
     .metatileAttributes = gMetatileAttributes_Recompiled_General,
-    .callback = NULL,
+    .callback = InitTilesetAnim_RecompiledGeneral,
 };
 
 const struct Tileset gTileset_Gate =
