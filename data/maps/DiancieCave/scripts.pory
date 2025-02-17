@@ -13,6 +13,7 @@ script DiancieCave_EventScript_MeetingDiancie{
     waitmovement(LOCALID_DIANCIE)
     speakername("Diancie")
     msgbox(DiancieCave_Text_IWishYouCouldStay, MSGBOX_DEFAULT)
+    closemessage
     warpwhitefade(MAP_FLOTT_TOWN_SHIP_CABIN, 6, 4)
     waitstate
     end

@@ -12,6 +12,7 @@ DiancieCave_EventScript_MeetingDiancie::
 	waitmovement 7
 	speakername DiancieCave_EventScript_MeetingDiancie_Text_0
 	msgbox DiancieCave_Text_IWishYouCouldStay, MSGBOX_DEFAULT
+	closemessage
 	warpwhitefade MAP_FLOTT_TOWN_SHIP_CABIN, 6, 4
 	waitstate
 	end

@@ -28,6 +28,7 @@ script DocksideCity_OnTransition{
 
 script DocksideCity_EventScript_SailorMachoke{
     faceplayer
+    speakername("Betting sailor")
     msgbox(DocksideCity_Text_SailorMachoke, MSGBOX_NPC)
     waitmessage
     closemessage
@@ -37,6 +38,7 @@ script DocksideCity_EventScript_SailorMachoke{
 
 script DocksideCity_EventScript_SailorPoliwrath{
     faceplayer
+    speakername("Betting sailor")
     msgbox(DocksideCity_Text_SailorPoliwrath, MSGBOX_NPC)
     waitmessage
     closemessage
@@ -46,6 +48,7 @@ script DocksideCity_EventScript_SailorPoliwrath{
 
 script DocksideCity_EventScript_SailorSpectator{
     faceplayer
+    speakername("High-rolling sailor")
     msgbox(DocksideCity_Text_SailorSpectator, MSGBOX_NPC)
     waitmessage
     closemessage
@@ -55,6 +58,7 @@ script DocksideCity_EventScript_SailorSpectator{
 
 script DocksideCity_EventScript_MomEatingOut{
     applymovement(20, moves(walk_in_place_right))
+    speakername("Tired mom")
     msgbox(format("Jaiden! I told you to stop playing with your food!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -62,6 +66,7 @@ script DocksideCity_EventScript_MomEatingOut{
 }
 
 script DocksideCity_EventScript_SonEatingOut{
+    speakername("“Foodie”")
     msgbox("Huh, this pasta is staler than usual…", MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -69,6 +74,7 @@ script DocksideCity_EventScript_SonEatingOut{
 }
 
 script DocksideCity_EventScript_DaughterEatingOut{
+    speakername("Messy kid")
     msgbox("PAsta!", MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -77,8 +83,10 @@ script DocksideCity_EventScript_DaughterEatingOut{
 
 script DocksideCity_EventScript_Lesbian1EatingOut{
     applymovement(19, moves(walk_in_place_right))
+    speakername("Smitten lady")
     msgbox(format("Hey… thanks for saying yes. I was really looking forward to spending the day with you."), MSGBOX_DEFAULT)
     applymovement(18, moves(walk_in_place_left))
+    speakername("Girl in love")
     msgbox(format("Of course! I always love spending time with you. You know that, right?"), MSGBOX_DEFAULT)
     applymovement(19, moves(emote_heart))
     applymovement(18, moves(emote_heart))
@@ -89,10 +97,13 @@ script DocksideCity_EventScript_Lesbian1EatingOut{
 
 script DocksideCity_EventScript_Lesbian2EatingOut{
     applymovement(18, moves(walk_in_place_left))
+    speakername("Girl in love")
     msgbox(format("Huh… this pasta tastes better than when I went here last time."), MSGBOX_DEFAULT)
     applymovement(19, moves(walk_in_place_right))
+    speakername("Smitten lady")
     msgbox(format("Really? I don't think they changed the recipe…"), MSGBOX_DEFAULT)
     applymovement(18, moves(walk_in_place_left))
+    speakername("Lovestruck woman")
     msgbox(format("Well… maybe there's just something better about today?"), MSGBOX_DEFAULT)
     applymovement(19, moves(emote_heart))
     applymovement(18, moves(emote_heart))
@@ -102,11 +113,13 @@ script DocksideCity_EventScript_Lesbian2EatingOut{
 }
 
 script DocksideCity_EventScript_Date1EatingOut{
-    applymovement(23, moves(walk_in_place_right, step_end))
+    applymovement(24, moves(walk_in_place_right, step_end))
+    speakername("Picky girl")
     msgbox(format("Hm… I'm getting kind of bored going here each week…"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    applymovement(24, moves(walk_in_place_left, step_end))
+    applymovement(23, moves(walk_in_place_left, step_end))
+    speakername("Stubborn guy")
     msgbox(format("What? But this is the best pasta place in the city!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -114,7 +127,6 @@ script DocksideCity_EventScript_Date1EatingOut{
 }
 
 script DocksideCity_EventScript_Date2EatingOut{
-    applymovement(24, moves(walk_in_place_left, step_end))
     msgbox(format("The lad seems to just eating his food in peace."), MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -122,6 +134,7 @@ script DocksideCity_EventScript_Date2EatingOut{
 }
 
 script DocksideCity_EventScript_Custodian{
+    speakername("Custodian")
     msgbox(format("I'll tell ya, it's astounding how much mess people can leave around after they eat."), MSGBOX_NPC)
     waitmessage
     closemessage
@@ -129,6 +142,7 @@ script DocksideCity_EventScript_Custodian{
 }
 
 script DocksideCity_EventScript_GirlTuber{
+    speakername("Tuber girl")
     msgbox(format("I love the beach! It's so nice to swim in the water."), MSGBOX_NPC)
     waitmessage
     closemessage
@@ -136,6 +150,7 @@ script DocksideCity_EventScript_GirlTuber{
 }
 
 script DocksideCity_EventScript_BoyTuber{
+    speakername("Tuber boy")
     msgbox(format("We can't go too far into the water. It's fine though."), MSGBOX_NPC)
     waitmessage
     closemessage
@@ -143,6 +158,7 @@ script DocksideCity_EventScript_BoyTuber{
 }
 
 script DocksideCity_EventScript_TuberDad{
+    speakername("Doting dad")
     msgbox(format("My kids love coming to the beach, so I always come with them when I have time."), MSGBOX_NPC)
     waitmessage
     closemessage
@@ -151,6 +167,7 @@ script DocksideCity_EventScript_TuberDad{
 
 script DocksideCity_EventScript_BuriedGuy{
     lock
+    speakername("Buried guy")
     msgbox(DocksideCity_Text_BuriedGuy, MSGBOX_DEFAULT)
     waitmessage
     closemessage
@@ -159,7 +176,7 @@ script DocksideCity_EventScript_BuriedGuy{
 }
 
 script DocksideCity_EventScript_LighthouseFan{
-    faceplayer
+    speakername("Wistful sailor")
     msgbox(format("Whenever I dock here, I love looking at the wide vision of the sea. It's such a majestic view."), MSGBOX_NPC)
     waitmessage
     closemessage
@@ -167,7 +184,7 @@ script DocksideCity_EventScript_LighthouseFan{
 }
 
 script DocksideCity_EventScript_GardenLady{
-    faceplayer
+    speakername("Gardener")
     msgbox(format("This is a community garden for the city. I like to take care of it with my Pokémon when I have the time."), MSGBOX_NPC)
     waitmessage
     closemessage
@@ -202,14 +219,14 @@ script DocksideCity_EventScript_Sign{
     end
 }
 
-text(local) DocksideCity_Text_SailorMachoke{
+text DocksideCity_Text_SailorMachoke{
     format(
         "We're currently on our break. We decided to have a battle while we're at it!"
         "He doesn't know that I made sure to give my buddy Machoke some moves to match up against Poliwrath!"
     )
 }
 
-text(local) DocksideCity_Text_SailorPoliwrath{
+text DocksideCity_Text_SailorPoliwrath{
     format(
         "It's our union-mandated break at the moment. So, we decided to spar and give our Pokémon a workout."
         "Joke's on him though. My Poliwrath is gonna wipe the floor with his Machoke!"
@@ -217,16 +234,16 @@ text(local) DocksideCity_Text_SailorPoliwrath{
     )
 }
 
-text(local) DocksideCity_Text_SailorSpectator{
+text DocksideCity_Text_SailorSpectator{
     format(
         "I'm just here to watch."
         "These two always spar and somehow always end up in a dead-tie."
     )
 }
 
-text(local) DocksideCity_Text_BuriedGuy{
+text DocksideCity_Text_BuriedGuy{
     format(
-        "BURIED So, I asked my friends to bury me in the sand. As a bit, y'know?"
+        "So, I asked my friends to bury me in the sand. As a bit, y'know?"
         "I asked them to do it days ago. I think they forgot me here."
         "It's not all too bad though. I still get food whenever the kids want some company."
     )
