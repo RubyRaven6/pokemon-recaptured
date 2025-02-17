@@ -135,6 +135,9 @@
 #define METATILE_Dewford_Door              0x825
 #define METATILE_Dewford_Door_BattleTower  0x85D
 
+// gTileset_DocksideCity
+#define METATILE_DocksideCity_DocksideDoor  0x841
+
 // gTileset_EliteFour
 #define METATILE_EliteFour_EntryDoor_ClosedBottom    0x80E
 #define METATILE_EliteFour_EntryDoor_ClosedTop       0x806
@@ -205,8 +208,6 @@
 #define METATILE_General_Door                  0x021
 #define METATILE_General_Door_Contest          0x1DB
 #define METATILE_General_Door_Gym              0x1CD
-#define METATILE_General_Door_PokeCenter       0x061
-#define METATILE_General_Door_PokeMart         0x041
 #define METATILE_General_Grass                 0x001
 #define METATILE_General_Grass_TreeLeft        0x1CE
 #define METATILE_General_Grass_TreeRight       0x1CF
@@ -460,6 +461,10 @@
 #define METATILE_PokemonCenter_Floor_ShadowTop           0x81E
 #define METATILE_PokemonCenter_Floor_ShadowTop_Alt       0x8DC
 
+// gTileset_Recompiled_General
+#define METATILE_Recompiled_General_PokecenterDoor  0x061
+#define METATILE_Recompiled_General_PokemartDoor    0x041
+
 // gTileset_Rustboro
 #define METATILE_Rustboro_Door_Gray  0x81F
 #define METATILE_Rustboro_Door_Tan   0x82F
@@ -651,7 +656,7 @@
 #define METATILE_SecretBase_RedPoster                   0x932
 #define METATILE_SecretBase_RedTent_BottomLeft          0x840
 #define METATILE_SecretBase_RedTent_BottomRight         0x83B
-#define METATILE_SecretBase_RedTent_Door                0x841
+#define METATILE_SecretBase_RedTent_Door                0x840
 #define METATILE_SecretBase_RedTent_DoorTop             0x839
 #define METATILE_SecretBase_RedTent_MidLeft             0x838
 #define METATILE_SecretBase_RedTent_MidRight            0x83A
