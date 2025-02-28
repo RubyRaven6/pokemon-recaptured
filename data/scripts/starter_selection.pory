@@ -1,6 +1,6 @@
 const FURY = 0
 const MISCHIEF = 1
-const FRIENDSHIP = 2
+const DEVOTION = 2
 
 const LOCALID_MON0 = 3
 const LOCALID_MON1 = 4
@@ -13,43 +13,14 @@ const STARTERY = VAR_TEMP_6
 const MON_NAME = VAR_TEMP_7
 const MON_ID = VAR_TEMP_8
 
-script StarterSelection_GFXSetting {
-    checkplayerpersonality
-    switch(var(VAR_RESULT)){
-        case FURY:
-            setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(MANKEY))
-            setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_SPECIES(BUDEW))
-            setvar(VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_SPECIES(TRAPINCH))
-            setvar(VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_SPECIES(LITWICK))
-            setvar(VAR_OBJ_GFX_ID_4, OBJ_EVENT_GFX_SPECIES(HATENNA))
-        case MISCHIEF:
-            setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(TINKATINK))
-            setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_SPECIES(BLIPBUG))
-            setvar(VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_SPECIES(FLABEBE))
-            setvar(VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_SPECIES(ZUBAT))
-            setvar(VAR_OBJ_GFX_ID_4, OBJ_EVENT_GFX_SPECIES(GOTHITA))
-        case FRIENDSHIP:
-            setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(TEDDIURSA))
-            setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_SPECIES(DUSKULL))
-            setvar(VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_SPECIES(AZURILL))
-            setvar(VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_SPECIES(ARON))
-            setvar(VAR_OBJ_GFX_ID_4, OBJ_EVENT_GFX_SPECIES(NACLI))
-    }
-    return
-}
+
 
 script StarterSelection_FuryPersonality{
     debugprint("running fury starter selection dynmultichoice")
     dynmultichoice(9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, "Rage Monkey", "Bouquet", "Mystic", "Luring", "Silent")
     switch(var(VAR_RESULT)){
         case 0:
-            setvar(MON_ID, LOCALID_MON0)
-            addobject(LOCALID_MON0)
-            applymovement(LOCALID_MON0, Common_Movement_FaceAwayPlayer)
-            setobjectxy(LOCALID_MON0, STARTERX, STARTERY)
-            bufferspeciesname(STR_VAR_1, SPECIES_MANKEY)
-            setvar(MON_NAME, SPECIES_MANKEY)
-            return
+            
             
         case 1:
             setvar(MON_ID, LOCALID_MON1)
@@ -94,13 +65,7 @@ script StarterSelection_MischiefPersonality{
     dynmultichoice(9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, "Hammer", "Seven Spots", "Garden", "Bat", "Astral Body")
     switch(var(VAR_RESULT)){
         case 0:
-            setvar(MON_ID, LOCALID_MON0)
-            addobject(LOCALID_MON0)
-            applymovement(LOCALID_MON0, Common_Movement_FaceAwayPlayer)
-            setobjectxy(LOCALID_MON0, STARTERX, STARTERY)
-            bufferspeciesname(STR_VAR_1, SPECIES_TINKATINK)
-            setvar(MON_NAME, SPECIES_TINKATINK)
-            return
+
             
         case 1:
             setvar(MON_ID, LOCALID_MON1)
@@ -142,13 +107,7 @@ script StarterSelection_FriendshipPersonality{
     dynmultichoice(9, 2, TRUE, 5, 0, DYN_MULTICHOICE_CB_NONE, "Peat", "Gripper", "Aqua Rabbit", "Iron Armor", "Rock Salt")
     switch(var(VAR_RESULT)){
         case 0:
-            setvar(MON_ID, LOCALID_MON0)
-            addobject(LOCALID_MON0)
-            applymovement(LOCALID_MON0, Common_Movement_FaceAwayPlayer)
-            setobjectxy(LOCALID_MON0, STARTERX, STARTERY)
-            bufferspeciesname(STR_VAR_1, SPECIES_TEDDIURSA)
-            setvar(MON_NAME, SPECIES_TEDDIURSA)
-            return
+
         case 1:
             setvar(MON_ID, LOCALID_MON1)
             addobject(LOCALID_MON1)

@@ -1,18 +1,20 @@
+const FURY = 1
+const MISCHIEF = 2
+const DEVOTION = 3
+
 const DIR_SOUTH =  1
 const DIR_NORTH =  2
 const DIR_WEST  =  3
 const DIR_EAST  =  4
 
-const LOCALID_ZUBAT = 10
+const LOCALID_ZUBAT = 8
 
-const LOCALID_MON0 = 3
-const LOCALID_MON1 = 4
-const LOCALID_MON2 = 2
-const LOCALID_MON3 = 1
-const LOCALID_MON4 = 9
+const LOCALID_MANKEY = 1
+const LOCALID_TINKATINK = 2
+const LOCALID_NACLI = 3
 
-const LOCALID_ELSIE = 7
-const LOCALID_BARNEY = 8
+const LOCALID_ELSIE = 6
+const LOCALID_BARNEY = 7
 
 const PLAYER = OBJ_EVENT_ID_PLAYER
 const PLAYERX = VAR_TEMP_0
@@ -34,8 +36,6 @@ mapscripts FlottTown_FlottCave_MapScripts {
         setflag(FLAG_HIDE_MON0)
         setflag(FLAG_HIDE_MON1)
         setflag(FLAG_HIDE_MON2)
-        setflag(FLAG_HIDE_MON3)
-setflag(FLAG_HIDE_MON4)
         call(StarterSelection_GFXSetting)
         call(FlottTown_FlottCave_CaveLightLevel)
     }
@@ -43,6 +43,19 @@ setflag(FLAG_HIDE_MON4)
         VAR_FLOTT_TOWN_STATE, 6: FlottTown_FlottCave_OnFrame
         // VAR_FLOTT_TOWN_STATE, 9: FlottTown_FlottCave_TurnOn
     ]
+}
+
+script StarterSelection_GFXSetting {
+    checkplayerpersonality
+    switch(var(VAR_RESULT)){
+        case FURY:
+            setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(MANKEY))
+        case MISCHIEF:
+            setvar(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_SPECIES(TINKATINK))
+        case DEVOTION:
+            setvar(VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_SPECIES(NACLI))
+    }
+    return
 }
 
 script FlottTown_FlottCave_OnFrame{
@@ -58,10 +71,6 @@ script FlottTown_FlottCave_CaveLightLevel{
     setflashlevel(6)
     end
 }
-
-// script FlottTown_FlottCave_TurnOn{
-//     setflashlevel(0)
-// }
 
 script FlottTown_FlottCave_EventScript_ZubatAttacks{
     lockall
@@ -135,7 +144,7 @@ script FlottTown_FlottCave_EventScript_RockSmash{
     clearflag(FLAG_ELSIE_IN_CAVE)
     clearflag(FLAG_BARNEY_IN_CAVE)
     setflag(FLAG_TEMP_11)
-    removeobject(6)
+    removeobject(5)
     waitse
     msgbox(format("That sounded like it came from the smashable rocks!"), MSGBOX_DEFAULT)
     closemessage
@@ -189,15 +198,31 @@ script FlottTown_FlottCave_EventScript_ElsieRescue{
 
 script FlottTown_FlottCave_StarterChoice{
     lockall
-	msgbox(format("But…before it could hurt you, something intervenes.\l What is it?"), MSGBOX_DEFAULT)
+	msgbox(format("Before it could hurt you, something intervenes!"), MSGBOX_DEFAULT)
     checkplayerpersonality
+    debugprint("personality", VAR_RESULT)
     switch(var(VAR_RESULT)){
-        case 0:
-            call(StarterSelection_FuryPersonality)
-        case 1:
-            call(StarterSelection_MischiefPersonality)
-        case 2:
-            call(StarterSelection_FriendshipPersonality)
+        case FURY:
+            setvar(MON_ID, LOCALID_MANKEY)
+            addobject(LOCALID_MANKEY)
+            applymovement(LOCALID_MANKEY, Common_Movement_FaceAwayPlayer)
+            setobjectxy(LOCALID_MANKEY, STARTERX, STARTERY)
+            bufferspeciesname(STR_VAR_1, SPECIES_MANKEY)
+            setvar(MON_NAME, SPECIES_MANKEY)
+        case MISCHIEF:
+            setvar(MON_ID, LOCALID_TINKATINK)
+            addobject(LOCALID_TINKATINK)
+            applymovement(LOCALID_TINKATINK, Common_Movement_FaceAwayPlayer)
+            setobjectxy(LOCALID_TINKATINK, STARTERX, STARTERY)
+            bufferspeciesname(STR_VAR_1, SPECIES_TINKATINK)
+            setvar(MON_NAME, SPECIES_TINKATINK)
+        case DEVOTION:
+            setvar(MON_ID, LOCALID_NACLI)
+            addobject(LOCALID_NACLI)
+            applymovement(LOCALID_NACLI, Common_Movement_FaceAwayPlayer)
+            setobjectxy(LOCALID_NACLI, STARTERX, STARTERY)
+            bufferspeciesname(STR_VAR_1, SPECIES_NACLI)
+            setvar(MON_NAME, SPECIES_NACLI)
     }
     fadescreen(FADE_FROM_BLACK)
     msgbox("{STR_VAR_1} jumped in to save you!", MSGBOX_DEFAULT)

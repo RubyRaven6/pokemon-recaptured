@@ -51,6 +51,7 @@ FlottTown_AbandonedGym_LadderStopper::
 	waitmessage
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, WalkAway
+	applymovement OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer
 	return
 
 

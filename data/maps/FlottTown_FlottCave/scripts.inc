@@ -10,8 +10,6 @@ FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_TRANSITION:
 	setflag FLAG_HIDE_MON0
 	setflag FLAG_HIDE_MON1
 	setflag FLAG_HIDE_MON2
-	setflag FLAG_HIDE_MON3
-	setflag FLAG_HIDE_MON4
 	call StarterSelection_GFXSetting
 	call FlottTown_FlottCave_CaveLightLevel
 	return
@@ -19,6 +17,28 @@ FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_TRANSITION:
 FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 	map_script_2 VAR_FLOTT_TOWN_STATE, 6, FlottTown_FlottCave_OnFrame
 	.2byte 0
+
+
+StarterSelection_GFXSetting::
+	checkplayerpersonality
+	switch VAR_RESULT
+	case 1, StarterSelection_GFXSetting_3
+	case 2, StarterSelection_GFXSetting_4
+	case 3, StarterSelection_GFXSetting_5
+StarterSelection_GFXSetting_1:
+	return
+
+StarterSelection_GFXSetting_3:
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES ( MANKEY )
+	goto StarterSelection_GFXSetting_1
+
+StarterSelection_GFXSetting_4:
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_SPECIES ( TINKATINK )
+	goto StarterSelection_GFXSetting_1
+
+StarterSelection_GFXSetting_5:
+	setvar VAR_OBJ_GFX_ID_2, OBJ_EVENT_GFX_SPECIES ( NACLI )
+	goto StarterSelection_GFXSetting_1
 
 
 FlottTown_FlottCave_OnFrame::
@@ -43,7 +63,7 @@ FlottTown_FlottCave_EventScript_ZubatAttacks::
 	playmoncry SPECIES_ZUBAT, CRY_MODE_NORMAL
 	waitmoncry
 	call FlottTown_FlottCave_ZubatSpawn
-	applymovement 10, Common_Movement_FacePlayer
+	applymovement 8, Common_Movement_FacePlayer
 	fadescreen FADE_TO_BLACK
 	msgbox FlottTown_FlottCave_EventScript_ZubatAttacks_Text_1
 	call FlottTown_FlottCave_StarterChoice
@@ -77,8 +97,8 @@ FlottTown_FlottCave_ZubatSpawn::
 	case 3, FlottTown_FlottCave_ZubatSpawn_5
 	case 4, FlottTown_FlottCave_ZubatSpawn_6
 FlottTown_FlottCave_ZubatSpawn_1:
-	addobject 10
-	setobjectxy 10, VAR_TEMP_2, VAR_TEMP_3
+	addobject 8
+	setobjectxy 8, VAR_TEMP_2, VAR_TEMP_3
 	return
 
 FlottTown_FlottCave_ZubatSpawn_3:
@@ -142,24 +162,24 @@ FlottTown_FlottCave_EventScript_ElsieRescue::
 	speakername FlottTown_FlottCave_EventScript_ElsieRescue_Text_0
 	msgbox FlottTown_FlottCave_Text_Rescue, MSGBOX_DEFAULT
 	closemessage
-	applymovement 8, FlottTown_FlottCave_Movement_BarneyWalksUp
+	applymovement 7, FlottTown_FlottCave_Movement_BarneyWalksUp
 	applymovement OBJ_EVENT_ID_PLAYER, FlottTown_FlottCave_Movement_PlayerWalksUp
-	applymovement 7, FlottTown_FlottCave_Movement_ElsieWalksUp
-	waitmovement 8
+	applymovement 6, FlottTown_FlottCave_Movement_ElsieWalksUp
 	waitmovement 7
+	waitmovement 6
 	waitmovement OBJ_EVENT_ID_PLAYER
-	applymovement 7, Common_Movement_FaceRight
+	applymovement 6, Common_Movement_FaceRight
 	speakername FlottTown_FlottCave_OnFrame_Text_0
 	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_1, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	applymovement 7, Common_Movement_WalkInPlaceRight
+	applymovement 6, Common_Movement_WalkInPlaceRight
 	speakername FlottTown_FlottCave_OnFrame_Text_0
 	msgbox FlottTown_FlottCave_EventScript_ElsieRescue_Text_2, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	applymovement 7, Common_Movement_FaceRight
-	applymovement 8, Common_Movement_WalkInPlaceDown
+	applymovement 6, Common_Movement_FaceRight
+	applymovement 7, Common_Movement_WalkInPlaceDown
 	speakername FlottTown_FlottCave_EventScript_ElsieRescue_Text_0
 	msgbox FlottTown_FlottCave_Text_LetsGoHome, MSGBOX_DEFAULT
 	waitmessage
@@ -177,28 +197,44 @@ FlottTown_FlottCave_StarterChoice::
 	lockall
 	msgbox FlottTown_FlottCave_StarterChoice_Text_0, MSGBOX_DEFAULT
 	checkplayerpersonality
+	debugprint FlottTown_FlottCave_StarterChoice_Text_1, VAR_RESULT
 	switch VAR_RESULT
-	case 0, FlottTown_FlottCave_StarterChoice_3
-	case 1, FlottTown_FlottCave_StarterChoice_4
-	case 2, FlottTown_FlottCave_StarterChoice_5
+	case 1, FlottTown_FlottCave_StarterChoice_3
+	case 2, FlottTown_FlottCave_StarterChoice_4
+	case 3, FlottTown_FlottCave_StarterChoice_5
 FlottTown_FlottCave_StarterChoice_1:
 	fadescreen FADE_FROM_BLACK
-	msgbox FlottTown_FlottCave_StarterChoice_Text_1, MSGBOX_DEFAULT
+	msgbox FlottTown_FlottCave_StarterChoice_Text_2, MSGBOX_DEFAULT
 	playmoncry VAR_TEMP_7, CRY_MODE_NORMAL
 	waitmoncry
 	givemon VAR_TEMP_7, 10, ITEM_NONE
 	return
 
 FlottTown_FlottCave_StarterChoice_3:
-	call StarterSelection_FuryPersonality
+	setvar VAR_TEMP_8, 1
+	addobject 1
+	applymovement 1, Common_Movement_FaceAwayPlayer
+	setobjectxy 1, VAR_TEMP_5, VAR_TEMP_6
+	bufferspeciesname STR_VAR_1, SPECIES_MANKEY
+	setvar VAR_TEMP_7, SPECIES_MANKEY
 	goto FlottTown_FlottCave_StarterChoice_1
 
 FlottTown_FlottCave_StarterChoice_4:
-	call StarterSelection_MischiefPersonality
+	setvar VAR_TEMP_8, 2
+	addobject 2
+	applymovement 2, Common_Movement_FaceAwayPlayer
+	setobjectxy 2, VAR_TEMP_5, VAR_TEMP_6
+	bufferspeciesname STR_VAR_1, SPECIES_TINKATINK
+	setvar VAR_TEMP_7, SPECIES_TINKATINK
 	goto FlottTown_FlottCave_StarterChoice_1
 
 FlottTown_FlottCave_StarterChoice_5:
-	call StarterSelection_FriendshipPersonality
+	setvar VAR_TEMP_8, 3
+	addobject 3
+	applymovement 3, Common_Movement_FaceAwayPlayer
+	setobjectxy 3, VAR_TEMP_5, VAR_TEMP_6
+	bufferspeciesname STR_VAR_1, SPECIES_NACLI
+	setvar VAR_TEMP_7, SPECIES_NACLI
 	goto FlottTown_FlottCave_StarterChoice_1
 
 
@@ -207,7 +243,7 @@ FlottTown_FlottCave_WildZubatBattle::
 	setwildbattle SPECIES_ZUBAT, 10
 	dowildbattle
 	fadescreen FADE_TO_BLACK
-	removeobject 10
+	removeobject 8
 	fadescreen FADE_FROM_BLACK
 	msgbox FlottTown_FlottCave_WildZubatBattle_Text_0, MSGBOX_DEFAULT
 	closemessage
@@ -306,11 +342,13 @@ FlottTown_FlottCave_EventScript_ElsieRescue_Text_2:
 	.string "gym.$"
 
 FlottTown_FlottCave_StarterChoice_Text_0:
-	.string "But…before it could hurt you, something\n"
-	.string "intervenes.\l"
-	.string "What is it?$"
+	.string "Before it could hurt you, something\n"
+	.string "intervenes!$"
 
 FlottTown_FlottCave_StarterChoice_Text_1:
+	.string "personality$"
+
+FlottTown_FlottCave_StarterChoice_Text_2:
 	.string "{STR_VAR_1} jumped in to save you!$"
 
 FlottTown_FlottCave_WildZubatBattle_Text_0:

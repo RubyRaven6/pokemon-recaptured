@@ -504,7 +504,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_PlayerShrink[] =
 static const struct MenuAction sMenuActions_Starter[] = {
     {COMPOUND_STRING("Fury"), {NULL}},
     {COMPOUND_STRING("Mischief"), {NULL}},
-    {COMPOUND_STRING("Friendship"), {NULL}}
+    {COMPOUND_STRING("Devotion"), {NULL}}
 };
 
 static const struct MenuAction sMenuActions_Gender[] = {
@@ -1629,7 +1629,7 @@ static void Task_NewGameDiancieSpeech_ChooseStarter(u8 taskId)
             break;
         case 2:
             PlaySE(SE_SELECT);
-            gSaveBlock2Ptr->personalityType = FRIENDSHIP;
+            gSaveBlock2Ptr->personalityType = DEVOTION;
             NewGameDiancieSpeech_ClearStarterWindow(3, 1);
             NewGameDiancieSpeech_ClearWindow(0);
             gTasks[taskId].func = Task_NewGameDiancieSpeech_WhatsYourName;
