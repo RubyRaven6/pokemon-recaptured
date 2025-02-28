@@ -262,8 +262,23 @@ script FlottTown_FlottCave_StarterWantsToJoin{
         return      
     }
     else{
-        msgbox("The Pokémon looks sad.", MSGBOX_DEFAULT)
+        call(FlottCave_StarterExpression)
         call(FlottTown_FlottCave_StarterWantsToJoin)
+    }
+}
+
+script FlottCave_StarterExpression{
+    checkplayerpersonality
+    switch(var(VAR_RESULT)){
+        case FURY:
+            msgbox(format("The Pokémon looks like it's about to hit you."), MSGBOX_DEFAULT)
+            return
+        case MISCHIEF:
+            msgbox(format("The Pokémon looks like it's about to plot against you."), MSGBOX_DEFAULT)
+            return
+        case DEVOTION:
+            msgbox(format("The Pokémon looks unmoved but is still insistent."), MSGBOX_DEFAULT)
+            return
     }
 }
 

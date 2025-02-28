@@ -255,7 +255,7 @@ FlottTown_FlottCave_StarterWantsToJoin::
 	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_0, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq FlottTown_FlottCave_StarterWantsToJoin_1
-	msgbox FlottTown_FlottCave_StarterWantsToJoin_Text_3, MSGBOX_DEFAULT
+	call FlottCave_StarterExpression
 	call FlottTown_FlottCave_StarterWantsToJoin
 	return
 
@@ -276,6 +276,27 @@ FlottTown_FlottCave_StarterWantsToJoin_5:
 	call Common_EventScript_GetGiftMonPartySlot
 	call Common_EventScript_NameReceivedPartyMon
 	goto FlottTown_FlottCave_StarterWantsToJoin_4
+
+
+FlottCave_StarterExpression::
+	checkplayerpersonality
+	switch VAR_RESULT
+	case 1, FlottCave_StarterExpression_2
+	case 2, FlottCave_StarterExpression_3
+	case 3, FlottCave_StarterExpression_4
+	return
+
+FlottCave_StarterExpression_2:
+	msgbox FlottCave_StarterExpression_Text_0, MSGBOX_DEFAULT
+	return
+
+FlottCave_StarterExpression_3:
+	msgbox FlottCave_StarterExpression_Text_1, MSGBOX_DEFAULT
+	return
+
+FlottCave_StarterExpression_4:
+	msgbox FlottCave_StarterExpression_Text_2, MSGBOX_DEFAULT
+	return
 
 
 FlottTown_FlottCave_PlayerFacesBarneyFromBottomTrigger:
@@ -363,8 +384,17 @@ FlottTown_FlottCave_StarterWantsToJoin_Text_1:
 FlottTown_FlottCave_StarterWantsToJoin_Text_2:
 	.string "Give a nickname?$"
 
-FlottTown_FlottCave_StarterWantsToJoin_Text_3:
-	.string "The Pokémon looks sad.$"
+FlottCave_StarterExpression_Text_0:
+	.string "The Pokémon looks like it's about to hit\n"
+	.string "you.$"
+
+FlottCave_StarterExpression_Text_1:
+	.string "The Pokémon looks like it's about to\n"
+	.string "plot against you.$"
+
+FlottCave_StarterExpression_Text_2:
+	.string "The Pokémon looks unmoved but is still\n"
+	.string "insistent.$"
 
 FlottTown_FlottCave_Text_ElsieWorried::
 	.string "Oh my god! {PLAYER}! Are you okay?!\n"
