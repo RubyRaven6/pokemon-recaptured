@@ -39,12 +39,13 @@ FlottTown_AbandonedGym_OnFrame::
 	msgbox FlottTown_AbandonedGym_OnFrame_Text_2, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	setfollower LOCALID_ELSIE, FOLLOWER_ALL, FlottTown_AbandonedGym_ElsieFollowerScript, 0
+	setfollower LOCALID_ELSIE, FOLLOW_ME_FLAG_ALL_LAND, FlottTown_AbandonedGym_ElsieFollowerScript, 0
 	callnative CallNativeForVariousPurposes
 	end
 
 
 FlottTown_AbandonedGym_LadderStopper::
+	applymovement OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer
 	speakername FlottTown_AbandonedGym_OnFrame_Text_0
 	msgbox FlottTown_AbandonedGym_Text_LetsStayUp, MSGBOX_DEFAULT
 	waitmessage

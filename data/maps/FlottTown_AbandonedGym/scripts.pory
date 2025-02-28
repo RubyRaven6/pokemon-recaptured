@@ -36,17 +36,19 @@ script FlottTown_AbandonedGym_OnFrame{
     msgbox(format("Elsie decided to follow you!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    setfollower(LOCALID_ELSIE, FOLLOWER_ALL, FlottTown_AbandonedGym_ElsieFollowerScript, 0)
+    setfollower(LOCALID_ELSIE, FOLLOW_ME_FLAG_ALL_LAND, FlottTown_AbandonedGym_ElsieFollowerScript, 0)
     callnative(CallNativeForVariousPurposes)
     end
 }
 
 script FlottTown_AbandonedGym_LadderStopper{
+    applymovement(OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer)
     speakername("Elsie")
     msgbox(FlottTown_AbandonedGym_Text_LetsStayUp, MSGBOX_DEFAULT)
     waitmessage
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, WalkAway)
+    applymovement(OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer)
 }
 
 script FlottTown_AbandonedGym_EventScript_FreePokeball{
