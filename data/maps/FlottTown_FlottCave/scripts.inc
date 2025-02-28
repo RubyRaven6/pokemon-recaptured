@@ -138,7 +138,7 @@ FlottTown_FlottCave_EventScript_RockSmash::
 	clearflag FLAG_ELSIE_IN_CAVE
 	clearflag FLAG_BARNEY_IN_CAVE
 	setflag FLAG_TEMP_11
-	removeobject 6
+	removeobject 5
 	waitse
 	msgbox FlottTown_FlottCave_EventScript_RockSmash_Text_2, MSGBOX_DEFAULT
 	closemessage
