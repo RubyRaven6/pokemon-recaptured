@@ -1900,32 +1900,25 @@
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
 	.endm
 
+@ Follow Me
+
 	@ Sets an NPC up to follow the player.
 	@ If you want to specify a battle partner without specifying a custom script, you can set the script parameter to 0.
-    .macro setfollower localId:req, flags:req, script, battlePartner
+    .macro setfollower localId:req, flags:req, script=0, battlePartner=0
 	checkfollower
 	goto_if_eq VAR_RESULT, TRUE, 1f
 	ballfollowingmon
-	.ifnb \script
-		.if \script == 0
-			.set setScript, FALSE
-		.else
-			loadword 0, \script
-			.set setScript, TRUE
-		.endif
-	.else
-		.set setScript, FALSE
-	.endif
     callnative ScriptSetFollower
+	.if \script == 0
+		.set setScript, FALSE
+    .else
+		.set setScript, TRUE
+	.endif
     .byte \localId
     .2byte \flags
 	.byte setScript
-	.ifb \battlePartner
-		.set battlePartner, 0
-		.2byte battlePartner
-	.else
-		.2byte \battlePartner
-	.endif
+	.2byte \battlePartner
+	.4byte \script
 	updatefollowingmon
 	1:
     .endm
@@ -1955,6 +1948,12 @@
 	callnative ScriptBallFollowingMon
 	delay 16
 	.endm
+
+	@ Changes the battle partner of the existing follower.
+    .macro changefollowerbattler battlePartner:req
+    callnative ScriptChangeFollowerBattlePartner
+    .2byte \battlePartner
+    .endm
 
 	.macro questmenu case:req, questId:req
     callnative ScrCmd_questmenu

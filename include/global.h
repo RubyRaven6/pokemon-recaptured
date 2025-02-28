@@ -546,6 +546,7 @@ struct FollowerMapData
     /*0x1*/ u8 number;
     /*0x2*/ u8 group;
 }; /* size = 0x4 */
+
 struct Follower
 {
     /*0x00*/ u8 inProgress:1;

@@ -248,6 +248,13 @@ static void Task_BattleStart(u8 taskId)
     case 1:
         if (IsBattleTransitionDone() == TRUE)
         {
+            // Load the partner party if the NPC follower should participate.
+            if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gSaveBlock2Ptr->follower.battlePartner)
+            {
+                SavePlayerParty();
+                gPartnerTrainerId = TRAINER_PARTNER(gSaveBlock2Ptr->follower.battlePartner);
+                FillPartnerParty(gPartnerTrainerId);
+            }
             CleanupOverworldWindowsAndTilemaps();
             SetMainCallback2(CB2_InitBattle);
             RestartWildEncounterImmunitySteps();
@@ -329,15 +336,12 @@ static void DoStandardWildBattle(bool32 isDouble)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
-    if (gSaveBlock2Ptr->follower.battlePartner && F_FLAG_PARTNER_WILD_BATTLES != 0
+    if (gSaveBlock2Ptr->follower.inProgress && gSaveBlock2Ptr->follower.battlePartner && F_FLAG_PARTNER_WILD_BATTLES != 0
      && (FlagGet(F_FLAG_PARTNER_WILD_BATTLES) || F_FLAG_PARTNER_WILD_BATTLES == ALWAYS))
     {
         gBattleTypeFlags |= BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_DOUBLE;
-        SavePlayerParty();
-        gPartnerTrainerId = TRAINER_PARTNER(gSaveBlock2Ptr->follower.battlePartner);
-        FillPartnerParty(gPartnerTrainerId);
     }
-    if (isDouble)
+    else if (isDouble)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     if (InBattlePyramid())
     {
@@ -1142,11 +1146,6 @@ void SetTrainerFacingDirection(void)
 u8 GetTrainerBattleMode(void)
 {
     return TRAINER_BATTLE_PARAM.mode;
-}
-
-bool8 GetFollowerPartner(void)
-{
-    return gSaveBlock2Ptr->follower.battlePartner;
 }
 
 bool8 GetTrainerFlag(void)

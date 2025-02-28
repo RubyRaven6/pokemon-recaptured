@@ -358,6 +358,8 @@ EventScript_UseDiveUnderwater::
 	msgbox Text_WantToSurface, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+	call FollowerIntoPlayerScript
+	callnative HideFollower
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndSurface
 	end
@@ -369,6 +371,7 @@ EventScript_CantSurface::
 	end
 
 EventScript_EndSurface::
+    callnative SetFollowerSurfSpriteAfterDive
 	releaseall
 	end
 
@@ -443,7 +446,7 @@ FollowerIntoPlayerScript::
 	callnative FollowerIntoPlayer
 	compare VAR_RESULT 0xFFFF
 	goto_if_eq FollowerPositionFixScriptReturn
-	setvar 0x8005 0xFE  @ follower
+	setvar 0x8005 0xFD  @ follower
 	call WalkCall
 	setvar 0x8000 0x1
 	callnative FollowerIntoPlayer

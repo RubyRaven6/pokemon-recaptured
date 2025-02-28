@@ -1,20 +1,31 @@
 #ifndef GUARD_CONSTANTS_FOLLOW_ME_H
 #define GUARD_CONSTANTS_FOLLOW_ME_H
 
-#define FOLLOWER_FLAG_HAS_RUNNING_FRAMES    0x1
-#define FOLLOWER_FLAG_CAN_LEAVE_ROUTE       0x4     // teleport, dig, fly, etc
-#define FOLLOWER_FLAG_CLEAR_ON_WHITE_OUT    0x80
+// Follow Me Flags
+#define FOLLOW_ME_FLAG_HAS_RUNNING_FRAMES    0x1
+#define FOLLOW_ME_FLAG_CAN_BIKE              0x2
+#define FOLLOW_ME_FLAG_CAN_LEAVE_ROUTE       0x4     // teleport, dig, fly, etc
+#define FOLLOW_ME_FLAG_CAN_SURF              0x8
+#define FOLLOW_ME_FLAG_CAN_WATERFALL         0x10
+#define FOLLOW_ME_FLAG_CAN_DIVE              0x20
+#define FOLLOW_ME_FLAG_CLEAR_ON_WHITE_OUT    0x80
 
-#define FOLLOWER_FLAG_ALL_LAND              FOLLOWER_FLAG_HAS_RUNNING_FRAMES | FOLLOWER_FLAG_CAN_LEAVE_ROUTE
-#define FOLLOWER_FLAG_ALL                   FOLLOWER_FLAG_ALL_LAND | FOLLOWER_FLAG_CLEAR_ON_WHITE_OUT
+#define FOLLOW_ME_FLAG_ALL_LAND              FOLLOW_ME_FLAG_HAS_RUNNING_FRAMES | FOLLOW_ME_FLAG_CAN_BIKE | FOLLOW_ME_FLAG_CAN_LEAVE_ROUTE
+#define FOLLOW_ME_FLAG_ALL_WATER             FOLLOW_ME_FLAG_CAN_SURF | FOLLOW_ME_FLAG_CAN_WATERFALL | FOLLOW_ME_FLAG_CAN_DIVE
+#define FOLLOW_ME_FLAG_ALL                   FOLLOW_ME_FLAG_ALL_LAND | FOLLOW_ME_FLAG_ALL_WATER | FOLLOW_ME_FLAG_CLEAR_ON_WHITE_OUT
 
-//For ease of use in setfollower macro while scripting
-#define RUNNING_FRAMES                      FOLLOWER_FLAG_HAS_RUNNING_FRAMES
-#define CAN_LEAVE_ROUTE                     FOLLOWER_FLAG_CAN_LEAVE_ROUTE       // teleport, dig, fly, etc
-#define CLEAR_ON_WHITE_OUT                  FOLLOWER_FLAG_CLEAR_ON_WHITE_OUT
+// Shorter flag names for ease of use in setfollower script macro
+#define FM_RUNNING                          FOLLOW_ME_FLAG_HAS_RUNNING_FRAMES
+#define FM_BIKE                             FOLLOW_ME_FLAG_CAN_BIKE
+#define FM_LEAVE_ROUTE                      FOLLOW_ME_FLAG_CAN_LEAVE_ROUTE
+#define FM_SURF                             FOLLOW_ME_FLAG_CAN_SURF
+#define FM_WATERFALL                        FOLLOW_ME_FLAG_CAN_WATERFALL
+#define FM_DIVE                             FOLLOW_ME_FLAG_CAN_DIVE
+#define FM_WHITE_OUT                        FOLLOW_ME_FLAG_CLEAR_ON_WHITE_OUT
 
-#define ALL_LAND                            FOLLOWER_FLAG_ALL_LAND
-#define FOLLOWER_ALL                        FOLLOWER_FLAG_ALL
+#define FM_ALL_LAND                         FOLLOW_ME_FLAG_ALL_LAND
+#define FM_ALL_WATER                        FOLLOW_ME_FLAG_ALL_WATER
+#define FM_ALL                              FOLLOW_ME_FLAG_ALL
 
 
 // Replace the 0 with a flag in order to use that flag to toggle whether the Player's party
@@ -36,14 +47,8 @@
 #define FACE_FOLLOWER_ON_DOOR_EXIT          TRUE
 
 
-
-// These flags are currently bugged and may cause the game to softlock.
-// They have been removed from all of the defines above.
-// Use at your own risk.
-#define FOLLOWER_FLAG_CAN_BIKE              0x2
-#define FOLLOWER_FLAG_CAN_SURF              0x8
-#define FOLLOWER_FLAG_CAN_WATERFALL         0x10
-#define FOLLOWER_FLAG_CAN_DIVE              0x20
+#define SIDEWAYS_STAIRS_IMPLEMENTED         FALSE
+#define POST_BATTLE_FOLLOWER_FIX            TRUE   //if you experience the follower de-syncing with the player after battle, set to TRUE
 
 
 #endif // GUARD_CONSTANTS_FOLLOW_ME_H

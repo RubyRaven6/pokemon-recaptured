@@ -176,6 +176,4 @@ static inline void Script_CheckEffectInstrumentedCallNative(void (*func)(struct 
         Script_GotoBreak_Internal();
 }
 
-u8* ReadWord(u8 index);
-
 #endif // GUARD_SCRIPT_H
