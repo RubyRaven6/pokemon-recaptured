@@ -912,3 +912,14 @@ const struct Tileset gTileset_DocksideCity =
     .metatileAttributes = gMetatileAttributes_DocksideCity,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_OasisTown_Indoors =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_OasisTown_Indoors,
+    .palettes = gTilesetPalettes_OasisTown_Indoors,
+    .metatiles = gMetatiles_OasisTown_Indoors,
+    .metatileAttributes = gMetatileAttributes_OasisTown_Indoors,
+    .callback = NULL,
+};

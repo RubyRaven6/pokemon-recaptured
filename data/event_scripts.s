@@ -1184,3 +1184,7 @@ EventScript_VsSeekerChargingDone::
 
 
 	.include "data/maps/OasisTown_PokemonCenter/scripts.inc"
+
+	.include "data/maps/OasisTown_House2/scripts.inc"
+
+	.include "data/maps/OasisTown_House3/scripts.inc"

@@ -37,7 +37,9 @@
 
 // gMapGroup_IndoorOasis
 #define MAP_OASIS_TOWN_HOUSE1         (0 | (3 << 8))
-#define MAP_OASIS_TOWN_POKEMON_CENTER (1 | (3 << 8))
+#define MAP_OASIS_TOWN_HOUSE2         (1 | (3 << 8))
+#define MAP_OASIS_TOWN_HOUSE3         (2 | (3 << 8))
+#define MAP_OASIS_TOWN_POKEMON_CENTER (3 | (3 << 8))
 
 // gMapGroup_Special
 #define MAP_DIANCIE_CAVE (0 | (4 << 8))

@@ -41,6 +41,8 @@
   ],
   "gMapGroup_IndoorOasis": [
     "OasisTown_House1",
+    "OasisTown_House2",
+    "OasisTown_House3",
     "OasisTown_PokemonCenter"
   ],
   "gMapGroup_Special": [

@@ -230,3 +230,6 @@ const u16 gMetatileAttributes_Recompiled_Pokemon_Center[] = INCBIN_U16("data/til
 
 const u16 gMetatiles_DocksideCity[] = INCBIN_U16("data/tilesets/secondary/dockside_city/metatiles.bin");
 const u16 gMetatileAttributes_DocksideCity[] = INCBIN_U16("data/tilesets/secondary/dockside_city/metatile_attributes.bin");
+
+const u16 gMetatiles_OasisTown_Indoors[] = INCBIN_U16("data/tilesets/secondary/oasistown_indoors/metatiles.bin");
+const u16 gMetatileAttributes_OasisTown_Indoors[] = INCBIN_U16("data/tilesets/secondary/oasistown_indoors/metatile_attributes.bin");

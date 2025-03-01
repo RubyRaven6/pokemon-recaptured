@@ -1785,3 +1785,22 @@ const u16 gTilesetPalettes_DocksideCity[][16] =
 };
 
 const u32 gTilesetTiles_DocksideCity[] = INCBIN_U32("data/tilesets/secondary/dockside_city/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_OasisTown_Indoors[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/oasistown_indoors/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_OasisTown_Indoors[] = INCBIN_U32("data/tilesets/secondary/oasistown_indoors/tiles.4bpp.lz");

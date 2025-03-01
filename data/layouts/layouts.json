@@ -4625,9 +4625,9 @@
       "id": "LAYOUT_OASIS_TOWN_HOUSE1",
       "name": "OasisTown_House1_Layout",
       "width": 10,
-      "height": 7,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GenericBuilding",
+      "height": 9,
+      "primary_tileset": "gTileset_Recompiled_Building",
+      "secondary_tileset": "gTileset_OasisTown_Indoors",
       "border_filepath": "data/layouts/OasisTown_House1/border.bin",
       "blockdata_filepath": "data/layouts/OasisTown_House1/map.bin"
     },
@@ -4640,6 +4640,26 @@
       "secondary_tileset": "gTileset_Recompiled_Pokemon_Center",
       "border_filepath": "data/layouts/OasisTown_PokemonCenter/border.bin",
       "blockdata_filepath": "data/layouts/OasisTown_PokemonCenter/map.bin"
+    },
+    {
+      "id": "LAYOUT_NEW_MAP1",
+      "name": "OasisTown_House2_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Recompiled_Building",
+      "secondary_tileset": "gTileset_OasisTown_Indoors",
+      "border_filepath": "data/layouts/OasisTown_House2/border.bin",
+      "blockdata_filepath": "data/layouts/OasisTown_House2/map.bin"
+    },
+    {
+      "id": "LAYOUT_OASIS_TOWN_HOUSE3",
+      "name": "OasisTown_House3_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Recompiled_Building",
+      "secondary_tileset": "gTileset_OasisTown_Indoors",
+      "border_filepath": "data/layouts/OasisTown_House3/border.bin",
+      "blockdata_filepath": "data/layouts/OasisTown_House3/map.bin"
     }
   ]
 }
