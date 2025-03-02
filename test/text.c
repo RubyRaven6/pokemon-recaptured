@@ -578,7 +578,7 @@ TEST("Battle strings fit on the battle message window")
     u8 boxName[9] = _("MMMMMMMM");                              // 54 pixels.
 
     // Set longest default player name, JOHNNY
-    NewGameBirchSpeech_SetDefaultPlayerName(10);  // JOHNNY
+    NewGameDiancieSpeech_SetDefaultPlayerName(10);  // JOHNNY
 
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_WOBBUFFET, 100;

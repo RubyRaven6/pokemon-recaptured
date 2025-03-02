@@ -1424,7 +1424,11 @@ static bool32 AccuracyCalcHelper(u32 move, u32 battler)
     // If the target is under the effects of Telekinesis, and the move isn't a OH-KO move, move hits.
     else if (gStatuses3[battler] & STATUS3_TELEKINESIS
           && !(gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
-          && gMovesInfo[move].effect != EFFECT_OHKO)
+          && moveEffect != EFFECT_OHKO)
+    {
+        effect = TRUE;
+    }
+    else if (gBattleStruct->battlerState[battler].pursuitTarget)
     {
         effect = TRUE;
     }
