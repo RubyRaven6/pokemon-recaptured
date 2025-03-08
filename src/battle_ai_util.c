@@ -686,19 +686,26 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
                                                      effectivenessMultiplier, weather,
                                                      aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
                                                      aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
+
+            nonCritDmg = ApplyModifiersAfterDmgRoll(nonCritDmg, &damageCalcData, effectivenessMultiplier,
+                                                    aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                                    aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
+
             damageCalcData.isCrit = TRUE;
             s32 critDmg = CalculateMoveDamageVars(&damageCalcData, fixedBasePower,
                                                   effectivenessMultiplier, weather,
                                                   aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
                                                   aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
 
-            u32 critOdds = GetCritHitOdds(critChanceIndex);
-            // With critOdds getting closer to 1, dmg gets closer to critDmg.
-            simDamage.expected = GetDamageByRollType((critDmg + nonCritDmg * (critOdds - 1)) / critOdds, rollType);
-            if (critOdds == 1)
-                simDamage.minimum = LowestRollDmg(critDmg);
-            else
-                simDamage.minimum = LowestRollDmg(nonCritDmg);
+            simDamage.expected = GetDamageByRollType(critDmg, rollType);
+            simDamage.expected = ApplyModifiersAfterDmgRoll(simDamage.expected, &damageCalcData, effectivenessMultiplier,
+                                                            aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                                            aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
+
+            simDamage.minimum = (GetCritHitOdds(critChanceIndex) == 1) ? LowestRollDmg(critDmg) : LowestRollDmg(nonCritDmg);
+            simDamage.minimum = ApplyModifiersAfterDmgRoll(simDamage.minimum, &damageCalcData, effectivenessMultiplier,
+                                                           aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                                           aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
         }
         else if (critChanceIndex == -2) // Guaranteed critical
         {
@@ -710,6 +717,14 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
 
             simDamage.expected = GetDamageByRollType(critDmg, rollType);
             simDamage.minimum = LowestRollDmg(critDmg);
+
+            simDamage.expected = ApplyModifiersAfterDmgRoll(simDamage.expected, &damageCalcData, effectivenessMultiplier,
+                                                            aiData->abilities[battlerAtk], aiData->abilities[battlerDef],
+                                                            aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef]);
+
+            simDamage.minimum = ApplyModifiersAfterDmgRoll(simDamage.minimum, &damageCalcData, effectivenessMultiplier,
+                                                           aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                                           aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
         }
         else
         {
@@ -718,10 +733,21 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
             {
                 for (gMultiHitCounter = GetMoveStrikeCount(move); gMultiHitCounter > 0; gMultiHitCounter--) // The global is used to simulate actual damage done
                 {
-                    nonCritDmg += CalculateMoveDamageVars(&damageCalcData, fixedBasePower,
-                                                          effectivenessMultiplier, weather,
-                                                          aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
-                                                          aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
+                    s32 oneTripleKickHit = CalculateMoveDamageVars(&damageCalcData, fixedBasePower,
+                                                                   effectivenessMultiplier, weather,
+                                                                   aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                                                   aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
+
+                    simDamage.expected = GetDamageByRollType(oneTripleKickHit, rollType);
+                    simDamage.minimum = LowestRollDmg(oneTripleKickHit);
+
+                    nonCritDmg += ApplyModifiersAfterDmgRoll(simDamage.expected, &damageCalcData, effectivenessMultiplier,
+                                                             aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                                             aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
+
+                    nonCritDmg += ApplyModifiersAfterDmgRoll(simDamage.minimum, &damageCalcData, effectivenessMultiplier,
+                                                             aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                                             aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
                 }
             }
             else
@@ -730,9 +756,18 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
                                                      effectivenessMultiplier, weather,
                                                      aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
                                                      aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
+
+                simDamage.expected = GetDamageByRollType(nonCritDmg, rollType);
+                simDamage.minimum = LowestRollDmg(nonCritDmg);
+
+                simDamage.expected = ApplyModifiersAfterDmgRoll(simDamage.expected, &damageCalcData, effectivenessMultiplier,
+                                                                aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                                                aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
+
+                simDamage.minimum = ApplyModifiersAfterDmgRoll(simDamage.minimum, &damageCalcData, effectivenessMultiplier,
+                                                               aiData->holdEffects[battlerAtk], aiData->holdEffects[battlerDef],
+                                                               aiData->abilities[battlerAtk], aiData->abilities[battlerDef]);
             }
-            simDamage.expected = GetDamageByRollType(nonCritDmg, rollType);
-            simDamage.minimum = LowestRollDmg(nonCritDmg);
         }
 
         if (GetActiveGimmick(battlerAtk) != GIMMICK_Z_MOVE)
@@ -3831,6 +3866,7 @@ static u32 IncreaseStatUpScoreInternal(u32 battlerAtk, u32 battlerDef, u32 statI
     u32 noOfHitsToFaint = NoOfHitsForTargetToFaintAI(battlerDef, battlerAtk);
     u32 aiIsFaster = AI_IsFaster(battlerAtk, battlerDef, TRUE);
     u32 shouldSetUp = ((noOfHitsToFaint >= 2 && aiIsFaster) || (noOfHitsToFaint >= 3 && !aiIsFaster) || noOfHitsToFaint == UNKNOWN_NO_OF_HITS);
+    u32 i;
 
     if (considerContrary && AI_DATA->abilities[battlerAtk] == ABILITY_CONTRARY)
         return NO_INCREASE;
@@ -3851,9 +3887,30 @@ static u32 IncreaseStatUpScoreInternal(u32 battlerAtk, u32 battlerDef, u32 statI
     if (AI_DATA->abilities[battlerDef] == ABILITY_OPPORTUNIST)
         return NO_INCREASE;
 
-    // If predicting switch, stat increases are great momentum
+    // Don't increase stats if opposing battler has Encore
+    if (HasMoveEffect(battlerDef, EFFECT_ENCORE))
+        return NO_INCREASE;
+
+    if (IsDoubleBattle() && HasMoveEffect(GetPartnerBattler(battlerDef), EFFECT_ENCORE))
+        return NO_INCREASE;
+
+    // Predicting switch
     if (IsBattlerPredictedToSwitch(battlerDef))
+    {
+        struct Pokemon *playerParty = GetBattlerParty(battlerDef);
+        // If expected switchin outspeeds and has Encore, don't increase
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (GetMoveEffect(GetMonData(&playerParty[AI_DATA->mostSuitableMonId[battlerDef]], MON_DATA_MOVE1 + i, NULL)) == EFFECT_ENCORE
+                && GetMonData(&playerParty[AI_DATA->mostSuitableMonId[battlerDef]], MON_DATA_PP1 + i, NULL) > 0);
+            {
+                if (GetMonData(&playerParty[AI_DATA->mostSuitableMonId[battlerDef]], MON_DATA_SPEED, NULL) > gBattleMons[battlerAtk].speed)
+                    return NO_INCREASE;
+            }   
+        }
+        // Otherwise if predicting switch, stat increases are great momentum
         tempScore += WEAK_EFFECT;
+    }
 
     switch (statId)
     {

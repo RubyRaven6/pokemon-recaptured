@@ -54,3 +54,4 @@ assign.cache
 *.smol
 *.fastSmol
 *.smolTM
+__pycache__
