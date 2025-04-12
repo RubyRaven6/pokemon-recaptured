@@ -17,6 +17,11 @@
     brew install coreutils
     ```
 
+4. **Optional: To run tests via Rosetta**
+    - You probably don't want to do this as it's much slower. Most users can use native tools, but some may have other reasons to use this setup such as working with Intel-only custom tooling.
+    - You will need an Intel-compatible homebrew installation. Understanding how to get one can be found [here](https://github.com/Homebrew/brew/issues/9173#issuecomment-729206868).
+    - Install `coreutils` like in step 3, but using your Intel-compatible installation of homebrew.
+
 ### Installing libpng (macOS)
 <details>
     <summary><i>Note for advanced users...</i></summary>
