@@ -2563,6 +2563,7 @@ void DebugMenu_CalculateTimeOfDay(struct ScriptContext *ctx)
             StringExpandPlaceholders(gStringVar1, sDebugText_TimeSkip_Morning);
             break;
         case 1: //Day
+        case 4: //TIME_OF_DAY; prevents breakage
             StringExpandPlaceholders(gStringVar1, sDebugText_TimeSkip_Day);
             break;
         case 2: //Evening
