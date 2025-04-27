@@ -61,10 +61,19 @@ void FakeRtc_AdvanceTimeBy(u32 days, u32 hours, u32 minutes, u32 seconds)
     ConvertDateTimeToRtc(rtc, &dateTime);
 }
 
-void FakeRtc_ManuallySetTime(u32 day, u32 hour, u32 minute, u32 second)
+void FakeRtc_ForwardTimeTo(u32 hour, u32 minute, u32 second)
 {
-    FakeRtc_Reset();
-    FakeRtc_AdvanceTimeBy(day, hour, minute, second);
+    Script_PauseFakeRtc();
+    struct Time diff, target;
+    struct SiiRtcInfo *fakeRtc = FakeRtc_GetCurrentTime();
+
+    target.hours = hour;
+    target.minutes = minute;
+    target.seconds = second;
+
+    FakeRtc_CalcTimeDifference(&diff, fakeRtc, &target);
+    FakeRtc_AdvanceTimeBy(0, diff.hours, diff.minutes, diff.seconds);
+    Script_ResumeFakeRtc();
 }
 
 static void FakeRtc_CalcTimeDifference(struct Time *result, struct SiiRtcInfo *t1, struct Time *t2)
@@ -91,6 +100,12 @@ static void FakeRtc_CalcTimeDifference(struct Time *result, struct SiiRtcInfo *t
         result->hours += HOURS_PER_DAY;
         --result->days;
     }
+}
+
+void FakeRtc_ManuallySetTime(u32 day, u32 hour, u32 minute, u32 second)
+{
+    FakeRtc_Reset();
+    FakeRtc_AdvanceTimeBy(day, hour, minute, second);
 }
 
 u32 FakeRtc_GetSecondsRatio(void)
@@ -124,21 +139,6 @@ void Script_ToggleFakeRtc(void)
     FlagToggle(OW_FLAG_PAUSE_TIME);
 }
 
-
-void FakeRtc_ForwardTimeTo(u32 hour, u32 minute, u32 second)
-{
-    Script_PauseFakeRtc();
-    struct Time diff, target;
-    struct SiiRtcInfo *fakeRtc = FakeRtc_GetCurrentTime();
-
-    target.hours = hour;
-    target.minutes = minute;
-    target.seconds = second;
-
-    FakeRtc_CalcTimeDifference(&diff, fakeRtc, &target);
-    FakeRtc_AdvanceTimeBy(0, diff.hours, diff.minutes, diff.seconds);
-    Script_ResumeFakeRtc();
-}
 
 bool8 ScrCmd_addtime(struct ScriptContext *ctx)
 {
