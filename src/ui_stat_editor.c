@@ -486,8 +486,8 @@ static void Task_StatEditorTurnOff(u8 taskId)
 }
 
 //
-//       Stat Editor Code
 //  End of UI setup code, beginning of stat editor specific code
+//       Stat Editor Code
 //
 static struct Pokemon *ReturnPartyMon()
 {
