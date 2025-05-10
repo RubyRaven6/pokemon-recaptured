@@ -36,19 +36,19 @@ script FlottTown_AbandonedGym_OnFrame{
     msgbox(format("Elsie decided to follow you!"), MSGBOX_DEFAULT)
     waitmessage
     closemessage
-    setfollower(LOCALID_ELSIE, FOLLOW_ME_FLAG_ALL_LAND, FlottTown_AbandonedGym_ElsieFollowerScript, 0)
+    setfollowernpc(LOCALID_ELSIE, FNPC_ALL_LAND, FlottTown_AbandonedGym_ElsieFollowerScript, 0)
     callnative(CallNativeForVariousPurposes)
     end
 }
 
 script FlottTown_AbandonedGym_LadderStopper{
-    applymovement(OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer)
+    applymovement(OBJ_EVENT_ID_NPC_FOLLOWER, Common_Movement_FacePlayer)
     speakername("Elsie")
     msgbox(FlottTown_AbandonedGym_Text_LetsStayUp, MSGBOX_DEFAULT)
     waitmessage
     closemessage
     applymovement(OBJ_EVENT_ID_PLAYER, WalkAway)
-    applymovement(OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer)
+    applymovement(OBJ_EVENT_ID_NPC_FOLLOWER, Common_Movement_FacePlayer)
 }
 
 script FlottTown_AbandonedGym_EventScript_FreePokeball{
@@ -73,7 +73,7 @@ script FlottTown_AbandonedGym_EventScript_GymCollapses{
     setmetatile(13, 18, METATILE_Cave_CrackedFloor, FALSE)
     setmetatile(14, 18, METATILE_Cave_CrackedFloor, FALSE)
     special(DrawWholeMapView)
-    applymovement(OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer)
+    applymovement(OBJ_EVENT_ID_FOLLOWER, Common_Movement_FacePlayer)
     speakername("Elsie")
     msgbox(format("{PLAYER}! Watch out!"))
     setmetatile(12, 17, METATILE_Cave_CrackedFloor_Hole, FALSE)
@@ -88,7 +88,7 @@ script FlottTown_AbandonedGym_EventScript_GymCollapses{
 }
 
 script FlottTown_AbandonedGym_ElsieFollowerScript{
-    facefollower
+    facefollowernpc
     if(var(VAR_FLOTT_TOWN_STATE) == 4){
         speakername("Elsie")
         msgbox(format("I wonder what's inside? There must be something interesting deeper in."))

@@ -4,7 +4,7 @@ FlottTown_FlottCave_MapScripts::
 	.byte 0
 
 FlottTown_FlottCave_MapScripts_MAP_SCRIPT_ON_TRANSITION:
-	destroyfollower
+	destroyfollowernpc
 	setflag FLAG_BARNEY_IN_CAVE
 	setflag FLAG_ELSIE_IN_CAVE
 	setflag FLAG_HIDE_MON0

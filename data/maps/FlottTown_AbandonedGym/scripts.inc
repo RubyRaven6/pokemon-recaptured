@@ -39,19 +39,19 @@ FlottTown_AbandonedGym_OnFrame::
 	msgbox FlottTown_AbandonedGym_OnFrame_Text_2, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
-	setfollower LOCALID_ELSIE, FOLLOW_ME_FLAG_ALL_LAND, FlottTown_AbandonedGym_ElsieFollowerScript, 0
+	setfollowernpc LOCALID_ELSIE, FNPC_ALL_LAND, FlottTown_AbandonedGym_ElsieFollowerScript, 0
 	callnative CallNativeForVariousPurposes
 	end
 
 
 FlottTown_AbandonedGym_LadderStopper::
-	applymovement OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer
+	applymovement OBJ_EVENT_ID_NPC_FOLLOWER, Common_Movement_FacePlayer
 	speakername FlottTown_AbandonedGym_OnFrame_Text_0
 	msgbox FlottTown_AbandonedGym_Text_LetsStayUp, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, WalkAway
-	applymovement OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer
+	applymovement OBJ_EVENT_ID_NPC_FOLLOWER, Common_Movement_FacePlayer
 	return
 
 
@@ -77,7 +77,7 @@ FlottTown_AbandonedGym_EventScript_GymCollapses::
 	setmetatile 13, 18, METATILE_Cave_CrackedFloor, FALSE
 	setmetatile 14, 18, METATILE_Cave_CrackedFloor, FALSE
 	special DrawWholeMapView
-	applymovement OBJ_EVENT_ID_FOLLOW_ME, Common_Movement_FacePlayer
+	applymovement OBJ_EVENT_ID_FOLLOWER, Common_Movement_FacePlayer
 	speakername FlottTown_AbandonedGym_OnFrame_Text_0
 	msgbox FlottTown_AbandonedGym_EventScript_GymCollapses_Text_0
 	setmetatile 12, 17, METATILE_Cave_CrackedFloor_Hole, FALSE
@@ -93,7 +93,7 @@ FlottTown_AbandonedGym_EventScript_GymCollapses::
 
 
 FlottTown_AbandonedGym_ElsieFollowerScript::
-	facefollower
+	facefollowernpc
 	compare VAR_FLOTT_TOWN_STATE, 4
 	goto_if_eq FlottTown_AbandonedGym_ElsieFollowerScript_1
 	speakername FlottTown_AbandonedGym_OnFrame_Text_0

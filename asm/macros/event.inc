@@ -1899,61 +1899,6 @@
 	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
 	.endm
 
-@ Follow Me
-
-	@ Sets an NPC up to follow the player.
-	@ If you want to specify a battle partner without specifying a custom script, you can set the script parameter to 0.
-    .macro setfollower localId:req, flags:req, script=0, battlePartner=0
-	checkfollower
-	goto_if_eq VAR_RESULT, TRUE, 1f
-	ballfollowingmon
-    callnative ScriptSetFollower
-	.if \script == 0
-		.set setScript, FALSE
-    .else
-		.set setScript, TRUE
-	.endif
-    .byte \localId
-    .2byte \flags
-	.byte setScript
-	.2byte \battlePartner
-	.4byte \script
-	updatefollowingmon
-	1:
-    .endm
-    
-    @ Remove the following NPC (assumes there will only ever be one).
-    .macro destroyfollower
-    callnative ScriptDestroyFollower
-    .endm
-    
-    @ Makes the player and follower face one another.
-    .macro facefollower
-    callnative ScriptFaceFollower
-    .endm
-    
-    @ Checks if you have a follower. returns the result to VAR_RESULT.
-    .macro checkfollower
-    callnative ScriptCheckFollower
-    .endm
-
-	@ Updates Pokemon follower.
-	.macro updatefollowingmon
-    callnative ScriptUpdateFollowingMon
-    .endm
-
-	@ Returns Pokemon follower to ball.
-	.macro ballfollowingmon
-	callnative ScriptBallFollowingMon
-	delay 16
-	.endm
-
-	@ Changes the battle partner of the existing follower.
-    .macro changefollowerbattler battlePartner:req
-    callnative ScriptChangeFollowerBattlePartner
-    .2byte \battlePartner
-    .endm
-
 	.macro questmenu case:req, questId:req
     callnative ScrCmd_questmenu
     .byte \case
@@ -2736,7 +2681,7 @@
 	callnative Script_SetDifficulty, requests_effects=1
 	.byte \difficulty
 	.endm
-    
+
 	.macro forcesave
 	callnative Script_ForceSaveGame
 	waitstate
@@ -2801,4 +2746,68 @@
 	.macro cant_see_if_ne, a:req, b:req
 	compare \a, \b
 	cant_see_if 5
+	.endm
+
+@ Follower NPCs
+
+	@ Sets an NPC up to follow the player.
+	@ Follower flags are defined in include/constants/follower_npc.h
+	@ If you want to specify a battle partner without specifying a custom script, you can set the script parameter to 0.
+	.macro setfollowernpc localId:req, flags:req, script=0, battlePartner=0
+	checkfollowernpc
+	goto_if_eq VAR_RESULT, TRUE, 1f
+	hidefollower
+	delay 16
+	callnative ScriptSetFollowerNPC
+	.if \script == 0
+		.set setScript, FALSE
+	.else
+		.set setScript, TRUE
+	.endif
+	.byte \localId
+	.2byte \flags
+	.byte setScript
+	.2byte \battlePartner
+	.4byte \script
+	updatefollowingmon
+	1:
+	.endm
+
+	@ Remove the follower NPC (assumes there will only ever be one).
+	.macro destroyfollowernpc
+	callnative ScriptDestroyFollowerNPC
+	.endm
+
+	@ Makes the player and follower NPC face one another.
+	.macro facefollowernpc
+	callnative ScriptFaceFollowerNPC
+	.endm
+
+	@ Makes the follower NPC walk into the player and get hidden.
+	@ Optionally, you can set the walk speed for the movement:
+	@ 0 = Slow
+	@ 1 = Normal (default)
+	@ 2 = Fast
+	@ 3 = Faster
+	.macro hidefollowernpc speed=1
+	callnative ScriptHideNPCFollower
+	.byte \speed
+	waitmovement OBJ_EVENT_ID_NPC_FOLLOWER
+	callnative HideNPCFollower
+	.endm
+
+	@ Checks if you have a follower NPC. Returns the result to VAR_RESULT.
+	.macro checkfollowernpc
+	callnative ScriptCheckFollowerNPC
+	.endm
+
+	@ Updates Pokemon follower.
+	.macro updatefollowingmon
+	callnative ScriptUpdateFollowingMon
+	.endm
+
+	@ Changes the battle partner of the existing follower NPC.
+	.macro changefollowerbattler battlePartner:req
+	callnative ScriptChangeFollowerNPCBattlePartner
+	.2byte \battlePartner
 	.endm
