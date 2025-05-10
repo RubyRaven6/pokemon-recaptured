@@ -126,16 +126,16 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     {
         .bg = 0,            // which bg to print text on
         .tilemapLeft = 1,   // position from left (per 8 pixels)
-        .tilemapTop = 0,    // position from top (per 8 pixels)
+        .tilemapTop = 1,    // position from top (per 8 pixels)
         .width = 30,        // width (per 8 pixels)
-        .height = 2,        // height (per 8 pixels)
+        .height = 3,        // height (per 8 pixels)
         .paletteNum = 15,   // palette index to use for text
         .baseBlock = 1,     // tile start in VRAM
     },
     [WINDOW_2] = 
     {
         .bg = 0,            // which bg to print text on
-        .tilemapLeft = 11,   // position from left (per 8 pixels)
+        .tilemapLeft = 10,   // position from left (per 8 pixels)
         .tilemapTop = 2,    // position from top (per 8 pixels)
         .width = 18,        // width (per 8 pixels)
         .height = 17,        // height (per 8 pixels)
@@ -495,7 +495,7 @@ static struct Pokemon *ReturnPartyMon()
 }
 
 #define MON_ICON_X     32 + 8
-#define MON_ICON_Y     32 + 24
+#define MON_ICON_Y     32 + 8
 static void SampleUi_DrawMonIcon(u16 dexNum)
 {
     u16 speciesId = dexNum;
@@ -584,13 +584,13 @@ static void PrintTitleToWindowMainState()
 {
     FillWindowPixelBuffer(WINDOW_1, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     
-    AddTextPrinterParameterized4(WINDOW_1, FONT_NORMAL, 1, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Stat Editor"));
+    //AddTextPrinterParameterized4(WINDOW_1, FONT_NORMAL, 1, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Stat Editor"));
 
     BlitBitmapToWindow(WINDOW_1, sR_ButtonGfx, 75, (BUTTON_Y), 24, 8);
-    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 102, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Cycle Party"));
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 102, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Cycle Party"));
 
-    BlitBitmapToWindow(WINDOW_1, sA_ButtonGfx, 160, (BUTTON_Y), 8, 8);
-    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 172, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Edit Stats"));
+    BlitBitmapToWindow(WINDOW_1, sA_ButtonGfx, 162, (BUTTON_Y), 8, 8);
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 172, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Edit Stats"));
 
     PutWindowTilemap(WINDOW_1);
     CopyWindowToVram(WINDOW_1, 3);
@@ -600,13 +600,13 @@ static void PrintTitleToWindowEditState()
 {
     FillWindowPixelBuffer(WINDOW_1, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     
-    AddTextPrinterParameterized4(WINDOW_1, FONT_NORMAL, 1, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Stat Editor"));
+    //AddTextPrinterParameterized4(WINDOW_1, FONT_NORMAL, 1, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Stat Editor"));
 
     BlitBitmapToWindow(WINDOW_1, sDPad_ButtonGfx, 75, (BUTTON_Y), 24, 8);
     AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 102, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Change Stat"));
 
-    BlitBitmapToWindow(WINDOW_1, sB_ButtonGfx, 160, (BUTTON_Y), 8, 8);
-    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 172, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Back"));
+    BlitBitmapToWindow(WINDOW_1, sB_ButtonGfx, 165, (BUTTON_Y), 8, 8);
+    AddTextPrinterParameterized4(WINDOW_1, FONT_NARROW, 177, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, COMPOUND_STRING("Back"));
 
     PutWindowTilemap(WINDOW_1);
     CopyWindowToVram(WINDOW_1, 3);
@@ -629,10 +629,10 @@ static void PrintMonStats()
     sStatEditorDataPtr->evTotal = 0;
     sStatEditorDataPtr->ivTotal = 0;
 
-    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 18, 7, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Stat"));
-    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X - 6, 7, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Actual"));
-    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + SECOND_COLUMN + 4, 7, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("EV"));
-    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + THIRD_COLUMN + 5, 7, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("IV"));
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 18, 7, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("Stat"));
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X - 6, 7, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("Actual"));
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + SECOND_COLUMN + 4, 7, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("EV"));
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + THIRD_COLUMN + 5, 7, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("IV"));
 
     AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 12, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 0), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("HP"));
     AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 12, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 1), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Attack"));
@@ -685,11 +685,11 @@ static void PrintMonStats()
 
     StringCopy(gStringVar2, GetSpeciesName(sStatEditorDataPtr->speciesID));
 
-    AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 2, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("Lv.{CLEAR 1}{STR_VAR_1}"));
-    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 18, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 17, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
 
     StringCopy(text, gText_MaleSymbol);
     if (gender != MON_GENDERLESS)
@@ -698,15 +698,15 @@ static void PrintMonStats()
             StringCopy(text, gText_FemaleSymbol);
         else
             StringCopy(text, gText_MaleSymbol);
-        AddTextPrinterParameterized4(WINDOW_3, FONT_NORMAL, 41 + 8, 19, 0, 0, sGenderColors[(gender == MON_FEMALE)], TEXT_SKIP_DRAW, text);
+        AddTextPrinterParameterized4(WINDOW_3, FONT_NORMAL, 41 + 8, 17, 0, 0, sGenderColors[(gender == MON_FEMALE)], TEXT_SKIP_DRAW, text);
     }
 
     nature = GetNature(ReturnPartyMon());
     StringCopy(gStringVar2, gNaturesInfo[nature].name);
-    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 50, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 49, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     StringCopy(gStringVar2, gAbilitiesInfo[gSpeciesInfo[sStatEditorDataPtr->speciesID].abilities[GetMonData(ReturnPartyMon(), MON_DATA_ABILITY_NUM)]].name);
-    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROWER, 4, 34, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROWER, 4, 33, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     PutWindowTilemap(WINDOW_3);
     CopyWindowToVram(WINDOW_3, 3);
