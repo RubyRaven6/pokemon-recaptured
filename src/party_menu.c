@@ -406,7 +406,6 @@ static void DisplayCantUseSurfMessage(void);
 static void Task_FieldMoveExitAreaYesNo(u8);
 static void Task_HandleFieldMoveExitAreaYesNoInput(u8);
 static void Task_FieldMoveWaitForFade(u8);
-static void Task_HideFollowerForTeleport(u8);
 static u16 GetFieldMoveMonSpecies(void);
 static void UpdatePartyMonHPBar(u8, struct Pokemon *);
 static void SpriteCB_UpdatePartyMonIcon(struct Sprite *);
