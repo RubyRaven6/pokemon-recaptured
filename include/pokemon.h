@@ -166,6 +166,7 @@ struct PokemonSubstruct2
     u8 speedEV;
     u8 spAttackEV;
     u8 spDefenseEV;
+    //u8 unassignedEV;
     u8 cool;
     u8 beauty;
     u8 cute;
