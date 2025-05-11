@@ -507,7 +507,7 @@ static void SampleUi_DrawMonIcon(u16 dexNum)
 static u8 CreateSelector()
 {
     if (sStatEditorDataPtr->selectorSpriteId == 0xFF)
-        sStatEditorDataPtr->selectorSpriteId = CreateSprite(&sSpriteTemplate_Selector, 188, 30, 0);
+        sStatEditorDataPtr->selectorSpriteId = CreateSprite(&sSpriteTemplate_Selector, 183, 30, 0);
 
     gSprites[sStatEditorDataPtr->selectorSpriteId].invisible = FALSE;
     StartSpriteAnim(&gSprites[sStatEditorDataPtr->selectorSpriteId], 0);
@@ -723,12 +723,12 @@ struct SpriteCordsStruct {
 static void SelectorCallback(struct Sprite *sprite)
 {
     struct SpriteCordsStruct spriteCords[6][2] = {
-        {{188, 30 + 20}, {220, 30 + 20}},
-        {{188, 46 + 20}, {220, 46 + 20}},
-        {{188, 62 + 20}, {220, 62 + 20}},
-        {{188, 78 + 20}, {220, 78 + 20}},
-        {{188, 94 + 20}, {220, 94 + 20}},
-        {{188, 110 + 20}, {220, 110 + 20}}, // Thanks Jaizu
+        {{183, 30 + 20},  {215, 30 + 20}},
+        {{183, 46 + 20},  {215, 46 + 20}},
+        {{183, 62 + 20},  {215, 62 + 20}},
+        {{183, 78 + 20},  {215, 78 + 20}},
+        {{183, 94 + 20},  {215, 94 + 20}},
+        {{183, 110 + 20}, {215, 110 + 20}}, // Thanks Jaizu
     };
 
     if(sStatEditorDataPtr->inputMode == INPUT_EDIT_STAT)
