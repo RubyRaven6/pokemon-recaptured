@@ -1763,6 +1763,7 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     SetMonData(mon, field, &n);                                 \
 }
 
+// 
 void CalculateMonStats(struct Pokemon *mon)
 {
     s32 oldMaxHP = GetMonData(mon, MON_DATA_MAX_HP, NULL);
@@ -1782,6 +1783,7 @@ void CalculateMonStats(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
     s32 level = GetLevelFromMonExp(mon);
+    u32 levelEVs = GetEVsForMonLevel(level);
     s32 newMaxHP;
 
     u8 nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE, NULL);
@@ -1825,6 +1827,129 @@ void CalculateMonStats(struct Pokemon *mon)
         currentHP = newMaxHP;
 
     SetMonData(mon, MON_DATA_HP, &currentHP);
+}
+
+u32 CalculateEvYield (s32 level)
+{     
+    if (level < 71 && (level % 10) == 0)
+        return 5;
+    else
+        return 1;
+}
+
+u32 GetEVsForMonLevel(s32 level) /* doesnt make mudskip cry */
+{
+    u32 cappedLevel = min(level, 70);
+    u32 numberOf10s = cappedLevel / 10;
+    u32 numberOfNon10s = level - numberOf10s;
+
+    u32 levelEvs = numberOf10s * 5 + numberOfNon10s * 1;
+
+    return levelEvs;
+}
+
+void DebugPrinter(void)
+{
+    DebugPrintf("Level 1: %u", GetEVsForMonLevel(1));
+    DebugPrintf("Level 2: %u", GetEVsForMonLevel(2));
+    DebugPrintf("Level 3: %u", GetEVsForMonLevel(3));
+    DebugPrintf("Level 4: %u", GetEVsForMonLevel(4));
+    DebugPrintf("Level 5: %u", GetEVsForMonLevel(5));
+    DebugPrintf("Level 6: %u", GetEVsForMonLevel(6));
+    DebugPrintf("Level 7: %u", GetEVsForMonLevel(7));
+    DebugPrintf("Level 8: %u", GetEVsForMonLevel(8));
+    DebugPrintf("Level 9: %u", GetEVsForMonLevel(9));
+    DebugPrintf("Level 10: %u", GetEVsForMonLevel(10));
+    DebugPrintf("Level 11: %u", GetEVsForMonLevel(11));
+    DebugPrintf("Level 12: %u", GetEVsForMonLevel(12));
+    DebugPrintf("Level 13: %u", GetEVsForMonLevel(13));
+    DebugPrintf("Level 14: %u", GetEVsForMonLevel(14));
+    DebugPrintf("Level 15: %u", GetEVsForMonLevel(15));
+    DebugPrintf("Level 16: %u", GetEVsForMonLevel(16));
+    DebugPrintf("Level 17: %u", GetEVsForMonLevel(17));
+    DebugPrintf("Level 18: %u", GetEVsForMonLevel(18));
+    DebugPrintf("Level 19: %u", GetEVsForMonLevel(19));
+    DebugPrintf("Level 20: %u", GetEVsForMonLevel(20));
+    DebugPrintf("Level 21: %u", GetEVsForMonLevel(21));
+    DebugPrintf("Level 22: %u", GetEVsForMonLevel(22));
+    DebugPrintf("Level 23: %u", GetEVsForMonLevel(23));
+    DebugPrintf("Level 24: %u", GetEVsForMonLevel(24));
+    DebugPrintf("Level 25: %u", GetEVsForMonLevel(25));
+    DebugPrintf("Level 26: %u", GetEVsForMonLevel(26));
+    DebugPrintf("Level 27: %u", GetEVsForMonLevel(27));
+    DebugPrintf("Level 28: %u", GetEVsForMonLevel(28));
+    DebugPrintf("Level 29: %u", GetEVsForMonLevel(29));
+    DebugPrintf("Level 30: %u", GetEVsForMonLevel(30));
+    DebugPrintf("Level 31: %u", GetEVsForMonLevel(31));
+    DebugPrintf("Level 32: %u", GetEVsForMonLevel(32));
+    DebugPrintf("Level 33: %u", GetEVsForMonLevel(33));
+    DebugPrintf("Level 34: %u", GetEVsForMonLevel(34));
+    DebugPrintf("Level 35: %u", GetEVsForMonLevel(35));
+    DebugPrintf("Level 36: %u", GetEVsForMonLevel(36));
+    DebugPrintf("Level 37: %u", GetEVsForMonLevel(37));
+    DebugPrintf("Level 38: %u", GetEVsForMonLevel(38));
+    DebugPrintf("Level 39: %u", GetEVsForMonLevel(39));
+    DebugPrintf("Level 40: %u", GetEVsForMonLevel(40));
+    DebugPrintf("Level 41: %u", GetEVsForMonLevel(41));
+    DebugPrintf("Level 42: %u", GetEVsForMonLevel(42));
+    DebugPrintf("Level 43: %u", GetEVsForMonLevel(43));
+    DebugPrintf("Level 44: %u", GetEVsForMonLevel(44));
+    DebugPrintf("Level 45: %u", GetEVsForMonLevel(45));
+    DebugPrintf("Level 46: %u", GetEVsForMonLevel(46));
+    DebugPrintf("Level 47: %u", GetEVsForMonLevel(47));
+    DebugPrintf("Level 48: %u", GetEVsForMonLevel(48));
+    DebugPrintf("Level 49: %u", GetEVsForMonLevel(49));
+    DebugPrintf("Level 50: %u", GetEVsForMonLevel(50));
+    DebugPrintf("Level 51: %u", GetEVsForMonLevel(51));
+    DebugPrintf("Level 52: %u", GetEVsForMonLevel(52));
+    DebugPrintf("Level 53: %u", GetEVsForMonLevel(53));
+    DebugPrintf("Level 54: %u", GetEVsForMonLevel(54));
+    DebugPrintf("Level 55: %u", GetEVsForMonLevel(55));
+    DebugPrintf("Level 56: %u", GetEVsForMonLevel(56));
+    DebugPrintf("Level 57: %u", GetEVsForMonLevel(57));
+    DebugPrintf("Level 58: %u", GetEVsForMonLevel(58));
+    DebugPrintf("Level 59: %u", GetEVsForMonLevel(59));
+    DebugPrintf("Level 60: %u", GetEVsForMonLevel(60));
+    DebugPrintf("Level 61: %u", GetEVsForMonLevel(61));
+    DebugPrintf("Level 62: %u", GetEVsForMonLevel(62));
+    DebugPrintf("Level 63: %u", GetEVsForMonLevel(63));
+    DebugPrintf("Level 64: %u", GetEVsForMonLevel(64));
+    DebugPrintf("Level 65: %u", GetEVsForMonLevel(65));
+    DebugPrintf("Level 66: %u", GetEVsForMonLevel(66));
+    DebugPrintf("Level 67: %u", GetEVsForMonLevel(67));
+    DebugPrintf("Level 68: %u", GetEVsForMonLevel(68));
+    DebugPrintf("Level 69: %u", GetEVsForMonLevel(69));
+    DebugPrintf("Level 70: %u", GetEVsForMonLevel(70));
+    DebugPrintf("Level 71: %u", GetEVsForMonLevel(71));
+    DebugPrintf("Level 72: %u", GetEVsForMonLevel(72));
+    DebugPrintf("Level 73: %u", GetEVsForMonLevel(73));
+    DebugPrintf("Level 74: %u", GetEVsForMonLevel(74));
+    DebugPrintf("Level 75: %u", GetEVsForMonLevel(75));
+    DebugPrintf("Level 76: %u", GetEVsForMonLevel(76));
+    DebugPrintf("Level 77: %u", GetEVsForMonLevel(77));
+    DebugPrintf("Level 78: %u", GetEVsForMonLevel(78));
+    DebugPrintf("Level 79: %u", GetEVsForMonLevel(79));
+    DebugPrintf("Level 80: %u", GetEVsForMonLevel(80));
+    DebugPrintf("Level 81: %u", GetEVsForMonLevel(81));
+    DebugPrintf("Level 82: %u", GetEVsForMonLevel(82));
+    DebugPrintf("Level 83: %u", GetEVsForMonLevel(83));
+    DebugPrintf("Level 84: %u", GetEVsForMonLevel(84));
+    DebugPrintf("Level 85: %u", GetEVsForMonLevel(85));
+    DebugPrintf("Level 86: %u", GetEVsForMonLevel(86));
+    DebugPrintf("Level 87: %u", GetEVsForMonLevel(87));
+    DebugPrintf("Level 88: %u", GetEVsForMonLevel(88));
+    DebugPrintf("Level 89: %u", GetEVsForMonLevel(89));
+    DebugPrintf("Level 90: %u", GetEVsForMonLevel(90));
+    DebugPrintf("Level 91: %u", GetEVsForMonLevel(91));
+    DebugPrintf("Level 92: %u", GetEVsForMonLevel(92));
+    DebugPrintf("Level 93: %u", GetEVsForMonLevel(93));
+    DebugPrintf("Level 94: %u", GetEVsForMonLevel(94));
+    DebugPrintf("Level 95: %u", GetEVsForMonLevel(95));
+    DebugPrintf("Level 96: %u", GetEVsForMonLevel(96));
+    DebugPrintf("Level 97: %u", GetEVsForMonLevel(97));
+    DebugPrintf("Level 98: %u", GetEVsForMonLevel(98));
+    DebugPrintf("Level 99: %u", GetEVsForMonLevel(99));
+    DebugPrintf("Level 100: %u", GetEVsForMonLevel(100));
 }
 
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest)
@@ -5419,7 +5544,8 @@ void MonGainEVs(struct Pokemon *mon, u16 defeatedSpecies)
 
         evs[i] += evIncrease;
         totalEVs += evIncrease;
-        SetMonData(mon, MON_DATA_HP_EV + i, &evs[i]);
+        u32 noEVs = 0;
+        SetMonData(mon, MON_DATA_HP_EV + i, &noEVs);
     }
 }
 
