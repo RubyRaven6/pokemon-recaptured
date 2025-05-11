@@ -146,9 +146,9 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     {
         .bg = 0,            // which bg to print text on
         .tilemapLeft = 1,   // position from left (per 8 pixels)
-        .tilemapTop = 11,    // position from top (per 8 pixels)
+        .tilemapTop = 9,    // position from top (per 8 pixels)
         .width = 8,        // width (per 8 pixels)
-        .height = 9,        // height (per 8 pixels)
+        .height = 11,        // height (per 8 pixels)
         .paletteNum = 15,   // palette index to use for text
         .baseBlock = 1 + 70 + 306,     // tile start in VRAM
     },
@@ -683,13 +683,15 @@ static void PrintMonStats()
 
     // Print ability / nature / name / level / gender
 
+    AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{FONT_NARROW}Free EVs"));
+    
     StringCopy(gStringVar2, GetSpeciesName(sStatEditorDataPtr->speciesID));
 
-    AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 16, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("Lv.{CLEAR 1}{STR_VAR_1}"));
-    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 17, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 33, 0, 0, sMenuWindowFontColors[FONT_WHITE], TEXT_SKIP_DRAW, gStringVar2);
 
     StringCopy(text, gText_MaleSymbol);
     if (gender != MON_GENDERLESS)
@@ -698,15 +700,15 @@ static void PrintMonStats()
             StringCopy(text, gText_FemaleSymbol);
         else
             StringCopy(text, gText_MaleSymbol);
-        AddTextPrinterParameterized4(WINDOW_3, FONT_NORMAL, 41 + 8, 17, 0, 0, sGenderColors[(gender == MON_FEMALE)], TEXT_SKIP_DRAW, text);
+        AddTextPrinterParameterized4(WINDOW_3, FONT_NORMAL, 41 + 8, 33, 0, 0, sGenderColors[(gender == MON_FEMALE)], TEXT_SKIP_DRAW, text);
     }
 
     nature = GetNature(ReturnPartyMon());
     StringCopy(gStringVar2, gNaturesInfo[nature].name);
-    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 49, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 65, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     StringCopy(gStringVar2, gAbilitiesInfo[gSpeciesInfo[sStatEditorDataPtr->speciesID].abilities[GetMonData(ReturnPartyMon(), MON_DATA_ABILITY_NUM)]].name);
-    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROWER, 4, 32, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROWER, 4, 48, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     PutWindowTilemap(WINDOW_3);
     CopyWindowToVram(WINDOW_3, 3);
