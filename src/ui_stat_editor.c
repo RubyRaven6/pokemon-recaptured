@@ -128,7 +128,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .tilemapLeft = 1,   // position from left (per 8 pixels)
         .tilemapTop = 1,    // position from top (per 8 pixels)
         .width = 30,        // width (per 8 pixels)
-        .height = 3,        // height (per 8 pixels)
+        .height = 2,        // height (per 8 pixels)
         .paletteNum = 15,   // palette index to use for text
         .baseBlock = 1,     // tile start in VRAM
     },
@@ -136,7 +136,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
     {
         .bg = 0,            // which bg to print text on
         .tilemapLeft = 10,   // position from left (per 8 pixels)
-        .tilemapTop = 2,    // position from top (per 8 pixels)
+        .tilemapTop = 3,    // position from top (per 8 pixels)
         .width = 18,        // width (per 8 pixels)
         .height = 17,        // height (per 8 pixels)
         .paletteNum = 15,   // palette index to use for text
@@ -526,7 +526,7 @@ static void DestroySelector()
 #define SECOND_COLUMN ((8 * 4))
 #define THIRD_COLUMN ((8 * 8))
 #define STARTING_X 60
-#define STARTING_Y 26
+#define STARTING_Y 18
 
 struct MonPrintData {
     u16 x;
@@ -629,10 +629,10 @@ static void PrintMonStats()
     sStatEditorDataPtr->evTotal = 0;
     sStatEditorDataPtr->ivTotal = 0;
 
-    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 18, 7, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("Stat"));
-    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X - 6, 7, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("Actual"));
-    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + SECOND_COLUMN + 4, 7, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("EV"));
-    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + THIRD_COLUMN + 5, 7, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("IV"));
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 18, 0, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("Stat"));
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X - 6, 0, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("Actual"));
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + SECOND_COLUMN + 4, 0, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("EV"));
+    AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, STARTING_X + THIRD_COLUMN + 5, 0, 0, 0, sMenuWindowFontColors[FONT_BLACK], 0xFF, COMPOUND_STRING("IV"));
 
     AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 12, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 0), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("HP"));
     AddTextPrinterParameterized4(WINDOW_2, FONT_NARROW, 12, STARTING_Y + (DISTANCE_BETWEEN_STATS_Y * 1), 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Attack"));
@@ -685,7 +685,7 @@ static void PrintMonStats()
 
     StringCopy(gStringVar2, GetSpeciesName(sStatEditorDataPtr->speciesID));
 
-    AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 1, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     ConvertIntToDecimalStringN(gStringVar1, level, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar2, COMPOUND_STRING("Lv.{CLEAR 1}{STR_VAR_1}"));
@@ -706,7 +706,7 @@ static void PrintMonStats()
     AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROW, 4, 49, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     StringCopy(gStringVar2, gAbilitiesInfo[gSpeciesInfo[sStatEditorDataPtr->speciesID].abilities[GetMonData(ReturnPartyMon(), MON_DATA_ABILITY_NUM)]].name);
-    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROWER, 4, 33, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
+    AddTextPrinterParameterized4(WINDOW_3, FONT_SMALL_NARROWER, 4, 32, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     PutWindowTilemap(WINDOW_3);
     CopyWindowToVram(WINDOW_3, 3);
