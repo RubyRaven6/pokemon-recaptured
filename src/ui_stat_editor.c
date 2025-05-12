@@ -844,8 +844,9 @@ static void Task_StatEditorMain(u8 taskId) // input control when first loaded in
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_StatEditorTurnOff;
     }
-    if (JOY_NEW(DPAD_LEFT) || JOY_NEW(DPAD_RIGHT))
+    if ((JOY_NEW(DPAD_LEFT) || JOY_NEW(DPAD_RIGHT)) && FlagGet(FLAG_SANDBOX_MODE))
     {
+        DebugPrintf("Its here now");
         if(sStatEditorDataPtr->selector_x == 0)
             sStatEditorDataPtr->selector_x = 1;
         else
