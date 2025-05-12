@@ -58,6 +58,7 @@ struct StatEditorResources
     u16 selector_y;
     u32 editingStat;
     u16 normalTotal;
+    u16 unallocatedEVs;
     u16 evTotal;
     u16 ivTotal;
     u16 partyid;
@@ -66,6 +67,13 @@ struct StatEditorResources
 
 #define INPUT_SELECT_STAT 0
 #define INPUT_EDIT_STAT 1
+
+#define HP_STAT 0
+#define ATK_STAT 1
+#define DEF_STAT 2
+#define SPE_STAT 3
+#define SPATK_STAT 4
+#define SPDEF_STAT 5
 
 enum WindowIds
 {
@@ -511,7 +519,6 @@ static u8 CreateSelector()
 
     gSprites[sStatEditorDataPtr->selectorSpriteId].invisible = FALSE;
     StartSpriteAnim(&gSprites[sStatEditorDataPtr->selectorSpriteId], 0);
-    DebugPrintf("Sprite ID: %d", sStatEditorDataPtr->selectorSpriteId);
     return sStatEditorDataPtr->selectorSpriteId;
 }
 
@@ -571,7 +578,6 @@ static const u16 statsToPrintEVs[] = {
 static const u16 statsToPrintIVs[] = {
         MON_DATA_HP_IV, MON_DATA_ATK_IV, MON_DATA_DEF_IV, MON_DATA_SPEED_IV, MON_DATA_SPATK_IV, MON_DATA_SPDEF_IV,
 };
-
 
 static const u8 sGenderColors[2][3] =
 {
@@ -647,7 +653,6 @@ static void PrintMonStats()
     {
         currentStat = GetMonData(ReturnPartyMon(), statsToPrintActual[i]);
         sStatEditorDataPtr->normalTotal += currentStat;
-        DebugPrintf("Stat: %d", currentStat);
         ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
         AddTextPrinterParameterized4(WINDOW_2, 1, StatPrintData[statsToPrintActual[i]].x, StatPrintData[statsToPrintActual[i]].y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
     }
@@ -656,7 +661,6 @@ static void PrintMonStats()
     {
         currentStat = GetMonData(ReturnPartyMon(), statsToPrintEVs[i]);
         sStatEditorDataPtr->evTotal += currentStat;
-        DebugPrintf("Stat: %d", currentStat);
         ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
         AddTextPrinterParameterized4(WINDOW_2, 1, StatPrintData[statsToPrintEVs[i]].x, StatPrintData[statsToPrintEVs[i]].y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
     }
@@ -665,10 +669,17 @@ static void PrintMonStats()
     {
         currentStat = GetMonData(ReturnPartyMon(), statsToPrintIVs[i]);
         sStatEditorDataPtr->ivTotal += currentStat;
-        DebugPrintf("Stat: %d", currentStat);
         ConvertIntToDecimalStringN(gStringVar2, currentStat, STR_CONV_MODE_RIGHT_ALIGN, 3);
         AddTextPrinterParameterized4(WINDOW_2, 1, StatPrintData[statsToPrintIVs[i]].x, StatPrintData[statsToPrintIVs[i]].y, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
     }
+
+    //Prints unallocated EVs
+
+    sStatEditorDataPtr->unallocatedEVs = GetEVsForMonLevel(level) - sStatEditorDataPtr->evTotal;
+ 
+    ConvertIntToDecimalStringN(gStringVar2, sStatEditorDataPtr->unallocatedEVs, STR_CONV_MODE_RIGHT_ALIGN, 3);
+
+    AddTextPrinterParameterized4(WINDOW_3, FONT_NORMAL, 44, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, gStringVar2);
 
     // Calc Totals
     ConvertIntToDecimalStringN(gStringVar2, sStatEditorDataPtr->normalTotal, STR_CONV_MODE_RIGHT_ALIGN, 4);
@@ -683,7 +694,7 @@ static void PrintMonStats()
 
     // Print ability / nature / name / level / gender
 
-    AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 4, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("{FONT_NARROW}Free EVs"));
+    AddTextPrinterParameterized4(WINDOW_3, FONT_NARROW, 3, 0, 0, 0, sMenuWindowFontColors[FONT_WHITE], 0xFF, COMPOUND_STRING("Free EVs"));
     
     StringCopy(gStringVar2, GetSpeciesName(sStatEditorDataPtr->speciesID));
 
@@ -756,8 +767,6 @@ static void SelectorCallback(struct Sprite *sprite)
 
     sprite->x = spriteCords[sStatEditorDataPtr->selector_y][sStatEditorDataPtr->selector_x].x;
     sprite->y = spriteCords[sStatEditorDataPtr->selector_y][sStatEditorDataPtr->selector_x].y;
-
-    DebugPrintf("%d", sStatEditorDataPtr->selectedStat);
 }
 
 static const u16 selectedStatToStatEnum[] = {
@@ -949,12 +958,12 @@ static void HandleEditingStatInput(u32 input)
         case EDIT_INPUT_MAX_INCREASE_STATE:
             if((sStatEditorDataPtr->selector_x == EDITING_EVS))
             {
-                if (EV_MAX_TOTAL - sStatEditorDataPtr->evTotal < EV_MAX_SINGLE_STAT)
+                if (EV_MAX_TOTAL - sStatEditorDataPtr->evTotal < min(MAX_PER_STAT_EVS, sStatEditorDataPtr->unallocatedEVs))
                     sStatEditorDataPtr->editingStat += EV_MAX_TOTAL - sStatEditorDataPtr->evTotal;
                 else
-                    sStatEditorDataPtr->editingStat = EV_MAX_SINGLE_STAT;
-                if(sStatEditorDataPtr->editingStat > EV_MAX_SINGLE_STAT)
-                    sStatEditorDataPtr->editingStat = EV_MAX_SINGLE_STAT;
+                    sStatEditorDataPtr->editingStat = min(MAX_PER_STAT_EVS, sStatEditorDataPtr->unallocatedEVs);
+                if(sStatEditorDataPtr->editingStat > min(MAX_PER_STAT_EVS, sStatEditorDataPtr->unallocatedEVs))
+                    sStatEditorDataPtr->editingStat = min(MAX_PER_STAT_EVS, sStatEditorDataPtr->unallocatedEVs);
             }
             else
             {
