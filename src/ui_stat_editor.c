@@ -906,9 +906,9 @@ static void ChangeAndUpdateStat()
 #define EDIT_INPUT_MAX_DECREASE_STATE       3
 
 #define STAT_MINIMUM          0  
-#define IV_MAX_SINGLE_STAT    MAX_PER_STAT_IVS  
-#define EV_MAX_SINGLE_STAT    MAX_PER_STAT_EVS   
-#define EV_MAX_TOTAL          MAX_TOTAL_EVS            
+#define IV_MAX_SINGLE_STAT    MAX_PER_STAT_IVS //31
+#define EV_MAX_SINGLE_STAT    MAX_PER_STAT_EVS //63
+#define EV_MAX_TOTAL          MAX_TOTAL_EVS // 128
                 
 #define EDITING_EVS     0
 #define EDITING_IVS     1
