@@ -374,7 +374,6 @@ static void BuildNormalStartMenu(void)
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
         
-    //AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     
@@ -393,8 +392,9 @@ static void BuildDebugStartMenu(void)
     if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEMON);
     AddStartMenuAction(MENU_ACTION_BAG);
-    if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
-        AddStartMenuAction(MENU_ACTION_POKENAV);
+    if (FlagGet(FLAG_SYS_QUEST_MENU_GET))
+        AddStartMenuAction(MENU_ACTION_QUEST_MENU);
+    AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);

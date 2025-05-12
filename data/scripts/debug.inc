@@ -17,9 +17,9 @@ Debug_CheatStart::
 	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setvar VAR_BIRCH_LAB_STATE, 2
 	setvar VAR_ROUTE101_STATE, 3
-	givemon SPECIES_TREECKO, 20, ITEM_NONE
-	givemon SPECIES_TORCHIC, 20, ITEM_NONE
-	givemon SPECIES_MUDKIP, 20, ITEM_NONE
+	givemon SPECIES_NACLI, 20, ITEM_NONE
+	givemon SPECIES_TINKATINK, 20, ITEM_NONE
+	givemon SPECIES_MANKEY, 20, ITEM_NONE
 	setflag FLAG_SYS_POKEDEX_GET
 	special SetUnlockedPokedexFlags
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
@@ -142,8 +142,13 @@ Debug_EventScript_Script_1::
 	end
 
 Debug_EventScript_Script_2::
-	release
-	end
+	goto_if_set FLAG_SANDBOX_MODE, Debug_EventScript_Script_2_1
+	setflag FLAG_SANDBOX_MODE
+	return
+
+Debug_EventScript_Script_2_1:
+	clearflag FLAG_SANDBOX_MODE
+	return
 
 Debug_EventScript_Script_3::
 	release
