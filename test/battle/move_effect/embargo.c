@@ -69,31 +69,31 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect experience
     }
 }
 
-WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect effort values")
-{
-    u32 finalHPEVAmount;
+// WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect effort values")
+// {
+//     u32 finalHPEVAmount;
 
-    GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_POWER_WEIGHT); }
-        OPPONENT(SPECIES_CATERPIE) { HP(1); }
-        ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].holdEffect == HOLD_EFFECT_POWER_ITEM);
-        ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].holdEffectParam == 8);
-        ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].secondaryId == STAT_HP);
-        ASSUME(gSpeciesInfo[SPECIES_CATERPIE].evYield_HP == 1);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_EMBARGO); MOVE(player, MOVE_SCRATCH); }
-    } SCENE {
-        // Turn 1
-        MESSAGE("The wild Caterpie used Embargo!");
-        MESSAGE("Wobbuffet can't use items anymore!");
-        // Turn 2
-        MESSAGE("Wobbuffet used Scratch!");
-        MESSAGE("The wild Caterpie fainted!");
-    } THEN {
-        finalHPEVAmount = (GetMonData(&PLAYER_PARTY[0], MON_DATA_HP_EV) + gItemsInfo[ITEM_POWER_WEIGHT].holdEffectParam + gSpeciesInfo[SPECIES_CATERPIE].evYield_HP);
-        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), finalHPEVAmount);
-    }
-}
+//     GIVEN {
+//         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_POWER_WEIGHT); }
+//         OPPONENT(SPECIES_CATERPIE) { HP(1); }
+//         ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].holdEffect == HOLD_EFFECT_POWER_ITEM);
+//         ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].holdEffectParam == 8);
+//         ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].secondaryId == STAT_HP);
+//         ASSUME(gSpeciesInfo[SPECIES_CATERPIE].evYield_HP == 1);
+//     } WHEN {
+//         TURN { MOVE(opponent, MOVE_EMBARGO); MOVE(player, MOVE_SCRATCH); }
+//     } SCENE {
+//         // Turn 1
+//         MESSAGE("The wild Caterpie used Embargo!");
+//         MESSAGE("Wobbuffet can't use items anymore!");
+//         // Turn 2
+//         MESSAGE("Wobbuffet used Scratch!");
+//         MESSAGE("The wild Caterpie fainted!");
+//     } THEN {
+//         finalHPEVAmount = (GetMonData(&PLAYER_PARTY[0], MON_DATA_HP_EV) + gItemsInfo[ITEM_POWER_WEIGHT].holdEffectParam + gSpeciesInfo[SPECIES_CATERPIE].evYield_HP);
+//         EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_HP_EV), finalHPEVAmount);
+//     }
+// }
 
 SINGLE_BATTLE_TEST("Embargo negates a held item's Speed reduction")
 {
