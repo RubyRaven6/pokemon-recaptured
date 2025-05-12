@@ -913,8 +913,11 @@ static void ChangeAndUpdateStat()
 #define EDITING_EVS     0
 #define EDITING_IVS     1
 
-#define CHECK_IF_STAT_CANT_INCREASE (((sStatEditorDataPtr->editingStat == ((sStatEditorDataPtr->selector_x == EDITING_EVS) ? (EV_MAX_SINGLE_STAT) : (IV_MAX_SINGLE_STAT))) \
-                                     || ((sStatEditorDataPtr->selector_x == EDITING_EVS) && (sStatEditorDataPtr->evTotal == EV_MAX_TOTAL))))
+#define LABEL_A (sStatEditorDataPtr->editingStat == ((sStatEditorDataPtr->selector_x == EDITING_EVS) ? (EV_MAX_SINGLE_STAT) : (IV_MAX_SINGLE_STAT)))
+#define LABEL_B (sStatEditorDataPtr->selector_x == EDITING_EVS)
+#define LABEL_C (sStatEditorDataPtr->evTotal == EV_MAX_TOTAL)
+
+#define CHECK_IF_STAT_CANT_INCREASE ((LABEL_A || (LABEL_B && LABEL_C)))
 
 static void HandleEditingStatInput(u32 input)
 {
@@ -950,7 +953,7 @@ static void HandleEditingStatInput(u32 input)
         case EDIT_INPUT_INCREASE_STATE:
             for (iterator = 0; iterator < INCREASE_DECREASE_AMOUNT; iterator++)
             {
-                if(!CHECK_IF_STAT_CANT_INCREASE)
+                if ((sStatEditorDataPtr->unallocatedEVs > 0 && sStatEditorDataPtr->editingStat < MAX_PER_STAT_EVS) || LABEL_A)
                     sStatEditorDataPtr->editingStat++;
                 else
                     break;
@@ -959,12 +962,7 @@ static void HandleEditingStatInput(u32 input)
         case EDIT_INPUT_MAX_INCREASE_STATE:
             if((sStatEditorDataPtr->selector_x == EDITING_EVS))
             {
-                if (EV_MAX_TOTAL - sStatEditorDataPtr->evTotal < min(MAX_PER_STAT_EVS, sStatEditorDataPtr->unallocatedEVs))
-                    sStatEditorDataPtr->editingStat += EV_MAX_TOTAL - sStatEditorDataPtr->evTotal;
-                else
-                    sStatEditorDataPtr->editingStat = min(MAX_PER_STAT_EVS, sStatEditorDataPtr->unallocatedEVs);
-                if(sStatEditorDataPtr->editingStat > min(MAX_PER_STAT_EVS, sStatEditorDataPtr->unallocatedEVs))
-                    sStatEditorDataPtr->editingStat = min(MAX_PER_STAT_EVS, sStatEditorDataPtr->unallocatedEVs);
+                sStatEditorDataPtr->editingStat = min(MAX_PER_STAT_EVS, sStatEditorDataPtr->unallocatedEVs + GetMonData(ReturnPartyMon(),  selectedStatToStatEnum[sStatEditorDataPtr->selectedStat]));
             }
             else
             {
@@ -993,9 +991,9 @@ static void Task_MenuEditingStat(u8 taskId) // This function should be refactore
         PrintTitleToWindowMainState();
         return;
     }
-    if (JOY_NEW(DPAD_LEFT))
+    if (JOY_NEW(DPAD_LEFT) || JOY_HELD(DPAD_LEFT))
         HandleEditingStatInput(EDIT_INPUT_DECREASE_STATE);
-    else if (JOY_NEW(DPAD_RIGHT))
+    else if (JOY_NEW(DPAD_RIGHT) || JOY_HELD(DPAD_RIGHT))
         HandleEditingStatInput(EDIT_INPUT_INCREASE_STATE);
     else if (JOY_NEW(DPAD_UP) || JOY_NEW(R_BUTTON))
         HandleEditingStatInput(EDIT_INPUT_MAX_INCREASE_STATE);
