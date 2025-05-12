@@ -953,7 +953,7 @@ static void HandleEditingStatInput(u32 input)
         case EDIT_INPUT_INCREASE_STATE:
             for (iterator = 0; iterator < INCREASE_DECREASE_AMOUNT; iterator++)
             {
-                if ((sStatEditorDataPtr->unallocatedEVs > 0 && sStatEditorDataPtr->editingStat < MAX_PER_STAT_EVS) || LABEL_A)
+                if ((sStatEditorDataPtr->unallocatedEVs > 0 || sStatEditorDataPtr->selector_x) && (sStatEditorDataPtr->editingStat < (sStatEditorDataPtr->selector_x ? IV_MAX_SINGLE_STAT : EV_MAX_SINGLE_STAT)))
                     sStatEditorDataPtr->editingStat++;
                 else
                     break;
