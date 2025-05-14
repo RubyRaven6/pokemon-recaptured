@@ -1126,7 +1126,7 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
     // items info
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (GetBattlerSide(i) == B_SIDE_PLAYER && IsBattlerAlive(i))
+        if (IsOnPlayerSide(i) && IsBattlerAlive(i))
         {
             u16 ability = AI_DATA->abilities[i];
             enum ItemHoldEffect holdEffect = AI_DATA->holdEffects[i];
@@ -1213,7 +1213,7 @@ static void Task_ShowAiKnowledge(u8 taskId)
         LoadMonIconPalettes();
         for (count = 0, i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
-            if (GetBattlerSide(i) == B_SIDE_PLAYER && IsBattlerAlive(i))
+            if (IsOnPlayerSide(i) && IsBattlerAlive(i))
             {
                 data->spriteIds.aiIconSpriteIds[i] = CreateMonIcon(gBattleMons[i].species,
                                                          SpriteCallbackDummy,
@@ -2482,7 +2482,7 @@ static const u8 *const sHoldEffectNames[] =
     [HOLD_EFFECT_CRITICAL_UP] = sText_HoldEffectCriticalUp,
     [HOLD_EFFECT_RANDOM_STAT_UP] = sText_HoldEffectRandomStatUp,
     [HOLD_EFFECT_EVASION_UP] = sText_HoldEffectEvasionUp,
-    [HOLD_EFFECT_RESTORE_STATS] = sText_HoldEffectRestoreStats,
+    [HOLD_EFFECT_WHITE_HERB] = sText_HoldEffectRestoreStats,
     [HOLD_EFFECT_MACHO_BRACE] = sText_HoldEffectMachoBrace,
     [HOLD_EFFECT_EXP_SHARE] = sText_HoldEffectExpShare,
     [HOLD_EFFECT_QUICK_CLAW] = sText_HoldEffectQuickClaw,
