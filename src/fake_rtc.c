@@ -138,19 +138,3 @@ void Script_ToggleFakeRtc(void)
 
     FlagToggle(OW_FLAG_PAUSE_TIME);
 }
-
-void PrintTimesIntoMgbaPrintf(void)
-{
-    struct SiiRtcInfo *rtc = FakeRtc_GetCurrentTime();
-    MgbaPrintf(MGBA_LOG_WARN, "gLocalTime Set");
-    MgbaPrintf(MGBA_LOG_WARN, " ");
-    MgbaPrintf(MGBA_LOG_WARN, "%u", gLocalTime.days);
-    MgbaPrintf(MGBA_LOG_WARN, "%u", gLocalTime.hours);
-    MgbaPrintf(MGBA_LOG_WARN, "%u", gLocalTime.minutes);
-
-    MgbaPrintf(MGBA_LOG_WARN, "Fake RTC Set");
-    MgbaPrintf(MGBA_LOG_WARN, " ");
-    MgbaPrintf(MGBA_LOG_WARN, "days: %u", rtc->day);
-    MgbaPrintf(MGBA_LOG_WARN, "hours: %u", rtc->hour);
-    MgbaPrintf(MGBA_LOG_WARN, "minutes: %u", rtc->minute);
-}
