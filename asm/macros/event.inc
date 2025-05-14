@@ -2513,10 +2513,11 @@
 
 	@ Adds a specified number of days to the time. 
 	.macro adddays days:req
-	callnative ScrCmd_adddays
+	callnative ScrCmd_adddays, requests_effects=1
 	.4byte \days
 	.endm
-	@ When OW_USE_FAKE_RTC is true, adds a specified number of days, hours, and minutes to the time. 
+
+	@ Adds a specified number of days, hours, and minutes to the time. 
 	.macro addhours hours:req
 	callnative ScrCmd_addhours, requests_effects=1
 	.4byte \hours
@@ -2530,6 +2531,7 @@
 
 	@ Forwards the time to a specified hour and minute. 
 	@ This causes the time to go to the next day if the time has already been past. 
+	.macro fwdtime hours:req, minutes:req
 	callnative ScrCmd_fwdtime, requests_effects=1
 	.4byte \hours
 	.4byte \minutes
@@ -2538,11 +2540,21 @@
 	@ Forwards the time to a specified day of the week. Uses a 0-index starting from Monday.
 	@ This causes the time to go to the next day if the time has already been past. 
 	.macro fwdweekday weekday:req
+	callnative ScrCmd_fwdweekday, requests_effects=1
+	.4byte \weekday
 	.endm
 
+	@DebugPrintF macro
+	.macro debugprint str:req, numOrVar=65535
+	callnative ScrCmd_debugprint
+	.4byte \str
+	.2byte \numOrVar
+	.endm
+	
 	@ ============================ @
 	@ ITEM DESCRIPTION HEADER MACROS
 	@ Used with OW_SHOW_ITEM_DESCRIPTIONS config
+	.macro showitemdescription
 	callnative ScriptShowItemDescription, requests_effects=1
 	.byte 0
 	.endm
