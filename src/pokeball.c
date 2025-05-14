@@ -1298,6 +1298,32 @@ void CreatePokeballSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, 
     gSprites[monSpriteId].invisible = TRUE;
 }
 
+void CreateKababallSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subpriority, u8 delay, u32 fadePalettes, u16 species)
+{
+    u8 spriteId;
+
+    LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[BALL_KABA]);
+    LoadSpritePalette(&gBallSpritePalettes[BALL_KABA]);
+    spriteId = CreateSprite(&gBallSpriteTemplates[BALL_KABA], x, y, subpriority);
+
+    gSprites[spriteId].sMonSpriteId = monSpriteId;
+    gSprites[spriteId].sFinalMonX = gSprites[monSpriteId].x;
+    gSprites[spriteId].sFinalMonY = gSprites[monSpriteId].y;
+
+    gSprites[monSpriteId].x = x;
+    gSprites[monSpriteId].y = y;
+    gSprites[monSpriteId].sSpecies = species;
+
+    gSprites[spriteId].sDelay = delay;
+    gSprites[spriteId].sMonPalNum = monPalNum;
+    gSprites[spriteId].sFadePalsLo = fadePalettes;
+    gSprites[spriteId].sFadePalsHi = fadePalettes >> 16;
+    gSprites[spriteId].oam.priority = oamPriority;
+    gSprites[spriteId].callback = SpriteCB_PokeballReleaseMon;
+
+    gSprites[monSpriteId].invisible = TRUE;
+}
+
 static void SpriteCB_PokeballReleaseMon(struct Sprite *sprite)
 {
     if (sprite->sDelay == 0)
@@ -1391,6 +1417,23 @@ u8 CreateTradePokeballSprite(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPri
     LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[BALL_POKE]);
     LoadSpritePalette(&gBallSpritePalettes[BALL_POKE]);
     spriteId = CreateSprite(&gBallSpriteTemplates[BALL_POKE], x, y, subPriority);
+    gSprites[spriteId].sMonSpriteId = monSpriteId;
+    gSprites[spriteId].sDelay = delay;
+    gSprites[spriteId].sMonPalNum = monPalNum;
+    gSprites[spriteId].sFadePalsLo = fadePalettes;
+    gSprites[spriteId].sFadePalsHi = fadePalettes >> 16;
+    gSprites[spriteId].oam.priority = oamPriority;
+    gSprites[spriteId].callback = SpriteCB_TradePokeball;
+    return spriteId;
+}
+
+u8 CreateIntroPokeballSprite(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPriority, u8 subPriority, u8 delay, u32 fadePalettes)
+{
+    u8 spriteId;
+
+    LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[BALL_KABA]);
+    LoadSpritePalette(&gBallSpritePalettes[BALL_KABA]);
+    spriteId = CreateSprite(&gBallSpriteTemplates[BALL_KABA], x, y, subPriority);
     gSprites[spriteId].sMonSpriteId = monSpriteId;
     gSprites[spriteId].sDelay = delay;
     gSprites[spriteId].sMonPalNum = monPalNum;
