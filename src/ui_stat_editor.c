@@ -916,7 +916,18 @@ static void ChangeAndUpdateStat()
 #define LABEL_A (sStatEditorDataPtr->editingStat == ((sStatEditorDataPtr->selector_x == EDITING_EVS) ? (EV_MAX_SINGLE_STAT) : (IV_MAX_SINGLE_STAT)))
 #define LABEL_B (sStatEditorDataPtr->selector_x == EDITING_EVS)
 #define LABEL_C (sStatEditorDataPtr->evTotal == EV_MAX_TOTAL)
-
+/*
+Breakdown of CHECK_IF_STAT_CANT_INCREASE
+TLDR: Stat can't increase if you're either: at the maximum amount a stat can have (for both EVs and IVs), or for EVs, if you already hit the max total of EVs
+    | (sStatEditorDataPtr->editingStat == ((sStatEditorDataPtr->selector_x == EDITING_EVS) ? (EV_MAX_SINGLE_STAT) : (IV_MAX_SINGLE_STAT))
+    \> This part checks if the current stat being raised is already at max, whether it's an EV or IV
+    | (sStatEditorDataPtr->selector_x == EDITING_EVS)
+    \> This part checks if you're currently editing an EV
+    | (sStatEditorDataPtr->evTotal == EV_MAX_TOTAL)
+    \> This part checks if the Pokémon already has the max amount of evs
+    | ((sStatEditorDataPtr->selector_x == EDITING_EVS) && (sStatEditorDataPtr->evTotal == EV_MAX_TOTAL))
+    \> Together, these two check if you're editing an EV and already at the maximum amount of EVs
+*/
 #define CHECK_IF_STAT_CANT_INCREASE ((LABEL_A || (LABEL_B && LABEL_C)))
 
 static void HandleEditingStatInput(u32 input)
