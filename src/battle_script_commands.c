@@ -16946,6 +16946,35 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
         *expAmount = (*expAmount * 4915) / 4096;
     if (CheckBagHasItem(ITEM_EXP_CHARM, 1)) //is also for other exp boosting Powers if/when implemented
         *expAmount = (*expAmount * 150) / 100;
+    
+    u8 sum = 0;
+    int i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+
+        if (species != SPECIES_EGG && species != SPECIES_NONE)
+        {
+            sum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+        }
+    }
+
+    u8 average = sum / gPlayerPartyCount;
+    u8 expGetterLevel = GetMonData(&gPlayerParty[expGetterMonId], MON_DATA_LEVEL);
+    uq4_12_t multiplier = 0;
+
+    if (expGetterLevel < GetPreviousLevelCap() - 15) {
+      multiplier = UQ_4_12(2.5);
+    } else if (expGetterLevel < GetPreviousLevelCap()) {
+      multiplier = UQ_4_12(2.0);
+    } else if (expGetterLevel < GetCurrentLevelCap()) {
+      multiplier = UQ_4_12(1.0);
+    }
+
+    *expAmount += ((*expAmount * multiplier) + average) / 100;
+
+    DebugPrintf("*expAmount %d", *expAmount);
 
     if (B_SCALED_EXP >= GEN_5 && B_SCALED_EXP != GEN_6)
     {
@@ -16953,7 +16982,6 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
         //       because of multiplying by scaling factor(the value would simply be larger than an u32 can hold). Hence u64 is needed.
         u64 value = *expAmount;
         u8 faintedLevel = gBattleMons[faintedBattler].level;
-        u8 expGetterLevel = GetMonData(&gPlayerParty[expGetterMonId], MON_DATA_LEVEL);
 
         value *= sExperienceScalingFactors[(faintedLevel * 2) + 10];
         value /= sExperienceScalingFactors[faintedLevel + expGetterLevel + 10];

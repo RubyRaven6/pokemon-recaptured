@@ -4,30 +4,51 @@
 #include "caps.h"
 #include "pokemon.h"
 
+const struct LevelCaps {
+    u16 flag;
+    u16 levelCap;
+} gLevelCapFlagMap[] = {
+    {FLAG_BADGE01_GET, 15},
+    {FLAG_BADGE02_GET, 19},
+    {FLAG_BADGE03_GET, 24},
+    {FLAG_BADGE04_GET, 29},
+    {FLAG_BADGE05_GET, 31},
+    {FLAG_BADGE06_GET, 33},
+    {FLAG_BADGE07_GET, 42},
+    {FLAG_BADGE08_GET, 46},
+    {FLAG_IS_CHAMPION, 58},
+};
 
 u32 GetCurrentLevelCap(void)
 {
-    static const u32 sLevelCapFlagMap[][2] =
-    {
-        {FLAG_BADGE01_GET, 15},
-        {FLAG_BADGE02_GET, 19},
-        {FLAG_BADGE03_GET, 24},
-        {FLAG_BADGE04_GET, 29},
-        {FLAG_BADGE05_GET, 31},
-        {FLAG_BADGE06_GET, 33},
-        {FLAG_BADGE07_GET, 42},
-        {FLAG_BADGE08_GET, 46},
-        {FLAG_IS_CHAMPION, 58},
-    };
-
     u32 i;
 
     if (B_LEVEL_CAP_TYPE == LEVEL_CAP_FLAG_LIST)
     {
-        for (i = 0; i < ARRAY_COUNT(sLevelCapFlagMap); i++)
+        for (i = 0; i < ARRAY_COUNT(gLevelCapFlagMap); i++)
         {
-            if (!FlagGet(sLevelCapFlagMap[i][0]))
-                return sLevelCapFlagMap[i][1];
+            if (!FlagGet(gLevelCapFlagMap[i].flag))
+                return gLevelCapFlagMap[i].levelCap;
+        }
+    }
+    else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
+    {
+        return VarGet(B_LEVEL_CAP_VARIABLE);
+    }
+
+    return MAX_LEVEL;
+}
+
+u32 GetPreviousLevelCap(void)
+{
+    u32 i;
+
+    if (B_LEVEL_CAP_TYPE == LEVEL_CAP_FLAG_LIST)
+    {
+        for (i = 0; i < ARRAY_COUNT(gLevelCapFlagMap); i++)
+        {
+            if (!FlagGet(gLevelCapFlagMap[i].flag))
+                return gLevelCapFlagMap[i - 1].levelCap;
         }
     }
     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
