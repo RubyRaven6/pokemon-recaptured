@@ -1077,7 +1077,11 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             default:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
                 gPlttBufferFaded[0] = RGB_BLACK;
-                DoKabaSpeech();
+                //DoKabaSpeech();
+                NewGameDiancieSpeech_SetDefaultPlayerName(0);
+                gSaveBlock2Ptr->playerGender = FEMALE;
+                SetMainCallback2(CB2_NewGame);
+                
                 DestroyTask(taskId);
                 
                 //gTasks[taskId].func = Task_NewGameDiancieSpeech_Init;
