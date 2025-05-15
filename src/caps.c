@@ -47,7 +47,9 @@ u32 GetPreviousLevelCap(void)
     {
         for (i = 0; i < ARRAY_COUNT(gLevelCapFlagMap); i++)
         {
-            if (!FlagGet(gLevelCapFlagMap[i].flag))
+            if (!FlagGet(gLevelCapFlagMap[0].flag))
+                return gLevelCapFlagMap[0].levelCap;
+            else if (!FlagGet(gLevelCapFlagMap[i].flag))
                 return gLevelCapFlagMap[i - 1].levelCap;
         }
     }

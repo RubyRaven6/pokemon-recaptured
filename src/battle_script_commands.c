@@ -16701,7 +16701,7 @@ static bool32 CriticalCapture(u32 odds)
     else if (numCaught <= (totalDexCount * 150) / 650)
         odds /= 2;
     else if (numCaught <= (totalDexCount * 300) / 650)
-        ;   // odds = (odds * 100) / 100;
+        ;   // odds = odds / 100;
     else if (numCaught <= (totalDexCount * 450) / 650)
         odds = (odds * 150) / 100;
     else if (numCaught <= (totalDexCount * 600) / 650)
@@ -16934,7 +16934,9 @@ u8 GetFirstFaintedPartyIndex(u8 battler)
 
 void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler)
 {
+    DebugPrintf("*expAmount1 %d", *expAmount);
     enum ItemHoldEffect holdEffect = GetMonHoldEffect(&gPlayerParty[expGetterMonId]);
+    u8 expGetterLevel = GetMonData(&gPlayerParty[expGetterMonId], MON_DATA_LEVEL);
 
     if (IsTradedMon(&gPlayerParty[expGetterMonId]))
         *expAmount = (*expAmount * 150) / 100;
@@ -16946,6 +16948,8 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
         *expAmount = (*expAmount * 4915) / 4096;
     if (CheckBagHasItem(ITEM_EXP_CHARM, 1)) //is also for other exp boosting Powers if/when implemented
         *expAmount = (*expAmount * 150) / 100;
+    
+    DebugPrintf("*expAmount2 %d", *expAmount);
     
     u8 sum = 0;
     int i;
@@ -16960,21 +16964,39 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
         }
     }
 
-    u8 average = sum / gPlayerPartyCount;
-    u8 expGetterLevel = GetMonData(&gPlayerParty[expGetterMonId], MON_DATA_LEVEL);
-    uq4_12_t multiplier = 0;
+    u8 average = (sum / gPlayerPartyCount);
 
+    if (expGetterLevel < average - 10)
+        *expAmount = *expAmount * 6;
+    else if (expGetterLevel < average - 5)
+        *expAmount = *expAmount * 3;
+    else if (expGetterLevel < average)
+        *expAmount = (*expAmount * 150) / 100;
+    
+    DebugPrintf("*expAmount3 %d", *expAmount);
+    DebugPrintf("*average %u", (average));
+    //uq4_12_t multiplier = 0;
+    // if (expGetterLevel < GetPreviousLevelCap() - 15) {
+    //   multiplier = UQ_4_12(2.5);
+    // } else if (expGetterLevel < GetPreviousLevelCap()) {
+    //   multiplier = UQ_4_12(2.0);
+    // } else if (expGetterLevel < GetCurrentLevelCap()) {
+    //   multiplier = UQ_4_12(1.0);
+    // }
+
+    DebugPrintf("GetPreviousLevelCap() %u", GetPreviousLevelCap());
+    DebugPrintf("GetCurrentLevelCap() %u", GetCurrentLevelCap());
+    
     if (expGetterLevel < GetPreviousLevelCap() - 15) {
-      multiplier = UQ_4_12(2.5);
+        *expAmount = (*expAmount * 250) / 100; // * 2.5
     } else if (expGetterLevel < GetPreviousLevelCap()) {
-      multiplier = UQ_4_12(2.0);
+        *expAmount = *expAmount * 2;
     } else if (expGetterLevel < GetCurrentLevelCap()) {
-      multiplier = UQ_4_12(1.0);
+        *expAmount = *expAmount; // * 1.0
     }
+    //DebugPrintf("*expAmount %u", multiplier);
 
-    *expAmount += ((*expAmount * multiplier) + average) / 100;
-
-    DebugPrintf("*expAmount %d", *expAmount);
+    DebugPrintf("*expAmount4 %d", *expAmount);
 
     if (B_SCALED_EXP >= GEN_5 && B_SCALED_EXP != GEN_6)
     {
@@ -16987,6 +17009,7 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
         value /= sExperienceScalingFactors[faintedLevel + expGetterLevel + 10];
 
         *expAmount = value + 1;
+        DebugPrintf("*expAmount %d", *expAmount);
     }
 }
 
