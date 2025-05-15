@@ -671,7 +671,7 @@ static void Task_KabaSpeech_Begin(u8 taskId)
             gMain.state = 0;
             return;
     }
-    DebugPrintf("state: %d", gMain.state);
+    //DebugPrintf("state: %d", gMain.state);
     gMain.state++;
 }
 
@@ -864,7 +864,7 @@ static void Task_KabaSpeech_WaitForPlayerMugshotChoice(u8 taskId)
             blend1 |
             BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BG3 |
             BLDCNT_EFFECT_BLEND);
-        DebugPrintf("%d is chosen", sKabaSpeech->chosenMugshot);
+        //DebugPrintf("%d is chosen", sKabaSpeech->chosenMugshot);
         sKabaSpeech->counter = 0;
         KabaSpeech_BeginFade(TRUE, 0, (sKabaSpeech->chosenMugshot == MUGSHOT_AO) ? SPRITE_TYPE_MUGSHOT_2 : SPRITE_TYPE_MUGSHOT_1);
         gTasks[taskId].func = Task_KabaSpeech_MoveChosenMugshot;
@@ -1317,7 +1317,7 @@ static void KabaSpeech_BeginFade(u8 fadeOut, u8 delay, u8 spriteType)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(bldTarget1, bldTarget2));
     SetGpuReg(REG_OFFSET_BLDY, 0);
 
-    DebugPrintf("fadeOut: %d", fadeOut);
+    //DebugPrintf("fadeOut: %d", fadeOut);
     taskId = CreateTask(fadeOut ? Task_KabaSpeech_FadeOut : Task_KabaSpeech_FadeIn, 0);
     gTasks[taskId].tSpriteType = spriteType;
 }
@@ -1451,6 +1451,6 @@ static void CB2_KabaSpeech_ReturnFromNamingScreen(void)
             return;
         }
     }
-    DebugPrintf("state: %d", gMain.state);
+    //DebugPrintf("state: %d", gMain.state);
     gMain.state++;
 }
