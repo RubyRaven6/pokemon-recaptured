@@ -79,7 +79,7 @@ static u16 GetBattlerPokeballItemId(u8 battlerId);
 #define GFX_TAG_KABA_BALL    55028
 
 static const u32 sBallGfx_Kaba[] = INCBIN_U32("graphics/kaba_speech/intro_ball.4bpp.lz");
-static const u32 sBallPal_Kaba[] = INCBIN_U32("graphics/kaba_speech/intro_ball.gbapal.lz");
+static const u16 sBallPal_Kaba[] = INCBIN_U16("graphics/kaba_speech/intro_ball.gbapal");
 
 const struct CompressedSpriteSheet gBallSpriteSheets[] =
 {
@@ -114,7 +114,7 @@ const struct CompressedSpriteSheet gBallSpriteSheets[] =
     [BALL_KABA]    = {sBallGfx_Kaba,   1536, GFX_TAG_KABA_BALL},
 };
 
-const struct CompressedSpritePalette gBallSpritePalettes[] =
+const struct SpritePalette gBallSpritePalettes[] =
 {
     [BALL_STRANGE] = {gBallPal_Strange, GFX_TAG_STRANGE_BALL},
     [BALL_POKE]    = {gBallPal_Poke,    GFX_TAG_POKE_BALL},
@@ -144,6 +144,7 @@ const struct CompressedSpritePalette gBallSpritePalettes[] =
     [BALL_PARK]    = {gBallPal_Park,    GFX_TAG_PARK_BALL},
     [BALL_BEAST]   = {gBallPal_Beast,   GFX_TAG_BEAST_BALL},
     [BALL_CHERISH] = {gBallPal_Cherish, GFX_TAG_CHERISH_BALL},
+    [BALL_KABA]    = {sBallPal_Kaba,    GFX_TAG_KABA_BALL},
 };
 
 static const struct OamData sBallOamData =
@@ -1362,7 +1363,7 @@ void CreateKababallSpriteToReleaseMon(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, 
     u8 spriteId;
 
     LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[BALL_KABA]);
-    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[BALL_KABA]);
+    LoadSpritePalette(&gBallSpritePalettes[BALL_KABA]);
     spriteId = CreateSprite(&gBallSpriteTemplates[BALL_KABA], x, y, subpriority);
 
     gSprites[spriteId].sMonSpriteId = monSpriteId;
@@ -1491,7 +1492,7 @@ u8 CreateIntroPokeballSprite(u8 monSpriteId, u8 monPalNum, u8 x, u8 y, u8 oamPri
     u8 spriteId;
 
     LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[BALL_KABA]);
-    LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[BALL_KABA]);
+    LoadSpritePalette(&gBallSpritePalettes[BALL_KABA]);
     spriteId = CreateSprite(&gBallSpriteTemplates[BALL_KABA], x, y, subPriority);
     gSprites[spriteId].sMonSpriteId = monSpriteId;
     gSprites[spriteId].sDelay = delay;

@@ -15,6 +15,7 @@
 #include "main.h"
 #include "main_menu.h"
 #include "menu.h"
+#include "kaba_speech.h"
 #include "list_menu.h"
 #include "mystery_event_menu.h"
 #include "naming_screen.h"
@@ -1076,7 +1077,10 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             default:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
                 gPlttBufferFaded[0] = RGB_BLACK;
-                gTasks[taskId].func = Task_NewGameDiancieSpeech_Init;
+                DoKabaSpeech();
+                DestroyTask(taskId);
+                
+                //gTasks[taskId].func = Task_NewGameDiancieSpeech_Init;
                 break;
             case ACTION_CONTINUE:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
