@@ -1077,8 +1077,9 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             default:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
                 gPlttBufferFaded[0] = RGB_BLACK;
-                DoKabaSpeech();
-                DestroyTask(taskId);
+                // DoKabaSpeech();
+                // DestroyTask(taskId);
+                gTasks[taskId].func = Task_NewGameDiancieSpeech_Init;
                 break;
             case ACTION_CONTINUE:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
