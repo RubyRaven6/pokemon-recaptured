@@ -20,7 +20,7 @@
 #include "pokeball.h"
 #include "naming_screen.h"
 #include "overworld.h"
-#include "kaba_speech.h"
+
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -333,6 +333,8 @@ struct KabaSpeech
 static EWRAM_DATA struct KabaSpeech *sKabaSpeech = NULL;
 
 // Function declarations
+extern void DoKabaSpeech(void);
+
 static void Task_KabaSpeech_Begin(u8);
 static void Task_KabaSpeech_FadeInEverything(u8);
 static void Task_KabaSpeech_GreetingsTraveler(u8);

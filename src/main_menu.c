@@ -15,7 +15,7 @@
 #include "main.h"
 #include "main_menu.h"
 #include "menu.h"
-#include "kaba_speech.h"
+
 #include "list_menu.h"
 #include "mystery_event_menu.h"
 #include "naming_screen.h"
