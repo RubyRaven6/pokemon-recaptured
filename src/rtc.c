@@ -459,7 +459,7 @@ enum Weekday GetDayOfWeek(void)
 
     return dateTime.dayOfWeek;
 }
-  
+
 enum TimeOfDay TryIncrementTimeOfDay(enum TimeOfDay timeOfDay)
 {
     return timeOfDay == TIME_NIGHT ? TIME_MORNING : timeOfDay + 1;
