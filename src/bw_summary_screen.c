@@ -4990,13 +4990,14 @@ static void SetMoveTypeIcons(void)
     u16 move;
     u32 type;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
+    enum MonState state = gMain.inBattle ? MON_IN_BATTLE : MON_OUTSIDE_BATTLE;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         move = summary->moves[i];
         if (move != MOVE_NONE)
         {
-            type = P_SHOW_DYNAMIC_TYPES ? CheckDynamicMoveType(&sMonSummaryScreen->currentMon, move, 0) : GetMoveType(move);
+            type = P_SHOW_DYNAMIC_TYPES ? CheckDynamicMoveType(&sMonSummaryScreen->currentMon, move, 0, state) : GetMoveType(move);
             SetTypeSpritePosAndPal(type, 8, 16 + (i * 28), i + SPRITE_ARR_ID_TYPE);
         }
         else
@@ -5023,6 +5024,7 @@ static void SetContestMoveTypeIcons(void)
 static void SetNewMoveTypeIcon(void)
 {
     u32 move = sMonSummaryScreen->newMove;
+    enum MonState state = gMain.inBattle ? MON_IN_BATTLE : MON_OUTSIDE_BATTLE;
     
     if (move == MOVE_NONE)
     {
@@ -5032,7 +5034,7 @@ static void SetNewMoveTypeIcon(void)
     {
         if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
         {
-            u32 type = P_SHOW_DYNAMIC_TYPES ? CheckDynamicMoveType(&sMonSummaryScreen->currentMon, move, 0) : GetMoveType(move);
+            u32 type = P_SHOW_DYNAMIC_TYPES ? CheckDynamicMoveType(&sMonSummaryScreen->currentMon, move, 0, state) : GetMoveType(move);
             SetTypeSpritePosAndPal(type, 8, 128, SPRITE_ARR_ID_TYPE + 4);
         }
         else
