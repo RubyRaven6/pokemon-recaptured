@@ -1282,11 +1282,11 @@ static void PlayMonCry(void)
 
     if (!isEgg)
     {
-        struct Pokemon *mon = NULL;
-        BoxMonToMon(boxMon, mon);
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+        struct Pokemon mon;
+        BoxMonToMon(boxMon, &mon);
+        enum Species species = GetMonData(&mon, MON_DATA_SPECIES_OR_EGG);
 
-        if (ShouldPlayNormalMonCry(mon) == TRUE)
+        if (ShouldPlayNormalMonCry( &mon) == TRUE)
             PlayCry_ByMode(species, 0, CRY_MODE_NORMAL);
         else
             PlayCry_ByMode(species, 0, CRY_MODE_WEAK);
