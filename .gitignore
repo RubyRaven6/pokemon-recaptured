@@ -68,3 +68,6 @@ __pycache__
 .map_version
 log.txt
 porytiles/
+porytiles/tilesets/**/config.local.yaml
+porytiles/tilesets/**/tileset.cache.json
+.porydaw/
