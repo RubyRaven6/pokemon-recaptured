@@ -1,16 +1,41 @@
 # pokeemerald-expansion
 
-A fork of the upstream project at https://github.com/rh-hideout/pokeemerald-expansion, modified to have zero AI contributions.
+This is an [organic](https://github.com/friend-safari) fork of the upstream project at <upstream>,
+modified to have only human contributions.
 
-Currently up to **1.11.0**.
+See [PEOPLE.md](PEOPLE.md) for a list of human contributors.
 
-Plan for ratcheting up to newer versions:
+## Templating
 
-- [ ] Contact contributors since to ask about LLM usage
-    - started; you can help by filling out the [disclosure table](disclosure.md)
-- [ ] cherry-pick commits, one minor release at a time
+```bash
+set -e # exit on (e)rror
+# Find and replace origin repo URL
+ORIGIN_NAME=origin
+PUSH_URL=$(git remote get-url --push "$ORIGIN_NAME")
+PUSH_REPO=$(echo "$PUSH_URL" | sed -E -e 's#.*github.com:(.+)\.git#\1#')
+sed -E -i -e "s#<origin>#[$PUSH_REPO](https://github.com/$PUSH_REPO)#g" *.md
+sed -E -i -e "s#<issues>#[Issues](https://github.com/$PUSH_REPO/issues)#g" *.md
 
-pokeemerald-expansion is ***a romhack base*** based off pret's [pokeemerald](https://github.com/pret/pokeemerald) decompilation project. ***It is NOT a playable romhack,*** but it has multiple features available to romhackers so that they can create their own games, so it's not meant to be played on its own.
+# Find and replace upstream URL
+UPSTREAM_NAME=upstream
+FETCH_URL=$(git remote get-url --no-push "$UPSTREAM_NAME")
+UPSTREAM_REPO=$(echo "$FETCH_URL" | sed -E -e 's#.*github.com:(.+)\.git#\1#')
+sed -E -i -e "s#<upstream>#[$UPSTREAM_REPO](https://github.com/$UPSTREAM_REPO)#g" *.md
+
+# List any other to-be-replaced tags
+grep -P '<\w+>' *.md
+
+# Remove any 'Templating' Markdown sections
+sed -Ezi -e 's/## Templat[^#]+//' *.md
+```
+
+## Contributing
+
+See [CONTRIBUTING.md]
+
+## Contact
+
+- **Discord**: [discord.gg/Mc94Zs8DXK](https://discord.gg/Mc94Zs8DXK)
 
 ## Should I use this or vanilla pokeemerald for my hack?
 The main advantage of using vanilla pokeemerald as a base is being able to link with other official GBA Pokémon games for battles and trading, pokeemerald-expansion can battle and trade with itself out of the box. If you don't mind losing full vanilla compatiblitity, we recommend using pokeemerald-expansion. Otherwise, use pret's pokeemerald. You'll still receive documentation improvements from pret, as we regurlarly incorporate pret's documentation changes.
