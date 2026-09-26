@@ -26,7 +26,7 @@ sed -E -i -e "s#<upstream>#[$UPSTREAM_REPO](https://github.com/$UPSTREAM_REPO)#g
 grep -P '<\w+>' *.md
 
 # Remove any 'Templating' Markdown sections
-sed -Ezi -e 's/## Templat[^#]+//' *.md
+sed -Ezi -e 's/#.?# Templat(([^#]|#[^#])+)//' *.md
 ```
 
 ## Contributing
