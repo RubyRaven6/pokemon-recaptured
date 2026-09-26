@@ -19,3 +19,39 @@ You can help by adding yourself or people you know in a <pull request>.
 | Name   | GitHub | Contacted? | LLM Use? |
 | ------ | ------ | ---------- | -------- |
 | aarant | aarant | x          | No       |
+| ghoulslash | | x |
+| psf | | x | Yes |
+| pawkkie | | | No |
+| surskitty | | x | No |
+| Alex | | | No |
+| ruby | | | |
+| lwelyk | | | |
+| dana yatsuta | | | |
+| kittenchilly | | x | No |
+| hedara90 | | | No |
+| PhallenTree | | | |
+| Deokishisu | | x| No |
+| shinydragonhunter | | x | No |
+| PCG | | | |
+| Martin Griffin | | | No |
+| aronson | aronson | x | Yes
+| Eduardo Quezada | | | |
+| Bassoonian | | x | Yes |
+| wiz1989 | | | |
+| LOuroboros | | | |
+| Bivurnum | | | |
+| grintoul | | | Yes |
+| cawtds | | | |
+| Cafe | | | |
+| spindrift64 | | | |
+| i0brendan0 | | | |
+| jfb1337 | | | |
+| Vex | | | |
+| TLM-PsIQ | | | |
+| Juanjo | | | |
+| basseforte123 | | | |
+| Phantonomy | | | |
+| AERDU | | | |
+| Kevin | | | |
+| RavePossum | | | |
+| cornixsenex | | | |
