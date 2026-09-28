@@ -78,6 +78,7 @@ static void QueueAnimTiles_EliteFour_WallLights(u16);
 static void TilesetAnim_GeneralPorytiles(u16);
 static void TilesetAnim_DewfordPorytiles(u16);
 static void QueueAnimTiles_GeneralPorytiles_Flower(u16);
+static void QueueAnimTiles_GeneralPorytiles_Water(u16);
 static void QueueAnimTiles_DewfordPorytiles_Flag(u16);
 
 //start of frame code
@@ -122,6 +123,26 @@ const u16 *const gTilesetAnims_General_Water[] = {
     gTilesetAnims_General_Water_Frame5,
     gTilesetAnims_General_Water_Frame6,
     gTilesetAnims_General_Water_Frame7
+};
+
+const u16 gTilesetAnims_GeneralPorytiles_Water_Frame0[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/water/0.png", ".4bpp");
+const u16 gTilesetAnims_GeneralPorytiles_Water_Frame1[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/water/1.png", ".4bpp");
+const u16 gTilesetAnims_GeneralPorytiles_Water_Frame2[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/water/2.png", ".4bpp");
+const u16 gTilesetAnims_GeneralPorytiles_Water_Frame3[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/water/3.png", ".4bpp");
+const u16 gTilesetAnims_GeneralPorytiles_Water_Frame4[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/water/4.png", ".4bpp");
+const u16 gTilesetAnims_GeneralPorytiles_Water_Frame5[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/water/5.png", ".4bpp");
+const u16 gTilesetAnims_GeneralPorytiles_Water_Frame6[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/water/6.png", ".4bpp");
+const u16 gTilesetAnims_GeneralPorytiles_Water_Frame7[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/water/7.png", ".4bpp");
+
+const u16 *const gTilesetAnims_GeneralPorytiles_Water[] = {
+    gTilesetAnims_GeneralPorytiles_Water_Frame0,
+    gTilesetAnims_GeneralPorytiles_Water_Frame1,
+    gTilesetAnims_GeneralPorytiles_Water_Frame2,
+    gTilesetAnims_GeneralPorytiles_Water_Frame3,
+    gTilesetAnims_GeneralPorytiles_Water_Frame4,
+    gTilesetAnims_GeneralPorytiles_Water_Frame5,
+    gTilesetAnims_GeneralPorytiles_Water_Frame6,
+    gTilesetAnims_GeneralPorytiles_Water_Frame7
 };
 
 const u16 gTilesetAnims_General_SandWaterEdge_Frame0[] = INCGFX_U16("data/tilesets/primary/general/anim/sand_water_edge/0.png", ".4bpp");
@@ -684,8 +705,8 @@ static void TilesetAnim_GeneralPorytiles(u16 timer)
 {
     if (timer % 16 == 0)
         QueueAnimTiles_GeneralPorytiles_Flower(timer / 16);
-    // if (timer % 16 == 1)
-    //     QueueAnimTiles_General_Water(timer / 16);
+    if (timer % 16 == 1)
+        QueueAnimTiles_GeneralPorytiles_Water(timer / 16);
     // if (timer % 16 == 2)
     //     QueueAnimTiles_General_SandWaterEdge(timer / 16);
     // if (timer % 16 == 3)
@@ -716,6 +737,12 @@ static void QueueAnimTiles_General_Water(u16 timer)
 {
     u8 i = timer % ARRAY_COUNT(gTilesetAnims_General_Water);
     AppendTilesetAnimToBuffer(gTilesetAnims_General_Water[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(432)), 30 * TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_GeneralPorytiles_Water(u16 timer)
+{
+    u8 i = timer % ARRAY_COUNT(gTilesetAnims_GeneralPorytiles_Water);
+    AppendTilesetAnimToBuffer(gTilesetAnims_GeneralPorytiles_Water[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(5)), 30 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_General_SandWaterEdge(u16 timer)
