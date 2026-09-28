@@ -1541,3 +1541,25 @@ const struct Tileset gTileset_HallOfFame =
 };
 
 #endif // IS_FRLG
+
+const struct Tileset gTileset_GeneralPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_GeneralPorytiles,
+    .palettes = gTilesetPalettes_GeneralPorytiles,
+    .metatiles = gMetatiles_GeneralPorytiles,
+    .metatileAttributes = gMetatileAttributes_GeneralPorytiles,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_DewfordPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_DewfordPorytiles,
+    .palettes = gTilesetPalettes_DewfordPorytiles,
+    .metatiles = gMetatiles_DewfordPorytiles,
+    .metatileAttributes = gMetatileAttributes_DewfordPorytiles,
+    .callback = NULL,
+};
