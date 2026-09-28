@@ -3,6 +3,8 @@
 This is an [organic](https://github.com/friend-safari) fork of the upstream project at [rh-hideout/pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion),
 modified to have only human contributions.
 
+Currently it includes code up to RHH's **1.16.0**.
+
 See [PEOPLE.md](PEOPLE.md) for a list of human contributors.
 
 ## Contributing

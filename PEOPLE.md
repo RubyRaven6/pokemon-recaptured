@@ -10,7 +10,7 @@ This table tracks contributors from [rh-hideout/pokeemerald-expansion](https://g
 
 It can be useful in determining which PRs from upstream are safe to merge in.
 
-You can help by adding yourself or people you know in a <pull request>.
+You can help by adding yourself or people you know in a [pull request](https://github.com/friend-safari/pokeemerald-expansion/pulls).
 
 **Please do not contact someone who's already been contacted!**
 
