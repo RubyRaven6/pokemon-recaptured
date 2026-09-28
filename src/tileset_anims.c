@@ -74,6 +74,13 @@ static void QueueAnimTiles_SootopolisGym_Waterfalls(u16);
 static void QueueAnimTiles_EliteFour_GroundLights(u16);
 static void QueueAnimTiles_EliteFour_WallLights(u16);
 
+//Porytiles
+static void TilesetAnim_GeneralPorytiles(u16);
+static void TilesetAnim_DewfordPorytiles(u16);
+static void QueueAnimTiles_GeneralPorytiles_Flower(u16);
+static void QueueAnimTiles_DewfordPorytiles_Flag(u16);
+
+//start of frame code
 const u16 gTilesetAnims_General_Flower_Frame1[] = INCGFX_U16("data/tilesets/primary/general/anim/flower/1.png", ".4bpp");
 const u16 gTilesetAnims_General_Flower_Frame0[] = INCGFX_U16("data/tilesets/primary/general/anim/flower/0.png", ".4bpp");
 const u16 gTilesetAnims_General_Flower_Frame2[] = INCGFX_U16("data/tilesets/primary/general/anim/flower/2.png", ".4bpp");
@@ -84,6 +91,17 @@ const u16 *const gTilesetAnims_General_Flower[] = {
     gTilesetAnims_General_Flower_Frame1,
     gTilesetAnims_General_Flower_Frame0,
     gTilesetAnims_General_Flower_Frame2
+};
+
+const u16 gTilesetAnims_GeneralPorytiles_Flower_Frame1[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/flower/1.png", ".4bpp");
+const u16 gTilesetAnims_GeneralPorytiles_Flower_Frame0[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/flower/0.png", ".4bpp");
+const u16 gTilesetAnims_GeneralPorytiles_Flower_Frame2[] = INCGFX_U16("data/tilesets/primary/general_porytiles/anim/flower/2.png", ".4bpp");
+
+const u16 *const gTilesetAnims_GeneralPorytiles_Flower[] = {
+    gTilesetAnims_GeneralPorytiles_Flower_Frame0,
+    gTilesetAnims_GeneralPorytiles_Flower_Frame1,
+    gTilesetAnims_GeneralPorytiles_Flower_Frame0,
+    gTilesetAnims_GeneralPorytiles_Flower_Frame2
 };
 
 const u16 gTilesetAnims_General_Water_Frame0[] = INCGFX_U16("data/tilesets/primary/general/anim/water/0.png", ".4bpp");
@@ -383,6 +401,18 @@ const u16 *const gTilesetAnims_Dewford_Flag[] = {
     gTilesetAnims_Dewford_Flag_Frame3
 };
 
+const u16 gTilesetAnims_DewfordPorytiles_Flag_Frame0[] = INCGFX_U16("data/tilesets/secondary/dewford_porytiles/anim/flag/0.png", ".4bpp");
+const u16 gTilesetAnims_DewfordPorytiles_Flag_Frame1[] = INCGFX_U16("data/tilesets/secondary/dewford_porytiles/anim/flag/1.png", ".4bpp");
+const u16 gTilesetAnims_DewfordPorytiles_Flag_Frame2[] = INCGFX_U16("data/tilesets/secondary/dewford_porytiles/anim/flag/2.png", ".4bpp");
+const u16 gTilesetAnims_DewfordPorytiles_Flag_Frame3[] = INCGFX_U16("data/tilesets/secondary/dewford_porytiles/anim/flag/3.png", ".4bpp");
+
+const u16 *const gTilesetAnims_DewfordPorytiles_Flag[] = {
+    gTilesetAnims_DewfordPorytiles_Flag_Frame0,
+    gTilesetAnims_DewfordPorytiles_Flag_Frame1,
+    gTilesetAnims_DewfordPorytiles_Flag_Frame2,
+    gTilesetAnims_DewfordPorytiles_Flag_Frame3
+};
+
 const u16 gTilesetAnims_BattleFrontierOutsideWest_Flag_Frame0[] = INCGFX_U16("data/tilesets/secondary/battle_frontier_outside_west/anim/flag/0.png", ".4bpp");
 const u16 gTilesetAnims_BattleFrontierOutsideWest_Flag_Frame1[] = INCGFX_U16("data/tilesets/secondary/battle_frontier_outside_west/anim/flag/1.png", ".4bpp");
 const u16 gTilesetAnims_BattleFrontierOutsideWest_Flag_Frame2[] = INCGFX_U16("data/tilesets/secondary/battle_frontier_outside_west/anim/flag/2.png", ".4bpp");
@@ -622,6 +652,13 @@ void InitTilesetAnim_General(void)
     sPrimaryTilesetAnimCallback = TilesetAnim_General;
 }
 
+void InitTilesetAnim_GeneralPorytiles(void)
+{
+    sPrimaryTilesetAnimCounter = 0;
+    sPrimaryTilesetAnimCounterMax = 256;
+    sPrimaryTilesetAnimCallback = TilesetAnim_GeneralPorytiles;
+}
+
 void InitTilesetAnim_Building(void)
 {
     sPrimaryTilesetAnimCounter = 0;
@@ -643,6 +680,20 @@ static void TilesetAnim_General(u16 timer)
         QueueAnimTiles_General_LandWaterEdge(timer / 16);
 }
 
+static void TilesetAnim_GeneralPorytiles(u16 timer)
+{
+    if (timer % 16 == 0)
+        QueueAnimTiles_GeneralPorytiles_Flower(timer / 16);
+    // if (timer % 16 == 1)
+    //     QueueAnimTiles_General_Water(timer / 16);
+    // if (timer % 16 == 2)
+    //     QueueAnimTiles_General_SandWaterEdge(timer / 16);
+    // if (timer % 16 == 3)
+    //     QueueAnimTiles_General_Waterfall(timer / 16);
+    // if (timer % 16 == 4)
+    //     QueueAnimTiles_General_LandWaterEdge(timer / 16);
+}
+
 static void TilesetAnim_Building(u16 timer)
 {
     if (timer % 8 == 0)
@@ -653,6 +704,12 @@ static void QueueAnimTiles_General_Flower(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_General_Flower);
     AppendTilesetAnimToBuffer(gTilesetAnims_General_Flower[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(508)), 4 * TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_GeneralPorytiles_Flower(u16 timer)
+{
+    u16 i = timer % ARRAY_COUNT(gTilesetAnims_GeneralPorytiles_Flower);
+    AppendTilesetAnimToBuffer(gTilesetAnims_GeneralPorytiles_Flower[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(1)), 4 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_General_Water(u16 timer)
@@ -692,6 +749,13 @@ void InitTilesetAnim_Dewford(void)
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = sPrimaryTilesetAnimCounterMax;
     sSecondaryTilesetAnimCallback = TilesetAnim_Dewford;
+}
+
+void InitTilesetAnim_DewfordPorytiles(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = sPrimaryTilesetAnimCounterMax;
+    sSecondaryTilesetAnimCallback = TilesetAnim_DewfordPorytiles;
 }
 
 void InitTilesetAnim_Slateport(void)
@@ -861,6 +925,12 @@ static void TilesetAnim_Dewford(u16 timer)
 {
     if (timer % 8 == 0)
         QueueAnimTiles_Dewford_Flag(timer / 8);
+}
+
+static void TilesetAnim_DewfordPorytiles(u16 timer)
+{
+    if (timer % 8 == 0)
+        QueueAnimTiles_DewfordPorytiles_Flag(timer / 8);
 }
 
 static void TilesetAnim_Slateport(u16 timer)
@@ -1043,6 +1113,12 @@ static void QueueAnimTiles_Dewford_Flag(u16 timer)
 {
     u16 i = timer % ARRAY_COUNT(gTilesetAnims_Dewford_Flag);
     AppendTilesetAnimToBuffer(gTilesetAnims_Dewford_Flag[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 170)), 6 * TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_DewfordPorytiles_Flag(u16 timer)
+{
+    u16 i = timer % ARRAY_COUNT(gTilesetAnims_DewfordPorytiles_Flag);
+    AppendTilesetAnimToBuffer(gTilesetAnims_DewfordPorytiles_Flag[i], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + 170)), 6 * TILE_SIZE_4BPP);
 }
 
 static void QueueAnimTiles_BattleFrontierOutsideWest_Flag(u16 timer)

@@ -40,4 +40,8 @@ void InitTilesetAnim_CeladonGym(void);
 void InitTilesetAnim_SilphCo(void);
 void InitTilesetAnim_MtEmber(void);
 
+// Porytiles
+void InitTilesetAnim_GeneralPorytiles(void);
+void InitTilesetAnim_DewfordPorytiles(void);
+
 #endif // GUARD_TILESET_ANIMS_H
