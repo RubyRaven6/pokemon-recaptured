@@ -1561,5 +1561,5 @@ const struct Tileset gTileset_DewfordPorytiles =
     .palettes = gTilesetPalettes_DewfordPorytiles,
     .metatiles = gMetatiles_DewfordPorytiles,
     .metatileAttributes = gMetatileAttributes_DewfordPorytiles,
-    .callback = InitTilesetAnim_DewfordPorytiles,
+    .callback = NULL,
 };

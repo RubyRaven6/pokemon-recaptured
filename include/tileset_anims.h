@@ -42,6 +42,5 @@ void InitTilesetAnim_MtEmber(void);
 
 // Porytiles
 void InitTilesetAnim_GeneralPorytiles(void);
-void InitTilesetAnim_DewfordPorytiles(void);
 
 #endif // GUARD_TILESET_ANIMS_H
