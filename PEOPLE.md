@@ -24,7 +24,7 @@ You can help by adding yourself or people you know in a [pull request](https://g
 | pawkkie | | | No |
 | surskitty | | x | No |
 | Alex | | | No |
-| ruby | | | |
+| ruby | | x | No |
 | lwelyk | | | |
 | dana yatsuta | | | |
 | kittenchilly | | x | No |
@@ -35,7 +35,7 @@ You can help by adding yourself or people you know in a [pull request](https://g
 | PCG | | | |
 | Martin Griffin | | | No |
 | aronson | aronson | x | Yes
-| Eduardo Quezada | | | |
+| Eduardo Quezada | | | No |
 | Bassoonian | | x | Yes |
 | wiz1989 | | | |
 | LOuroboros | | | |
@@ -53,5 +53,6 @@ You can help by adding yourself or people you know in a [pull request](https://g
 | Phantonomy | | | |
 | AERDU | | | |
 | Kevin | | | |
-| RavePossum | | | |
+| RavePossum | | x | No |
 | cornixsenex | | | |
+| iriv | | x | no |
