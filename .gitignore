@@ -79,6 +79,6 @@ agbcc/
 /*.png
 !.vscode/tasks.json
 !.vscode/c_cpp_properties.json
-.worktree*
-worktree*
+/.worktree*
+/worktree*
 /dist/
