@@ -32,9 +32,9 @@ You can help by adding yourself or people you know in a [pull request](https://g
 | PhallenTree | | | |
 | Deokishisu | | x| No |
 | shinydragonhunter | | x | No |
-| PCG | | | |
+| PCG | | x | No |
 | Martin Griffin | | | No |
-| aronson | aronson | x | Yes
+| aronson | aronson | x | Yes |
 | Eduardo Quezada | | | No |
 | Bassoonian | | x | Yes |
 | wiz1989 | | | |
@@ -56,3 +56,4 @@ You can help by adding yourself or people you know in a [pull request](https://g
 | RavePossum | | x | No |
 | cornixsenex | | | |
 | iriv | | x | no |
+| thepeeps191 | ThePeeps191 | | |
