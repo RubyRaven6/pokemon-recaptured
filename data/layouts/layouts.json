@@ -9323,6 +9323,36 @@
       "border_height": 2,
       "border_width": 2,
       "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_HOUSE3",
+      "name": "DewfordTown_House3_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/DewfordTown_House3/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_House3/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_HARBOR",
+      "name": "DewfordTown_Harbor_Layout",
+      "width": 24,
+      "height": 15,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/DewfordTown_Harbor/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_Harbor/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_MART",
+      "name": "DewfordTown_Mart_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/DewfordTown_Mart/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_Mart/map.bin"
     }
   ]
 }
