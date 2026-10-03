@@ -68,3 +68,4 @@ __pycache__
 .map_version
 log.txt
 *.ase
+.porydaw/
