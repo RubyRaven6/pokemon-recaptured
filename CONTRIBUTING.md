@@ -25,7 +25,7 @@ Any and all human contributions are encouraged.
 
 This is an AI-free fork of the repository at [rh-hideout/pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion).
 
-Currently, it includes contributions there up to **1.16.0**.
+Currently, it includes contributions there up to **1.16.1**.
 
 ### What does 'AI-free' / 'organic' mean?
 
