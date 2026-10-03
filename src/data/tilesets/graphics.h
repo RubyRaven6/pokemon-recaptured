@@ -3048,3 +3048,41 @@ const u16 ALIGNED(4) gTilesetPalettes_General_Frlg[][16] =
 const u32 gTilesetTiles_General_Frlg[] = INCGFX_U32("data/tilesets/primary/general_frlg/tiles.png", ".4bpp.smol");
 
 #endif // IS_FRLG
+
+const u16 gTilesetPalettes_GeneralPorytiles[][16] =
+{
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/primary/general_porytiles/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_GeneralPorytiles[] = INCBIN_U32("data/tilesets/primary/general_porytiles/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_DewfordPorytiles[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/dewford_porytiles/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_DewfordPorytiles[] = INCBIN_U32("data/tilesets/secondary/dewford_porytiles/tiles.4bpp.lz");

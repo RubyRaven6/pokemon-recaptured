@@ -125,10 +125,10 @@
     {
       "id": "LAYOUT_DEWFORD_TOWN",
       "name": "DewfordTown_Layout",
-      "width": 20,
-      "height": 20,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Dewford",
+      "width": 30,
+      "height": 28,
+      "primary_tileset": "gTileset_GeneralPorytiles",
+      "secondary_tileset": "gTileset_DewfordPorytiles",
       "border_filepath": "data/layouts/DewfordTown/border.bin",
       "blockdata_filepath": "data/layouts/DewfordTown/map.bin",
       "layout_version": "emerald"
@@ -226,8 +226,8 @@
       "name": "Route105_Layout",
       "width": 40,
       "height": 80,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Dewford",
+      "primary_tileset": "gTileset_GeneralPorytiles",
+      "secondary_tileset": "gTileset_DewfordPorytiles",
       "border_filepath": "data/layouts/Route105/border.bin",
       "blockdata_filepath": "data/layouts/Route105/map.bin",
       "layout_version": "emerald"
@@ -237,8 +237,8 @@
       "name": "Route106_Layout",
       "width": 80,
       "height": 20,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Dewford",
+      "primary_tileset": "gTileset_GeneralPorytiles",
+      "secondary_tileset": "gTileset_DewfordPorytiles",
       "border_filepath": "data/layouts/Route106/border.bin",
       "blockdata_filepath": "data/layouts/Route106/map.bin",
       "layout_version": "emerald"
@@ -247,9 +247,9 @@
       "id": "LAYOUT_ROUTE107",
       "name": "Route107_Layout",
       "width": 60,
-      "height": 20,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Dewford",
+      "height": 28,
+      "primary_tileset": "gTileset_GeneralPorytiles",
+      "secondary_tileset": "gTileset_DewfordPorytiles",
       "border_filepath": "data/layouts/Route107/border.bin",
       "blockdata_filepath": "data/layouts/Route107/map.bin",
       "layout_version": "emerald"
@@ -4439,8 +4439,8 @@
       "name": "BirthIsland_Exterior_Layout",
       "width": 30,
       "height": 30,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Dewford",
+      "primary_tileset": "gTileset_GeneralPorytiles",
+      "secondary_tileset": "gTileset_DewfordPorytiles",
       "border_filepath": "data/layouts/BirthIsland_Exterior/border.bin",
       "blockdata_filepath": "data/layouts/BirthIsland_Exterior/map.bin",
       "layout_version": "emerald"
@@ -4626,8 +4626,8 @@
       "name": "NavelRock_Exterior_Layout",
       "width": 21,
       "height": 24,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Dewford",
+      "primary_tileset": "gTileset_GeneralPorytiles",
+      "secondary_tileset": "gTileset_DewfordPorytiles",
       "border_filepath": "data/layouts/NavelRock_Exterior/border.bin",
       "blockdata_filepath": "data/layouts/NavelRock_Exterior/map.bin",
       "layout_version": "emerald"
@@ -9323,6 +9323,36 @@
       "border_height": 2,
       "border_width": 2,
       "layout_version": "frlg"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_HOUSE3",
+      "name": "DewfordTown_House3_Layout",
+      "width": 10,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/DewfordTown_House3/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_House3/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_HARBOR",
+      "name": "DewfordTown_Harbor_Layout",
+      "width": 24,
+      "height": 15,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Facility",
+      "border_filepath": "data/layouts/DewfordTown_Harbor/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_Harbor/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_MART",
+      "name": "DewfordTown_Mart_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/DewfordTown_Mart/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_Mart/map.bin"
     }
   ]
 }

@@ -408,3 +408,9 @@ const u16 gMetatiles_HallOfFame[] = INCBIN_U16("data/tilesets/secondary/hall_of_
 const u16 gMetatileAttributes_HallOfFame[] = INCBIN_U16("data/tilesets/secondary/hall_of_fame_frlg/metatile_attributes.bin");
 
 #endif // IS_FRLG
+
+const u16 gMetatiles_GeneralPorytiles[] = INCBIN_U16("data/tilesets/primary/general_porytiles/metatiles.bin");
+const u16 gMetatileAttributes_GeneralPorytiles[] = INCBIN_U16("data/tilesets/primary/general_porytiles/metatile_attributes.bin");
+
+const u16 gMetatiles_DewfordPorytiles[] = INCBIN_U16("data/tilesets/secondary/dewford_porytiles/metatiles.bin");
+const u16 gMetatileAttributes_DewfordPorytiles[] = INCBIN_U16("data/tilesets/secondary/dewford_porytiles/metatile_attributes.bin");

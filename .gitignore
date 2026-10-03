@@ -84,3 +84,5 @@ agbcc/
 /dist/
 /discord.mailmap
 log.txt
+log.txt
+*.ase
