@@ -2485,24 +2485,30 @@ static void Task_StatEditorMain(u8 taskId)
             return;
         }
 
-        if (JOY_NEW(DPAD_LEFT))
+        if (FlagGet(FLAG_SYS_IV_ALLOC) || FlagGet(FLAG_SYS_EV_ALLOC))
         {
-            PlaySE(SE_SELECT);
-            sStatEditorDataPtr->panel = PANEL_RIGHT;
-            sStatEditorDataPtr->rightPanelColumn = RIGHT_PANEL_IVS;
-            sStatEditorDataPtr->rightPanelRow = 0;
-            PrintMonStats();
-            return;
-        }
+            if (JOY_NEW(DPAD_LEFT) && FlagGet(FLAG_SYS_IV_ALLOC))
+            {
+                PlaySE(SE_SELECT); 
+                sStatEditorDataPtr->panel = PANEL_RIGHT;
+                sStatEditorDataPtr->rightPanelColumn = RIGHT_PANEL_IVS;
+                sStatEditorDataPtr->rightPanelRow = 0;
+                PrintMonStats();
+                return;
+            }
 
-        if (JOY_NEW(DPAD_RIGHT))
-        {
-            PlaySE(SE_SELECT);
-            sStatEditorDataPtr->panel = PANEL_RIGHT;
-            sStatEditorDataPtr->rightPanelColumn = RIGHT_PANEL_EVS;
-            sStatEditorDataPtr->rightPanelRow = 0;
-            PrintMonStats();
-            return;
+            if (JOY_NEW(DPAD_RIGHT))
+            {
+                PlaySE(SE_SELECT);
+                sStatEditorDataPtr->panel = PANEL_RIGHT;
+                if(FlagGet(FLAG_SYS_EV_ALLOC))
+                    sStatEditorDataPtr->rightPanelColumn = RIGHT_PANEL_EVS;
+                else
+                    sStatEditorDataPtr->rightPanelColumn = RIGHT_PANEL_IVS;
+                sStatEditorDataPtr->rightPanelRow = 0;
+                PrintMonStats();
+                return;
+            }
         }
 
         if (JOY_NEW(A_BUTTON))
@@ -2582,7 +2588,7 @@ static void Task_StatEditorMain(u8 taskId)
                 sStatEditorDataPtr->panel = PANEL_LEFT;
                 sStatEditorDataPtr->leftRow = LEFT_ROW_NICKNAME;
             }
-            else if (sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_IVS)
+            else if (sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_IVS && FlagGet(FLAG_SYS_EV_ALLOC))
             {    
                 sStatEditorDataPtr->rightPanelColumn = RIGHT_PANEL_EVS;
             }
@@ -2603,7 +2609,7 @@ static void Task_StatEditorMain(u8 taskId)
                 sStatEditorDataPtr->panel = PANEL_LEFT;
                 sStatEditorDataPtr->leftRow = LEFT_ROW_NICKNAME;
             }
-            else if (sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS)
+            else if (sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS && FlagGet(FLAG_SYS_IV_ALLOC))
             {
                 sStatEditorDataPtr->rightPanelColumn = RIGHT_PANEL_IVS;
             }
