@@ -625,6 +625,110 @@ static const u8 sGetMonDataEVConstants[] =
     MON_DATA_SPATK_EV
 };
 
+const u8 gLevelToEVs[] =
+{
+    [1]  = 1, 
+    [2]  = 2, 
+    [3]  = 3, 
+    [4]  = 4, 
+    [5]  = 5, 
+    [6]  = 6, 
+    [7]  = 7, 
+    [8]  = 8, 
+    [9]  = 9, 
+    [10] = 14,
+    [11] = 15,
+    [12] = 16,
+    [13] = 17,
+    [14] = 18,
+    [15] = 19,
+    [16] = 20,
+    [17] = 21,
+    [18] = 22,
+    [19] = 23,
+    [20] = 28,
+    [21] = 29, 
+    [22] = 30, 
+    [23] = 31, 
+    [24] = 32, 
+    [25] = 33, 
+    [26] = 34, 
+    [27] = 35, 
+    [28] = 36, 
+    [29] = 37, 
+    [30] = 42,
+    [31] = 43,
+    [32] = 44,
+    [33] = 45,
+    [34] = 46,
+    [35] = 47,
+    [36] = 48,
+    [37] = 49,
+    [38] = 50,
+    [39] = 51,
+    [40] = 56,
+    [41] = 57, 
+    [42] = 58, 
+    [43] = 59, 
+    [44] = 60, 
+    [45] = 61, 
+    [46] = 62, 
+    [47] = 63, 
+    [48] = 64, 
+    [49] = 65, 
+    [50] = 70,
+    [51] = 71,
+    [52] = 72,
+    [53] = 73,
+    [54] = 74,
+    [55] = 75,
+    [56] = 76,
+    [57] = 77,
+    [58] = 78,
+    [59] = 79,
+    [60] = 84,
+    [61] = 85, 
+    [62] = 86, 
+    [63] = 87, 
+    [64] = 88, 
+    [65] = 89, 
+    [66] = 90, 
+    [67] = 91, 
+    [68] = 92, 
+    [69] = 93, 
+    [70] = 98,
+    [71] = 99,
+    [72] = 100,
+    [73] = 101,
+    [74] = 102,
+    [75] = 103,
+    [76] = 104,
+    [77] = 105,
+    [78] = 106,
+    [79] = 107,
+    [80] = 108,
+    [81] = 109, 
+    [82] = 110, 
+    [83] = 111, 
+    [84] = 112, 
+    [85] = 113, 
+    [86] = 114, 
+    [87] = 115, 
+    [88] = 116, 
+    [89] = 117, 
+    [90] = 118,
+    [91] = 119,
+    [92] = 120,
+    [93] = 121,
+    [94] = 122,
+    [95] = 123,
+    [96] = 124,
+    [97] = 125,
+    [98] = 126,
+    [99] = 127,
+    [100] = 128,
+};
+
 // For stat-raising items
 static const enum Stat sStatsToRaise[] =
 {
@@ -1372,6 +1476,13 @@ static u16 CalculateBoxMonChecksumReencrypt(struct BoxPokemon *boxMon)
     return checksum;
 }
 
+void CalculateBoxMonStats(struct BoxPokemon *boxMon)
+{
+    struct Pokemon *mon = NULL;
+    BoxMonToMon(boxMon, mon);
+    CalculateMonStats(mon);
+}
+
 void CalculateMonStats(struct Pokemon *mon)
 {
     CalculateMonStatsCont(mon, TRUE);
@@ -1412,7 +1523,8 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
             continue;
 
         u8 baseStat = GetSpeciesBaseStat(species, i);
-        s32 n = (((2 * baseStat + iv[i] + ev[i] / 4) * level) / 100) + 5;
+        s32 n = (((2 * baseStat + iv[i]) * level) / 100) + (5 + ev[i]);
+        // s32 n = (((2 * baseStat + iv[i] + ev[i] / 4) * level) / 100) + 5;
         n = ModifyStatByNature(nature, n, i);
         if (B_FRIENDSHIP_BOOST == TRUE)
             n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));
@@ -1431,7 +1543,8 @@ void CalculateMonStatsCont(struct Pokemon *mon, bool32 updateSpeedStat)
     else
     {
         s32 n = 2 * GetSpeciesBaseHP(species) + iv[STAT_HP];
-        newMaxHP = (((n + ev[STAT_HP] / 4) * level) / 100) + level + 10;
+        s32 m = level + 10 + ev[STAT_HP];
+        newMaxHP = (((n) * level) / 100) + m;
     }
 
     gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
@@ -5483,12 +5596,15 @@ static void Task_AnimateAfterDelay(u8 taskId)
     }
 }
 
+#define tIsShadow data[4]
+
 static void Task_PokemonSummaryAnimateAfterDelay(u8 taskId)
 {
     if (--gTasks[taskId].sAnimDelay == 0)
     {
         StartMonSummaryAnimation(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].sAnimId);
-        SummaryScreen_SetAnimDelayTaskId(TASK_NONE);
+        if (!gTasks[taskId].tIsShadow)
+            SummaryScreen_SetAnimDelayTaskId(TASK_NONE);
         DestroyTask(taskId);
     }
 }
@@ -5548,7 +5664,7 @@ void DoMonFrontSpriteAnimation(struct Sprite *sprite, enum Species species, bool
     }
 }
 
-void PokemonSummaryDoMonAnimation(struct Sprite *sprite, enum Species species, bool8 oneFrame)
+void PokemonSummaryDoMonAnimation(struct Sprite *sprite, enum Species species, bool8 oneFrame, bool32 isShadow)
 {
     if (!oneFrame && HasTwoFramesAnimation(species))
         StartSpriteAnim(sprite, 1);
@@ -5559,7 +5675,11 @@ void PokemonSummaryDoMonAnimation(struct Sprite *sprite, enum Species species, b
         STORE_PTR_IN_TASK(sprite, taskId, 0);
         gTasks[taskId].sAnimId = gSpeciesInfo[species].frontAnimId;
         gTasks[taskId].sAnimDelay = gSpeciesInfo[species].frontAnimDelay;
-        SummaryScreen_SetAnimDelayTaskId(taskId);
+        gTasks[taskId].tIsShadow = isShadow;
+
+        if (!isShadow)
+            SummaryScreen_SetAnimDelayTaskId(taskId);
+
         SetSpriteCB_MonAnimDummy(sprite);
     }
     else
@@ -5742,6 +5862,10 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
 
     failureFlags = 0;
     managerId %= MON_SPR_GFX_MANAGERS_COUNT;
+    // Mont note: If the manager is already active, return it to allow for reliable transitions between summary screen
+    // and swsh party menu which also uses animated mon sprite
+    if (sMonSpritesGfxManagers[managerId] != NULL && sMonSpritesGfxManagers[managerId]->active == GFX_MANAGER_ACTIVE)
+        return sMonSpritesGfxManagers[managerId];
     gfx = AllocZeroed(sizeof(*gfx));
     if (gfx == NULL)
         return NULL;
@@ -5837,6 +5961,9 @@ void DestroyMonSpritesGfxManager(u8 managerId)
 
     managerId %= MON_SPR_GFX_MANAGERS_COUNT;
     gfx = sMonSpritesGfxManagers[managerId];
+    // Clear global reference to avoid leaving a dangling pointer that others (swsh summary screen)
+    // might read while the manager is being freed
+    sMonSpritesGfxManagers[managerId] = NULL;
     if (gfx == NULL)
         return;
 

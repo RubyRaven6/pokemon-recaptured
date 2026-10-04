@@ -15798,8 +15798,8 @@ const struct ItemInfo gItemsInfo[] =
         .price = 300,
         .description = COMPOUND_STRING(
             "A cake that causes\n"
-            "a Pokémon to lose\n"
-            "all its base stats."),
+            "a Pokémon change\n"
+            "themselves again."),
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_STAT_BOOST_MOCHI,
         .type = ITEM_USE_PARTY_MENU,
