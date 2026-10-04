@@ -13,7 +13,7 @@
 #define P_SUMMARY_SCREEN_STAT_EDITOR        TRUE  // If TRUE, the stat editor will be accessible through the summary screen on the stat menu by clicking Start. (opens on selected Pokémon)
 
 // Hidden Power or Terastal Config
-#define P_STAT_EDITOR_HP_OR_TERA    P_STAT_EDITOR_TERASTAL
+#define P_STAT_EDITOR_HP_OR_TERA    P_STAT_EDITOR_NONE
 
 // defines for the config above
 #define P_STAT_EDITOR_NONE          0 // neither will be available

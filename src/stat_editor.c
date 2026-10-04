@@ -30,8 +30,9 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include <stdbool.h>
 
-#if P_STAT_EDITOR_ENABLE
+// #if P_STAT_EDITOR_ENABLE
 
 //==========DEFINES==========//
 struct StatEditorResources
@@ -95,9 +96,11 @@ enum {
 };
 
 #define MIN_STAT 0
+#define CURRENT_STAT_AT_MAX (sStatEditorDataPtr->statEditingValue == ((sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS) ? (MAX_PER_STAT_EVS) : (MAX_PER_STAT_IVS)))
+#define CHECK_CURRENT_IF_EV (sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS)
+#define CHECK_CURRENT_IF_EV_MAX (sStatEditorDataPtr->evTotal == MAX_TOTAL_EVS)
 
-#define CHECK_IF_STAT_CANT_INCREASE (((sStatEditorDataPtr->statEditingValue == ((sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS) ? (MAX_PER_STAT_EVS) : (MAX_PER_STAT_IVS))) \
-                                     || ((sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS) && (sStatEditorDataPtr->evTotal == MAX_TOTAL_EVS))))
+#define CHECK_IF_STAT_CANT_INCREASE ((CURRENT_STAT_AT_MAX || (CHECK_CURRENT_IF_EV && CHECK_CURRENT_IF_EV_MAX)))
 /*
 Breakdown of CHECK_IF_STAT_CANT_INCREASE
 TLDR: Stat can't increase if you're either: at the maximum amount a stat can have (for both EVs and IVs), or for EVs, if you already hit the max total of EVs
@@ -129,6 +132,8 @@ enum WindowIds
     WINDOW_MAIN_HEADER,
     WINDOW_STATS_HEADER,
     WINDOW_STATS_PANEL,
+    WINDOW_EVS_HEADER,
+    WINDOW_EVS_PANEL,
     WINDOW_NICKNAME,
     WINDOW_ABILITIES,
     WINDOW_NATURES,
@@ -158,6 +163,7 @@ static bool32 IsEditingBoxMon(void);
 static struct BoxPokemon *GetCurrentBoxMon(void);
 static void UpdateMoveRelearnerState(void);
 static void SetMonPosVars(void);
+static bool32 CheckIfStatCantIncrease(void);
 static void SelectorCallback(struct Sprite *sprite);
 static u8 CreateSelectors(void);
 static void DestroySelectors(void);
@@ -224,6 +230,26 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .paletteNum = 2,
         .baseBlock = 1 + 32 + 24,
     },
+    [WINDOW_EVS_HEADER] = 
+    {
+        .bg = 0,
+        .tilemapLeft = 20,
+        .tilemapTop = 15,
+        .width = 10,
+        .height = 2,
+        .paletteNum = 2,
+        .baseBlock = 1 + 32 + 24 + 224,
+    },
+    [WINDOW_EVS_PANEL] = 
+    {
+        .bg = 0,
+        .tilemapLeft = 20,
+        .tilemapTop = 17,
+        .width = 10,
+        .height = 2,
+        .paletteNum = 2,
+        .baseBlock = 1 + 32 + 24 + 224 + 20,
+    },
     [WINDOW_NICKNAME] = 
     {
         .bg = 0,
@@ -232,7 +258,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 10,
         .height = 3,
         .paletteNum = 2,
-        .baseBlock = 1 + 32 + 24 + 224,
+        .baseBlock = 1 + 32 + 24 + 224 + 20 + 20,
     },
     [WINDOW_ABILITIES] = 
     {
@@ -242,7 +268,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 14,
         .height = 2,
         .paletteNum = 2,
-        .baseBlock = 1 + 32 + 24 + 224 + 36,
+        .baseBlock = 1 + 32 + 24 + 224 + 20 + 20 + 36,
     },
     [WINDOW_NATURES] = 
     {
@@ -252,7 +278,7 @@ static const struct WindowTemplate sMenuWindowTemplates[] =
         .width = 14,
         .height = 2,
         .paletteNum = 2,
-        .baseBlock = 1 + 32 + 24 + 224 + 36 + 28,
+        .baseBlock = 1 + 32 + 24 + 224 + 20 + 20 + 36 + 28,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -1692,10 +1718,13 @@ static void PrintMonStats(void)
 
     u32 nature = GetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE);
     enum Ability ability = GetBoxMonAbility(boxMon);
+    u32 level = GetMonData(&mon, MON_DATA_LEVEL);
     u32 currentStat, digits;
     s32 xPos;
 
     FillWindowPixelBuffer(WINDOW_STATS_HEADER, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WINDOW_EVS_HEADER, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
+    FillWindowPixelBuffer(WINDOW_EVS_PANEL, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WINDOW_STATS_PANEL, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WINDOW_NICKNAME, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
     FillWindowPixelBuffer(WINDOW_ABILITIES, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
@@ -1705,6 +1734,9 @@ static void PrintMonStats(void)
     PrintTextOnWindow(WINDOW_STATS_HEADER, sText_MenuStat, 3,  0, 0, FONT_WHITE_BLACK);
     PrintTextOnWindow(WINDOW_STATS_HEADER, sText_MenuEV,   40, 0, 0, FONT_WHITE_BLACK);
     PrintTextOnWindow(WINDOW_STATS_HEADER, sText_MenuIV,   76, 0, 0, FONT_WHITE_BLACK);
+
+    PrintTextOnWindow(WINDOW_EVS_HEADER, COMPOUND_STRING("Unspent"), 0,  0, 0, FONT_WHITE_BLACK);
+    PrintTextOnWindow(WINDOW_EVS_HEADER, COMPOUND_STRING("Total"),   48,  0, 0, FONT_WHITE_BLACK);
 
     UpdateNatureArrowSprites();
 
@@ -1734,8 +1766,12 @@ static void PrintMonStats(void)
     }
 
     digits = P_STAT_EDITOR_CENTER_ALIGN_STATS ? (currentStat == 0 ? 1 : CountDigits(currentStat)) : 3;
-    ConvertIntToDecimalStringN(gStringVar2, sStatEditorDataPtr->evTotal, STR_CONV_MODE_RIGHT_ALIGN, digits);
-    PrintTextOnWindowWithFont(WINDOW_STATS_PANEL, gStringVar2, STARTING_X + SECOND_COLUMN + 2, STARTING_Y + (STAT_ROW_HEIGHT * 6), 0, FONT_BLACK, FONT_NORMAL);
+    ConvertIntToDecimalStringN(gStringVar2, (gLevelToEVs[level] - sStatEditorDataPtr->evTotal), STR_CONV_MODE_RIGHT_ALIGN, digits);
+    PrintTextOnWindowWithFont(WINDOW_EVS_PANEL, gStringVar2, 14, 1, 0, FONT_BLACK, FONT_NORMAL);
+
+    digits = P_STAT_EDITOR_CENTER_ALIGN_STATS ? (currentStat == 0 ? 1 : CountDigits(currentStat)) : 3;
+    ConvertIntToDecimalStringN(gStringVar2, gLevelToEVs[level], STR_CONV_MODE_RIGHT_ALIGN, digits);
+    PrintTextOnWindowWithFont(WINDOW_EVS_PANEL, gStringVar2, 46, 1, 0, FONT_BLACK, FONT_NORMAL);
 
     if (P_STAT_EDITOR_HP_OR_TERA == P_STAT_EDITOR_HIDDEN_POWER)
         UpdateHiddenPowerTypeIcon();
@@ -1768,12 +1804,42 @@ static void PrintMonStats(void)
     CopyWindowToVram(WINDOW_ABILITIES, COPYWIN_FULL);
     PutWindowTilemap(WINDOW_NATURES);
     CopyWindowToVram(WINDOW_NATURES, COPYWIN_FULL);
+    PutWindowTilemap(WINDOW_EVS_HEADER);
+    CopyWindowToVram(WINDOW_EVS_HEADER, COPYWIN_FULL);
+    PutWindowTilemap(WINDOW_EVS_PANEL);
+    CopyWindowToVram(WINDOW_EVS_PANEL, COPYWIN_FULL);
 }
 
 struct SpriteCoords
 {
     u8 x;
     u8 y;
+};
+
+static bool32 CheckIfStatCantIncrease(void)
+{
+    struct BoxPokemon *boxMon = GetCurrentBoxMon();
+    struct Pokemon mon;
+    BoxMonToMon(boxMon, &mon);
+    
+    u32 totalEvs = gLevelToEVs[GetMonData(&mon, MON_DATA_LEVEL)];
+    u32 currEvTotal = sStatEditorDataPtr->evTotal;
+    u32 availableEvs = totalEvs - currEvTotal;
+    bool8 evsUnavailable = FALSE;
+    bool8 currIsEvs = FALSE;
+    bool8 currStatMax = FALSE;
+
+    if(sStatEditorDataPtr->statEditingValue == ((sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS) ? (MAX_PER_STAT_EVS) : (MAX_PER_STAT_IVS)))
+        currStatMax = TRUE;
+    if(sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS)
+        currIsEvs = TRUE;
+    if (availableEvs == 0)
+        evsUnavailable = TRUE;
+    if (currStatMax || (currIsEvs && (currEvTotal == MAX_TOTAL_EVS || evsUnavailable)))
+        return TRUE;
+    else
+        return FALSE;
+
 };
 
 static void SelectorCallback(struct Sprite *sprite)
@@ -1845,7 +1911,7 @@ static void SelectorCallback(struct Sprite *sprite)
             sprite->invisible = TRUE;
             return;
         }
-        if (!isLeft && CHECK_IF_STAT_CANT_INCREASE)
+        if (!isLeft && CheckIfStatCantIncrease())
         {
             sprite->invisible = TRUE;
             return;
@@ -2197,7 +2263,13 @@ static void ApplyRightPanelStatChange(void)
 
 static void HandleRightPanelEditInput(u32 input)
 {
-    if ((input <= EDIT_INPUT_INCREASE_MAX) && CHECK_IF_STAT_CANT_INCREASE)
+    struct BoxPokemon *boxMon = GetCurrentBoxMon();
+    struct Pokemon mon;
+    BoxMonToMon(boxMon, &mon);
+    
+    u32 totalEvs = gLevelToEVs[GetMonData(&mon, MON_DATA_LEVEL)];
+    
+    if ((input <= EDIT_INPUT_INCREASE_MAX) && CheckIfStatCantIncrease())
         return;
 
     if ((input >= EDIT_INPUT_DECREASE) && (sStatEditorDataPtr->statEditingValue == MIN_STAT))
@@ -2206,13 +2278,13 @@ static void HandleRightPanelEditInput(u32 input)
     switch (input)
     {
     case EDIT_INPUT_INCREASE:
-        if (!CHECK_IF_STAT_CANT_INCREASE)
+        if (!CheckIfStatCantIncrease())
             sStatEditorDataPtr->statEditingValue++;
         break;
     case EDIT_INPUT_INCREASE_BY_10:
         if (sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS)
         {
-            u32 remaining = MAX_TOTAL_EVS - sStatEditorDataPtr->evTotal;
+            u32 remaining = totalEvs - sStatEditorDataPtr->evTotal;
             sStatEditorDataPtr->statEditingValue += (remaining < 10) ? remaining : 10;
             if (sStatEditorDataPtr->statEditingValue > MAX_PER_STAT_EVS)
                 sStatEditorDataPtr->statEditingValue = MAX_PER_STAT_EVS;
@@ -2227,7 +2299,7 @@ static void HandleRightPanelEditInput(u32 input)
     case EDIT_INPUT_INCREASE_MAX:
         if (sStatEditorDataPtr->rightPanelColumn == RIGHT_PANEL_EVS)
         {
-            u32 remaining = MAX_TOTAL_EVS - sStatEditorDataPtr->evTotal;
+            u32 remaining = totalEvs - sStatEditorDataPtr->evTotal;
             sStatEditorDataPtr->statEditingValue += (remaining < MAX_PER_STAT_EVS) ? remaining : MAX_PER_STAT_EVS;
             if (sStatEditorDataPtr->statEditingValue > MAX_PER_STAT_EVS)
                 sStatEditorDataPtr->statEditingValue = MAX_PER_STAT_EVS;
@@ -2546,4 +2618,4 @@ static void Task_StatEditorMain(u8 taskId)
     }
 }
 
-#endif // P_STAT_EDITOR_ENABLE
+// #endif // P_STAT_EDITOR_ENABLE
