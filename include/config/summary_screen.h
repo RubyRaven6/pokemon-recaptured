@@ -3,7 +3,7 @@
 
 // Settings
 #define P_SUMMARY_SCREEN_NATURE_COLORS   TRUE   // If TRUE, nature-based stat boosts and reductions will be red and blue in the summary screen.
-#define P_SUMMARY_SCREEN_RENAME          TRUE   // If TRUE, an option to change Pokémon nicknames replaces the cancel prompt on the summary screen info page.
+#define P_SUMMARY_SCREEN_RENAME          FALSE  // If TRUE, an option to change Pokémon nicknames replaces the cancel prompt on the summary screen info page.
 
 // IV/EV settings
 #define P_SUMMARY_SCREEN_IV_EV_INFO      FALSE  // If TRUE, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page.
@@ -48,7 +48,7 @@ Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
 #define P_FLAG_TUTOR_MOVES               0       // If this flag is set, enables tutor move relearner.
 
 // Move Relearner summary screen
-#define P_SUMMARY_SCREEN_MOVE_RELEARNER  TRUE   // If TRUE, shows an option for Pokémon to relearn moves on the summary screen moves page.
+#define P_SUMMARY_SCREEN_MOVE_RELEARNER  FALSE  // If TRUE, shows an option for Pokémon to relearn moves on the summary screen moves page.
 #define P_SUMMARY_MOVE_RELEARNER_FULL_PP TRUE   // If TRUE, the move relearner in the summary screen restores relearned moves' PP to full.
 
 #endif // GUARD_CONFIG_SUMMARY_SCREEN_H

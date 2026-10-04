@@ -25,6 +25,7 @@
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
+#include "stat_editor.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
@@ -386,7 +387,7 @@ static void CB2_InitLearnMove_Basic(void)
             AddScrollArrows();
             gTasks[sMoveRelearnerStruct->mainTask].func = Task_MoveRelearner_HandleInput;
         }
-        if (gRelearnMode == RELEARN_MODE_SCRIPT)
+        if (gRelearnMode == RELEARN_MODE_SCRIPT || gRelearnMode == RELEARN_MODE_STAT_EDITOR)
             gTasks[sMoveRelearnerStruct->mainTask].tRecoverPp = TRUE;
         else
             gTasks[sMoveRelearnerStruct->mainTask].tRecoverPp = P_SUMMARY_MOVE_RELEARNER_FULL_PP;
@@ -542,12 +543,24 @@ static const struct MoveLearnUI sMoveLearnUI =
     .endTask = UIEndTask
 };
 
+static void CB2_ReturnToSummaryScreenFromMoveRelearner(void)
+{
+    ShowPokemonSummaryScreen(SUMMARY_MODE_STAT_EDITOR, gParties[B_TRAINER_PLAYER], gSpecialVar_0x8004, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
+}
+
 static void Task_MoveRelearner_Quit(u8 taskId)
 {
     if (gPaletteFade.active)
         return;
 
-    if (gInitialSummaryScreenCallback != NULL)
+    if (gRelearnMode == RELEARN_MODE_STAT_EDITOR)
+    {
+        if (P_PARTY_MENU_STAT_EDITOR)
+            StatEditor_Init(CB2_ReturnToPartyMenuFromSummaryScreen);
+        else if (P_SUMMARY_SCREEN_STAT_EDITOR)
+            StatEditor_Init(CB2_ReturnToSummaryScreenFromMoveRelearner);
+    }
+    else if (gInitialSummaryScreenCallback != NULL)
     {
         if (gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES)
             ShowPokemonSummaryScreen(SUMMARY_MODE_RELEARNER_CONTEST, gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
