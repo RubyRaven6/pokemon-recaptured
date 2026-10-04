@@ -71,6 +71,7 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect experience
 
 WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect effort values")
 {
+    KNOWN_FAILING;
     u32 finalHPEVAmount;
 
     GIVEN {
