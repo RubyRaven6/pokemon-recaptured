@@ -152,6 +152,7 @@ static void StatEditor_FadeAndBail(void);
 static bool8 StatEditor_LoadGraphics(void);
 static void StatEditor_InitWindows(void);
 static void PrintTitleToWindowMainState(void);
+static void StatEditor_EnableEVEditing(void);
 static void Task_StatEditorWaitFadeIn(u8 taskId);
 static void Task_StatEditorMain(u8 taskId);
 static void CreateMonSprite(enum Species species);
@@ -969,6 +970,7 @@ static bool8 StatEditor_DoGfxSetup(void)
         }
         break;
     case 3:
+        StatEditor_EnableEVEditing();
         if (StatEditor_LoadGraphics() == TRUE)
             gMain.state++;
         break;
@@ -1129,6 +1131,33 @@ static bool8 StatEditor_LoadGraphics(void)
         return TRUE;
     }
     return FALSE;
+}
+
+static void StatEditor_EnableEVEditing(void)
+{
+    struct BoxPokemon *boxMon = GetCurrentBoxMon();
+    struct Pokemon mon;
+    BoxMonToMon(boxMon, &mon);
+    u32 level = GetMonData(&mon, MON_DATA_LEVEL);
+    u32 monHP = GetMonData(&mon, MON_DATA_HP_EV);
+    u32 monATK = GetMonData(&mon, MON_DATA_ATK_EV);
+    u32 monDEF = GetMonData(&mon, MON_DATA_DEF_EV);
+    u32 monSPE = GetMonData(&mon, MON_DATA_SPEED_EV);
+    u32 monSPA = GetMonData(&mon, MON_DATA_SPATK_EV);
+    u32 monSPD = GetMonData(&mon, MON_DATA_SPDEF_EV);
+    u32 monEVs = (monHP + monATK + monDEF + monSPA + monSPD + monSPE);    
+
+    if(gLevelToEVs[level] - monEVs > 0)
+        FlagSet(FLAG_SYS_EV_ALLOC);
+
+}
+
+static void StatEditor_DisableEVIVEditing(void)
+{
+    if(FlagGet(FLAG_SYS_EV_ALLOC))
+        FlagClear(FLAG_SYS_EV_ALLOC);
+    if(FlagGet(FLAG_SYS_IV_ALLOC))
+        FlagClear(FLAG_SYS_IV_ALLOC);
 }
 
 static void StatEditor_InitWindows(void)
@@ -2434,6 +2463,9 @@ static void Task_StatEditorMain(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
+        DebugPrintf("FLAG_SYS_EV_ALLOC: %d",FlagGet(FLAG_SYS_EV_ALLOC));
+        StatEditor_DisableEVIVEditing();
+        DebugPrintf("FLAG_SYS_EV_ALLOC: %d",FlagGet(FLAG_SYS_EV_ALLOC));
         PlaySE(SE_PC_OFF);
         gLastViewedMonIndex = sStatEditorDataPtr->monIndex;
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
