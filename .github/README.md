@@ -14,3 +14,4 @@
   - BlackFragrant: SwSh style graphics.
   - Montblanc: SwSh icons.
   - Zatsu: Tera type icons.
+- Start Menu Clock: Pawkkie
