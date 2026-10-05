@@ -95,6 +95,14 @@
 #define CMD_ARGS(...) const struct __attribute__((packed)) { u8 opcode; RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) const u8 nextInstr[0]; } *const cmd UNUSED = (const void *)gBattlescriptCurrInstr
 #define NATIVE_ARGS(...) CMD_ARGS(void (*func)(void), ##__VA_ARGS__)
 
+// Acts essentially like a percentage multiplier
+// for the exp catch up feature
+static const u8 sCatchUpExpFactors[] =
+{
+    100, 110, 125, 140, 160, 175, 190, 200, 210, 220,
+    225, 230, 235, 240, 245, 250,
+};
+
 // table to avoid ugly powing on gba (courtesy of doesnt)
 // this returns (i^2.5)/4
 // the quarters cancel so no need to re-quadruple them in actual calculation
@@ -9263,6 +9271,25 @@ u8 GetFirstFaintedPartyIndex(enum BattlerId battler)
     return PARTY_SIZE;
 }
 
+static inline u8 GetHighestMonLevel(void)
+{
+    u32 i, level;
+    u8 highestLevel = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
+        {
+            level = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            if(level > highestLevel)
+                highestLevel = level;
+        }
+    }
+
+    return highestLevel;
+}
+
+
 void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler)
 {
     enum HoldEffect holdEffect = GetMonHoldEffect(&gParties[B_TRAINER_PLAYER][expGetterMonId]);
@@ -9277,6 +9304,19 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
         *expAmount = (*expAmount * 4915) / 4096;
     if (CheckBagHasItem(ITEM_EXP_CHARM, 1)) //is also for other exp boosting Powers if/when implemented
         *expAmount = (*expAmount * 150) / 100;
+
+    //Catchup EXP
+    {
+        s8 levelDiff = GetHighestMonLevel() - GetMonData(&gPlayerParty[expGetterMonId], MON_DATA_LEVEL);
+
+        if (levelDiff < 0)
+            levelDiff = 0;
+
+        if (levelDiff > 15)
+            levelDiff = 15;
+
+        *expAmount = (*expAmount * sCatchUpExpFactors[levelDiff]) / 100;
+    }
     if (GetConfig(B_SCALED_EXP) >= GEN_5 && GetConfig(B_SCALED_EXP) != GEN_6)
     {
         // Note: There is an edge case where if a Pokémon receives a large amount of exp, it wouldn't be properly calculated
