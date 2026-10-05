@@ -250,6 +250,22 @@ static const struct WindowTemplate sSaveInfoWindowTemplate = {
     .baseBlock = 8
 };
 
+struct SafeAreaData {
+    s8 mapGroup;
+    s8 mapNum;
+};
+
+static const struct SafeAreaData sSafeAreas[] =
+{
+    { MAP_GROUP(MAP_LITTLEROOT_TOWN), MAP_NUM(MAP_LITTLEROOT_TOWN) },
+    { MAP_GROUP(MAP_DEWFORD_TOWN), MAP_NUM(MAP_DEWFORD_TOWN) },
+};
+
+static const struct SafeAreaData sUnsafeAreas[] =
+{
+    { MAP_GROUP(MAP_DEWFORD_TOWN_GYM), MAP_NUM(MAP_DEWFORD_TOWN_GYM) },
+};
+
 // Local functions
 static void BuildStartMenuActions(void);
 static void AddStartMenuAction(u8 action);
@@ -1532,24 +1548,23 @@ static bool8 StartMenuStatEditorCallback(void)
 
 static bool32 IsPlayerInSafeArea(void)
 {
-    
-    static const struct {
-        s8 mapGroup;
-        s8 mapNum;
-    } sSafeAreas[] =
+    for (u32 i = 0; i < ARRAY_COUNT(sUnsafeAreas); i++)
     {
-        { MAP_GROUP(MAP_LITTLEROOT_TOWN), MAP_NUM(MAP_LITTLEROOT_TOWN) },
-        { MAP_GROUP(MAP_DEWFORD_TOWN), MAP_NUM(MAP_DEWFORD_TOWN) },
-        // etc.
-    };
+        if (gSaveBlock1Ptr->location.mapNum == sUnsafeAreas[i].mapNum
+        && gSaveBlock1Ptr->location.mapGroup == sUnsafeAreas[i].mapGroup)
+            return FALSE; // is unsafe
+    }
     
     for (u32 i = 0; i < ARRAY_COUNT(sSafeAreas); i++)
     {
-    if (gSaveBlock1Ptr->location.mapNum == sSafeAreas[i].mapNum
-     && gSaveBlock1Ptr->location.mapGroup == sSafeAreas[i].mapGroup)
-        return TRUE; // is safe
+        if (gSaveBlock1Ptr->location.mapNum == sSafeAreas[i].mapNum
+        && gSaveBlock1Ptr->location.mapGroup == sSafeAreas[i].mapGroup)
+            return TRUE; // is safe
     }
-    
+
+    if(gMapHeader.mapType == MAP_TYPE_INDOOR) //is this map indoors?
+        return TRUE;
+
     return FALSE; // ain't safe
 }
 
@@ -1563,10 +1578,12 @@ static bool32 IsPlayerOnSafeMetatile(void)
 
 static bool32 ShowSaveOption(void)
 {
-  if(IsPlayerInSafeArea())
-    return TRUE;
-  if(IsPlayerOnSafeMetatile())
-    return TRUE;
+    DebugPrintf("IsPlayerInSafeArea(): %d", IsPlayerInSafeArea());
+    
+    if(IsPlayerOnSafeMetatile())
+        return TRUE;
+    if(IsPlayerInSafeArea())
+        return TRUE;
     
     return FALSE;
 }
