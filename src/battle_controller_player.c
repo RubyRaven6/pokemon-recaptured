@@ -1454,7 +1454,6 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
     enum BattlerId battler = gTasks[taskId].tExpTask_battler;
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][monIndex];
     u8 level = GetMonData(mon, MON_DATA_LEVEL);
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
     u32 exp = GetMonData(mon, MON_DATA_EXP);
     u32 currLvlExp = gExperienceTables[GROWTH_MEDIUM_SLOW][level];
     u32 expToNextLvl;
@@ -1470,7 +1469,6 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
 static void Task_GiveExpWithExpBar(u8 taskId)
 {
     u32 level, expAfterGain;
-    enum Species species;
     u32 oldMaxHP;
     s32 currExp, expOnNextLvl, newExpPoints;
 
@@ -1492,7 +1490,6 @@ static void Task_GiveExpWithExpBar(u8 taskId)
             m4aSongNumStop(SE_EXP);
             level = GetMonData(mon, MON_DATA_LEVEL);
             currExp = GetMonData(mon, MON_DATA_EXP);
-            species = GetMonData(mon, MON_DATA_SPECIES);
             oldMaxHP = GetMonData(mon, MON_DATA_MAX_HP);
             expOnNextLvl = gExperienceTables[GROWTH_MEDIUM_SLOW][level + 1];
 
