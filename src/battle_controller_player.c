@@ -1408,7 +1408,6 @@ static void Task_GiveExpToMon(u8 taskId)
     if (GetBattlerCoordsIndex(battler) == BATTLE_COORDS_DOUBLES || monId != gBattlerPartyIndexes[battler]) // Give exp without moving the expbar.
     {
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][monId];
-        enum Species species = GetMonData(mon, MON_DATA_SPECIES);
         u8 level = GetMonData(mon, MON_DATA_LEVEL);
         u32 currExp = GetMonData(mon, MON_DATA_EXP);
         u32 nextLvlExp = gExperienceTables[GROWTH_MEDIUM_SLOW][level + 1];

@@ -1586,7 +1586,6 @@ void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest)
 
 u8 GetLevelFromMonExp(struct Pokemon *mon)
 {
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
     u32 exp = GetMonData(mon, MON_DATA_EXP);
     s32 level = 1;
 
@@ -1598,7 +1597,6 @@ u8 GetLevelFromMonExp(struct Pokemon *mon)
 
 u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon)
 {
-    enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
     u32 exp = GetBoxMonData(boxMon, MON_DATA_EXP);
     s32 level = 1;
 
@@ -3625,11 +3623,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, enum Item item, u8 partyIndex, 
 
                 if (param == 0) // Rare Candy
                 {
-                    dataUnsigned = gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate][GetMonData(mon, MON_DATA_LEVEL) + 1];
+                    dataUnsigned = gExperienceTables[GROWTH_MEDIUM_SLOW][GetMonData(mon, MON_DATA_LEVEL) + 1];
                 }
                 else if (param - 1 < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
                 {
-                    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
                     dataUnsigned = sExpCandyExperienceTable[param - 1] + GetMonData(mon, MON_DATA_EXP);
 
                     if (B_RARE_CANDY_CAP && B_EXP_CAP_TYPE == EXP_CAP_HARD)
@@ -5115,7 +5112,6 @@ u16 GetMonEVCount(struct Pokemon *mon)
 
 bool8 TryIncrementMonLevel(struct Pokemon *mon)
 {
-    enum Species species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u8 nextLevel = GetMonData(mon, MON_DATA_LEVEL, 0) + 1;
     u32 expPoints = GetMonData(mon, MON_DATA_EXP, 0);
     if (expPoints > gExperienceTables[GROWTH_MEDIUM_SLOW][MAX_LEVEL])

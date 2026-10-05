@@ -1602,7 +1602,7 @@ void GenerateBattlePyramidWildMon(enum Species forceSpecies)
     }
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0],
                MON_DATA_EXP,
-               &gExperienceTables[gSpeciesInfo[wildMons[id].species].growthRate][lvl]);
+               &gExperienceTables[GROWTH_MEDIUM_SLOW][lvl]);
 
     switch (wildMons[id].abilityNum)
     {
