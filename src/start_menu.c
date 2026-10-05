@@ -24,6 +24,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
+#include "metatile_behavior.h"
 #include "new_game.h"
 #include "option_menu.h"
 #include "overworld.h"
@@ -283,6 +284,9 @@ static void ShowSaveInfoWindow(void);
 static void RemoveSaveInfoWindow(void);
 static void HideStartMenuWindow(void);
 static void HideStartMenuDebug(void);
+static bool32 IsPlayerInSafeArea(void);
+static bool32 IsPlayerOnSafeMetatile(void);
+static bool32 ShowSaveOption(void);
 
 static void BuildStartMenuActions(void)
 {
@@ -346,7 +350,8 @@ static void BuildNormalStartMenu(void)
         AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
-    AddStartMenuAction(MENU_ACTION_SAVE);
+    if(ShowSaveOption())
+        AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
@@ -1523,4 +1528,45 @@ static bool8 StartMenuStatEditorCallback(void)
 {
     CreateTask(Task_OpenStatEditorFromStartMenu, 0);
     return TRUE;
+}
+
+static bool32 IsPlayerInSafeArea(void)
+{
+    
+    static const struct {
+        s8 mapGroup;
+        s8 mapNum;
+    } sSafeAreas[] =
+    {
+        { MAP_GROUP(MAP_LITTLEROOT_TOWN), MAP_NUM(MAP_LITTLEROOT_TOWN) },
+        { MAP_GROUP(MAP_DEWFORD_TOWN), MAP_NUM(MAP_DEWFORD_TOWN) },
+        // etc.
+    };
+    
+    for (u32 i = 0; i < ARRAY_COUNT(sSafeAreas); i++)
+    {
+    if (gSaveBlock1Ptr->location.mapNum == sSafeAreas[i].mapNum
+     && gSaveBlock1Ptr->location.mapGroup == sSafeAreas[i].mapGroup)
+        return TRUE; // is safe
+    }
+    
+    return FALSE; // ain't safe
+}
+
+static bool32 IsPlayerOnSafeMetatile(void)
+{
+    if(MetatileBehavior_IsSavePointTile(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static bool32 ShowSaveOption(void)
+{
+  if(IsPlayerInSafeArea())
+    return TRUE;
+  if(IsPlayerOnSafeMetatile())
+    return TRUE;
+    
+    return FALSE;
 }

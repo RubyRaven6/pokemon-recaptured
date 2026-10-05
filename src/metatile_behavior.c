@@ -1762,3 +1762,10 @@ bool8 MetatileBehavior_IsTrainerTowerMonitor(u8 metatileBehavior)
         return FALSE;
 }
 
+bool8 MetatileBehavior_IsSavePointTile(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_SAVE_POINT)
+        return TRUE;
+    else
+        return FALSE;
+}
