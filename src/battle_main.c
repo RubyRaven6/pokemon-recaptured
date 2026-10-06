@@ -1787,19 +1787,6 @@ void CB2_QuitRecordedBattle(void)
     }
 }
 
-void ModifyPersonalityForNature(u32 *personality, u32 newNature)
-{
-    u32 nature = GetNatureFromPersonality(*personality);
-    s32 diff = abs((s32)nature - (s32)newNature);
-    s32 sign = (nature > newNature) ? 1 : -1;
-    if (diff > NUM_NATURES / 2)
-    {
-        diff = NUM_NATURES - diff;
-        sign *= -1;
-    }
-    *personality -= (diff * sign);
-}
-
 void VBlankCB_Battle(void)
 {
     // Change gRngSeed every vblank unless the battle could be recorded.
@@ -3021,6 +3008,10 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
         gBattleMons[battler].volatiles.battlerPreventingEscape = volatilesCopy->battlerPreventingEscape;
         gBattleMons[battler].volatiles.embargoTimer = volatilesCopy->embargoTimer;
         gBattleMons[battler].volatiles.healBlockTimer = volatilesCopy->healBlockTimer;
+        if (IsTelekinesisBannedSpecies(gBattleMons[battler].species))
+            gBattleMons[battler].volatiles.telekinesis = FALSE;
+        else
+            gBattleMons[battler].volatiles.telekinesisTimer = volatilesCopy->telekinesisTimer;
     }
     else if (effect == EFFECT_SHED_TAIL)
     {
@@ -3799,8 +3790,6 @@ static void HandleTurnActionSelectionState(void)
 {
     s32 i;
 
-    gAiLogicData->reverseBattlerLogicOrder = RandomPercentage(RNG_AI_REVERSE_BATTLER_LOGIC_ORDER, GetConfig(AI_REVERSE_BATTLER_LOGIC_ORDER_CHANCE)) && IsDoubleBattle();
-
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
     for (enum BattlerId battlerIndex = 0; battlerIndex < gBattlersCount; battlerIndex++)
     {
@@ -4454,6 +4443,9 @@ s32 GetChosenMovePriority(enum BattlerId battler, enum Ability ability)
     gProtectStructs[battler].pranksterElevated = FALSE;
     if (gProtectStructs[battler].noValidMoves)
         move = MOVE_STRUGGLE;
+    else if (gLockedMoves[battler] != MOVE_NONE
+          && (gBattleMons[battler].volatiles.multipleTurns || gBattleMons[battler].volatiles.rechargeTimer > 0))
+        move = gLockedMoves[battler];
     else if (gBattleMons[battler].volatiles.encoredMove != MOVE_NONE && GetConfig(B_ENCORE_PRIORITY) >= GEN_CHAMPIONS)
         move = gBattleMons[battler].volatiles.encoredMove;
     else
