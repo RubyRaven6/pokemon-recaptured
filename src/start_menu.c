@@ -255,15 +255,16 @@ struct SafeAreaData {
     s8 mapNum;
 };
 
-static const struct SafeAreaData sSafeAreas[] =
+const struct SafeAreaData gSafeAreas[] =
 {
     { MAP_GROUP(MAP_LITTLEROOT_TOWN), MAP_NUM(MAP_LITTLEROOT_TOWN) },
     { MAP_GROUP(MAP_DEWFORD_TOWN), MAP_NUM(MAP_DEWFORD_TOWN) },
 };
 
-static const struct SafeAreaData sUnsafeAreas[] =
+const struct SafeAreaData sUnsafeAreas[] =
 {
-    { MAP_GROUP(MAP_DEWFORD_TOWN_GYM), MAP_NUM(MAP_DEWFORD_TOWN_GYM) },
+    { MAP_GROUP(MAP_ROUTE119_WEATHER_INSTITUTE_1F), MAP_NUM(MAP_ROUTE119_WEATHER_INSTITUTE_1F) },
+    { MAP_GROUP(MAP_ROUTE119_WEATHER_INSTITUTE_2F), MAP_NUM(MAP_ROUTE119_WEATHER_INSTITUTE_2F) },
 };
 
 // Local functions
@@ -300,8 +301,6 @@ static void ShowSaveInfoWindow(void);
 static void RemoveSaveInfoWindow(void);
 static void HideStartMenuWindow(void);
 static void HideStartMenuDebug(void);
-static bool32 IsPlayerInSafeArea(void);
-static bool32 IsPlayerOnSafeMetatile(void);
 static bool32 ShowSaveOption(void);
 
 static void BuildStartMenuActions(void)
@@ -1546,7 +1545,7 @@ static bool8 StartMenuStatEditorCallback(void)
     return TRUE;
 }
 
-static bool32 IsPlayerInSafeArea(void)
+bool32 IsPlayerInSafeArea(void)
 {
     for (u32 i = 0; i < ARRAY_COUNT(sUnsafeAreas); i++)
     {
@@ -1555,10 +1554,10 @@ static bool32 IsPlayerInSafeArea(void)
             return FALSE; // is unsafe
     }
     
-    for (u32 i = 0; i < ARRAY_COUNT(sSafeAreas); i++)
+    for (u32 i = 0; i < ARRAY_COUNT(gSafeAreas); i++)
     {
-        if (gSaveBlock1Ptr->location.mapNum == sSafeAreas[i].mapNum
-        && gSaveBlock1Ptr->location.mapGroup == sSafeAreas[i].mapGroup)
+        if (gSaveBlock1Ptr->location.mapNum == gSafeAreas[i].mapNum
+        && gSaveBlock1Ptr->location.mapGroup == gSafeAreas[i].mapGroup)
             return TRUE; // is safe
     }
 
@@ -1568,7 +1567,7 @@ static bool32 IsPlayerInSafeArea(void)
     return FALSE; // ain't safe
 }
 
-static bool32 IsPlayerOnSafeMetatile(void)
+bool32 IsPlayerOnSafeMetatile(void)
 {
     if(MetatileBehavior_IsSavePointTile(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior))
         return TRUE;
@@ -1578,8 +1577,6 @@ static bool32 IsPlayerOnSafeMetatile(void)
 
 static bool32 ShowSaveOption(void)
 {
-    DebugPrintf("IsPlayerInSafeArea(): %d", IsPlayerInSafeArea());
-    
     if(IsPlayerOnSafeMetatile())
         return TRUE;
     if(IsPlayerInSafeArea())
