@@ -29,7 +29,7 @@ You can help by adding yourself or people you know in a [pull request](https://g
 | dana yatsuta | | | |
 | kittenchilly | | x | No |
 | hedara90 | | | No |
-| PhallenTree | | | |
+| PhallenTree | PhallenTree | x | No |
 | Deokishisu | | x| No |
 | shinydragonhunter | | x | No |
 | PCG | | x | No |
@@ -57,3 +57,4 @@ You can help by adding yourself or people you know in a [pull request](https://g
 | cornixsenex | | | |
 | iriv | | x | no |
 | thepeeps191 | ThePeeps191 | | |
+| Jamie | FosterProgramming | | No |
