@@ -1072,6 +1072,7 @@ EventScript_AfterWhiteOutHeal::
 	applymovement VAR_LAST_TALKED, Movement_PkmnCenterNurse_Bow
 	waitmovement 0
 	fadedefaultbgm
+	clearflag FLAG_UNSAFE_AREA
 	releaseall
 	end
 

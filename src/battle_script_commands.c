@@ -76,6 +76,7 @@
 #include "test/battle.h"
 #include "follower_npc.h"
 #include "load_save.h"
+#include "start_menu.h"
 
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
 //
@@ -4058,7 +4059,7 @@ static void Cmd_getmoneyreward(void)
     CMD_ARGS();
 
     u32 money;
-    u8 sPartyLevel = 1;
+    u32 money1;
 
     if (gBattleOutcome == B_OUTCOME_WON)
     {
@@ -4069,28 +4070,17 @@ static void Cmd_getmoneyreward(void)
     }
     else
     {
-        if (B_WHITEOUT_MONEY <= GEN_3)
+        if (IsPlayerInSafeArea())
         {
-            money = GetMoney(&gSaveBlock1Ptr->money) / 2;
+            money = GetMoney(&gSaveBlock1Ptr->money) / 4;
         }
         else
         {
-            s32 i, count;
-            for (i = 0; i < PARTY_SIZE; i++)
-            {
-                if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-                && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
-                {
-                    if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL) > sPartyLevel)
-                        sPartyLevel = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL);
-                }
-            }
-            for (count = 0, i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
-            {
-                if (FlagGet(gBadgeFlags[i]) == TRUE)
-                    ++count;
-            }
-            money = sWhiteOutBadgeMoney[count] * sPartyLevel;
+            money1 = (GetMoney(&gSaveBlock1Ptr->money) * 3) / 4;
+            if(money1 > 1000)
+                money = money1;
+            else
+                money = 1000;
         }
         if (!IsEnoughMoney(&gSaveBlock1Ptr->money, money))
             money = GetMoney(&gSaveBlock1Ptr->money);
@@ -12460,4 +12450,15 @@ void BS_TryDoMoveEffectsBeforeMoves(void)
     }
 
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_CheckIfPlayerInSafeArea(void)
+{
+    DebugPrintf("inside BS_CheckIfPlayerInSafeArea");
+    NATIVE_ARGS(const u8 *jumpInstr);
+
+    if (IsPlayerInSafeArea())
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
