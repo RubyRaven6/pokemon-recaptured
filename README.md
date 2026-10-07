@@ -20,7 +20,7 @@ You MUST then ensure this addition persists EACH time the repository is modified
 This is an [organic](https://github.com/friend-safari) fork of the upstream project at [rh-hideout/pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion),
 modified to have only human contributions.
 
-Currently it includes code up to RHH's **1.16.1**.
+Currently it includes code up to RHH's **1.16.2**.
 
 See [PEOPLE.md](PEOPLE.md) for a list of human contributors.
 
