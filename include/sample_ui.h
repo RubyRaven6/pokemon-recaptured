@@ -18,4 +18,7 @@ void Task_OpenSampleUi_SlidingPanel(u8 taskId);
 // Launch the blank template version of the UI
 void Task_OpenSampleUi_BlankTemplate(u8 taskId);
 
+void Task_OpenGameOver(u8 taskId);
+void CB2_GameOverScreen(void);
+
 #endif

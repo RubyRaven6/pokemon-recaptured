@@ -34,6 +34,7 @@
 #include "random.h"
 #include "reload_save.h"
 #include "safari_zone.h"
+#include "sample_ui.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "secret_base.h"
@@ -708,7 +709,7 @@ static void CB2_EndWildBattle(void)
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
         if (!IsPlayerInSafeArea())
-            ReloadSave();
+            SetMainCallback2(CB2_GameOverScreen);
         else
             SetMainCallback2(CB2_WhiteOut);
     }
@@ -1625,7 +1626,7 @@ static void CB2_EndTrainerBattle(void)
             case TRAINER_CLASS_TEAM_AQUA:
             case TRAINER_CLASS_AQUA_ADMIN:
             case TRAINER_CLASS_AQUA_LEADER:
-                ReloadSave();
+                SetMainCallback2(CB2_GameOverScreen);
             default:
                 SetMainCallback2(CB2_WhiteOut);
         }
