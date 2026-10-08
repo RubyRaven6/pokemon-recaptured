@@ -176,9 +176,9 @@ WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not partici
         NOT MESSAGE("The rest of your team gained EXP. Points thanks to the Exp. Share!");
     } THEN {
         if (item == ITEM_EXP_SHARE)
-            EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
+            EXPECT_GT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[GROWTH_MEDIUM_SLOW][40]);
         else
-            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[gSpeciesInfo[SPECIES_WYNAUT].growthRate][40]);
+            EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_EXP), gExperienceTables[GROWTH_MEDIUM_SLOW][40]);
     }
 }
 
@@ -194,7 +194,7 @@ AI_DOUBLE_BATTLE_TEST("Both player Pokemon gain experience in double battles")
     } WHEN {
         TURN { }
     } THEN {
-        EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP) > gExperienceTables[gSpeciesInfo[SPECIES_WOBBUFFET].growthRate][99]);
+        EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_EXP) > gExperienceTables[GROWTH_MEDIUM_SLOW][99]);
         EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_LEVEL) > 1);
     }
 }

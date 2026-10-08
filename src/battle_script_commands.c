@@ -76,6 +76,7 @@
 #include "test/battle.h"
 #include "follower_npc.h"
 #include "load_save.h"
+#include "start_menu.h"
 
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
 //
@@ -94,6 +95,14 @@
 // gBattlescriptCurrInstr = cmd->nextInstr; advances to the next instruction.
 #define CMD_ARGS(...) const struct __attribute__((packed)) { u8 opcode; RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) const u8 nextInstr[0]; } *const cmd UNUSED = (const void *)gBattlescriptCurrInstr
 #define NATIVE_ARGS(...) CMD_ARGS(void (*func)(void), ##__VA_ARGS__)
+
+// Acts essentially like a percentage multiplier
+// for the exp catch up feature
+static const u8 sCatchUpExpFactors[] =
+{
+    100, 110, 125, 140, 160, 175, 190, 200, 210, 220,
+    225, 230, 235, 240, 245, 250,
+};
 
 // table to avoid ugly powing on gba (courtesy of doesnt)
 // this returns (i^2.5)/4
@@ -4050,7 +4059,7 @@ static void Cmd_getmoneyreward(void)
     CMD_ARGS();
 
     u32 money;
-    u8 sPartyLevel = 1;
+    u32 money1;
 
     if (gBattleOutcome == B_OUTCOME_WON)
     {
@@ -4061,28 +4070,17 @@ static void Cmd_getmoneyreward(void)
     }
     else
     {
-        if (B_WHITEOUT_MONEY <= GEN_3)
+        if (IsPlayerInSafeArea())
         {
-            money = GetMoney(&gSaveBlock1Ptr->money) / 2;
+            money = GetMoney(&gSaveBlock1Ptr->money) / 4;
         }
         else
         {
-            s32 i, count;
-            for (i = 0; i < PARTY_SIZE; i++)
-            {
-                if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-                && GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
-                {
-                    if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL) > sPartyLevel)
-                        sPartyLevel = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL);
-                }
-            }
-            for (count = 0, i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
-            {
-                if (FlagGet(gBadgeFlags[i]) == TRUE)
-                    ++count;
-            }
-            money = sWhiteOutBadgeMoney[count] * sPartyLevel;
+            money1 = (GetMoney(&gSaveBlock1Ptr->money) * 3) / 4;
+            if(money1 > 1000)
+                money = money1;
+            else
+                money = 1000;
         }
         if (!IsEnoughMoney(&gSaveBlock1Ptr->money, money))
             money = GetMoney(&gSaveBlock1Ptr->money);
@@ -9263,6 +9261,25 @@ u8 GetFirstFaintedPartyIndex(enum BattlerId battler)
     return PARTY_SIZE;
 }
 
+static inline u8 GetHighestMonLevel(void)
+{
+    u32 i, level;
+    u8 highestLevel = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES) != SPECIES_NONE)
+        {
+            level = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL);
+            if(level > highestLevel)
+                highestLevel = level;
+        }
+    }
+
+    return highestLevel;
+}
+
+
 void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler)
 {
     enum HoldEffect holdEffect = GetMonHoldEffect(&gParties[B_TRAINER_PLAYER][expGetterMonId]);
@@ -9277,6 +9294,19 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
         *expAmount = (*expAmount * 4915) / 4096;
     if (CheckBagHasItem(ITEM_EXP_CHARM, 1)) //is also for other exp boosting Powers if/when implemented
         *expAmount = (*expAmount * 150) / 100;
+
+    //Catchup EXP
+    {
+        s8 levelDiff = GetHighestMonLevel() - GetMonData(&gParties[B_TRAINER_PLAYER][expGetterMonId], MON_DATA_LEVEL);
+
+        if (levelDiff < 0)
+            levelDiff = 0;
+
+        if (levelDiff > 15)
+            levelDiff = 15;
+
+        *expAmount = (*expAmount * sCatchUpExpFactors[levelDiff]) / 100;
+    }
     if (GetConfig(B_SCALED_EXP) >= GEN_5 && GetConfig(B_SCALED_EXP) != GEN_6)
     {
         // Note: There is an edge case where if a Pokémon receives a large amount of exp, it wouldn't be properly calculated
@@ -12420,4 +12450,15 @@ void BS_TryDoMoveEffectsBeforeMoves(void)
     }
 
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_CheckIfPlayerInSafeArea(void)
+{
+    DebugPrintf("inside BS_CheckIfPlayerInSafeArea");
+    NATIVE_ARGS(const u8 *jumpInstr);
+
+    if (IsPlayerInSafeArea())
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }

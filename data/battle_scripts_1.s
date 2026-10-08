@@ -2904,25 +2904,23 @@ BattleScript_LocalBattleLostPrintWhiteOut::
 	getmoneyreward
 	printstring STRINGID_PLAYERWHITEOUT
 	waitmessage B_WAIT_TIME_LONG
-.if B_WHITEOUT_MONEY >= GEN_4
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostEnd
 	printstring STRINGID_PLAYERWHITEOUT2_WILD
 	waitmessage B_WAIT_TIME_LONG
-	printstring STRINGID_PLAYERWHITEOUT3
-	waitmessage B_WAIT_TIME_LONG
 	end
 BattleScript_LocalBattleLostEnd::
+	jumpifsafearea BattleScript_LocalBattleLostSafeZone
+	printstring STRINGID_PLAYERWHITEOUT3_TRAINER
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_PLAYERWHITEOUT4
+	waitmessage B_WAIT_TIME_LONG
+	end
+BattleScript_LocalBattleLostSafeZone::
 	printstring STRINGID_PLAYERWHITEOUT2_TRAINER
 	waitmessage B_WAIT_TIME_LONG
 	printstring STRINGID_PLAYERWHITEOUT3
 	waitmessage B_WAIT_TIME_LONG
 	end
-.else
-	printstring STRINGID_PLAYERWHITEOUT3
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_LocalBattleLostEnd::
-	end
-.endif
 
 BattleScript_CheckDomeDrew::
 	jumpifbyte CMP_EQUAL, gBattleOutcome, B_OUTCOME_DREW, BattleScript_LocalBattleLostEnd_
@@ -6345,11 +6343,7 @@ BattleScript_QuestionForfeitBattle::
 
 BattleScript_ForfeitBattleGaveMoney::
 	getmoneyreward
-.if B_WHITEOUT_MONEY >= GEN_4
 	printstring STRINGID_PLAYERWHITEOUT2_TRAINER
-.else
-	printstring STRINGID_PLAYERWHITEOUT3
-.endif
 	waitmessage B_WAIT_TIME_LONG
 	end
 
