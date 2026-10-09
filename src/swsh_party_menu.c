@@ -4368,15 +4368,11 @@ static void CB2_SelectBagItemToGive(void)
 
 static void CB2_GiveHoldItem(void)
 {
-    u8 i;
-
     if (gSpecialVar_ItemId == ITEM_NONE)
     {
         InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_NONE, Task_TryCreateSelectionWindow, gPartyMenu.exitCallback);
 
         sPartyMenuInternal->inItemMode = FALSE;
-        for (i = 0; i < PARTY_SIZE; i++)
-            UpdatePartyMonHeldItemSprite(&gParties[B_TRAINER_PLAYER][i], &sPartyMenuBoxes[i]);
     }
     else
     {
@@ -4390,8 +4386,6 @@ static void CB2_GiveHoldItem(void)
 
             // Restore item mode after InitPartyMenu reset it
             sPartyMenuInternal->inItemMode = TRUE;
-            for (i = 0; i < PARTY_SIZE; i++)
-                UpdatePartyMonHeldItemSprite(&gParties[B_TRAINER_PLAYER][i], &sPartyMenuBoxes[i]);
         }
         // Give mail
         else if (ItemIsMail(gSpecialVar_ItemId))
@@ -4408,8 +4402,6 @@ static void CB2_GiveHoldItem(void)
 
             // Restore item mode after InitPartyMenu reset it
             sPartyMenuInternal->inItemMode = TRUE;
-            for (i = 0; i < PARTY_SIZE; i++)
-                UpdatePartyMonHeldItemSprite(&gParties[B_TRAINER_PLAYER][i], &sPartyMenuBoxes[i]);
         }
     }
 }
