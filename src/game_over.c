@@ -369,7 +369,7 @@ static void GameOver_InitWindows(void)
     CopyWindowToVram(WINDOW_0, 3);
 }
 
-static const u8 sText_Text1[] = _("{A_BUTTON} Retry for the heart");
+static const u8 sText_Text1[] = _("{A_BUTTON} Retry for the Heart");
 static void GameOver_PrintUiSampleWindowText(void)
 {
     FillWindowPixelBuffer(WINDOW_0, PIXEL_FILL(TEXT_COLOR_TRANSPARENT));
