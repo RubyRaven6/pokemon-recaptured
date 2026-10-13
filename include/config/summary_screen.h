@@ -30,7 +30,7 @@ Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
 #define P_FLAG_SUMMARY_SCREEN_IV_EV_INFO 0      // If this flag is set, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page. Note: if P_SUMMARY_SCREEN_IV_EV_INFO is TRUE, this flag does nothing.
 
 // Move Relearner settings
-#define P_ENABLE_MOVE_RELEARNERS         FALSE   // If TRUE, it enables move relearners for egg, TM and tutor. (see below for specific configs /flags)
+#define P_ENABLE_MOVE_RELEARNERS         TRUE   // If TRUE, it enables move relearners for egg, TM and tutor. (see below for specific configs /flags)
 #define P_SORT_MOVES                     FALSE   // If TRUE, sorts all moves alphabetically in the relearner's list.
 
 // Level up Relearner
@@ -48,7 +48,7 @@ Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
 #define P_FLAG_TUTOR_MOVES               0       // If this flag is set, enables tutor move relearner.
 
 // Move Relearner summary screen
-#define P_SUMMARY_SCREEN_MOVE_RELEARNER  FALSE  // If TRUE, shows an option for Pokémon to relearn moves on the summary screen moves page.
+#define P_SUMMARY_SCREEN_MOVE_RELEARNER  TRUE  // If TRUE, shows an option for Pokémon to relearn moves on the summary screen moves page.
 #define P_SUMMARY_MOVE_RELEARNER_FULL_PP TRUE   // If TRUE, the move relearner in the summary screen restores relearned moves' PP to full.
 
 #endif // GUARD_CONFIG_SUMMARY_SCREEN_H

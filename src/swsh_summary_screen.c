@@ -743,7 +743,7 @@ static const s8 sMultiBattleOrder[] = {0, 2, 3, 1, 4, 5};
 #define WIN_PORTRAIT_INFO_TILES         (WIN_PORTRAIT_INFO_W * WIN_PORTRAIT_INFO_H)
 #define WIN_PORTRAIT_INFO_BASE          (WIN_MOVES_POWER_ACC_BASE + WIN_MOVES_POWER_ACC_TILES)
 
-#define WIN_PROMPT_IV_EV_STATS_W        10
+#define WIN_PROMPT_IV_EV_STATS_W        16
 #define WIN_PROMPT_IV_EV_STATS_H        2
 #define WIN_PROMPT_IV_EV_STATS_TILES    (WIN_PROMPT_IV_EV_STATS_W * WIN_PROMPT_IV_EV_STATS_H)
 #define WIN_PROMPT_IV_EV_STATS_BASE     (WIN_PORTRAIT_INFO_BASE + WIN_PORTRAIT_INFO_TILES)
@@ -795,7 +795,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
     },
     [PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS] = {
         .bg = 0,
-        .tilemapLeft = 20,
+        .tilemapLeft = 14,
         .tilemapTop = 18,
         .width = WIN_PROMPT_IV_EV_STATS_W,
         .height = WIN_PROMPT_IV_EV_STATS_H,
@@ -2755,6 +2755,7 @@ static void PrintRightAlignedPrompt(u8 windowId, u8 button, const u8 *text, int 
 static void DrawNextSkillsButtonPrompt(u8 mode)
 {
     const u8 *text;
+    struct PokeSummary *sum = &sMonSummaryScreen->summary;
 
     switch (mode)
     {
@@ -2763,7 +2764,14 @@ static void DrawNextSkillsButtonPrompt(u8 mode)
     default:                text = sText_ViewStats; break;
     }
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, PIXEL_FILL(0));
-    PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_A, text, 76, 1);
+
+    if(sum->evsUnallocated == TRUE)
+    {
+        PrintButtonIcon(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_START, 0, 4);
+        PrintTextOnWindowWithFont(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, COMPOUND_STRING("Allocate"), 24, 0, 0, 1, FONT_SMALL);
+    }
+
+    PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_A, text, 124, 1);
     ScheduleBgCopyTilemapToVram(0);
 }
 
