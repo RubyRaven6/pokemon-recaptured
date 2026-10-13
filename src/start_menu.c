@@ -847,7 +847,7 @@ static bool8 StartMenuPokemonCallback(void)
         return TRUE;
     }
 
-    if (!GetSafariZoneFlag() && !InBattlePyramid() && gSaveBlock2Ptr->playTimeSeconds == 0) 
+    if (!GetSafariZoneFlag() && !InBattlePyramid_() && gSaveBlock2Ptr->playTimeSeconds == 0) 
     {
         RemoveExtraStartMenuWindows();
         ShowTimeWindow();
