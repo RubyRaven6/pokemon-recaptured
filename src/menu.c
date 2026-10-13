@@ -444,6 +444,8 @@ u8 AddMapNamePopUpWindow(void)
     {
         if (OW_POPUP_GENERATION == GEN_5)
             sMapNamePopupWindowId = AddWindowParameterized(0, 0, 0, 30, 3, 14, 0x107);
+        else if (OW_POPUP_GENERATION == GEN_8)
+            sMapNamePopupWindowId = AddWindowParameterized(0, 16, 15, 14, 4, 14, 0x107);
         else
             sMapNamePopupWindowId = AddWindowParameterized(0, 1, 1, 10, 3, 14, 0x107);
     }
