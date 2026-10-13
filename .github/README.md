@@ -15,3 +15,4 @@
   - Montblanc: SwSh icons.
   - Zatsu: Tera type icons.
 - Start Menu Clock: Pawkkie
+- SwSh UIs: Montmoguri
