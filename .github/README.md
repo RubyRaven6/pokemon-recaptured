@@ -15,4 +15,13 @@
   - Montblanc: SwSh icons.
   - Zatsu: Tera type icons.
 - Start Menu Clock: Pawkkie
-- SwSh UIs: Montmoguri
+- SwSh UIs
+  - Feature Branch: Montmoguri
+  - RavePossum (BW summary screen)    
+  - Vexx (auto-format code)
+  - Buffelsaft (IV/EV code)
+  - Dizzyegg (nature color code)
+  - Zeturic (wrapping summary screen)
+  - Greenphx9 (pokefirered reference)
+  - Skeli (heart indicator graphic, based on Unbound)
+  - Zatsu (Tera type icons)
