@@ -46,6 +46,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
+#include "stat_editor.h"
 #include "task.h"
 #include "text.h"
 #include "tv.h"
@@ -61,7 +62,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#if SWSH_SUMMARY_SCREEN == TRUE
+// #if SWSH_SUMMARY_SCREEN == TRUE
 enum SWSHPSSEffect
 {
     PSS_EFFECT_BATTLE,
@@ -416,6 +417,7 @@ static void PrintStatLabels(void);
 static void PrintExpPointsNextLevel(void);
 static void PrintBattleMoves(void);
 static void Task_PrintBattleMoves(u8);
+static bool32 ShouldShowStatEditor(void);
 #if SWSH_SUMMARY_SHOW_CONTEST_PAGES
 static void PrintConditionsPageText(void);
 static void Task_PrintConditionsPage(u8);
@@ -2014,6 +2016,7 @@ void ShowPokemonSummaryScreen_SwSh(u8 mode, void *mons, u8 monIndex, u8 maxMonIn
     case SUMMARY_MODE_BOX_CURSOR:
     case SUMMARY_MODE_RELEARNER_BATTLE:
     case SUMMARY_MODE_RELEARNER_CONTEST:
+    case SUMMARY_MODE_STAT_EDITOR:
         sMonSummaryScreen->minPageIndex = 0;
         sMonSummaryScreen->maxPageIndex = pageCount - 1;
         break;
@@ -2758,6 +2761,46 @@ static void DrawNextSkillsButtonPrompt(u8 mode)
 
 #define IS_MOVE_PAGE(page) (page == PSS_PAGE_BATTLE_MOVES || page == PSS_PAGE_CONTEST_MOVES)
 
+static inline bool32 ShouldShowStatEditor(void)
+{
+    return ((P_STAT_EDITOR_ALWAYS || FlagGet(P_FLAG_STAT_EDITOR_GET)) && P_SUMMARY_SCREEN_STAT_EDITOR
+         && !sMonSummaryScreen->lockMovesFlag
+         && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR
+         && !InBattleFactory()
+         && !InSlateportBattleTent());
+}
+
+static void CB2_StatEditorCallback(void)
+{
+    ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gParties[B_TRAINER_PLAYER], gSpecialVar_0x8004, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
+}
+
+static void CB2_StatEditorReturnToSummaryScreen(void)
+{
+    StatEditor_Init(CB2_StatEditorCallback);
+}
+
+static void HandleStatEditorInput(u8 taskId)
+{
+    if (JOY_NEW(START_BUTTON))
+    {
+        sMonSummaryScreen->callback = CB2_StatEditorReturnToSummaryScreen;
+        if (sMonSummaryScreen->isBoxMon)
+        {
+            gSpecialVar_0x8004 = PC_MON_CHOSEN;
+            gSpecialVar_MonBoxPos = sMonSummaryScreen->curMonIndex;
+            gSpecialVar_MonBoxId = StorageGetCurrentBox();
+        }
+        else
+        {
+            gSpecialVar_0x8004 = sMonSummaryScreen->curMonIndex;
+        }
+        StopPokemonAnimations();
+        PlaySE(SE_SELECT);
+        BeginCloseSummaryScreen(taskId);
+    }
+}
+
 static void Task_HandleInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -2850,6 +2893,10 @@ static void Task_HandleInput(u8 taskId)
                 StopPokemonAnimations();
                 PlaySE(SE_SELECT);
                 BeginCloseSummaryScreen(taskId);
+            }
+             if (ShouldShowStatEditor() && sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
+            {
+                HandleStatEditorInput(taskId);
             }
         }
         else if (DEBUG_POKEMON_SPRITE_VISUALIZER && JOY_NEW(SELECT_BUTTON) && !gMain.inBattle)
@@ -7121,7 +7168,7 @@ static void ShowCancelOrRenamePrompt(void)
 static void CB2_ReturnToSummaryScreenFromNamingScreen(void)
 {
     SetBoxMonData(GetSelectedBoxMonFromPcOrParty(), MON_DATA_NICKNAME, gStringVar2);
-    ShowPokemonSummaryScreen(SUMMARY_MODE_NORMAL, gParties[B_TRAINER_PLAYER], gSpecialVar_0x8004, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
+    ShowPokemonSummaryScreen(SUMMARY_MODE_STAT_EDITOR, gParties[B_TRAINER_PLAYER], gSpecialVar_0x8004, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
 }
 
 static void CB2_PssChangePokemonNickname(void)
@@ -7222,4 +7269,4 @@ static bool32 ShouldRemoveHyphen(const u8 *p, const u8 *start, const u8 *end)
     return FALSE;
 }
 
-#endif
+// #endif

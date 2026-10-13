@@ -2463,9 +2463,7 @@ static void Task_StatEditorMain(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
-        DebugPrintf("FLAG_SYS_EV_ALLOC: %d",FlagGet(FLAG_SYS_EV_ALLOC));
         StatEditor_DisableEVIVEditing();
-        DebugPrintf("FLAG_SYS_EV_ALLOC: %d",FlagGet(FLAG_SYS_EV_ALLOC));
         PlaySE(SE_PC_OFF);
         gLastViewedMonIndex = sStatEditorDataPtr->monIndex;
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
