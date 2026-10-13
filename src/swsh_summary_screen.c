@@ -289,6 +289,8 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 evSpatk;
         u8 evSpdef;
         u8 evSpeed; // 0x56
+        u8 evsAtLevel;
+        bool8 evsUnallocated;
     } summary;
     u16 bg3TilemapBuffers[PSS_BUFFER_SIZE];
     u16 bg2TilemapBuffers[PSS_PAGE_COUNT][PSS_BUFFER_SIZE];
@@ -2596,6 +2598,12 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->evSpatk = GetMonData(mon, MON_DATA_SPATK_EV);
         sum->evSpdef = GetMonData(mon, MON_DATA_SPDEF_EV);
         sum->evSpeed = GetMonData(mon, MON_DATA_SPEED_EV);
+        sum->evsAtLevel = gLevelToEVs[GetMonData(mon,MON_DATA_LEVEL)];
+        if(sum->evsAtLevel - (sum->evHp + sum->evAtk + sum->evDef + sum->evSpatk + sum->evSpdef + sum->evSpeed) > 0)
+            sum->evsUnallocated = TRUE;
+        else
+            sum->evsUnallocated = FALSE;
+
         break;
     default:
         sum->ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
