@@ -60,4 +60,4 @@ You can help by adding yourself or people you know in a [pull request](https://g
 | Jamie | FosterProgramming | | No |
 | Viridian. | moostoet | | |
 | Linathan | LinathanZel | | No |
-| tacobell24 | | | |
+| tacobell24 | | x | No |
