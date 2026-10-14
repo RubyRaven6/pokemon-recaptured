@@ -94,6 +94,7 @@ COMMON_DATA bool8 (*gMenuCallback)(void) = NULL;
 // EWRAM
 EWRAM_DATA static u8 sSafariBallsWindowId = 0;
 EWRAM_DATA static u8 sStartClockWindowId = 0;
+EWRAM_DATA static u8 sEVAllocNotifWindowId = 0;
 EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
@@ -169,10 +170,20 @@ static const struct WindowTemplate sWindowTemplate_StartClock = {
     .bg = 0, 
     .tilemapLeft = 1, 
     .tilemapTop = 1, 
-    .width = 13, // If you want to shorten the dates to Sat., Sun., etc., change this to 9
+    .width = 9, // If you want to shorten the dates to Sat., Sun., etc., change this to 9
     .height = 2, 
     .paletteNum = 15,
     .baseBlock = 0x30
+};
+
+static const struct WindowTemplate sWindowTemplate_EVAllocNotif = {
+    .bg = 0, 
+    .tilemapLeft = 1, 
+    .tilemapTop = 5, 
+    .width = 9,
+    .height = 4, 
+    .paletteNum = 15,
+    .baseBlock = 0x30 + 26
 };
 
 static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
@@ -225,7 +236,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
-    [MENU_ACTION_STAT_EDITOR]     = {gText_StatEditor,  {.u8_void = StartMenuStatEditorCallback}},
+    [MENU_ACTION_STAT_EDITOR]     = {gText_StatEditor,  {.u8_void = StartMenuStatEditorCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -318,6 +329,7 @@ static void HideStartMenuWindow(void);
 static void HideStartMenuDebug(void);
 static bool32 ShowSaveOption(void);
 static void ShowTimeWindow(void);
+static void ShowEVAllocNotif(void);
 
 void SetDexPokemonPokenavFlags(void) // unused
 {
@@ -516,17 +528,17 @@ static void ShowPyramidFloorWindow(void)
 }
 
 // If you want to shorten the dates to Sat., Sun., etc., change this to 70
-#define CLOCK_WINDOW_WIDTH 104
+#define CLOCK_WINDOW_WIDTH 70
 
-const u8 gText_Saturday[] = _("Saturday,");
-const u8 gText_Sunday[] = _("Sunday,");
-const u8 gText_Monday[] = _("Monday,");
-const u8 gText_Tuesday[] = _("Tuesday,");
-const u8 gText_Wednesday[] = _("Wednesday,");
-const u8 gText_Thursday[] = _("Thursday,");
-const u8 gText_Friday[] = _("Friday,");
+const u8 gText_Saturday[] = _("Sat.,");
+const u8 gText_Sunday[] = _("Sun.,");
+const u8 gText_Monday[] = _("Mon.,");
+const u8 gText_Tuesday[] = _("Tue.,");
+const u8 gText_Wednesday[] = _("Wed.,");
+const u8 gText_Thursday[] = _("Thu.,");
+const u8 gText_Friday[] = _("Fri.,");
 
-const u8 *const gDayNameStringsTable[7] = {
+const u8 *const gClockDayNameStringsTable[7] = {
     gText_Saturday,
     gText_Sunday,
     gText_Monday,
@@ -567,7 +579,7 @@ static void ShowTimeWindow(void)
         suffix = gText_PM;
     }
 
-    StringExpandPlaceholders(gStringVar4, gDayNameStringsTable[(gLocalTime.days % 7)]);
+    StringExpandPlaceholders(gStringVar4, gClockDayNameStringsTable[(gLocalTime.days % 7)]);
     // StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime); // prints "time" word, from version before weekday was added and leaving it here in case anyone would prefer to use it
     AddTextPrinterParameterized(sStartClockWindowId, 1, gStringVar4, 0, 1, 0xFF, NULL); 
 
@@ -580,6 +592,16 @@ static void ShowTimeWindow(void)
     AddTextPrinterParameterized(sStartClockWindowId, 1, suffix, GetStringRightAlignXOffset(1, suffix, CLOCK_WINDOW_WIDTH), 1, 0xFF, NULL); // print am/pm
 
     CopyWindowToVram(sStartClockWindowId, COPYWIN_GFX);
+}
+
+static void ShowEVAllocNotif(void)
+{
+    sEVAllocNotifWindowId = AddWindow(&sWindowTemplate_EVAllocNotif);
+    PutWindowTilemap(sEVAllocNotifWindowId);
+    DrawStdWindowFrame(sEVAllocNotifWindowId, FALSE);
+        
+    AddTextPrinterParameterized(sEVAllocNotifWindowId, 1, COMPOUND_STRING("{FONT_SMALL_NARROWER}Your Pokémon have\npoints to allocate."), 0, 0, 0xFF, NULL);
+    CopyWindowToVram(sEVAllocNotifWindowId, COPYWIN_GFX);
 }
 
 static void RemoveExtraStartMenuWindows(void)
@@ -597,8 +619,10 @@ static void RemoveExtraStartMenuWindows(void)
     }
     
     ClearStdWindowAndFrameToTransparent(sStartClockWindowId, FALSE);
+    ClearStdWindowAndFrameToTransparent(sEVAllocNotifWindowId, FALSE);
     // CopyWindowToVram(sStartClockWindowId, COPYWIN_GFX);
     RemoveWindow(sStartClockWindowId);
+    RemoveWindow(sEVAllocNotifWindowId);
 }
 
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
@@ -660,6 +684,23 @@ static bool32 InitStartMenuStep(void)
         break;
     case 4:
         ShowTimeWindow();
+        bool8 evsUnallocated = FALSE;
+        for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
+        {
+            u32 evs = 0;
+            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_HP_EV);
+            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_ATK_EV);
+            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_DEF_EV);
+            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_SPEED_EV);
+            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_SPATK_EV);
+            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_SPDEF_EV);
+
+            if((gLevelToEVs[GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_LEVEL)] - evs) > 0)
+                evsUnallocated = TRUE;
+        }
+        DebugPrintf("evsUnallocated: %d",evsUnallocated);
+        if (evsUnallocated)
+            ShowEVAllocNotif();
         sInitStartMenuData[0]++;
         break;
     case 5:
@@ -1404,7 +1445,7 @@ static bool32 InitSaveWindowAfterLinkBattle(u8 *state)
         SetVBlankCallback(NULL);
         ScanlineEffect_Stop();
         DmaClear16(3, PLTT, PLTT_SIZE);
-        DmaClearLarge16(3, (void *)VRAM, VRAM_SIZE, 0x1000);
+        DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
         break;
     case 1:
         ResetSpriteData();
