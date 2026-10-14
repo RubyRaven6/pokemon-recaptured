@@ -1,6 +1,9 @@
 # Pokémon Recaptured
 
 
+## Team Credits
+miriamlefae - EXP code
+
 ## Credits
 - FRLG-styled Hoenn Tilesets: 
   - Jaizu
