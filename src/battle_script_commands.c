@@ -2181,6 +2181,7 @@ static void Cmd_getexp(void)
             gBattleStruct->expBuffer += CalculateExpToGive(faintedSpecies);
         }
 
+        gBattleStruct->givenExpMons[GetBattlerTrainer(gBattlerFainted) & BIT_FLANK] |= (1u << gBattlerPartyIndexes[gBattlerFainted]);
         gBattleScripting.getexpState++;
     }
 
