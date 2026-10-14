@@ -194,5 +194,6 @@ bool8 MetatileBehavior_IsImpressiveMachine(u8 metatileBehavior);
 bool8 MetatileBehavior_IsVideoGame(u8 metatileBehavior);
 bool8 MetatileBehavior_IsBurglary(u8 metatileBehavior);
 bool8 MetatileBehavior_IsTrainerTowerMonitor(u8 metatileBehavior);
+bool8 MetatileBehavior_IsSavePointTile(u8 metatileBehavior);
 
 #endif // GUARD_METATILE_BEHAVIOR_H

@@ -24,6 +24,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
+#include "metatile_behavior.h"
 #include "new_game.h"
 #include "option_menu.h"
 #include "overworld.h"
@@ -51,6 +52,10 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "stat_editor.h"
+
+#if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_START_MENU)
+#define AddTextPrinterParameterized (AddTextPrinterFixedCaseParameterized)
+#endif
 
 // Menu actions
 enum
@@ -180,6 +185,7 @@ static const struct WindowTemplate sWindowTemplate_PyramidFloor = {
     .baseBlock = 0x8
 };
 
+static const u8 sText_MenuDebug[] = _("DEBUG");
 static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
     .bg = 0,
     .tilemapLeft = 1,
@@ -189,8 +195,6 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
     .paletteNum = 15,
     .baseBlock = 0x8
 };
-
-static const u8 sText_MenuDebug[] = _("DEBUG");
 
 static const struct MenuAction sStartMenuItems[] =
 {
@@ -209,7 +213,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
-    [MENU_ACTION_STAT_EDITOR]     = {gText_StatEditor,  {.u8_void = StartMenuStatEditorCallback}}
+    [MENU_ACTION_STAT_EDITOR]     = {gText_StatEditor,  {.u8_void = StartMenuStatEditorCallback}},
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -249,6 +253,23 @@ static const struct WindowTemplate sSaveInfoWindowTemplate = {
     .baseBlock = 8
 };
 
+struct SafeAreaData {
+    s8 mapGroup;
+    s8 mapNum;
+};
+
+const struct SafeAreaData gSafeAreas[] =
+{
+    { MAP_GROUP(MAP_LITTLEROOT_TOWN), MAP_NUM(MAP_LITTLEROOT_TOWN) },
+    { MAP_GROUP(MAP_DEWFORD_TOWN), MAP_NUM(MAP_DEWFORD_TOWN) },
+};
+
+const struct SafeAreaData sUnsafeAreas[] =
+{
+    { MAP_GROUP(MAP_ROUTE119_WEATHER_INSTITUTE_1F), MAP_NUM(MAP_ROUTE119_WEATHER_INSTITUTE_1F) },
+    { MAP_GROUP(MAP_ROUTE119_WEATHER_INSTITUTE_2F), MAP_NUM(MAP_ROUTE119_WEATHER_INSTITUTE_2F) },
+};
+
 // Local functions
 static void BuildStartMenuActions(void);
 static void AddStartMenuAction(u8 action);
@@ -283,6 +304,7 @@ static void ShowSaveInfoWindow(void);
 static void RemoveSaveInfoWindow(void);
 static void HideStartMenuWindow(void);
 static void HideStartMenuDebug(void);
+static bool32 ShowSaveOption(void);
 
 static void BuildStartMenuActions(void)
 {
@@ -346,7 +368,8 @@ static void BuildNormalStartMenu(void)
         AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
-    AddStartMenuAction(MENU_ACTION_SAVE);
+    if(ShowSaveOption())
+        AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
@@ -1523,4 +1546,44 @@ static bool8 StartMenuStatEditorCallback(void)
 {
     CreateTask(Task_OpenStatEditorFromStartMenu, 0);
     return TRUE;
+}
+
+bool32 IsPlayerInSafeArea(void)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sUnsafeAreas); i++)
+    {
+        if (gSaveBlock1Ptr->location.mapNum == sUnsafeAreas[i].mapNum
+        && gSaveBlock1Ptr->location.mapGroup == sUnsafeAreas[i].mapGroup)
+            return FALSE; // is unsafe
+    }
+    
+    for (u32 i = 0; i < ARRAY_COUNT(gSafeAreas); i++)
+    {
+        if (gSaveBlock1Ptr->location.mapNum == gSafeAreas[i].mapNum
+        && gSaveBlock1Ptr->location.mapGroup == gSafeAreas[i].mapGroup)
+            return TRUE; // is safe
+    }
+
+    if(gMapHeader.mapType == MAP_TYPE_INDOOR) //is this map indoors?
+        return TRUE;
+
+    return FALSE; // ain't safe
+}
+
+bool32 IsPlayerOnSafeMetatile(void)
+{
+    if(MetatileBehavior_IsSavePointTile(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static bool32 ShowSaveOption(void)
+{
+    if(IsPlayerOnSafeMetatile())
+        return TRUE;
+    if(IsPlayerInSafeArea())
+        return TRUE;
+    
+    return FALSE;
 }

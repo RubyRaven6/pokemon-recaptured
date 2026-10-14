@@ -1,6 +1,10 @@
 # Pokémon Recaptured
 
 
+## Team Credits
+<!---You only get to add yourself once you're done with the game, Ruby--->
+miriamlefae - EXP code
+
 ## Credits
 - FRLG-styled Hoenn Tilesets: 
   - Jaizu

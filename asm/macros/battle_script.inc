@@ -2123,3 +2123,12 @@
 	.macro trydomoveeffectsbeforemoves
 	callnative BS_TryDoMoveEffectsBeforeMoves
 	.endm
+
+	.macro jumpifsafearea jumpInstr:req
+	callnative BS_CheckIfPlayerInSafeArea
+	.4byte \jumpInstr
+	.endm
+
+	.macro givepartyexp
+	callnative BS_givepartyexp
+	.endm

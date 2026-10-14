@@ -61,6 +61,7 @@ static void UpdateStairsMovement(s16, s16, s16*, s16*, s16*);
 static void Task_StairWarp(u8);
 static void ForceStairsMovement(u32, s16*, s16*);
 
+static const u8 sText_PlayerRescuedToCenter[] = _("{PLAYER} was carried to a POKéMON CENTER,\nprotecting the exhausted and fainted\nPOKéMON from further harm…\p");
 static const u8 sText_PlayerScurriedToCenter[] = _("{PLAYER} scurried to a POKéMON CENTER,\nprotecting the exhausted and fainted\nPOKéMON from further harm…\p");
 static const u8 sText_PlayerScurriedBackHome[] = _("{PLAYER} scurried back home, protecting\nthe exhausted and fainted POKéMON from\nfurther harm…\p");
 static const u8 sText_PlayerRegroupCenter[] = _("{PLAYER} scurried to a POKéMON CENTER,\nto regroup and reconsider the battle\nstrategy…\p");
@@ -1412,6 +1413,7 @@ static const u8 *GenerateRecoveryMessage(u8 taskId)
 {
     bool32 forfeitTrainer = DidPlayerForfeitNormalTrainerBattle();
     bool32 destinationIsPlayersHouse = (gTasks[taskId].tIsPlayerHouse == TRUE);
+    DebugPrintf("IsPlayerInSafeArea():%d",IsPlayerInSafeArea());
 
     if (forfeitTrainer && destinationIsPlayersHouse)
         return sText_PlayerRegroupHome;
@@ -1419,6 +1421,8 @@ static const u8 *GenerateRecoveryMessage(u8 taskId)
         return sText_PlayerRegroupCenter;
     else if (!forfeitTrainer && destinationIsPlayersHouse)
         return sText_PlayerScurriedBackHome;
+    else if (FlagGet(FLAG_UNSAFE_AREA))
+        return sText_PlayerRescuedToCenter;
     else
         return sText_PlayerScurriedToCenter;
 }

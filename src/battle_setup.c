@@ -32,12 +32,15 @@
 #include "mirage_tower.h"
 #include "palette.h"
 #include "random.h"
+#include "reload_save.h"
 #include "safari_zone.h"
+#include "sample_ui.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "secret_base.h"
 #include "sound.h"
 #include "starter_choose.h"
+#include "start_menu.h"
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
@@ -705,7 +708,10 @@ static void CB2_EndWildBattle(void)
 
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE && !InBattlePike())
     {
-        SetMainCallback2(CB2_WhiteOut);
+        if (!IsPlayerInSafeArea())
+            SetMainCallback2(CB2_GameOverScreen);
+        else
+            SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
@@ -1615,8 +1621,19 @@ static void CB2_EndTrainerBattle(void)
     {
         if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InTrainerHillChallenge() || FlagGet(B_FLAG_NO_WHITEOUT))
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        switch (GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA))
+        {
+            case TRAINER_CLASS_TEAM_AQUA:
+            case TRAINER_CLASS_AQUA_ADMIN:
+            case TRAINER_CLASS_AQUA_LEADER:
+                SetMainCallback2(CB2_GameOverScreen);
+            default:
+                SetMainCallback2(CB2_WhiteOut);
+        }
+        if(!IsPlayerInSafeArea())
+            FlagSet(FLAG_UNSAFE_AREA);
         else
-            SetMainCallback2(CB2_WhiteOut);
+            FlagClear(FLAG_UNSAFE_AREA);
     }
     else
     {

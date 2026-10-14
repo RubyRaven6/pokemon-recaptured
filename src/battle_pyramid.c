@@ -1501,7 +1501,7 @@ void GenerateBattlePyramidWildMon(enum Species forceSpecies)
     }
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0],
                MON_DATA_EXP,
-               &gExperienceTables[gSpeciesInfo[species].growthRate][lvl]);
+               &gExperienceTables[GROWTH_MEDIUM_SLOW][lvl]);
 
     // Give initial moves and replace one with desired move
     GiveBoxMonInitialMoveset(&gParties[B_TRAINER_OPPONENT_A][0].box);
@@ -1602,7 +1602,7 @@ void GenerateBattlePyramidWildMon(enum Species forceSpecies)
     }
     SetMonData(&gParties[B_TRAINER_OPPONENT_A][0],
                MON_DATA_EXP,
-               &gExperienceTables[gSpeciesInfo[wildMons[id].species].growthRate][lvl]);
+               &gExperienceTables[GROWTH_MEDIUM_SLOW][lvl]);
 
     switch (wildMons[id].abilityNum)
     {
