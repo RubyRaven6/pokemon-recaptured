@@ -6461,36 +6461,36 @@ static void DeleteInvalidFusionMoves(struct Pokemon *mon, enum Species species)
     }
 }
 
-#if P_FUSION_FORMS
-static void SwapFusionMonMoves(struct Pokemon *mon, const u16 moveTable[][2], u32 mode)
-{
-    u32 oldMoveIndex, newMoveIndex;
-    if (mode == FUSE_MON)
-    {
-        oldMoveIndex = 0;
-        newMoveIndex = 1;
-    }
-    else //mode == UNFUSE_MON
-    {
-        oldMoveIndex = 1;
-        newMoveIndex = 0;
-    }
-    for (u32 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
-        for (u32 j = 0; j < 2; j++)
-        {
-            if (move == moveTable[j][oldMoveIndex])
-            {
-                u32 pp = GetMovePP(moveTable[j][newMoveIndex]);
-                SetMonData(mon, MON_DATA_MOVE1 + i, &moveTable[j][newMoveIndex]);
-                SetMonData(mon, MON_DATA_PP1 + i, &pp);
-            }
-        }
-    }
+// #if P_FUSION_FORMS
+// static void SwapFusionMonMoves(struct Pokemon *mon, const u16 moveTable[][2], u32 mode)
+// {
+//     u32 oldMoveIndex, newMoveIndex;
+//     if (mode == FUSE_MON)
+//     {
+//         oldMoveIndex = 0;
+//         newMoveIndex = 1;
+//     }
+//     else //mode == UNFUSE_MON
+//     {
+//         oldMoveIndex = 1;
+//         newMoveIndex = 0;
+//     }
+//     for (u32 i = 0; i < MAX_MON_MOVES; i++)
+//     {
+//         enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
+//         for (u32 j = 0; j < 2; j++)
+//         {
+//             if (move == moveTable[j][oldMoveIndex])
+//             {
+//                 u32 pp = GetMovePP(moveTable[j][newMoveIndex]);
+//                 SetMonData(mon, MON_DATA_MOVE1 + i, &moveTable[j][newMoveIndex]);
+//                 SetMonData(mon, MON_DATA_PP1 + i, &pp);
+//             }
+//         }
+//     }
 
-}
-#endif //P_FUSION_FORMS
+// }
+// #endif //P_FUSION_FORMS
 
 static void Task_TryItemUseFusionChange(u8 taskId)
 {
@@ -6585,35 +6585,35 @@ static void Task_TryItemUseFusionChange(u8 taskId)
         {
             if (gTasks[taskId].fusionType == FUSE_MON)
             {
-#if P_FUSION_FORMS
-#if P_FAMILY_KYUREM
-#if P_FAMILY_RESHIRAM
-                if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_WHITE)
-                    SwapFusionMonMoves(mon, gKyuremWhiteSwapMoveTable, FUSE_MON);
-#endif //P_FAMILY_RESHIRAM
-#if P_FAMILY_ZEKROM
-                if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_BLACK)
-                    SwapFusionMonMoves(mon, gKyuremBlackSwapMoveTable, FUSE_MON);
-#endif //P_FAMILY_ZEKROM
-#endif //P_FAMILY_KYUREM
-#endif //P_FUSION_FORMS
-                if (gTasks[taskId].moveToLearn != 0)
-                    FormChangeTeachMove(taskId, gTasks[taskId].moveToLearn, gTasks[taskId].firstFusionSlot);
-            }
-            else //(gTasks[taskId].fusionType == UNFUSE_MON)
-            {
-#if P_FUSION_FORMS
-#if P_FAMILY_KYUREM
-#if P_FAMILY_RESHIRAM
-                if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_WHITE)
-                    SwapFusionMonMoves(mon, gKyuremWhiteSwapMoveTable, UNFUSE_MON);
-#endif //P_FAMILY_RESHIRAM
-#if P_FAMILY_ZEKROM
-                if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_BLACK)
-                    SwapFusionMonMoves(mon, gKyuremBlackSwapMoveTable, UNFUSE_MON);
-#endif //P_FAMILY_ZEKROM
-#endif //P_FAMILY_KYUREM
-#endif //P_FUSION_FORMS
+// #if P_FUSION_FORMS
+// #if P_FAMILY_KYUREM
+// #if P_FAMILY_RESHIRAM
+//                 if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_WHITE)
+//                     SwapFusionMonMoves(mon, gKyuremWhiteSwapMoveTable, FUSE_MON);
+// #endif //P_FAMILY_RESHIRAM
+// #if P_FAMILY_ZEKROM
+//                 if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_BLACK)
+//                     SwapFusionMonMoves(mon, gKyuremBlackSwapMoveTable, FUSE_MON);
+// #endif //P_FAMILY_ZEKROM
+// #endif //P_FAMILY_KYUREM
+// #endif //P_FUSION_FORMS
+//                 if (gTasks[taskId].moveToLearn != 0)
+//                     FormChangeTeachMove(taskId, gTasks[taskId].moveToLearn, gTasks[taskId].firstFusionSlot);
+//             }
+//             else //(gTasks[taskId].fusionType == UNFUSE_MON)
+//             {
+// #if P_FUSION_FORMS
+// #if P_FAMILY_KYUREM
+// #if P_FAMILY_RESHIRAM
+//                 if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_WHITE)
+//                     SwapFusionMonMoves(mon, gKyuremWhiteSwapMoveTable, UNFUSE_MON);
+// #endif //P_FAMILY_RESHIRAM
+// #if P_FAMILY_ZEKROM
+//                 if (gTasks[taskId].tExtraMoveHandling == SWAP_EXTRA_MOVES_KYUREM_BLACK)
+//                     SwapFusionMonMoves(mon, gKyuremBlackSwapMoveTable, UNFUSE_MON);
+// #endif //P_FAMILY_ZEKROM
+// #endif //P_FAMILY_KYUREM
+// #endif //P_FUSION_FORMS
                 if ( gTasks[taskId].tExtraMoveHandling == FORGET_EXTRA_MOVES)
                 {
                     DeleteInvalidFusionMoves(mon, gTasks[taskId].fusionResult);
