@@ -11,6 +11,7 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "battle_z_move.h"
+#include "swsh_summary_screen.h"
 #include "caps.h"
 #include "data.h"
 #include "daycare.h"
@@ -5687,9 +5688,24 @@ void PokemonSummaryDoMonAnimation(struct Sprite *sprite, enum Species species, b
 
 void StopPokemonAnimationDelayTask(void)
 {
-    u8 delayTaskId = FindTaskIdByFunc(Task_PokemonSummaryAnimateAfterDelay);
-    if (delayTaskId != TASK_NONE)
+    u8 delayTaskId;
+    while ((delayTaskId = FindTaskIdByFunc(Task_PokemonSummaryAnimateAfterDelay)) != TASK_NONE)
         DestroyTask(delayTaskId);
+}
+
+void StopShadowAnimDelayTask(void)
+{
+    u8 taskId;
+    for (taskId = 0; taskId < NUM_TASKS; taskId++)
+    {
+        if (gTasks[taskId].isActive
+            && gTasks[taskId].func == Task_PokemonSummaryAnimateAfterDelay
+            && gTasks[taskId].tIsShadow)
+        {
+            DestroyTask(taskId);
+            return;
+        }
+    }
 }
 
 void BattleAnimateBackSprite(struct Sprite *sprite, enum Species species)
