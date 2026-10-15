@@ -698,7 +698,6 @@ static bool32 InitStartMenuStep(void)
             if((gLevelToEVs[GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_LEVEL)] - evs) > 0)
                 evsUnallocated = TRUE;
         }
-        DebugPrintf("evsUnallocated: %d",evsUnallocated);
         if (evsUnallocated)
             ShowEVAllocNotif();
         sInitStartMenuData[0]++;
