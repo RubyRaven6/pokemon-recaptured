@@ -1,0 +1,3 @@
+# Make sure IDEs can see worktrees, even if they are .gitignored
+!/.worktree*
+!/worktree*

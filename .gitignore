@@ -3,6 +3,7 @@
 *.i
 *.elf
 *.gba
+*.bps
 !data/*.gba
 *.sgm
 *.sa1
@@ -35,10 +36,15 @@ build/
 .idea/
 porymap.*.cfg
 prefabs.json
-.vscode/
+/.vscode/*
 *.a
 .fuse_hidden*
+.ccls-cache/*
+.ropeproject/
+/overworld/
+/icons/
 *.sna
+TODO.md
 *.diff
 *.sym
 *.js
