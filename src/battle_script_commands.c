@@ -12210,7 +12210,6 @@ void BS_TryDoMoveEffectsBeforeMoves(void)
 
 void BS_CheckIfPlayerInSafeArea(void)
 {
-    DebugPrintf("inside BS_CheckIfPlayerInSafeArea");
     NATIVE_ARGS(const u8 *jumpInstr);
 
     if (IsPlayerInSafeArea())

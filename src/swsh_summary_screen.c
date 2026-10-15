@@ -45,6 +45,7 @@
 #include "scanline_effect.h"
 #include "sound.h"
 #include "sprite.h"
+#include "stat_editor.h"
 #include "string_util.h"
 #include "strings.h"
 #include "swsh_graphics.h"
@@ -64,7 +65,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#if SWSH_SUMMARY_SCREEN == TRUE
 enum SWSHPSSEffect
 {
     PSS_EFFECT_BATTLE,
@@ -115,22 +115,24 @@ static const u8 sSummaryConditionToLineLength[MAX_CONDITION + 1] =
 };
 #endif
 
-// Button prompts (bottom right)
-#define PSS_LABEL_WINDOW_PROMPT_CANCEL 0 // Also handles the "rename" prompt if P_SUMMARY_SCREEN_RENAME is true
-#define PSS_LABEL_WINDOW_PROMPT_SWITCH 1
+enum PSSLavelWindowIds
+{
+    // Button prompts (bottom right)
+    PSS_LABEL_WINDOW_PROMPT_CANCEL, // Also handles the "rename" prompt if P_SUMMARY_SCREEN_RENAME is true
+    PSS_LABEL_WINDOW_PROMPT_SWITCH,
+    // Moves screen
+    PSS_LABEL_WINDOW_MOVES_POWER_ACC, // Also contains the power and accuracy values
+    
+    // Above/below the pokemon's portrait (right)
+    PSS_LABEL_WINDOW_PORTRAIT_INFO,
 
-// Moves screen
-#define PSS_LABEL_WINDOW_MOVES_POWER_ACC 2 // Also contains the power and accuracy values
+    // button prompt for cycling IV/EV/stats views
+    PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS,
+    PSS_LABEL_WINDOW_PROMPT_MOVES,
+    PSS_LABEL_WINDOW_PROMPT_ALLOCATE,
 
-// Above/below the pokemon's portrait (right)
-#define PSS_LABEL_WINDOW_PORTRAIT_INFO 3
-
-// button prompt for cycling IV/EV/stats views
-#define PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS 4
-#define PSS_LABEL_WINDOW_PROMPT_MOVES 5
-
-#define PSS_LABEL_WINDOW_END 6
-
+    PSS_LABEL_WINDOW_END,
+};
 // Dynamic fields for the Pokémon Info page
 #define PSS_DATA_WINDOW_INFO_ITEM 0
 #define PSS_DATA_WINDOW_INFO_SPECIES 1
@@ -276,6 +278,8 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 evSpatk;
         u8 evSpdef;
         u8 evSpeed; // 0x56
+        u8 evTotalAtLevel;
+        bool8 evsUnallocated;
     } summary;
     u16 bg3TilemapBuffers[PSS_BUFFER_SIZE];
     u16 bg2TilemapBuffers[PSS_PAGE_COUNT][PSS_BUFFER_SIZE];
@@ -490,6 +494,8 @@ static void CB2_ReturnToSummaryScreenFromNamingScreen(void);
 static void CB2_PssChangePokemonNickname(void);
 static void UpdateMoveRelearnerState(void);
 static void PrintRightAlignedPrompt(u8, u8, const u8*, int, u8);
+static void CB2_StatEditorCallback(void);
+static void CB2_StatEditorReturnToSummaryScreen(void);
 
 // const rom data
 
@@ -716,7 +722,7 @@ static const s8 sMultiBattleOrder[] = {0, 2, 3, 1, 4, 5};
 #define WIN_PORTRAIT_INFO_TILES         (WIN_PORTRAIT_INFO_W * WIN_PORTRAIT_INFO_H)
 #define WIN_PORTRAIT_INFO_BASE          (WIN_MOVES_POWER_ACC_BASE + WIN_MOVES_POWER_ACC_TILES)
 
-#define WIN_PROMPT_IV_EV_STATS_W        10
+#define WIN_PROMPT_IV_EV_STATS_W        16
 #define WIN_PROMPT_IV_EV_STATS_H        2
 #define WIN_PROMPT_IV_EV_STATS_TILES    (WIN_PROMPT_IV_EV_STATS_W * WIN_PROMPT_IV_EV_STATS_H)
 #define WIN_PROMPT_IV_EV_STATS_BASE     (WIN_PORTRAIT_INFO_BASE + WIN_PORTRAIT_INFO_TILES)
@@ -768,7 +774,7 @@ static const struct WindowTemplate sSummaryTemplate[] =
     },
     [PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS] = {
         .bg = 0,
-        .tilemapLeft = 20,
+        .tilemapLeft = 14,
         .tilemapTop = 18,
         .width = WIN_PROMPT_IV_EV_STATS_W,
         .height = WIN_PROMPT_IV_EV_STATS_H,
@@ -1894,6 +1900,7 @@ void ShowPokemonSummaryScreen_SwSh(u8 mode, void *mons, u8 monIndex, u8 maxMonIn
     case SUMMARY_MODE_BOX_CURSOR:
     case SUMMARY_MODE_RELEARNER_BATTLE:
     case SUMMARY_MODE_RELEARNER_CONTEST:
+    case SUMMARY_MODE_STAT_EDITOR:
         sMonSummaryScreen->minPageIndex = 0;
         sMonSummaryScreen->maxPageIndex = pageCount - 1;
         break;
@@ -2473,6 +2480,10 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->evSpatk = GetMonData(mon, MON_DATA_SPATK_EV);
         sum->evSpdef = GetMonData(mon, MON_DATA_SPDEF_EV);
         sum->evSpeed = GetMonData(mon, MON_DATA_SPEED_EV);
+        sum->evTotalAtLevel = gLevelToEVs[GetMonData(mon, MON_DATA_LEVEL)];
+        u8 evTotal = sum->evHp + sum->evAtk + sum->evDef + sum->evSpatk + sum->evSpdef + sum->evSpeed;
+        if((sum->evTotalAtLevel - evTotal) > 0)
+            sum->evsUnallocated = TRUE;
         break;
     default:
         sum->ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
@@ -2631,6 +2642,8 @@ static void PrintRightAlignedPrompt(u8 windowId, u8 button, const u8 *text, int 
 static void DrawNextSkillsButtonPrompt(u8 mode)
 {
     const u8 *text;
+    struct PokeSummary *sum = &sMonSummaryScreen->summary;
+    int rightPx = WIN_PROMPT_IV_EV_STATS_W * TILE_WIDTH - 4;
 
     switch (mode)
     {
@@ -2639,11 +2652,27 @@ static void DrawNextSkillsButtonPrompt(u8 mode)
     default:                text = sText_ViewStats; break;
     }
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, PIXEL_FILL(0));
-    PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_A, text, 76, 1);
+    PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_A, text, rightPx, 1);
+    if(sum->evsUnallocated)
+    {
+        int aIconX = GetStringRightAlignXOffset(FONT_SMALL, text, rightPx) - GetButtonTextOffset(BUTTON_A);
+        PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_START, COMPOUND_STRING("Allocate"), aIconX - 2, 1);
+    }
+    
     ScheduleBgCopyTilemapToVram(0);
 }
 
 #define IS_MOVE_PAGE(page) (page == PSS_PAGE_BATTLE_MOVES || page == PSS_PAGE_CONTEST_MOVES)
+
+static void CB2_StatEditorCallback(void)
+{
+    ShowPokemonSummaryScreen_SwSh(SUMMARY_MODE_STAT_EDITOR, gParties[B_TRAINER_PLAYER], gSpecialVar_0x8004, gPartiesCount[B_TRAINER_PLAYER] - 1, gInitialSummaryScreenCallback);
+}
+
+static void CB2_StatEditorReturnToSummaryScreen(void)
+{
+    StatEditor_Init(CB2_StatEditorCallback);
+}
 
 static void Task_HandleInput(u8 taskId)
 {
@@ -2700,6 +2729,23 @@ static void Task_HandleInput(u8 taskId)
         }
         else if (JOY_NEW(START_BUTTON))
         {
+            if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
+            {
+                sMonSummaryScreen->callback = CB2_StatEditorReturnToSummaryScreen;
+                if (sMonSummaryScreen->isBoxMon)
+                {
+                    gSpecialVar_0x8004 = PC_MON_CHOSEN;
+                    gSpecialVar_MonBoxPos = sMonSummaryScreen->curMonIndex;
+                    gSpecialVar_MonBoxId = StorageGetCurrentBox();
+                }
+                else
+                {
+                    gSpecialVar_0x8004 = sMonSummaryScreen->curMonIndex;
+                }
+                StopPokemonAnimations();
+                PlaySE(SE_SELECT);
+                BeginCloseSummaryScreen(taskId);
+            }
             if (sMonSummaryScreen->currPageIndex == PSS_PAGE_INFO && ShouldShowRename())
             {
                 if (sMonSummaryScreen->isBoxMon)
@@ -3974,6 +4020,7 @@ static void PutPageWindowTilemaps(u8 page)
         PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_CANCEL);
         break;
     case PSS_PAGE_SKILLS:
+        DrawNextSkillsButtonPrompt(SKILL_STATE_STATS);
         PutWindowTilemap(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS);
         break;
     case PSS_PAGE_BATTLE_MOVES:
@@ -4021,6 +4068,7 @@ static void ClearPageWindowTilemaps(u8 page)
     case PSS_PAGE_SKILLS:
         if (SWSH_SUMMARY_SHOW_IV_EV)
             ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS);
+        ClearWindowTilemap(PSS_LABEL_WINDOW_PROMPT_ALLOCATE);
         break;
     case PSS_PAGE_BATTLE_MOVES:
         if (sMonSummaryScreen->mode == SUMMARY_MODE_SELECT_MOVE)
@@ -6837,5 +6885,3 @@ static void CB2_PssChangePokemonNickname(void)
 {
     ChangePokemonNicknameWithCallback(CB2_ReturnToSummaryScreenFromNamingScreen);
 }
-
-#endif
