@@ -138,7 +138,19 @@ static void SetUpItemUseCallback(u8 taskId)
     }
     else
     {
-        if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
+        bool8 inPyramid = (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE);
+#if SWSH_BAG_IN_BAG_USE
+        bool8 useInline = !inPyramid;
+#if SWSH_BAG_PYRAMID_ACTION
+        useInline = TRUE;
+#endif
+        if (useInline && (type == (ITEM_USE_PARTY_MENU - 1) || type == (ITEM_USE_PARTY_MENU_MOVES - 1)))
+        {
+            BagMenu_OpenPartySelect(taskId);
+            return;
+        }
+#endif
+        if (!inPyramid)
         {
             gBagMenu->newScreenCallback = sItemUseCallbacks[type];
             Task_FadeAndCloseBagMenu(taskId);
@@ -1145,7 +1157,19 @@ static const u8 sText_CantThrowPokeBall_Disabled[] = _("POKé BALLS cannot be us
 
 static void ItemUseInBattle_ShowPartyMenu(u8 taskId)
 {
-    if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
+    bool8 inPyramid = (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE);
+#if SWSH_BAG_IN_BATTLE_USE
+    bool8 useInline = !inPyramid;
+#if SWSH_BAG_PYRAMID_ACTION
+    useInline = TRUE;
+#endif
+    if (useInline)
+    {
+        BagMenu_OpenPartySelectBattle(taskId);
+        return;
+    }
+#endif
+    if (!inPyramid)
     {
         gBagMenu->newScreenCallback = ChooseMonForInBattleItem;
         Task_FadeAndCloseBagMenu(taskId);
