@@ -1668,6 +1668,10 @@ static void PrintTitleToWindowMainState(void)
         else
             PrintTextOnWindowWithFont(WINDOW_MAIN_HEADER, sText_MenuLRButtonParty, 19, 0, 0, FONT_WHITE, FONT_NARROW);
     }
+    else
+    {
+        PrintTextOnWindowWithFont(WINDOW_MAIN_HEADER, COMPOUND_STRING("Allocate, Relearn"), 0, 0, 0, FONT_WHITE, FONT_NARROWER);
+    }
 
     if (ShouldShowMoveRelearner())
     {
