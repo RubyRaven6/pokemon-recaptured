@@ -278,7 +278,6 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 evSpatk;
         u8 evSpdef;
         u8 evSpeed; // 0x56
-        u8 evTotalAtLevel;
         bool8 evsUnallocated;
     } summary;
     u16 bg3TilemapBuffers[PSS_BUFFER_SIZE];
@@ -493,7 +492,7 @@ static void ShowCancelOrRenamePrompt(void);
 static void CB2_ReturnToSummaryScreenFromNamingScreen(void);
 static void CB2_PssChangePokemonNickname(void);
 static void UpdateMoveRelearnerState(void);
-static void PrintRightAlignedPrompt(u8, u8, const u8*, int, u8);
+static void PrintRightAlignedPrompt(u8, u8, const u8*, s32, u8);
 static void CB2_StatEditorCallback(void);
 static void CB2_StatEditorReturnToSummaryScreen(void);
 
@@ -2480,10 +2479,9 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->evSpatk = GetMonData(mon, MON_DATA_SPATK_EV);
         sum->evSpdef = GetMonData(mon, MON_DATA_SPDEF_EV);
         sum->evSpeed = GetMonData(mon, MON_DATA_SPEED_EV);
-        sum->evTotalAtLevel = gLevelToEVs[GetMonData(mon, MON_DATA_LEVEL)];
-        u8 evTotal = sum->evHp + sum->evAtk + sum->evDef + sum->evSpatk + sum->evSpdef + sum->evSpeed;
-        if((sum->evTotalAtLevel - evTotal) > 0)
-            sum->evsUnallocated = TRUE;
+        s32 evTotalAtLevel = gLevelToEVs[GetMonData(mon, MON_DATA_LEVEL)];
+        s32 evTotal = sum->evHp + sum->evAtk + sum->evDef + sum->evSpatk + sum->evSpdef + sum->evSpeed;
+        sum->evsUnallocated = (evTotal < evTotalAtLevel);
         break;
     default:
         sum->ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
@@ -2628,10 +2626,10 @@ enum {
     BUTTON_LR,
 };
 
-static void PrintRightAlignedPrompt(u8 windowId, u8 button, const u8 *text, int maxPx, u8 colorId)
+static void PrintRightAlignedPrompt(u8 windowId, u8 button, const u8 *text, s32 maxPx, u8 colorId)
 {
-    int stringXPos = GetStringRightAlignXOffset(FONT_SMALL, text, maxPx);
-    int iconXPos = stringXPos - GetButtonTextOffset(button);
+    s32 stringXPos = GetStringRightAlignXOffset(FONT_SMALL, text, maxPx);
+    s32 iconXPos = stringXPos - GetButtonTextOffset(button);
     if (iconXPos < 0)
         iconXPos = 0;
     PrintButtonIcon(windowId, button, iconXPos, 4);
@@ -2643,7 +2641,7 @@ static void DrawNextSkillsButtonPrompt(u8 mode)
 {
     const u8 *text;
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
-    int rightPx = WIN_PROMPT_IV_EV_STATS_W * TILE_WIDTH - 4;
+    s32 rightPx = WIN_PROMPT_IV_EV_STATS_W * TILE_WIDTH - 4;
 
     switch (mode)
     {
@@ -2655,7 +2653,7 @@ static void DrawNextSkillsButtonPrompt(u8 mode)
     PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_A, text, rightPx, 1);
     if(sum->evsUnallocated)
     {
-        int aIconX = GetStringRightAlignXOffset(FONT_SMALL, text, rightPx) - GetButtonTextOffset(BUTTON_A);
+        s32 aIconX = GetStringRightAlignXOffset(FONT_SMALL, text, rightPx) - GetButtonTextOffset(BUTTON_A);
         PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_START, COMPOUND_STRING("Allocate"), aIconX - 2, 1);
     }
     
@@ -4194,7 +4192,7 @@ static void Task_PrintInfoPage(u8 taskId)
 
 static void PrintMonDexNumberSpecies(void)
 {
-    int windowId;
+    s32 windowId;
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
     u16 dexNum = SpeciesToPokedexNum(summary->species); // not printing pokedex number
@@ -4234,7 +4232,7 @@ static void PrintMonDexNumberSpecies(void)
 
 static void PrintMonOTName(void)
 {
-    int windowId = AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_SPECIES);
+    s32 windowId = AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_SPECIES);
     if (InBattleFactory() != TRUE && InSlateportBattleTent() != TRUE)
     {
         PrintTextOnWindow(windowId, sMonSummaryScreen->summary.OTName, 0, 37, 0, 0);
