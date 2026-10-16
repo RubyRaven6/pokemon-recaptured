@@ -2640,6 +2640,7 @@ static void PrintRightAlignedPrompt(u8 windowId, u8 button, const u8 *text, s32 
 static void DrawNextSkillsButtonPrompt(u8 mode)
 {
     const u8 *text;
+    const u8 *text2;
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     s32 rightPx = WIN_PROMPT_IV_EV_STATS_W * TILE_WIDTH - 4;
 
@@ -2651,12 +2652,13 @@ static void DrawNextSkillsButtonPrompt(u8 mode)
     }
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, PIXEL_FILL(0));
     PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_A, text, rightPx, 1);
+    s32 aIconX = GetStringRightAlignXOffset(FONT_SMALL, text, rightPx) - GetButtonTextOffset(BUTTON_A);
     if(sum->evsUnallocated)
-    {
-        s32 aIconX = GetStringRightAlignXOffset(FONT_SMALL, text, rightPx) - GetButtonTextOffset(BUTTON_A);
-        PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_START, COMPOUND_STRING("Allocate"), aIconX - 2, 1);
-    }
-    
+        text2 = COMPOUND_STRING("Allocate");
+    else    
+        text2 = COMPOUND_STRING("View Full");
+
+    PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_START, text2, aIconX - 2, 1);
     ScheduleBgCopyTilemapToVram(0);
 }
 
