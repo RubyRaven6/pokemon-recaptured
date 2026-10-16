@@ -1145,7 +1145,7 @@ static void StatEditor_EnableEVEditing(void)
     u32 monSPE = GetMonData(&mon, MON_DATA_SPEED_EV);
     u32 monSPA = GetMonData(&mon, MON_DATA_SPATK_EV);
     u32 monSPD = GetMonData(&mon, MON_DATA_SPDEF_EV);
-    u32 monEVs = (monHP + monATK + monDEF + monSPA + monSPD + monSPE);    
+    u32 monEVs = (monHP + monATK + monDEF + monSPA + monSPD + monSPE);
 
     if(gLevelToEVs[level] - monEVs > 0)
         FlagSet(FLAG_SYS_EV_ALLOC);
@@ -1158,6 +1158,19 @@ static void StatEditor_DisableEVIVEditing(void)
         FlagClear(FLAG_SYS_EV_ALLOC);
     if(FlagGet(FLAG_SYS_IV_ALLOC))
         FlagClear(FLAG_SYS_IV_ALLOC);
+}
+
+static bool32 StatEditor_AreAllEVsAllocated(void)
+{
+    struct BoxPokemon *boxMon = GetCurrentBoxMon();
+    struct Pokemon mon;
+    BoxMonToMon(boxMon, &mon);
+    u32 level = GetMonData(&mon, MON_DATA_LEVEL);
+
+    if(!(gLevelToEVs[level] - sStatEditorDataPtr->evTotal))
+        return TRUE;
+    else
+        return FALSE;
 }
 
 static void StatEditor_InitWindows(void)
@@ -2463,12 +2476,20 @@ static void Task_StatEditorMain(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
-        StatEditor_DisableEVIVEditing();
-        PlaySE(SE_PC_OFF);
-        gLastViewedMonIndex = sStatEditorDataPtr->monIndex;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_StatEditorTurnOff;
-        return;
+        if(StatEditor_AreAllEVsAllocated())
+        {
+            StatEditor_DisableEVIVEditing();
+            PlaySE(SE_PC_OFF);
+            gLastViewedMonIndex = sStatEditorDataPtr->monIndex;
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].func = Task_StatEditorTurnOff;
+            return;
+        }
+        else
+        {
+            PlaySE(SE_PC_OFF);
+            return;
+        }
     }
 
     if (CanCycleBoxOrParty())
