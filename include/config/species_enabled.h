@@ -341,13 +341,13 @@
 #define P_FAMILY_ARCHEN                  P_GEN_5_POKEMON
 #define P_FAMILY_TRUBBISH                P_RECAPTURED_MONS
 #define P_FAMILY_ZORUA                   P_GEN_5_POKEMON
-#define P_FAMILY_MINCCINO                P_GEN_5_POKEMON
+#define P_FAMILY_MINCCINO                P_RECAPTURED_MONS
 #define P_FAMILY_GOTHITA                 P_GEN_5_POKEMON
 #define P_FAMILY_SOLOSIS                 P_GEN_5_POKEMON
 #define P_FAMILY_DUCKLETT                P_GEN_5_POKEMON
 #define P_FAMILY_VANILLITE               P_GEN_5_POKEMON
 #define P_FAMILY_DEERLING                P_GEN_5_POKEMON
-#define P_FAMILY_EMOLGA                  P_GEN_5_POKEMON
+#define P_FAMILY_EMOLGA                  P_RECAPTURED_MONS
 #define P_FAMILY_KARRABLAST              P_GEN_5_POKEMON
 #define P_FAMILY_FOONGUS                 P_GEN_5_POKEMON
 #define P_FAMILY_FRILLISH                P_GEN_5_POKEMON
