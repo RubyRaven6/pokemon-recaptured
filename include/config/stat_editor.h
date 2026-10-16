@@ -23,7 +23,7 @@
 // General Configs
 #define P_STAT_EDITOR_NATURE_ARROWS         TRUE  // If TRUE, stats increased or decreased by nature will have arrows, red and up = increased, blue and down = decreased.
 #define P_STAT_EDITOR_MOVE_RELEARNER        TRUE  // If TRUE, the move relearner will be accessible through the stat editor by pressing Start.
-#define P_STAT_EDITOR_CYCLE_MODE            TRUE  // If TRUE, allows stat editor to cycle through the party or box.
+#define P_STAT_EDITOR_CYCLE_MODE            FALSE  // If TRUE, allows stat editor to cycle through the party or box.
 #define P_STAT_EDITOR_CENTER_ALIGN_TEXT     TRUE  // If TRUE, center aligns texts such as nickname, ability and nature.
 #define P_STAT_EDITOR_CENTER_ALIGN_STATS    FALSE // If TRUE, center aligns all stat numbers.
 

@@ -1413,7 +1413,6 @@ static const u8 *GenerateRecoveryMessage(u8 taskId)
 {
     bool32 forfeitTrainer = DidPlayerForfeitNormalTrainerBattle();
     bool32 destinationIsPlayersHouse = (gTasks[taskId].tIsPlayerHouse == TRUE);
-    DebugPrintf("IsPlayerInSafeArea():%d",IsPlayerInSafeArea());
 
     if (forfeitTrainer && destinationIsPlayersHouse)
         return sText_PlayerRegroupHome;

@@ -33,6 +33,8 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#if !SWSH_BAG_PYRAMID
+
 #define TAG_SCROLL_ARROW  2910
 #define TAG_PYRAMID_BAG   4132
 #define TAG_ITEM_ICON     4133
@@ -1453,6 +1455,8 @@ void TryStoreHeldItemsInPyramidBag(void)
     Free(newQuantities);
 }
 
+#define PYRAMID_BAG_DLG_WINDOW_BASE_TILE_NUM 0x22C // Adjusted for SwSh msg box, vanilla 0xA
+
 static void InitPyramidBagWindows(void)
 {
     u8 i;
@@ -1460,7 +1464,7 @@ static void InitPyramidBagWindows(void)
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
     LoadUserWindowBorderGfx(0, 0x1, BG_PLTT_ID(14));
-    LoadMessageBoxGfx(0, 0xA, BG_PLTT_ID(13));
+    LoadMessageBoxGfx(0, PYRAMID_BAG_DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(13));
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
 
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates); i++)
@@ -1526,7 +1530,7 @@ static void CreatePyramidBagYesNo(u8 taskId, const struct YesNoFuncTable *yesNoT
 void DisplayItemMessageInBattlePyramid(u8 taskId, const u8 *str, TaskFunc callback)
 {
     FillWindowPixelBuffer(WIN_MSG, PIXEL_FILL(1));
-    DisplayMessageAndContinueTask(taskId, WIN_MSG, 0xA, 0xD, FONT_NORMAL, GetPlayerTextSpeedDelay(), str, callback);
+    DisplayMessageAndContinueTask(taskId, WIN_MSG, PYRAMID_BAG_DLG_WINDOW_BASE_TILE_NUM, 0xD, FONT_NORMAL, GetPlayerTextSpeedDelay(), str, callback);
     ScheduleBgCopyTilemapToVram(1);
 }
 
@@ -1624,3 +1628,5 @@ static void UpdateSwapLinePos(u8 y)
 {
     UpdateSwapLineSpritesPos(&gPyramidBagMenu->spriteIds[PBAG_SPRITE_SWAP_LINE_START], NUM_SWAP_LINE_SPRITES | SWAP_LINE_HAS_MARGIN, 120, (y + 1) * 16);
 }
+
+#endif // !SWSH_BAG_PYRAMID

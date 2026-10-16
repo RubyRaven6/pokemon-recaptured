@@ -1186,11 +1186,14 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
         }
         else
         {
+            u16 arrowX = (gWindows[textPrinter->printerTemplate.windowId].window.width * 8) - 8;
+            u16 arrowY = (gWindows[textPrinter->printerTemplate.windowId].window.height * 8) - 16;
+
             FillWindowPixelRect(
                 textPrinter->printerTemplate.windowId,
                 textPrinter->printerTemplate.color.background << 4 | textPrinter->printerTemplate.color.background,
-                textPrinter->printerTemplate.currentX,
-                textPrinter->printerTemplate.currentY,
+                arrowX,
+                arrowY,
                 8,
                 16);
 
@@ -1212,8 +1215,8 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 sDownArrowYCoords[textPrinter->downArrowYPosIdx],
                 8,
                 16,
-                textPrinter->printerTemplate.currentX,
-                textPrinter->printerTemplate.currentY,
+                arrowX,
+                arrowY,
                 8,
                 16);
             CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
@@ -1226,11 +1229,14 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
 
 void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
 {
+    u16 arrowX = (gWindows[textPrinter->printerTemplate.windowId].window.width * 8) - 8;
+    u16 arrowY = (gWindows[textPrinter->printerTemplate.windowId].window.height * 8) - 16;
+
     FillWindowPixelRect(
         textPrinter->printerTemplate.windowId,
         textPrinter->printerTemplate.color.background << 4 | textPrinter->printerTemplate.color.background,
-        textPrinter->printerTemplate.currentX,
-        textPrinter->printerTemplate.currentY,
+        arrowX,
+        arrowY,
         8,
         16);
     CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);

@@ -7,6 +7,7 @@
 #include "battle_tent.h"
 #include "battle_factory.h"
 #include "bg.h"
+#include "swsh_summary_screen.h"
 #include "contest.h"
 #include "contest_effect.h"
 #include "data.h"
@@ -1193,6 +1194,12 @@ u32 GetAdjustedIvData(struct Pokemon *mon, u32 stat)
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void))
 {
+    if (SWSH_SUMMARY_SCREEN)
+    {
+        ShowPokemonSummaryScreen_SwSh(mode, mons, monIndex, maxMonIndex, callback);
+        return;
+    }
+
     sMonSummaryScreen = AllocZeroed(sizeof(*sMonSummaryScreen));
     sMonSummaryScreen->mode = mode;
     if (monIndex == PC_MON_CHOSEN)
@@ -1263,6 +1270,12 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
 
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *mons, u8 monIndex, void (*callback)(void), u16 newMove)
 {
+    if (SWSH_SUMMARY_SCREEN)
+    {
+        ShowSelectMovePokemonSummaryScreen_SwSh(mons, monIndex, callback, newMove);
+        return;
+    }
+
     ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, mons, monIndex, gPartiesCount[B_TRAINER_PLAYER] - 1, callback);
     sMonSummaryScreen->newMove = newMove;
 }
@@ -2804,6 +2817,9 @@ static void Task_HandleInputCantForgetHMsMoves(u8 taskId)
 
 u8 GetMoveSlotToReplace(void)
 {
+    if (SWSH_SUMMARY_SCREEN)
+        return GetMoveSlotToReplace_SwSh();
+
     return sMoveSlotToReplace;
 }
 
@@ -4614,6 +4630,12 @@ static void SpriteCB_Pokemon(struct Sprite *sprite)
 // Normally destroys itself but it can be interrupted before the animation starts
 void SummaryScreen_SetAnimDelayTaskId(u8 taskId)
 {
+    if (SWSH_SUMMARY_SCREEN)
+    {
+        SummaryScreen_SetAnimDelayTaskId_SwSh(taskId);
+        return;
+    }
+
     sAnimDelayTaskId = taskId;
 }
 

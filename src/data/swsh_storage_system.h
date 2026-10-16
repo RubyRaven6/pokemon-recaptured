@@ -1,0 +1,1385 @@
+// ============================================================================
+// PC Storage System - Data
+// ============================================================================
+
+// Wallpaper IDs
+enum {
+    WALLPAPER_BASE,
+    WALLPAPER_NORMAL,
+    WALLPAPER_FIGHTING,
+    WALLPAPER_FLYING,
+    WALLPAPER_POISON,
+    WALLPAPER_GROUND,
+    WALLPAPER_ROCK,
+    WALLPAPER_BUG,
+    WALLPAPER_GHOST,
+    WALLPAPER_STEEL,
+    WALLPAPER_FIRE,
+    WALLPAPER_WATER,
+    WALLPAPER_GRASS,
+    WALLPAPER_ELECTRIC,
+    WALLPAPER_PSYCHIC,
+    WALLPAPER_ICE,
+    WALLPAPER_DRAGON,
+    WALLPAPER_DARK,
+    WALLPAPER_FAIRY,
+    WALLPAPER_STELLAR,
+    WALLPAPER_COUNT
+};
+#define MAX_DEFAULT_WALLPAPER WALLPAPER_FLYING
+
+// ============================================================================
+// Structs
+// ============================================================================
+
+struct Wallpaper
+{
+    const u32 *tiles;
+    const u32 *tilemap;
+    const u16 *palettes;
+};
+
+struct StorageMessage
+{
+    const u8 *text;
+    u8 format;
+};
+
+// ============================================================================
+// Graphics - Storage System UI
+// ============================================================================
+
+static const u32 sSwShStorage_Gfx[]           = INCGFX_U32("graphics/pokemon_storage/swsh/tiles.png", ".4bpp.smol");
+static const u16 sSwShStorage_Pal[]           = INCGFX_U16("graphics/pokemon_storage/swsh/tiles.png", ".gbapal");
+static const u32 sSwShStorage_BG1_Tilemap[]   = INCGFX_U32("graphics/pokemon_storage/swsh/bg1.bin", ".smolTM");
+static const u32 sSwShStorage_BG2_Tilemap[]   = INCGFX_U32("graphics/pokemon_storage/swsh/bg2.bin", ".smolTM");
+static const u32 sMonInfo_Gfx[]               = INCGFX_U32("graphics/pokemon_storage/swsh/mon_info.png", ".4bpp.smol");
+static const u32 sMonInfo_Tilemap[]           = INCGFX_U32("graphics/pokemon_storage/swsh/mon_info.bin", ".smolTM");
+
+static const u32 sBoxTitleFrame_Gfx[]         = INCGFX_U32("graphics/pokemon_storage/swsh/box_title_frame.png", ".4bpp");
+static const u32 sBoxTitleArrow_Gfx[]         = INCGFX_U32("graphics/pokemon_storage/swsh/box_title_arrow.png", ".4bpp.smol");
+#if SWSH_STORAGE_CHOOSE_BOX_GRID
+static const u32 sChooseBoxGrid_Hover_Gfx[]   = INCGFX_U32("graphics/pokemon_storage/swsh/choose_box_grid_hover.png", ".4bpp");
+#else
+static const u8  sChooseBoxMenu_Tilemap[]     = INCBIN_U8("graphics/pokemon_storage/swsh/choose_box_menu.bin");
+#endif
+static const u32 sCursor_Gfx[]                = INCGFX_U32("graphics/pokemon_storage/swsh/cursor.png", ".4bpp.smol");
+static const u16 sCursor_Pal[]                = INCGFX_U16("graphics/pokemon_storage/swsh/cursor.png", ".gbapal");
+static const u32 sGenderIcons_Gfx[]           = INCGFX_U32("graphics/pokemon_storage/swsh/gender_icons.png", ".4bpp.smol");
+static const u16 sMarkings_Pal[]              = INCGFX_U16("graphics/pokemon_storage/swsh/markings.pal", ".gbapal");
+static const u32 sMarkingsMenu_Gfx[]          = INCGFX_U32("graphics/pokemon_storage/swsh/markings_menu.png", ".4bpp.smol");
+static const u32 sMessageWindow_Gfx[]         = INCGFX_U32("graphics/pokemon_storage/swsh/message_window.png", ".4bpp.smol");
+static const u32 sShinyIcon_Gfx[]             = INCGFX_U32("graphics/pokemon_storage/swsh/shiny_icon.png", ".4bpp.smol");
+static const u32 sStatLabels_Gfx[]            = INCGFX_U32("graphics/pokemon_storage/swsh/stat_labels.png", ".4bpp.smol");
+
+// ============================================================================
+// Graphics - Wallpapers
+// ============================================================================
+
+static const u32 sWallpaperTiles_Base[]       = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/base.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Base[]     = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/base.bin", ".smolTM");
+static const u16 sWallpaperPalette_Base[]     = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/base.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Normal[]     = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/normal.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Normal[]   = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/normal.bin", ".smolTM");
+static const u16 sWallpaperPalette_Normal[]   = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/normal.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Fighting[]   = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/fighting.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Fighting[] = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/fighting.bin", ".smolTM");
+static const u16 sWallpaperPalette_Fighting[] = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/fighting.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Flying[]     = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/flying.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Flying[]   = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/flying.bin", ".smolTM");
+static const u16 sWallpaperPalette_Flying[]   = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/flying.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Poison[]     = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/poison.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Poison[]   = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/poison.bin", ".smolTM");
+static const u16 sWallpaperPalette_Poison[]   = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/poison.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Ground[]     = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/ground.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Ground[]   = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/ground.bin", ".smolTM");
+static const u16 sWallpaperPalette_Ground[]   = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/ground.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Rock[]       = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/rock.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Rock[]     = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/rock.bin", ".smolTM");
+static const u16 sWallpaperPalette_Rock[]     = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/rock.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Bug[]        = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/bug.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Bug[]      = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/bug.bin", ".smolTM");
+static const u16 sWallpaperPalette_Bug[]      = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/bug.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Ghost[]      = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/ghost.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Ghost[]    = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/ghost.bin", ".smolTM");
+static const u16 sWallpaperPalette_Ghost[]    = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/ghost.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Steel[]      = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/steel.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Steel[]    = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/steel.bin", ".smolTM");
+static const u16 sWallpaperPalette_Steel[]    = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/steel.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Fire[]       = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/fire.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Fire[]     = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/fire.bin", ".smolTM");
+static const u16 sWallpaperPalette_Fire[]     = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/fire.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Water[]      = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/water.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Water[]    = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/water.bin", ".smolTM");
+static const u16 sWallpaperPalette_Water[]    = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/water.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Grass[]      = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/grass.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Grass[]    = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/grass.bin", ".smolTM");
+static const u16 sWallpaperPalette_Grass[]    = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/grass.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Electric[]   = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/electric.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Electric[] = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/electric.bin", ".smolTM");
+static const u16 sWallpaperPalette_Electric[] = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/electric.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Psychic[]    = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/psychic.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Psychic[]  = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/psychic.bin", ".smolTM");
+static const u16 sWallpaperPalette_Psychic[]  = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/psychic.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Ice[]        = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/ice.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Ice[]      = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/ice.bin", ".smolTM");
+static const u16 sWallpaperPalette_Ice[]      = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/ice.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Dragon[]     = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/dragon.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Dragon[]   = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/dragon.bin", ".smolTM");
+static const u16 sWallpaperPalette_Dragon[]   = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/dragon.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Dark[]       = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/dark.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Dark[]     = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/dark.bin", ".smolTM");
+static const u16 sWallpaperPalette_Dark[]     = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/dark.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Fairy[]      = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/fairy.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Fairy[]    = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/fairy.bin", ".smolTM");
+static const u16 sWallpaperPalette_Fairy[]    = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/fairy.png", ".gbapal");
+
+static const u32 sWallpaperTiles_Stellar[]    = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/stellar.png", ".4bpp.smol");
+static const u32 sWallpaperTilemap_Stellar[]  = INCGFX_U32("graphics/pokemon_storage/swsh/wallpapers/stellar.bin", ".smolTM");
+static const u16 sWallpaperPalette_Stellar[]  = INCGFX_U16("graphics/pokemon_storage/swsh/wallpapers/stellar.png", ".gbapal");
+
+#define WALLPAPER_ENTRY(name) {sWallpaperTiles_##name, sWallpaperTilemap_##name, sWallpaperPalette_##name}
+
+static const struct Wallpaper sSwShWallpapers[] =
+{
+    [WALLPAPER_BASE]     = WALLPAPER_ENTRY(Base),
+    [WALLPAPER_NORMAL]   = WALLPAPER_ENTRY(Normal),
+    [WALLPAPER_FIGHTING] = WALLPAPER_ENTRY(Fighting),
+    [WALLPAPER_FLYING]   = WALLPAPER_ENTRY(Flying),
+    [WALLPAPER_POISON]   = WALLPAPER_ENTRY(Poison),
+    [WALLPAPER_GROUND]   = WALLPAPER_ENTRY(Ground),
+    [WALLPAPER_ROCK]     = WALLPAPER_ENTRY(Rock),
+    [WALLPAPER_BUG]      = WALLPAPER_ENTRY(Bug),
+    [WALLPAPER_GHOST]    = WALLPAPER_ENTRY(Ghost),
+    [WALLPAPER_STEEL]    = WALLPAPER_ENTRY(Steel),
+    [WALLPAPER_FIRE]     = WALLPAPER_ENTRY(Fire),
+    [WALLPAPER_WATER]    = WALLPAPER_ENTRY(Water),
+    [WALLPAPER_GRASS]    = WALLPAPER_ENTRY(Grass),
+    [WALLPAPER_ELECTRIC] = WALLPAPER_ENTRY(Electric),
+    [WALLPAPER_PSYCHIC]  = WALLPAPER_ENTRY(Psychic),
+    [WALLPAPER_ICE]      = WALLPAPER_ENTRY(Ice),
+    [WALLPAPER_DRAGON]   = WALLPAPER_ENTRY(Dragon),
+    [WALLPAPER_DARK]     = WALLPAPER_ENTRY(Dark),
+    [WALLPAPER_FAIRY]    = WALLPAPER_ENTRY(Fairy),
+    [WALLPAPER_STELLAR]  = WALLPAPER_ENTRY(Stellar),
+};
+
+// ============================================================================
+// Text Strings
+// ============================================================================
+
+static const u8 gText_JustOnePkmn[]   = _("There is just one Pokémon with you.");
+static const u8 gText_PartyFull[]     = _("Your party is full!");
+static const u8 sText_Lv[]            = _("Lv");
+#if !SWSH_STORAGE_CHOOSE_BOX_GRID
+static const u8 sText_OutOf30[]       = _("/30");
+#endif
+static const u8 gPCText_Give[]        = _("Give");
+
+struct {
+    const u8 *text;
+    const u8 *desc;
+} static const sMainMenuTexts[OPTIONS_COUNT] =
+{
+    [OPTION_WITHDRAW]   = {COMPOUND_STRING("Withdraw Pokémon"), COMPOUND_STRING("Move Pokémon stored in boxes to\nyour party.")},
+    [OPTION_DEPOSIT]    = {COMPOUND_STRING("Deposit Pokémon"),  COMPOUND_STRING("Store Pokémon in your party in boxes.")},
+    [OPTION_MOVE_MONS]  = {COMPOUND_STRING("Move Pokémon"),     COMPOUND_STRING("Organize the Pokémon in boxes and\nin your party.")},
+    [OPTION_MOVE_ITEMS] = {COMPOUND_STRING("Move Items"),       COMPOUND_STRING("Move items held by any Pokémon\nin a box or your party.")},
+    [OPTION_EXIT]       = {COMPOUND_STRING("See ya!"),          COMPOUND_STRING("Return to the previous menu.")}
+};
+
+static const u8 *const sMenuTexts[] =
+{
+    [MENU_CANCEL]     = COMPOUND_STRING("Cancel"),
+    [MENU_STORE]      = COMPOUND_STRING("Store"),
+    [MENU_WITHDRAW]   = COMPOUND_STRING("Withdraw"),
+    [MENU_MOVE]       = COMPOUND_STRING("Move"),
+    [MENU_SHIFT]      = COMPOUND_STRING("Shift"),
+    [MENU_PLACE]      = COMPOUND_STRING("Place"),
+    [MENU_SUMMARY]    = COMPOUND_STRING("Summary"),
+    [MENU_RELEASE]    = COMPOUND_STRING("Release"),
+    [MENU_MARK]       = COMPOUND_STRING("Mark"),
+    [MENU_JUMP]       = COMPOUND_STRING("Jump"),
+    [MENU_WALLPAPER]  = COMPOUND_STRING("Wallpaper"),
+    [MENU_NAME]       = COMPOUND_STRING("Name"),
+    [MENU_TAKE]       = COMPOUND_STRING("Take"),
+    [MENU_GIVE]       = gPCText_Give,
+    [MENU_GIVE_2]     = gPCText_Give,
+    [MENU_SWITCH]     = COMPOUND_STRING("Switch"),
+    [MENU_BAG]        = COMPOUND_STRING("Bag"),
+    [MENU_SELECT]     = COMPOUND_STRING("Select"),
+    [MENU_BASE]       = COMPOUND_STRING("Default"),
+    [MENU_NORMAL]     = COMPOUND_STRING("Normal"),
+    [MENU_FIGHTING]   = COMPOUND_STRING("Fighting"),
+    [MENU_FLYING]     = COMPOUND_STRING("Flying"),
+    [MENU_POISON]     = COMPOUND_STRING("Poison"),
+    [MENU_GROUND]     = COMPOUND_STRING("Ground"),
+    [MENU_ROCK]       = COMPOUND_STRING("Rock"),
+    [MENU_BUG]        = COMPOUND_STRING("Bug"),
+    [MENU_GHOST]      = COMPOUND_STRING("Ghost"),
+    [MENU_STEEL]      = COMPOUND_STRING("Steel"),
+    [MENU_FIRE]       = COMPOUND_STRING("Fire"),
+    [MENU_WATER]      = COMPOUND_STRING("Water"),
+    [MENU_GRASS]      = COMPOUND_STRING("Grass"),
+    [MENU_ELECTRIC]   = COMPOUND_STRING("Electric"),
+    [MENU_PSYCHIC]    = COMPOUND_STRING("Psychic"),
+    [MENU_ICE]        = COMPOUND_STRING("Ice"),
+    [MENU_DRAGON]     = COMPOUND_STRING("Dragon"),
+    [MENU_DARK]       = COMPOUND_STRING("Dark"),
+    [MENU_FAIRY]      = COMPOUND_STRING("Fairy"),
+    [MENU_STELLAR]    = COMPOUND_STRING("Stellar"),
+    [MENU_COUNT]      = gText_EmptyString2,
+};
+
+// ============================================================================
+// Messages
+// ============================================================================
+
+static const struct StorageMessage sMessages[] =
+{
+    [MSG_BOX_IS_FULL]          = {COMPOUND_STRING("The box is full."),           MSG_VAR_NONE},
+    [MSG_RELEASE_POKE]         = {COMPOUND_STRING("Release this Pokémon?"),      MSG_VAR_NONE},
+    [MSG_WAS_RELEASED]         = {COMPOUND_STRING("{DYNAMIC 0} was released."),  MSG_VAR_RELEASE_MON_1},
+    [MSG_BYE_BYE]              = {COMPOUND_STRING("Bye-bye, {DYNAMIC 0}!"),      MSG_VAR_RELEASE_MON_3},
+    [MSG_LAST_POKE]            = {COMPOUND_STRING("That's your last Pokémon!"),  MSG_VAR_NONE},
+    [MSG_PARTY_FULL]           = {gText_YourPartysFull,                          MSG_VAR_NONE},
+    [MSG_HOLDING_POKE]         = {COMPOUND_STRING("You're holding a Pokémon!"),  MSG_VAR_NONE},
+    [MSG_WHICH_ONE_WILL_TAKE]  = {COMPOUND_STRING("Which one will you take?"),   MSG_VAR_NONE},
+    [MSG_CANT_RELEASE_EGG]     = {COMPOUND_STRING("You can't release an egg."),  MSG_VAR_NONE},
+    [MSG_CONTINUE_BOX]         = {COMPOUND_STRING("Continue P.C. operations?"),  MSG_VAR_NONE},
+    [MSG_CAME_BACK]            = {COMPOUND_STRING("{DYNAMIC 0} came back!"),     MSG_VAR_MON_NAME_1},
+    [MSG_WORRIED]              = {COMPOUND_STRING("Was it worried about you?"),  MSG_VAR_NONE},
+    [MSG_SURPRISE]             = {COMPOUND_STRING("… … … … !"),                  MSG_VAR_NONE},
+    [MSG_PLEASE_REMOVE_MAIL]   = {COMPOUND_STRING("Please remove the mail."),    MSG_VAR_NONE},
+    [MSG_PLACED_IN_BAG]        = {COMPOUND_STRING("Placed item in the bag."),    MSG_VAR_ITEM_NAME},
+    [MSG_BAG_FULL]             = {COMPOUND_STRING("The bag is full."),           MSG_VAR_NONE},
+    [MSG_PUT_IN_BAG]           = {COMPOUND_STRING("Put this item in the bag?"),  MSG_VAR_NONE},
+    [MSG_CANT_STORE_MAIL]      = {COMPOUND_STRING("Mail can't be stored!"),      MSG_VAR_NONE},
+};
+
+// ============================================================================
+// Window Templates
+// ============================================================================
+
+#define PAL_STORAGE_MAIN            0   // tiles.png bank 0 - BG1/BG2 art, and sMonInfo_Gfx
+#define PAL_STORAGE_TEXT            1   // tiles.png bank 1 - custom swsh text palette
+#define PAL_STORAGE_WALLPAPER       2   // wallpaper
+#define PAL_STORAGE_FRAME           14  // std window border
+#define PAL_STORAGE_STD_MENU        15  // gStandardMenuPalette - options menu, yes/no, jump list
+
+#define STORAGE_CHAR_BASE_TILES     1024
+
+#define STORAGE_TILES_MON_INFO_GFX  48  // sMonInfo_Gfx
+#define STORAGE_TILES_STD_BORDER    9
+
+#define STORAGE_BASE_MON_INFO_GFX   0
+#define STORAGE_BASE_STD_BORDER     (STORAGE_BASE_MON_INFO_GFX + STORAGE_TILES_MON_INFO_GFX)
+
+static const struct WindowTemplate sWindowTemplate_MainMenu =
+{
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 17,
+    .height = 10,
+    .paletteNum = 15,
+    .baseBlock = 0x1,
+};
+
+// ----------------------------------------------------------------------------
+// Message window and mon info panel - see sWindowTemplates
+// ----------------------------------------------------------------------------
+
+#define WIN_MESSAGE_W                   20
+#define WIN_MESSAGE_H                   2
+#define WIN_MESSAGE_TILES               (WIN_MESSAGE_W * WIN_MESSAGE_H)
+#define WIN_MESSAGE_BASE                (STORAGE_BASE_STD_BORDER + STORAGE_TILES_STD_BORDER)
+
+#define WIN_PANEL_BASE                  (WIN_MESSAGE_BASE + WIN_MESSAGE_TILES)
+
+#define WIN_MON_INFO_NICKNAME_W         8
+#define WIN_MON_INFO_NICKNAME_H         2
+#define WIN_MON_INFO_NICKNAME_TILES     (WIN_MON_INFO_NICKNAME_W * WIN_MON_INFO_NICKNAME_H)
+#define WIN_MON_INFO_NICKNAME_BASE      WIN_PANEL_BASE
+
+#define WIN_MON_INFO_LEVEL_W            4
+#define WIN_MON_INFO_LEVEL_H            2
+#define WIN_MON_INFO_LEVEL_TILES        (WIN_MON_INFO_LEVEL_W * WIN_MON_INFO_LEVEL_H)
+#define WIN_MON_INFO_LEVEL_BASE         (WIN_MON_INFO_NICKNAME_BASE + WIN_MON_INFO_NICKNAME_TILES)
+
+#define WIN_MON_INFO_STATS_COL1_W       3
+#define WIN_MON_INFO_STATS_COL1_H       6
+#define WIN_MON_INFO_STATS_COL1_TILES   (WIN_MON_INFO_STATS_COL1_W * WIN_MON_INFO_STATS_COL1_H)
+#define WIN_MON_INFO_STATS_COL1_BASE    (WIN_MON_INFO_LEVEL_BASE + WIN_MON_INFO_LEVEL_TILES)
+
+#define WIN_MON_INFO_STATS_COL2_W       3
+#define WIN_MON_INFO_STATS_COL2_H       6
+#define WIN_MON_INFO_STATS_COL2_TILES   (WIN_MON_INFO_STATS_COL2_W * WIN_MON_INFO_STATS_COL2_H)
+#define WIN_MON_INFO_STATS_COL2_BASE    (WIN_MON_INFO_STATS_COL1_BASE + WIN_MON_INFO_STATS_COL1_TILES)
+
+#define WIN_MON_INFO_ABILITY_W          9
+#define WIN_MON_INFO_ABILITY_H          2
+#define WIN_MON_INFO_ABILITY_TILES      (WIN_MON_INFO_ABILITY_W * WIN_MON_INFO_ABILITY_H)
+#define WIN_MON_INFO_ABILITY_BASE       (WIN_MON_INFO_STATS_COL2_BASE + WIN_MON_INFO_STATS_COL2_TILES)
+
+#define WIN_MON_INFO_ITEM_W             9
+#define WIN_MON_INFO_ITEM_H             2
+#define WIN_MON_INFO_ITEM_TILES         (WIN_MON_INFO_ITEM_W * WIN_MON_INFO_ITEM_H)
+#define WIN_MON_INFO_ITEM_BASE          (WIN_MON_INFO_ABILITY_BASE + WIN_MON_INFO_ABILITY_TILES)
+
+#define WIN_MON_INFO_TILES              (WIN_MON_INFO_ITEM_BASE + WIN_MON_INFO_ITEM_TILES - WIN_PANEL_BASE)
+
+#define MON_INFO_WIN(name, left, top)                   \
+    {                                                   \
+        .bg          = 0,                               \
+        .tilemapLeft = (left),                          \
+        .tilemapTop  = (top),                           \
+        .width       = WIN_MON_INFO_##name##_W,         \
+        .height      = WIN_MON_INFO_##name##_H,         \
+        .paletteNum  = PAL_STORAGE_TEXT,                \
+        .baseBlock   = WIN_MON_INFO_##name##_BASE,      \
+    }
+
+static const struct WindowTemplate sWindowTemplates[] =
+{
+    [WIN_MESSAGE] = {
+        .bg = 0,
+        .tilemapLeft = 9,
+        .tilemapTop = 17,
+        .width = WIN_MESSAGE_W,
+        .height = WIN_MESSAGE_H,
+        .paletteNum = PAL_STORAGE_TEXT,
+        .baseBlock = WIN_MESSAGE_BASE,
+    },
+    [WIN_MON_INFO_NICKNAME_LEFT]     = MON_INFO_WIN(NICKNAME,   0, 23),
+    [WIN_MON_INFO_LEVEL_LEFT]        = MON_INFO_WIN(LEVEL,      9, 23),
+    [WIN_MON_INFO_STATS_COL1_LEFT]   = MON_INFO_WIN(STATS_COL1, 3, 27),
+    [WIN_MON_INFO_STATS_COL2_LEFT]   = MON_INFO_WIN(STATS_COL2, 10, 27),
+    [WIN_MON_INFO_ABILITY_LEFT]      = MON_INFO_WIN(ABILITY,    4, 34),
+    [WIN_MON_INFO_ITEM_LEFT]         = MON_INFO_WIN(ITEM,       4, 36),
+    [WIN_MON_INFO_NICKNAME_RIGHT]    = MON_INFO_WIN(NICKNAME,   17, 43),
+    [WIN_MON_INFO_LEVEL_RIGHT]       = MON_INFO_WIN(LEVEL,      26, 43),
+    [WIN_MON_INFO_STATS_COL1_RIGHT]  = MON_INFO_WIN(STATS_COL1, 20, 47),
+    [WIN_MON_INFO_STATS_COL2_RIGHT]  = MON_INFO_WIN(STATS_COL2, 27, 47),
+    [WIN_MON_INFO_ABILITY_RIGHT]     = MON_INFO_WIN(ABILITY,    21, 54),
+    [WIN_MON_INFO_ITEM_RIGHT]        = MON_INFO_WIN(ITEM,       21, 56),
+    DUMMY_WIN_TEMPLATE
+};
+
+STATIC_ASSERT(ARRAY_COUNT(sWindowTemplates) == WIN_COUNT + 1, StorageWindowTemplateCount);
+
+// ----------------------------------------------------------------------------
+// Options menu - shares the panel block and AddMenu clears before opening
+// ----------------------------------------------------------------------------
+
+#define STORAGE_MENU_ROW_H          2
+#define STORAGE_MENU_TOP_MIN        2
+#define STORAGE_MENU_BOTTOM_MAX     19
+#define STORAGE_MENU_JUMP_ROWS      5
+
+#define WIN_MENU_W                  28
+#define WIN_MENU_MAX_ROWS           ((STORAGE_MENU_BOTTOM_MAX - STORAGE_MENU_TOP_MIN) / STORAGE_MENU_ROW_H)
+#define WIN_MENU_H                  (WIN_MENU_MAX_ROWS * STORAGE_MENU_ROW_H)
+#define WIN_MENU_TILES              (WIN_MENU_W * WIN_MENU_H)
+#define WIN_MENU_BASE               WIN_PANEL_BASE
+
+#define WIN_PANEL_TILES             max(WIN_MON_INFO_TILES, WIN_MENU_TILES)
+
+STATIC_ASSERT(STORAGE_MENU_JUMP_ROWS <= WIN_MENU_MAX_ROWS, StorageMenuJumpRows);
+
+static const struct WindowTemplate sWindowTemplate_Menu =
+{
+    .bg = 0,
+    .paletteNum = PAL_STORAGE_STD_MENU,
+    .baseBlock = WIN_MENU_BASE,
+};
+
+// ----------------------------------------------------------------------------
+// Yes/No
+// ----------------------------------------------------------------------------
+
+#define WIN_YESNO_W                 5
+#define WIN_YESNO_H                 4
+#define WIN_YESNO_TILES             (WIN_YESNO_W * WIN_YESNO_H)
+#define WIN_YESNO_BASE              (WIN_PANEL_BASE + WIN_PANEL_TILES)
+
+static const struct WindowTemplate sYesNoWindowTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 24,
+    .tilemapTop = 11,
+    .width = WIN_YESNO_W,
+    .height = WIN_YESNO_H,
+    .paletteNum = PAL_STORAGE_STD_MENU,
+    .baseBlock = WIN_YESNO_BASE,
+};
+
+#define STORAGE_TILES_END           (WIN_YESNO_BASE + WIN_YESNO_TILES)
+
+STATIC_ASSERT(STORAGE_TILES_END <= STORAGE_CHAR_BASE_TILES, StorageCharBaseOverflow);
+
+// ----------------------------------------------------------------------------
+// Multi-move
+// ----------------------------------------------------------------------------
+
+#define WIN_MULTI_MOVE_W            19
+#define WIN_MULTI_MOVE_H            16
+#define WIN_MULTI_MOVE_BASE         1
+#define WIN_MULTI_MOVE_END          ((WIN_MULTI_MOVE_BASE + WIN_MULTI_MOVE_W * WIN_MULTI_MOVE_H) * 2)
+
+STATIC_ASSERT(WIN_MULTI_MOVE_END <= STORAGE_CHAR_BASE_TILES, StorageMultiMoveOverflow);
+
+static const struct WindowTemplate sWindowTemplate_MultiMove =
+{
+    .bg = 0,
+    .tilemapLeft = 10,
+    .tilemapTop = 3,
+    .width = WIN_MULTI_MOVE_W,
+    .height = WIN_MULTI_MOVE_H,
+    .paletteNum = 9,
+    .baseBlock = WIN_MULTI_MOVE_BASE,
+};
+
+enum {
+    COLORID_PC_MAIN_MENU,   // overworld PC main menu
+    COLORID_MON_INFO_NAME,  // nickname and level, on the grey panel
+    COLORID_MON_INFO,       // stats, ability, held item
+    COLORID_CHOOSE_BOX,     // uses PALTAG_MISC_3
+    COLORID_MESSAGE,
+};
+
+static const u8 sFontColorTable[][3] = {
+                              // bgColor, textColor, shadowColor
+    [COLORID_PC_MAIN_MENU]  = {1, 2, 3},
+    [COLORID_MON_INFO_NAME] = {4, 2, 5},
+    [COLORID_MON_INFO]      = {1, 2, 3},
+    [COLORID_CHOOSE_BOX]    = {0, 4, 7},
+    [COLORID_MESSAGE]       = {0, 1, 6},
+};
+
+
+// ============================================================================
+// BG Templates
+// ============================================================================
+
+static const struct BgTemplate sBgTemplates[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 29,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 26,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 27,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 3,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+};
+
+// ============================================================================
+// Choose Box Menu Sprites
+// ============================================================================
+
+#if SWSH_STORAGE_CHOOSE_BOX_GRID
+
+static const struct OamData sOamData_ChooseBoxGrid_Hover =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .size = SPRITE_SIZE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .shape = SPRITE_SHAPE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteSheet sSpriteSheet_ChooseBoxGrid_Hover =
+{
+    .data = sChooseBoxGrid_Hover_Gfx,
+    .size = (32 * 32) / 2,
+    .tag = GFXTAG_CHOOSE_BOX_GRID_HOVER,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_ChooseBoxGrid_Hover =
+{
+    .tileTag = GFXTAG_CHOOSE_BOX_GRID_HOVER,
+    .paletteTag = PALTAG_MISC_3,
+    .oam = &sOamData_ChooseBoxGrid_Hover,
+};
+
+#else // !SWSH_STORAGE_CHOOSE_BOX_GRID
+
+// ============================================================================
+// Box Selection Text Sprites (single-menu mode, loaded dynamically)
+// ============================================================================
+
+static const struct OamData sOamData_ChooseBoxMenu_BoxName =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .size = SPRITE_SIZE(32x16),
+    .x = 0,
+    .matrixNum = 0,
+    .shape = SPRITE_SHAPE(32x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sAnim_ChooseBoxMenu_BoxName_0[]  = {
+    ANIMCMD_FRAME(0, 5), ANIMCMD_END
+};
+static const union AnimCmd sAnim_ChooseBoxMenu_BoxName_1[] = {
+    ANIMCMD_FRAME(8, 5), ANIMCMD_END
+};
+static const union AnimCmd *const sAnims_ChooseBoxMenu_BoxName[] =
+{
+    sAnim_ChooseBoxMenu_BoxName_0,
+    sAnim_ChooseBoxMenu_BoxName_1,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_ChooseBoxMenu_BoxName =
+{
+    .tileTag = GFXTAG_CHOOSE_BOX_MENU_BOX_NAME,
+    .paletteTag = PALTAG_MISC_3,
+    .oam = &sOamData_ChooseBoxMenu_BoxName,
+    .anims = sAnims_ChooseBoxMenu_BoxName,
+};
+
+static const struct OamData sOamData_ChooseBoxMenu_MonCount =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .size = SPRITE_SIZE(32x16),
+    .x = 0,
+    .matrixNum = 0,
+    .shape = SPRITE_SHAPE(32x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_ChooseBoxMenu_MonCount =
+{
+    .tileTag = GFXTAG_CHOOSE_BOX_MON_COUNT,
+    .paletteTag = PALTAG_MISC_3,
+    .oam = &sOamData_ChooseBoxMenu_MonCount,
+};
+
+#endif // SWSH_STORAGE_CHOOSE_BOX_GRID
+
+// ============================================================================
+// Box Title Frame Sprites
+// ============================================================================
+
+static const struct OamData sOamData_BoxTitleFrame =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .size = SPRITE_SIZE(32x16),
+    .x = 0,
+    .matrixNum = 0,
+    .shape = SPRITE_SHAPE(32x16),
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_BoxTitleFrame_0[] = {
+    ANIMCMD_FRAME(0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_BoxTitleFrame_1[] = {
+    ANIMCMD_FRAME(8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_BoxTitleFrame_2[] = {
+    ANIMCMD_FRAME(16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_BoxTitleFrame_3[] = {
+    ANIMCMD_FRAME(0, 0, TRUE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_BoxTitleFrame_4[] = {
+    ANIMCMD_FRAME(24, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_BoxTitleFrame_5[] = {
+    ANIMCMD_FRAME(32, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_BoxTitleFrame[] = {
+    sSpriteAnim_BoxTitleFrame_0,
+    sSpriteAnim_BoxTitleFrame_1,
+    sSpriteAnim_BoxTitleFrame_2,
+    sSpriteAnim_BoxTitleFrame_3,
+    sSpriteAnim_BoxTitleFrame_4,
+    sSpriteAnim_BoxTitleFrame_5,
+};
+
+static const u8 sBoxTitleFrameAnims[4] = {0, 1, 2, 3};
+
+// Two sets of middle frames, double-buffered to avoid flicker when updating
+static const u8 sBoxTitleMidAnims[2][2] = {{1, 2}, {4, 5}};
+
+static const struct SpriteSheet sSpriteSheet_BoxTitleFrame =
+{
+    .data = sBoxTitleFrame_Gfx,
+    .size = (32 * 16 * 5) / 2,
+    .tag = GFXTAG_BOX_TITLE_FRAME,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_BoxTitleFrame =
+{
+    .tileTag = GFXTAG_BOX_TITLE_FRAME,
+    .paletteTag = PALTAG_MISC_1,
+    .oam = &sOamData_BoxTitleFrame,
+    .anims = sSpriteAnimTable_BoxTitleFrame,
+};
+
+// ============================================================================
+// Box Title Arrow Sprites
+// ============================================================================
+
+static const struct OamData sOamData_BoxTitleArrow =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .size = SPRITE_SIZE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .shape = SPRITE_SHAPE(8x8),
+    .tileNum = 0,
+    .priority = 2,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_BoxTitleArrow_Left[] = {
+    ANIMCMD_FRAME(0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_BoxTitleArrow_Right[] = {
+    ANIMCMD_FRAME(0, 0, TRUE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_BoxTitleArrow[] = {
+    sSpriteAnim_BoxTitleArrow_Left,
+    sSpriteAnim_BoxTitleArrow_Right,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_BoxTitleArrow =
+{
+    .data = sBoxTitleArrow_Gfx,
+    .size = (8 * 8) / 2,
+    .tag = GFXTAG_BOX_TITLE_ARROW,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_BoxTitleArrow =
+{
+    .tileTag = GFXTAG_BOX_TITLE_ARROW,
+    .paletteTag = PALTAG_MISC_1,
+    .oam = &sOamData_BoxTitleArrow,
+    .anims = sSpriteAnimTable_BoxTitleArrow,
+    .callback = SpriteCB_Arrow,
+};
+
+// ============================================================================
+// Cursor Sprites
+// ============================================================================
+
+static const struct CompressedSpriteSheet sSpriteSheet_Cursor[] =
+{
+    {
+        .data = sCursor_Gfx,
+        .size = (16 * 16 * 3) / 2,
+        .tag = GFXTAG_CURSOR,
+    },
+    {},
+};
+
+static const struct SpritePalette sSpritePal_Cursor[] =
+{
+    {
+        .data = sCursor_Pal,
+        .tag = PALTAG_MISC_1,
+    },
+    {
+        .data = sCursor_Pal + 16,
+        .tag = PALTAG_MISC_2,
+    },
+    {
+        .data = sCursor_Pal + 32,
+        .tag = PALTAG_MISC_3,
+    },
+    {},
+};
+
+static const struct OamData sOamData_Cursor =
+{
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1,
+};
+
+static const union AnimCmd sAnim_Cursor_Bouncing[] =
+{
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_FRAME(8, 8),
+    ANIMCMD_FRAME(4, 8),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sAnim_Cursor_Main[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sAnims_Cursor[] =
+{
+    [CURSOR_ANIM_BOUNCE] = sAnim_Cursor_Bouncing,
+    [CURSOR_ANIM_MAIN]   = sAnim_Cursor_Main,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_Cursor =
+{
+    .tileTag = GFXTAG_CURSOR,
+    .paletteTag = PALTAG_MISC_1,
+    .oam = &sOamData_Cursor,
+    .anims = sAnims_Cursor,
+};
+
+// ============================================================================
+// Mon Icon Sprites
+// ============================================================================
+
+static const struct OamData sOamData_MonIcon;
+static const struct SpriteTemplate sSpriteTemplate_MonIcon =
+{
+    .tileTag = GFXTAG_MON_ICON,
+    .paletteTag = PALTAG_MON_ICON_0,
+    .oam = &sOamData_MonIcon,
+};
+
+static const struct OamData sOamData_MonIcon =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AffineAnimCmd sAffineAnim_ReleaseMon_Release[] =
+{
+    AFFINEANIMCMD_FRAME(-2, -2, 0, 120),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sAffineAnim_ReleaseMon_CameBack[] =
+{
+    AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+    AFFINEANIMCMD_FRAME(16, 16, 0, 15),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd *const sAffineAnims_ReleaseMon[] =
+{
+    [RELEASE_ANIM_RELEASE]   = sAffineAnim_ReleaseMon_Release,
+    [RELEASE_ANIM_CAME_BACK] = sAffineAnim_ReleaseMon_CameBack
+};
+
+// ============================================================================
+// Gender Icon Sprites
+// ============================================================================
+
+static const struct OamData sOamData_GenderIcons =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 7,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_GenderFemale[] = {
+    ANIMCMD_FRAME(0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_GenderMale[] = {
+    ANIMCMD_FRAME(2, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_GenderIcons[] = {
+    sSpriteAnim_GenderFemale,
+    sSpriteAnim_GenderMale,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_GenderIcons =
+{
+    .data = sGenderIcons_Gfx,
+    .size = (8 * 16 * 2) / 2,
+    .tag = GFXTAG_GENDER_ICON
+};
+
+static const struct SpriteTemplate sSpriteTemplate_GenderIcons =
+{
+    .tileTag = GFXTAG_GENDER_ICON,
+    .paletteTag = PALTAG_MISC_2,
+    .oam = &sOamData_GenderIcons,
+    .anims = sSpriteAnimTable_GenderIcons,
+    .images = NULL,
+};
+
+// ============================================================================
+// Shiny Icon Sprites
+// ============================================================================
+
+static const struct OamData sOamData_ShinyIcon =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_ShinyIcon =
+{
+    .data = sShinyIcon_Gfx,
+    .size = (8 * 8) / 2,
+    .tag = GFXTAG_SHINY_ICON
+};
+
+static const struct SpriteTemplate sSpriteTemplate_ShinyIcon =
+{
+    .tileTag = GFXTAG_SHINY_ICON,
+    .paletteTag = PALTAG_MISC_2,
+    .oam = &sOamData_ShinyIcon,
+};
+
+// ============================================================================
+// Stat Label Sprites
+// ============================================================================
+
+static const struct OamData sOamData_StatLabels =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+};
+
+static const union AnimCmd sSpriteAnim_StatAtk[] = {
+    ANIMCMD_FRAME(0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatDef[] = {
+    ANIMCMD_FRAME(4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatSpAtk[] = {
+    ANIMCMD_FRAME(8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatSpDef[] = {
+    ANIMCMD_FRAME(12, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_StatSpeed[] = {
+    ANIMCMD_FRAME(16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_StatLabels[] = {
+    sSpriteAnim_StatAtk,
+    sSpriteAnim_StatDef,
+    sSpriteAnim_StatSpAtk,
+    sSpriteAnim_StatSpDef,
+    sSpriteAnim_StatSpeed,
+};
+
+static const struct CompressedSpriteSheet sSpriteSheet_StatLabels =
+{
+    .data = sStatLabels_Gfx,
+    .size = (16 * 16 * 5) / 2,
+    .tag = GFXTAG_STAT_LABELS
+};
+
+static const struct SpriteTemplate sSpriteTemplate_StatLabels =
+{
+    .tileTag = GFXTAG_STAT_LABELS,
+    .paletteTag = PALTAG_MISC_2,
+    .oam = &sOamData_StatLabels,
+    .anims = sSpriteAnimTable_StatLabels,
+};
+
+// ============================================================================
+// Type Icon Sprites
+// ============================================================================
+
+static const struct OamData sOamData_TypeIcons =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_TypeIcons =
+{
+    .tileTag = GFXTAG_TYPE_ICON,
+    .paletteTag = PALTAG_TYPE_ICON,
+    .oam = &sOamData_TypeIcons,
+};
+
+// ============================================================================
+// Markings Menu Sprites
+// ============================================================================
+
+static const struct CompressedSpriteSheet sSpriteSheet_MarkingsMenu =
+{
+    .data = sMarkingsMenu_Gfx,
+    .size = (
+        32 * 32 * 2 + // marking menu window
+        8 * 8 * 8 +   // marking menu marks
+        16 * 16 * 3   // marking menu cursor
+    ) / 2,
+    .tag = GFXTAG_MARKING_MENU,
+};
+
+static const struct OamData sOamData_MarkingsMenu_Window =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_Window_0[] = {
+    ANIMCMD_FRAME(0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_Window_1[] = {
+    ANIMCMD_FRAME(16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_Window_2[] = {
+    ANIMCMD_FRAME(0, 0, TRUE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sAnims_MarkingsMenu_Window[] = {
+    sAnim_MarkingsMenu_Window_0,
+    sAnim_MarkingsMenu_Window_1,
+    sAnim_MarkingsMenu_Window_2,
+};
+
+static const u8 sMarkingsMenu_WindowAnims[3] = {0, 1, 2};
+
+static const struct SpriteTemplate sSpriteTemplate_MarkingsMenu_Window =
+{
+    .tileTag = GFXTAG_MARKING_MENU,
+    .paletteTag = PALTAG_MISC_3,
+    .oam = &sOamData_MarkingsMenu_Window,
+    .anims = sAnims_MarkingsMenu_Window,
+};
+
+static const struct OamData sOamData_MarkingsMenu_Marks =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_CircleOff[] = {
+    ANIMCMD_FRAME(32, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_CircleOn[] = {
+    ANIMCMD_FRAME(33, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_SquareOff[] = {
+    ANIMCMD_FRAME(34, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_SquareOn[] = {
+    ANIMCMD_FRAME(35, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_TriangleOff[] = {
+    ANIMCMD_FRAME(36, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_TriangleOn[] = {
+    ANIMCMD_FRAME(37, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_HeartOff[] = {
+    ANIMCMD_FRAME(38, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_HeartOn[] = {
+    ANIMCMD_FRAME(39, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sAnims_MarkingsMenu_Marks[] = {
+    sAnim_MarkingsMenu_CircleOff,
+    sAnim_MarkingsMenu_CircleOn,
+    sAnim_MarkingsMenu_SquareOff,
+    sAnim_MarkingsMenu_SquareOn,
+    sAnim_MarkingsMenu_TriangleOff,
+    sAnim_MarkingsMenu_TriangleOn,
+    sAnim_MarkingsMenu_HeartOff,
+    sAnim_MarkingsMenu_HeartOn,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_MarkingsMenu_Marks =
+{
+    .tileTag = GFXTAG_MARKING_MENU,
+    .paletteTag = PALTAG_MISC_3,
+    .oam = &sOamData_MarkingsMenu_Marks,
+    .anims = sAnims_MarkingsMenu_Marks,
+};
+
+// Marking menu cursor (16x16, 3 frames)
+static const struct OamData sOamData_MarkingsMenu_Cursor =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_Cursor_Bouncing[] = {
+    ANIMCMD_FRAME(40, 8, FALSE, FALSE),
+    ANIMCMD_FRAME(44, 8, FALSE, FALSE),
+    ANIMCMD_FRAME(48, 8, FALSE, FALSE),
+    ANIMCMD_FRAME(44, 8, FALSE, FALSE),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sAnim_MarkingsMenu_Cursor_Main[] = {
+    ANIMCMD_FRAME(44, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sAnims_MarkingsMenu_Cursor[] = {
+    sAnim_MarkingsMenu_Cursor_Bouncing,
+    sAnim_MarkingsMenu_Cursor_Main,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_MarkingsMenu_Cursor =
+{
+    .tileTag = GFXTAG_MARKING_MENU,
+    .paletteTag = PALTAG_MISC_3,
+    .oam = &sOamData_MarkingsMenu_Cursor,
+    .anims = sAnims_MarkingsMenu_Cursor,
+};
+
+// ============================================================================
+// Message window sprites
+// ============================================================================
+
+static const struct OamData sOamData_MessageWindow =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .size = SPRITE_SIZE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .shape = SPRITE_SHAPE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sSpriteAnim_MessageWindow_0[] = {
+    ANIMCMD_FRAME(0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_MessageWindow_1[] = {
+    ANIMCMD_FRAME(16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_MessageWindow_2[] = {
+    ANIMCMD_FRAME(0, 0, TRUE, TRUE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_MessageWindow[] = {
+    sSpriteAnim_MessageWindow_0,
+    sSpriteAnim_MessageWindow_1,
+    sSpriteAnim_MessageWindow_2,
+};
+
+static const u8 sMessageWindowAnims[6] = {0, 1, 1, 1, 1, 2};
+
+static const struct CompressedSpriteSheet sSpriteSheet_MessageWindow =
+{
+    .data = sMessageWindow_Gfx,
+    .size = (32 * 32 * 2) / 2,
+    .tag = GFXTAG_MESSAGE_WINDOW,
+};
+
+static const struct SpriteTemplate sSpriteTemplate_MessageWindow =
+{
+    .tileTag = GFXTAG_MESSAGE_WINDOW,
+    .paletteTag = PALTAG_MISC_3,
+    .oam = &sOamData_MessageWindow,
+    .anims = sSpriteAnimTable_MessageWindow,
+};
+
+// ============================================================================
+// Item Icon Sprites
+// ============================================================================
+
+static const struct OamData sOamData_ItemIcon =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_NORMAL,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0
+};
+
+static const union AffineAnimCmd sAffineAnim_ItemIcon_Small[] =
+{
+    AFFINEANIMCMD_FRAME(192, 192, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sAffineAnim_ItemIcon_Appear[] =
+{
+    AFFINEANIMCMD_FRAME(152, 152, 0, 0),
+    AFFINEANIMCMD_FRAME(5, 5, 0, 8),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sAffineAnim_ItemIcon_Disappear[] =
+{
+    AFFINEANIMCMD_FRAME(192, 192, 0, 0),
+    AFFINEANIMCMD_FRAME(-5, -5, 0, 8),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sAffineAnim_ItemIcon_PickUp[] =
+{
+    AFFINEANIMCMD_FRAME(192, 192, 0, 0),
+    AFFINEANIMCMD_FRAME(6, 6, 0, 12),
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sAffineAnim_ItemIcon_PutDown[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_FRAME(-6, -6, 0, 12),
+    AFFINEANIMCMD_FRAME(192, 192, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sAffineAnim_ItemIcon_PutAway[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_FRAME(-5, -5, 0, 16),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd sAffineAnim_ItemIcon_Large[] =
+{
+    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+static const union AffineAnimCmd *const sAffineAnims_ItemIcon[] =
+{
+    [ITEM_ANIM_NONE]      = sAffineAnim_ItemIcon_Small,
+    [ITEM_ANIM_APPEAR]    = sAffineAnim_ItemIcon_Appear,
+    [ITEM_ANIM_DISAPPEAR] = sAffineAnim_ItemIcon_Disappear,
+    [ITEM_ANIM_PICK_UP]   = sAffineAnim_ItemIcon_PickUp,
+    [ITEM_ANIM_PUT_DOWN]  = sAffineAnim_ItemIcon_PutDown,
+    [ITEM_ANIM_PUT_AWAY]  = sAffineAnim_ItemIcon_PutAway,
+    [ITEM_ANIM_LARGE]     = sAffineAnim_ItemIcon_Large
+};
+
+static const struct SpriteTemplate sSpriteTemplate_ItemIcon =
+{
+    .tileTag = GFXTAG_ITEM_ICON_0,
+    .paletteTag = PALTAG_ITEM_ICON_0,
+    .oam = &sOamData_ItemIcon,
+    .affineAnims = sAffineAnims_ItemIcon,
+};

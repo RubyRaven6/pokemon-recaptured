@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle_pyramid.h"
 #include "bg.h"
+#include "comfy_anim.h"
 #include "event_data.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
@@ -315,6 +316,15 @@ static const u8 sRegionMapSectionId_To_PopUpThemeIdMapping_BW[] =
     [MAPSEC_TRAINER_HILL - KANTO_MAPSEC_COUNT] = MAPPOPUP_THEME_BW_DEFAULT,
 };
 
+#if OW_POPUP_GENERATION == GEN_8
+// Gen8 assets
+static const u8 sMapPopUp_SwSh[]            = INCGFX_U8("graphics/map_popup/swsh.png", ".4bpp");
+static const u16 sMapPopUp_Palette_SwSh[]   = INCGFX_U16("graphics/map_popup/swsh.png", ".gbapal");
+#else
+static const u8 sMapPopUp_SwSh[] = {0};
+static const u16 sMapPopUp_Palette_SwSh[] = {0};
+#endif
+
 static const u8 sText_PyramidFloor1[] = _("PYRAMID FLOOR 1");
 static const u8 sText_PyramidFloor2[] = _("PYRAMID FLOOR 2");
 static const u8 sText_PyramidFloor3[] = _("PYRAMID FLOOR 3");
@@ -355,13 +365,16 @@ enum {
 };
 
 #define POPUP_OFFSCREEN_Y  ((OW_POPUP_GENERATION == GEN_5) ? 24 : 40)
-#define POPUP_SLIDE_SPEED  2
+#define POPUP_OFFSCREEN_X  ((OW_POPUP_GENERATION == GEN_8) ? 112 : 0)
+#define POPUP_SLIDE_SPEED  ((OW_POPUP_GENERATION == GEN_8) ? 12 : 2)
 
 #define tState         data[0]
 #define tOnscreenTimer data[1]
 #define tYOffset       data[2]
+#define tXOffset       data[2]
 #define tIncomingPopUp data[3]
 #define tPrintTimer    data[4]
+#define tComfyAnimId   data[5]
 
 void ShowMapNamePopup(void)
 {
@@ -377,6 +390,16 @@ void ShowMapNamePopup(void)
                 if (OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
                     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
             }
+            else if (OW_POPUP_GENERATION == GEN_8)
+            {
+                gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 90);
+                gTasks[gPopupTaskId].tComfyAnimId = INVALID_COMFY_ANIM;
+
+                SetGpuReg(REG_OFFSET_BG0HOFS, -POPUP_OFFSCREEN_X);
+                SetGpuReg(REG_OFFSET_WIN0H, (128 << 8) | 240);
+                SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
+                SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
+            }
             else
             {
                 gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 90);
@@ -384,7 +407,8 @@ void ShowMapNamePopup(void)
             }
 
             gTasks[gPopupTaskId].tState = STATE_PRINT;
-            gTasks[gPopupTaskId].tYOffset = POPUP_OFFSCREEN_Y;
+            if (OW_POPUP_GENERATION != GEN_8)
+                gTasks[gPopupTaskId].tYOffset = POPUP_OFFSCREEN_Y;
         }
         else
         {
@@ -395,6 +419,27 @@ void ShowMapNamePopup(void)
             gTasks[gPopupTaskId].tIncomingPopUp = TRUE;
         }
     }
+}
+
+static void StartPopUpSlide(struct Task *task, s32 from, s32 to, u32 durationFrames)
+{
+    struct ComfyAnimEasingConfig config = {
+        .from = Q_24_8(from),
+        .to = Q_24_8(to),
+        .durationFrames = durationFrames,
+        .easingFunc = ComfyAnimEasing_EaseInOutCubic,
+    };
+
+    if (task->tComfyAnimId == INVALID_COMFY_ANIM)
+        task->tComfyAnimId = CreateComfyAnim_Easing(&config);
+    else
+        InitComfyAnim_Easing(&config, &gComfyAnims[task->tComfyAnimId]);
+}
+
+static bool32 PopUpSlideFinished(struct Task *task)
+{
+    return task->tComfyAnimId == INVALID_COMFY_ANIM
+        || gComfyAnims[task->tComfyAnimId].completed;
 }
 
 static void Task_MapNamePopUpWindow(u8 taskId)
@@ -419,12 +464,45 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         break;
     case STATE_SLIDE_IN:
         // Slide the window onscreen.
-        task->tYOffset -= POPUP_SLIDE_SPEED;
-        if (task->tYOffset <= 0 )
+        if (OW_POPUP_GENERATION == GEN_8)
         {
-            task->tYOffset = 0;
-            task->tState = STATE_WAIT;
-            gTasks[gPopupTaskId].tOnscreenTimer = 0;
+            if (task->tPrintTimer == 0)
+            {
+                StartPopUpSlide(task, -POPUP_OFFSCREEN_X, 0, 20);
+                task->tPrintTimer = 1;
+            }
+
+            if (task->tComfyAnimId == INVALID_COMFY_ANIM)
+            {
+                SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+            }
+            else
+            {
+                TryAdvanceComfyAnim(&gComfyAnims[task->tComfyAnimId]);
+                SetGpuReg(REG_OFFSET_BG0HOFS, ReadComfyAnimValueSmooth(&gComfyAnims[task->tComfyAnimId]));
+            }
+
+            if (PopUpSlideFinished(task))
+            {
+                task->tState = STATE_WAIT;
+                gTasks[gPopupTaskId].tOnscreenTimer = 0;
+            }
+        }
+        else
+        {
+            task->tYOffset -= POPUP_SLIDE_SPEED;
+            if (task->tYOffset <= 0)
+            {
+                task->tYOffset = 0;
+            }
+            if (OW_POPUP_GENERATION != GEN_5)
+                SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
+
+            if (task->tYOffset == 0)
+            {
+                task->tState = STATE_WAIT;
+                gTasks[gPopupTaskId].tOnscreenTimer = 0;
+            }
         }
         break;
     case STATE_WAIT:
@@ -437,14 +515,44 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         break;
     case STATE_SLIDE_OUT:
         // Slide the window offscreen.
-        task->tYOffset += POPUP_SLIDE_SPEED;
-        if (task->tYOffset >= POPUP_OFFSCREEN_Y)
+        if (OW_POPUP_GENERATION == GEN_8)
         {
-            task->tYOffset = POPUP_OFFSCREEN_Y;
+            if (task->tPrintTimer != 2)
+            {
+                s32 currentPos = (task->tComfyAnimId != INVALID_COMFY_ANIM)
+                               ? ReadComfyAnimValueSmooth(&gComfyAnims[task->tComfyAnimId])
+                               : -POPUP_OFFSCREEN_X;
+
+                StartPopUpSlide(task, currentPos, -POPUP_OFFSCREEN_X, 12);
+                task->tPrintTimer = 2;
+            }
+
+            if (task->tComfyAnimId == INVALID_COMFY_ANIM)
+            {
+                SetGpuReg(REG_OFFSET_BG0HOFS, -POPUP_OFFSCREEN_X);
+            }
+            else
+            {
+                TryAdvanceComfyAnim(&gComfyAnims[task->tComfyAnimId]);
+                SetGpuReg(REG_OFFSET_BG0HOFS, ReadComfyAnimValueSmooth(&gComfyAnims[task->tComfyAnimId]));
+            }
+        }
+        else
+        {
+            task->tYOffset += POPUP_SLIDE_SPEED;
+            if (task->tYOffset >= POPUP_OFFSCREEN_Y)
+            {
+                task->tYOffset = POPUP_OFFSCREEN_Y;
+            }
+            if (OW_POPUP_GENERATION != GEN_5)
+                SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
+        }
+
+        if ((OW_POPUP_GENERATION == GEN_8 && PopUpSlideFinished(task)) ||
+            (OW_POPUP_GENERATION != GEN_8 && task->tYOffset >= POPUP_OFFSCREEN_Y))
+        {
             if (task->tIncomingPopUp)
             {
-                // A new pop up window is incoming,
-                // return to the first state to show it.
                 task->tState = STATE_PRINT;
                 task->tPrintTimer = 0;
                 task->tIncomingPopUp = FALSE;
@@ -466,7 +574,7 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         HideMapNamePopUpWindow();
         return;
     }
-    if (OW_POPUP_GENERATION != GEN_5)
+    if (OW_POPUP_GENERATION != GEN_5 && OW_POPUP_GENERATION != GEN_8)
         SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
 }
 
@@ -500,8 +608,16 @@ void HideMapNamePopUpWindow(void)
                 SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 10));
             }
         }
+        else if (OW_POPUP_GENERATION == GEN_8)
+        {
+            ReleaseComfyAnim(gTasks[gPopupTaskId].tComfyAnimId);
+            gTasks[gPopupTaskId].tComfyAnimId = INVALID_COMFY_ANIM;
+            SetGpuReg(REG_OFFSET_WIN0H, 0xFF);
+            SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WINOBJ_BG0);
+        }
 
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);
+        SetGpuReg_ForcedBlank(REG_OFFSET_BG0HOFS, 0);
         DestroyTask(gPopupTaskId);
     }
 }
@@ -628,6 +744,12 @@ static void ShowMapNamePopUpWindow(void)
         CopyWindowToVram(mapNamePopUpWindowId, COPYWIN_FULL);
         UpdateSecondaryPopUpWindow(secondaryPopUpWindowId);
     }
+    else if (OW_POPUP_GENERATION == GEN_8)
+    {
+        x = GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 120);
+        AddTextPrinterParameterized(GetMapNamePopUpWindowId(), FONT_NARROW, mapDisplayHeader, x, 6, TEXT_SKIP_DRAW, NULL);
+        CopyWindowToVram(GetMapNamePopUpWindowId(), COPYWIN_FULL);
+    }
     else
     {
         u32 fontId = GetFontIdToFit(withoutPrefixPtr, FONT_NORMAL, -1, 80);
@@ -706,6 +828,12 @@ static void LoadMapNamePopUpWindowBg(void)
 
         PutWindowTilemap(popupWindowId);
         PutWindowTilemap(secondaryPopUpWindowId);
+    }
+    else if (OW_POPUP_GENERATION == GEN_8)
+    {
+        PutWindowTilemap(popupWindowId);
+        LoadPalette(sMapPopUp_Palette_SwSh, BG_PLTT_ID(14), sizeof(sMapPopUp_Palette_SwSh));
+        BlitBitmapToWindow(popupWindowId, sMapPopUp_SwSh, 0, 0, 112, 32);
     }
     else
     {
