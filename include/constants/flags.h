@@ -1352,6 +1352,7 @@
 #define FLAG_SYS_POKENAV_GET                         (SYSTEM_FLAGS + 0x2)
 #define FLAG_SYS_EV_ALLOC                            (SYSTEM_FLAGS + 0x3)
 #define FLAG_SYS_IV_ALLOC                            (SYSTEM_FLAGS + 0x21)
+#define FLAG_SYS_QUEST_MENU_GET                      (SYSTEM_FLAGS + 0x83) // add QUESTS to start menu
 #define FLAG_SYS_GAME_CLEAR                          (SYSTEM_FLAGS + 0x4)
 #define FLAG_SYS_CHAT_USED                           (SYSTEM_FLAGS + 0x5)
 #define FLAG_UNLOCKED_TRENDY_SAYINGS                 (SYSTEM_FLAGS + 0x6)
@@ -1502,8 +1503,6 @@
 #define FLAG_ENABLE_SHIP_NAVEL_ROCK                 (SYSTEM_FLAGS + 0x80)
 #define FLAG_ARRIVED_AT_NAVEL_ROCK                  (SYSTEM_FLAGS + 0x81)
 #define FLAG_LANDMARK_TRAINER_HILL                  (SYSTEM_FLAGS + 0x82)
-
-#define FLAG_UNUSED_0x8E3                           (SYSTEM_FLAGS + 0x83) // Unused Flag
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 
