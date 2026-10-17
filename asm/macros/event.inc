@@ -2135,6 +2135,12 @@
     call_if_eq VAR_RESULT, FALSE, \dest
     .endm
 
+	@ Rewards the player's current party with given EXP
+	.macro rewardpartyexp exp:req
+	callnative ScrCmd_rewardpartyexp
+	.4byte \exp
+	.endm
+
 @ Supplementary
 
 	@ Gets the width of the specified message in the Braille font and sets the result to VAR_0x8004.

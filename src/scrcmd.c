@@ -3510,3 +3510,21 @@ bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
 
     return TRUE;
 }
+
+bool8 ScrCmd_rewardpartyexp(struct ScriptContext *ctx)
+{
+    u32 exp = ScriptReadWord(ctx);
+    u32 partySize = gPartiesCount[B_TRAINER_PLAYER];
+
+    for(u32 i = 0; i < partySize; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        
+        u32 currentMonExp = GetMonData(mon, MON_DATA_EXP);
+        currentMonExp = currentMonExp + exp;
+        SetMonData(mon, MON_DATA_EXP, &currentMonExp);
+        CalculateMonStats(mon);
+    }
+
+    return TRUE;
+}
