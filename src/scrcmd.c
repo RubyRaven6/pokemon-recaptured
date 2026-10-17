@@ -3513,15 +3513,22 @@ bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
 
 bool8 ScrCmd_rewardpartyexp(struct ScriptContext *ctx)
 {
-    u32 exp = ScriptReadWord(ctx);
+    u32 expPercent = ScriptReadWord(ctx);
     u32 partySize = gPartiesCount[B_TRAINER_PLAYER];
 
     for(u32 i = 0; i < partySize; i++)
     {
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
-        
+        u32 speciesGrowthRate = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate;
+        u32 monLevel = GetMonData(mon, MON_DATA_LEVEL);
+        u32 monNextLevel = monLevel + 1;
+        u32 expOfCurrrentLevel = gExperienceTables[speciesGrowthRate][monLevel];
+        u32 expOfNextLevel = gExperienceTables[speciesGrowthRate][monNextLevel];
+        u32 expDiff = expOfNextLevel - expOfCurrrentLevel;
+
         u32 currentMonExp = GetMonData(mon, MON_DATA_EXP);
-        currentMonExp = currentMonExp + exp;
+        u32 expReward = (expDiff * expPercent) / 100;
+        currentMonExp = currentMonExp + expReward;
         SetMonData(mon, MON_DATA_EXP, &currentMonExp);
         CalculateMonStats(mon);
     }
