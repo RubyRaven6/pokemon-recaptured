@@ -1121,12 +1121,12 @@ const u8 gText_OakImportantToGetToKnowPokemonThroughly[] = _("OAK: It's importan
 const u8 gText_OakThisIsListOfPokemon[] = _("This is a list of your POKéMON,\n{PLAYER}.\pOpen this to check the skills\nand moves of your POKéMON.\pYou also choose POKéMON here if\nyou want to use an item on one.{PAUSE_UNTIL_PRESS}");
 
 //// side quest data
-//generic strings
+// generic strings
 const u8 gText_QuestAnnounce[] = _("The quest '{STR_VAR_1}'\nis now {STR_VAR_2}.");
 const u8 gText_QuestComplete[] =_("complete");
 const u8 gText_QuestActive[] =_("active");
 
-//names
+// names
 const u8 gText_SideQuestName_1[] = _("Side Quest 1");
 const u8 gText_SideQuestName_2[] = _("Side Quest 2");
 const u8 gText_SideQuestName_3[] = _("Side Quest 3");
@@ -1158,7 +1158,7 @@ const u8 gText_SideQuestName_28[] = _("Side Quest 28");
 const u8 gText_SideQuestName_29[] = _("Side Quest 29");
 const u8 gText_SideQuestName_30[] = _("Side Quest 30");
 
-//descriptions
+// descriptions
 const u8 gText_SideQuestDesc_1[] = _("Description 1");
 const u8 gText_SideQuestDesc_2[] = _("Description 2");
 const u8 gText_SideQuestDesc_3[] = _("Description 3");
@@ -1190,7 +1190,7 @@ const u8 gText_SideQuestDesc_28[] = _("Description 28");
 const u8 gText_SideQuestDesc_29[] = _("Description 29");
 const u8 gText_SideQuestDesc_30[] = _("Description 30");
 
-//completed quest description
+// completed quest description
 const u8 gText_SideQuestDoneDesc_1[] = _("Completed Quest 1");
 const u8 gText_SideQuestDoneDesc_2[] = _("Completed Quest 2");
 const u8 gText_SideQuestDoneDesc_3[] = _("Completed Quest 3");
@@ -1222,7 +1222,7 @@ const u8 gText_SideQuestDoneDesc_28[] = _("Completed Quest 28");
 const u8 gText_SideQuestDoneDesc_29[] = _("Completed Quest 29");
 const u8 gText_SideQuestDoneDesc_30[] = _("Completed Quest 30");
 
-//map
+// map
 const u8 gText_SideQuestMap1[] = _("Map 1");
 const u8 gText_SideQuestMap2[] = _("Map 2");
 const u8 gText_SideQuestMap3[] = _("Map 3");
@@ -1254,7 +1254,7 @@ const u8 gText_SideQuestMap28[] = _("Map 28");
 const u8 gText_SideQuestMap29[] = _("Map 29");
 const u8 gText_SideQuestMap30[] = _("Map 30");
 
-//subquests
+// subquests
 const u8 gText_SubQuest1_Name1[] = _("Part 1");
 const u8 gText_SubQuest1_Name2[] = _("Part 2");
 const u8 gText_SubQuest1_Name3[] = _("Part 3");

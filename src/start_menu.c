@@ -55,6 +55,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "quests.h"
 
 #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_START_MENU)
 #define AddTextPrinterParameterized (AddTextPrinterFixedCaseParameterized)

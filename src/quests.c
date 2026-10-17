@@ -200,12 +200,9 @@ static void Task_QuestMenuTurnOff1(u8 taskId);
 static void Task_QuestMenuTurnOff2(u8 taskId);
 
 // Tiles, palettes and tilemaps for the Quest Menu
-static const u32 sQuestMenuTiles[] =
-        INCBIN_U32("graphics/quest_menu/menu.4bpp.lz");
-static const u32 sQuestMenuBgPals[] =
-        INCBIN_U32("graphics/quest_menu/menu.gbapal.lz");
-static const u32 sQuestMenuTilemap[] =
-        INCBIN_U32("graphics/quest_menu/menu.bin.lz");
+static const u32 sQuestMenuTiles[] = INCBIN_U32("graphics/quest_menu/menu.4bpp.lz");
+static const u32 sQuestMenuBgPals[] = INCBIN_U32("graphics/quest_menu/menu.gbapal");
+static const u32 sQuestMenuTilemap[] = INCBIN_U32("graphics/quest_menu/menu.bin.lz");
 
 //Strings used for the Quest Menu
 static const u8 sText_Empty[] = _("");
@@ -1120,23 +1117,16 @@ static bool8 SetupGraphics(void)
 			gMain.state++;
 			break;
 		case 18:
-			if (sListMenuState.initialized == 1)
-			{
-				BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-			}
+			BlendPalettes(PALETTES_ALL, 16, 0);
 			gMain.state++;
 			break;
 		case 19:
-			if (sListMenuState.initialized == 1)
-			{
-				BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
-			}
-			else
-			{
+			BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+			gPaletteFade.bufferTransferDisabled = FALSE;
 
-				BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, RGB_BLACK);
+			if (sListMenuState.initialized != 1)
 				SetInitializedFlag(1);
-			}
+
 			gMain.state++;
 			break;
 		default:
@@ -1159,7 +1149,7 @@ static bool8 LoadGraphics(void)
 		case 1:
 			if (FreeTempTileDataBuffersIfPossible() != TRUE)
 			{
-				DecompressDataWithHeaderWram(sQuestMenuTilemap, sBg1TilemapBuffer);
+				DecompressDataWithHeaderVram(sQuestMenuTilemap, sBg1TilemapBuffer);
 				sStateDataPtr->data[0]++;
 			}
 			break;
@@ -2180,35 +2170,34 @@ static void QuestMenu_CreateSprite(u16 itemId, u8 idx, u8 spriteType)
 		FreeSpritePaletteByTag(102 + idx);
 
 		switch (spriteType)
-	{
-	 		case OBJECT:
-					spriteId = CreateObjectGraphicsSprite(
-					itemId, //graphicsId
-					SpriteCallbackDummy, //sprite callback
-					30, //x
-					116, //y
-					0); //subpriority
+		{
+			case OBJECT:
+				spriteId = CreateObjectGraphicsSprite(itemId, SpriteCallbackDummy, 20,
+				                                      132, 0);
 				break;
-	 		case ITEM:
+			case ITEM:
 				spriteId = AddItemIconSprite(102 + idx, 102 + idx, itemId);
 				break;
-	 		case PKMN:
+			case PKMN:
 				LoadMonIconPalettes();
-				spriteId = CreateMonIcon(itemId, SpriteCallbackDummy, 30, 116, 0, 1);
+				spriteId = CreateMonIcon(itemId, SpriteCallbackDummy, 20, 132, 0, 1);
 				break;
 			default:
+				spriteId = SPRITE_NONE;
 				break;
 		}
 
-		if (spriteId < MAX_SPRITES)
-		{
+		if (spriteId != SPRITE_NONE)
 			gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+
+		if (spriteId != MAX_SPRITES)
+		{
 			ptr[idx] = spriteId;
 
 			if (spriteType == ITEM)
 			{
-				gSprites[spriteId].x2 = 32;
-				gSprites[spriteId].y2 = 122;
+				gSprites[spriteId].x2 = 24;
+				gSprites[spriteId].y2 = 140;
 			}
 		}
 	}
