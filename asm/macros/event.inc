@@ -2019,15 +2019,19 @@
 	.endm
 
     @ Completes the specified quest.
-	.macro completequest quest:req
+	.macro completequest quest:req, exp:req
 	closemessage
 	delay 30
 	questmenu QUEST_MENU_COMPLETE_QUEST, \quest
 	questmenu QUEST_MENU_BUFFER_QUEST_NAME \quest
+	rewardpartyexp \exp
     bufferstring 1 gText_QuestComplete
 	playfanfare MUS_LEVEL_UP
 	msgbox gText_QuestAnnounce, MSGBOX_SIGN
 	waitfanfare
+	playse SE_USE_ITEM
+	msgbox gText_ExpAwarded, MSGBOX_SIGN
+	waitse
 	.endm
 
 	.macro goto_if_quest_inactive quest:req, dest:req
