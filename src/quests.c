@@ -249,105 +249,105 @@ static const u8 sText_AZ[] = _(" A-Z");
 #define sub_quest(i, n, d, m, s, st, t) {.id = i, .name = n, .desc = d, .map = m, .sprite = s, .spritetype = st, .type = t}
 static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 {
-	sub_quest(
-	      0,
-	      gText_SubQuest1_Name1,
-	      gText_SubQuest1_Desc1,
-	      gText_SideQuestMap1,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 0,
+		.name = gText_SubQuest1_Name1,
+		.desc = gText_SubQuest1_Desc1,
+		.map = gText_SideQuestMap1,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      1,
-	      gText_SubQuest1_Name2,
-	      gText_SubQuest1_Desc2,
-	      gText_SideQuestMap2,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 1,
+		.name = gText_SubQuest1_Name2,
+		.desc = gText_SubQuest1_Desc2,
+		.map = gText_SideQuestMap2,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      2,
-	      gText_SubQuest1_Name3,
-	      gText_SubQuest1_Desc3,
-	      gText_SideQuestMap3,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 2,
+		.name = gText_SubQuest1_Name3,
+		.desc = gText_SubQuest1_Desc3,
+		.map = gText_SideQuestMap3,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      3,
-	      gText_SubQuest1_Name4,
-	      gText_SubQuest1_Desc4,
-	      gText_SideQuestMap4,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 3,
+		.name = gText_SubQuest1_Name4,
+		.desc = gText_SubQuest1_Desc4,
+		.map = gText_SideQuestMap4,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      4,
-	      gText_SubQuest1_Name5,
-	      gText_SubQuest1_Desc5,
-	      gText_SideQuestMap5,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 4,
+		.name = gText_SubQuest1_Name5,
+		.desc = gText_SubQuest1_Desc5,
+		.map = gText_SideQuestMap5,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      5,
-	      gText_SubQuest1_Name6,
-	      gText_SubQuest1_Desc6,
-	      gText_SideQuestMap6,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 5,
+		.name = gText_SubQuest1_Name6,
+		.desc = gText_SubQuest1_Desc6,
+		.map = gText_SideQuestMap6,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      6,
-	      gText_SubQuest1_Name7,
-	      gText_SubQuest1_Desc7,
-	      gText_SideQuestMap7,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 6,
+		.name = gText_SubQuest1_Name7,
+		.desc = gText_SubQuest1_Desc7,
+		.map = gText_SideQuestMap7,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      7,
-	      gText_SubQuest1_Name8,
-	      gText_SubQuest1_Desc8,
-	      gText_SideQuestMap8,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 7,
+		.name = gText_SubQuest1_Name8,
+		.desc = gText_SubQuest1_Desc8,
+		.map = gText_SideQuestMap8,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      8,
-	      gText_SubQuest1_Name9,
-	      gText_SubQuest1_Desc9,
-	      gText_SideQuestMap9,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 8,
+		.name = gText_SubQuest1_Name9,
+		.desc = gText_SubQuest1_Desc9,
+		.map = gText_SideQuestMap9,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      9,
-	      gText_SubQuest1_Name10,
-	      gText_SubQuest1_Desc10,
-	      gText_SideQuestMap10,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = 9,
+		.name = gText_SubQuest1_Name10,
+		.desc = gText_SubQuest1_Desc10,
+		.map = gText_SideQuestMap10,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 };
 
 static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
@@ -628,7 +628,7 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 		.sprite = {OBJ_EVENT_GFX_WALLY},
 		.spritetype = {OBJECT},
 		.subquests = sSubQuests2,
-		.numSubquests = 0,
+		.numSubquests = QUEST_2_SUB_COUNT,
 		.questVariable = 0,
 	},
 
