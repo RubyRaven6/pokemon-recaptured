@@ -1126,6 +1126,7 @@ const u8 gText_QuestAnnounce[] = _("The quest '{STR_VAR_1}'\nis now {STR_VAR_2}!
 const u8 gText_QuestComplete[] =_("complete");
 const u8 gText_QuestActive[] =_("active");
 const u8 gText_ExpAwarded[] = _("Your party was awarded experience.");
+const u8 gText_QuestUpdate[] = _("The quest '{STR_VAR_1}'\nhas been updated!");
 
 // names
 const u8 gText_SideQuestName_1[] = _("Side Quest 1");
@@ -1223,7 +1224,12 @@ const u8 gText_SideQuestDoneDesc_28[] = _("Completed Quest 28");
 const u8 gText_SideQuestDoneDesc_29[] = _("Completed Quest 29");
 const u8 gText_SideQuestDoneDesc_30[] = _("Completed Quest 30");
 
-// map
+//complex quest descriptions
+const u8 gComplexQuest_Quest3Desc_1[] = _("Content 1");
+const u8 gComplexQuest_Quest3Desc_2[] = _("Content 2");
+const u8 gComplexQuest_Quest3Desc_3[] = _("Content 3");
+
+//map
 const u8 gText_SideQuestMap1[] = _("Map 1");
 const u8 gText_SideQuestMap2[] = _("Map 2");
 const u8 gText_SideQuestMap3[] = _("Map 3");
@@ -1255,7 +1261,12 @@ const u8 gText_SideQuestMap28[] = _("Map 28");
 const u8 gText_SideQuestMap29[] = _("Map 29");
 const u8 gText_SideQuestMap30[] = _("Map 30");
 
-// subquests
+//complex quest map
+const u8 gComplexQuest_Quest3Map_1[] = _("Content 1");
+const u8 gComplexQuest_Quest3Map_2[] = _("Content 2");
+const u8 gComplexQuest_Quest3Map_3[] = _("Content 3");
+
+//subquests
 const u8 gText_SubQuest1_Name1[] = _("Part 1");
 const u8 gText_SubQuest1_Name2[] = _("Part 2");
 const u8 gText_SubQuest1_Name3[] = _("Part 3");

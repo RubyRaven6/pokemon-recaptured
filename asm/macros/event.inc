@@ -2034,7 +2034,21 @@
 	waitse
 	.endm
 
-	.macro goto_if_quest_inactive quest:req, dest:req
+	@ Updates the complex quest's variable to give it its next state.
+	.macro updatequest questId:req, openquestmenu=TRUE
+	callnative ScrCmd_updatequest
+	.byte \questId
+	playse SE_PIN
+	questmenu QUEST_MENU_BUFFER_QUEST_NAME QUEST_3
+	msgbox gText_QuestUpdate, MSGBOX_SIGN
+	waitse
+	.if \openquestmenu == TRUE
+		openquestmenu
+	.else
+	.endif
+	.endm
+
+.macro goto_if_quest_inactive quest:req, dest:req
 	questmenu QUEST_MENU_CHECK_INACTIVE \quest
 	goto_if_eq VAR_RESULT, TRUE, \dest
 	.endm

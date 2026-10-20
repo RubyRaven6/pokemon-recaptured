@@ -83,5 +83,20 @@
 #define QUEST_2_SUB_COUNT  20
 #define SUB_QUEST_COUNT    (QUEST_1_SUB_COUNT + QUEST_2_SUB_COUNT)
 
-#define QUEST_ARRAY_COUNT  (SUB_QUEST_COUNT > QUEST_COUNT ? SUB_QUEST_COUNT : QUEST_COUNT)
+#define QUEST_ARRAY_COUNT (SUB_QUEST_COUNT > QUEST_COUNT ? SUB_QUEST_COUNT : QUEST_COUNT)
+
+//////////////////////////////////////////
+////////////BEGIN QUEST NUMS//////////////
+
+/* These will be where the number of descriptions and maps a quest has will be controlled.*/
+
+enum Quest3_Enum{
+    QUEST_3_STATE_1,
+    QUEST_3_STATE_2,
+    QUEST_3_STATE_3,
+    QUEST_3_TOTAL_STATES,
+};
+
+/////////////END QUEST NUMS/////////////
+////////////////////////////////////////
 #endif // GUARD_CONSTANTS_QUESTS_H
