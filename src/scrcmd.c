@@ -3263,7 +3263,7 @@ bool8 ScrCmd_fwdweekday(struct ScriptContext *ctx)
     FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
     return FALSE;
 }
-
+//event evo
 static bool32 EventEvolution(u32 partyIndex)
 {
     bool32 canStopEvo = gSpecialVar_0x8000;
@@ -3515,7 +3515,11 @@ bool8 ScrCmd_rewardpartyexp(struct ScriptContext *ctx)
 {
     u32 expPercent = ScriptReadWord(ctx);
     u32 partySize = gPartiesCount[B_TRAINER_PLAYER];
-
+    // u8 evoTracker = 0; //tracks which Nth mon is due an evolution
+    // u8 evoCounter = 0; //number of mons due for an evolution
+    // u32 targetSpecies = SPECIES_NONE;
+    // bool32 canStopEvo = TRUE;
+    
     for(u32 i = 0; i < partySize; i++)
     {
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
@@ -3531,6 +3535,27 @@ bool8 ScrCmd_rewardpartyexp(struct ScriptContext *ctx)
         currentMonExp = currentMonExp + expReward;
         SetMonData(mon, MON_DATA_EXP, &currentMonExp);
         CalculateMonStats(mon);
+
+        /*
+        the section of code below is meant to handle evolution; this is for if the mon would evolve upon levelling up after gaining the exp
+
+        // monLevel = GetMonData(mon, MON_DATA_LEVEL);
+        // check if pokemon leveled up
+        // so that pokemon doesnt evolve when just gaining exp
+
+        // targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, CHECK_EVO);
+
+        // if (targetSpecies != SPECIES_NONE && monLevel == monNextLevel) // checks if there is 
+        // {
+        //     evoTracker |= (1 << i);
+        //     evoCounter += 1;
+        // }
+
+        // GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
+        // gCB2_AfterEvolution = CB2_ReturnToFieldContinueScriptPlayMapMusic;
+        // BeginEvolutionScene(mon, targetSpecies, canStopEvo, i);
+        */
+        
     }
 
     return TRUE;
