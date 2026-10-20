@@ -3121,6 +3121,21 @@ extern const u8 gText_SideQuestMap28[];
 extern const u8 gText_SideQuestMap29[];
 extern const u8 gText_SideQuestMap30[];
 
+//Complex Quest Descriptions
+extern const u8 gComplexQuest_Quest3Desc_1[];
+extern const u8 gComplexQuest_Quest3Desc_2[];
+extern const u8 gComplexQuest_Quest3Desc_3[];
+
+extern const u8 *const gTable_Quest3Descs[];
+
+//Maps
+//Quest 3
+extern const u8 gComplexQuest_Quest3Map_1[];
+extern const u8 gComplexQuest_Quest3Map_2[];
+extern const u8 gComplexQuest_Quest3Map_3[];
+
+extern const u8 *const gTable_Quest3Maps[];
+
 //subquests
 extern const u8 gText_SubQuest1_Name1[];
 extern const u8 gText_SubQuest1_Name2[];

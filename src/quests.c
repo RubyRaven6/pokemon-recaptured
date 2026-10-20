@@ -35,7 +35,6 @@
 #include "pokemon_icon.h"
 
 #include "random.h"
-#include "complex_quests.h"
 
 #define tPageItems      data[4]
 #define tItemPcParam    data[6]
@@ -607,16 +606,16 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 		},
 		.sprite = {
 			OBJ_EVENT_GFX_WALLY,
-			OBJ_EVENT_GFX_WALLY,
-			OBJ_EVENT_GFX_WALLY
+			ITEM_POKE_BALL,
+			SPECIES_RALTS
 		},
 		.spritetype = {
 			OBJECT,
-			OBJECT,
-			OBJECT
+			ITEM,
+			PKMN
 		},
-		.subquests = sSubQuests2,
-		.numSubquests = QUEST_2_SUB_COUNT,
+		.subquests = NULL,
+		.numSubquests = 0,
 		.questVariable = VAR_UNUSED_0x404E //First unused var in vars.h,
 	},
 
@@ -628,7 +627,7 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 		.map = {gText_SideQuestMap4},
 		.sprite = {OBJ_EVENT_GFX_WALLY},
 		.spritetype = {OBJECT},
-		.subquests = NULL,
+		.subquests = sSubQuests2,
 		.numSubquests = 0,
 		.questVariable = 0,
 	},
@@ -2967,5 +2966,6 @@ u32 QuestMenu_GetQuestVariableId(u8 quest)
 
 u32 QuestMenu_GetQuestVariable(u8 quest)
 {
-    return VarGet(QuestMenu_GetQuestVariableId(quest));
+    DebugPrintf("%u", VarGet(QuestMenu_GetQuestVariableId(quest)));
+	return VarGet(QuestMenu_GetQuestVariableId(quest));
 }
