@@ -32,7 +32,7 @@ struct Stats
     int hp, attack, defense, special_attack, special_defense, speed;
 };
 
-enum Gender
+enum PlayerGender
 {
     GENDER_ANY,
     GENDER_MALE,
@@ -56,7 +56,7 @@ struct Pokemon
 {
     struct String nickname;
     struct String species;
-    enum Gender gender;
+    enum PlayerGender gender;
     struct String item;
     int header_line;
 
@@ -862,7 +862,7 @@ static struct String token_string(const struct Token *t)
     }
 }
 
-static bool token_gender(struct Parser *p, const struct Token *t, enum Gender *g)
+static bool token_gender(struct Parser *p, const struct Token *t, enum PlayerGender *g)
 {
     if (is_literal_token(t, "M") || is_literal_token(t, "Male"))
     {

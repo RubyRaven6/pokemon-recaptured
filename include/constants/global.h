@@ -180,6 +180,14 @@ enum Gender
     GENDER_COUNT,
 };
 
+enum PlayerGender
+{
+    GENDER_MASCULINE,
+    GENDER_FEMININE,
+    GENDER_ANDROGYNOUS,
+    GENDERS_COUNT,
+}; //slayyy
+
 #define NUM_BARD_SONG_WORDS    6
 #define NUM_STORYTELLER_TALES  4
 #define NUM_TRADER_ITEMS       4

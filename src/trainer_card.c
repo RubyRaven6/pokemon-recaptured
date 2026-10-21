@@ -284,36 +284,41 @@ static const u8 sTrainerCardTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_D
 static const u8 sTrainerCardStatColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
 static const u8 sTimeColonInvisibleTextColors[6] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_TRANSPARENT};
 
-static const u8 sTrainerPicOffset[2][GENDER_COUNT][2] =
+static const u8 sTrainerPicOffset[2][GENDERS_COUNT][2] =
 {
     // Kanto
     {
-        [MALE]   = {13, 4},
-        [FEMALE] = {13, 4}
+        [GENDER_MASCULINE]   = {13, 4},
+        [GENDER_FEMININE]    = {13, 4},
+        [GENDER_ANDROGYNOUS] = {13, 4}
     },
     // Hoenn
     {
-        [MALE]   = {1, 0},
-        [FEMALE] = {1, 0}
+        [GENDER_MASCULINE]   = {1, 0},
+        [GENDER_FEMININE]    = {1, 0},
+        [GENDER_ANDROGYNOUS] = {1, 0}
     },
 };
 
-static const u8 sTrainerPicFacilityClass[][GENDER_COUNT] =
+static const u8 sTrainerPicFacilityClass[][GENDERS_COUNT] =
 {
     [CARD_TYPE_FRLG] =
     {
-        [MALE]   = FACILITY_CLASS_RED,
-        [FEMALE] = FACILITY_CLASS_LEAF
+        [GENDER_MASCULINE]   = FACILITY_CLASS_RED,
+        [GENDER_FEMININE]    = FACILITY_CLASS_LEAF,
+        [GENDER_ANDROGYNOUS] = FACILITY_CLASS_LEAF,
     },
     [CARD_TYPE_RS] =
     {
-        [MALE]   = FACILITY_CLASS_RS_BRENDAN,
-        [FEMALE] = FACILITY_CLASS_RS_MAY
+        [GENDER_MASCULINE]   = FACILITY_CLASS_RS_BRENDAN,
+        [GENDER_FEMININE]    = FACILITY_CLASS_RS_MAY,
+        [GENDER_ANDROGYNOUS] = FACILITY_CLASS_RS_MAY,
     },
     [CARD_TYPE_EMERALD] =
     {
-        [MALE]   = FACILITY_CLASS_BRENDAN,
-        [FEMALE] = FACILITY_CLASS_MAY
+        [GENDER_MASCULINE]   = FACILITY_CLASS_BRENDAN,
+        [GENDER_FEMININE]    = FACILITY_CLASS_MAY,
+        [GENDER_ANDROGYNOUS] = FACILITY_CLASS_KRIS,
     }
 };
 
