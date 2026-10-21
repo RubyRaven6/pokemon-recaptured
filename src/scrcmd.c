@@ -63,10 +63,13 @@
 #include "list_menu.h"
 #include "malloc.h"
 #include "battle.h"
+#include "quests.h"
+#include "constants/event_objects.h"
 #include "constants/comparison_operators.h"
 #include "constants/event_objects.h"
 #include "constants/map_types.h"
 #include "constants/party_menu.h"
+#include "quests.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(struct ScriptContext *ctx);
@@ -3260,7 +3263,7 @@ bool8 ScrCmd_fwdweekday(struct ScriptContext *ctx)
     FakeRtc_AdvanceTimeBy(daysToAdd, 0, 0, 0);
     return FALSE;
 }
-
+//event evo
 static bool32 EventEvolution(u32 partyIndex)
 {
     bool32 canStopEvo = gSpecialVar_0x8000;
@@ -3392,5 +3395,180 @@ bool8 ScrCmd_normalmsg(struct ScriptContext *ctx)
     Script_RequestEffects(SCREFF_V1);
 
     gMsgIsSignPost = FALSE;
+    return FALSE;
+
+}
+
+bool8 ScrCmd_questmenu(struct ScriptContext *ctx)
+{
+    u8 caseId = ScriptReadByte(ctx);
+    u8 questId = VarGet(ScriptReadByte(ctx));
+
+    switch (caseId)
+    {
+        case QUEST_MENU_OPEN:
+        default:
+            BeginNormalPaletteFade(0xFFFFFFFF, 2, 16, 0, 0);
+            QuestMenu_Init(0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+            ScriptContext_Stop();
+            break;
+        case QUEST_MENU_UNLOCK_QUEST:
+            QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
+            break;
+        case QUEST_MENU_SET_ACTIVE:
+            QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
+            QuestMenu_GetSetQuestState(questId, FLAG_SET_ACTIVE);
+            break;
+        case QUEST_MENU_SET_REWARD:
+            QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
+            QuestMenu_GetSetQuestState(questId, FLAG_SET_REWARD);
+            QuestMenu_GetSetQuestState(questId, FLAG_REMOVE_ACTIVE);
+            break;
+        case QUEST_MENU_COMPLETE_QUEST:
+            QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
+            QuestMenu_GetSetQuestState(questId, FLAG_SET_COMPLETED);
+            QuestMenu_GetSetQuestState(questId, FLAG_REMOVE_ACTIVE);
+            QuestMenu_GetSetQuestState(questId, FLAG_REMOVE_REWARD);
+            break;
+        case QUEST_MENU_CHECK_UNLOCKED:
+            if (QuestMenu_GetSetQuestState(questId, FLAG_GET_UNLOCKED))
+                gSpecialVar_Result = TRUE;
+            else
+                gSpecialVar_Result = FALSE;
+            break;
+        case QUEST_MENU_CHECK_ACTIVE:
+            if (QuestMenu_GetSetQuestState(questId, FLAG_GET_ACTIVE))
+                gSpecialVar_Result = TRUE;
+            else
+                gSpecialVar_Result = FALSE;
+            break;
+        case QUEST_MENU_CHECK_REWARD:
+            if (QuestMenu_GetSetQuestState(questId, FLAG_GET_REWARD))
+                gSpecialVar_Result = TRUE;
+            else
+                gSpecialVar_Result = FALSE;
+            break;
+        case QUEST_MENU_CHECK_COMPLETE:
+            if (QuestMenu_GetSetQuestState(questId, FLAG_GET_COMPLETED))
+                gSpecialVar_Result = TRUE;
+            else
+                gSpecialVar_Result = FALSE;
+            break;
+        case QUEST_MENU_BUFFER_QUEST_NAME:
+            QuestMenu_CopyQuestName(gStringVar1, questId);
+        break;
+    }
+
+    return TRUE;
+}
+
+bool8 ScrCmd_returnqueststate(struct ScriptContext *ctx)
+{
+    u8 questId = VarGet(ScriptReadByte(ctx));
+
+    if (QuestMenu_GetSetQuestState(questId, FLAG_GET_INACTIVE)){
+        gSpecialVar_Result = FLAG_GET_INACTIVE;
+        return FALSE;
+    }
+    if (QuestMenu_GetSetQuestState(questId, FLAG_GET_ACTIVE)){
+        gSpecialVar_Result = FLAG_GET_ACTIVE;
+        return FALSE;
+    }
+    if (QuestMenu_GetSetQuestState(questId, FLAG_GET_REWARD)){
+        gSpecialVar_Result = FLAG_GET_REWARD;
+        return FALSE;
+    }
+    if (QuestMenu_GetSetQuestState(questId, FLAG_GET_COMPLETED)){
+        gSpecialVar_Result = FLAG_GET_COMPLETED;
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
+{
+    u8 caseId = ScriptReadByte(ctx);
+    u8 parentId = VarGet(ScriptReadHalfword(ctx));
+    u8 childId = VarGet(ScriptReadHalfword(ctx));
+
+    switch (caseId)
+    {
+        case QUEST_MENU_COMPLETE_QUEST:
+            QuestMenu_GetSetSubquestState(parentId ,FLAG_SET_COMPLETED,childId);
+            break;
+        case QUEST_MENU_CHECK_COMPLETE:
+            if (QuestMenu_GetSetSubquestState(parentId ,FLAG_GET_COMPLETED,childId))
+                gSpecialVar_Result = TRUE;
+            else
+                gSpecialVar_Result = FALSE;
+            break;
+        case QUEST_MENU_BUFFER_QUEST_NAME:
+            QuestMenu_CopySubquestName(gStringVar1,parentId,childId);
+            break;
+    }
+
+    return TRUE;
+}
+
+bool8 ScrCmd_rewardpartyexp(struct ScriptContext *ctx)
+{
+    u32 expPercent = ScriptReadWord(ctx);
+    u32 partySize = gPartiesCount[B_TRAINER_PLAYER];
+    // u8 evoTracker = 0; //tracks which Nth mon is due an evolution
+    // u8 evoCounter = 0; //number of mons due for an evolution
+    // u32 targetSpecies = SPECIES_NONE;
+    // bool32 canStopEvo = TRUE;
+    
+    for(u32 i = 0; i < partySize; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        u32 speciesGrowthRate = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate;
+        u32 monLevel = GetMonData(mon, MON_DATA_LEVEL);
+        u32 monNextLevel = monLevel + 1;
+        u32 expOfCurrrentLevel = gExperienceTables[speciesGrowthRate][monLevel];
+        u32 expOfNextLevel = gExperienceTables[speciesGrowthRate][monNextLevel];
+        u32 expDiff = expOfNextLevel - expOfCurrrentLevel;
+
+        u32 currentMonExp = GetMonData(mon, MON_DATA_EXP);
+        u32 expReward = (expDiff * expPercent) / 100;
+        currentMonExp = currentMonExp + expReward;
+        SetMonData(mon, MON_DATA_EXP, &currentMonExp);
+        CalculateMonStats(mon);
+
+        /*
+        the section of code below is meant to handle evolution; this is for if the mon would evolve upon levelling up after gaining the exp
+
+        // monLevel = GetMonData(mon, MON_DATA_LEVEL);
+        // check if pokemon leveled up
+        // so that pokemon doesnt evolve when just gaining exp
+
+        // targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, CHECK_EVO);
+
+        // if (targetSpecies != SPECIES_NONE && monLevel == monNextLevel) // checks if there is 
+        // {
+        //     evoTracker |= (1 << i);
+        //     evoCounter += 1;
+        // }
+
+        // GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL, &canStopEvo, DO_EVO);
+        // gCB2_AfterEvolution = CB2_ReturnToFieldContinueScriptPlayMapMusic;
+        // BeginEvolutionScene(mon, targetSpecies, canStopEvo, i);
+        */
+        
+    }
+
+    return TRUE;
+}
+
+//updatequest by mudskipper
+bool8 ScrCmd_updatequest(struct ScriptContext *ctx)
+{
+    u8 questId = VarGet(ScriptReadByte(ctx));
+    u32 varId = QuestMenu_GetQuestVariableId(questId); // VAR_UNUSED_XXXX
+    u32 varValue = QuestMenu_GetQuestVariable(questId); // the value that VAR_UNUSED_XXXX holds
+
+    VarSet(varId, varValue + 1);
+
     return FALSE;
 }
