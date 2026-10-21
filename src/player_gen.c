@@ -529,7 +529,7 @@ static bool8 PlayerGen_LoadGraphics(void)
         }
         break;
     case 2:
-        LoadPalette(sPlayerGenPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadPalette(sPlayerGenPalette, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         LoadPalette(gMessageBox_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         sPlayerGenState->loadState++;
     default:
