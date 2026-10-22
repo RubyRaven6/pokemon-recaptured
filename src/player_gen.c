@@ -317,7 +317,7 @@ static void PlayerGen_SetupCB(void)
         }
         break;
     case 6:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 10, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 7:
@@ -705,7 +705,8 @@ static void Task_PlayerGen_WaitForComingHither(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active())
     {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        FadeOutBGM(10);
+        BeginNormalPaletteFade(PALETTES_ALL, 10, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_PlayerGen_WaitFadeAndExitGracefully;
     }
 }
