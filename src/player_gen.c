@@ -317,6 +317,7 @@ static void PlayerGen_SetupCB(void)
         }
         break;
     case 6:
+        FadeInNewBGM(MUS_SEALED_CHAMBER,10);
         BeginNormalPaletteFade(PALETTES_ALL, 10, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
@@ -419,7 +420,6 @@ static void Task_PlayerGen_British(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        PlayBGM(MUS_SEALED_CHAMBER);
         gTasks[taskId].func = Task_PlayerGen_DiancieCopiesHydaelyn;
     }
 }
