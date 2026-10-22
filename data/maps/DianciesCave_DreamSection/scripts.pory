@@ -1,3 +1,34 @@
 mapscripts DianciesCave_DreamSection_MapScripts {
-    
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_TEMP_0, 0 {
+            turnobject(LOCALID_PLAYER, DIR_NORTH)
+        }
+    ]
+}
+
+script DianciesCave_DreamSection_EventScript_BusyCarbink
+{
+    lock
+    msgbox(format("The Carbink is quite hard at work.\nBest not to disturb it!"))
+    closemessage
+    release
+    end
+}
+
+movement DiancieMovements
+{
+    emote_exclamation_mark,
+    delay_16 * 2,
+    jump_in_place_left,
+    jump_in_place_up,
+    jump_in_place_right,
+    jump_in_place_down,
+}
+
+script DianciesCave_DreamSection_EventScript_Diancie
+{
+    applymovement(LOCALID_DREAMSECTION_DIANCIE, DiancieMovements)
+    waitmovement(LOCALID_DREAMSECTION_DIANCIE)
+    setspeaker(SP_NAME_DIANCIE)
+    msgbox("It's you…")
 }

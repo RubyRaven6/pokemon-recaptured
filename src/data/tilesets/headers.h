@@ -1574,3 +1574,14 @@ const struct Tileset gTileset_CavePorytiles =
     .metatileAttributes = gMetatileAttributes_CavePorytiles,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_DiancieCave =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_DiancieCave,
+    .palettes = gTilesetPalettes_DiancieCave,
+    .metatiles = gMetatiles_DiancieCave,
+    .metatileAttributes = gMetatileAttributes_DiancieCave,
+    .callback = NULL,
+};

@@ -3095,3 +3095,22 @@ const u16 gTilesetPalettes_CavePorytiles[][16] =
 };
 
 const u32 gTilesetTiles_CavePorytiles[] = INCBIN_U32("data/tilesets/secondary/cave_porytiles/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_DiancieCave[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/diancie_cave/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_DiancieCave[] = INCBIN_U32("data/tilesets/secondary/diancie_cave/tiles.4bpp.lz");

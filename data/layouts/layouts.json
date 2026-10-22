@@ -9357,20 +9357,20 @@
     {
       "id": "LAYOUT_DIANCIES_CAVE_DREAM_SECTION",
       "name": "DianciesCave_DreamSection_Layout",
-      "width": 19,
-      "height": 19,
+      "width": 20,
+      "height": 26,
       "primary_tileset": "gTileset_GeneralPorytiles",
-      "secondary_tileset": "gTileset_Cave",
+      "secondary_tileset": "gTileset_DiancieCave",
       "border_filepath": "data/layouts/DianciesCave_DreamSection/border.bin",
       "blockdata_filepath": "data/layouts/DianciesCave_DreamSection/map.bin"
     },
     {
       "id": "LAYOUT_DIANCIES_CAVE_MAIN_CHAMBER",
       "name": "DianciesCave_MainChamber_Layout",
-      "width": 19,
-      "height": 19,
+      "width": 20,
+      "height": 26,
       "primary_tileset": "gTileset_GeneralPorytiles",
-      "secondary_tileset": "gTileset_Cave",
+      "secondary_tileset": "gTileset_DiancieCave",
       "border_filepath": "data/layouts/DianciesCave_MainChamber/border.bin",
       "blockdata_filepath": "data/layouts/DianciesCave_MainChamber/map.bin"
     }

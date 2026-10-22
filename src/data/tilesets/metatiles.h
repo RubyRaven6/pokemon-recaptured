@@ -417,3 +417,6 @@ const u16 gMetatileAttributes_DewfordPorytiles[] = INCBIN_U16("data/tilesets/sec
 
 const u16 gMetatiles_CavePorytiles[] = INCBIN_U16("data/tilesets/secondary/cave_porytiles/metatiles.bin");
 const u16 gMetatileAttributes_CavePorytiles[] = INCBIN_U16("data/tilesets/secondary/cave_porytiles/metatile_attributes.bin");
+
+const u16 gMetatiles_DiancieCave[] = INCBIN_U16("data/tilesets/secondary/diancie_cave/metatiles.bin");
+const u16 gMetatileAttributes_DiancieCave[] = INCBIN_U16("data/tilesets/secondary/diancie_cave/metatile_attributes.bin");
