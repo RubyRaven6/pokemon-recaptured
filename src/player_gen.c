@@ -63,6 +63,8 @@ enum WindowIds
 #define tMaySpriteId data[7]
 #define tKrisSpriteId data[8]
 
+#define TILEMAP_BUFFER_SIZE (1024 * 2)
+
 static EWRAM_DATA struct PlayerGenState *sPlayerGenState = NULL;
 static EWRAM_DATA u8 *sBg1TilemapBuffer = NULL;
 
@@ -345,7 +347,6 @@ static void CB2_PlayerGen_ReturnFromNamingScreen(void)
     u8 spriteId = SPRITE_NONE;
 
     ResetBgsAndClearDma3BusyFlags(0);
-    SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     InitBgsFromTemplates(0, sPlayerGenBgTemplates, NELEMS(sPlayerGenBgTemplates));
     SetVBlankCallback(NULL);
@@ -356,54 +357,59 @@ static void CB2_PlayerGen_ReturnFromNamingScreen(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
-    // DmaFill16(3, 0, VRAM, VRAM_SIZE);
-    // DmaFill32(3, 0, OAM, OAM_SIZE);
-    // DmaFill16(3, 0, PLTT, PLTT_SIZE);
-    ResetPaletteFade();
-    DecompressDataWithHeaderVram(sPlayerGenTilemap, (u8 *)(BG_SCREEN_ADDR(7)));
-    LoadPalette(sPlayerGenPalette, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
-    LoadPalette(gMessageBox_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     ResetTasks();
     taskId = CreateTask(Task_PlayerGen_ReturnFromNamingScreenShowTextbox, 0);
     gTasks[taskId].tTimer = 5;
+    ResetPaletteFade();
+    PlayerGen_InitBgs();
+    while (!PlayerGen_LoadGraphics())
+        ;
+
     ScanlineEffect_Stop();
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetAllPicSprites();
+    gTasks[taskId].tBrendanSpriteId = CreatePlayerTrainerSprite(GENDER_MASCULINE);
+    gTasks[taskId].tMaySpriteId = CreatePlayerTrainerSprite(GENDER_FEMININE);
+    gTasks[taskId].tKrisSpriteId = CreatePlayerTrainerSprite(GENDER_ANDROGYNOUS);
     switch(gSaveBlock2Ptr->playerGender)
     {
         case GENDER_MASCULINE:
             gTasks[taskId].tPlayerGender = GENDER_MASCULINE;
             spriteId = gTasks[taskId].tBrendanSpriteId;
+            break;
         case GENDER_FEMININE:
             gTasks[taskId].tPlayerGender = GENDER_FEMININE;
             spriteId = gTasks[taskId].tMaySpriteId;
+            break;
         case GENDER_ANDROGYNOUS:
             gTasks[taskId].tPlayerGender = GENDER_ANDROGYNOUS;
             spriteId = gTasks[taskId].tKrisSpriteId;
+            break;
     }
+
     gSprites[spriteId].x = 180;
     gSprites[spriteId].y = 60;
     gSprites[spriteId].invisible = FALSE;
     gTasks[taskId].tPlayerSpriteId = spriteId;
-    SetGpuReg(REG_OFFSET_BG1HOFS, -60);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-    SetGpuReg(REG_OFFSET_WIN0H, 0);
-    SetGpuReg(REG_OFFSET_WIN0V, 0);
-    SetGpuReg(REG_OFFSET_WININ, 0);
-    SetGpuReg(REG_OFFSET_WINOUT, 0);
-    SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-    SetGpuReg(REG_OFFSET_BLDY, 0);
-    ShowBg(0);
-    ShowBg(1);
-    IntrEnable(INTR_FLAG_VBLANK);
+
     SetVBlankCallback(PlayerGen_VBlankCB);
     SetMainCallback2(PlayerGen_MainCB);
+
     InitWindows(sPlayerGenTextWindows);
+    for (u32 win = 0; win < ARRAY_COUNT(sPlayerGenTextWindows); win++)
+    {
+        FillWindowPixelBuffer(win, PIXEL_FILL(0));
+        PutWindowTilemap(win);
+        CopyWindowToVram(win, COPYWIN_FULL);
+    }
+
+    LoadUserWindowBorderGfx(1, 0xF3, BG_PLTT_ID(2));
     LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);
+
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
 }
 
 static void Task_PlayerGen_WaitFadeIn(u8 taskId)
@@ -671,7 +677,6 @@ static void Task_PlayerGen_WaitFadeAndExitGracefully(u8 taskId)
     gTasks[taskId].func = Task_PlayerGen_Cleanup;
 }
 
-#define TILEMAP_BUFFER_SIZE (1024 * 2)
 static bool8 PlayerGen_InitBgs(void)
 {
     ResetAllBgsCoordinates();
@@ -791,7 +796,7 @@ void PlayerGen_StartNamingScreen(void)
 
 static void PlayerGen_ShowGenderMenu(u32 pos)
 {
-    LoadUserWindowBorderGfx(1, 0xF3, 2);
+    LoadUserWindowBorderGfx(1, 0xF3, BG_PLTT_ID(2));
     DrawStdFrameWithCustomTileAndPalette(1, FALSE, 0xF3, 2);
     PrintMenuTable(1, ARRAY_COUNT(sMenuActions_Gender), sMenuActions_Gender);
     InitMenuInUpperLeftCornerNormal(1, ARRAY_COUNT(sMenuActions_Gender), pos);
