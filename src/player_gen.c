@@ -32,6 +32,7 @@
 #include "random.h"
 #include "naming_screen.h"
 #include "field_weather.h"
+#include "strings.h"
 #include "trainer_pokemon_sprites.h"
 #include "trainer.h"
 
@@ -125,9 +126,9 @@ static const u8 sPlayerGenWindowFontColors[][3] =
 };
 
 static const struct MenuAction sMenuActions_Gender[] = {
-    {COMPOUND_STRING("Masculine"), {NULL}},
-    {COMPOUND_STRING("Feminine"), {NULL}},
-    {COMPOUND_STRING("Androgynous"), {NULL}},
+    {COMPOUND_STRING("Like this?"), {NULL}},
+    {COMPOUND_STRING("Or this?"), {NULL}},
+    {COMPOUND_STRING("Perhaps this…"), {NULL}},
 };
 
 static const u8 *const sMascPresetNames[] = {
@@ -166,7 +167,7 @@ static void PlayerGen_StartFadeOutTarget1InTarget2(u8 taskId, u8 delay);
 static s8 PlayerGen_ProcessGenderMenuInput(void);
 
 // Tasks
-static void Task_PlayerGen_WaitFadeIn(u8 taskId);
+static void Task_PlayerGen_British(u8 taskId);
 static void Task_PlayerGen_DiancieCopiesHydaelyn(u8 taskId);
 static void Task_PlayerGen_DiancieSpeaks(u8 taskId);
 static void Task_PlayerGen_StartPlayerFadeIn(u8 taskId);
@@ -182,7 +183,8 @@ static void Task_PlayerGen_StartNamingScreen(u8 taskId);
 static void Task_PlayerGen_SoItsPlayerName(u8 taskId);
 static void Task_PlayerGen_CreateNameYesNo(u8 taskId);
 static void Task_PlayerGen_ProcessNameYesNoMenu(u8 taskId);
-static void Task_PlayerGen_ComeHitherNow(u8 taskId);
+static void Task_PlayerGen_WhatABeautifulName(u8 taskId);
+static void Task_PlayerGen_ComeHither(u8 taskId);
 static void Task_PlayerGen_WaitForComingHither(u8 taskId);
 static void Task_PlayerGen_WaitFadeAndBail(u8 taskId);
 static void Task_PlayerGen_WaitFadeAndExitGracefully(u8 taskId);
@@ -305,10 +307,10 @@ static void PlayerGen_SetupCB(void)
         break;
     case 5:
         gMain.state++;
-        u32 taskId = CreateTask(Task_PlayerGen_WaitFadeIn, 0);
+        u32 taskId = CreateTask(Task_PlayerGen_British, 0);
         if (taskId != TASK_NONE)
         {
-            gTasks[taskId].tTimer = 0x06C; //128 frames
+            gTasks[taskId].tTimer = 0x0B4; //108 frames
             gTasks[taskId].tBrendanSpriteId = CreatePlayerTrainerSprite(GENDER_MASCULINE);
             gTasks[taskId].tMaySpriteId = CreatePlayerTrainerSprite(GENDER_FEMININE);
             gTasks[taskId].tKrisSpriteId = CreatePlayerTrainerSprite(GENDER_ANDROGYNOUS);
@@ -412,10 +414,12 @@ static void CB2_PlayerGen_ReturnFromNamingScreen(void)
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
 }
 
-static void Task_PlayerGen_WaitFadeIn(u8 taskId)
+//get it cuz it's like init. innit.
+static void Task_PlayerGen_British(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
+        PlayBGM(MUS_SEALED_CHAMBER);
         gTasks[taskId].func = Task_PlayerGen_DiancieCopiesHydaelyn;
     }
 }
@@ -430,8 +434,7 @@ static void Task_PlayerGen_DiancieCopiesHydaelyn(u8 taskId)
     {
         LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
         DrawDialogFrameWithCustomTile(0, FALSE, 0x200);
-        StringExpandPlaceholders(gStringVar4, 
-        COMPOUND_STRING("Hear… Feel… Love…\nI can feel your heart beating true…\lCould you be the one I seek?\p"));
+        StringExpandPlaceholders(gStringVar4, gText_DiancieSpeech_HydaelynPlagiarism);
         AddTextPrinterForMessage(TRUE);
         CopyWindowToVram(0, COPYWIN_FULL);
         gTasks[taskId].func = Task_PlayerGen_DiancieSpeaks;
@@ -444,8 +447,7 @@ static void Task_PlayerGen_DiancieSpeaks(u8 taskId)
     {
         LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
         DrawDialogFrameWithCustomTile(0, FALSE, 0x200);
-        StringExpandPlaceholders(gStringVar4, 
-                                COMPOUND_STRING("While I can hear your heart yet,\nI have trouble seeing you in full.\p"));
+        StringExpandPlaceholders(gStringVar4, gText_DiancieSpeech_CantSeeYou);
         AddTextPrinterForMessage(TRUE);
         CopyWindowToVram(0, COPYWIN_FULL);
         gTasks[taskId].func = Task_PlayerGen_StartPlayerFadeIn;
@@ -481,7 +483,7 @@ static void Task_PlayerGen_HowDoYouPresent(u8 taskId)
 {
     LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
     DrawDialogFrameWithCustomTile(0, FALSE, 0x200);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("How do you present?"));
+    StringExpandPlaceholders(gStringVar4, gText_DiancieSpeech_DiancieAsksYourGenderPresentation);
     AddTextPrinterForMessage(TRUE);
     CopyWindowToVram(0, COPYWIN_FULL);
     gTasks[taskId].func = Task_PlayerGen_WaitToShowGenderMenu;
@@ -581,7 +583,7 @@ static void Task_PlayerGen_YouLookFireYo(u8 taskId)
 {
     LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
     DrawDialogFrameWithCustomTile(0, FALSE, 0x200);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Is that so? You look wonderful…\nThen… what are you called?\p"));
+    StringExpandPlaceholders(gStringVar4, gText_DiancieSpeech_YouLookWonderful);
     AddTextPrinterForMessage(TRUE);
     CopyWindowToVram(0, COPYWIN_FULL);
     gTasks[taskId].func = Task_PlayerGen_WaitForWonderfulRemark;
@@ -630,7 +632,7 @@ static void Task_PlayerGen_ProcessNameYesNoMenu(u8 taskId)
         PlaySE(SE_SELECT);
         gSprites[gTasks[taskId].tPlayerSpriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         PlayerGen_StartFadeOutTarget1InTarget2(taskId, 2);
-        gTasks[taskId].func = Task_PlayerGen_ComeHitherNow;
+        gTasks[taskId].func = Task_PlayerGen_WhatABeautifulName;
         break;
     case MENU_B_PRESSED:
     case 1:
@@ -639,14 +641,64 @@ static void Task_PlayerGen_ProcessNameYesNoMenu(u8 taskId)
     }
 }
 
-static void Task_PlayerGen_ComeHitherNow(u8 taskId)
+static void Task_PlayerGen_WhatABeautifulName(u8 taskId)
 {
     LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
     DrawDialogFrameWithCustomTile(0, FALSE, 0x200);
-    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("What a beautfiul name…!\nPlease, come! We must meet at once…\p"));
+    switch (RandomUniform(RNG_NONE, 0, 11)) {
+        case 0:
+        default:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like birds chirping…"));
+            break;
+        case 1:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a cheerful festival…"));
+            break;
+        case 2:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a lover's heartbeat…"));
+            break;
+        case 3:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a babe's laughter…"));
+            break;
+        case 4:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a wedding march…"));
+            break;
+        case 5:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like children playing…"));
+            break;
+        case 6:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It feels like a warm embrace…"));
+            break;
+        case 7:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like the kiss from a rose…"));
+            break;
+        case 8:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like mended heartache…"));
+            break;
+        case 9:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like you're being yourself…"));
+            break;
+        case 10:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It feels like lying next to one you love…"));
+            break;
+        case 11:
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It feels like the cool splash of water…"));
+            break;
+    }
+    StringExpandPlaceholders(gStringVar4, gText_DiancieSpeech_WhatABeautifulName1);
     AddTextPrinterForMessage(TRUE);
     CopyWindowToVram(0, COPYWIN_FULL);
-    gTasks[taskId].func = Task_PlayerGen_WaitForComingHither;
+    gTasks[taskId].func = Task_PlayerGen_ComeHither;
+}
+
+static void Task_PlayerGen_ComeHither(u8 taskId)
+{
+    if (!RunTextPrintersAndIsPrinter0Active())
+    {
+        StringExpandPlaceholders(gStringVar4, gText_DiancieSpeech_PleaseComeHither);
+        AddTextPrinterForMessage(TRUE);
+        CopyWindowToVram(0, COPYWIN_FULL);
+        gTasks[taskId].func = Task_PlayerGen_WaitForComingHither;
+    }
 }
 
 static void Task_PlayerGen_WaitForComingHither(u8 taskId)
@@ -693,7 +745,6 @@ static bool8 PlayerGen_InitBgs(void)
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
     ScheduleBgCopyTilemapToVram(1);
 
-    PlayBGM(MUS_SEALED_CHAMBER);
     ShowBg(0);
     ShowBg(1);
 

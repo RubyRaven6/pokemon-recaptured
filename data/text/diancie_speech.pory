@@ -1,0 +1,32 @@
+text gText_DiancieSpeech_HydaelynPlagiarism
+{
+    "Hear…{PAUSE 180}{PAUSE 180}{PAUSE 180}{PAUSE 180} Feel…{PAUSE 180}{PAUSE 180}{PAUSE 180}{PAUSE 180} Love…\p"
+    "I can feel your heart beating true…\nCould you be the one I seek?\p"
+}
+
+text gText_DiancieSpeech_CantSeeYou
+{
+    "While I can hear your heart yet,\nI have trouble seeing you in full.\p"
+}
+
+text gText_DiancieSpeech_DiancieAsksYourGenderPresentation
+{
+    "How do you present?"
+}
+
+text gText_DiancieSpeech_YouLookWonderful
+{
+    "Is that so? What a wonderful visage you\nbless the world with…\p"
+    "Then… what are you called?\p"
+}
+
+text gText_DiancieSpeech_WhatABeautifulName1
+{
+    "What a beautfiul name…!\n{STR_VAR_1}\p"
+}
+
+text gText_DiancieSpeech_PleaseComeHither
+{
+    "Yes… I feel it to be true. You are the\none I've been searching for.\p"
+    "Please! I implore you to come hither…\p"
+}
