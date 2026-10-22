@@ -1756,3 +1756,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	@@ Maps
 	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
+
+	.include "data/maps/DianciesCave_DreamSection/scripts.scr"
