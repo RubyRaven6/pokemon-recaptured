@@ -1563,3 +1563,14 @@ const struct Tileset gTileset_DewfordPorytiles =
     .metatileAttributes = gMetatileAttributes_DewfordPorytiles,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_CavePorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CavePorytiles,
+    .palettes = gTilesetPalettes_CavePorytiles,
+    .metatiles = gMetatiles_CavePorytiles,
+    .metatileAttributes = gMetatileAttributes_CavePorytiles,
+    .callback = NULL,
+};
