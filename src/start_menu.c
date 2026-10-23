@@ -1570,7 +1570,6 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
 static void ShowSaveInfoWindow(void)
 {
     struct WindowTemplate saveInfoWindow = sSaveInfoWindowTemplate;
-    enum PlayerGender gender;
     u8 color;
     u32 xOffset;
     u32 yOffset;
