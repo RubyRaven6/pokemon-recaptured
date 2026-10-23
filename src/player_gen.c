@@ -172,7 +172,7 @@ static void Task_PlayerGen_WaitToShowGenderMenu(u8 taskId);
 static void Task_PlayerGen_ChooseGender(u8 taskId);
 static void Task_PlayerGen_SlideOutOldGenderSprite(u8 taskId);
 static void Task_PlayerGen_SlideInNewGenderSprite(u8 taskId);
-static void Task_PlayerGen_YouLookFireYo(u8 taskId);
+static void Task_PlayerGen_YouLookWonderful(u8 taskId);
 static void Task_PlayerGen_WaitForWonderfulRemark(u8 taskId);
 static void Task_PlayerGenExitToNamingScreen(u8 taskId);
 static void Task_PlayerGen_SoItsPlayerName(u8 taskId);
@@ -428,7 +428,7 @@ static void Task_PlayerGen_DiancieCopiesHydaelyn(u8 taskId)
     {
         LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
         DrawDialogFrameWithCustomTile(0, FALSE, 0x200);
-        StringExpandPlaceholders(gStringVar4, gText_DiancieSpeech_HydaelynPlagiarism);
+        StringExpandPlaceholders(gStringVar4, gText_DiancieSpeech_HearFeelLove);
         AddTextPrinterForMessage(TRUE);
         CopyWindowToVram(0, COPYWIN_FULL);
         gTasks[taskId].func = Task_PlayerGen_DiancieSpeaks;
@@ -505,7 +505,7 @@ static void Task_PlayerGen_ChooseGender(u8 taskId)
         PlaySE(SE_SELECT);
         gSaveBlock2Ptr->playerGender = gender;
         PlayerGen_ClearGenderWindow(WINDOW_GENDER, TRUE);
-        gTasks[taskId].func = Task_PlayerGen_YouLookFireYo;
+        gTasks[taskId].func = Task_PlayerGen_YouLookWonderful;
         break;
     default: //repeat task if nothing is selected
         break;
@@ -573,7 +573,7 @@ static void Task_PlayerGen_SlideInNewGenderSprite(u8 taskId)
     }
 }
 
-static void Task_PlayerGen_YouLookFireYo(u8 taskId)
+static void Task_PlayerGen_YouLookWonderful(u8 taskId)
 {
     LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
     DrawDialogFrameWithCustomTile(0, FALSE, 0x200);

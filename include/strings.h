@@ -216,7 +216,7 @@ extern const u8 gText_BirchInTrouble[];
 extern const u8 gText_ConfirmStarterChoice[];
 
 // Diancie Speech text
-extern const u8 gText_DiancieSpeech_HydaelynPlagiarism[];
+extern const u8 gText_DiancieSpeech_HearFeelLove[];
 extern const u8 gText_DiancieSpeech_CantSeeYou[];
 extern const u8 gText_DiancieSpeech_DiancieAsksYourGenderPresentation[];
 extern const u8 gText_DiancieSpeech_YouLookWonderful[];
