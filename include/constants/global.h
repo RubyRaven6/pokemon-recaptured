@@ -188,6 +188,15 @@ enum PlayerGender
     GENDERS_COUNT,
 }; //slayyy
 
+enum PlayerPronouns
+{
+    MASC_PRONOUNS,
+    FEMME_PRONOUNS,
+    NEUTRAL_PRONOUNS,
+    NEO_PRONOUNS,
+    PRONOUN_COUNT
+};
+
 #define NUM_BARD_SONG_WORDS    6
 #define NUM_STORYTELLER_TALES  4
 #define NUM_TRADER_ITEMS       4

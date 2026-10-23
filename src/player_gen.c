@@ -34,6 +34,7 @@
 #include "strings.h"
 #include "trainer_pokemon_sprites.h"
 #include "trainer.h"
+#include "event_data.h"
 
 struct PlayerGenState
 {
@@ -504,6 +505,7 @@ static void Task_PlayerGen_ChooseGender(u8 taskId)
     case GENDER_ANDROGYNOUS:
         PlaySE(SE_SELECT);
         gSaveBlock2Ptr->playerGender = gender;
+        gSaveBlock2Ptr->playerPronouns = gender;
         PlayerGen_ClearGenderWindow(WINDOW_GENDER, TRUE);
         gTasks[taskId].func = Task_PlayerGen_YouLookWonderful;
         break;
@@ -954,5 +956,24 @@ static void Task_PlayerGen_Cleanup(u8 taskId)
     {
         SetMainCallback2(CB2_NewGame);
         DestroyTask(taskId);
+    }
+}
+
+void SetPlayerPronouns(void)
+{
+    switch(VarGet(VAR_RESULT))
+    {
+        case MASC_PRONOUNS:
+            gSaveBlock2Ptr->playerPronouns = MASC_PRONOUNS;
+            break;
+        case FEMME_PRONOUNS:
+            gSaveBlock2Ptr->playerPronouns = FEMME_PRONOUNS;
+            break;
+        case NEUTRAL_PRONOUNS:
+            gSaveBlock2Ptr->playerPronouns = NEUTRAL_PRONOUNS;
+            break;
+        case NEO_PRONOUNS:
+            gSaveBlock2Ptr->playerPronouns = NEO_PRONOUNS;
+            break;
     }
 }

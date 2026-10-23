@@ -5,5 +5,6 @@
 #include "main.h"
 
 void Task_OpenPlayerGen(u8 taskId);
+void SetPlayerPronouns(void);
 
 #endif

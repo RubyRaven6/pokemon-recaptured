@@ -521,6 +521,62 @@ static const u8 *ExpandPlaceholder_Region(void)
         return gText_Hoenn;
 }
 
+static const u8 *ExpandPlaceholder_PersonalPronoun(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("he");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("she");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("they");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("it");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_PossessivePronoun1(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("his");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("hers");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("theirs");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("its");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_PossessivePronoun2(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("his");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("her");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("their");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("its");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_ObjectivePronoun(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("him");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("her");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("them");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("it");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
 const u8 *GetExpandedPlaceholder(u32 id)
 {
     typedef const u8 *(*ExpandPlaceholderFunc)(void);
@@ -542,6 +598,11 @@ const u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
         [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
         [PLACEHOLDER_ID_REGION]       = ExpandPlaceholder_Region,
+        [PLACEHOLDER_ID_PERS_PRONOUN] = ExpandPlaceholder_PersonalPronoun,
+        [PLACEHOLDER_ID_POSS_PRONOUN_1] = ExpandPlaceholder_PossessivePronoun1,
+        [PLACEHOLDER_ID_POSS_PRONOUN_2] = ExpandPlaceholder_PossessivePronoun2,
+        [PLACEHOLDER_ID_OBJ_PRONOUN] = ExpandPlaceholder_ObjectivePronoun,
+
     };
 
     if (id >= ARRAY_COUNT(funcs))
