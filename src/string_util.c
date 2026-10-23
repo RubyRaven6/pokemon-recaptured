@@ -521,7 +521,7 @@ static const u8 *ExpandPlaceholder_Region(void)
         return gText_Hoenn;
 }
 
-static const u8 *ExpandPlaceholder_PersonalPronoun(void)
+static const u8 *ExpandPlaceholder_PersonalPronoun_Lowercase(void)
 {
     if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
         return COMPOUND_STRING("he");
@@ -535,7 +535,7 @@ static const u8 *ExpandPlaceholder_PersonalPronoun(void)
         return gSaveBlock2Ptr->playerName;
 }
 
-static const u8 *ExpandPlaceholder_PossessivePronoun1(void)
+static const u8 *ExpandPlaceholder_PossessivePronoun1_Lowercase(void)
 {
     if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
         return COMPOUND_STRING("his");
@@ -549,7 +549,7 @@ static const u8 *ExpandPlaceholder_PossessivePronoun1(void)
         return gSaveBlock2Ptr->playerName;
 }
 
-static const u8 *ExpandPlaceholder_PossessivePronoun2(void)
+static const u8 *ExpandPlaceholder_PossessivePronoun2_Lowercase(void)
 {
     if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
         return COMPOUND_STRING("his");
@@ -563,7 +563,7 @@ static const u8 *ExpandPlaceholder_PossessivePronoun2(void)
         return gSaveBlock2Ptr->playerName;
 }
 
-static const u8 *ExpandPlaceholder_ObjectivePronoun(void)
+static const u8 *ExpandPlaceholder_ObjectivePronoun_Lowercase(void)
 {
     if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
         return COMPOUND_STRING("him");
@@ -573,6 +573,118 @@ static const u8 *ExpandPlaceholder_ObjectivePronoun(void)
         return COMPOUND_STRING("them");
     else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
         return COMPOUND_STRING("it");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_PersonalPronoun_Capitalized(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("HE");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("SHE");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("THEY");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("IT");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_PossessivePronoun1_Capitalized(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("HIS");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("HERS");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("THEIRS");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("ITS");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_PossessivePronoun2_Capitalized(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("HIS");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("HER");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("THEIR");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("ITS");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_ObjectivePronoun_Capitalized(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("HIM");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("HER");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("THEM");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("IT");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_PersonalPronoun_TitleCase(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("He");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("She");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("They");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("It");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_PossessivePronoun1_TitleCase(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("His");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("Hers");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("Theirs");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("Its");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_PossessivePronoun2_TitleCase(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("His");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("Her");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("Their");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("Its");
+    else
+        return gSaveBlock2Ptr->playerName;
+}
+
+static const u8 *ExpandPlaceholder_ObjectivePronoun_TitleCase(void)
+{
+    if(gSaveBlock2Ptr->playerPronouns == MASC_PRONOUNS)
+        return COMPOUND_STRING("Him");
+    else if(gSaveBlock2Ptr->playerPronouns == FEMME_PRONOUNS)
+        return COMPOUND_STRING("Her");
+    else if(gSaveBlock2Ptr->playerPronouns == NEUTRAL_PRONOUNS)
+        return COMPOUND_STRING("Them");
+    else if(gSaveBlock2Ptr->playerPronouns == NEO_PRONOUNS)
+        return COMPOUND_STRING("It");
     else
         return gSaveBlock2Ptr->playerName;
 }
@@ -598,10 +710,18 @@ const u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
         [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
         [PLACEHOLDER_ID_REGION]       = ExpandPlaceholder_Region,
-        [PLACEHOLDER_ID_PERS_PRONOUN] = ExpandPlaceholder_PersonalPronoun,
-        [PLACEHOLDER_ID_POSS_PRONOUN_1] = ExpandPlaceholder_PossessivePronoun1,
-        [PLACEHOLDER_ID_POSS_PRONOUN_2] = ExpandPlaceholder_PossessivePronoun2,
-        [PLACEHOLDER_ID_OBJ_PRONOUN] = ExpandPlaceholder_ObjectivePronoun,
+        [PLACEHOLDER_ID_PERS_PRONOUN_TITLE] = ExpandPlaceholder_PersonalPronoun_TitleCase,
+        [PLACEHOLDER_ID_POSS_PRONOUN_1_TITLE] = ExpandPlaceholder_PossessivePronoun1_TitleCase,
+        [PLACEHOLDER_ID_POSS_PRONOUN_2_TITLE] = ExpandPlaceholder_PossessivePronoun2_TitleCase,
+        [PLACEHOLDER_ID_OBJ_PRONOUN_TITLE] = ExpandPlaceholder_ObjectivePronoun_TitleCase,
+        [PLACEHOLDER_ID_PERS_PRONOUN_CAP] = ExpandPlaceholder_PersonalPronoun_Capitalized,
+        [PLACEHOLDER_ID_POSS_PRONOUN_1_CAP] = ExpandPlaceholder_PossessivePronoun1_Capitalized,
+        [PLACEHOLDER_ID_POSS_PRONOUN_2_CAP] = ExpandPlaceholder_PossessivePronoun2_Capitalized,
+        [PLACEHOLDER_ID_OBJ_PRONOUN_CAP] = ExpandPlaceholder_ObjectivePronoun_Capitalized,
+        [PLACEHOLDER_ID_PERS_PRONOUN_LOWER] = ExpandPlaceholder_PersonalPronoun_Lowercase,
+        [PLACEHOLDER_ID_POSS_PRONOUN_1_LOWER] = ExpandPlaceholder_PossessivePronoun1_Lowercase,
+        [PLACEHOLDER_ID_POSS_PRONOUN_2_LOWER] = ExpandPlaceholder_PossessivePronoun2_Lowercase,
+        [PLACEHOLDER_ID_OBJ_PRONOUN_LOWER] = ExpandPlaceholder_ObjectivePronoun_Lowercase,
 
     };
 

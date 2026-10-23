@@ -352,10 +352,18 @@ MAXIE          = FD 0B
 KYOGRE         = FD 0C
 GROUDON        = FD 0D
 REGION         = FD 0E
-PERS_PRN       = FD 0F
-POSS_PRN_1     = FD 10
-POSS_PRN_2     = FD 11
-OBJ_PRN        = FD 12
+PERS_PRN_TITLE     = FD 0F
+POSS_PRN_1_TITLE   = FD 10
+POSS_PRN_2_TITLE   = FD 11
+OBJ_PRN_TITLE      = FD 12
+PERS_PRN_CAP       = FD 13
+POSS_PRN_1_CAP     = FD 14
+POSS_PRN_2_CAP     = FD 15
+OBJ_PRN_CAP        = FD 16
+PERS_PRN_LWR       = FD 17
+POSS_PRN_1_LWR     = FD 18
+POSS_PRN_2_LWR     = FD 19
+OBJ_PRN_LWR        = FD 1A
 
 @ battle string placeholders
 
