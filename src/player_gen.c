@@ -87,7 +87,7 @@ static const struct BgTemplate sPlayerGenBgTemplates[] =
 
 static const struct WindowTemplate sPlayerGenTextWindows[] =
 {
-    {
+    [WINDOW_TEXT] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
@@ -96,7 +96,7 @@ static const struct WindowTemplate sPlayerGenTextWindows[] =
         .paletteNum = 15,
         .baseBlock = 1
     },
-    {
+    [WINDOW_GENDER] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 5,
@@ -603,13 +603,16 @@ static void Task_PlayerGen_StartNamingScreen(u8 taskId)
     if (gPaletteFade.active) return;
 
     PlayerGen_SetDefaultPlayerName(RandomUniform(RNG_NONE, 0, NUM_PRESET_NAMES - 1));
+    DebugPrintf("Right Before PlayerGen_FreeResources");
+    PlayerGen_FreeResources();
+    DebugPrintf("Right After PlayerGen_FreeResources");
     DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_PlayerGen_ReturnFromNamingScreen);
     DestroyTask(taskId);
 }
 
 static void Task_PlayerGen_SoItsPlayerName(u8 taskId)
 {
-    PlayerGen_ClearWindow(0);
+    PlayerGen_ClearWindow(WINDOW_TEXT);
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{PLAYER}?\nIs that right?"));
     AddTextPrinterForMessage(TRUE);
     gTasks[taskId].func = Task_PlayerGen_CreateNameYesNo;
@@ -669,7 +672,7 @@ static void Task_PlayerGen_WhatABeautifulName(u8 taskId)
             StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It feels like a warm embrace…"));
             break;
         case 7:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like the kiss from a rose…"));
+            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a kiss from a rose…"));
             break;
         case 8:
             StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like mended heartache…"));
