@@ -1,9 +1,8 @@
-#include "player_gen.h"
-#include "main_menu.h"
-
+#include "global.h"
 #include "gba/types.h"
 #include "gba/defines.h"
-#include "global.h"
+#include "player_gen.h"
+#include "main_menu.h"
 #include "main.h"
 #include "bg.h"
 #include "text_window.h"
@@ -40,7 +39,7 @@ struct PlayerGenState
 {
     MainCallback savedCallback;
     u8 loadState;
-    u8 mode;
+    u8 playerSpriteIds[GENDERS_COUNT];
 };
 
 enum BgIds
@@ -60,10 +59,6 @@ enum WindowIds
 #define tTimer data[3]
 #define tIsDoneFadingSprites data[4]
 #define tPlayerGender data[5]
-#define tBrendanSpriteId data[6]
-#define tMaySpriteId data[7]
-#define tKrisSpriteId data[8]
-
 #define TILEMAP_BUFFER_SIZE (1024 * 2)
 
 static EWRAM_DATA struct PlayerGenState *sPlayerGenState = NULL;
@@ -167,7 +162,7 @@ static void PlayerGen_StartFadeOutTarget1InTarget2(u8 taskId, u8 delay);
 static s8 PlayerGen_ProcessGenderMenuInput(void);
 
 // Tasks
-static void Task_PlayerGen_British(u8 taskId);
+static void Task_PlayerGen_Init(u8 taskId);
 static void Task_PlayerGen_DiancieCopiesHydaelyn(u8 taskId);
 static void Task_PlayerGen_DiancieSpeaks(u8 taskId);
 static void Task_PlayerGen_StartPlayerFadeIn(u8 taskId);
@@ -179,7 +174,7 @@ static void Task_PlayerGen_SlideOutOldGenderSprite(u8 taskId);
 static void Task_PlayerGen_SlideInNewGenderSprite(u8 taskId);
 static void Task_PlayerGen_YouLookFireYo(u8 taskId);
 static void Task_PlayerGen_WaitForWonderfulRemark(u8 taskId);
-static void Task_PlayerGen_StartNamingScreen(u8 taskId);
+static void Task_PlayerGenExitToNamingScreen(u8 taskId);
 static void Task_PlayerGen_SoItsPlayerName(u8 taskId);
 static void Task_PlayerGen_CreateNameYesNo(u8 taskId);
 static void Task_PlayerGen_ProcessNameYesNoMenu(u8 taskId);
@@ -210,7 +205,6 @@ void Task_OpenPlayerGen(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        CleanupOverworldWindowsAndTilemaps();
         PlayerGen_Init(CB2_ReturnToFieldWithOpenMenu);
         DestroyTask(taskId);
     }
@@ -231,18 +225,8 @@ static void PlayerGen_Init(MainCallback callback)
     SetMainCallback2(PlayerGen_SetupCB);
 }
 
-// Credit: Jaizu, pret
 static void PlayerGen_ResetGpuRegsAndBgs(void)
 {
-    /*
-     * TODO : these settings are overkill, and seem to be clearing some
-     * important values. I need to come back and investigate this. For now, they
-     * are disabled. Note: by not resetting the various BG and GPU regs, we are
-     * effectively assuming that the user of this UI is entering from the
-     * overworld. If this UI is entered from a different screen, it's possible
-     * some regs won't be set correctly. In that case, you'll need to figure
-     * out which ones you need.
-     */
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -307,13 +291,13 @@ static void PlayerGen_SetupCB(void)
         break;
     case 5:
         gMain.state++;
-        u32 taskId = CreateTask(Task_PlayerGen_British, 0);
+        u32 taskId = CreateTask(Task_PlayerGen_Init, 0);
         if (taskId != TASK_NONE)
         {
-            gTasks[taskId].tTimer = 0x0B4; //108 frames
-            gTasks[taskId].tBrendanSpriteId = CreatePlayerTrainerSprite(GENDER_MASCULINE);
-            gTasks[taskId].tMaySpriteId = CreatePlayerTrainerSprite(GENDER_FEMININE);
-            gTasks[taskId].tKrisSpriteId = CreatePlayerTrainerSprite(GENDER_ANDROGYNOUS);
+            gTasks[taskId].tTimer = 180;
+            sPlayerGenState->playerSpriteIds[GENDER_MASCULINE] = CreatePlayerTrainerSprite(GENDER_MASCULINE);
+            sPlayerGenState->playerSpriteIds[GENDER_FEMININE] = CreatePlayerTrainerSprite(GENDER_FEMININE);
+            sPlayerGenState->playerSpriteIds[GENDER_ANDROGYNOUS] = CreatePlayerTrainerSprite(GENDER_ANDROGYNOUS);
         }
         break;
     case 6:
@@ -346,8 +330,12 @@ static void PlayerGen_VBlankCB(void)
 
 static void CB2_PlayerGen_ReturnFromNamingScreen(void)
 {
-    u8 taskId;
     u8 spriteId = SPRITE_NONE;
+
+    sPlayerGenState = AllocZeroed(sizeof(struct PlayerGenState));
+
+    if (sPlayerGenState == NULL)
+        errorf("Failed to allocate sPlayerGenState");
 
     ResetBgsAndClearDma3BusyFlags(0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
@@ -360,34 +348,39 @@ static void CB2_PlayerGen_ReturnFromNamingScreen(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
-    ResetTasks();
-    taskId = CreateTask(Task_PlayerGen_ReturnFromNamingScreenShowTextbox, 0);
-    gTasks[taskId].tTimer = 5;
-    ResetPaletteFade();
-    PlayerGen_InitBgs();
-    while (!PlayerGen_LoadGraphics())
-        ;
 
     ScanlineEffect_Stop();
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetAllPicSprites();
-    gTasks[taskId].tBrendanSpriteId = CreatePlayerTrainerSprite(GENDER_MASCULINE);
-    gTasks[taskId].tMaySpriteId = CreatePlayerTrainerSprite(GENDER_FEMININE);
-    gTasks[taskId].tKrisSpriteId = CreatePlayerTrainerSprite(GENDER_ANDROGYNOUS);
+
+    ResetTasks();
+
+    u32 taskId = CreateTask(Task_PlayerGen_ReturnFromNamingScreenShowTextbox, 0);
+    gTasks[taskId].tTimer = 5;
+    ResetPaletteFade();
+    PlayerGen_InitBgs();
+
+    while (!PlayerGen_LoadGraphics())
+        ;
+
+    sPlayerGenState->playerSpriteIds[GENDER_MASCULINE] = CreatePlayerTrainerSprite(GENDER_MASCULINE);
+    sPlayerGenState->playerSpriteIds[GENDER_FEMININE]     = CreatePlayerTrainerSprite(GENDER_FEMININE);
+    sPlayerGenState->playerSpriteIds[GENDER_ANDROGYNOUS]    = CreatePlayerTrainerSprite(GENDER_ANDROGYNOUS);
+
     switch(gSaveBlock2Ptr->playerGender)
     {
         case GENDER_MASCULINE:
             gTasks[taskId].tPlayerGender = GENDER_MASCULINE;
-            spriteId = gTasks[taskId].tBrendanSpriteId;
+            spriteId = sPlayerGenState->playerSpriteIds[GENDER_MASCULINE];
             break;
         case GENDER_FEMININE:
             gTasks[taskId].tPlayerGender = GENDER_FEMININE;
-            spriteId = gTasks[taskId].tMaySpriteId;
+            spriteId = sPlayerGenState->playerSpriteIds[GENDER_FEMININE];
             break;
         case GENDER_ANDROGYNOUS:
             gTasks[taskId].tPlayerGender = GENDER_ANDROGYNOUS;
-            spriteId = gTasks[taskId].tKrisSpriteId;
+            spriteId = sPlayerGenState->playerSpriteIds[GENDER_ANDROGYNOUS];
             break;
     }
 
@@ -400,6 +393,7 @@ static void CB2_PlayerGen_ReturnFromNamingScreen(void)
     SetMainCallback2(PlayerGen_MainCB);
 
     InitWindows(sPlayerGenTextWindows);
+
     for (u32 win = 0; win < ARRAY_COUNT(sPlayerGenTextWindows); win++)
     {
         FillWindowPixelBuffer(win, PIXEL_FILL(0));
@@ -416,7 +410,7 @@ static void CB2_PlayerGen_ReturnFromNamingScreen(void)
 }
 
 //get it cuz it's like init. innit.
-static void Task_PlayerGen_British(u8 taskId)
+static void Task_PlayerGen_Init(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
@@ -458,7 +452,7 @@ static void Task_PlayerGen_StartPlayerFadeIn(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active())
     {
-        u8 spriteId = gTasks[taskId].tMaySpriteId;
+        u8 spriteId = sPlayerGenState->playerSpriteIds[GENDER_FEMININE];
         gSprites[spriteId].x = 180;
         gSprites[spriteId].y = 60;
         gSprites[spriteId].invisible = FALSE;
@@ -539,14 +533,14 @@ static void Task_PlayerGen_SlideOutOldGenderSprite(u8 taskId)
         switch(gTasks[taskId].tPlayerGender)
         {
             case GENDER_MASCULINE:
-                spriteId = gTasks[taskId].tBrendanSpriteId;
+                spriteId = sPlayerGenState->playerSpriteIds[GENDER_MASCULINE];
                 break;
             default:
             case GENDER_FEMININE:
-                spriteId = gTasks[taskId].tMaySpriteId;
+                spriteId = sPlayerGenState->playerSpriteIds[GENDER_FEMININE];
                 break;
             case GENDER_ANDROGYNOUS:
-                spriteId = gTasks[taskId].tKrisSpriteId;
+                spriteId = sPlayerGenState->playerSpriteIds[GENDER_ANDROGYNOUS];
                 break;
         }
 
@@ -594,20 +588,19 @@ static void Task_PlayerGen_WaitForWonderfulRemark(u8 taskId)
     if (!RunTextPrintersAndIsPrinter0Active())
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        gTasks[taskId].func = Task_PlayerGen_StartNamingScreen;
+        gTasks[taskId].func = Task_PlayerGenExitToNamingScreen;
     }
 }
 
-static void Task_PlayerGen_StartNamingScreen(u8 taskId)
+static void Task_PlayerGenExitToNamingScreen(u8 taskId)
 {
-    if (gPaletteFade.active) return;
-
-    PlayerGen_SetDefaultPlayerName(RandomUniform(RNG_NONE, 0, NUM_PRESET_NAMES - 1));
-    DebugPrintf("Right Before PlayerGen_FreeResources");
-    PlayerGen_FreeResources();
-    DebugPrintf("Right After PlayerGen_FreeResources");
-    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_PlayerGen_ReturnFromNamingScreen);
-    DestroyTask(taskId);
+    if (!gPaletteFade.active)
+    {
+        PlayerGen_SetDefaultPlayerName(RandomUniform(RNG_NONE, 0, NUM_PRESET_NAMES - 1));
+        PlayerGen_FreeResources();
+        DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_PlayerGen_ReturnFromNamingScreen);
+        DestroyTask(taskId);
+    }
 }
 
 static void Task_PlayerGen_SoItsPlayerName(u8 taskId)
@@ -644,49 +637,27 @@ static void Task_PlayerGen_ProcessNameYesNoMenu(u8 taskId)
     }
 }
 
+static const u8 *const sDiancieNameStrings[] =
+{
+    COMPOUND_STRING("It sounds like birds chirping…"),
+    COMPOUND_STRING("It sounds like a cheerful festival…"),
+    COMPOUND_STRING("It sounds like a lover's heartbeat…"),
+    COMPOUND_STRING("It sounds like a babe's laughter…"),
+    COMPOUND_STRING("It sounds like a wedding march…"),
+    COMPOUND_STRING("It sounds like children playing…"),
+    COMPOUND_STRING("It feels like a warm embrace…"),
+    COMPOUND_STRING("It sounds like a kiss from a rose…"),
+    COMPOUND_STRING("It sounds like mended heartache…"),
+    COMPOUND_STRING("It sounds like you're being yourself…"),
+    COMPOUND_STRING("It feels like lying next to one you love…"),
+    COMPOUND_STRING("It feels like the cool splash of water…"),
+};
+
 static void Task_PlayerGen_WhatABeautifulName(u8 taskId)
 {
     LoadMessageBoxGfx(0, 0x200, BG_PLTT_ID(15));
     DrawDialogFrameWithCustomTile(0, FALSE, 0x200);
-    switch (RandomUniform(RNG_NONE, 0, 11)) {
-        case 0:
-        default:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like birds chirping…"));
-            break;
-        case 1:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a cheerful festival…"));
-            break;
-        case 2:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a lover's heartbeat…"));
-            break;
-        case 3:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a babe's laughter…"));
-            break;
-        case 4:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a wedding march…"));
-            break;
-        case 5:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like children playing…"));
-            break;
-        case 6:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It feels like a warm embrace…"));
-            break;
-        case 7:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like a kiss from a rose…"));
-            break;
-        case 8:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like mended heartache…"));
-            break;
-        case 9:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It sounds like you're being yourself…"));
-            break;
-        case 10:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It feels like lying next to one you love…"));
-            break;
-        case 11:
-            StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("It feels like the cool splash of water…"));
-            break;
-    }
+    StringCopy(gStringVar1, RandomElement(RNG_NONE, sDiancieNameStrings));
     StringExpandPlaceholders(gStringVar4, gText_DiancieSpeech_WhatABeautifulName1);
     AddTextPrinterForMessage(TRUE);
     CopyWindowToVram(0, COPYWIN_FULL);
@@ -725,12 +696,13 @@ static void Task_PlayerGen_WaitFadeAndBail(u8 taskId)
 }
 
 static void Task_PlayerGen_WaitFadeAndExitGracefully(u8 taskId)
-{    
-    if (gPaletteFade.active) return;
-
-    PlayerGen_FreeResources();
-    gTasks[taskId].data[0] = 0;
-    gTasks[taskId].func = Task_PlayerGen_Cleanup;
+{
+    if (!gPaletteFade.active)
+    {
+        PlayerGen_FreeResources();
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].func = Task_PlayerGen_Cleanup;
+    }
 }
 
 static bool8 PlayerGen_InitBgs(void)
@@ -738,8 +710,10 @@ static bool8 PlayerGen_InitBgs(void)
     ResetAllBgsCoordinates();
 
     sBg1TilemapBuffer = AllocZeroed(TILEMAP_BUFFER_SIZE);
+
     if (sBg1TilemapBuffer == NULL)
     {
+        errorf("Failed to allocate sBg1TilemapBuffer");
         return FALSE;
     }
 
@@ -769,16 +743,12 @@ static bool8 PlayerGen_LoadGraphics(void)
     switch (sPlayerGenState->loadState)
     {
     case 0:
-        ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, sPlayerGenTiles, 0, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(1, sPlayerGenTiles, 0, 0, 0);
         sPlayerGenState->loadState++;
         break;
     case 1:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            DecompressDataWithHeaderWram(sPlayerGenTilemap, sBg1TilemapBuffer);
-            sPlayerGenState->loadState++;
-        }
+        DecompressDataWithHeaderWram(sPlayerGenTilemap, sBg1TilemapBuffer);
+        sPlayerGenState->loadState++;
         break;
     case 2:
         LoadPalette(sPlayerGenPalette, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
@@ -806,22 +776,21 @@ static void PlayerGen_InitWindows(void)
 
 static void PlayerGen_FreeResources(void)
 {
-    if (sPlayerGenState != NULL)
+    for (u32 i = 0; i < NELEMS(sPlayerGenState->playerSpriteIds); i++)
     {
-        Free(sPlayerGenState);
+        FreeAndDestroyTrainerPicSprite(sPlayerGenState->playerSpriteIds[i]);
     }
-    if (sBg1TilemapBuffer != NULL)
-    {
-        Free(sBg1TilemapBuffer);
-    }
+
+    TRY_FREE_AND_SET_NULL(sPlayerGenState);
+    TRY_FREE_AND_SET_NULL(sBg1TilemapBuffer);
     FreeAllWindowBuffers();
+    ResetAllPicSprites();
     ResetSpriteData();
 }
 
 void PlayerGen_SetDefaultPlayerName(u8 nameId)
 {
-    const u8 *name = 0;
-    u8 i;
+    const u8 *name = NULL;
 
     switch(gSaveBlock2Ptr->playerGender)
     {
@@ -836,18 +805,8 @@ void PlayerGen_SetDefaultPlayerName(u8 nameId)
             break;
     }
 
-    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-        gSaveBlock2Ptr->playerName[i] = name[i];
-
-    gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
+    StringCopy_PlayerName(gSaveBlock2Ptr->playerName, name);
 }
-/*
-void PlayerGen_StartNamingScreen(void)
-{
-    FadeScreen(FADE_TO_BLACK, 0);
-    CreateTask(Task_PlayerGen_StartNamingScreen, 1);
-}
-*/
 
 static void PlayerGen_ShowGenderMenu(u32 pos)
 {
@@ -902,9 +861,6 @@ static void Task_PlayerGen_ReturnFromNamingScreenShowTextbox(u8 taskId)
 #undef tPlayerSpriteId
 #undef tTimer
 #undef tPlayerGender
-#undef tBrendanSpriteId
-#undef tMaySpriteId
-#undef tKrisSpriteId
 
 #define tMainTask data[0]
 #define tAlphaCoeff1 data[1]
@@ -996,8 +952,6 @@ static void Task_PlayerGen_Cleanup(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        FreeAllWindowBuffers();
-        ResetAllPicSprites();
         SetMainCallback2(CB2_NewGame);
         DestroyTask(taskId);
     }
