@@ -6,6 +6,7 @@
 miriamlefae - EXP code
 
 ## Credits
+- Kris Sprites by [EndlessTGX](https://www.deviantart.com/endlesstgx/art/Crystal-Sprites-704463782)
 - FRLG-styled Hoenn Tilesets: 
   - Jaizu
   - Citrus Bolt
