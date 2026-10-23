@@ -8,7 +8,7 @@ mapscripts DianciesCave_DreamSection_MapScripts {
 
 script DianciesCave_DreamSection_EventScript_BusyCarbink
 {
-    lock
+    lockall
     msgbox(format("The Carbink is quite hard at work.\nBest not to disturb it!"))
     closemessage
     release
@@ -27,8 +27,16 @@ movement DiancieMovements
 
 script DianciesCave_DreamSection_EventScript_Diancie
 {
+    lockall
     applymovement(LOCALID_DREAMSECTION_DIANCIE, DiancieMovements)
     waitmovement(LOCALID_DREAMSECTION_DIANCIE)
     setspeaker(SP_NAME_DIANCIE)
-    msgbox("It's you…")
+    msgbox("I cannot believe my eyes!\nTo meet you at last…!")
+    msgbox("Words fail me from how overjoyed I am\nmeeting you…")
+    msgbox("That said, we don't have much time.\n"
+            "I have an important message to depart.")
+    msgbox("A rot has seeded itself in our home.")
+    msgbox("It has festered, growing like a weed. It\nthreatens to strangle our very Heart.")
+    closemessage
+    releaseall
 }
