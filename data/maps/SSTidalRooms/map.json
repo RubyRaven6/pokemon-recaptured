@@ -93,6 +93,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_SS_TIDAL_TROUBLED_NERD",
       "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 16,
       "y": 12,
@@ -102,7 +103,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "SSTidalRooms_EventScript_Nerd",
       "flag": "0"
     },
     {

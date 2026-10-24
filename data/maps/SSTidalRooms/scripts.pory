@@ -129,7 +129,6 @@ script SSTidalRooms_EventScript_Mom
 			waitmessage
 			waitbuttonpress
 			closemessage
-			end
 		case 1:
 			setspeaker("Tired Mom")
 			message(
@@ -141,12 +140,10 @@ script SSTidalRooms_EventScript_Mom
 			waitmessage
 			waitbuttonpress
 			closemessage
-			end
 		default:
 			setspeaker("Tired Mom")
 			msgbox("I hope you have a safe rest of your\njourney!")
 			closemessage
-			end
 	}
 	releaseall
 	end
@@ -156,6 +153,57 @@ script SSTidalRooms_EventScript_Billy
 {
 	setspeaker("Billy")
 	msgbox("WEEEEEEE!", MSGBOX_NPC)
+	end
+}
+
+script SSTidalRooms_EventScript_Nerd
+{
+	lockall
+	setspeaker("Phone")
+	message(
+		"Team Armistice has once again released\na public statement condemning the\lPok\emon League.\p"
+		"The party has drawn out significant\ndiscourse lobbying to disband the\lLeague as a whole, among other things."
+		)
+	waitmessage
+	waitbuttonpress
+	closemessage
+	setspeaker("Troubled Guy")
+	message("Tch. People just don't understand them\nat all…\p")
+	waitmessage
+	faceplayer
+	setspeaker("Troubled Guy")
+	message("Huh? What do you want, kid?")
+	waitmessage
+	waitbuttonpress
+	mcdialogueB("What is that?", "Do you know Diancie?")
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			setspeaker("Troubled Guy")
+			message(
+				"It's just the news. I'm following Team\nArmistice and what the sheeple are\lbranding them.\p"
+				"People just don't get they want what's\ngood for people, y'know?"
+				)
+			waitmessage
+			waitbuttonpress
+			closemessage
+		case 1:
+			setspeaker("Troubled Guy")
+			message(
+				"Figures a kid like you would still even\nbelieve in made up Pok\emon like that.\p"
+				"If you're done bothering me with myths,\nyou can go scram."
+				)
+			waitmessage
+			waitbuttonpress
+			closemessage
+		default:
+			setspeaker("Troubled Guy")
+			msgbox("Get outta my room.")
+			closemessage
+	}
+	applymovement(LOCALID_SS_TIDAL_TROUBLED_NERD, moves(face_up))
+	waitmovement(0)
+	releaseall
 	end
 }
 
