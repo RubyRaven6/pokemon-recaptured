@@ -3614,6 +3614,7 @@ bool8 ScrCmd_unset_if_set(struct ScriptContext *ctx)
     return FALSE;
 }
 
+#ifndef NDEBUG
 //debugprint by rave
 void ScrCmd_debugprint(struct ScriptContext *ctx)
 {
@@ -3648,7 +3649,7 @@ void ScrCmd_debugprintflag(struct ScriptContext *ctx)
             DebugPrintfLevel(MGBA_LOG_WARN, "%S, FALSE", str);
     }
 }
-
+#endif
 // Start cueobject
 
 extern const u8 Common_Movement_ExclamationMark[];
