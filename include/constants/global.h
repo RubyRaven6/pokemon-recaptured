@@ -230,8 +230,9 @@ enum __attribute__((packed)) Direction
     DIR_SOUTHEAST,
     DIR_NORTHWEST,
     DIR_NORTHEAST,
+    DIR_OPPOSITE, // cueobject
+    DIR_FACING, // cueobject
 };
-
 enum Connection
 {
     CONNECTION_INVALID = -1,

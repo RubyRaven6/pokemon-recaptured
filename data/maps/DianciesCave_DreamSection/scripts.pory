@@ -17,8 +17,6 @@ script DianciesCave_DreamSection_EventScript_BusyCarbink
 
 movement DiancieMovements
 {
-    emote_exclamation_mark,
-    delay_16 * 2,
     jump_in_place_left,
     jump_in_place_up,
     jump_in_place_right,
@@ -28,7 +26,24 @@ movement DiancieMovements
 script DianciesCave_DreamSection_EventScript_Diancie
 {
     lockall
+    applymovement(LOCALID_DREAMSECTION_DIANCIE, moves(emote_exclamation_mark, delay_16 * 2))
+    playse(SE_PIN)
+    waitmovement(0)
+    waitse
+    delay(16)
     applymovement(LOCALID_DREAMSECTION_DIANCIE, DiancieMovements)
+    playse(SE_BIKE_HOP)
+    delay(16)
+    waitse
+    playse(SE_BIKE_HOP)
+    delay(16)
+    waitse
+    playse(SE_BIKE_HOP)
+    delay(16)
+    waitse
+    playse(SE_BIKE_HOP)
+    delay(16)
+    waitse
     waitmovement(LOCALID_DREAMSECTION_DIANCIE)
     msgbox("I cannot believe my eyes!\nTo meet you at last…!")
     msgbox("Words fail me from how overjoyed I am\nmeeting you…")

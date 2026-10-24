@@ -1,5 +1,7 @@
 mapscripts SSTidalCorridor_MapScripts {
-	
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_INTRO_SEQUENCE_STATE, 2: SSTidalCorridor_EventScript_WhatsYourPronouns
+	]	
 }
 
 raw `
@@ -336,3 +338,113 @@ SSTidalCorridor_Text_Cabin3:
 SSTidalCorridor_Text_Cabin4:
 	.string "Cabin 4$"
 `
+
+script SSTidalCorridor_EventScript_WhatsYourPronouns
+{
+	checkplayergender
+	// switch(var(VAR_RESULT))
+	// {
+	// 	case GENDER_MASCULINE:
+	// 	case GENDER_FEMININE:
+	// 	case GENDER_ANDROGYNOUS:
+	// }
+
+	setspeaker("???")
+	msgbox("WEEEEEEEEE!")
+	closemessage
+	applymovement(LOCALID_SS_TIDAL_ROWDY_GIRL, moves(walk_fast_left * 7))
+	applymovement(LOCALID_PLAYER, moves(delay_16 * 3, delay_8, face_right))
+	waitmovement(LOCALID_PLAYER)
+	waitmovement(LOCALID_SS_TIDAL_ROWDY_GIRL)
+	playse(SE_WALL_HIT)
+	waitse
+	delay(10)
+	setspeaker("???")
+	msgbox("Oh god, Billy!")
+	closemessage
+	applymovement(LOCALID_SS_TIDAL_MOM, moves(walk_fast_left * 7, face_up))
+	applymovement(LOCALID_SS_TIDAL_ROWDY_GIRL, moves(delay_16 * 3, delay_8, face_down))
+	waitmovement(LOCALID_SS_TIDAL_MOM)
+	waitmovement(LOCALID_SS_TIDAL_ROWDY_GIRL)
+	delay(10)
+	setspeaker("Worried Mom")
+	msgbox("Billy, how many times have I told you\nnot to run around!")
+	closemessage
+	delay(10)
+	setspeaker("Billy")
+	msgbox("Four…")
+	closemessage
+	cueobject(LOCALID_SS_TIDAL_MOM, DIR_NORTH)
+	delay(10)
+	setspeaker("Flustered Mom")
+	msgbox("Make that five! Now, apologize to this\nyoung, er…")
+	closemessage
+	applymovement(LOCALID_SS_TIDAL_MOM, moves(walk_left, face_up))
+	applymovement(LOCALID_PLAYER, moves(delay_16, face_down))
+	waitmovement(LOCALID_SS_TIDAL_MOM)
+	waitmovement(LOCALID_PLAYER)
+	delay(10)
+	setspeaker("Mom")
+	msgbox("I'm sorry dearie. Could I get your\npronouns?")
+	closemessage
+	call(PronounSetting)
+	delay(10)
+	setspeaker("Mom")
+	msgbox("Thank you, dear.")
+	closemessage
+	applymovement(LOCALID_SS_TIDAL_MOM, moves(walk_right, face_up))
+	applymovement(LOCALID_PLAYER, moves(delay_16, face_right))
+	waitmovement(LOCALID_SS_TIDAL_MOM)
+	waitmovement(LOCALID_PLAYER)
+	delay(10)
+	setspeaker("Mom")
+	msgbox("Billy, be a good girl and apologise to\n{OBJ_PRN_LWR}.")
+	turnobject(LOCALID_SS_TIDAL_ROWDY_GIRL, DIR_WEST)
+	delay(10)
+	setspeaker("Billy")
+	msgbox("I'm sorry. I hope running into you didn't\nhurt.")
+	turnobject(LOCALID_SS_TIDAL_MOM, DIR_WEST)
+	delay(10)
+	setspeaker("Mom")
+	message(
+		"We've been on the ferry for a few hours,\nand Billy gets excitable.\p"
+		"At least we'll be departing on the next\nport after this one.\p"
+		"You have a safe rest of your trip,\nalright?"
+		)
+	waitmessage
+	waitbuttonpress
+	closemessage
+	applymovement(LOCALID_SS_TIDAL_MOM, moves(walk_left * 3, walk_up * 7))
+	applymovement(LOCALID_SS_TIDAL_ROWDY_GIRL, moves(walk_down, walk_left * 3, walk_up * 7))
+	waitmovement(LOCALID_SS_TIDAL_MOM)
+	waitmovement(LOCALID_SS_TIDAL_ROWDY_GIRL)
+	removeobject(LOCALID_SS_TIDAL_MOM)
+	removeobject(LOCALID_SS_TIDAL_ROWDY_GIRL)
+	setvar(VAR_INTRO_SEQUENCE_STATE, 3)
+}
+
+script(local) PronounSetting
+{
+	if(var(VAR_TEMP_0) == 1)
+	{
+		delay(10)
+		setspeaker("Mom")
+		msgbox("What pronouns do you use?")
+	}
+	mcdialogue("He/him", "She/her", "They/them", "It/its")
+	callnative(SetPlayerPronouns)
+	delay(10)
+	setspeaker("Mom")
+	msgbox("You use {PERS_PRN_LWR}, {POSS_PRN_1_LWR}, {POSS_PRN_2_LWR}, {OBJ_PRN_LWR}, then?\nIs that right?", MSGBOX_YESNO)
+	closemessage
+	if(var(VAR_RESULT) == NO)
+	{
+		setvar(VAR_TEMP_0, 1)
+		call(PronounSetting)
+	}
+	else
+	{
+		closemessage
+		return
+	}
+}

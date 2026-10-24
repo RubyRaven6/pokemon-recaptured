@@ -3648,3 +3648,55 @@ void ScrCmd_debugprintflag(struct ScriptContext *ctx)
             DebugPrintfLevel(MGBA_LOG_WARN, "%S, FALSE", str);
     }
 }
+
+// Start cueobject
+
+extern const u8 Common_Movement_ExclamationMark[];
+extern const u8 Common_Movement_WalkInPlaceDown[];
+extern const u8 Common_Movement_WalkInPlaceUp[];
+extern const u8 Common_Movement_WalkInPlaceLeft[];
+extern const u8 Common_Movement_WalkInPlaceRight[];
+extern const u8 Common_Movement_QuestionMark[];
+
+static const u8* const sWalkInPlaceScripts[] =
+{
+    [DIR_NONE]      = Common_Movement_ExclamationMark,
+    [DIR_SOUTH]     = Common_Movement_WalkInPlaceDown,
+    [DIR_NORTH]     = Common_Movement_WalkInPlaceUp,
+    [DIR_WEST]      = Common_Movement_WalkInPlaceLeft,
+    [DIR_EAST]      = Common_Movement_WalkInPlaceRight,
+    [DIR_SOUTHWEST] = Common_Movement_QuestionMark,
+    [DIR_SOUTHEAST] = Common_Movement_QuestionMark,
+    [DIR_NORTHWEST] = Common_Movement_QuestionMark,
+    [DIR_NORTHEAST] = Common_Movement_QuestionMark,
+};
+
+// Make an object walk in place and (optionally) wait for movement
+// Used to condense repeated `applymovement, waitmovement 0` use
+void ScrCmd_cueobject(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u16 direction = VarGet(ScriptReadHalfword(ctx));
+    u8 shouldWait = ScriptReadByte(ctx);
+
+    if (direction == DIR_OPPOSITE)
+        direction = GetOppositeDirection(gObjectEvents[GetObjectEventIdByLocalId(OBJ_EVENT_ID_PLAYER)].facingDirection);
+    else if (direction == DIR_FACING)
+        direction = gObjectEvents[GetObjectEventIdByLocalId(localId)].facingDirection;
+
+    // Cued movements never have to put away the follower pokemon
+    //gObjectEvents[GetObjectEventIdByLocalId(localId)].directionOverwrite = DIR_NONE;
+    ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, sWalkInPlaceScripts[direction]);
+    sMovingNpcId = localId;
+
+     if (shouldWait)
+     {
+         // waitmovement 0
+        sMovingNpcMapGroup = gSaveBlock1Ptr->location.mapGroup;
+        sMovingNpcMapNum = gSaveBlock1Ptr->location.mapNum;
+        SetupNativeScript(ctx, WaitForMovementFinish);
+    }
+
+}
+
+// End cueobject

@@ -576,7 +576,7 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 	{
 		.name = COMPOUND_STRING("Find the Heart"),
 		.desc = {
-			COMPOUND_STRING("Find the Heart"),
+			COMPOUND_STRING("You try to make sense of your dream…\nbut you don't have many leads.\nMaybe ask about Diancie?"),
 			COMPOUND_STRING(""),
 			COMPOUND_STRING("")
 		},

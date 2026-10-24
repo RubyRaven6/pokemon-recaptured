@@ -1469,7 +1469,7 @@
 	.2byte \heallocation
 	.endm
 
-	@ Checks the player's gender. Stores the result (MALE (0) or FEMALE (1)) in VAR_RESULT.
+	@ Checks the player's gender. Stores the result (GENDER_MASCULINE (0), GENDER_FEMININE (1), GENDER_ANDROGYNOUS (2)) in VAR_RESULT.
 	.macro checkplayergender
 	.byte SCR_OP_CHECKPLAYERGENDER
 	.endm
@@ -3253,3 +3253,23 @@
 	.macro mcdialogueB argv:vararg
 	_dynmultichoice 0, 0, FALSE, 10, FALSE, 0, DYN_MULTICHOICE_CB_NONE, \argv
 	.endm
+
+	@ Cue Object from PSF / Silicon
+	@ Start cueobject
+    @ Cue an object in a direction (walk in place)
+    @ If `wait` is set, waits for movement to complete
+    .macro cueobject localId:req, direction:req, wait=1
+	callnative ScrCmd_cueobject
+    .2byte \localId
+    .2byte \direction
+    .byte \wait
+    .endm
+
+	.macro cueobjectplayer localId:req, wait=1
+	    cueobject \localId, DIR_OPPOSITE, \wait
+	.endm
+
+	.macro cueobjecttalking localId:req, wait=1
+	    cueobject \localId, DIR_FACING, \wait
+	.endm
+    @ End cueobject
