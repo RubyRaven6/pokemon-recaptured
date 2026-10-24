@@ -2,9 +2,7 @@ mapscripts SSTidalRooms_MapScripts {
 	MAP_SCRIPT_ON_TRANSITION {
 		if(var(VAR_INTRO_SEQUENCE_STATE) == 0)
 		{
-			debugprintflag("Quest Menu Get", FLAG_SYS_QUEST_MENU_GET)
 			setifunset(FLAG_SYS_QUEST_MENU_GET)
-			debugprintflag("Quest Menu Get", FLAG_SYS_QUEST_MENU_GET)
 			setobjectxy(LOCALID_SS_TIDAL_ANABEL, 4, 16)
 			setflag(FLAG_HIDE_ANABEL_IN_SS_TIDAL_CABIN)
 		}
