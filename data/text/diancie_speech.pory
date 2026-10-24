@@ -22,7 +22,7 @@ text gText_DiancieSpeech_YouLookWonderful
 
 text gText_DiancieSpeech_WhatABeautifulName1
 {
-    "What a beautfiul name…!\n{STR_VAR_1}\p"
+    "What a beautfiul name…!\p{STR_VAR_1}\p"
 }
 
 text gText_DiancieSpeech_PleaseComeHither
