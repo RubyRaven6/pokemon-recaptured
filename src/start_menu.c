@@ -224,7 +224,7 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
     .baseBlock = 0x8
 };
 
-static const u8 sText_QuestMenu[] = _("QUESTS");
+static const u8 sText_QuestMenu[] = _("PDA");
 static const struct MenuAction sStartMenuItems[] =
 {
     [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
@@ -336,6 +336,7 @@ static void HideStartMenuWindow(void);
 static void HideStartMenuDebug(void);
 static bool32 ShowSaveOption(void);
 static void ShowTimeWindow(void);
+static bool32 ShouldShowEVAllocNotif(void);
 static void ShowEVAllocNotif(void);
 
 void SetDexPokemonPokenavFlags(void) // unused
@@ -389,6 +390,9 @@ static void AddStartMenuAction(u8 action)
 
 static void BuildNormalStartMenu(void)
 {
+    if (FlagGet(FLAG_SYS_QUEST_MENU_GET))
+        AddStartMenuAction(MENU_ACTION_QUEST_MENU);
+
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEDEX);
 
@@ -406,12 +410,10 @@ static void BuildNormalStartMenu(void)
     if ((P_STAT_EDITOR_ALWAYS || FlagGet(P_FLAG_STAT_EDITOR_GET)) && P_START_MENU_STAT_EDITOR)
         AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
 
-    if (FlagGet(FLAG_SYS_QUEST_MENU_GET))
-        AddStartMenuAction(MENU_ACTION_QUEST_MENU);
-
     AddStartMenuAction(MENU_ACTION_PLAYER);
     if(ShowSaveOption())
         AddStartMenuAction(MENU_ACTION_SAVE);
+
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
@@ -636,7 +638,8 @@ static void RemoveExtraStartMenuWindows(void)
     ClearStdWindowAndFrameToTransparent(sEVAllocNotifWindowId, FALSE);
     // CopyWindowToVram(sStartClockWindowId, COPYWIN_GFX);
     RemoveWindow(sStartClockWindowId);
-    RemoveWindow(sEVAllocNotifWindowId);
+    if (ShouldShowEVAllocNotif())
+        RemoveWindow(sEVAllocNotifWindowId);
 }
 
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
@@ -698,21 +701,7 @@ static bool32 InitStartMenuStep(void)
         break;
     case 4:
         ShowTimeWindow();
-        bool8 evsUnallocated = FALSE;
-        for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
-        {
-            u32 evs = 0;
-            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_HP_EV);
-            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_ATK_EV);
-            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_DEF_EV);
-            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_SPEED_EV);
-            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_SPATK_EV);
-            evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_SPDEF_EV);
-
-            if((gLevelToEVs[GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_LEVEL)] - evs) > 0)
-                evsUnallocated = TRUE;
-        }
-        if (evsUnallocated)
+        if (ShouldShowEVAllocNotif())
             ShowEVAllocNotif();
         sInitStartMenuData[0]++;
         break;
@@ -850,8 +839,8 @@ static bool8 HandleStartMenuInput(void)
         return TRUE;
     }
 
-    RemoveExtraStartMenuWindows();
-    ShowTimeWindow();
+    // RemoveExtraStartMenuWindows();
+    // ShowTimeWindow();
     return FALSE;
 }
 
@@ -1581,7 +1570,6 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
 static void ShowSaveInfoWindow(void)
 {
     struct WindowTemplate saveInfoWindow = sSaveInfoWindowTemplate;
-    enum Gender gender;
     u8 color;
     u32 xOffset;
     u32 yOffset;
@@ -1594,11 +1582,11 @@ static void ShowSaveInfoWindow(void)
     sSaveInfoWindowId = AddWindow(&saveInfoWindow);
     DrawStdWindowFrame(sSaveInfoWindowId, FALSE);
 
-    gender = gSaveBlock2Ptr->playerGender;
-    color = TEXT_COLOR_RED;  // Red when female, blue when male.
+    // gender = gSaveBlock2Ptr->playerGender;
+    color = TEXT_COLOR_RED;
 
-    if (gender == MALE)
-        color = TEXT_COLOR_BLUE;
+    // if (gender == GENDER_MASCULINE)
+        // color = TEXT_COLOR_BLUE;
 
     // Print region name
     yOffset = 1;
@@ -1730,6 +1718,30 @@ bool32 IsPlayerInSafeArea(void)
 bool32 IsPlayerOnSafeMetatile(void)
 {
     if(MetatileBehavior_IsSavePointTile(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static bool32 ShouldShowEVAllocNotif(void)
+{
+    u32 evs = 0;
+    u32 monsUnallocated = 0;
+    for (u32 i = 0; i < gPartiesCount[B_TRAINER_PLAYER]; i++)
+    {
+        u32 monLevel = GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_LEVEL);
+        
+        evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_HP_EV);
+        evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_ATK_EV);
+        evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_DEF_EV);
+        evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_SPEED_EV);
+        evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_SPATK_EV);
+        evs += GetMonData(&gParties[B_TRAINER_PLAYER][i],MON_DATA_SPDEF_EV);
+
+        if((gLevelToEVs[monLevel] - evs) > 0)
+            monsUnallocated++;
+    }
+    if(monsUnallocated > 0)
         return TRUE;
     else
         return FALSE;

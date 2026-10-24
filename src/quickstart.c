@@ -58,17 +58,20 @@ static const struct SpritePalette sSpritePalette_QuickstartHud = {
     .tag = TAG_SKIP_INTRO
 };
 
-static inline enum Gender SetQuickstartPlayerGender()
+static inline enum PlayerGender SetQuickstartPlayerGender()
 {
+    const enum PlayerGender genders[] = {GENDER_MASCULINE, GENDER_FEMININE, GENDER_ANDROGYNOUS};
     switch (QUICKSTART_GENDER)
     {
-        case GENDER_MALE:
-            return MALE;
-        case GENDER_FEMALE:
-            return FEMALE;
-        case GENDER_RANDOM:
-        default:
-            return RandomPercentage(RNG_NONE, 50) ? FEMALE : MALE;
+    case GENDER_MASC:
+        return GENDER_MASCULINE;
+    case GENDER_FEMME:
+        return GENDER_FEMININE;
+    case GENDER_ANDRO:
+        return GENDER_ANDROGYNOUS;
+    case GENDER_RANDOM:
+    default:
+        return RandomElement(RNG_NONE, genders);
     }
 }
 
@@ -79,14 +82,27 @@ static void CB2_SkipToNewGame(void)
     static const u8 sText_PlayerFemale[] = _("LEAF");
     static const u8 sText_Rival[] = _("BLUE");
 #else
-    static const u8 sText_PlayerMale[] = _("BRENDAN");
-    static const u8 sText_PlayerFemale[] = _("MAY");
+    static const u8 sText_PlayerMale[] = _("Brendan");
+    static const u8 sText_PlayerFemale[] = _("May");
+    static const u8 sText_PlayerAndro[] = _("Kris");
 #endif  // IS_FRLG
 
     if (!UpdatePaletteFade())
     {
         gSaveBlock2Ptr->playerGender = SetQuickstartPlayerGender();
-        const u8* textPtr = gSaveBlock2Ptr->playerGender == FEMALE ? sText_PlayerFemale : sText_PlayerMale;
+        const u8* textPtr = 0;
+        switch(gSaveBlock2Ptr->playerGender)
+        {
+            case GENDER_MASCULINE:
+                textPtr = sText_PlayerMale;
+                break;
+            case GENDER_FEMININE:
+                textPtr = sText_PlayerFemale;
+                break;
+            case GENDER_ANDROGYNOUS:
+                textPtr = sText_PlayerAndro;
+                break;
+        }
         StringCopy_PlayerName(gSaveBlock2Ptr->playerName, textPtr);
 
 #if IS_FRLG

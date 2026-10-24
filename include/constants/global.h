@@ -180,6 +180,23 @@ enum Gender
     GENDER_COUNT,
 };
 
+enum PlayerGender
+{
+    GENDER_MASCULINE,
+    GENDER_FEMININE,
+    GENDER_ANDROGYNOUS,
+    GENDERS_COUNT,
+}; //slayyy
+
+enum PlayerPronouns
+{
+    MASC_PRONOUNS,
+    FEMME_PRONOUNS,
+    NEUTRAL_PRONOUNS,
+    NEO_PRONOUNS,
+    PRONOUN_COUNT
+};
+
 #define NUM_BARD_SONG_WORDS    6
 #define NUM_STORYTELLER_TALES  4
 #define NUM_TRADER_ITEMS       4
@@ -213,8 +230,9 @@ enum __attribute__((packed)) Direction
     DIR_SOUTHEAST,
     DIR_NORTHWEST,
     DIR_NORTHEAST,
+    DIR_OPPOSITE, // cueobject
+    DIR_FACING, // cueobject
 };
-
 enum Connection
 {
     CONNECTION_INVALID = -1,

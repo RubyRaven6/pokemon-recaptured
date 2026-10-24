@@ -1,0 +1,64 @@
+mapscripts DianciesCave_DreamSection_MapScripts {
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_TEMP_0, 0 {
+            turnobject(LOCALID_PLAYER, DIR_NORTH)
+        }
+    ]
+}
+
+script DianciesCave_DreamSection_EventScript_BusyCarbink
+{
+    lockall
+    msgbox(format("The Carbink is quite hard at work.\nBest not to disturb it!"))
+    closemessage
+    release
+    end
+}
+
+movement DiancieMovements
+{
+    jump_in_place_left,
+    jump_in_place_up,
+    jump_in_place_right,
+    jump_in_place_down,
+}
+
+script DianciesCave_DreamSection_EventScript_Diancie
+{
+    lockall
+    applymovement(LOCALID_DREAMSECTION_DIANCIE, moves(emote_exclamation_mark, delay_16 * 2))
+    playse(SE_PIN)
+    waitmovement(0)
+    waitse
+    delay(16)
+    applymovement(LOCALID_DREAMSECTION_DIANCIE, DiancieMovements)
+    playse(SE_BIKE_HOP)
+    delay(16)
+    waitse
+    playse(SE_BIKE_HOP)
+    delay(16)
+    waitse
+    playse(SE_BIKE_HOP)
+    delay(16)
+    waitse
+    playse(SE_BIKE_HOP)
+    delay(16)
+    waitse
+    waitmovement(LOCALID_DREAMSECTION_DIANCIE)
+    msgbox("I cannot believe my eyes!\nTo meet you at last…!")
+    msgbox("Words fail me from how overjoyed I am\nmeeting you…")
+    setspeaker(SP_NAME_DIANCIE)
+    msgbox("I am Diancie, guardian of the Heart of\nHoenn…")
+    msgbox("Our time runs short, young one.\n"
+            "I have an important message to depart.")
+    msgbox("A rot has seeded itself in our home.")
+    msgbox("It has festered, growing like a weed. It\nthreatens to strangle our very Heart.")
+    msgbox("The Heart has chosen you, {PLAYER}.\nChosen to be its final hope.")
+    msgbox("Seek out the Heart's Hidden Chamber, in\nthe ridge dividing Hoenn itself.")
+    msgbox("Our time has run out… I hope to see you\nsoon!")
+    closemessage
+    fadescreen(FADE_TO_WHITE)
+    warpsilent(MAP_SS_TIDAL_ROOMS, 5, 11)
+    waitstate
+    releaseall
+}

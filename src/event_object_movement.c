@@ -517,6 +517,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_EnemyZigzagoon,        OBJ_EVENT_PAL_TAG_ZIGZAGOON},
     {gObjectEventPal_May,                   OBJ_EVENT_PAL_TAG_MAY},
     {gObjectEventPal_MayReflection,         OBJ_EVENT_PAL_TAG_MAY_REFLECTION},
+    {gObjectEventPal_Kris,                  OBJ_EVENT_PAL_TAG_KRIS},
+    {gObjectEventPal_KrisReflection,        OBJ_EVENT_PAL_TAG_KRIS_REFLECTION},
     {gObjectEventPal_MovingBox,             OBJ_EVENT_PAL_TAG_MOVING_BOX},
     {gObjectEventPal_CableCar,              OBJ_EVENT_PAL_TAG_CABLE_CAR},
     {gObjectEventPal_SSTidal,               OBJ_EVENT_PAL_TAG_SSTIDAL},
@@ -3317,17 +3319,20 @@ u8 LoadObjectEventPaletteCopy(u16 originalTag, u16 copyTag)
     return LoadSpritePalette(&palette);
 }
 
-u8 LoadPlayerObjectEventPalette(enum Gender gender)
+u8 LoadPlayerObjectEventPalette(enum PlayerGender gender)
 {
     u16 paletteTag;
     switch (gender)
     {
     default:
-    case MALE:
+    case GENDER_MASCULINE:
         paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN;
         break;
-    case FEMALE:
+    case GENDER_FEMININE:
         paletteTag = OBJ_EVENT_PAL_TAG_MAY;
+        break;
+    case GENDER_ANDROGYNOUS:
+        paletteTag = OBJ_EVENT_PAL_TAG_KRIS;
         break;
     }
     return LoadObjectEventPalette(paletteTag);

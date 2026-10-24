@@ -9353,6 +9353,26 @@
       "secondary_tileset": "gTileset_Shop",
       "border_filepath": "data/layouts/DewfordTown_Mart/border.bin",
       "blockdata_filepath": "data/layouts/DewfordTown_Mart/map.bin"
+    },
+    {
+      "id": "LAYOUT_DIANCIES_CAVE_DREAM_SECTION",
+      "name": "DianciesCave_DreamSection_Layout",
+      "width": 22,
+      "height": 28,
+      "primary_tileset": "gTileset_GeneralPorytiles",
+      "secondary_tileset": "gTileset_DiancieCave",
+      "border_filepath": "data/layouts/DianciesCave_DreamSection/border.bin",
+      "blockdata_filepath": "data/layouts/DianciesCave_DreamSection/map.bin"
+    },
+    {
+      "id": "LAYOUT_DIANCIES_CAVE_MAIN_CHAMBER",
+      "name": "DianciesCave_MainChamber_Layout",
+      "width": 20,
+      "height": 26,
+      "primary_tileset": "gTileset_GeneralPorytiles",
+      "secondary_tileset": "gTileset_DiancieCave",
+      "border_filepath": "data/layouts/DianciesCave_MainChamber/border.bin",
+      "blockdata_filepath": "data/layouts/DianciesCave_MainChamber/map.bin"
     }
   ]
 }

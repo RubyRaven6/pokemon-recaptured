@@ -3511,6 +3511,21 @@ bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
     return TRUE;
 }
 
+/*
+ ______     __  __     ______     __  __     ______        ______     ______   __     ______                                             
+/\  == \   /\ \/\ \   /\  == \   /\ \_\ \   /\  ___\      /\  ___\   /\  == \ /\ \   /\  ___\                                            
+\ \  __<   \ \ \_\ \  \ \  __<   \ \____ \  \ \___  \     \ \  __\   \ \  _-/ \ \ \  \ \ \____                                           
+ \ \_\ \_\  \ \_____\  \ \_____\  \/\_____\  \/\_____\     \ \_____\  \ \_\    \ \_\  \ \_____\                                          
+  \/_/ /_/   \/_____/   \/_____/   \/_____/   \/_____/      \/_____/   \/_/     \/_/   \/_____/                                          
+                                                                                                                                         
+ ______     __  __     ______     ______   ______     __    __        __    __     ______     ______     ______     ______     ______    
+/\  ___\   /\ \/\ \   /\  ___\   /\__  _\ /\  __ \   /\ "-./  \      /\ "-./  \   /\  __ \   /\  ___\   /\  == \   /\  __ \   /\  ___\   
+\ \ \____  \ \ \_\ \  \ \___  \  \/_/\ \/ \ \ \/\ \  \ \ \-./\ \     \ \ \-./\ \  \ \  __ \  \ \ \____  \ \  __<   \ \ \/\ \  \ \___  \  
+ \ \_____\  \ \_____\  \/\_____\    \ \_\  \ \_____\  \ \_\ \ \_\     \ \_\ \ \_\  \ \_\ \_\  \ \_____\  \ \_\ \_\  \ \_____\  \/\_____\ 
+  \/_____/   \/_____/   \/_____/     \/_/   \/_____/   \/_/  \/_/      \/_/  \/_/   \/_/\/_/   \/_____/   \/_/ /_/   \/_____/   \/_____/ 
+                                                                                                                                                                                                                                  
+*/
+
 bool8 ScrCmd_rewardpartyexp(struct ScriptContext *ctx)
 {
     u32 expPercent = ScriptReadWord(ctx);
@@ -3572,3 +3587,117 @@ bool8 ScrCmd_updatequest(struct ScriptContext *ctx)
 
     return FALSE;
 }
+
+bool8 ScrCmd_set_if_unset(struct ScriptContext *ctx)
+{
+    enum ComparisonOperators condition = ScriptReadByte(ctx);
+    u16 flagId = ScriptReadHalfword(ctx);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
+        FlagSet(flagId);
+
+    return FALSE;
+}
+
+bool8 ScrCmd_unset_if_set(struct ScriptContext *ctx)
+{
+    enum ComparisonOperators condition = ScriptReadByte(ctx);
+    u16 flagId = ScriptReadHalfword(ctx);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 0)
+        FlagClear(flagId);
+
+    return FALSE;
+}
+
+#ifndef NDEBUG
+//debugprint by rave
+void ScrCmd_debugprint(struct ScriptContext *ctx)
+{
+    u16 num;
+    const u8 *str = (const u8*)ScriptReadWord(ctx);
+    u16 numOrVar = ScriptReadHalfword(ctx);
+
+    if (str != NULL)
+    {
+        if (numOrVar != 65535)
+        {
+            num = VarGet(numOrVar);
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S, %u", str, num);
+        }
+        else
+        {
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S", str);
+        }
+    }
+}
+
+void ScrCmd_debugprintflag(struct ScriptContext *ctx)
+{
+    const u8 *str = (const u8*)ScriptReadWord(ctx);
+    u16 flagId = ScriptReadHalfword(ctx);
+
+    if (str != NULL)
+    {
+        if(FlagGet(flagId))
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S, TRUE", str);
+        else
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S, FALSE", str);
+    }
+}
+#endif
+// Start cueobject
+
+extern const u8 Common_Movement_ExclamationMark[];
+extern const u8 Common_Movement_WalkInPlaceDown[];
+extern const u8 Common_Movement_WalkInPlaceUp[];
+extern const u8 Common_Movement_WalkInPlaceLeft[];
+extern const u8 Common_Movement_WalkInPlaceRight[];
+extern const u8 Common_Movement_QuestionMark[];
+
+static const u8* const sWalkInPlaceScripts[] =
+{
+    [DIR_NONE]      = Common_Movement_ExclamationMark,
+    [DIR_SOUTH]     = Common_Movement_WalkInPlaceDown,
+    [DIR_NORTH]     = Common_Movement_WalkInPlaceUp,
+    [DIR_WEST]      = Common_Movement_WalkInPlaceLeft,
+    [DIR_EAST]      = Common_Movement_WalkInPlaceRight,
+    [DIR_SOUTHWEST] = Common_Movement_QuestionMark,
+    [DIR_SOUTHEAST] = Common_Movement_QuestionMark,
+    [DIR_NORTHWEST] = Common_Movement_QuestionMark,
+    [DIR_NORTHEAST] = Common_Movement_QuestionMark,
+};
+
+// Make an object walk in place and (optionally) wait for movement
+// Used to condense repeated `applymovement, waitmovement 0` use
+void ScrCmd_cueobject(struct ScriptContext *ctx)
+{
+    u16 localId = VarGet(ScriptReadHalfword(ctx));
+    u16 direction = VarGet(ScriptReadHalfword(ctx));
+    u8 shouldWait = ScriptReadByte(ctx);
+
+    if (direction == DIR_OPPOSITE)
+        direction = GetOppositeDirection(gObjectEvents[GetObjectEventIdByLocalId(OBJ_EVENT_ID_PLAYER)].facingDirection);
+    else if (direction == DIR_FACING)
+        direction = gObjectEvents[GetObjectEventIdByLocalId(localId)].facingDirection;
+
+    // Cued movements never have to put away the follower pokemon
+    //gObjectEvents[GetObjectEventIdByLocalId(localId)].directionOverwrite = DIR_NONE;
+    ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, sWalkInPlaceScripts[direction]);
+    sMovingNpcId = localId;
+
+     if (shouldWait)
+     {
+         // waitmovement 0
+        sMovingNpcMapGroup = gSaveBlock1Ptr->location.mapGroup;
+        sMovingNpcMapNum = gSaveBlock1Ptr->location.mapNum;
+        SetupNativeScript(ctx, WaitForMovementFinish);
+    }
+
+}
+
+// End cueobject

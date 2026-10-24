@@ -66,6 +66,7 @@ test/battle/partner_control.h
 tools/compresSmol/compresSmol
 tools/compresSmol/compresSmolTilemap
 tools/aif2pcm/aif2pcm
+tools/poryscript/poryscript
 *.Identifier
 *.smol
 *.fastSmol
@@ -76,3 +77,4 @@ log.txt
 *.ase
 .porydaw/
 tools/poryscript/poryscript
+*.scr

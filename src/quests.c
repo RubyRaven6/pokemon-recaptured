@@ -572,17 +572,33 @@ static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
 //Declaration of side quest structures. Edits to quests are made here.
 static const struct SideQuest sSideQuests[QUEST_COUNT] =
 {
-	[QUEST_1] = 
+	[QUEST_FIND_THE_HEART] = 
 	{
-		.name = gText_SideQuestName_1,
-		.desc = {gText_SideQuestDesc_1},
+		.name = COMPOUND_STRING("Find the Heart"),
+		.desc = {
+			COMPOUND_STRING("You try to make sense of your dream…\nbut you don't have many leads.\nMaybe ask about Diancie?"),
+			COMPOUND_STRING(""),
+			COMPOUND_STRING("")
+		},
 		.donedesc = gText_SideQuestDoneDesc_1,
-		.map = {gText_SideQuestMap1},
-		.sprite = {OBJ_EVENT_GFX_WALLY},
-		.spritetype = {OBJECT},
+		.map = {
+			COMPOUND_STRING("{FONT_NARROW}?????"),
+			COMPOUND_STRING(""),
+			COMPOUND_STRING("")
+		},
+		.sprite = {
+			OBJ_EVENT_GFX_SPECIES(DIANCIE),
+			ITEM_POKE_BALL,
+			SPECIES_RALTS
+		},
+		.spritetype = {
+			OBJECT,
+			ITEM,
+			PKMN
+		},
 		.subquests = NULL,
 		.numSubquests = 0,
-		.questVariable = 0,
+		.questVariable = VAR_QUEST_FIND_THE_HEART //First unused var in vars.h,
 	},
 
 	[QUEST_2] = 
@@ -601,30 +617,14 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 	[QUEST_3] = 
 	{
 		.name = gText_SideQuestName_3,
-		.desc = {
-			gComplexQuest_Quest3Desc_1,
-			gComplexQuest_Quest3Desc_2,
-			gComplexQuest_Quest3Desc_3
-		},
+		.desc = {gText_SideQuestDesc_3},
 		.donedesc = gText_SideQuestDoneDesc_3,
-		.map = {
-			gComplexQuest_Quest3Map_1,
-			gComplexQuest_Quest3Map_2,
-			gComplexQuest_Quest3Map_3
-		},
-		.sprite = {
-			OBJ_EVENT_GFX_WALLY,
-			ITEM_POKE_BALL,
-			SPECIES_RALTS
-		},
-		.spritetype = {
-			OBJECT,
-			ITEM,
-			PKMN
-		},
-		.subquests = NULL,
-		.numSubquests = 0,
-		.questVariable = VAR_UNUSED_0x404E //First unused var in vars.h,
+		.map = {gText_SideQuestMap3},
+		.sprite = {OBJ_EVENT_GFX_WALLY},
+		.spritetype = {OBJECT},
+		.subquests = sSubQuests2,
+		.numSubquests = QUEST_2_SUB_COUNT,
+		.questVariable = 0,
 	},
 
 	[QUEST_4] = 

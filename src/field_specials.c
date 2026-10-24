@@ -658,6 +658,9 @@ static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEven
             case OBJ_EVENT_GFX_RIVAL_MAY_NORMAL:
                 LoadPalette(gObjectEventPal_May, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
                 break;
+            case OBJ_EVENT_GFX_RIVAL_KRIS_NORMAL:
+                LoadPalette(gObjectEventPal_Kris, OBJ_PLTT_ID(adjustedPaletteNum), PLTT_SIZE_4BPP);
+                break;
             }
         }
     }
