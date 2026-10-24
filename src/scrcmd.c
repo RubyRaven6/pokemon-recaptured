@@ -3642,6 +3642,9 @@ void ScrCmd_debugprintflag(struct ScriptContext *ctx)
 
     if (str != NULL)
     {
-        DebugPrintfLevel(MGBA_LOG_WARN, "%S, %d", str, FlagGet(flagId));
+        if(FlagGet(flagId))
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S, TRUE", str);
+        else
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S, FALSE", str);
     }
 }
