@@ -21,6 +21,113 @@ mapscripts SSTidalRooms_MapScripts {
 	]
 }
 
+script(local) SSTidalRooms_EventScript_WokeUpLikeThis
+{
+	questmenu(QUEST_MENU_SET_ACTIVE, QUEST_FIND_THE_HEART)
+	msgbox("A strange dream… that felt real all the\nsame.")
+	msgbox("You take out your PDA, and take some\nnotes.")
+	closemessage
+	openquestmenu
+	setvar(VAR_INTRO_SEQUENCE_STATE, 1)
+}
+
+script(local) SSTidalRooms_EventScript_ElsieEnters
+{
+	addobject(LOCALID_SS_TIDAL_ELSIE)
+	clearflag(FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN)
+	playse(SE_DOOR)
+	applymovement(LOCALID_SS_TIDAL_ELSIE, moves(walk_in_place_fast_up, delay_16 * 2))
+	waitmovement(0)
+	waitse
+	applymovement(LOCALID_SS_TIDAL_ELSIE, moves(walk_up * 5, face_right))
+	applymovement(LOCALID_PLAYER, moves(delay_16 * 5, face_left))
+	waitmovement(LOCALID_SS_TIDAL_ELSIE)
+	waitmovement(LOCALID_PLAYER)
+	setspeaker(SP_NAME_ELSIE)
+	message(
+		"Hey there, Champ! You're finally awake.\nWe're almost at Dewford.\p"
+		"I didn't think we'd be this close to our\nnew life.\p"
+		"I'm… sorry that I couldn't help you out\nsooner.\pBut I'll do my best to make it up to you\nas your big sis.\p"
+		"We can be sappy once we have our new\ndigs, though. We still have some time\lbefore we dock.\p"
+		"Why not go stretch your legs?\p"
+		"Just make sure to come back once we're\nabout to disembark, alright, Champ?"
+	)
+	waitmessage
+	waitbuttonpress
+	closemessage
+	applymovement(LOCALID_SS_TIDAL_ELSIE, moves(walk_left, face_down, delay_16 * 2))
+	waitmovement(0)
+	setvar(VAR_INTRO_SEQUENCE_STATE, 2)
+}
+
+script SSTidalRooms_EventScript_Elsie
+{
+	faceplayer
+	setspeaker(SP_NAME_ELSIE)
+	msgbox("Just packing the rest of my stuff.\nWhat's up?")
+	mcdialogueB("How are you?", "What's Diancie?")
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			setspeaker(SP_NAME_ELSIE)
+			message(
+				"As good as I could be, I guess! A little\nseasick though.\p"
+				"I'm a big girl, though. So no need to\nworry about me."
+				)
+			waitmessage
+			waitbuttonpress
+			closemessage
+			end
+		case 1:
+			setspeaker(SP_NAME_ELSIE)
+			message(
+				"Diancie? Oh, you mean from the myths?\nI guess you didn't get told those\lstories when you were younger.\p"
+				"Well, she's an important Pok\emon; one of\nthe Guardians that watch over us.\p"
+				"It's said that she guards the Heart,\nthe manifestation of all our thoughts,\lfeelings, and inner hearts."
+				)
+			waitmessage
+			waitbuttonpress
+			closemessage
+			end
+		default:
+			setspeaker(SP_NAME_ELSIE)
+			msgbox("Just let me know if you need anything,\nChamp.")
+			closemessage
+			end
+	}
+}
+
+script SSTidalRooms_EventScript_Bed{
+	lockall
+	msgbox("It was a comfy bed.\nBetter stretch your legs now, though.", MSGBOX_DEFAULT)
+	closemessage
+	releaseall
+	end
+}
+
+script SSTidalRooms_EventScript_Mom
+{
+	lockall
+	faceplayer
+	setspeaker("Tired Mom")
+	message(
+		"Thank you for being understanding of\nBilly.\p"
+		"Many people can't really handle her\nenergy. I worry she rubs people the\lwrong way."
+		)
+	waitmessage
+	waitbuttonpress
+	closemessage
+	releaseall
+	end
+}
+
+script SSTidalRooms_EventScript_Billy
+{
+	setspeaker("Billy")
+	msgbox("WEEEEEEE!", MSGBOX_NPC)
+	end
+}
+
 raw `
 
 SSTidalRooms_EventScript_SnatchGiver::
@@ -187,87 +294,3 @@ SSTidalRooms_Text_ExplainSnatch:
 	.string "used by a foe or ally.$"
 
 `
-
-script(local) SSTidalRooms_EventScript_WokeUpLikeThis
-{
-	questmenu(QUEST_MENU_SET_ACTIVE, QUEST_FIND_THE_HEART)
-	msgbox("A strange dream… that felt real all the\nsame.")
-	msgbox("You take out your PDA, and take some\nnotes.")
-	closemessage
-	openquestmenu
-	setvar(VAR_INTRO_SEQUENCE_STATE, 1)
-}
-
-script(local) SSTidalRooms_EventScript_ElsieEnters
-{
-	addobject(LOCALID_SS_TIDAL_ELSIE)
-	clearflag(FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN)
-	playse(SE_DOOR)
-	applymovement(LOCALID_SS_TIDAL_ELSIE, moves(walk_in_place_fast_up, delay_16 * 2))
-	waitmovement(0)
-	waitse
-	applymovement(LOCALID_SS_TIDAL_ELSIE, moves(walk_up * 5, face_right))
-	applymovement(LOCALID_PLAYER, moves(delay_16 * 5, face_left))
-	waitmovement(LOCALID_SS_TIDAL_ELSIE)
-	waitmovement(LOCALID_PLAYER)
-	setspeaker(SP_NAME_ELSIE)
-	message(
-		"Hey there, Champ! You're finally awake.\nWe're almost at Dewford.\p"
-		"I didn't think we'd be this close to our\nnew life.\p"
-		"I'm… sorry that I couldn't help you out\nsooner.\pBut I'll do my best to make it up to you\nas your big sis.\p"
-		"We can be sappy once we have our new\ndigs, though. We still have some time\lbefore we dock.\p"
-		"Why not go stretch your legs?\p"
-		"Just make sure to come back once we're\nabout to disembark, alright, Champ?"
-	)
-	waitmessage
-	waitbuttonpress
-	closemessage
-	applymovement(LOCALID_SS_TIDAL_ELSIE, moves(walk_left, face_down, delay_16 * 2))
-	waitmovement(0)
-	setvar(VAR_INTRO_SEQUENCE_STATE, 2)
-}
-
-script SSTidalRooms_EventScript_Elsie
-{
-	faceplayer
-	setspeaker(SP_NAME_ELSIE)
-	msgbox("Just packing the rest of my stuff.\nWhat's up?")
-	mcdialogueB("How are you?", "What's Diancie?")
-	switch(var(VAR_RESULT))
-	{
-		case 0:
-			setspeaker(SP_NAME_ELSIE)
-			message(
-				"As good as I could be, I guess! A little\nseasick though.\p"
-				"I'm a big girl, though. So no need to\nworry about me."
-				)
-			waitmessage
-			waitbuttonpress
-			closemessage
-			end
-		case 1:
-			setspeaker(SP_NAME_ELSIE)
-			message(
-				"Diancie? Oh, you mean from the myths?\nI guess you didn't get told those\lstories when you were younger.\p"
-				"Well, she's an important Pok\emon; one of\nthe Guardians that watch over us.\p"
-				"It's said that she guards the Heart,\nthe manifestation of all our thoughts,\lfeelings, and inner hearts."
-				)
-			waitmessage
-			waitbuttonpress
-			closemessage
-			end
-		default:
-			setspeaker(SP_NAME_ELSIE)
-			msgbox("Just let me know if you need anything,\nChamp.")
-			closemessage
-			end
-	}
-}
-
-script SSTidalRooms_EventScript_Bed{
-	lockall
-	msgbox("It was a comfy bed.\nBetter stretch your legs now, though.", MSGBOX_DEFAULT)
-	closemessage
-	releaseall
-	end
-}

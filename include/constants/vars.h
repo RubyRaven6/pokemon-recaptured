@@ -48,6 +48,51 @@
 #define VAR_OBJ_GFX_ID_E           0x401E
 #define VAR_OBJ_GFX_ID_F           0x401F
 
+/*
+__________     ___.          /\      __________                             __                           .___
+\______   \__ _\_ |__ ___.__.)/_____ \______   \ ____   ____ _____  _______/  |_ __ _________   ____   __| _/
+ |       _/  |  \ __ <   |  |/  ___/  |       _// __ \_/ ___\\__  \ \____ \   __\  |  \_  __ \_/ __ \ / __ | 
+ |    |   \  |  / \_\ \___  |\___ \   |    |   \  ___/\  \___ / __ \|  |_> >  | |  |  /|  | \/\  ___// /_/ | 
+ |____|_  /____/|___  / ____/____  >  |____|_  /\___  >\___  >____  /   __/|__| |____/ |__|    \___  >____ | 
+        \/          \/\/         \/          \/     \/     \/     \/|__|                           \/     \/ 
+  ________                        ____   ____            .__      ___.   .__                                 
+ /  _____/_____    _____   ____   \   \ /   /____ _______|__|____ \_ |__ |  |   ____   ______                
+/   \  ___\__  \  /     \_/ __ \   \   Y   /\__  \\_  __ \  \__  \ | __ \|  | _/ __ \ /  ___/                
+\    \_\  \/ __ \|  Y Y  \  ___/    \     /  / __ \|  | \/  |/ __ \| \_\ \  |_\  ___/ \___ \                 
+ \______  (____  /__|_|  /\___  >    \___/  (____  /__|  |__(____  /___  /____/\___  >____  >                
+        \/     \/      \/     \/                 \/              \/    \/          \/     \/                              
+*/
+
+// MAIN VARS
+/* 
+VAR_INTRO_SEQUENCE_STATE States
+- 0: The player wakes up from their dream where they met Diancie. 
+- 1: Right after they exit the quest menu, when Elsie enters their cabin
+- 2: The player exits the room, and are prompted for their pronouns
+*/
+#define VAR_INTRO_SEQUENCE_STATE                         0x4084
+
+//QUEST VARS
+#define VAR_QUEST_FIND_THE_HEART                         0x404E // Unused Var
+
+/*
+ __ __   ____  ____   ____  _      _       ____        ___  ___ ___    ___  ____    ____  _      ___   
+|  |  | /    ||    \ |    || |    | |     /    |      /  _]|   |   |  /  _]|    \  /    || |    |   \  
+|  |  ||  o  ||  _  | |  | | |    | |    |  o  |     /  [_ | _   _ | /  [_ |  D  )|  o  || |    |    \ 
+|  |  ||     ||  |  | |  | | |___ | |___ |     |    |    _]|  \_/  ||    _]|    / |     || |___ |  D  |
+|  :  ||  _  ||  |  | |  | |     ||     ||  _  |    |   [_ |   |   ||   [_ |    \ |  _  ||     ||     |
+ \   / |  |  ||  |  | |  | |     ||     ||  |  |    |     ||   |   ||     ||  .  \|  |  ||     ||     |
+  \_/  |__|__||__|__||____||_____||_____||__|__|    |_____||___|___||_____||__|\_||__|__||_____||_____|
+                                                                                                       
+  ____   ____  ___ ___    ___      __ __   ____  ____   ____   ____  ____   _        ___  _____        
+ /    | /    ||   |   |  /  _]    |  |  | /    ||    \ |    | /    ||    \ | |      /  _]/ ___/        
+|   __||  o  || _   _ | /  [_     |  |  ||  o  ||  D  ) |  | |  o  ||  o  )| |     /  [_(   \_         
+|  |  ||     ||  \_/  ||    _]    |  |  ||     ||    /  |  | |     ||     || |___ |    _]\__  |        
+|  |_ ||  _  ||   |   ||   [_     |  :  ||  _  ||    \  |  | |  _  ||  O  ||     ||   [_ /  \ |        
+|     ||  |  ||   |   ||     |     \   / |  |  ||  .  \ |  | |  |  ||     ||     ||     |\    |        
+|___,_||__|__||___|___||_____|      \_/  |__|__||__|\_||____||__|__||_____||_____||_____| \___|        
+                                                                                                       
+*/
 // general purpose vars
 #define VAR_RECYCLE_GOODS                                0x4020
 #define VAR_REPEL_STEP_COUNT                             0x4021
@@ -97,7 +142,6 @@
 #define VAR_POKELOT_RND1                                 0x404B // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
 #define VAR_POKELOT_RND2                                 0x404C // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
-#define VAR_QUEST_FIND_THE_HEART                                0x404E // Unused Var
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
 #define VAR_LITTLEROOT_TOWN_STATE                        0x4050
 #define VAR_OLDALE_TOWN_STATE                            0x4051
@@ -151,7 +195,6 @@
 #define VAR_ROUTE134_STATE                               0x4081 // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
 #define VAR_UNUSED_0x4083                                0x4083 // Unused Var
-#define VAR_INTRO_SEQUENCE_STATE                         0x4084
 #define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
 #define VAR_CONTEST_HALL_STATE                           0x4086
 #define VAR_CABLE_CLUB_STATE                             0x4087
