@@ -117,6 +117,37 @@ script SSTidalRooms_EventScript_Mom
 	waitmessage
 	waitbuttonpress
 	closemessage
+	mcdialogueB("Where to next?", "Do you know Diancie?")
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			setspeaker("Tired Mom")
+			message(
+				"Our next stop would be Rustboro, the\none right after this one."
+				"We went to visit Billy's mom over in Ever\nGrande City.\pShe's works as a Pok\emon League Coach\nto the advanced trainers."
+				)
+			waitmessage
+			waitbuttonpress
+			closemessage
+			end
+		case 1:
+			setspeaker("Tired Mom")
+			message(
+				"Well, you seem a little too old for fairy\ntales like that, hm?\p"
+				"I suppose there's no age to stop being\nwhimsical.\p"
+				"Tell you what, though, I did once wish\nupon a star for Diancie to bless me…\p"
+				"And wouldn't you know it, I met the one\nwoman who'd be my wife the next day!"
+				)
+			waitmessage
+			waitbuttonpress
+			closemessage
+			end
+		default:
+			setspeaker("Tired Mom")
+			msgbox("I hope you have a safe rest of your\njourney!")
+			closemessage
+			end
+	}
 	releaseall
 	end
 }
