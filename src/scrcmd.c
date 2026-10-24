@@ -3511,6 +3511,21 @@ bool8 ScrCmd_subquestmenu(struct ScriptContext *ctx)
     return TRUE;
 }
 
+/*
+ ______     __  __     ______     __  __     ______        ______     ______   __     ______                                             
+/\  == \   /\ \/\ \   /\  == \   /\ \_\ \   /\  ___\      /\  ___\   /\  == \ /\ \   /\  ___\                                            
+\ \  __<   \ \ \_\ \  \ \  __<   \ \____ \  \ \___  \     \ \  __\   \ \  _-/ \ \ \  \ \ \____                                           
+ \ \_\ \_\  \ \_____\  \ \_____\  \/\_____\  \/\_____\     \ \_____\  \ \_\    \ \_\  \ \_____\                                          
+  \/_/ /_/   \/_____/   \/_____/   \/_____/   \/_____/      \/_____/   \/_/     \/_/   \/_____/                                          
+                                                                                                                                         
+ ______     __  __     ______     ______   ______     __    __        __    __     ______     ______     ______     ______     ______    
+/\  ___\   /\ \/\ \   /\  ___\   /\__  _\ /\  __ \   /\ "-./  \      /\ "-./  \   /\  __ \   /\  ___\   /\  == \   /\  __ \   /\  ___\   
+\ \ \____  \ \ \_\ \  \ \___  \  \/_/\ \/ \ \ \/\ \  \ \ \-./\ \     \ \ \-./\ \  \ \  __ \  \ \ \____  \ \  __<   \ \ \/\ \  \ \___  \  
+ \ \_____\  \ \_____\  \/\_____\    \ \_\  \ \_____\  \ \_\ \ \_\     \ \_\ \ \_\  \ \_\ \_\  \ \_____\  \ \_\ \_\  \ \_____\  \/\_____\ 
+  \/_____/   \/_____/   \/_____/     \/_/   \/_____/   \/_/  \/_/      \/_/  \/_/   \/_/\/_/   \/_____/   \/_/ /_/   \/_____/   \/_____/ 
+                                                                                                                                                                                                                                  
+*/
+
 bool8 ScrCmd_rewardpartyexp(struct ScriptContext *ctx)
 {
     u32 expPercent = ScriptReadWord(ctx);
@@ -3571,4 +3586,62 @@ bool8 ScrCmd_updatequest(struct ScriptContext *ctx)
     VarSet(varId, varValue + 1);
 
     return FALSE;
+}
+
+bool8 ScrCmd_set_if_unset(struct ScriptContext *ctx)
+{
+    enum ComparisonOperators condition = ScriptReadByte(ctx);
+    u16 flagId = ScriptReadHalfword(ctx);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
+        FlagSet(flagId);
+
+    return FALSE;
+}
+
+bool8 ScrCmd_unset_if_set(struct ScriptContext *ctx)
+{
+    enum ComparisonOperators condition = ScriptReadByte(ctx);
+    u16 flagId = ScriptReadHalfword(ctx);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 0)
+        FlagClear(flagId);
+
+    return FALSE;
+}
+
+//debugprint by rave
+void ScrCmd_debugprint(struct ScriptContext *ctx)
+{
+    u16 num;
+    const u8 *str = (const u8*)ScriptReadWord(ctx);
+    u16 numOrVar = ScriptReadHalfword(ctx);
+
+    if (str != NULL)
+    {
+        if (numOrVar != 65535)
+        {
+            num = VarGet(numOrVar);
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S, %u", str, num);
+        }
+        else
+        {
+            DebugPrintfLevel(MGBA_LOG_WARN, "%S", str);
+        }
+    }
+}
+
+void ScrCmd_debugprintflag(struct ScriptContext *ctx)
+{
+    const u8 *str = (const u8*)ScriptReadWord(ctx);
+    u16 flagId = ScriptReadHalfword(ctx);
+
+    if (str != NULL)
+    {
+        DebugPrintfLevel(MGBA_LOG_WARN, "%S, %d", str, FlagGet(flagId));
+    }
 }

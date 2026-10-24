@@ -1,6 +1,31 @@
+mapscripts SSTidalRooms_MapScripts {
+	MAP_SCRIPT_ON_TRANSITION {
+		if(var(VAR_INTRO_SEQUENCE_STATE) == 0)
+		{
+			debugprintflag("Quest Menu Get", FLAG_SYS_QUEST_MENU_GET)
+			setifunset(FLAG_SYS_QUEST_MENU_GET)
+			debugprintflag("Quest Menu Get", FLAG_SYS_QUEST_MENU_GET)
+			setobjectxy(LOCALID_SS_TIDAL_ANABEL, 4, 16)
+			setflag(FLAG_HIDE_ANABEL_IN_SS_TIDAL_CABIN)
+		}
+	}
+
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_INTRO_SEQUENCE_STATE, 0 {
+			questmenu(QUEST_MENU_SET_ACTIVE, QUEST_FIND_THE_HEART)
+			msgbox("A strange dream… that felt real all the\nsame.")
+			msgbox("You take out your PDA, and take some\nnotes.")
+			closemessage
+			openquestmenu
+			setvar(VAR_INTRO_SEQUENCE_STATE, 1)
+		}
+		VAR_INTRO_SEQUENCE_STATE, 1 {
+			// addobject
+		}
+	]
+}
+
 raw `
-SSTidalRooms_MapScripts::
-	.byte 0
 
 SSTidalRooms_EventScript_SnatchGiver::
 	lock
@@ -17,15 +42,6 @@ SSTidalRooms_EventScript_SnatchGiver::
 SSTidalRooms_EventScript_ExplainSnatch::
 	msgbox SSTidalRooms_Text_ExplainSnatch, MSGBOX_DEFAULT
 	release
-	end
-
-SSTidalRooms_EventScript_Bed::
-	lockall
-	msgbox SSTidalRooms_Text_TakeRestOnBed, MSGBOX_DEFAULT
-	closemessage
-	call Common_EventScript_OutOfCenterPartyHeal
-	call SSTidalRooms_EventScript_ProgessCruiseAfterBed
-	releaseall
 	end
 
 SSTidalRooms_EventScript_Colton::
@@ -175,3 +191,10 @@ SSTidalRooms_Text_ExplainSnatch:
 	.string "used by a foe or ally.$"
 
 `
+script SSTidalRooms_EventScript_Bed{
+	lockall
+	msgbox("It was a comfy bed.\nBetter stretch your legs now, though.", MSGBOX_DEFAULT)
+	closemessage
+	releaseall
+	end
+}

@@ -3193,3 +3193,53 @@
 	getbraillestringwidth \text
 	call EventScript_BrailleCursorWaitButton
 	.endm
+
+	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	@@ ______      _           _       _____      _                           @@
+	@@ | ___ \    | |         ( )     |  ___|    (_)                          @@
+	@@ | |_/ /   _| |__  _   _|/ ___  | |__ _ __  _  ___                      @@
+	@@ |    / | | | '_ \| | | | / __| |  __| '_ \| |/ __|                     @@
+	@@ | |\ \ |_| | |_) | |_| | \__ \ | |__| |_) | | (__                      @@
+	@@ \_| \_\__,_|_.__/ \__, | |___/ \____/ .__/|_|\___|                     @@
+	@@                    __/ |            | |                                @@
+	@@                   |___/             |_|                                @@
+	@@  _____           _                   ___  ___                          @@
+	@@ /  __ \         | |                  |  \/  |                          @@
+	@@ | /  \/_   _ ___| |_ ___  _ __ ___   | .  . | __ _  ___ _ __ ___  ___  @@
+	@@ | |   | | | / __| __/ _ \| '_ ` _ \  | |\/| |/ _` |/ __| '__/ _ \/ __| @@
+	@@ | \__/\ |_| \__ \ || (_) | | | | | | | |  | | (_| | (__| | | (_) \__ \ @@
+	@@  \____/\__,_|___/\__\___/|_| |_| |_| \_|  |_/\__,_|\___|_|  \___/|___/ @@
+	@@                                                                        @@
+	@@                                                                        @@
+	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+    @ setifunset
+	
+	@ Sets the flag if flag is unset
+    .macro setifunset flag:req
+    goto_if_set \flag, skip_set_\@
+    setflag \flag
+    skip_set_\@:
+    .endm
+
+    @ Unsets flag if set
+    .macro unsetifset flag:req
+    goto_if_unset \flag, skip_unset_\@
+    clearflag \flag
+    skip_unset_\@:
+    .endm
+
+	@ Prints a debug print in a script
+	@ Prints the value in numOrVar alongside it if declared. 
+	.macro debugprint str:req, numOrVar=65535
+	callnative ScrCmd_debugprint
+	.4byte \str
+	.2byte \numOrVar
+	.endm
+
+	@ Debug Prints flags
+	.macro debugprintflag str:req, flag:req
+	callnative ScrCmd_debugprintflag
+	.4byte \str
+	.2byte \flag
+	.endm
