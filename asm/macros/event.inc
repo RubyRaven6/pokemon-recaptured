@@ -3243,3 +3243,13 @@
 	.4byte \str
 	.2byte \flag
 	.endm
+
+	@ A simpler version of dynmultichoice that only takes arguments; meant to be a template for the player character's dialogue.
+	.macro mcdialogue argv:vararg
+	_dynmultichoice 0, 0, TRUE, 10, FALSE, 0, DYN_MULTICHOICE_CB_NONE, \argv
+	.endm
+
+	@ mcdialogue but with B = leave
+	.macro mcdialogueB argv:vararg
+	_dynmultichoice 0, 0, FALSE, 10, FALSE, 0, DYN_MULTICHOICE_CB_NONE, \argv
+	.endm
