@@ -2,7 +2,7 @@
   "defaultFontId": "1_latin_rse",
   "fonts": {
     "1_latin_rse": {
-      "maxLineLength": 208,
+      "maxLineLength": 200,
       "numLines": 2,
       "cursorOverlapWidth": 0,
       "widths": {
@@ -173,11 +173,23 @@
         "{MAXIE}": 30,
         "{KYOGRE}": 36,
         "{GROUDON}": 42,
+        "{PERS_PRN_LWR}": 32,
+        "{POSS_PRN_1_LWR}": 32,
+        "{POSS_PRN_2_LWR}": 32,
+        "{OBJ_PRN_LWR}": 32,
+        "{PERS_PRN_TITLE}": 32,
+        "{POSS_PRN_1_TITLE}": 32,
+        "{POSS_PRN_2_TITLE}": 32,
+        "{OBJ_PRN_TITLE}": 32,
+        "{PERS_PRN_CAP}": 32,
+        "{POSS_PRN_1_CAP}": 32,
+        "{POSS_PRN_2_CAP}": 32,
+        "{OBJ_PRN_CAP}": 32,
         "$": 0
       }
     },
     "1_latin_frlg": {
-      "maxLineLength": 208,
+      "maxLineLength": 200,
       "numLines": 2,
       "cursorOverlapWidth": 10,
       "widths": {
@@ -356,6 +368,18 @@
     {"pattern": "\\f", "replacement": "♀"},
     {"pattern": "\\qo", "replacement": "“"},
     {"pattern": "\\qc", "replacement": "”"},
+    {"pattern": "\\prprnl", "replacement": "{PERS_PRN_LWR}"},
+    {"pattern": "\\psprn1l", "replacement": "{POSS_PRN_1_LWR}"},
+    {"pattern": "\\psprn2l", "replacement": "{POSS_PRN_2_LWR}"},
+    {"pattern": "\\objprnl", "replacement": "{OBJ_PRN_LWR}"},
+    {"pattern": "\\prprnt", "replacement": "{PERS_PRN_TITLE}"},
+    {"pattern": "\\psprn1t", "replacement": "{POSS_PRN_1_TITLE}"},
+    {"pattern": "\\psprn2t", "replacement": "{POSS_PRN_2_TITLE}"},
+    {"pattern": "\\objprnt", "replacement": "{OBJ_PRN_TITLE}"},
+    {"pattern": "\\prprnu", "replacement": "{PERS_PRN_CAP}"},
+    {"pattern": "\\psprn1u", "replacement": "{POSS_PRN_1_CAP}"},
+    {"pattern": "\\psprn2u", "replacement": "{POSS_PRN_2_CAP}"},
+    {"pattern": "\\objprnu", "replacement": "{OBJ_PRN_CAP}"},
     {"pattern": "\\\\h(\\d+)", "replacement": "{PAUSE_$1}", "regex": true}
   ]
 }

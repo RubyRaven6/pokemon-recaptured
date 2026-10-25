@@ -398,17 +398,17 @@ script SSTidalCorridor_EventScript_WhatsYourPronouns
 	waitmovement(LOCALID_PLAYER)
 	delay(10)
 	setspeaker("Mom")
-	msgbox("Billy, be a good girl and apologise to\n{OBJ_PRN_LWR}.")
+	msgbox("Billy, be a good girl and apologise to\nobjprnl.")
 	turnobject(LOCALID_SS_TIDAL_ROWDY_GIRL, DIR_WEST)
 	delay(10)
 	setspeaker("Billy")
-	msgbox("I'm sorry. I hope running into you didn't\nhurt.")
+	msgbox("I'm sorry. I hope running into you\ndidn't hurt.")
 	turnobject(LOCALID_SS_TIDAL_MOM, DIR_WEST)
 	delay(10)
 	setspeaker("Mom")
 	message(
-		"We've been on the ferry for a few hours,\nand Billy gets excitable.\p"
-		"At least we'll be departing on the next\nport after this one.\p"
+		"We've been on the ferry for a few hours,\nand Billy gets excitable.\p"//ignore poryscript warnin
+		"At least we'll be departing on the next\nport after this one.\p"//ignore poryscript warnin
 		"You have a safe rest of your trip,\nalright?"
 		)
 	waitmessage
@@ -435,7 +435,7 @@ script(local) PronounSetting
 	callnative(SetPlayerPronouns)
 	delay(10)
 	setspeaker("Mom")
-	msgbox("You use {PERS_PRN_LWR}, {POSS_PRN_1_LWR}, {POSS_PRN_2_LWR}, {OBJ_PRN_LWR}, then?\nIs that right?", MSGBOX_YESNO)
+	msgbox("You use \prprnl, \psprn1l, \psprn2l, \objprnl, then?\nIs that right?", MSGBOX_YESNO) //ignore poryscript warnin
 	closemessage
 	if(var(VAR_RESULT) == NO)
 	{

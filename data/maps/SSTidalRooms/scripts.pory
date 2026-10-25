@@ -182,6 +182,7 @@ script SSTidalRooms_EventScript_Nerd
 			setspeaker("Troubled Guy")
 			message(
 				"It's just the news. I'm following Team\nArmistice and what the sheeple are\lbranding them.\p"
+				"They took the only thing Team Plasma\nwas right about.\p"
 				"People just don't get they want what's\ngood for people, y'know?"
 				)
 			waitmessage
@@ -203,6 +204,55 @@ script SSTidalRooms_EventScript_Nerd
 	}
 	applymovement(LOCALID_SS_TIDAL_TROUBLED_NERD, moves(face_up))
 	waitmovement(0)
+	releaseall
+	end
+}
+
+script SSTidalRooms_EventScript_Gentleman
+{
+	lockall
+	setspeaker("Gentleman")
+	message(
+		"Sigh… Another trainer attacked on the\nwild areas? Those dastardly Corvids…\p"
+		)
+	waitmessage
+	faceplayer
+	message(
+		"Oh, hello there. Is there anything I\ncould help you with, child?"
+		)
+	waitmessage
+	waitbuttonpress
+	closemessage
+	mcdialogueB("What were you reading?", "Do you know Diancie?")
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			setspeaker("Gentleman")
+			message(
+				"I was just reading my newspaper, is all.\nTrainers all'round are being assaulted.\p"
+				"The police so far have said that the\nCorvid gang are likely behind it.\p"
+				"I've lived long enough to know that may\nbe the most they're able to figure out,\lconsidering what passes a cop."
+				)
+			waitmessage
+			waitbuttonpress
+			closemessage
+		case 1:
+			setspeaker("Gentleman")
+			message(
+				"Ahh… that takes me back. Back then,\npeople were trying to search for her in\lRusturf Tunnel. But, to no avail.\p"
+				"After all, we'd found a whole colony of\nCarbink!\p"
+				"I don't believe she was ever found, but\nsome people still believe."
+				)
+			waitmessage
+			waitbuttonpress
+			closemessage
+			updatequest(QUEST_FIND_THE_HEART)
+			setvar(VAR_INTRO_SEQUENCE_STATE, 3)
+		default:
+			setspeaker("Gentleman")
+			msgbox("Take care!")
+			closemessage
+	}
 	releaseall
 	end
 }

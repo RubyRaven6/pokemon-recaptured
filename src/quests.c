@@ -577,23 +577,23 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 		.name = COMPOUND_STRING("Find the Heart"),
 		.desc = {
 			COMPOUND_STRING("You try to make sense of your dream…\nbut you don't have many leads.\nMaybe ask about Diancie?"),
-			COMPOUND_STRING(""),
+			COMPOUND_STRING("Based on your conversation, the only\nother lead you have to find Diancie\nmay be Rusturf Tunnel."),
 			COMPOUND_STRING("")
 		},
 		.donedesc = gText_SideQuestDoneDesc_1,
 		.map = {
 			COMPOUND_STRING("{FONT_NARROW}?????"),
-			COMPOUND_STRING(""),
+			COMPOUND_STRING("Rusturf Tunnel"),
 			COMPOUND_STRING("")
 		},
 		.sprite = {
 			OBJ_EVENT_GFX_SPECIES(DIANCIE),
-			ITEM_POKE_BALL,
+			OBJ_EVENT_GFX_SPECIES(DIANCIE),
 			SPECIES_RALTS
 		},
 		.spritetype = {
 			OBJECT,
-			ITEM,
+			OBJECT,
 			PKMN
 		},
 		.subquests = NULL,
