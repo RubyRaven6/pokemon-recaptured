@@ -5,7 +5,7 @@ mapscripts SSTidalRooms_MapScripts {
 			case 0:
 			case 1:
 				setflag(FLAG_SYS_QUEST_MENU_GET)
-				setflag(FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN)				
+				setflag(FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN)
 			default:
 				setobjectxyperm(LOCALID_SS_TIDAL_ELSIE, 3, 11)
 		}
@@ -14,10 +14,8 @@ mapscripts SSTidalRooms_MapScripts {
 	MAP_SCRIPT_ON_FRAME_TABLE [
 		VAR_INTRO_SEQUENCE_STATE, 0: SSTidalRooms_EventScript_WokeUpLikeThis
 		VAR_INTRO_SEQUENCE_STATE, 1: SSTidalRooms_EventScript_ElsieEnters
-		VAR_TEMP_0, 0 {
-			turnobject(LOCALID_SS_TIDAL_ELSIE, DIR_SOUTH)
-			setvar(VAR_TEMP_0, 1)
-		}
+		VAR_INTRO_SEQUENCE_STATE, 4: SSTidalRooms_EventScript_PA_Announcement
+		VAR_INTRO_SEQUENCE_STATE, 5: SSTidalRooms_EventScript_DisembarkElvieConvo
 	]
 }
 
@@ -58,6 +56,37 @@ script(local) SSTidalRooms_EventScript_ElsieEnters
 	applymovement(LOCALID_SS_TIDAL_ELSIE, moves(walk_left, face_down, delay_16 * 2))
 	waitmovement(0)
 	setvar(VAR_INTRO_SEQUENCE_STATE, 2)
+}
+
+script(local)SSTidalRooms_EventScript_PA_Announcement
+{
+	setvar(VAR_INTRO_SEQUENCE_STATE, 5)
+	setspeaker("P.A.")
+	playse(SE_DING_DONG)
+	msgbox(
+		"Good afternoon, passengers. We are\nabout to dock in Dewford.\lPlease ready to disembark.\p"
+		"Thank you for patronizing the SS Tidal.\nWe hope to see you again!"
+	)
+	waitse
+	closemessage
+	warp(MAP_SS_TIDAL_CORRIDOR, 4, 10)
+	waitstate
+}
+
+script(local)SSTidalRooms_EventScript_DisembarkElvieConvo
+{
+	applymovement(LOCALID_PLAYER, moves(walk_up * 5, face_left))
+	applymovement(LOCALID_SS_TIDAL_ELSIE, moves(delay_16 * 5, face_right))
+	waitmovement(LOCALID_PLAYER)
+	waitmovement(LOCALID_SS_TIDAL_ELSIE)
+	setspeaker(SP_NAME_ELSIE)
+	message(
+		"You got here quick, huh. Excited to\nsee our new home?"
+	)
+	waitmessage
+	waitbuttonpress
+	closemessage
+	mcdialogue("Yeah!", "I'm nervous…", "As long as I'm with you.")
 }
 
 script SSTidalRooms_EventScript_Elsie
@@ -237,6 +266,8 @@ script SSTidalRooms_EventScript_Gentleman
 			waitbuttonpress
 			closemessage
 		case 1:
+			setvar(VAR_INTRO_SEQUENCE_STATE, 4)
+			setvar(VAR_TEMP_0, 2)
 			setspeaker("Gentleman")
 			message(
 				"Ahh… that takes me back. Back then,\npeople were trying to search for her in\lRusturf Tunnel. But, to no avail.\p"
@@ -247,7 +278,6 @@ script SSTidalRooms_EventScript_Gentleman
 			waitbuttonpress
 			closemessage
 			updatequest(QUEST_FIND_THE_HEART)
-			setvar(VAR_INTRO_SEQUENCE_STATE, 3)
 		default:
 			setspeaker("Gentleman")
 			msgbox("Take care!")

@@ -69,6 +69,9 @@ VAR_INTRO_SEQUENCE_STATE States
 - 0: The player wakes up from their dream where they met Diancie. 
 - 1: Right after they exit the quest menu, when Elsie enters their cabin
 - 2: The player exits the room, and are prompted for their pronouns
+- 3: Filler, ensures that SSTidalRooms_EventScript_PA_Announcement doesn't immediately fire
+- 4: The PA happens
+- 5: Player talks to Elsie for disembarking
 */
 #define VAR_INTRO_SEQUENCE_STATE                         0x4084
 
