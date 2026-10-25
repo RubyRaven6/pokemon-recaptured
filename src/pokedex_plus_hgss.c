@@ -1192,7 +1192,8 @@ static void CreateStatBars(struct PokedexListItem *dexMon)
 
     sPokedexView->justScrolled = FALSE;
 
-    if (dexMon->owned) // Show filed bars
+    // if (dexMon->owned) // Show filed bars
+    if (dexMon->seen) // Show filed bars
     {
         u8 i;
         u32 width, statValue;
@@ -1225,12 +1226,12 @@ static void CreateStatBars(struct PokedexListItem *dexMon)
         LoadSpriteSheet(&sheet);
         Free(gfx);
     }
-    else if (dexMon->seen) // Just HP/ATK/DEF
-    {
-        static const struct SpriteSheet sheet = {sStatBarsGfx, 64 * 64, TAG_STAT_BAR};
+    // else if (dexMon->seen) // Just HP/ATK/DEF
+    // {
+    //     static const struct SpriteSheet sheet = {sStatBarsGfx, 64 * 64, TAG_STAT_BAR};
 
-        LoadSpriteSheet(&sheet);
-    }
+    //     LoadSpriteSheet(&sheet);
+    // }
     else // neither seen nor owned
     {
         return;
@@ -1339,7 +1340,7 @@ bool32 Task_TryLoadInfoScreen_HGSS(u8 taskId)
         break;
     case 4:
         PrintMonInfo(sPokedexListItem->dexNum, sPokedexView->dexMode == DEX_MODE_HOENN ? FALSE : TRUE, sPokedexListItem->owned, 0);
-        if (!sPokedexListItem->owned)
+        // if (!sPokedexListItem->owned)
             LoadPalette(gPlttBufferUnfaded + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(16 - 1));
         CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
         CopyBgTilemapBufferToVram(1);
@@ -1473,10 +1474,11 @@ bool32 TrySwitchScreensFromAreaScreen_HGSS(u8 taskId)
         gTasks[taskId].func = Task_LoadInfoScreen;
         break;
     case 2:
-        if (sPokedexListItem->owned)
+        DebugPrintf("sPokedexView->screenSwitchState",sPokedexView->screenSwitchState);
+        // if (sPokedexListItem->owned)
             gTasks[taskId].func = Task_LoadStatsScreen;
-        else
-            PlaySE(SE_FAILURE);
+        // else
+            // PlaySE(SE_FAILURE);
         break;
     case 3:
         gTasks[taskId].func = Task_ReloadAreaScreen;
@@ -1765,21 +1767,21 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     else
         name = sText_TenDashes;
     PrintInfoScreenTextWhite(name, 139 + (6 * digitCount), 17);
-    if (owned)
-    {
+    // if (owned)
+    // {
         CopyMonCategoryText(species, str2);
         category = str2;
-    }
-    else
-    {
-        category = gText_5MarksPokemon;
-    }
+    // }
+    // else
+    // {
+        // category = gText_5MarksPokemon;
+    // }
     PrintInfoScreenText(category, 123, 31);
     PrintMonMeasurements(species,owned);
-    if (owned)
+    // if (owned)
         description = GetSpeciesPokedexDescription(species);
-    else
-        description = sExpandedPlaceholder_PokedexDescription;
+    // else
+        // description = sExpandedPlaceholder_PokedexDescription;
     PrintInfoScreenText(description, GetStringCenterAlignXOffset(FONT_NORMAL, description, 0xF0), 93);
 
     //Type Icon(s)
@@ -2029,7 +2031,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         PrintStatsScreen_Moves_Description(taskId);
         PrintStatsScreen_Moves_BottomText(taskId);
         PrintStatsScreen_Moves_Bottom(taskId);
-        if (!sPokedexListItem->owned)
+        // if (!sPokedexListItem->owned)
             LoadPalette(gPlttBufferUnfaded + 1, BG_PLTT_ID(3) + 1, 30);
         StatsPage_PrintNavigationButtons(); //sText_Stats_Buttons
         gMain.state++;
@@ -2149,16 +2151,16 @@ static void Task_HandleStatsScreenInput(u8 taskId)
     }
     if ((JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)))
     {
-        if (!sPokedexListItem->owned)
-            PlaySE(SE_FAILURE);
-        else
-        {
+        // if (!sPokedexListItem->owned)
+            // PlaySE(SE_FAILURE);
+        // else
+        // {
             sPokedexView->selectedScreen = EVO_SCREEN;
             BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
             sPokedexView->screenSwitchState = 3;
             gTasks[taskId].func = Task_SwitchScreensFromStatsScreen;
             PlaySE(SE_PIN);
-        }
+        // }
     }
 }
 
@@ -3289,16 +3291,16 @@ static void Task_HandleEvolutionScreenInput(u8 taskId)
     }
     if ((JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)))
     {
-        if (!sPokedexListItem->owned)
-            PlaySE(SE_FAILURE);
-        else
-        {
+        // if (!sPokedexListItem->owned)
+            // PlaySE(SE_FAILURE);
+        // else
+        // {
             sPokedexView->selectedScreen = CRY_SCREEN;
             BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
             sPokedexView->screenSwitchState = 2;
             gTasks[taskId].func = Task_SwitchScreensFromEvolutionScreen;
             PlaySE(SE_PIN);
-        }
+        // }
     }
 }
 
