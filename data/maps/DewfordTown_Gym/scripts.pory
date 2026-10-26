@@ -1,5 +1,34 @@
 mapscripts DewfordTown_Gym_MapScripts {
-	
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_INTRO_SEQUENCE_STATE, 7: DewfordTown_Gym_EventScript_EntranceCollapses
+	]
+}
+
+script(local) DewfordTown_Gym_EventScript_EntranceCollapses
+{
+	applymovement(LOCALID_PLAYER, moves(walk_up * 2))
+	waitmovement(0)
+	playse(SE_M_ROCK_THROW)
+	setvar (VAR_0x8004, 1)  // vertical pan
+	setvar (VAR_0x8005, 1)  // horizontal pan
+	setvar (VAR_0x8006, 3)  // num shakes
+	setvar (VAR_0x8007, 5)  // shake delay
+	special(ShakeCamera)
+	waitse
+
+	setmetatile(5, 27, 0x84e, FALSE)
+	setmetatile(6, 27, 0x84f, FALSE)
+	special(DrawWholeMapView)
+
+	debugprint("Print! Everything else is done!")
+
+	setvar(VAR_INTRO_SEQUENCE_STATE, 8)
+}
+
+script DewfordTown_Gym_EventScript_GymStatues
+{
+	msgbox("You can't see what it says in the dark.\nYou can just barely see faded names.", MSGBOX_DEFAULT)
+	closemessage
 }
 
 raw `

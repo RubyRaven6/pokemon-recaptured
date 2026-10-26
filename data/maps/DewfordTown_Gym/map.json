@@ -4,7 +4,7 @@
   "layout": "LAYOUT_DEWFORD_TOWN_GYM",
   "music": "MUS_GYM",
   "region_map_section": "MAPSEC_DEWFORD_TOWN",
-  "requires_flash": true,
+  "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
   "allow_cycling": false,
@@ -37,32 +37,32 @@
       "x": 4,
       "y": 23,
       "elevation": 3,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_LeftGymStatue"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "DewfordTown_Gym_EventScript_GymStatues"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 24,
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "DewfordTown_Gym_EventScript_GymStatues"
     },
     {
       "type": "sign",
       "x": 7,
       "y": 23,
       "elevation": 3,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_RightGymStatue"
-    },
-    {
-      "type": "sign",
-      "x": 4,
-      "y": 24,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_LeftGymStatue"
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "DewfordTown_Gym_EventScript_GymStatues"
     },
     {
       "type": "sign",
       "x": 7,
       "y": 24,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "DewfordTown_Gym_EventScript_RightGymStatue"
+      "elevation": 3,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "DewfordTown_Gym_EventScript_GymStatues"
     }
   ],
   "region": "REGION_HOENN"
