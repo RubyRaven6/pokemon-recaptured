@@ -164,7 +164,7 @@
     {
       "type": "sign",
       "x": 16,
-      "y": 16,
+      "y": 17,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "DewfordTown_EventScript_GymSign"
