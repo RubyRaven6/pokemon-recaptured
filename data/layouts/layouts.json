@@ -125,8 +125,8 @@
     {
       "id": "LAYOUT_DEWFORD_TOWN",
       "name": "DewfordTown_Layout",
-      "width": 30,
-      "height": 28,
+      "width": 35,
+      "height": 31,
       "primary_tileset": "gTileset_GeneralPorytiles",
       "secondary_tileset": "gTileset_DewfordPorytiles",
       "border_filepath": "data/layouts/DewfordTown/border.bin",
@@ -9373,6 +9373,26 @@
       "secondary_tileset": "gTileset_DiancieCave",
       "border_filepath": "data/layouts/DianciesCave_MainChamber/border.bin",
       "blockdata_filepath": "data/layouts/DianciesCave_MainChamber/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_HOUSE5",
+      "name": "DewfordTown_House5_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/DewfordTown_House5/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_House5/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_HOUSE4",
+      "name": "DewfordTown_House4_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/DewfordTown_House4/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_House4/map.bin"
     }
   ]
 }
