@@ -28,7 +28,7 @@ extern const struct Tileset gTileset_PokemonCenter;
 extern const struct Tileset gTileset_InsideShip;
 extern const struct Tileset gTileset_Fallarbor;
 extern const struct Tileset gTileset_Shop;
-extern const struct Tileset gTileset_Dewford;
+extern const struct Tileset gTileset_DewfordPorytiles;
 extern const struct Tileset gTileset_BattleFrontier;
 extern const struct Tileset gTileset_BattleFrontierOutsideWest;
 extern const struct Tileset gTileset_BattleFrontierOutsideEast;

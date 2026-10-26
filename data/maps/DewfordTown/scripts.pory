@@ -53,8 +53,10 @@ script(local) DewfordTown_EventScript_ArrivingInDewford
 	waitmessage
 	waitbuttonpress
 	closemessage
+	cueobject(LOCALID_DEWFORD_ELSIE, DIR_NORTH)
 	opendoor(26, 4)
 	waitdooranim
+	delay(10)
 	applymovement(LOCALID_DEWFORD_ELSIE, moves(walk_up))
 	waitmovement(0)
 	removeobject(LOCALID_DEWFORD_ELSIE)
