@@ -72,6 +72,8 @@ VAR_INTRO_SEQUENCE_STATE States
 - 3: Filler, ensures that SSTidalRooms_EventScript_PA_Announcement doesn't immediately fire
 - 4: The PA happens
 - 5: Player talks to Elsie for disembarking
+- 6: Player and Elsie exit Dewford Harbor and go to new home.
+- 7: Player talking to neighbors
 */
 #define VAR_INTRO_SEQUENCE_STATE                         0x4084
 

@@ -1,12 +1,69 @@
+mapscripts DewfordTown_MapScripts {
+	MAP_SCRIPT_ON_TRANSITION {
+		setflag(FLAG_VISITED_DEWFORD_TOWN)
+		end
+	}
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_INTRO_SEQUENCE_STATE, 6: DewfordTown_EventScript_ArrivingInDewford
+	]	
+}
+
+movement ElsieWalksUpToNewHouse {
+	walk_down, 
+	walk_left * 4
+	walk_up * 7
+	walk_right * 2
+	walk_up * 4
+	walk_right * 6
+	walk_in_place_fast_up
+}
+
+movement PlayerWalksUpToNewHouse {
+	delay_16
+	walk_left * 5
+	walk_up * 7
+	walk_right * 2
+	walk_up * 4
+	walk_right * 5
+	walk_in_place_fast_up
+}
+
+script(local) DewfordTown_EventScript_ArrivingInDewford
+{
+	applymovement(LOCALID_PLAYER, moves(walk_right, face_down))
+	waitmovement(0)
+	applymovement(LOCALID_DEWFORD_ELSIE, ElsieWalksUpToNewHouse)
+	applymovement(LOCALID_PLAYER, PlayerWalksUpToNewHouse)
+	waitmovement(LOCALID_DEWFORD_ELSIE)
+	waitmovement(LOCALID_PLAYER)
+	setspeaker(SP_NAME_ELSIE)
+	msgbox("Well, here it is! Our brand new home.")
+	closemessage
+	setspeaker(SP_NAME_ELSIE)
+	message("Can you believe I got a fully fur-\nnished house on a teacher's salary?")
+	turnobject(LOCALID_PLAYER,DIR_EAST)
+	cueobject(LOCALID_DEWFORD_ELSIE, DIR_WEST)
+	waitmessage
+	waitbuttonpress
+	//ignore poryscript warning
+	message(
+		"I'll go unpack our things.\nWhy not meet go and the neighbors?\p"
+		"The people here seem nice. Helps we're\nnew faces too!"
+	)
+	waitmessage
+	waitbuttonpress
+	closemessage
+	opendoor(26, 4)
+	waitdooranim
+	applymovement(LOCALID_DEWFORD_ELSIE, moves(walk_up))
+	waitmovement(0)
+	removeobject(LOCALID_DEWFORD_ELSIE)
+	closedoor(26, 4)
+	waitdooranim
+	setvar(VAR_INTRO_SEQUENCE_STATE, 7)
+}
+
 raw `
-DewfordTown_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_OnTransition
-	.byte 0
-
-DewfordTown_OnTransition:
-	setflag FLAG_VISITED_DEWFORD_TOWN
-	end
-
 DewfordTown_EventScript_Briney::
 	lock
 	faceplayer
@@ -113,16 +170,16 @@ DewfordTown_EventScript_FishingNotSoGood::
 
 DewfordTown_EventScript_SailToPetalburg::
 	call EventScript_BackupMrBrineyLocation
-	setobjectsubpriority LOCALID_DEWFORD_BRINEY, MAP_DEWFORD_TOWN, 0
+	setobjectsubpriority 0, MAP_DEWFORD_TOWN, 0
 	setobjectsubpriority LOCALID_PLAYER, MAP_DEWFORD_TOWN, 0
-	applymovement LOCALID_DEWFORD_BRINEY, DewfordTown_Movement_BrineyBoardBoat
+	applymovement 0, DewfordTown_Movement_BrineyBoardBoat
 	waitmovement 0
-	removeobject LOCALID_DEWFORD_BRINEY
+	removeobject 0
 	applymovement LOCALID_PLAYER, DewfordTown_Movement_PlayerBoardBoat
 	waitmovement 0
 	hideobjectat LOCALID_PLAYER, MAP_DEWFORD_TOWN
 	call Common_EventScript_PlayBrineysBoatMusic
-	applymovement LOCALID_DEWFORD_BOAT, DewfordTown_Movement_SailToPetalburg
+	applymovement 0, DewfordTown_Movement_SailToPetalburg
 	applymovement LOCALID_PLAYER, DewfordTown_Movement_SailToPetalburg
 	waitmovement 0
 	showobjectat LOCALID_PLAYER, MAP_ROUTE104
@@ -134,7 +191,7 @@ DewfordTown_EventScript_SailToPetalburg::
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	clearflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
-	hideobjectat LOCALID_DEWFORD_BOAT, MAP_DEWFORD_TOWN
+	hideobjectat 0, MAP_DEWFORD_TOWN
 	setvar VAR_BOARD_BRINEY_BOAT_STATE, 2
 	resetobjectsubpriority LOCALID_PLAYER, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 5, 4
@@ -145,16 +202,16 @@ DewfordTown_EventScript_SailToPetalburg::
 
 DewfordTown_EventScript_SailToSlateport::
 	call EventScript_BackupMrBrineyLocation
-	setobjectsubpriority LOCALID_DEWFORD_BRINEY, MAP_DEWFORD_TOWN, 0
+	setobjectsubpriority 0, MAP_DEWFORD_TOWN, 0
 	setobjectsubpriority LOCALID_PLAYER, MAP_DEWFORD_TOWN, 1
-	applymovement LOCALID_DEWFORD_BRINEY, DewfordTown_Movement_BrineyBoardBoat
+	applymovement 0, DewfordTown_Movement_BrineyBoardBoat
 	waitmovement 0
-	removeobject LOCALID_DEWFORD_BRINEY
+	removeobject 0
 	applymovement LOCALID_PLAYER, DewfordTown_Movement_PlayerBoardBoat
 	waitmovement 0
 	hideobjectat LOCALID_PLAYER, MAP_DEWFORD_TOWN
 	call Common_EventScript_PlayBrineysBoatMusic
-	applymovement LOCALID_DEWFORD_BOAT, DewfordTown_Movement_SailToSlateport
+	applymovement 0, DewfordTown_Movement_SailToSlateport
 	applymovement LOCALID_PLAYER, DewfordTown_Movement_SailToSlateport
 	waitmovement 0
 	call Common_EventScript_StopBrineysBoatMusic
@@ -170,7 +227,7 @@ DewfordTown_EventScript_SailToSlateport::
 	addobject LOCALID_ROUTE109_BOAT
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
-	hideobjectat LOCALID_DEWFORD_BOAT, MAP_DEWFORD_TOWN
+	hideobjectat 0, MAP_DEWFORD_TOWN
 	call_if_unset FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_LandedSlateportDeliverGoods
 	call_if_set FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_LandedSlateport
 	closemessage

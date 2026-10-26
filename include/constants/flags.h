@@ -54,7 +54,7 @@
 #define FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN       0x20 // Unused Flag
 #define FLAG_HIDE_MOM_IN_SS_TIDAL_CORRIDOR      0x21 // Unused Flag
 #define FLAG_HIDE_BILLY_IN_SS_TIDAL_CORRIDOR    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
+#define FLAG_HIDE_ELSIE_IN_DEWFORD_TOWN    0x23 // Unused Flag
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag

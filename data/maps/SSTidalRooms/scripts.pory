@@ -80,13 +80,25 @@ script(local)SSTidalRooms_EventScript_DisembarkElvieConvo
 	waitmovement(LOCALID_PLAYER)
 	waitmovement(LOCALID_SS_TIDAL_ELSIE)
 	setspeaker(SP_NAME_ELSIE)
-	message(
-		"You got here quick, huh. Excited to\nsee our new home?"
-	)
-	waitmessage
-	waitbuttonpress
+	msgbox("You got here quick, huh. Excited to\nsee our new home?")
 	closemessage
 	mcdialogue("Yeah!", "I'm nervous…", "As long as I'm with you.")
+	cueobject(LOCALID_SS_TIDAL_ELSIE, DIR_EAST)
+	setspeaker(SP_NAME_ELSIE)
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			msgbox("Nice to see you in good spirits!")
+		case 1:
+			msgbox("Don't be. We're together now, alright?")
+		case 2:
+			msgbox("…{PAUSE 90} …{PAUSE 90} …{PAUSE 90}\nSame goes for me with you, Champ.")
+	}
+	msgbox("Well, nothing left to it but to do it!\nLet's go.")
+	closemessage
+	setvar(VAR_INTRO_SEQUENCE_STATE, 6)
+	warp(MAP_DEWFORD_TOWN, 22, 15)
+	waitstate
 }
 
 script SSTidalRooms_EventScript_Elsie
