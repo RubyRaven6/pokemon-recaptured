@@ -61,3 +61,4 @@ You can help by adding yourself or people you know in a [pull request](https://g
 | Viridian. | moostoet | | |
 | Linathan | LinathanZel | | No |
 | tacobell24 | | x | No |
+| thales21 | thalescd | | Yes |
