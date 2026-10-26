@@ -1607,3 +1607,14 @@ const struct Tileset gTileset_PlayersHouse =
     .metatileAttributes = gMetatileAttributes_PlayersHouse,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_DewfordGymPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_DewfordGymPorytiles,
+    .palettes = gTilesetPalettes_DewfordGymPorytiles,
+    .metatiles = gMetatiles_DewfordGymPorytiles,
+    .metatileAttributes = gMetatileAttributes_DewfordGymPorytiles,
+    .callback = NULL,
+};
