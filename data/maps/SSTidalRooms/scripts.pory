@@ -270,9 +270,9 @@ script SSTidalRooms_EventScript_Gentleman
 			setvar(VAR_TEMP_0, 2)
 			setspeaker("Gentleman")
 			message(
-				"Ahh… that takes me back. Back then,\npeople were trying to search for her in\lRusturf Tunnel. But, to no avail.\p"
+				"Ahh… that takes me back. Back then,\npeople were trying to search for her\lin Rusturf Tunnel. But, to no avail.\p"
 				"After all, we'd found a whole colony of\nCarbink!\p"
-				"I don't believe she was ever found, but\nsome people still believe."
+				"I don't believe she was ever found,\nbut some still think she's there."
 				)
 			waitmessage
 			waitbuttonpress
