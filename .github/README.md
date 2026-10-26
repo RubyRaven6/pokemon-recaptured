@@ -120,3 +120,6 @@
     <li><a href="https://steamcommunity.com/profiles/76561198116557987">RAP Yogurt</a>: Found a typo in the documentation
     </ul>
     </details>
+
+- `cueobject` Macro by PSF
+- `debugprint` Macro by RavePossum
