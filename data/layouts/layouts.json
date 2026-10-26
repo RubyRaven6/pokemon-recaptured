@@ -9397,12 +9397,22 @@
     {
       "id": "LAYOUT_DEWFORD_TOWN_PLAYERS_HOUSE_1F",
       "name": "DewfordTown_PlayersHouse_1F_Layout",
-      "width": 13,
-      "height": 9,
+      "width": 14,
+      "height": 12,
       "primary_tileset": "gTileset_BuildingPorytiles",
       "secondary_tileset": "gTileset_PlayersHouse",
       "border_filepath": "data/layouts/DewfordTown_PlayersHouse_1F/border.bin",
       "blockdata_filepath": "data/layouts/DewfordTown_PlayersHouse_1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_PLAYERS_HOUSE_2F",
+      "name": "DewfordTown_PlayersHouse_2F_Layout",
+      "width": 12,
+      "height": 8,
+      "primary_tileset": "gTileset_BuildingPorytiles",
+      "secondary_tileset": "gTileset_PlayersHouse",
+      "border_filepath": "data/layouts/DewfordTown_PlayersHouse_2F/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_PlayersHouse_2F/map.bin"
     }
   ]
 }
