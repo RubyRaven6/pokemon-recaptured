@@ -7,6 +7,11 @@ extern const u16 gTilesetPalettes_General[][16];
 extern const struct Tileset *const gTilesetPointer_SecretBase;
 extern const struct Tileset *const gTilesetPointer_SecretBaseRedCave;
 
+//porytiles
+extern const struct Tileset gTileset_GeneralPorytiles;
+extern const struct Tileset gTileset_DewfordPorytiles;
+
+//vanilla
 extern const struct Tileset gTileset_Building;
 extern const struct Tileset gTileset_BuildingFrlg;
 extern const struct Tileset gTileset_BrendansMaysHouse;
@@ -28,7 +33,6 @@ extern const struct Tileset gTileset_PokemonCenter;
 extern const struct Tileset gTileset_InsideShip;
 extern const struct Tileset gTileset_Fallarbor;
 extern const struct Tileset gTileset_Shop;
-extern const struct Tileset gTileset_DewfordPorytiles;
 extern const struct Tileset gTileset_BattleFrontier;
 extern const struct Tileset gTileset_BattleFrontierOutsideWest;
 extern const struct Tileset gTileset_BattleFrontierOutsideEast;

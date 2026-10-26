@@ -264,8 +264,8 @@ static const struct DoorSizeInfo sDoorSizeInfo[DOOR_SIZE_COUNT] =
 
 static const u8 sDoorAnimPalettes_General[] = {1, 1, 1, 1, 1, 1, 1, 1};
 static const u8 sDoorAnimPalettes_PokeCenter[] = {1, 1, 1, 1, 1, 1, 1, 1};
-static const u8 sDoorAnimPalettes_Gym[] = {5, 5, 5, 5, 5, 5, 5, 5};
-static const u8 sDoorAnimPalettes_PokeMart[] = {0, 0, 0, 0, 1, 1, 1, 1};
+static const u8 sDoorAnimPalettes_Gym[] = {0, 0, 0, 0, 0, 0, 0, 0};
+static const u8 sDoorAnimPalettes_PokeMart[] = {1, 1, 1, 1, 1, 1, 1, 1};
 static const u8 sDoorAnimPalettes_Littleroot[] = {10, 10, 6, 6, 6, 6, 6, 6};
 static const u8 sDoorAnimPalettes_BirchsLab[] = {8, 8, 8, 8, 8, 8, 8, 8};
 static const u8 sDoorAnimPalettes_RustboroTan[] = {11, 11, 11, 11, 11, 11, 11, 11};
@@ -785,6 +785,30 @@ static const struct DoorGraphics sDoorAnimGraphicsTable[] =
         .size = DOOR_SIZE_1x2,
         .tiles = sDoorAnimTiles_DewfordPorytiles,
         .palettes = sDoorAnimPalettes_DewfordPorytiles
+    },
+    {
+        .metatileNum = METATILE_GeneralPorytiles_PokemonCenterDoor,
+        .tileset = &gTileset_GeneralPorytiles,
+        .sound = DOOR_SOUND_SLIDING,
+        .size = DOOR_SIZE_1x2,
+        .tiles = sDoorAnimTiles_PokeCenter,
+        .palettes = sDoorAnimPalettes_PokeCenter
+    },
+    {
+        .metatileNum = METATILE_GeneralPorytiles_GymDoor,
+        .tileset = &gTileset_GeneralPorytiles,
+        .sound = DOOR_SOUND_SLIDING,
+        .size = DOOR_SIZE_1x2,
+        .tiles = sDoorAnimTiles_Gym,
+        .palettes = sDoorAnimPalettes_Gym
+    },
+    {
+        .metatileNum = METATILE_GeneralPorytiles_PokemartDoor,
+        .tileset = &gTileset_GeneralPorytiles,
+        .sound = DOOR_SOUND_SLIDING,
+        .size = DOOR_SIZE_1x2,
+        .tiles = sDoorAnimTiles_PokeMart,
+        .palettes = sDoorAnimPalettes_PokeMart
     },
 #else
     {
