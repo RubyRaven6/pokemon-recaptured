@@ -1764,3 +1764,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/DewfordTown_House5/scripts.scr"
 
 	.include "data/maps/DewfordTown_House4/scripts.scr"
+
+	.include "data/maps/DewfordTown_PlayersHouse_1F/scripts.inc"
