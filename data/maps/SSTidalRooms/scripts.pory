@@ -97,7 +97,7 @@ script(local)SSTidalRooms_EventScript_DisembarkElvieConvo
 	msgbox("Well, nothing left to it but to do it!\nLet's go.")
 	closemessage
 	setvar(VAR_INTRO_SEQUENCE_STATE, 6)
-	warp(MAP_DEWFORD_TOWN, 22, 15)
+	warp(MAP_DEWFORD_TOWN, 27, 15)
 	waitstate
 }
 

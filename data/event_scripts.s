@@ -1761,6 +1761,6 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 
 	.include "data/maps/DianciesCave_MainChamber/scripts.scr"
 
-	.include "data/maps/DewfordTown_House5/scripts.inc"
+	.include "data/maps/DewfordTown_House5/scripts.scr"
 
-	.include "data/maps/DewfordTown_House4/scripts.inc"
+	.include "data/maps/DewfordTown_House4/scripts.scr"
