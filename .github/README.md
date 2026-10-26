@@ -78,14 +78,14 @@
     <details>
     <summary>Full Quest Menu Credits</summary>
     <ul>
-    <li>[Skeli#3917](https://www.youtube.com/channel/UCRIShSkz-VJWqQT83KQlNjg)
+    <li><a href="https://www.youtube.com/channel/UCRIShSkz-VJWqQT83KQlNjg">Skeli#3917</a>
         <ul>
         <li>Developed the original Unbound menu
         <li>Provided a variant of the current background
         <li>Provided an implementation of fading text
         <li>Suggested ways to reduce the size of quests on saveblock2
         </ul>
-    <li>[ghoulslash#3839](https://www.pokecommunity.com/member.php?u=581824)
+    <li><a href="https://www.pokecommunity.com/member.php?u=581824">ghoulslash#3839</a>
         <ul>
         <li>[Developed the original Quest Menu](https://www.pokecommunity.com/showthread.php?t=434462)
         <li>Helped debug adding a new macro to vanilla
@@ -93,31 +93,30 @@
         <li>Provided bitwise operation for removing quest status
         </ul>
     <li>HN (PSF Developer): A lot of these aren't written down because we meet in voice calls, but HN was instrumental in getting this working.
-    <li>[Karathan#1337](https://github.com/SBird1337/)
+    <li><a href="https://github.com/SBird1337/">Karathan#1337</a>
         <ul>
         <li>Explained printing encoded strings via MgbaPrintf 
         <li>Suggested ways to reduce the size of quests on saveblock2
         <li>Suggested ways to allocate memory for prepending/append of the quest name
         <li>Helped debug adding the UI background and palette
         </ul>
-    <li>[MCboy#0891](https://github.com/atasro2/pwaa1)
+    <li><a href="https://github.com/atasro2/pwaa1">MCboy#0891</a>
         <ul>
         <li>Helped debug and refactor the implementation of fading text
         <li>Suggested ways to fix the object fading issue
         </ul>
-    <li>[Greenphx#5428](https://github.com/Greenphx9): Ported this feature to pokefirered
-    <li>[MGriffin#3997](https://www.pokecommunity.com/member.php?u=471077) / [Deokishisu#3251](https://www.pokecommunity.com/member.php?u=22062): Suggested ways to reduce the size of quests on saveblock2
-    <li>[BSBob#4144](https://github.com/nielsmittertreiner): Provided implementation for prepending/append of the quest name
+    <li><a href="https://github.com/Greenphx9">Greenphx#5428</a>: Ported this feature to pokefirered
+    <li><a href="https://www.pokecommunity.com/member.php?u=471077">MGriffin#3997</a> / <a href="https://www.pokecommunity.com/member.php?u=22062">Deokishisu#3251</a>: Suggested ways to reduce the size of quests on saveblock2
+    <li><a href="https://github.com/nielsmittertreiner">BSBob#4144</a>: Provided implementation for prepending/append of the quest name
     <li>MM (PSF Developer)
         <ul>
         <li>Pointed out that the W stood for Wumbo.
         <li>Proofread this documentation
         </ul>
-    </ul>
-    <li>[Raymie Humbert](https://twitter.com/raymieX): Designed the banner header
-    <li>[missiri#4895](): Provided two alternate backgrounds
-    <li>[Tustin2121](https://github.com/tustin2121): Fixed the object fading issue
-    <li>[RavePossum](https://github.com/ravepossum): Updated branch to properly build when using modern compiler
-    <li>[RAP Yogurt](https://steamcommunity.com/profiles/76561198116557987): Found a typo in the documentation
+    <li><a href="https://raymie.xyz/">Raymie Humbert</a>: Designed the banner header
+    <li>missiri#4895: Provided two alternate backgrounds
+    <li><a href="https://github.com/tustin2121">Tustin2121</a>: Fixed the object fading issue
+    <li><a href="https://github.com/ravepossum">RavePossum</a>: Updated branch to properly build when using modern compiler
+    <li><a href="https://steamcommunity.com/profiles/76561198116557987">RAP Yogurt</a>: Found a typo in the documentation
     </ul>
     </details>
