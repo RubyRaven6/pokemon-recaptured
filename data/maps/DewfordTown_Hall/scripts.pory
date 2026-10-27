@@ -1,8 +1,99 @@
-raw `
-DewfordTown_Hall_MapScripts::
-	.byte 0
+mapscripts DewfordTown_Hall_MapScripts {
+	
+}
 
-DewfordTown_Hall_EventScript_Girl::
+script DewfordTown_Hall_EventScript_Girl
+{
+	setspeaker("Wistful Girl")
+	msgbox("", MSGBOX_NPC)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_Woman
+{
+	setspeaker("")
+	msgbox("", MSGBOX_NPC)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_Man
+{
+	setspeaker("")
+	msgbox("", MSGBOX_NPC)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_ExpertM
+{
+	setspeaker("")
+	msgbox("", MSGBOX_NPC)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_Twin
+{
+	setspeaker("")
+	msgbox("", MSGBOX_NPC)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_LittleBoy
+{
+	setspeaker("")
+	msgbox("", MSGBOX_NPC)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_SchoolKidM
+{
+	setspeaker("")
+	msgbox("", MSGBOX_NPC)
+	applymovement(7, moves(face_original_direction))
+	waitmovement(0)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_PsychicM
+{
+	setspeaker("")
+	msgbox("", MSGBOX_NPC)
+	applymovement(8, moves(face_original_direction))
+	waitmovement(0)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_SludgeBombMan
+{
+	setspeaker("")
+	msgbox("", MSGBOX_NPC)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_Bookshelf
+{
+	msgbox("", MSGBOX_SIGN)
+	closemessage
+	end
+}
+
+script DewfordTown_Hall_EventScript_Painting
+{
+	msgbox("", MSGBOX_SIGN)
+	closemessage
+	end
+}
+
+raw `
+DewfordTown_Hall_EventScript_Girl_Original::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
@@ -17,7 +108,7 @@ DewfordTown_Hall_EventScript_GirlBoredOfTrend::
 	release
 	end
 
-DewfordTown_Hall_EventScript_Woman::
+DewfordTown_Hall_EventScript_Woman_Original::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
@@ -25,7 +116,7 @@ DewfordTown_Hall_EventScript_Woman::
 	release
 	end
 
-DewfordTown_Hall_EventScript_Man::
+DewfordTown_Hall_EventScript_Man_Original::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
@@ -45,7 +136,7 @@ DewfordTown_Hall_EventScript_RejectTrendLink::
 	release
 	end
 
-DewfordTown_Hall_EventScript_ExpertM::
+DewfordTown_Hall_EventScript_ExpertM_Original::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
@@ -56,7 +147,7 @@ DewfordTown_Hall_EventScript_ExpertM::
 	release
 	end
 
-DewfordTown_Hall_EventScript_Twin::
+DewfordTown_Hall_EventScript_Twin_Original::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
@@ -67,7 +158,7 @@ DewfordTown_Hall_EventScript_Twin::
 	release
 	end
 
-DewfordTown_Hall_EventScript_LittleBoy::
+DewfordTown_Hall_EventScript_LittleBoy_Original::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
@@ -75,14 +166,14 @@ DewfordTown_Hall_EventScript_LittleBoy::
 	release
 	end
 
-DewfordTown_Hall_EventScript_Bookshelf::
+DewfordTown_Hall_EventScript_Bookshelf_Original::
 	lockall
 	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Hall_Text_BooksAboutTrend, MSGBOX_DEFAULT
 	releaseall
 	end
 
-DewfordTown_Hall_EventScript_Painting::
+DewfordTown_Hall_EventScript_Painting_Original::
 	lockall
 	call Common_EventScript_BufferTrendyPhrase
 	special GetDewfordHallPaintingNameIndex
@@ -117,13 +208,13 @@ DewfordTown_Hall_EventScript_BirthTitle::
 	releaseall
 	end
 
-DewfordTown_Hall_EventScript_SchoolKidM::
+DewfordTown_Hall_EventScript_SchoolKidM_Original::
 	lockall
 	setvar VAR_0x8008, 0
 	goto DewfordTown_Hall_EventScript_DoTrendDebate
 	end
 
-DewfordTown_Hall_EventScript_PsychicM::
+DewfordTown_Hall_EventScript_PsychicM_Original::
 	lockall
 	setvar VAR_0x8008, 1
 	goto DewfordTown_Hall_EventScript_DoTrendDebate
@@ -238,7 +329,7 @@ DewfordTown_Hall_Movement_SchoolKidWalkInPlaceRight:
 	walk_in_place_right
 	step_end
 
-DewfordTown_Hall_EventScript_SludgeBombMan::
+DewfordTown_Hall_EventScript_SludgeBombMan_Original::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase

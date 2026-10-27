@@ -20,14 +20,14 @@
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_DEWFORD_TOWN",
-      "dest_warp_id": "7"
+      "dest_warp_id": "6"
     },
     {
       "x": 3,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_DEWFORD_TOWN",
-      "dest_warp_id": "7"
+      "dest_warp_id": "6"
     }
   ],
   "coord_events": [],

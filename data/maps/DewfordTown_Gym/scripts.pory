@@ -1,16 +1,16 @@
 mapscripts DewfordTown_Gym_MapScripts {
 	MAP_SCRIPT_ON_FRAME_TABLE [
-		VAR_INTRO_SEQUENCE_STATE, 7: DewfordTown_Gym_EventScript_EntranceCollapses
+		VAR_INTRO_SEQUENCE_STATE, 9: DewfordTown_Gym_EventScript_EntranceCollapses
 	]
 }
 
 script(local) DewfordTown_Gym_EventScript_EntranceCollapses
 {
-	applymovement(LOCALID_PLAYER, moves(walk_up * 2))
+	applymovement(LOCALID_PLAYER, moves(walk_up))
 	waitmovement(0)
 	playse(SE_M_ROCK_THROW)
-	setvar (VAR_0x8004, 1)  // vertical pan
-	setvar (VAR_0x8005, 1)  // horizontal pan
+	setvar (VAR_0x8004, 6)  // vertical pan
+	setvar (VAR_0x8005, 7)  // horizontal pan
 	setvar (VAR_0x8006, 3)  // num shakes
 	setvar (VAR_0x8007, 5)  // shake delay
 	special(ShakeCamera)
@@ -20,7 +20,7 @@ script(local) DewfordTown_Gym_EventScript_EntranceCollapses
 	setmetatile(6, 27, 0x84f, FALSE)
 	special(DrawWholeMapView)
 
-	setvar(VAR_INTRO_SEQUENCE_STATE, 8)
+	setvar(VAR_INTRO_SEQUENCE_STATE, 10)
 }
 
 script DewfordTown_Gym_EventScript_GymStatues

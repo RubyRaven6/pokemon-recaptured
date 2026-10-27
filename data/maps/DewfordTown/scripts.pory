@@ -65,6 +65,201 @@ script(local) DewfordTown_EventScript_ArrivingInDewford
 	setvar(VAR_INTRO_SEQUENCE_STATE, 7)
 }
 
+script DewfordTown_EventScript_GymDoorIsUnlocked
+{
+	if(var(VAR_INTRO_SEQUENCE_STATE) < 8)
+	{
+		lockall
+		msgbox(
+			"You see an abandoned gym beyond the\ndoors.\p"
+			"Just for kicks, you try to push the\ndoor open. You hear something clatter\lon the other side as it opens."
+		)
+		setvar(VAR_INTRO_SEQUENCE_STATE, 8)
+		goto(OpenTheAbandonedGymDoors)
+	}
+	elif(var(VAR_INTRO_SEQUENCE_STATE) == 8)
+	{
+		goto(OpenTheAbandonedGymDoors)
+	}
+	else{
+		msgbox("They have a proper lock now.")
+	}
+}
+
+script(local) OpenTheAbandonedGymDoors
+{
+	msgbox("Open the doors and enter?", MSGBOX_YESNO)
+	if(var(VAR_RESULT) == NO)
+	{
+		closemessage
+		end
+	}
+	else
+	{
+		closemessage
+		setvar(VAR_INTRO_SEQUENCE_STATE, 9)
+		setmetatile(13, 18, METATILE_GeneralPorytiles_GymDoor, TRUE)
+		special(DrawWholeMapView)
+		cueobject(LOCALID_PLAYER, DIR_NORTH)
+		opendoor(13, 18)
+		waitdooranim
+		delay(10)
+        applymovement(LOCALID_PLAYER, moves(walk_up))
+        waitmovement(LOCALID_PLAYER)
+        hideplayer
+        warp(MAP_DEWFORD_TOWN_GYM, 6, 27)
+        waitstate
+        release
+        end
+	}
+}
+
+script DewfordTown_EventScript_Woman
+{
+	setspeaker("Woman")
+	msgbox(
+		"Dewford was a tiny island community,\nand we've grown a bit since the harbor\lwas constructed.\p"
+		"That being said, it's not that much\nbusier than it used to be.", MSGBOX_NPC)
+	closemessage
+	end
+}
+script DewfordTown_EventScript_TrendyPhraseBoy
+{
+	setspeaker("Trendy Guy")
+	msgbox(
+		"Back in the day, people used to\ncelebrate the trendy phrases that\lmade their way here.\p"
+		"However, once we had the harbor\nwe'd gotten so many new ones!\pSo we just stopped keeping track.", MSGBOX_NPC)
+	closemessage
+	end
+}
+
+script DewfordTown_EventScript_OldRodFisherman
+{
+	lock
+	faceplayer	
+	setspeaker("Fisherman")
+	if(!flag(FLAG_ADVENTURE_STARTED))
+	{
+		msgbox(
+			"Dewford's a pretty nice fishing spot.\nThe waters are calm and shallow.\p"
+			"I wish I could depart the fishing to\nmore people so they can understand…", MSGBOX_DEFAULT)
+		closemessage
+		release
+		end
+	}
+	else
+	{
+		goto_if_set(FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_HowsFishing)
+		applymovement(LOCALID_DEWFORD_OLD_ROD_FISHERMAN, moves(emote_exclamation_mark, delay_16 * 2))
+		waitmovement(0)
+		msgbox(DewfordTown_Text_GettingItchToFish, MSGBOX_YESNO)
+		goto_if_eq(VAR_RESULT, YES, DewfordTown_EventScript_GiveOldRod)
+		goto_if_eq(VAR_RESULT, NO, DewfordTown_EventScript_NotGettingItchToFish)
+	}
+}
+
+script DewfordTown_EventScript_GiveOldRod
+{
+	msgbox(DewfordTown_Text_GiveYouOneOfMyRods, MSGBOX_DEFAULT)
+	giveitem(ITEM_OLD_ROD)
+	goto_if_eq(VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull)
+	setflag(FLAG_RECEIVED_OLD_ROD)
+	msgbox(DewfordTown_Text_ThrowInFishingAdvice, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script DewfordTown_EventScript_NotGettingItchToFish
+{
+	msgbox(DewfordTown_Text_ThatsTooBadThen, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script DewfordTown_EventScript_HowsFishing
+{
+	message (DewfordTown_Text_HowsYourFishing)
+	waitmessage
+	multichoice (20, 8, MULTI_HOWS_FISHING, TRUE)
+	goto_if_eq (VAR_RESULT, 0, DewfordTown_EventScript_FishingExcellent)
+	goto_if_eq (VAR_RESULT, 1, DewfordTown_EventScript_FishingNotSoGood)
+	end
+}
+
+script DewfordTown_EventScript_FishingExcellent
+{
+	msgbox (DewfordTown_Text_GreatHaulInSomeBigOnes, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script DewfordTown_EventScript_FishingNotSoGood
+{
+	msgbox (DewfordTown_Text_FishingAdvice, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+text DewfordTown_Text_GettingItchToFish
+{
+	"There's a different glint in your eyes…\n"
+	"Are you getting the itch to fish?"
+}
+
+text DewfordTown_Text_GiveYouOneOfMyRods
+{
+
+	"I hear you, and I like what\n"
+	"you're saying!\p"
+	"I'll give you one of my fishing RODS."
+}
+
+text DewfordTown_Text_ThrowInFishingAdvice
+{
+	"And, as an added bonus, I'll even throw\n"
+	"in a little fishing advice!\p"
+	"First, you want to face the water,\n"
+	"then use the ROD.\p"
+	"Focus your mind…\n"
+	"If you get a bite, pull on the ROD.\p"
+	"Sometimes you can snag something\n"
+	"immediately, but with bigger catches,\l"
+	"you need to time the pulls on your ROD\l"
+	"to haul them in."
+}
+
+text DewfordTown_Text_ThatsTooBadThen
+{
+	"Oh, is that so?\n"
+	"That's too bad, then."
+}
+
+text DewfordTown_Text_HowsYourFishing
+{
+	"Yo!\n"
+	"How's your fishing?"
+}
+
+text DewfordTown_Text_GreatHaulInSomeBigOnes
+{
+	"Is that right! That's great!\n"
+	"Haul in some big ones!"
+}
+
+text DewfordTown_Text_FishingAdvice
+{
+	"Oh, hey, don't get down on yourself!\n"
+	"I'll give you a little fishing advice.\p"
+	"First, you want to face the water,\n"
+	"then use the ROD.\p"
+	"Focus your mind…\n"
+	"If you get a bite, pull the ROD.\p"
+	"Sometimes you can snag something\n"
+	"immediately, but with bigger catches,\l"
+	"you need to time the pulls on your ROD\l"
+	"to haul them in."
+}
+
 raw `
 DewfordTown_EventScript_Briney::
 	lock
@@ -113,7 +308,7 @@ DewfordTown_EventScript_SailBackToPetalburg::
 	goto DewfordTown_EventScript_SailToPetalburg
 	end
 
-DewfordTown_EventScript_Woman::
+DewfordTown_EventScript_Woman_Original::
 	msgbox DewfordTown_Text_TinyIslandCommunity, MSGBOX_NPC
 	end
 
@@ -128,48 +323,6 @@ DewfordTown_EventScript_GymSign::
 DewfordTown_EventScript_HallSign::
 	msgbox DewfordTown_Text_HallSign, MSGBOX_SIGN
 	end
-
-DewfordTown_EventScript_OldRodFisherman::
-	lock
-	faceplayer
-	goto_if_set FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_HowsFishing
-	msgbox DewfordTown_Text_GettingItchToFish, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, DewfordTown_EventScript_GiveOldRod
-	goto_if_eq VAR_RESULT, NO, DewfordTown_EventScript_NotGettingItchToFish
-	end
-
-DewfordTown_EventScript_GiveOldRod::
-	msgbox DewfordTown_Text_GiveYouOneOfMyRods, MSGBOX_DEFAULT
-	giveitem ITEM_OLD_ROD
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_OLD_ROD
-	msgbox DewfordTown_Text_ThrowInFishingAdvice, MSGBOX_DEFAULT
-	release
-	end
-
-DewfordTown_EventScript_NotGettingItchToFish::
-	msgbox DewfordTown_Text_ThatsTooBadThen, MSGBOX_DEFAULT
-	release
-	end
-
-DewfordTown_EventScript_HowsFishing::
-	message DewfordTown_Text_HowsYourFishing
-	waitmessage
-	multichoice 20, 8, MULTI_HOWS_FISHING, TRUE
-	goto_if_eq VAR_RESULT, 0, DewfordTown_EventScript_FishingExcellent
-	goto_if_eq VAR_RESULT, 1, DewfordTown_EventScript_FishingNotSoGood
-	end
-
-DewfordTown_EventScript_FishingExcellent::
-	msgbox DewfordTown_Text_GreatHaulInSomeBigOnes, MSGBOX_DEFAULT
-	release
-	end
-
-DewfordTown_EventScript_FishingNotSoGood::
-	msgbox DewfordTown_Text_FishingAdvice, MSGBOX_DEFAULT
-	release
-	end
-
 DewfordTown_EventScript_SailToPetalburg::
 	call EventScript_BackupMrBrineyLocation
 	setobjectsubpriority 0, MAP_DEWFORD_TOWN, 0
@@ -646,7 +799,7 @@ DewfordTown_Movement_BrineyExitBoat:
 	walk_up
 	step_end
 
-DewfordTown_EventScript_TrendyPhraseBoy::
+DewfordTown_EventScript_TrendyPhraseBoy_Original::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
@@ -750,51 +903,6 @@ DewfordTown_Text_SlateportWereSettingSail:
 DewfordTown_Text_JustTellMeWhenYouNeedToSetSail:
 	.string "MR. BRINEY: You just tell me whenever\n"
 	.string "you need to set sail again!$"
-
-DewfordTown_Text_GettingItchToFish:
-	.string "This is a renowned fishing spot.\n"
-	.string "Are you getting the itch to fish?$"
-
-DewfordTown_Text_GiveYouOneOfMyRods:
-	.string "I hear you, and I like what\n"
-	.string "you're saying!\p"
-	.string "I'll give you one of my fishing RODS.$"
-
-DewfordTown_Text_ThrowInFishingAdvice:
-	.string "And, as an added bonus, I'll even throw\n"
-	.string "in a little fishing advice!\p"
-	.string "First, you want to face the water,\n"
-	.string "then use the ROD.\p"
-	.string "Focus your mind…\n"
-	.string "If you get a bite, pull on the ROD.\p"
-	.string "Sometimes you can snag something\n"
-	.string "immediately, but with bigger catches,\l"
-	.string "you need to time the pulls on your ROD\l"
-	.string "to haul them in.$"
-
-DewfordTown_Text_ThatsTooBadThen:
-	.string "Oh, is that so?\n"
-	.string "That's too bad, then.$"
-
-DewfordTown_Text_HowsYourFishing:
-	.string "Yo!\n"
-	.string "How's your fishing?$"
-
-DewfordTown_Text_GreatHaulInSomeBigOnes:
-	.string "Is that right! That's great!\n"
-	.string "Haul in some big ones!$"
-
-DewfordTown_Text_FishingAdvice:
-	.string "Oh, hey, don't get down on yourself!\n"
-	.string "I'll give you a little fishing advice.\p"
-	.string "First, you want to face the water,\n"
-	.string "then use the ROD.\p"
-	.string "Focus your mind…\n"
-	.string "If you get a bite, pull the ROD.\p"
-	.string "Sometimes you can snag something\n"
-	.string "immediately, but with bigger catches,\l"
-	.string "you need to time the pulls on your ROD\l"
-	.string "to haul them in.$"
 
 DewfordTown_Text_XIsTheBiggestHappeningThingRight:
 	.string "I like what's hip, happening, and trendy.\n"

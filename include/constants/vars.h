@@ -74,7 +74,8 @@ VAR_INTRO_SEQUENCE_STATE States
 - 5: Player talks to Elsie for disembarking
 - 6: Player and Elsie exit Dewford Harbor and go to new home.
 - 7: Player talking to neighbors
-- 8: Player has entered Dewford Gym
+- 8: Player can now enter Dewford Gym
+- 9: Player has entered Dewford Gym
 */
 #define VAR_INTRO_SEQUENCE_STATE                         0x4084
 

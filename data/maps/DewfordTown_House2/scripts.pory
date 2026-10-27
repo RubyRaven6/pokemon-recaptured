@@ -1,8 +1,34 @@
-raw `
-DewfordTown_House2_MapScripts::
-	.byte 0
+mapscripts DewfordTown_House2_MapScripts {
+	
+}
 
-DewfordTown_House2_EventScript_Man::
+script DewfordTown_House2_EventScript_Man
+{
+	lock
+	faceplayer
+	setspeaker("Man in Vogue")
+	msgbox(
+		"Oh? A fresh face in Dewford! What a\nblessing. I hope you're not averse to\la styling, darling.\p"
+		"I am Dewford's premiere diva, and you\nbest believe you won't be caught dead\llooking like that in front of me."
+	)
+	closemessage
+	release
+	end
+}
+
+script DewfordTown_House2_EventScript_Boy
+{
+	setspeaker("Fanboy")
+	msgbox(
+		"Brawly used to a hotshot Gym Leader,\nbut had to retire early 'cuz of the\linjury he got surfing.\p"
+		"Not that that matters to me though.\nI still think he's the coolest.\p"
+		"It's a shame what happened to the gym\nthough.", MSGBOX_NPC)
+	closemessage
+	end
+}
+
+raw `
+DewfordTown_House2_EventScript_Man_Orig::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_SILK_SCARF, DewfordTown_House2_EventScript_ExplainSilkScarf
@@ -23,7 +49,7 @@ DewfordTown_House2_EventScript_ExplainSilkScarf::
 	release
 	end
 
-DewfordTown_House2_EventScript_Boy::
+DewfordTown_House2_EventScript_Boy_Orig::
 	msgbox DewfordTown_House2_Text_BrawlySoCool, MSGBOX_NPC
 	end
 
