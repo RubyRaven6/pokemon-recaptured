@@ -2517,7 +2517,7 @@ static void Task_StatEditorMain(u8 taskId)
 {
     if (JOY_NEW(B_BUTTON))
     {
-        if(StatEditor_AreAllEVsAllocated())
+        if(StatEditor_AreAllEVsAllocated() || gMain.inBattle == TRUE)
         {
             StatEditor_DisableEVIVEditing();
             PlaySE(SE_PC_OFF);
@@ -2528,7 +2528,7 @@ static void Task_StatEditorMain(u8 taskId)
         }
         else
         {
-            PlaySE(SE_PC_OFF);
+            PlaySE(SE_FAILURE);
             return;
         }
     }
@@ -2548,7 +2548,7 @@ static void Task_StatEditorMain(u8 taskId)
         }
     }
 
-    if (JOY_NEW(START_BUTTON) && ShouldShowMoveRelearner())
+    if ((JOY_NEW(START_BUTTON) && ShouldShowMoveRelearner()) && gMain.inBattle == FALSE)
     {
         PlaySE(SE_SELECT);
         gRelearnMode = RELEARN_MODE_STAT_EDITOR;
@@ -2561,7 +2561,7 @@ static void Task_StatEditorMain(u8 taskId)
 
     if (sStatEditorDataPtr->panel == PANEL_LEFT)
     {
-        if (JOY_NEW(DPAD_UP))
+        if (JOY_NEW(DPAD_UP) && gMain.inBattle == FALSE)
         {
             PlaySE(SE_SELECT);
             sStatEditorDataPtr->leftRow = (sStatEditorDataPtr->leftRow == 0) ? (LEFT_ROW_COUNT - 1) : (sStatEditorDataPtr->leftRow - 1);
@@ -2569,7 +2569,7 @@ static void Task_StatEditorMain(u8 taskId)
             return;
         }
 
-        if (JOY_NEW(DPAD_DOWN))
+        if (JOY_NEW(DPAD_DOWN) && gMain.inBattle == FALSE)
         {
             PlaySE(SE_SELECT);
             sStatEditorDataPtr->leftRow = (sStatEditorDataPtr->leftRow + 1) % LEFT_ROW_COUNT;
@@ -2577,7 +2577,7 @@ static void Task_StatEditorMain(u8 taskId)
             return;
         }
 
-        if (FlagGet(FLAG_SYS_IV_ALLOC) || FlagGet(FLAG_SYS_EV_ALLOC))
+        if ((FlagGet(FLAG_SYS_IV_ALLOC) || FlagGet(FLAG_SYS_EV_ALLOC)) && gMain.inBattle == FALSE)
         {
             if (JOY_NEW(DPAD_LEFT) && FlagGet(FLAG_SYS_IV_ALLOC))
             {
@@ -2603,7 +2603,7 @@ static void Task_StatEditorMain(u8 taskId)
             }
         }
 
-        if (JOY_NEW(A_BUTTON))
+        if (JOY_NEW(A_BUTTON) && gMain.inBattle == FALSE)
         {
             if (sStatEditorDataPtr->leftRow == LEFT_ROW_ABILITY
              && HasOnlyOneAbility(sStatEditorDataPtr->speciesID) == TRUE)

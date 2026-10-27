@@ -2653,7 +2653,7 @@ static void DrawNextSkillsButtonPrompt(u8 mode)
     FillWindowPixelBuffer(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, PIXEL_FILL(0));
     PrintRightAlignedPrompt(PSS_LABEL_WINDOW_PROMPT_IV_EV_STATS, BUTTON_A, text, rightPx, 1);
     s32 aIconX = GetStringRightAlignXOffset(FONT_SMALL, text, rightPx) - GetButtonTextOffset(BUTTON_A);
-    if(sum->evsUnallocated)
+    if(sum->evsUnallocated && gMain.inBattle == FALSE)
         text2 = COMPOUND_STRING("Allocate");
     else    
         text2 = COMPOUND_STRING("View Full");

@@ -400,7 +400,7 @@ static void BuildNormalStartMenu(void)
     // if (DN_FLAG_DEXNAV_GET != 0 && FlagGet(DN_FLAG_DEXNAV_GET))
     //     AddStartMenuAction(MENU_ACTION_DEXNAV);
 
-    if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
+    if (FlagGet(FLAG_ADVENTURE_STARTED) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEMON);
     
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
@@ -643,7 +643,7 @@ static void RemoveExtraStartMenuWindows(void)
     // CopyWindowToVram(sStartClockWindowId, COPYWIN_GFX);
     if(VarGet(VAR_INTRO_SEQUENCE_STATE) > 1)
         RemoveWindow(sStartClockWindowId);
-    if (ShouldShowEVAllocNotif())
+    if (ShouldShowEVAllocNotif() && FlagGet(FLAG_ADVENTURE_STARTED))
         RemoveWindow(sEVAllocNotifWindowId);
 }
 
@@ -707,7 +707,7 @@ static bool32 InitStartMenuStep(void)
     case 4:
         if(VarGet(VAR_INTRO_SEQUENCE_STATE) > 1)
             ShowTimeWindow();
-        if (ShouldShowEVAllocNotif())
+        if (ShouldShowEVAllocNotif() && FlagGet(FLAG_ADVENTURE_STARTED))
             ShowEVAllocNotif();
         sInitStartMenuData[0]++;
         break;
@@ -1368,6 +1368,7 @@ static u8 SaveReturnSuccessCallback(void)
 {
     if (!IsSEPlaying() && SaveSuccesTimer())
     {
+
         HideSaveInfoWindow();
         return SAVE_SUCCESS;
     }
