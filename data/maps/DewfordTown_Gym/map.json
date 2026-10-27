@@ -2,7 +2,7 @@
   "id": "MAP_DEWFORD_TOWN_GYM",
   "name": "DewfordTown_Gym",
   "layout": "LAYOUT_DEWFORD_TOWN_GYM",
-  "music": "MUS_GYM",
+  "music": "MUS_PETALBURG_WOODS",
   "region_map_section": "MAPSEC_DEWFORD_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -15,6 +15,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_ABANDONED_GYM_POKEBALL",
       "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
       "x": 3,
       "y": 3,
@@ -30,7 +31,7 @@
     {
       "local_id": "LOCALID_ABANDONED_GYM_ZUBAT",
       "graphics_id": "OBJ_EVENT_GFX_SPECIES(ZUBAT)",
-      "x": 7,
+      "x": 8,
       "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -40,6 +41,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "FLAG_HIDE_ABANDONED_GYM_ZUBAT"
+    },
+    {
+      "local_id": "LOCALID_ABANDONED_GYM_STARTER",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 5,
+      "y": 5,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_ABANDONED_GYM_STARTER"
     }
   ],
   "warp_events": [

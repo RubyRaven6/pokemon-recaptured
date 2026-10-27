@@ -70,7 +70,7 @@ const struct SpeciesInfo gSpeciesInfoGenRecaptured[] =
             gOverworldPalette_Mankey,
             gShinyOverworldPalette_Mankey
         )
-        .levelUpLearnset = sMankeyLevelUpLearnset,
+        .levelUpLearnset = sMankeyRecapLevelUpLearnset,
         .teachableLearnset = sMankeyTeachableLearnset,
         .eggMoveLearnset = sMankeyEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_PRIMEAPE_SPECIAL}),
@@ -144,7 +144,7 @@ const struct SpeciesInfo gSpeciesInfoGenRecaptured[] =
             gOverworldPalette_Primeape,
             gShinyOverworldPalette_Primeape
         )
-        .levelUpLearnset = sPrimeapeLevelUpLearnset,
+        .levelUpLearnset = sPrimeapeRecapLevelUpLearnset,
         .teachableLearnset = sPrimeapeTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_ANNIHILAPE_SPECIAL, CONDITIONS({IF_USED_MOVE_X_TIMES, MOVE_RAGE_FIST, 20})}),
     },
@@ -209,7 +209,7 @@ const struct SpeciesInfo gSpeciesInfoGenRecaptured[] =
             gOverworldPalette_Annihilape,
             gShinyOverworldPalette_Annihilape
         )
-        .levelUpLearnset = sAnnihilapeLevelUpLearnset,
+        .levelUpLearnset = sAnnihilapeRecapLevelUpLearnset,
         .teachableLearnset = sAnnihilapeTeachableLearnset,
     },
 
@@ -272,7 +272,7 @@ const struct SpeciesInfo gSpeciesInfoGenRecaptured[] =
             gOverworldPalette_Tinkatink,
             gShinyOverworldPalette_Tinkatink
         )
-        .levelUpLearnset = sTinkatinkLevelUpLearnset,
+        .levelUpLearnset = sTinkatinkRecapLevelUpLearnset,
         .teachableLearnset = sTinkatinkTeachableLearnset,
         .eggMoveLearnset = sTinkatinkEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_TINKATUFF_SPECIAL}),
@@ -337,7 +337,7 @@ const struct SpeciesInfo gSpeciesInfoGenRecaptured[] =
             gOverworldPalette_Tinkatuff,
             gShinyOverworldPalette_Tinkatuff
         )
-        .levelUpLearnset = sTinkatuffLevelUpLearnset,
+        .levelUpLearnset = sTinkatuffRecapLevelUpLearnset,
         .teachableLearnset = sTinkatuffTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_TINKATON_SPECIAL}),
     },
@@ -401,7 +401,7 @@ const struct SpeciesInfo gSpeciesInfoGenRecaptured[] =
             gOverworldPalette_Tinkaton,
             gShinyOverworldPalette_Tinkaton
         )
-        .levelUpLearnset = sTinkatonLevelUpLearnset,
+        .levelUpLearnset = sTinkatonRecapLevelUpLearnset,
         .teachableLearnset = sTinkatonTeachableLearnset,
     },
 
@@ -471,7 +471,7 @@ const struct SpeciesInfo gSpeciesInfoGenRecaptured[] =
             gOverworldPalette_Solosis,
             gShinyOverworldPalette_Solosis
         )
-        .levelUpLearnset = sSolosisLevelUpLearnset,
+        .levelUpLearnset = sSolosisRecapLevelUpLearnset,
         .teachableLearnset = sSolosisTeachableLearnset,
         .eggMoveLearnset = sSolosisEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_DUOSION}),
@@ -542,7 +542,7 @@ const struct SpeciesInfo gSpeciesInfoGenRecaptured[] =
             gOverworldPalette_Duosion,
             gShinyOverworldPalette_Duosion
         )
-        .levelUpLearnset = sDuosionLevelUpLearnset,
+        .levelUpLearnset = sDuosionRecapLevelUpLearnset,
         .teachableLearnset = sDuosionTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 41, SPECIES_REUNICLUS}),
     },
@@ -613,7 +613,7 @@ const struct SpeciesInfo gSpeciesInfoGenRecaptured[] =
             gOverworldPalette_Reuniclus,
             gShinyOverworldPalette_Reuniclus
         )
-        .levelUpLearnset = sReuniclusLevelUpLearnset,
+        .levelUpLearnset = sReuniclusRecapLevelUpLearnset,
         .teachableLearnset = sReuniclusTeachableLearnset,
     },
 #ifdef __INTELLISENSE__

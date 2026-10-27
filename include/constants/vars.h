@@ -76,6 +76,7 @@ VAR_INTRO_SEQUENCE_STATE States
 - 7: Player talking to neighbors
 - 8: Player can now enter Dewford Gym
 - 9: Player has entered Dewford Gym
+- 10: Player has chosen starter
 */
 #define VAR_INTRO_SEQUENCE_STATE                         0x4084
 
@@ -201,7 +202,7 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_ROUTE133_STATE                               0x4080 // Unused Var
 #define VAR_ROUTE134_STATE                               0x4081 // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
-#define VAR_UNUSED_0x4083                                0x4083 // Unused Var
+#define VAR_HIDDEN_MON_STEPS                                0x4083 // Unused Var
 #define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
 #define VAR_CONTEST_HALL_STATE                           0x4086
 #define VAR_CABLE_CLUB_STATE                             0x4087
