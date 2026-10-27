@@ -1,15 +1,1 @@
 mapscripts DewfordTown_House4_MapScripts {}
-
-script DewfordTown_House4_EventScript_BrawlysWife {
-    lock
-    faceplayer
-    setspeaker("Nova")
-    msgbox(
-        "Oh, hello! You must be the girls moving\nin today. Welcome!\p"
-        "I hope you enjoy our small community.\nLife here is a little slow.\p"
-        "We have a dock now for the new ferry\nroute, but since my husband retired,\lwe haven't had too many visit."
-    )
-    closemessage
-    release
-    end
-}

@@ -9375,24 +9375,24 @@
       "blockdata_filepath": "data/layouts/DianciesCave_MainChamber/map.bin"
     },
     {
-      "id": "LAYOUT_DEWFORD_TOWN_HOUSE5",
-      "name": "DewfordTown_House5_Layout",
+      "id": "LAYOUT_DEWFORD_TOWN_HOUSE4",
+      "name": "DewfordTown_House4_Layout",
       "width": 10,
       "height": 8,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_GenericBuilding",
-      "border_filepath": "data/layouts/DewfordTown_House5/border.bin",
-      "blockdata_filepath": "data/layouts/DewfordTown_House5/map.bin"
+      "border_filepath": "data/layouts/DewfordTown_House4/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_House4/map.bin"
     },
     {
-      "id": "LAYOUT_DEWFORD_TOWN_HOUSE4",
-      "name": "DewfordTown_House4_Layout",
+      "id": "LAYOUT_DEWFORD_TOWN_BRAWLYHOUSE",
+      "name": "DewfordTown_BrawlysHouse_Layout",
       "width": 12,
       "height": 9,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_GenericBuilding",
-      "border_filepath": "data/layouts/DewfordTown_House4/border.bin",
-      "blockdata_filepath": "data/layouts/DewfordTown_House4/map.bin"
+      "border_filepath": "data/layouts/DewfordTown_BrawlysHouse/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_BrawlysHouse/map.bin"
     },
     {
       "id": "LAYOUT_DEWFORD_TOWN_PLAYERS_HOUSE_1F",
