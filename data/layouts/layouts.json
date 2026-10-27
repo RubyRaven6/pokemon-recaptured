@@ -9387,8 +9387,8 @@
     {
       "id": "LAYOUT_DEWFORD_TOWN_HOUSE4",
       "name": "DewfordTown_House4_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 12,
+      "height": 9,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/DewfordTown_House4/border.bin",
