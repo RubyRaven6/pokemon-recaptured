@@ -766,7 +766,6 @@ bool32 TryCreateMonListEntry_HGSS(u8 position, u16 b, u16 ignored)
                     CreateMonName(0, MON_LIST_X + 5, i * 2);
                 }
             }
-            DebugPrintf("entryNum: %u", entryNum);
             entryNum++;
         }
         break;

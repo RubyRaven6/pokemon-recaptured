@@ -3053,6 +3053,5 @@ u32 QuestMenu_GetQuestVariableId(u8 quest)
 
 u32 QuestMenu_GetQuestVariable(u8 quest)
 {
-    DebugPrintf("%u", VarGet(QuestMenu_GetQuestVariableId(quest)));
 	return VarGet(QuestMenu_GetQuestVariableId(quest));
 }
