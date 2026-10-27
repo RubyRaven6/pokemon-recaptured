@@ -45,12 +45,13 @@ script DianciesCave_DreamSection_EventScript_Diancie
     delay(16)
     waitse
     waitmovement(LOCALID_DREAMSECTION_DIANCIE)
+    setspeaker("???")
     msgbox("I cannot believe my eyes!\nTo meet you at last…!")
     msgbox("Words fail me from how overjoyed I am\nmeeting you…")
     setspeaker(SP_NAME_DIANCIE)
     msgbox("I am Diancie, guardian of the Heart of\nHoenn…")
     msgbox("Our time runs short, young one.\n"
-            "I have an important message to depart.")
+            "I've an important message to depart.")
     msgbox("A rot has seeded itself in our home.")
     msgbox("It has festered, growing like a weed. It\nthreatens to strangle our very Heart.")
     msgbox("The Heart has chosen you, {PLAYER}.\nChosen to be its final hope.")
