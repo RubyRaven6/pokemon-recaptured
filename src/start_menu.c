@@ -405,12 +405,15 @@ static void BuildNormalStartMenu(void)
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
 
-    AddStartMenuAction(MENU_ACTION_BAG);
+    if(VarGet(VAR_INTRO_SEQUENCE_STATE) > 1)
+        AddStartMenuAction(MENU_ACTION_BAG);
 
     if ((P_STAT_EDITOR_ALWAYS || FlagGet(P_FLAG_STAT_EDITOR_GET)) && P_START_MENU_STAT_EDITOR)
         AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
 
-    AddStartMenuAction(MENU_ACTION_PLAYER);
+    if(FlagGet(FLAG_ADVENTURE_STARTED))
+        AddStartMenuAction(MENU_ACTION_PLAYER);
+
     if(ShowSaveOption())
         AddStartMenuAction(MENU_ACTION_SAVE);
 
@@ -637,7 +640,8 @@ static void RemoveExtraStartMenuWindows(void)
     ClearStdWindowAndFrameToTransparent(sStartClockWindowId, FALSE);
     ClearStdWindowAndFrameToTransparent(sEVAllocNotifWindowId, FALSE);
     // CopyWindowToVram(sStartClockWindowId, COPYWIN_GFX);
-    RemoveWindow(sStartClockWindowId);
+    if(VarGet(VAR_INTRO_SEQUENCE_STATE) > 1)
+        RemoveWindow(sStartClockWindowId);
     if (ShouldShowEVAllocNotif())
         RemoveWindow(sEVAllocNotifWindowId);
 }
@@ -700,7 +704,8 @@ static bool32 InitStartMenuStep(void)
         sInitStartMenuData[0]++;
         break;
     case 4:
-        ShowTimeWindow();
+        if(VarGet(VAR_INTRO_SEQUENCE_STATE) > 1)
+            ShowTimeWindow();
         if (ShouldShowEVAllocNotif())
             ShowEVAllocNotif();
         sInitStartMenuData[0]++;
