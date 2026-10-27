@@ -46,6 +46,7 @@ script(local) DewfordTown_Gym_EventScript_EntranceCollapses
 	
 	setvar(VAR_INTRO_SEQUENCE_STATE, 10)
 	forcesave
+	release
 }
 
 script DewfordTown_Gym_EventScript_GymStatues
@@ -170,7 +171,7 @@ script DewfordTown_Gym_BrawlyCallsForPlayer
 	closemessage
 
 	setvar(VAR_INTRO_SEQUENCE_STATE, 13)
-	warpwhitefade
+	warpwhitefade(MAP_DEWFORD_TOWN_BRAWLYHOUSE, 5, 4)
 	waitstate
 }
 
