@@ -68,6 +68,7 @@
 #define FLAG_HIDE_ABANDONED_GYM_POKEBALL    0x29
 #define FLAG_HIDE_ABANDONED_GYM_ZUBAT    0x2A
 #define FLAG_HIDE_ABANDONED_GYM_STARTER    0x2B
+#define FLAG_HIDE_ABANDONED_GYM_BRAWLY    0x2E
 
 // System-ish Flags
 #define FLAG_DEXNAV_SEARCH    0x24 // Searching for mon
@@ -78,7 +79,6 @@
 #define FLAG_WE_FLAG_NO_CATCHING    0x2C // Disables Catching Wild Mons
 #define FLAG_WE_FLAG_NO_RUNNING    0x2D // Disables Running from Wild Mons
 
-#define FLAG_UNUSED_0x02E    0x2E // Unused Flag
 #define FLAG_UNUSED_0x02F    0x2F // Unused Flag
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag

@@ -76,7 +76,8 @@ VAR_INTRO_SEQUENCE_STATE States
 - 7: Player talking to neighbors
 - 8: Player can now enter Dewford Gym
 - 9: Player has entered Dewford Gym
-- 10: Player has chosen starter
+- 10: Player found Pokeball
+- 11: Player has accepted starter into team
 */
 #define VAR_INTRO_SEQUENCE_STATE                         0x4084
 

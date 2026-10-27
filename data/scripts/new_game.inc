@@ -280,6 +280,7 @@ EventScript_ResetAllMapFlags::
 	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	setflag FLAG_WE_FLAG_NO_CATCHING
 	setflag FLAG_WE_FLAG_NO_RUNNING
+	setflag FLAG_HIDE_ABANDONED_GYM_BRAWLY
 
 	@ </recaptured flags>
 	call EventScript_ResetAllBerries

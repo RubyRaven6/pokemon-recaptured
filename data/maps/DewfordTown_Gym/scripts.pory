@@ -15,6 +15,7 @@ mapscripts DewfordTown_Gym_MapScripts {
 	}
 	MAP_SCRIPT_ON_FRAME_TABLE [
 		VAR_INTRO_SEQUENCE_STATE, 9: DewfordTown_Gym_EventScript_EntranceCollapses
+		VAR_INTRO_SEQUENCE_STATE, 11: DewfordTown_Gym_EventScript_StarterSequence
 	]
 }
 
@@ -57,7 +58,10 @@ script DewfordTown_Gym_EventScript_PokeBall
 	giveitem(ITEM_POKE_BALL)
 	removeobject(LOCALID_ABANDONED_GYM_POKEBALL)
 	closemessage
+	setvar(VAR_INTRO_SEQUENCE_STATE, 11)
+}
 
+script(local) DewfordTown_Gym_EventScript_StarterSequence {
 	playmoncry(SPECIES_ZUBAT, CRY_MODE_NORMAL)
 	turnobject(LOCALID_PLAYER, DIR_EAST)
 	waitmoncry
@@ -120,16 +124,36 @@ script DewfordTown_Gym_EventScript_PokeBall
 	removeobject(ZUBAT)
 	clearflag(FLAG_WE_FLAG_NO_CATCHING)
 	clearflag(FLAG_WE_FLAG_NO_RUNNING)
-	turnobject(STARTER, DIR_WEST)
-	
+	goto(DewfordTown_Gym_StarterWantsToJoin)
+}
 
-	
-	playmoncry(SPECIES_ZUBAT, CRY_MODE_NORMAL)
-	waitmoncry
-
-
-
-	setvar(VAR_INTRO_SEQUENCE_STATE, 11)
+script DewfordTown_Gym_StarterWantsToJoin{
+    applymovement(STARTER, Common_Movement_FacePlayer)
+    msgbox("It looks like the {STR_VAR_1} wants\nto join you. Let it?", MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        playfanfare(MUS_OBTAIN_ITEM)
+        msgbox(format("{STR_VAR_1} joined you!"), MSGBOX_DEFAULT)
+        waitfanfare
+        setflag(FLAG_SYS_POKEMON_GET)
+        removeobject(STARTER)
+        msgbox("Give a nickname?", MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            call(Common_EventScript_GetGiftMonPartySlot)
+            call(Common_EventScript_NameReceivedPartyMon)
+        }
+        else{closemessage}
+        setvar(VAR_INTRO_SEQUENCE_STATE, 12)
+		end      
+    }
+    else{
+		switch(var(VAR_RESULT))
+		{
+        	case CONST_MANKEY: msgbox("The Pokémon looks like it's about to\nhit you.", MSGBOX_DEFAULT)
+        	case CONST_TINKATINK: msgbox("The Pokémon looks like it's ploting\nagainst you.", MSGBOX_DEFAULT)
+        	case CONST_SOLOSIS: msgbox("The Pokémon looks like it's unmoved\nbut is still insistent.", MSGBOX_DEFAULT)
+	    }
+        call(DewfordTown_Gym_StarterWantsToJoin)
+    }
 }
 
 raw `
