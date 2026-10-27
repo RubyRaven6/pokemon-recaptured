@@ -57,16 +57,17 @@
       "flag": "FLAG_HIDE_ABANDONED_GYM_STARTER"
     },
     {
+      "local_id": "LOCALID_ABANDONED_GYM_BRAWLY",
       "graphics_id": "OBJ_EVENT_GFX_BRAWLY",
-      "x": 8,
-      "y": 18,
+      "x": 11,
+      "y": 22,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "DewfordTown_Gym_BrawlyCallsForPlayer",
       "flag": "FLAG_HIDE_ABANDONED_GYM_BRAWLY"
     }
   ],
@@ -94,7 +95,7 @@
       "elevation": 0,
       "var": "VAR_INTRO_SEQUENCE_STATE",
       "var_value": "12",
-      "script": "NULL"
+      "script": "DewfordTown_Gym_BrawlyCallsForPlayer"
     }
   ],
   "bg_events": [

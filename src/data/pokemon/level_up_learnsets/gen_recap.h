@@ -65,7 +65,7 @@ static const struct LevelUpMove sAnnihilapeRecapLevelUpLearnset[] = {
 static const struct LevelUpMove sTinkatinkRecapLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_POUND),
     LEVEL_UP_MOVE( 1, MOVE_FAIRY_WIND),
-    LEVEL_UP_MOVE( 1, MOVE_DISARMING_VOICE),
+    LEVEL_UP_MOVE( 1, MOVE_SMACK_DOWN),
     LEVEL_UP_MOVE( 5, MOVE_BABY_DOLL_EYES),
     LEVEL_UP_MOVE( 8, MOVE_METAL_CLAW),
     LEVEL_UP_MOVE(11, MOVE_COVET),
@@ -85,6 +85,7 @@ static const struct LevelUpMove sTinkatinkRecapLevelUpLearnset[] = {
 
 static const struct LevelUpMove sTinkatuffRecapLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_ASTONISH),
+    LEVEL_UP_MOVE( 1, MOVE_SMACK_DOWN),
     LEVEL_UP_MOVE( 1, MOVE_FAIRY_WIND),
     LEVEL_UP_MOVE( 5, MOVE_BABY_DOLL_EYES),
     LEVEL_UP_MOVE( 8, MOVE_METAL_CLAW),
@@ -105,6 +106,7 @@ static const struct LevelUpMove sTinkatuffRecapLevelUpLearnset[] = {
 
 static const struct LevelUpMove sTinkatonRecapLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 0, MOVE_GIGATON_HAMMER),
+    LEVEL_UP_MOVE( 1, MOVE_SMACK_DOWN),
     LEVEL_UP_MOVE( 1, MOVE_FAIRY_WIND),
     LEVEL_UP_MOVE( 1, MOVE_ASTONISH),
     LEVEL_UP_MOVE( 5, MOVE_BABY_DOLL_EYES),

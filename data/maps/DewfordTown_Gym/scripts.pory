@@ -1,5 +1,6 @@
 const ZUBAT = LOCALID_ABANDONED_GYM_ZUBAT
 const STARTER = LOCALID_ABANDONED_GYM_STARTER
+const BRAWLY = LOCALID_ABANDONED_GYM_BRAWLY
 
 const CONST_MANKEY = 1
 const CONST_TINKATINK = 2
@@ -91,16 +92,19 @@ script(local) DewfordTown_Gym_EventScript_StarterSequence {
 	{
 		case CONST_MANKEY:
 			setvar(VAR_TEMP_0, SPECIES_MANKEY)
+			setvar(VAR_TEMP_1, CONST_MANKEY)
 			setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(MANKEY))
 			givemon(SPECIES_MANKEY_SPECIAL, 6, move1=MOVE_KARATE_CHOP, move2=MOVE_LEER, move3=MOVE_FURY_SWIPES, move4=MOVE_SCRATCH)
 			bufferspeciesname(STR_VAR_1, SPECIES_MANKEY)
 		case CONST_TINKATINK:
 			setvar(VAR_TEMP_0, SPECIES_TINKATINK)
+			setvar(VAR_TEMP_1, CONST_TINKATINK)
 			setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(TINKATINK))
 			bufferspeciesname(STR_VAR_1, SPECIES_TINKATINK)
-			givemon(SPECIES_TINKATINK_SPECIAL, 6, move1=MOVE_DISARMING_VOICE, move2=MOVE_POUND, move3=MOVE_BABY_DOLL_EYES, move4=MOVE_FAIRY_WIND)
+			givemon(SPECIES_TINKATINK_SPECIAL, 6, move1=MOVE_SMACK_DOWN, move2=MOVE_POUND, move3=MOVE_BABY_DOLL_EYES, move4=MOVE_FAIRY_WIND)
 		case CONST_SOLOSIS:
 			setvar(VAR_TEMP_0, SPECIES_SOLOSIS)
+			setvar(VAR_TEMP_1, CONST_SOLOSIS)
 			setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(SOLOSIS))
 			bufferspeciesname(STR_VAR_1, SPECIES_SOLOSIS)
 			givemon(SPECIES_SOLOSIS_SPECIAL, 6, move1=MOVE_PROTECT, move2=MOVE_CONFUSION, move3=MOVE_ECHOED_VOICE, move4=MOVE_RECOVER)
@@ -127,33 +131,40 @@ script(local) DewfordTown_Gym_EventScript_StarterSequence {
 	goto(DewfordTown_Gym_StarterWantsToJoin)
 }
 
-script DewfordTown_Gym_StarterWantsToJoin{
+script DewfordTown_Gym_StarterWantsToJoin
+{
     applymovement(STARTER, Common_Movement_FacePlayer)
-    msgbox("It looks like the {STR_VAR_1} wants\nto join you. Let it?", MSGBOX_YESNO)
-    if(var(VAR_RESULT) == YES){
-        playfanfare(MUS_OBTAIN_ITEM)
-        msgbox(format("{STR_VAR_1} joined you!"), MSGBOX_DEFAULT)
-        waitfanfare
-        setflag(FLAG_SYS_POKEMON_GET)
-        removeobject(STARTER)
-        msgbox("Give a nickname?", MSGBOX_YESNO)
-        if(var(VAR_RESULT) == YES){
-            call(Common_EventScript_GetGiftMonPartySlot)
-            call(Common_EventScript_NameReceivedPartyMon)
-        }
-        else{closemessage}
-        setvar(VAR_INTRO_SEQUENCE_STATE, 12)
-		end      
-    }
-    else{
-		switch(var(VAR_RESULT))
-		{
-        	case CONST_MANKEY: msgbox("The Pokémon looks like it's about to\nhit you.", MSGBOX_DEFAULT)
-        	case CONST_TINKATINK: msgbox("The Pokémon looks like it's ploting\nagainst you.", MSGBOX_DEFAULT)
-        	case CONST_SOLOSIS: msgbox("The Pokémon looks like it's unmoved\nbut is still insistent.", MSGBOX_DEFAULT)
-	    }
-        call(DewfordTown_Gym_StarterWantsToJoin)
-    }
+    msgbox("It looks like the {STR_VAR_1} wants to\nstay by your side.\pYou can't help but feel like welcoming\nit.", MSGBOX_DEFAULT)
+	closemessage
+	playfanfare(MUS_OBTAIN_ITEM)
+	msgbox(format("{STR_VAR_1} joined you!"), MSGBOX_DEFAULT)
+	waitfanfare
+	setflag(FLAG_SYS_POKEMON_GET)
+	removeobject(STARTER)
+	closemessage
+	msgbox("Give a nickname?", MSGBOX_YESNO)
+	if(var(VAR_RESULT) == YES){
+		call(Common_EventScript_GetGiftMonPartySlot)
+		call(Common_EventScript_NameReceivedPartyMon)
+	}
+	else{closemessage}
+	setvar(VAR_INTRO_SEQUENCE_STATE, 12)
+	addobject(BRAWLY)
+	clearflag(FLAG_HIDE_ABANDONED_GYM_BRAWLY)
+	end
+}
+
+script DewfordTown_Gym_BrawlyCallsForPlayer
+{
+	setspeaker("???")
+	msgbox("Hello? Is anyone in there?", MSGBOX_DEFAULT)
+	closemessage
+	applymovement(LOCALID_PLAYER, moves(emote_exclamation_mark, face_down, delay_16 * 2, walk_down * 3))
+	applymovement(BRAWLY, moves(delay_16 * 4, walk_up * 3))
+	waitmovement(LOCALID_PLAYER)
+	waitmovement(BRAWLY)
+
+	setvar(VAR_INTRO_SEQUENCE_STATE, 13)
 }
 
 raw `
