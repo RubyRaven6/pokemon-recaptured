@@ -1,7 +1,16 @@
-raw `
-Route106_MapScripts::
-	.byte 0
+mapscripts Route106_MapScripts
+{
 
+}
+
+script Route106_EventScript_BeachMom
+{
+	setspeaker("Young Mom")
+	msgbox("I'm letting my kids cool off.", MSGBOX_NPC)
+	closemessage
+}
+
+raw `
 Route106_EventScript_TrainerTipsSign::
 	msgbox Route106_Text_TrainerTips, MSGBOX_SIGN
 	end
