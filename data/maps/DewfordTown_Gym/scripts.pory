@@ -1,4 +1,10 @@
 mapscripts DewfordTown_Gym_MapScripts {
+	MAP_SCRIPT_ON_TRANSITION
+	{
+		setflashlevel(4)
+		if(var(VAR_INTRO_SEQUENCE_STATE) > 10){setflag(FLAG_HIDE_ABANDONED_GYM_POKEBALL)}
+		setflag(FLAG_HIDE_ABANDONED_GYM_ZUBAT)
+	}
 	MAP_SCRIPT_ON_FRAME_TABLE [
 		VAR_INTRO_SEQUENCE_STATE, 9: DewfordTown_Gym_EventScript_EntranceCollapses
 	]
@@ -9,10 +15,10 @@ script(local) DewfordTown_Gym_EventScript_EntranceCollapses
 	applymovement(LOCALID_PLAYER, moves(walk_up))
 	waitmovement(0)
 	playse(SE_M_ROCK_THROW)
-	setvar (VAR_0x8004, 6)  // vertical pan
-	setvar (VAR_0x8005, 7)  // horizontal pan
-	setvar (VAR_0x8006, 3)  // num shakes
-	setvar (VAR_0x8007, 5)  // shake delay
+	setvar (VAR_0x8004, 0)  // vertical pan
+	setvar (VAR_0x8005, 2)  // horizontal pan
+	setvar (VAR_0x8006, 2)  // num shakes
+	setvar (VAR_0x8007, 3)  // shake delay
 	special(ShakeCamera)
 	waitse
 
@@ -20,14 +26,36 @@ script(local) DewfordTown_Gym_EventScript_EntranceCollapses
 	setmetatile(6, 27, 0x84f, FALSE)
 	special(DrawWholeMapView)
 
+	turnobject(LOCALID_PLAYER, DIR_SOUTH)
+	delay(60)
+	applymovement(LOCALID_PLAYER, moves(walk_down, delay_16 * 2, walk_in_place_down))
+	waitmovement(0)
+
+	msgbox("…\pThe doors got locked behind you…")
+	closemessage
+	
 	setvar(VAR_INTRO_SEQUENCE_STATE, 10)
 }
 
 script DewfordTown_Gym_EventScript_GymStatues
 {
-	debugprint("The Statue!!")
 	msgbox("You can't see what it says in the dark.\nYou can just barely see faded names.", MSGBOX_DEFAULT)
 	closemessage
+}
+
+script DewfordTown_Gym_EventScript_PokeBall
+{
+	msgbox("You find a Pokéball on the ground!")
+	giveitem(ITEM_POKE_BALL)
+	setflag(FLAG_HIDE_ABANDONED_GYM_POKEBALL)
+	closemessage
+
+	playmoncry(SPECIES_ZUBAT, CRY_MODE_NORMAL)
+	turnobject(LOCALID_PLAYER, DIR_EAST)
+	waitmoncry
+
+	applymovement(LOCALID_PLAYER, moves(walk_down, walk_right))
+	waitmovement(0)
 }
 
 raw `
