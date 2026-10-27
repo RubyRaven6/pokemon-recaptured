@@ -124,10 +124,10 @@ static const u16 sListWindow_Pal[] = INCGFX_U16("graphics/pokenav/match_call/lis
 static const u16 sPokeball_Pal[] = INCGFX_U16("graphics/pokenav/match_call/pokeball.pal", ".gbapal");
 static const u32 sPokeball_Gfx[] = INCGFX_U32("graphics/pokenav/match_call/pokeball.png", ".4bpp.smol");
 
-static const u8 gText_NumberRegistered[] = _("No. registered");
-static const u8 gText_NumberOfBattles[] = _("No. of battles");
-static const u8 gText_TrainerCloseBy[] = _("That TRAINER is close by.\nTalk to the TRAINER in person!");
-static const u8 gText_Unknown[] = _("UNKNOWN");
+const u8 gText_NumberRegistered[] = _("No. registered");
+const u8 gText_NumberOfBattles[] = _("No. of battles");
+const u8 gText_TrainerCloseBy[] = _("That TRAINER is close by.\nTalk to the TRAINER in person!");
+const u8 gText_Unknown[] = _("UNKNOWN");
 
 static const struct BgTemplate sMatchCallBgTemplates[3] =
 {
