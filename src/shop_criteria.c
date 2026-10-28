@@ -46,7 +46,27 @@ void TryFreeDynamicShopItemList(const u16 **ogItemList)
 
 // Add new Criterias below!
 
-static UNUSED bool32 ShopCriteriaByBadgeCount(u32 count)
+bool32 ShopCriteriaByTwoBadges(enum Item item)
+{
+    return ShopCriteriaByBadgeCount(2);
+}
+
+bool32 ShopCriteriaByFourBadges(enum Item item)
+{
+    return ShopCriteriaByBadgeCount(4);
+}
+
+bool32 ShopCriteriaByFiveBadges(enum Item item)
+{
+    return ShopCriteriaByBadgeCount(5);
+}
+
+bool32 ShopCriteriaBySixBadges(enum Item item)
+{
+    return ShopCriteriaByBadgeCount(6);
+}
+
+static bool32 ShopCriteriaByBadgeCount(u32 count)
 {
     u32 badgeCount = 0;
 

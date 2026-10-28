@@ -82,6 +82,7 @@ const struct ItemInfo gItemsInfo[] =
         .secondaryId = BALL_GREAT,
         .iconPic = gItemIcon_GreatBall,
         .iconPalette = gItemIconPalette_GreatBall,
+		.shopCriteriaFunc = ShopCriteriaByTwoBadges,
     },
 
     [ITEM_ULTRA_BALL] =
@@ -98,7 +99,8 @@ const struct ItemInfo gItemsInfo[] =
         .secondaryId = BALL_ULTRA,
         .iconPic = gItemIcon_UltraBall,
         .iconPalette = gItemIconPalette_UltraBall,
-    },
+		.shopCriteriaFunc = ShopCriteriaByFourBadges,
+	},
 
     [ITEM_MASTER_BALL] =
     {
@@ -537,7 +539,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Potion,
         .iconPalette = gItemIconPalette_SuperPotion,
-    },
+		.shopCriteriaFunc = ShopCriteriaByTwoBadges,
+	},
 
     [ITEM_HYPER_POTION] =
     {
@@ -561,7 +564,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Potion,
         .iconPalette = gItemIconPalette_HyperPotion,
-    },
+		.shopCriteriaFunc = ShopCriteriaByFourBadges,
+	},
 
     [ITEM_MAX_POTION] =
     {
@@ -580,7 +584,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_LargePotion,
         .iconPalette = gItemIconPalette_MaxPotion,
-    },
+		.shopCriteriaFunc = ShopCriteriaByFiveBadges,
+	},
 
     [ITEM_FULL_RESTORE] =
     {
@@ -600,7 +605,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_LargePotion,
         .iconPalette = gItemIconPalette_FullRestore,
-    },
+		.shopCriteriaFunc = ShopCriteriaBySixBadges,
+	},
 
     [ITEM_REVIVE] =
     {
@@ -619,7 +625,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Revive,
         .iconPalette = gItemIconPalette_Revive,
-    },
+		.shopCriteriaFunc = ShopCriteriaByFourBadges,
+	},
 
     [ITEM_MAX_REVIVE] =
     {
@@ -638,7 +645,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_MaxRevive,
         .iconPalette = gItemIconPalette_Revive,
-    },
+		.shopCriteriaFunc = ShopCriteriaBySixBadges,
+	},
 
     [ITEM_FRESH_WATER] =
     {

@@ -1,0 +1,60 @@
+script Common_Mart_EventScript_Clerk
+{
+	lock
+	faceplayer
+	setspeaker("Clerk")
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(Pokemart_DefaultItemList)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart Pokemart_DefaultItemList
+{
+	ITEM_POKE_BALL
+	ITEM_GREAT_BALL
+	ITEM_ULTRA_BALL
+	ITEM_POTION
+	ITEM_SUPER_POTION
+	ITEM_HYPER_POTION
+	ITEM_MAX_POTION
+	ITEM_ETHER
+	ITEM_ELIXIR
+	ITEM_ANTIDOTE
+	ITEM_PARALYZE_HEAL
+	ITEM_AWAKENING
+	ITEM_BURN_HEAL
+	ITEM_ICE_HEAL
+	ITEM_FULL_HEAL
+	ITEM_FULL_RESTORE
+	ITEM_REVIVE
+	ITEM_MAX_REVIVE
+	ITEM_REPEL
+	ITEM_SUPER_REPEL
+	ITEM_MAX_REPEL
+}
+
+raw`
+gText_HowMayIServeYou::
+	.string "Welcome!\p"
+	.string "How may I serve you?$"
+
+gText_PleaseComeAgain::
+	.string "Please come again!$"
+
+gText_PlayerWhatCanIDoForYou::
+	.string "{PLAYER}{KUN}, welcome!\p"
+	.string "What can I do for you?$"
+
+@Pokemart_DefaultItemList::
+@	.2byte ITEM_ULTRA_BALL
+@	.2byte ITEM_HYPER_POTION
+@	.2byte ITEM_MAX_POTION
+@	.2byte ITEM_FULL_RESTORE
+@	.2byte ITEM_FULL_HEAL
+@	.2byte ITEM_REVIVE
+@	.2byte ITEM_MAX_REPEL
+@	pokemartlistend
+`
