@@ -2,3 +2,42 @@ raw `
 DewfordTown_Mart_MapScripts::
 	.byte 0
 `
+
+script DewfordTown_Mart_EventScript_Clerk
+{
+	if(!flag(FLAG_ADVENTURE_STARTED))
+	{
+		lock
+		faceplayer
+		setspeaker("Clerk")
+		msgbox(gText_HowMayIServeYou)
+		msgbox("Ah, are you not a trainer? My items are\nfor trainers.")
+		msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+		release
+		end
+	}
+	else
+	{
+		goto(Common_Mart_EventScript_Clerk)
+	}
+}
+
+script DewfordTown_Mart_EventScript_ClerkNormal
+{
+	lock
+	faceplayer
+	setspeaker("Clerk")
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(DewfordTown_Mart)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart DewfordTown_Mart
+{
+	ITEM_FRESH_WATER
+	ITEM_LEMONADE
+	ITEM_SODA_POP
+}
