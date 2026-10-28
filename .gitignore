@@ -75,6 +75,7 @@ __pycache__
 .map_version
 log.txt
 *.ase
+*.aseprite
 .porydaw/
 tools/poryscript/poryscript
 *.scr
