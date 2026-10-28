@@ -6415,7 +6415,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GBAKid = {
     .images = sPicTable_GBAKid,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
-
+#endif
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Snorlax = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
@@ -6434,7 +6434,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Snorlax = {
     .images = sPicTable_Snorlax,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
-
+#if IS_FRLG
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FossilFrlg = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,

@@ -1,1 +1,36 @@
-mapscripts DewfordTown_PlayersHouse_1F_MapScripts {}
+mapscripts DewfordTown_PlayersHouse_1F_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION {
+        if(var(VAR_INTRO_SEQUENCE_STATE) == 15)
+        {
+            setflag(FLAG_TEMP_1)
+        }
+        elif(var(VAR_INTRO_SEQUENCE_STATE) > 15 || var(VAR_INTRO_SEQUENCE_STATE) < 15)
+        {
+            setflag(FLAG_TEMP_2)
+        }
+    }    
+}
+
+script DewfordTown_PlayersHouse_1F_EventScript_Elsie
+{
+    if(var(VAR_INTRO_SEQUENCE_STATE) < 15)
+    {
+        lock
+        faceplayer
+        setspeaker(SP_NAME_ELSIE)
+        msgbox("Isn't it nice here, Champ?\nThe salty air's pretty refreshing.\p")
+        msgbox("Thankfully we don't have to unpack a\nlot. It was convenient getting movers.\lYou can take it easy today.")
+        closemessage
+        release
+        end
+    }
+    elif(var(VAR_INTRO_SEQUENCE_STATE) > 15)
+    {
+
+    }
+}
+
+script DewfordTown_PlayersHouse_1F_EventScript_ElsieSeesYouOff
+{
+    
+}

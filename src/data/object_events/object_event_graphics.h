@@ -494,7 +494,9 @@ const u16 gObjectEventPic_GreenVSSeekerBike[] = INCGFX_U16("graphics/object_even
 
 const u16 gObjectEventPal_PlayerFrlg[] = INCGFX_U16("graphics/object_events/palettes/player_frlg.pal", ".gbapal");
 const u16 gObjectEventPal_PlayerReflectionFrlg[] = INCGFX_U16("graphics/object_events/palettes/player_reflection_frlg.pal", ".gbapal");
+#endif
 const u16 gObjectEventPal_NpcBlue[] = INCGFX_U16("graphics/object_events/palettes/npc_blue.pal", ".gbapal");
+#if IS_FRLG
 const u16 gObjectEventPal_NpcPink[] = INCGFX_U16("graphics/object_events/palettes/npc_pink.pal", ".gbapal");
 const u16 gObjectEventPal_NpcGreen[] = INCGFX_U16("graphics/object_events/palettes/npc_green.pal", ".gbapal");
 const u16 gObjectEventPal_NpcWhite[] = INCGFX_U16("graphics/object_events/palettes/npc_white.pal", ".gbapal");
@@ -631,7 +633,9 @@ const u16 gObjectEventPic_DoduoOld[] = INCGFX_U16("graphics/object_events/pics/p
 const u16 gObjectEventPic_FearowOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/fearow.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPic_KabutoOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/kabuto.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPic_MachokeOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/machoke.png", ".4bpp", "-mwidth 2 -mheight 2");
+#endif
 const u16 gObjectEventPic_SnorlaxOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/snorlax.png", ".4bpp");
+#if IS_FRLG
 const u16 gObjectEventPic_SpearowOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/spearow.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPic_CuboneOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/cubone.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPic_PoliwrathOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/poliwrath.png", ".4bpp", "-mwidth 2 -mheight 2");

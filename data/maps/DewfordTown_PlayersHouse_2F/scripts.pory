@@ -1,1 +1,67 @@
-mapscripts DewfordTown_PlayersHouse_2F_MapScripts {}
+mapscripts DewfordTown_PlayersHouse_2F_MapScripts 
+{
+    MAP_SCRIPT_ON_TRANSITION
+    {
+	    call (SecretBase_EventScript_SetDecorationFlags)
+	    setvar (VAR_SECRET_BASE_INITIALIZED, 0)
+    }
+}
+
+script DewfordTown_PlayersHouse_2F_EventScript_CheckPlayersPC
+{
+	special (DoPCTurnOnEffect)
+	playse (SE_PC_ON)
+	msgbox (gText_PlayerHouseBootPC, MSGBOX_DEFAULT)
+	special (BedroomPC)
+	releaseall
+	end
+}
+
+script DewfordTown_PlayersHouse_2F_EventScript_PlayerDresser
+{
+    msgbox (
+        "It's your dresser."
+        "You already like the clothes you got\n"
+        "so there's no need to change.", MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script DewfordTown_PlayersHouse_2F_EventScript_SnorlaxDoll
+{
+    msgbox (
+        "It's a gigantic Snorlax doll. There's a\nnote attached.\p"
+        "\qoHey, Champ, I hope you like the frien\nin our room. I know you've always\lwanted one. -Elsie\qc", MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script DewfordTown_PlayersHouse_2F_EventScript_ElsieDresser
+{
+    msgbox (
+        "It's your sister's dresser.\p"
+        "You find a mix of simple, casual clothes\n"
+        "and more formal attire for her job.", MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script DewfordTown_PlayersHouse_2F_EventScript_Notebook
+{
+    msgbox (
+        "It seems to be a spreadsheet book.\p"
+        "A lot of student's names and grades\n"
+        "for different classes are listed down.", MSGBOX_SIGN)
+    closemessage
+    end
+}
+
+script DewfordTown_PlayersHouse_2F_EventScript_GameCube
+{
+	msgbox (
+        "It's your sister's Nintendo GameCube.\p"
+        "A Game Boy Advance is connected to\n"
+        "serve as the Controller.", MSGBOX_SIGN)
+    closemessage
+	end
+}

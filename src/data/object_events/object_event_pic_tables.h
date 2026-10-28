@@ -2050,7 +2050,7 @@ static const struct SpriteFrameImage sPicTable_SSAnne[] = {
     overworld_frame(gObjectEventPic_SSAnne, 8, 16, 0),
     overworld_frame(gObjectEventPic_SSAnne, 8, 16, 0),
 };
-
+#endif
 static const struct SpriteFrameImage sPicTable_Snorlax[] = {
     overworld_frame(gObjectEventPic_SnorlaxOld, 4, 4, 0),
     overworld_frame(gObjectEventPic_SnorlaxOld, 4, 4, 0),
@@ -2063,6 +2063,7 @@ static const struct SpriteFrameImage sPicTable_Snorlax[] = {
     overworld_frame(gObjectEventPic_SnorlaxOld, 4, 4, 0),
 };
 
+#if IS_FRLG
 static const struct SpriteFrameImage sPicTable_Spearow[] = {
     overworld_frame(gObjectEventPic_SpearowOld, 2, 2, 0),
     overworld_frame(gObjectEventPic_SpearowOld, 2, 2, 1),
