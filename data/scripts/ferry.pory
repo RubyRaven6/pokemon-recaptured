@@ -1,0 +1,72 @@
+//the attendant, sailor, and ferry will always be objs 1, 2, 3 and a harbor map
+const ATTENDANT = 1
+const SAILOR = 2
+const FERRY = 3
+const PLAYER = LOCALID_PLAYER
+
+script Common_EventScript_FerryAttendant
+{
+	lockall
+	cueobjecttalking(ATTENDANT)
+	setspeaker(SP_NAME_ATTENDANT)	
+	msgbox("Good day! May I see your ticket?")
+	waitmovement(0)
+	dynmultipush("Rustboro", 	0)
+	dynmultipush("Slateport", 	1)
+	dynmultipush("Lilycove", 	2)
+	dynmultipush("Mossdeep", 	3)
+	dynmultipush("Ever Grande", 4)
+	dynmultistack(0,0, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+
+	msgbox("Thank you! Have a lovely trip.")
+	closemessage
+
+	applymovement(PLAYER, PlayerBoardsFerry)
+	waitmovement(0)
+	
+	playse(SE_DOOR)
+	applymovement(PLAYER, moves(walk_in_place_fast_up))
+	waitse
+	waitmovement(0)
+	hideplayer
+
+	setspeaker(SP_NAME_SAILOR)
+	msgbox("All aboard!")
+	closemessage
+
+	playse(SE_DOOR)
+	applymovement(SAILOR, moves(face_up, delay_16 * 2, walk_in_place_fast_up))
+	waitse
+	waitmovement(0)
+	removeobject(SAILOR)
+
+	delay (60)
+	applymovement (FERRY, Movement_FerryDepart_Recap)
+	waitmovement (0)
+	switch(var(VAR_RESULT))
+	{
+		default:
+			warp(MAP_RUSTBORO_CITY_HARBOR, 7, 10)
+	}
+	waitstate
+	releaseall
+	end
+}
+
+movement Movement_FerryDepart_Recap
+{
+	walk_slow_right
+	walk_slow_right
+	walk_slow_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+}
+
+movement PlayerBoardsFerry
+{
+	walk_right * 5
+	walk_up * 3
+}

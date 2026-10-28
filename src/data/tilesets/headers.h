@@ -1629,3 +1629,25 @@ const struct Tileset gTileset_Harbor =
     .metatileAttributes = gMetatileAttributes_Harbor,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_FallarborPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_FallarborPorytiles,
+    .palettes = gTilesetPalettes_FallarborPorytiles,
+    .metatiles = gMetatiles_FallarborPorytiles,
+    .metatileAttributes = gMetatileAttributes_FallarborPorytiles,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_RustboroPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_RustboroPorytiles,
+    .palettes = gTilesetPalettes_RustboroPorytiles,
+    .metatiles = gMetatiles_RustboroPorytiles,
+    .metatileAttributes = gMetatileAttributes_RustboroPorytiles,
+    .callback = NULL,
+};

@@ -1,29 +1,27 @@
-const ATTENDANT = LOCALID_DEWFORD_HARBOR_ATTENDANT
+const ATTENDANT = 1
 
 mapscripts DewfordTown_Harbor_MapScripts{}
 
 script DewfordTown_Harbor_EventScript_Teller
 {
-	lockall
-	cueobjecttalking(ATTENDANT)
-	setspeaker(SP_NAME_ATTENDANT)	
-	msgbox("Good day! May I see your ticket?")
-	waitmovement(0)
 	checkitem(ITEM_TRAINER_TICKET)
 	if(var(VAR_RESULT))
 	{
-		goto(AttendantAsksWhereYoureGoing)
+		goto(Common_EventScript_FerryAttendant)
 	}
 	else
 	{
+		lockall
+		cueobjecttalking(ATTENDANT)
+		setspeaker(SP_NAME_ATTENDANT)	
+		msgbox("Good day! May I see your ticket?")
+		waitmovement(0)
 		setspeaker(SP_NAME_NONE)
 		msgbox("You think to yourself… You probably\nshouldn't leave Elsie right away.")
 		setspeaker(SP_NAME_ATTENDANT)
 		msgbox("Uhm… okay then.\nHave a nice day!")
 		closemessage
+		releaseall
+		end
 	}
-
-AttendantAsksWhereYoureGoing:
-	releaseall
-	end
 }

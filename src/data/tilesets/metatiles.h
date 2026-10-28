@@ -432,3 +432,9 @@ const u16 gMetatileAttributes_DewfordGymPorytiles[] = INCBIN_U16("data/tilesets/
 
 const u16 gMetatiles_Harbor[] = INCBIN_U16("data/tilesets/secondary/harbor/metatiles.bin");
 const u16 gMetatileAttributes_Harbor[] = INCBIN_U16("data/tilesets/secondary/harbor/metatile_attributes.bin");
+
+const u16 gMetatiles_FallarborPorytiles[] = INCBIN_U16("data/tilesets/secondary/fallarbor_porytiles/metatiles.bin");
+const u16 gMetatileAttributes_FallarborPorytiles[] = INCBIN_U16("data/tilesets/secondary/fallarbor_porytiles/metatile_attributes.bin");
+
+const u16 gMetatiles_RustboroPorytiles[] = INCBIN_U16("data/tilesets/secondary/rustboro_porytiles/metatiles.bin");
+const u16 gMetatileAttributes_RustboroPorytiles[] = INCBIN_U16("data/tilesets/secondary/rustboro_porytiles/metatile_attributes.bin");
