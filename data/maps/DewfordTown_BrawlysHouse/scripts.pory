@@ -1,4 +1,28 @@
-mapscripts DewfordTown_BrawlysHouse_MapScripts {}
+mapscripts DewfordTown_BrawlysHouse_MapScripts 
+{
+    MAP_SCRIPT_ON_TRANSITION {
+        call(DewfordTown_BrawlysHouse_SetNovaFlags)
+        setflag(FLAG_TEMP_2)
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        // VAR_INTRO_SEQUENCE_STATE, 13: DewfordTown_BrawlysHouse_EventScript_BrawlyChastisesYou
+    ]
+}
+
+script(local) DewfordTown_BrawlysHouse_SetNovaFlags
+{
+    if(var(VAR_INTRO_SEQUENCE_STATE) == 13)
+    {
+        setflag(FLAG_TEMP_1)
+    }
+}
+
+script(local) DewfordTown_BrawlysHouse_EventScript_BrawlyChastisesYou
+{
+    turnobject(LOCALID_PLAYER, DIR_NORTH)
+
+    setvar(VAR_INTRO_SEQUENCE_STATE, 14)
+}
 
 script DewfordTown_BrawlysHouse_EventScript_BrawlysWife {
     lock
