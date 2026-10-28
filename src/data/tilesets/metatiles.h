@@ -429,3 +429,6 @@ const u16 gMetatileAttributes_PlayersHouse[] = INCBIN_U16("data/tilesets/seconda
 
 const u16 gMetatiles_DewfordGymPorytiles[] = INCBIN_U16("data/tilesets/secondary/dewford_gym_porytiles/metatiles.bin");
 const u16 gMetatileAttributes_DewfordGymPorytiles[] = INCBIN_U16("data/tilesets/secondary/dewford_gym_porytiles/metatile_attributes.bin");
+
+const u16 gMetatiles_Harbor[] = INCBIN_U16("data/tilesets/secondary/harbor/metatiles.bin");
+const u16 gMetatileAttributes_Harbor[] = INCBIN_U16("data/tilesets/secondary/harbor/metatile_attributes.bin");

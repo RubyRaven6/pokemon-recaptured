@@ -887,7 +887,7 @@ enum __attribute__((packed)) Item
 
     // Story Key Items
     ITEM_SS_TICKET = 727,
-    ITEM_EON_TICKET = 728,
+    ITEM_TRAINER_TICKET = 728,
     ITEM_MYSTIC_TICKET = 729,
     ITEM_AURORA_TICKET = 730,
     ITEM_OLD_SEA_MAP = 731,

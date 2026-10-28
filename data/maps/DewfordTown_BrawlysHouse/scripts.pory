@@ -263,7 +263,8 @@ BrawlyMakesYouAnOfficialTrainer:
 		setflag(FLAG_SYS_POKEDEX_GET)
 		setflag(FLAG_SYS_POKEMON_GET)
 		setflag(FLAG_DEXNAV_OBTAINED)
-		msgbox("Brawly gave you a Pok\edex, Trainer\nCard, and updated your Pok\enav!")
+		additem(ITEM_TRAINER_TICKET)
+		msgbox("Brawly gave you a Pok\edex, Trainer\nCard, Trainer Ticket and updated your\lPok\enav!")
 		closemessage
 		cueobjecttalking(BRAWLY, FALSE)
 		setspeaker(SP_NAME_BRAWLY)

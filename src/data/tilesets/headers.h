@@ -1618,3 +1618,14 @@ const struct Tileset gTileset_DewfordGymPorytiles =
     .metatileAttributes = gMetatileAttributes_DewfordGymPorytiles,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Harbor =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Harbor,
+    .palettes = gTilesetPalettes_Harbor,
+    .metatiles = gMetatiles_Harbor,
+    .metatileAttributes = gMetatileAttributes_Harbor,
+    .callback = NULL,
+};
