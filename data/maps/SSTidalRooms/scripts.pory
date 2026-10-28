@@ -5,7 +5,7 @@ mapscripts SSTidalRooms_MapScripts {
 			case 0:
 			case 1:
 				setflag(FLAG_SYS_QUEST_MENU_GET)
-				setflag(FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN)
+				setflag(FLAG_HIDE_SS_TIDAL_CABIN_ELSIE)
 			default:
 				setobjectxyperm(LOCALID_SS_TIDAL_ELSIE, 3, 11)
 		}
@@ -32,7 +32,7 @@ script(local) SSTidalRooms_EventScript_WokeUpLikeThis
 script(local) SSTidalRooms_EventScript_ElsieEnters
 {
 	addobject(LOCALID_SS_TIDAL_ELSIE)
-	clearflag(FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN)
+	clearflag(FLAG_HIDE_SS_TIDAL_CABIN_ELSIE)
 	playse(SE_DOOR)
 	applymovement(LOCALID_SS_TIDAL_ELSIE, moves(walk_in_place_fast_up, delay_16 * 2))
 	waitmovement(0)

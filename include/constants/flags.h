@@ -61,14 +61,19 @@
 */
 
 // Object Hiding Flags
-#define FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN       0x20
-#define FLAG_HIDE_MOM_IN_SS_TIDAL_CORRIDOR      0x21
-#define FLAG_HIDE_BILLY_IN_SS_TIDAL_CORRIDOR    0x22
-#define FLAG_HIDE_ELSIE_IN_DEWFORD_TOWN    0x23
-#define FLAG_HIDE_ABANDONED_GYM_POKEBALL    0x29
-#define FLAG_HIDE_ABANDONED_GYM_ZUBAT    0x2A
-#define FLAG_HIDE_ABANDONED_GYM_STARTER    0x2B
-#define FLAG_HIDE_ABANDONED_GYM_BRAWLY    0x2E
+#define FLAG_HIDE_SS_TIDAL_CABIN_ELSIE       0x20
+#define FLAG_HIDE_SS_TIDAL_CORRIDOR_MOM      0x21
+#define FLAG_HIDE_SS_TIDAL_CORRIDOR_BILLY    0x22
+#define FLAG_HIDE_DEWFORD_TOWN_ELSIE         0x23
+#define FLAG_HIDE_ABANDONED_GYM_POKEBALL        0x29
+#define FLAG_HIDE_ABANDONED_GYM_ZUBAT           0x2A
+#define FLAG_HIDE_ABANDONED_GYM_STARTER         0x2B
+#define FLAG_HIDE_ABANDONED_GYM_BRAWLY          0x2E
+#define FLAG_HIDE_BRAWLYSHOUSE_NOVA             0x2F
+#define FLAG_HIDE_BRAWLYSHOUSE_BRAWLY           0x30
+#define FLAG_HIDE_BRAWLYSHOUSE_ELSIE            0x31
+#define FLAG_HIDE_BRAWLYSHOUSE_STARTER    0x34
+#define FLAG_HIDE_PLAYERSHOUSE_ELSIE    0x35
 
 // System-ish Flags
 #define FLAG_DEXNAV_SEARCH    0x24 // Searching for mon
@@ -78,14 +83,9 @@
 #define FLAG_WE_OWE_FLAG_DISABLED    0x28 // disabled overworld wild encounters
 #define FLAG_WE_FLAG_NO_CATCHING    0x2C // Disables Catching Wild Mons
 #define FLAG_WE_FLAG_NO_RUNNING    0x2D // Disables Running from Wild Mons
+#define FLAG_FOLLOWERS_DISABLED    0x32 // Disable Followers
+#define FLAG_FNPC_ALWAYS_HEALS_PARTY    0x33 // Follower NPC Heals player 
 
-#define FLAG_UNUSED_0x02F    0x2F // Unused Flag
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
-#define FLAG_UNUSED_0x031    0x31 // Unused Flag
-#define FLAG_UNUSED_0x032    0x32 // Unused Flag
-#define FLAG_UNUSED_0x033    0x33 // Unused Flag
-#define FLAG_UNUSED_0x034    0x34 // Unused Flag
-#define FLAG_UNUSED_0x035    0x35 // Unused Flag
 #define FLAG_UNUSED_0x036    0x36 // Unused Flag
 #define FLAG_UNUSED_0x037    0x37 // Unused Flag
 #define FLAG_UNUSED_0x038    0x38 // Unused Flag
