@@ -1,36 +1,50 @@
+const ELSIE = LOCALID_PLAYERHOUSE_ELSIE
+
 mapscripts DewfordTown_PlayersHouse_1F_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION {
-        if(var(VAR_INTRO_SEQUENCE_STATE) == 15)
-        {
-            setflag(FLAG_TEMP_1)
-        }
-        elif(var(VAR_INTRO_SEQUENCE_STATE) > 15 || var(VAR_INTRO_SEQUENCE_STATE) < 15)
-        {
-            setflag(FLAG_TEMP_2)
-        }
-    }    
+	MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+		VAR_INTRO_SEQUENCE_STATE, 14
+		{
+			setobjectxyperm(ELSIE, 9, 10)
+			setobjectmovementtype(ELSIE, MOVEMENT_TYPE_FACE_RIGHT)
+		}
+	]
 }
 
 script DewfordTown_PlayersHouse_1F_EventScript_Elsie
 {
-    if(var(VAR_INTRO_SEQUENCE_STATE) < 15)
-    {
-        lock
-        faceplayer
-        setspeaker(SP_NAME_ELSIE)
-        msgbox("Isn't it nice here, Champ?\nThe salty air's pretty refreshing.\p")
-        msgbox("Thankfully we don't have to unpack a\nlot. It was convenient getting movers.\lYou can take it easy today.")
-        closemessage
-        release
-        end
-    }
-    elif(var(VAR_INTRO_SEQUENCE_STATE) > 15)
-    {
+	if(var(VAR_INTRO_SEQUENCE_STATE) < 14)
+	{goto(ElsieJustMovedIn)}
+	elif(var(VAR_INTRO_SEQUENCE_STATE) == 14)
+	{goto(ElsieSeesYouOff)}
 
-    }
-}
 
-script DewfordTown_PlayersHouse_1F_EventScript_ElsieSeesYouOff
-{
-    
+ElsieJustMovedIn:
+	lock
+	faceplayer
+	setspeaker(SP_NAME_ELSIE)
+	msgbox("Isn't it nice here, Champ?\nThe salty air's pretty refreshing.\p")
+	msgbox("Thankfully we don't have to unpack a\nlot. It was convenient getting movers.\lYou can take it easy today, too.")
+	closemessage
+	release
+	end
+
+ElsieSeesYouOff:
+	lock
+	cueobjecttalking(ELSIE, TRUE)
+	setspeaker(SP_NAME_ELSIE)
+	msgbox(
+		"I guess this was to be expected, with\nhow much I call you \qoChamp\qc."
+		"It's just… I can't help but feel worry.\n And irony. Working this hard to get us\laway and you start the warpath back."
+	)
+	closemessage
+	applymovement(ELSIE, moves(face_player, delay_16 * 2))
+	waitmovement(0)
+	msgbox(
+		"I guess this was to be expected, with\nhow much I call you \qoChamp\qc."
+		"It's just… I can't help but feel worry.\n And irony. Working this hard to get us\laway and you start the warpath back."
+	)
+	closemessage
+	release
+	setvar(VAR_INTRO_SEQUENCE_STATE, 15)
+	end
 }

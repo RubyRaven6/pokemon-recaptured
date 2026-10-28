@@ -80,6 +80,7 @@ VAR_INTRO_SEQUENCE_STATE States
 - 11: Player has accepted starter into team
 - 12: Player gets rescued by Brawly
 - 13: Player talking to Brawly in house
+- 14: Player talking to Elsie
 */
 #define VAR_INTRO_SEQUENCE_STATE                         0x4084
 #define VAR_STARTER_MON                                  0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip

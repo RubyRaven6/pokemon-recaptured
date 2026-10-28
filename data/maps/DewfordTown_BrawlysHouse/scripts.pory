@@ -1,39 +1,276 @@
+const BRAWLY = LOCALID_BRAWLY_HOUSE_BRAWLY
+const NOVA = LOCALID_BRAWLY_HOUSE_NOVA
+const ELSIE = LOCALID_BRAWLY_HOUSE_ELSIE
+const STARTER = LOCALID_BRAWLY_HOUSE_STARTER
+const FLAG_BRAWLY = FLAG_HIDE_BRAWLYSHOUSE_BRAWLY
+const FLAG_NOVA = FLAG_HIDE_BRAWLYSHOUSE_NOVA
+const FLAG_ELSIE = FLAG_HIDE_BRAWLYSHOUSE_ELSIE
+const CONST_MANKEY = 0
+const CONST_TINKATINK = 1
+const CONST_SOLOSIS = 2
+
 mapscripts DewfordTown_BrawlysHouse_MapScripts 
 {
-    MAP_SCRIPT_ON_TRANSITION {
-        call(DewfordTown_BrawlysHouse_SetNovaFlags)
-        setflag(FLAG_TEMP_2)
-    }
-    MAP_SCRIPT_ON_FRAME_TABLE [
-        // VAR_INTRO_SEQUENCE_STATE, 13: DewfordTown_BrawlysHouse_EventScript_BrawlyChastisesYou
-    ]
+	MAP_SCRIPT_ON_TRANSITION {
+		call(DewfordTown_BrawlysHouse_SetNovaFlags)
+		call(DewfordTown_BrawlysHouse_SetBrawlyFlags)
+		call(DewfordTown_BrawlysHouse_SetStarterGfxVar)
+	}
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_INTRO_SEQUENCE_STATE, 13: DewfordTown_BrawlysHouse_EventScript_BrawlyChastisesYou
+	]
+}
+
+script DewfordTown_BrawlysHouse_SetStarterGfxVar
+{
+	switch(var(VAR_STARTER_MON))
+	{
+		case CONST_MANKEY:
+			setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(MANKEY))
+		case CONST_TINKATINK:
+			setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(TINKATINK))
+		case CONST_SOLOSIS:
+			setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(SOLOSIS))
+	}
+}
+
+script(local) DewfordTown_BrawlysHouse_SetBrawlyFlags
+{
+	if(var(VAR_INTRO_SEQUENCE_STATE) < 13)
+	{
+		setflag(FLAG_BRAWLY)
+	}
 }
 
 script(local) DewfordTown_BrawlysHouse_SetNovaFlags
 {
-    if(var(VAR_INTRO_SEQUENCE_STATE) == 13)
-    {
-        setflag(FLAG_TEMP_1)
-    }
+	if(var(VAR_INTRO_SEQUENCE_STATE) == 13)
+	{
+		setobjectxyperm(NOVA, 5, 8)
+		setflag(FLAG_NOVA)
+	}
+}
+
+movement MankeyMovements {
+	walk_fast_down
+	walk_fast_left
+	walk_fast_up
+	walk_fast_right
+	walk_fast_down
+	walk_fast_left
+	walk_fast_up
+	walk_fast_right
 }
 
 script(local) DewfordTown_BrawlysHouse_EventScript_BrawlyChastisesYou
 {
-    turnobject(LOCALID_PLAYER, DIR_NORTH)
+	lock
+	setobjectmovementtype(BRAWLY, MOVEMENT_TYPE_NONE)
+	setobjectmovementtype(NOVA, MOVEMENT_TYPE_NONE)
+	turnobject(LOCALID_PLAYER, DIR_NORTH)
+	cueobject(BRAWLY, DIR_SOUTH)
+	setspeaker(SP_NAME_BRAWLY)
+	msgbox(
+		"So, the lock just fell off and you just\nwent in?\pI know urban exploration's big, but\nthat's still trespassing.\p"
+		"Some stray Pokémon get in there\nsometimes, still. Lucky you didn't get\lhurt at all."
+	)
+	closemessage
+	delay(30)
+	playse(SE_DOOR)
+	addobject(NOVA)
+	addobject(ELSIE)
+	clearflag(FLAG_NOVA)
+	clearflag(FLAG_ELSIE)
+	cueobject(NOVA, DIR_NORTH)
+	cueobject(ELSIE, DIR_NORTH)
+	turnobject(LOCALID_PLAYER, DIR_SOUTH)
+	delay(30)
+	setspeaker(SP_NAME_ELSIE)
+	msgbox(
+		"Oh my god, {PLAYER}! Are you okay?"
+	)
+	applymovement(ELSIE, moves(walk_fast_up * 2, walk_fast_left, walk_fast_up, delay_16 * 2))
+	setspeaker(SP_NAME_NOVA)
+	applymovement(NOVA, moves(walk_left, walk_up * 5, face_down, delay_16 * 2))
+	msgbox(
+		"Slow down, girl! We've already looked\nher over and she's unharmed."
+	)
+	waitmessage
+	waitmovement(ELSIE)
+	waitmovement(NOVA)
+	closemessage
+	cueobjecttalking(LOCALID_PLAYER, TRUE)
+	delay(30)
+	setspeaker(SP_NAME_ELSIE)
+	msgbox(
+		"Eh? What do you mean you weren't\nalone?"
+	)
+	closemessage
+	turnobject(LOCALID_PLAYER, DIR_WEST)
+	delay(30)
+	playse(SE_BALL_OPEN)
+	addobject(STARTER)
+	clearflag(FLAG_HIDE_BRAWLYSHOUSE_STARTER)
+	applymovement(STARTER, moves(exit_pokeball))
+	waitmovement(0)
+	switch(var(VAR_STARTER_MON))
+	{
+		case CONST_MANKEY:
+			playmoncry(SPECIES_MANKEY, CRY_MODE_NORMAL)
+			waitmoncry
+			applymovement(STARTER, MankeyMovements)
+			waitmovement(0)
+			applymovement(STARTER, moves(delay_16 * 2, walk_in_place_right))
+			playmoncry(SPECIES_MANKEY, CRY_MODE_NORMAL)
+			waitmovement(0)
+			waitmoncry
+		case CONST_TINKATINK:
+			playmoncry(SPECIES_TINKATINK, CRY_MODE_NORMAL)
+			waitmoncry
+			applymovement(STARTER, moves(jump_in_place_right * 4))
+			playse(SE_BIKE_HOP)
+			delay(16)
+			waitse
+			playse(SE_BIKE_HOP)
+			delay(16)
+			waitse
+			playse(SE_BIKE_HOP)
+			delay(16)
+			waitse
+			playse(SE_BIKE_HOP)
+			delay(16)
+			waitse
+			waitmovement(STARTER)
+			playmoncry(SPECIES_TINKATINK, CRY_MODE_NORMAL)
+			waitmoncry
+		case CONST_SOLOSIS:
+			playmoncry(SPECIES_SOLOSIS, CRY_MODE_NORMAL)
+			waitmoncry
+			applymovement(STARTER, moves(face_up, delay_16 * 4, face_down * 4, delay_16 *4, face_right))
+			waitmovement(0)
+			delay(30)
+			playmoncry(SPECIES_SOLOSIS, CRY_MODE_NORMAL)
+			waitmoncry
+	}
+	setspeaker(SP_NAME_BRAWLY)
+	msgbox("Ah well, look at this lil' guy! Looks\nlike you had nothing to worry about.")
+	closemessage
+	applymovement(STARTER, moves(enter_pokeball))
+	waitmovement(0)
+	removeobject(STARTER)
+	delay(15)
+	cueobject(LOCALID_PLAYER, DIR_NORTH, TRUE)
+	delay(60)
+	setspeaker(SP_NAME_BRAWLY)
+	msgbox("Huh? Becoming a trainer? You seem to\nbe a bit old to just be starting…")
+	closemessage
+	applymovement(ELSIE, moves(walk_fast_left, walk_fast_up, face_right, delay_16, walk_in_place_right))
+	applymovement(LOCALID_PLAYER, moves(delay_16 * 3, face_left))
+	waitmovement(ELSIE)
+	waitmovement(LOCALID_PLAYER)
+	setspeaker(SP_NAME_ELSIE)
+	msgbox("A-Are you sure, {PLAYER}? If you do\nthe League Challenge then…\pWhat if you have to face him?")
+	setspeaker(SP_NAME_BRAWLY)
+	msgbox("…")
+	closemessage
+	delay(15)
+	cueobjecttalking(BRAWLY, FALSE)
+	setspeaker(SP_NAME_BRAWLY)
+	msgbox("It's as I thought then, I thought you\nboth looked familiar. You're Rook's\lkids, arent you?")
+	waitmovement(BRAWLY)
+	turnobject(ELSIE, DIR_NORTH)
+	turnobject(LOCALID_PLAYER, DIR_NORTH)
+	setspeaker(SP_NAME_ELSIE)
+	msgbox("Uh, yes, sir. Rook is our father.")
+	setspeaker(SP_NAME_BRAWLY)
+	msgbox("You don't have to say more, kid. A guy\nhears things. I'm just glad you could\lfind a home here.")
+	setspeaker(SP_NAME_ELSIE)
+	msgbox("Is it okay we talk back home first?")
+	setspeaker(SP_NAME_BRAWLY)
+	msgbox("Of course. I'll be waiting here to help\n{PLAYER} get started.")
+	turnobject(ELSIE, DIR_EAST)
+	turnobject(LOCALID_PLAYER, DIR_WEST)
+	setspeaker(SP_NAME_ELSIE)
+	msgbox("I'll just be in the living room, kay?\nSee you in a bit.")
+	closemessage
+	applymovement(ELSIE, moves(walk_down * 3, walk_right, walk_down, walk_in_place_down))
+	waitmovement(ELSIE)
+	playse(SE_DOOR)
+	removeobject(ELSIE)
 
-    setvar(VAR_INTRO_SEQUENCE_STATE, 14)
+	setvar(VAR_INTRO_SEQUENCE_STATE, 14)
+	release
+	end
 }
 
-script DewfordTown_BrawlysHouse_EventScript_BrawlysWife {
-    lock
-    faceplayer
-    setspeaker("Nova")
-    msgbox(
-        "Oh, hello! You must be the girls moving\nin today. Welcome!\p"
-        "I hope you enjoy our small community.\nLife here is a little slow.\p"
-        "We have a dock now for the new ferry\nroute, but since my husband retired,\lwe haven't had too many visit."
-    )
-    closemessage
-    release
-    end
+script DewfordTown_BrawlysHouse_EventScript_Brawly
+{
+	if(var(VAR_INTRO_SEQUENCE_STATE) == 14)
+	{
+		lock
+		faceplayer
+		setspeaker(SP_NAME_BRAWLY)
+		msgbox(
+			"I'll be waiting right here until you\nhave that chat with your sister."
+		)
+		closemessage
+		release
+		end
+	}
+	elif(var(VAR_INTRO_SEQUENCE_STATE) == 15)
+	{
+		lock
+		faceplayer
+		setspeaker(SP_NAME_BRAWLY)
+		msgbox(
+			"I know what it's like to move here as a\nnew face. I came all the way from Kalos\lafter journeying a while.\p"
+			"I knew this was the place for me the\nmoment I laid eyes on the town's\lhandsome Gym Leader."
+		)
+		closemessage
+		release
+		end
+	}
+}
+
+script DewfordTown_BrawlysHouse_EventScript_Nova {
+	if(var(VAR_INTRO_SEQUENCE_STATE) < 13)
+	{
+		lock
+		faceplayer
+		setspeaker(SP_NAME_NOVA)
+		msgbox(
+			"Oh, hello! You must be the girls moving\nin today. Welcome!\p"
+			"I hope you enjoy our small community.\nLife here is a little slow.\p"
+			"We have a dock now for the new ferry\nroute, but since my husband retired,\lwe haven't had too many visit."
+		)
+		closemessage
+		release
+		end
+	}
+	elif(var(VAR_INTRO_SEQUENCE_STATE) == 14)
+	{
+		lock
+		faceplayer
+		setspeaker(SP_NAME_NOVA)
+		msgbox(
+			"I'm glad that you got out of that old\ngym safe. We try our best to keep\lpeople out of harm.\p"
+			"And know that you'll always have a\nwarm and welcome home here in Dewford,\lcourtesy of me."
+		)
+		closemessage
+		release
+		end
+	}
+	elif(var(VAR_INTRO_SEQUENCE_STATE) > 14)
+	{
+		lock
+		faceplayer
+		setspeaker(SP_NAME_NOVA)
+		msgbox(
+			"I know what it's like to move here as a\nnew face. I came all the way from Kalos\lafter journeying a while.\p"
+			"I knew this was the place for me the\nmoment I laid eyes on the town's\lhandsome Gym Leader."
+		)
+		closemessage
+		release
+		end
+	}
 }
