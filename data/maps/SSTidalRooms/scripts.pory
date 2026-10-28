@@ -164,7 +164,7 @@ script SSTidalRooms_EventScript_Mom
 		case 0:
 			setspeaker("Tired Mom")
 			message(
-				"Our next stop would be Rustboro, the\none right after this one."
+				"Our next stop would be Rustboro, the\none right after this one.\p"
 				"We went to visit Billy's mom over in Ever\nGrande City.\pShe's works as a Pok\emon League Coach\nto the advanced trainers."
 				)
 			waitmessage
