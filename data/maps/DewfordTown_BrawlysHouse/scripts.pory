@@ -218,18 +218,71 @@ script DewfordTown_BrawlysHouse_EventScript_Brawly
 		end
 	}
 	elif(var(VAR_INTRO_SEQUENCE_STATE) == 15)
-	{
+	{goto(BrawlyMakesYouAnOfficialTrainer)}
+	elif(var(VAR_INTRO_SEQUENCE_STATE) > 15){
 		lock
 		faceplayer
 		setspeaker(SP_NAME_BRAWLY)
 		msgbox(
-			"I know what it's like to move here as a\nnew face. I came all the way from Kalos\lafter journeying a while.\p"
-			"I knew this was the place for me the\nmoment I laid eyes on the town's\lhandsome Gym Leader."
+			"It's been a long while since I've been\na Gym Leader, but I can still help new\ltrainers start their journey.\p"
+			"Being the most experienced trainer in\nDewford, I've been allowed to keep my\lauthorization from the League."
 		)
 		closemessage
 		release
-		end
+		end		
 	}
+
+BrawlyMakesYouAnOfficialTrainer:
+	lock
+	faceplayer
+	setspeaker(SP_NAME_BRAWLY)
+	msgbox(
+		"I gather you've sorted things out\nwith your sister, then.\p"
+		"Even so, I ask you: are you ready to\nstart this journey?.", MSGBOX_YESNO
+	)
+	if(var(VAR_RESULT) == NO){
+		msgbox("I understand. Just let me know once\nyou're ready.")
+		closemessage
+	}
+	else
+	{
+		setvar(VAR_INTRO_SEQUENCE_STATE, 16)
+		cueobjecttalking(BRAWLY, FALSE)
+		setspeaker(SP_NAME_BRAWLY)
+		msgbox(
+			"Music to my ears! It's been a while\nsince I welcomed someone to the life\lof a trainer.\p"
+			"Now, to get you started, you'll need\nsome basic equipment.\p"
+			"I'll need to borrow your Pok\enav too,\nif you don't mind."
+		)
+		waitmovement(0)
+		closemessage
+		cueobjecttalking(BRAWLY, TRUE)
+		playfanfare(MUS_OBTAIN_ITEM)
+		waitfanfare
+		setflag(FLAG_ADVENTURE_STARTED)
+		setflag(FLAG_SYS_POKEDEX_GET)
+		setflag(FLAG_SYS_POKEMON_GET)
+		setflag(FLAG_DEXNAV_OBTAINED)
+		msgbox("Brawly gave you a Pok\edex, Trainer\nCard, and updated your Pok\enav!")
+		closemessage
+		cueobjecttalking(BRAWLY, FALSE)
+		setspeaker(SP_NAME_BRAWLY)
+		msgbox(
+			"Here you go! These should give you\neverything to get started.\p"
+			"I, Brawly, hereby welcome you to the\nPok\emon League Challenge!"
+		)
+		playfanfare(MUS_OBTAIN_BADGE)
+		waitfanfare
+		waitse
+		waitmovement(0)
+		msgbox(
+			"Now, onto business. Your first stop in\nthe League Challenge would be in\lLittleroot Town.\p"
+			"Of course, to get there you'll have to\ntake the ferry to Rustboro, then the\lsubway to Littleroot.\p"
+			"You can just go up at any time to take\nthe next ferry already.\pGood luck!"
+		)
+	}
+	release
+	end
 }
 
 script DewfordTown_BrawlysHouse_EventScript_Nova {
