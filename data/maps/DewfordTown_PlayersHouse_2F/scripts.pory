@@ -31,7 +31,7 @@ script DewfordTown_PlayersHouse_2F_EventScript_SnorlaxDoll
 {
 	msgbox (
 		"It's a gigantic Snorlax doll. There's a\nnote attached.\p"
-		"\qoHey, Champ, I hope you like the frien\nin our room. I know you've always\lwanted one. -Elsie\qc", MSGBOX_SIGN)
+		"\qoHey, Champ, I hope you like the friend\nin our room. I know you've always\lwanted one. -Elsie\qc", MSGBOX_SIGN)
 	closemessage
 	end
 }
