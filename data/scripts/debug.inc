@@ -80,6 +80,10 @@ Debug_CheatStart_Old:
 	release
 	end
 
+Debug_ForceSave::
+	forcesave
+	release
+
 Debug_CheatStartFrlg::
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
