@@ -150,15 +150,19 @@
     "OldaleTown_Mart"
   ],
   "gMapGroup_IndoorDewford": [
-    "DewfordTown_House1",
     "DewfordTown_PokemonCenter_1F",
     "DewfordTown_PokemonCenter_2F",
+    "DewfordTown_Mart",
     "DewfordTown_Gym",
     "DewfordTown_Hall",
+    "DewfordTown_House1",
     "DewfordTown_House2",
     "DewfordTown_House3",
+    "DewfordTown_House4",
     "DewfordTown_Harbor",
-    "DewfordTown_Mart"
+    "DewfordTown_BrawlysHouse",
+    "DewfordTown_PlayersHouse_1F",
+    "DewfordTown_PlayersHouse_2F"
   ],
   "gMapGroup_IndoorLavaridge": [
     "LavaridgeTown_HerbShop",

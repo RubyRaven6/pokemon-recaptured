@@ -1,7 +1,184 @@
+const ZUBAT = LOCALID_ABANDONED_GYM_ZUBAT
+const STARTER = LOCALID_ABANDONED_GYM_STARTER
+const BRAWLY = LOCALID_ABANDONED_GYM_BRAWLY
+
+const CONST_MANKEY = 0
+const CONST_TINKATINK = 1
+const CONST_SOLOSIS = 2
+
+mapscripts DewfordTown_Gym_MapScripts {
+	MAP_SCRIPT_ON_TRANSITION
+	{
+		setflashlevel(4)
+		if(var(VAR_INTRO_SEQUENCE_STATE) > 10){setflag(FLAG_HIDE_ABANDONED_GYM_POKEBALL)}
+		setflag(FLAG_HIDE_ABANDONED_GYM_ZUBAT)
+		setflag(FLAG_HIDE_ABANDONED_GYM_STARTER)
+	}
+	MAP_SCRIPT_ON_FRAME_TABLE [
+		VAR_INTRO_SEQUENCE_STATE, 9: DewfordTown_Gym_EventScript_EntranceCollapses
+		VAR_INTRO_SEQUENCE_STATE, 11: DewfordTown_Gym_EventScript_StarterSequence
+	]
+}
+
+script(local) DewfordTown_Gym_EventScript_EntranceCollapses
+{
+	applymovement(LOCALID_PLAYER, moves(walk_up))
+	waitmovement(0)
+	playse(SE_M_ROCK_THROW)
+	setvar (VAR_0x8004, 0)  // vertical pan
+	setvar (VAR_0x8005, 2)  // horizontal pan
+	setvar (VAR_0x8006, 2)  // num shakes
+	setvar (VAR_0x8007, 3)  // shake delay
+	special(ShakeCamera)
+	waitse
+
+	setmetatile(5, 27, 0x84e, FALSE)
+	setmetatile(6, 27, 0x84f, FALSE)
+	special(DrawWholeMapView)
+
+	turnobject(LOCALID_PLAYER, DIR_SOUTH)
+	delay(60)
+	applymovement(LOCALID_PLAYER, moves(walk_down, delay_16 * 2, walk_in_place_down))
+	waitmovement(0)
+
+	msgbox("…\pThe doors got locked behind you…")
+	closemessage
+	
+	setvar(VAR_INTRO_SEQUENCE_STATE, 10)
+	forcesave
+	release
+}
+
+script DewfordTown_Gym_EventScript_GymStatues
+{
+	msgbox("You can't see what it says in the dark.\nYou can just barely see faded names.", MSGBOX_DEFAULT)
+	closemessage
+}
+
+script DewfordTown_Gym_EventScript_PokeBall
+{
+	giveitem(ITEM_POKE_BALL)
+	removeobject(LOCALID_ABANDONED_GYM_POKEBALL)
+	closemessage
+	setvar(VAR_INTRO_SEQUENCE_STATE, 11)
+}
+
+script(local) DewfordTown_Gym_EventScript_StarterSequence {
+	playmoncry(SPECIES_ZUBAT, CRY_MODE_NORMAL)
+	turnobject(LOCALID_PLAYER, DIR_EAST)
+	waitmoncry
+	delay(30)
+	getplayerxy(VAR_TEMP_1, VAR_TEMP_0)
+	if(var(VAR_TEMP_1) == 3){applymovement(LOCALID_PLAYER, moves(walk_down, walk_right))}
+	else{applymovement(LOCALID_PLAYER, moves(walk_down * 2, face_right))}
+	waitmovement(0)
+	addobject(ZUBAT)
+	clearflag(FLAG_HIDE_ABANDONED_GYM_ZUBAT)
+	applymovement(ZUBAT, moves(walk_fast_left))
+	playmoncry(SPECIES_ZUBAT, CRY_MODE_NORMAL)
+	waitmovement(0)
+	waitmoncry
+	delay(30)
+	applymovement(ZUBAT, moves(walk_fast_left))
+	waitmovement(0)
+
+	fadescreen(FADE_TO_BLACK)
+	msgbox("In that moment of danger, you feel\nsomething reach out…")
+	msgbox("Who answers your call?")
+	dynmultipush("Something angry…", CONST_MANKEY)
+	dynmultipush("Something stalwart…", CONST_TINKATINK)
+	dynmultipush("Something mystic…", CONST_SOLOSIS)
+	dynmultistack(7, 3, TRUE, 3, TRUE, 0, DYN_MULTICHOICE_CB_NONE)
+	switch(var(VAR_RESULT))
+	{
+		case CONST_MANKEY:
+			setvar(VAR_TEMP_0, SPECIES_MANKEY)
+			setvar(VAR_TEMP_1, CONST_MANKEY)
+			setvar(VAR_STARTER_MON, CONST_MANKEY)
+			setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(MANKEY))
+			givemon(SPECIES_MANKEY_SPECIAL, 6, move1=MOVE_KARATE_CHOP, move2=MOVE_LEER, move3=MOVE_FURY_SWIPES, move4=MOVE_SCRATCH)
+			bufferspeciesname(STR_VAR_1, SPECIES_MANKEY)
+		case CONST_TINKATINK:
+			setvar(VAR_TEMP_0, SPECIES_TINKATINK)
+			setvar(VAR_TEMP_1, CONST_TINKATINK)
+			setvar(VAR_STARTER_MON, CONST_TINKATINK)
+			setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(TINKATINK))
+			bufferspeciesname(STR_VAR_1, SPECIES_TINKATINK)
+			givemon(SPECIES_TINKATINK_SPECIAL, 6, move1=MOVE_SMACK_DOWN, move2=MOVE_POUND, move3=MOVE_BABY_DOLL_EYES, move4=MOVE_FAIRY_WIND)
+		case CONST_SOLOSIS:
+			setvar(VAR_TEMP_0, SPECIES_SOLOSIS)
+			setvar(VAR_TEMP_1, CONST_SOLOSIS)
+			setvar(VAR_STARTER_MON, CONST_SOLOSIS)
+			setvar(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_SPECIES(SOLOSIS))
+			bufferspeciesname(STR_VAR_1, SPECIES_SOLOSIS)
+			givemon(SPECIES_SOLOSIS_SPECIAL, 6, move1=MOVE_PROTECT, move2=MOVE_CONFUSION, move3=MOVE_ECHOED_VOICE, move4=MOVE_RECOVER)
+	}
+	addobject(STARTER)
+	clearflag(FLAG_HIDE_ABANDONED_GYM_STARTER)
+	closemessage
+	fadescreen(FADE_FROM_BLACK)
+	delay(30)
+	playmoncry(VAR_TEMP_0, CRY_MODE_NORMAL)
+	waitmoncry
+
+	setwildbattle(SPECIES_ZUBAT, 7)
+	dowildbattle
+
+	playmoncry(SPECIES_ZUBAT, CRY_MODE_NORMAL)
+	waitmoncry
+	delay(30)
+	applymovement(ZUBAT, moves(walk_fast_right * 3))
+	waitmovement(0)
+	removeobject(ZUBAT)
+	clearflag(FLAG_WE_FLAG_NO_CATCHING)
+	clearflag(FLAG_WE_FLAG_NO_RUNNING)
+	goto(DewfordTown_Gym_StarterWantsToJoin)
+}
+
+script DewfordTown_Gym_StarterWantsToJoin
+{
+    applymovement(STARTER, Common_Movement_FacePlayer)
+    msgbox("It looks like the {STR_VAR_1} wants to\nstay by your side.\pYou can't help but feel like welcoming\nit.", MSGBOX_DEFAULT)
+	closemessage
+	playfanfare(MUS_OBTAIN_ITEM)
+	msgbox(format("{STR_VAR_1} joined you!"), MSGBOX_DEFAULT)
+	waitfanfare
+	setflag(FLAG_SYS_POKEMON_GET)
+	removeobject(STARTER)
+	closemessage
+	msgbox("Give a nickname?", MSGBOX_YESNO)
+	if(var(VAR_RESULT) == YES){
+		call(Common_EventScript_GetGiftMonPartySlot)
+		call(Common_EventScript_NameReceivedPartyMon)
+	}
+	else{closemessage}
+	setvar(VAR_INTRO_SEQUENCE_STATE, 12)
+	addobject(BRAWLY)
+	clearflag(FLAG_HIDE_ABANDONED_GYM_BRAWLY)
+	end
+}
+
+script DewfordTown_Gym_BrawlyCallsForPlayer
+{
+	setspeaker("???")
+	msgbox("Hello? Is anyone in there?", MSGBOX_DEFAULT)
+	closemessage
+	applymovement(LOCALID_PLAYER, moves(emote_exclamation_mark, face_down, delay_16 * 2, walk_down * 3))
+	applymovement(BRAWLY, moves(delay_16 * 2, walk_up * 3))
+	waitmovement(LOCALID_PLAYER)
+	waitmovement(BRAWLY)
+	setspeaker("???")
+	msgbox("What are you doing in here?! It's totally\nunsafe, and if anything happens, it's\lon MY head.")
+	setspeaker("Brawly")
+	msgbox("I may have retired, but this is still my\ngym. You better come with me, kid.")
+	closemessage
+
+	setvar(VAR_INTRO_SEQUENCE_STATE, 13)
+	warp(MAP_DEWFORD_TOWN_BRAWLYHOUSE, 5, 4)
+	waitstate
+}
+
 raw `
-DewfordTown_Gym_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_Gym_OnTransition
-	.byte 0
 
 DewfordTown_Gym_OnTransition:
 	call DewfordTown_Gym_EventScript_SetFlashLevel

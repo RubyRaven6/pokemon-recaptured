@@ -272,6 +272,17 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_HIDE_EVER_GRANDE_POKEMON_CENTER_1F_SCOTT
 	setflag FLAG_HIDE_SKY_PILLAR_WALLACE
 	setflag FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL
+	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	@ ____  ____  ___   __   ____  ____  _  _  ____  ____  ____    ____  __     __    ___  ____  @
+	@(  _ \(  __)/ __) / _\ (  _ \(_  _)/ )( \(  _ \(  __)(    \  (  __)(  )   / _\  / __)/ ___) @
+	@ )   / ) _)( (__ /    \ ) __/  )(  ) \/ ( )   / ) _)  ) D (   ) _) / (_/\/    \( (_ \\___ \ @
+	@(__\_)(____)\___)\_/\_/(__)   (__) \____/(__\_)(____)(____/  (__)  \____/\_/\_/ \___/(____/ @
+	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	setflag FLAG_WE_FLAG_NO_CATCHING
+	setflag FLAG_WE_FLAG_NO_RUNNING
+	setflag FLAG_HIDE_ABANDONED_GYM_BRAWLY
+
+	@ </recaptured flags>
 	call EventScript_ResetAllBerries
 	end
 

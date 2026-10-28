@@ -51,21 +51,34 @@
 
 #else
 
-#define FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN       0x20 // Unused Flag
-#define FLAG_HIDE_MOM_IN_SS_TIDAL_CORRIDOR      0x21 // Unused Flag
-#define FLAG_HIDE_BILLY_IN_SS_TIDAL_CORRIDOR    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
-#define FLAG_UNUSED_0x024    0x24 // Unused Flag
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
-#define FLAG_UNUSED_0x026    0x26 // Unused Flag
-#define FLAG_UNUSED_0x027    0x27 // Unused Flag
-#define FLAG_UNUSED_0x028    0x28 // Unused Flag
-#define FLAG_UNUSED_0x029    0x29 // Unused Flag
-#define FLAG_UNUSED_0x02A    0x2A // Unused Flag
-#define FLAG_UNUSED_0x02B    0x2B // Unused Flag
-#define FLAG_UNUSED_0x02C    0x2C // Unused Flag
-#define FLAG_UNUSED_0x02D    0x2D // Unused Flag
-#define FLAG_UNUSED_0x02E    0x2E // Unused Flag
+/*
+    ____                        __                      __   ________                
+   / __ \___  _________ _____  / /___  __________  ____/ /  / ____/ /___ _____ ______
+  / /_/ / _ \/ ___/ __ `/ __ \/ __/ / / / ___/ _ \/ __  /  / /_  / / __ `/ __ `/ ___/
+ / _, _/  __/ /__/ /_/ / /_/ / /_/ /_/ / /  /  __/ /_/ /  / __/ / / /_/ / /_/ (__  ) 
+/_/ |_|\___/\___/\__,_/ .___/\__/\__,_/_/   \___/\__,_/  /_/   /_/\__,_/\__, /____/  
+                     /_/                                               /____/        
+*/
+
+// Object Hiding Flags
+#define FLAG_HIDE_ELSIE_IN_SS_TIDAL_CABIN       0x20
+#define FLAG_HIDE_MOM_IN_SS_TIDAL_CORRIDOR      0x21
+#define FLAG_HIDE_BILLY_IN_SS_TIDAL_CORRIDOR    0x22
+#define FLAG_HIDE_ELSIE_IN_DEWFORD_TOWN    0x23
+#define FLAG_HIDE_ABANDONED_GYM_POKEBALL    0x29
+#define FLAG_HIDE_ABANDONED_GYM_ZUBAT    0x2A
+#define FLAG_HIDE_ABANDONED_GYM_STARTER    0x2B
+#define FLAG_HIDE_ABANDONED_GYM_BRAWLY    0x2E
+
+// System-ish Flags
+#define FLAG_DEXNAV_SEARCH    0x24 // Searching for mon
+#define FLAG_DEXNAV_OBTAINED    0x25 // DexNav shows in start menu
+#define FLAG_DEXNAV_FIND_HIDDEN    0x26 // Allow player to find hidden mons
+#define FLAG_WE_FLAG_NO_ENCOUNTER    0x27 // disabled wild encounters
+#define FLAG_WE_OWE_FLAG_DISABLED    0x28 // disabled overworld wild encounters
+#define FLAG_WE_FLAG_NO_CATCHING    0x2C // Disables Catching Wild Mons
+#define FLAG_WE_FLAG_NO_RUNNING    0x2D // Disables Running from Wild Mons
+
 #define FLAG_UNUSED_0x02F    0x2F // Unused Flag
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag

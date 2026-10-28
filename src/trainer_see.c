@@ -72,7 +72,7 @@ static const u8 sEmotion_QuestionMarkGfx[] = INCGFX_U8("graphics/field_effects/p
 static const u8 sEmotion_HeartGfx[] = INCGFX_U8("graphics/field_effects/pics/emotion_heart.png", ".4bpp");
 static const u8 sEmotion_DoubleExclamationMarkGfx[] = INCGFX_U8("graphics/field_effects/pics/emotion_double_exclamation.png", ".4bpp");
 static const u8 sEmotion_XGfx[] = INCGFX_U8("graphics/field_effects/pics/emote_x.png", ".4bpp");
-static const u8 sQuest_Gfx[] = INCGFX_U8("graphics/misc/quests_icons.png", ".4bpp");
+static const u8 sQuest_Gfx[] = INCGFX_U8("graphics/misc/quests_icons.png", ".4bpp", "-mwidth 2 -mheight 2");
 // HGSS emote graphics ripped by Lemon on The Spriters Resource: https://www.spriters-resource.com/ds_dsi/pokemonheartgoldsoulsilver/sheet/30497/
 static const u8 sEmotion_Gfx[] = INCGFX_U8("graphics/misc/emotes.png", ".4bpp", "-mwidth 2 -mheight 2");
 

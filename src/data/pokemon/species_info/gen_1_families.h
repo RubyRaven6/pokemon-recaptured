@@ -7814,7 +7814,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Mankey,
             gShinyOverworldPalette_Mankey
         )
-        .levelUpLearnset = sMankeyLevelUpLearnset,
+        .levelUpLearnset = sMankeyRecapLevelUpLearnset,
         .teachableLearnset = sMankeyTeachableLearnset,
         .eggMoveLearnset = sMankeyEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_PRIMEAPE}),
@@ -7892,7 +7892,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Primeape,
             gShinyOverworldPalette_Primeape
         )
-        .levelUpLearnset = sPrimeapeLevelUpLearnset,
+        .levelUpLearnset = sPrimeapeRecapLevelUpLearnset,
         .teachableLearnset = sPrimeapeTeachableLearnset,
     #if P_GEN_9_CROSS_EVOS
         .evolutions = EVOLUTION({EVO_LEVEL, 0, SPECIES_ANNIHILAPE, CONDITIONS({IF_USED_MOVE_X_TIMES, MOVE_RAGE_FIST, 20})}),
@@ -7960,7 +7960,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             gOverworldPalette_Annihilape,
             gShinyOverworldPalette_Annihilape
         )
-        .levelUpLearnset = sAnnihilapeLevelUpLearnset,
+        .levelUpLearnset = sAnnihilapeRecapLevelUpLearnset,
         .teachableLearnset = sAnnihilapeTeachableLearnset,
     },
 #endif //P_GEN_9_CROSS_EVOS

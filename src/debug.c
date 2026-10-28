@@ -1997,8 +1997,8 @@ static void DebugAction_Player_Id(u8 taskId)
 
 static void DebugAction_Util_CheatStart(u8 taskId)
 {
-    if (!FlagGet(FLAG_SYS_CLOCK_SET))
-        RtcInitLocalTimeOffset(0, 0);
+    // if (!FlagGet(FLAG_SYS_CLOCK_SET))
+        // RtcInitLocalTimeOffset(0, 0);
 
     InitTimeBasedEvents();
     if (IS_FRLG)

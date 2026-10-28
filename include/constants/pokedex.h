@@ -1167,9 +1167,9 @@ enum NationalDexOrder
     F(PALOSSAND) \
     F(SILICOBRA) \
     F(SANDACONDA) \
-    F(NACLI) \
-    F(NACLSTACK) \
-    F(GARGANACL) \
+    F(SOLOSIS) \
+    F(DUOSION) \
+    F(REUNICLUS) \
     F(EEVEE) \
     F(FLAREON) \
     F(JOLTEON) \

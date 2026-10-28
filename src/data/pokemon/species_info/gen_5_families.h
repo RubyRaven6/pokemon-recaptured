@@ -7428,7 +7428,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gOverworldPalette_Solosis,
             gShinyOverworldPalette_Solosis
         )
-        .levelUpLearnset = sSolosisLevelUpLearnset,
+        .levelUpLearnset = sSolosisRecapLevelUpLearnset,
         .teachableLearnset = sSolosisTeachableLearnset,
         .eggMoveLearnset = sSolosisEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_DUOSION}),
@@ -7499,7 +7499,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gOverworldPalette_Duosion,
             gShinyOverworldPalette_Duosion
         )
-        .levelUpLearnset = sDuosionLevelUpLearnset,
+        .levelUpLearnset = sDuosionRecapLevelUpLearnset,
         .teachableLearnset = sDuosionTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 41, SPECIES_REUNICLUS}),
     },
@@ -7570,7 +7570,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gOverworldPalette_Reuniclus,
             gShinyOverworldPalette_Reuniclus
         )
-        .levelUpLearnset = sReuniclusLevelUpLearnset,
+        .levelUpLearnset = sReuniclusRecapLevelUpLearnset,
         .teachableLearnset = sReuniclusTeachableLearnset,
     },
 #endif //P_FAMILY_SOLOSIS

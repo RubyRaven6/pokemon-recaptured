@@ -3775,7 +3775,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             gOverworldPalette_Tinkatink,
             gShinyOverworldPalette_Tinkatink
         )
-        .levelUpLearnset = sTinkatinkLevelUpLearnset,
+        .levelUpLearnset = sTinkatinkRecapLevelUpLearnset,
         .teachableLearnset = sTinkatinkTeachableLearnset,
         .eggMoveLearnset = sTinkatinkEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_TINKATUFF}),
@@ -3840,7 +3840,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             gOverworldPalette_Tinkatuff,
             gShinyOverworldPalette_Tinkatuff
         )
-        .levelUpLearnset = sTinkatuffLevelUpLearnset,
+        .levelUpLearnset = sTinkatuffRecapLevelUpLearnset,
         .teachableLearnset = sTinkatuffTeachableLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_TINKATON}),
     },
@@ -3904,7 +3904,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             gOverworldPalette_Tinkaton,
             gShinyOverworldPalette_Tinkaton
         )
-        .levelUpLearnset = sTinkatonLevelUpLearnset,
+        .levelUpLearnset = sTinkatonRecapLevelUpLearnset,
         .teachableLearnset = sTinkatonTeachableLearnset,
     },
 #endif //P_FAMILY_TINKATINK

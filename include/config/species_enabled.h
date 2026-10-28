@@ -343,7 +343,7 @@
 #define P_FAMILY_ZORUA                   P_GEN_5_POKEMON
 #define P_FAMILY_MINCCINO                P_RECAPTURED_MONS
 #define P_FAMILY_GOTHITA                 P_GEN_5_POKEMON
-#define P_FAMILY_SOLOSIS                 P_GEN_5_POKEMON
+#define P_FAMILY_SOLOSIS                 P_RECAPTURED_MONS
 #define P_FAMILY_DUCKLETT                P_GEN_5_POKEMON
 #define P_FAMILY_VANILLITE               P_GEN_5_POKEMON
 #define P_FAMILY_DEERLING                P_GEN_5_POKEMON

@@ -69,7 +69,7 @@
     },
     {
       "local_id": "LOCALID_DEWFORD_HALL_TWIN",
-      "graphics_id": "OBJ_EVENT_GFX_TWIN",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 5,
       "y": 2,
       "elevation": 3,
@@ -82,7 +82,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 14,
       "y": 7,
       "elevation": 0,

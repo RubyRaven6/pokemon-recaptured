@@ -176,6 +176,10 @@
 #define METATILE_Dewford_Door              0x225
 #define METATILE_Dewford_Door_BattleTower  0x25D
 
+// gTileset_DewfordPorytiles
+#define METATILE_DewfordPorytiles_ClosedGymDoors  0x917
+#define METATILE_DewfordPorytiles_Door            0x825
+
 // gTileset_EliteFour
 #define METATILE_EliteFour_EntryDoor_ClosedBottom    0x20E
 #define METATILE_EliteFour_EntryDoor_ClosedTop       0x206
@@ -297,6 +301,12 @@
 #define METATILE_General_TallGrass_TreeUp      0x025
 #define METATILE_General_YellowCaveIndent      0x1A8
 #define METATILE_General_YellowCaveOpen        0x1A9
+
+// gTileset_GeneralPorytiles
+#define METATILE_GeneralPorytiles_Door               0x021
+#define METATILE_GeneralPorytiles_GymDoor            0x1CD
+#define METATILE_GeneralPorytiles_PokemartDoor       0x041
+#define METATILE_GeneralPorytiles_PokemonCenterDoor  0x061
 
 // gTileset_GenericBuilding
 #define METATILE_GenericBuilding_TableEdge               0x2F1

@@ -730,6 +730,8 @@ static void CB2_EndScriptedWildBattle(void)
     {
         if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        if (!IsPlayerInSafeArea())
+            SetMainCallback2(CB2_GameOverScreen);
         else
             SetMainCallback2(CB2_WhiteOut);
     }

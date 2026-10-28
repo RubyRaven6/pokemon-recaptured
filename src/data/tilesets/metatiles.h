@@ -420,3 +420,12 @@ const u16 gMetatileAttributes_CavePorytiles[] = INCBIN_U16("data/tilesets/second
 
 const u16 gMetatiles_DiancieCave[] = INCBIN_U16("data/tilesets/secondary/diancie_cave/metatiles.bin");
 const u16 gMetatileAttributes_DiancieCave[] = INCBIN_U16("data/tilesets/secondary/diancie_cave/metatile_attributes.bin");
+
+const u16 gMetatiles_BuildingPorytiles[] = INCBIN_U16("data/tilesets/primary/building_porytiles/metatiles.bin");
+const u16 gMetatileAttributes_BuildingPorytiles[] = INCBIN_U16("data/tilesets/primary/building_porytiles/metatile_attributes.bin");
+
+const u16 gMetatiles_PlayersHouse[] = INCBIN_U16("data/tilesets/secondary/players_house/metatiles.bin");
+const u16 gMetatileAttributes_PlayersHouse[] = INCBIN_U16("data/tilesets/secondary/players_house/metatile_attributes.bin");
+
+const u16 gMetatiles_DewfordGymPorytiles[] = INCBIN_U16("data/tilesets/secondary/dewford_gym_porytiles/metatiles.bin");
+const u16 gMetatileAttributes_DewfordGymPorytiles[] = INCBIN_U16("data/tilesets/secondary/dewford_gym_porytiles/metatile_attributes.bin");

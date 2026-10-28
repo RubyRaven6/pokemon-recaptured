@@ -1585,3 +1585,36 @@ const struct Tileset gTileset_DiancieCave =
     .metatileAttributes = gMetatileAttributes_DiancieCave,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_BuildingPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_BuildingPorytiles,
+    .palettes = gTilesetPalettes_BuildingPorytiles,
+    .metatiles = gMetatiles_BuildingPorytiles,
+    .metatileAttributes = gMetatileAttributes_BuildingPorytiles,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_PlayersHouse =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PlayersHouse,
+    .palettes = gTilesetPalettes_PlayersHouse,
+    .metatiles = gMetatiles_PlayersHouse,
+    .metatileAttributes = gMetatileAttributes_PlayersHouse,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_DewfordGymPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_DewfordGymPorytiles,
+    .palettes = gTilesetPalettes_DewfordGymPorytiles,
+    .metatiles = gMetatiles_DewfordGymPorytiles,
+    .metatileAttributes = gMetatileAttributes_DewfordGymPorytiles,
+    .callback = NULL,
+};

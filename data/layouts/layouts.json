@@ -125,8 +125,8 @@
     {
       "id": "LAYOUT_DEWFORD_TOWN",
       "name": "DewfordTown_Layout",
-      "width": 30,
-      "height": 28,
+      "width": 35,
+      "height": 31,
       "primary_tileset": "gTileset_GeneralPorytiles",
       "secondary_tileset": "gTileset_DewfordPorytiles",
       "border_filepath": "data/layouts/DewfordTown/border.bin",
@@ -710,8 +710,8 @@
       "name": "DewfordTown_Gym_Layout",
       "width": 18,
       "height": 28,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_DewfordGym",
+      "primary_tileset": "gTileset_BuildingPorytiles",
+      "secondary_tileset": "gTileset_DewfordGymPorytiles",
       "border_filepath": "data/layouts/DewfordTown_Gym/border.bin",
       "blockdata_filepath": "data/layouts/DewfordTown_Gym/map.bin",
       "layout_version": "emerald"
@@ -9373,6 +9373,46 @@
       "secondary_tileset": "gTileset_DiancieCave",
       "border_filepath": "data/layouts/DianciesCave_MainChamber/border.bin",
       "blockdata_filepath": "data/layouts/DianciesCave_MainChamber/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_HOUSE4",
+      "name": "DewfordTown_House4_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/DewfordTown_House4/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_House4/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_BRAWLYHOUSE",
+      "name": "DewfordTown_BrawlysHouse_Layout",
+      "width": 12,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/DewfordTown_BrawlysHouse/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_BrawlysHouse/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_PLAYERS_HOUSE_1F",
+      "name": "DewfordTown_PlayersHouse_1F_Layout",
+      "width": 14,
+      "height": 12,
+      "primary_tileset": "gTileset_BuildingPorytiles",
+      "secondary_tileset": "gTileset_PlayersHouse",
+      "border_filepath": "data/layouts/DewfordTown_PlayersHouse_1F/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_PlayersHouse_1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_DEWFORD_TOWN_PLAYERS_HOUSE_2F",
+      "name": "DewfordTown_PlayersHouse_2F_Layout",
+      "width": 12,
+      "height": 8,
+      "primary_tileset": "gTileset_BuildingPorytiles",
+      "secondary_tileset": "gTileset_PlayersHouse",
+      "border_filepath": "data/layouts/DewfordTown_PlayersHouse_2F/border.bin",
+      "blockdata_filepath": "data/layouts/DewfordTown_PlayersHouse_2F/map.bin"
     }
   ]
 }

@@ -2039,7 +2039,7 @@
 	callnative ScrCmd_updatequest
 	.byte \questId
 	playse SE_PIN
-	questmenu QUEST_MENU_BUFFER_QUEST_NAME QUEST_3
+	questmenu QUEST_MENU_BUFFER_QUEST_NAME \questId
 	msgbox gText_QuestUpdate, MSGBOX_SIGN
 	waitse
 	.if \openquestmenu == TRUE
@@ -2787,6 +2787,8 @@
 	.byte \difficulty
 	.endm
 
+	@ Forces a save in the middle of scripting.
+	@ Requires `release` immediately after to clear the Save Dialogue and Save Info Window.
 	.macro forcesave
 	callnative Script_ForceSaveGame
 	waitstate

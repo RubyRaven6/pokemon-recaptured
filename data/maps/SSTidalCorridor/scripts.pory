@@ -396,16 +396,14 @@ script SSTidalCorridor_EventScript_WhatsYourPronouns
 	applymovement(LOCALID_PLAYER, moves(delay_16, face_right))
 	waitmovement(LOCALID_SS_TIDAL_MOM)
 	waitmovement(LOCALID_PLAYER)
-	delay(10)
 	setspeaker("Mom")
-	msgbox("Billy, be a good girl and apologise to\n{OBJ_PRN_LWR}.")
+	msgbox("Billy, be a good girl and apologise to\n\objprnl.")
 	turnobject(LOCALID_SS_TIDAL_ROWDY_GIRL, DIR_WEST)
-	delay(10)
 	setspeaker("Billy")
-	msgbox("I'm sorry. I hope running into you didn't\nhurt.")
+	msgbox("I'm sorry. I hope running into you\ndidn't hurt.")
 	turnobject(LOCALID_SS_TIDAL_MOM, DIR_WEST)
-	delay(10)
 	setspeaker("Mom")
+	//ignore poryscript warnings
 	message(
 		"We've been on the ferry for a few hours,\nand Billy gets excitable.\p"
 		"At least we'll be departing on the next\nport after this one.\p"
@@ -427,15 +425,15 @@ script(local) PronounSetting
 {
 	if(var(VAR_TEMP_0) == 1)
 	{
-		delay(10)
+		// delay(10)
 		setspeaker("Mom")
 		msgbox("What pronouns do you use?")
 	}
 	mcdialogue("He/him", "She/her", "They/them", "It/its")
 	callnative(SetPlayerPronouns)
-	delay(10)
+	// delay(10)
 	setspeaker("Mom")
-	msgbox("You use {PERS_PRN_LWR}, {POSS_PRN_1_LWR}, {POSS_PRN_2_LWR}, {OBJ_PRN_LWR}, then?\nIs that right?", MSGBOX_YESNO)
+	msgbox("You use \prprnl, \psprn1l, \psprn2l, \objprnl, then?\nIs that right?", MSGBOX_YESNO) //ignore poryscript warnin
 	closemessage
 	if(var(VAR_RESULT) == NO)
 	{
@@ -446,5 +444,41 @@ script(local) PronounSetting
 	{
 		closemessage
 		return
+	}
+}
+
+script SSTidalRooms_EventScript_KeepPlayerInFrontOfDoor1
+{
+	setvar(VAR_TEMP_1, 1)	
+	goto(SSTidalRooms_EventScript_TalkToElsie)
+}
+
+script SSTidalRooms_EventScript_KeepPlayerInFrontOfDoor2
+{
+	setvar(VAR_TEMP_1, 2)
+	goto(SSTidalRooms_EventScript_TalkToElsie)
+}
+
+script SSTidalRooms_EventScript_KeepPlayerInFrontOfDoor3
+{
+	setvar(VAR_TEMP_1, 3)
+	goto(SSTidalRooms_EventScript_TalkToElsie)
+}
+
+
+script SSTidalRooms_EventScript_TalkToElsie {
+	msgbox("We're about to disembark. Best talk to\nElsie now.")
+	closemessage
+	switch(var(VAR_TEMP_1))
+	{
+		case 1:
+			applymovement(LOCALID_PLAYER, moves(walk_left))
+			waitmovement(0)
+		case 2:
+			applymovement(LOCALID_PLAYER, moves(walk_up))
+			waitmovement(0)
+		case 3:
+			applymovement(LOCALID_PLAYER, moves(walk_right))
+			waitmovement(0)
 	}
 }

@@ -1,7 +1,8 @@
-raw `
-DewfordTown_House1_MapScripts::
-	.byte 0
+mapscripts DewfordTown_House1_MapScripts {
+	
+}
 
+raw `
 DewfordTown_House1_EventScript_Man::
 	msgbox DewfordTown_House1_Text_LotToBeSaidForLivingOnIsland, MSGBOX_NPC
 	end
