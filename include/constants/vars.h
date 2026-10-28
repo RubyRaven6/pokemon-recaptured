@@ -82,11 +82,12 @@ VAR_INTRO_SEQUENCE_STATE States
 - 13: Player talking to Brawly in house
 - 14: Player talking to Elsie
 */
-#define VAR_INTRO_SEQUENCE_STATE                         0x4084
-#define VAR_STARTER_MON                                  0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
+#define VAR_INTRO_SEQUENCE_STATE						0x4084
+#define VAR_STARTER_MON									0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
+#define VAR_TRACK_FERRY									0x4020
 
 //QUEST VARS
-#define VAR_QUEST_FIND_THE_HEART                         0x404E // Unused Var
+#define VAR_QUEST_FIND_THE_HEART						0x404E
 
 /*
  __ __   ____  ____   ____  _      _       ____        ___  ___ ___    ___  ____    ____  _      ___   
@@ -107,7 +108,6 @@ VAR_INTRO_SEQUENCE_STATE States
                                                                                                        
 */
 // general purpose vars
-#define VAR_RECYCLE_GOODS                                0x4020
 #define VAR_REPEL_STEP_COUNT                             0x4021
 #define VAR_ICE_STEP_COUNT                               0x4022
 #define VAR_MIRAGE_RND_H                                 0x4024 // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE

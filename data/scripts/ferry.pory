@@ -4,6 +4,13 @@ const SAILOR = 2
 const FERRY = 3
 const PLAYER = LOCALID_PLAYER
 
+const DEWFORD = 0
+const RUSTBORO = 1
+const SLATEPORT = 2
+const LILYCOVE = 3
+const MOSSDEEP = 4
+const EVER_GRANDE = 5
+
 script Common_EventScript_FerryAttendant
 {
 	lockall
@@ -11,13 +18,15 @@ script Common_EventScript_FerryAttendant
 	setspeaker(SP_NAME_ATTENDANT)	
 	msgbox("Good day! May I see your ticket?")
 	waitmovement(0)
-	dynmultipush("Rustboro", 	0)
-	dynmultipush("Slateport", 	1)
-	dynmultipush("Lilycove", 	2)
-	dynmultipush("Mossdeep", 	3)
-	dynmultipush("Ever Grande", 4)
-	dynmultistack(0,0, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
 
+	if(var(VAR_TRACK_FERRY) != 0){dynmultipush("Dewford", 	0)}
+	if(var(VAR_TRACK_FERRY) != 1){dynmultipush("Rustboro", 	1)}
+	if(var(VAR_TRACK_FERRY) != 2){dynmultipush("Slateport", 	2)}
+	if(var(VAR_TRACK_FERRY) != 3){dynmultipush("Lilycove", 	3)}
+	if(var(VAR_TRACK_FERRY) != 4){dynmultipush("Mossdeep", 	4)}
+	if(var(VAR_TRACK_FERRY) != 5){dynmultipush("Ever Grande", 5)}
+	dynmultistack(0,0, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+	
 	msgbox("Thank you! Have a lovely trip.")
 	closemessage
 
@@ -41,11 +50,26 @@ script Common_EventScript_FerryAttendant
 	removeobject(SAILOR)
 
 	delay (60)
-	applymovement (FERRY, Movement_FerryDepart_Recap)
-	waitmovement (0)
-	switch(var(VAR_RESULT))
+	debugprint("VAR_TRACK_FERRY", VAR_TRACK_FERRY)
+	switch(var(VAR_TRACK_FERRY))
 	{
-		default:
+		case RUSTBORO:
+		case MOSSDEEP:
+		case EVER_GRANDE:
+			applymovement (FERRY, Movement_FerryDepart_West)
+			waitmovement (0)
+		case DEWFORD:
+		case SLATEPORT:
+		case LILYCOVE:
+			applymovement (FERRY, Movement_FerryDepart_East)
+			waitmovement (0)
+	}
+	copyvar(VAR_TRACK_FERRY, VAR_RESULT)
+	switch(var(VAR_TRACK_FERRY))
+	{
+		case DEWFORD:
+			warp(MAP_DEWFORD_TOWN_HARBOR, 7, 10)
+		case RUSTBORO:
 			warp(MAP_RUSTBORO_CITY_HARBOR, 7, 10)
 	}
 	waitstate
@@ -53,7 +77,19 @@ script Common_EventScript_FerryAttendant
 	end
 }
 
-movement Movement_FerryDepart_Recap
+movement Movement_FerryDepart_West
+{
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+}
+
+movement Movement_FerryDepart_East
 {
 	walk_slow_right
 	walk_slow_right
