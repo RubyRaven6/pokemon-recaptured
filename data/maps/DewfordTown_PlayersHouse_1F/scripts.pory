@@ -44,6 +44,7 @@ ElsieSeesYouOff:
 	closemessage
 	applymovement(ELSIE, moves(face_player, delay_16 * 2))
 	waitmovement(0)
+	setspeaker(SP_NAME_ELSIE)
 	msgbox(
 		"Just promise me something, okay?\nPlease… stay safe. I can't bear to\nthink of losing you.\p"
 		"Oh, and here; I was going surprise you\nwith it later, but, seems like a good\ltime to give it now."
