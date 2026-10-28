@@ -1,13 +1,13 @@
 const ELSIE = LOCALID_PLAYERHOUSE_ELSIE
 
 mapscripts DewfordTown_PlayersHouse_1F_MapScripts {
-	MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
-		VAR_INTRO_SEQUENCE_STATE, 14
+	MAP_SCRIPT_ON_TRANSITION {
+		if(var(VAR_INTRO_SEQUENCE_STATE) == 14)
 		{
 			setobjectxyperm(ELSIE, 9, 10)
 			setobjectmovementtype(ELSIE, MOVEMENT_TYPE_FACE_RIGHT)
 		}
-	]
+	} 
 }
 
 script DewfordTown_PlayersHouse_1F_EventScript_Elsie
@@ -16,7 +16,12 @@ script DewfordTown_PlayersHouse_1F_EventScript_Elsie
 	{goto(ElsieJustMovedIn)}
 	elif(var(VAR_INTRO_SEQUENCE_STATE) == 14)
 	{goto(ElsieSeesYouOff)}
-
+	elif(var(VAR_INTRO_SEQUENCE_STATE) == 15)
+	{goto(ElsieRemindsYouToCall)}
+	elif(var(VAR_INTRO_SEQUENCE_STATE) > 15)
+	{
+		//this is where Elsie tells you to take a load off and rest
+	}
 
 ElsieJustMovedIn:
 	lock
@@ -33,18 +38,44 @@ ElsieSeesYouOff:
 	cueobjecttalking(ELSIE, TRUE)
 	setspeaker(SP_NAME_ELSIE)
 	msgbox(
-		"I guess this was to be expected, with\nhow much I call you \qoChamp\qc."
-		"It's just… I can't help but feel worry.\n And irony. Working this hard to get us\laway and you start the warpath back."
+		"I guess this was to be expected, with\nhow much I call you \qoChamp\qc.\p"
+		"It's just… I can't help but feel worry.\nAnd irony. Working this hard to get us\laway and you start the warpath back."
 	)
 	closemessage
 	applymovement(ELSIE, moves(face_player, delay_16 * 2))
 	waitmovement(0)
 	msgbox(
-		"I guess this was to be expected, with\nhow much I call you \qoChamp\qc."
-		"It's just… I can't help but feel worry.\n And irony. Working this hard to get us\laway and you start the warpath back."
+		"Just promise me something, okay?\nPlease… stay safe. I can't bear to\nthink of losing you.\p"
+		"Oh, and here; I was going surprise you\nwith it later, but, seems like a good\ltime to give it now."
+	)
+	closemessage
+	cueobjectplayer(ELSIE, TRUE)
+	msgbox(
+		"Elsie hands you a small gadget in your\nhands. It's a Pok\eNav!"
+	)
+	setspeaker(SP_NAME_ELSIE)
+	msgbox(
+		"Figured if you're gonna go on a big\nadventure, we might as well keep in\ltouch huh?\p"
+		"…\p"
+		"I thought we'd have some more time\nto enjoy our new life here, but life\lcomes at you fast.\p"
+		"Don't forget to call and visit, okay?\nI love you, {PLAYER}.\p"
+		"Go get 'im, Champ."
 	)
 	closemessage
 	release
+	setflag(FLAG_SYS_POKENAV_GET)
 	setvar(VAR_INTRO_SEQUENCE_STATE, 15)
+	end
+
+ElsieRemindsYouToCall:
+	lock
+	faceplayer
+	setspeaker(SP_NAME_ELSIE)
+	msgbox(
+		"Don't forget to call and visit, okay?\nI love you, {PLAYER}.\p"
+		"Go get 'im, Champ."
+	)
+	closemessage
+	release
 	end
 }
