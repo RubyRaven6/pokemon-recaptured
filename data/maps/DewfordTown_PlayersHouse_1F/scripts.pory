@@ -64,6 +64,7 @@ ElsieSeesYouOff:
 	closemessage
 	release
 	setflag(FLAG_SYS_POKENAV_GET)
+	setflag(FLAG_ADDED_MATCH_CALL_TO_POKENAV)
 	setvar(VAR_INTRO_SEQUENCE_STATE, 15)
 	end
 

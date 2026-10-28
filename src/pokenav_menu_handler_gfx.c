@@ -209,12 +209,24 @@ struct
         .deltaY = 20,
         .gfx = {
             sOptionsLabelGfx_RegionMap,
-            sOptionsLabelGfx_DexNav,
-            sOptionsLabelGfx_Condition,
+            // sOptionsLabelGfx_DexNav,
+            // sOptionsLabelGfx_Condition,
             sOptionsLabelGfx_SwitchOff
         }
     },
     [POKENAV_MENU_TYPE_UNLOCK_MC] =
+    {
+        .yStart = 42,
+        .deltaY = 20,
+        .gfx = {
+            sOptionsLabelGfx_RegionMap,
+            // sOptionsLabelGfx_DexNav,
+            // sOptionsLabelGfx_Condition,
+            sOptionsLabelGfx_MatchCall,
+            sOptionsLabelGfx_SwitchOff
+        }
+    },
+	[POKENAV_MENU_TYPE_UNLOCK_CONDITION_DEXNAV] =
     {
         .yStart = 42,
         .deltaY = 20,
