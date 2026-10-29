@@ -3275,3 +3275,15 @@
 	    cueobject \localId, DIR_FACING, \wait
 	.endm
     @ End cueobject
+
+	@ Hides a virtual object from the map
+	.macro hidevobject localId:req
+	callnative ScrCmd_hidevobject
+	.2byte \localId
+	.endm
+
+	@ Destroys a virtual object from the map
+	.macro destroyvobject localId:req
+	callnative ScrCmd_destroyvobject
+	.2byte \localId
+	.endm
