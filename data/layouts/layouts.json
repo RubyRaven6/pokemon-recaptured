@@ -103,7 +103,7 @@
     {
       "id": "LAYOUT_LITTLEROOT_TOWN",
       "name": "LittlerootTown_Layout",
-      "width": 30,
+      "width": 26,
       "height": 27,
       "primary_tileset": "gTileset_GeneralPorytiles",
       "secondary_tileset": "gTileset_PetalburgPorytiles",
