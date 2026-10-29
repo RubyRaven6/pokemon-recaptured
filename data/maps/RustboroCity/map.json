@@ -59,7 +59,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 25,
-      "y": 37,
+      "y": 39,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -112,7 +112,7 @@
       "local_id": "LOCALID_RUSTBORO_LITTLE_BOY",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 24,
-      "y": 51,
+      "y": 56,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -126,7 +126,7 @@
       "local_id": "LOCALID_RUSTBORO_LITTLE_GIRL",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 25,
-      "y": 51,
+      "y": 56,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -179,8 +179,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 36,
-      "y": 51,
+      "x": 21,
+      "y": 62,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -247,8 +247,8 @@
   ],
   "warp_events": [
     {
-      "x": 27,
-      "y": 19,
+      "x": 30,
+      "y": 18,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_GYM",
       "dest_warp_id": "0"
@@ -276,7 +276,7 @@
     },
     {
       "x": 27,
-      "y": 34,
+      "y": 37,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_POKEMON_SCHOOL",
       "dest_warp_id": "0"
@@ -296,8 +296,8 @@
       "dest_warp_id": "1"
     },
     {
-      "x": 33,
-      "y": 19,
+      "x": 30,
+      "y": 25,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_HOUSE1",
       "dest_warp_id": "0"
@@ -311,7 +311,7 @@
     },
     {
       "x": 30,
-      "y": 28,
+      "y": 31,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_HOUSE2",
       "dest_warp_id": "0"
@@ -325,208 +325,18 @@
     },
     {
       "x": 26,
-      "y": 46,
+      "y": 51,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_HOUSE3",
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [
-    {
-      "type": "trigger",
-      "x": 23,
-      "y": 20,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger0"
-    },
-    {
-      "type": "trigger",
-      "x": 23,
-      "y": 21,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger1"
-    },
-    {
-      "type": "trigger",
-      "x": 23,
-      "y": 22,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger2"
-    },
-    {
-      "type": "trigger",
-      "x": 23,
-      "y": 23,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger3"
-    },
-    {
-      "type": "trigger",
-      "x": 23,
-      "y": 24,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger4"
-    },
-    {
-      "type": "trigger",
-      "x": 30,
-      "y": 9,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "2",
-      "script": "RustboroCity_EventScript_HelpGetGoodsTrigger0"
-    },
-    {
-      "type": "trigger",
-      "x": 29,
-      "y": 10,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "2",
-      "script": "RustboroCity_EventScript_HelpGetGoodsTrigger1"
-    },
-    {
-      "type": "trigger",
-      "x": 30,
-      "y": 11,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "2",
-      "script": "RustboroCity_EventScript_HelpGetGoodsTrigger2"
-    },
-    {
-      "type": "trigger",
-      "x": 30,
-      "y": 12,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "2",
-      "script": "RustboroCity_EventScript_HelpGetGoodsTrigger3"
-    },
-    {
-      "type": "trigger",
-      "x": 30,
-      "y": 9,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "4",
-      "script": "RustboroCity_EventScript_ReturnGoodsTrigger0"
-    },
-    {
-      "type": "trigger",
-      "x": 31,
-      "y": 10,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "4",
-      "script": "RustboroCity_EventScript_ReturnGoodsTrigger1"
-    },
-    {
-      "type": "trigger",
-      "x": 30,
-      "y": 11,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "4",
-      "script": "RustboroCity_EventScript_ReturnGoodsTrigger2"
-    },
-    {
-      "type": "trigger",
-      "x": 30,
-      "y": 12,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "4",
-      "script": "RustboroCity_EventScript_ReturnGoodsTrigger3"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 53,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "7",
-      "script": "RustboroCity_EventScript_RivalTrigger0"
-    },
-    {
-      "type": "trigger",
-      "x": 13,
-      "y": 53,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "7",
-      "script": "RustboroCity_EventScript_RivalTrigger1"
-    },
-    {
-      "type": "trigger",
-      "x": 14,
-      "y": 53,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "7",
-      "script": "RustboroCity_EventScript_RivalTrigger2"
-    },
-    {
-      "type": "trigger",
-      "x": 15,
-      "y": 53,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "7",
-      "script": "RustboroCity_EventScript_RivalTrigger3"
-    },
-    {
-      "type": "trigger",
-      "x": 16,
-      "y": 53,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "7",
-      "script": "RustboroCity_EventScript_RivalTrigger4"
-    },
-    {
-      "type": "trigger",
-      "x": 17,
-      "y": 53,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "7",
-      "script": "RustboroCity_EventScript_RivalTrigger5"
-    },
-    {
-      "type": "trigger",
-      "x": 18,
-      "y": 53,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "7",
-      "script": "RustboroCity_EventScript_RivalTrigger6"
-    },
-    {
-      "type": "trigger",
-      "x": 19,
-      "y": 53,
-      "elevation": 3,
-      "var": "VAR_RUSTBORO_CITY_STATE",
-      "var_value": "7",
-      "script": "RustboroCity_EventScript_RivalTrigger7"
-    }
-  ],
+  "coord_events": [],
   "bg_events": [
     {
       "type": "sign",
-      "x": 23,
-      "y": 19,
+      "x": 26,
+      "y": 18,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "RustboroCity_EventScript_GymSign"
@@ -534,7 +344,7 @@
     {
       "type": "sign",
       "x": 25,
-      "y": 35,
+      "y": 38,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "RustboroCity_EventScript_TrainersSchoolSign"

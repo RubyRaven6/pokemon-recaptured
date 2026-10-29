@@ -83,6 +83,7 @@ script DewfordTown_EventScript_GymDoorIsUnlocked
 	}
 	else{
 		msgbox("They have a proper lock now.")
+		closemessage
 	}
 }
 
