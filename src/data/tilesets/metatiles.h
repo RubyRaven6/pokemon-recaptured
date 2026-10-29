@@ -438,3 +438,6 @@ const u16 gMetatileAttributes_FallarborPorytiles[] = INCBIN_U16("data/tilesets/s
 
 const u16 gMetatiles_RustboroPorytiles[] = INCBIN_U16("data/tilesets/secondary/rustboro_porytiles/metatiles.bin");
 const u16 gMetatileAttributes_RustboroPorytiles[] = INCBIN_U16("data/tilesets/secondary/rustboro_porytiles/metatile_attributes.bin");
+
+const u16 gMetatiles_Subway[] = INCBIN_U16("data/tilesets/secondary/subway/metatiles.bin");
+const u16 gMetatileAttributes_Subway[] = INCBIN_U16("data/tilesets/secondary/subway/metatile_attributes.bin");

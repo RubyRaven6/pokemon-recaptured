@@ -1771,3 +1771,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/DewfordTown_PlayersHouse_2F/scripts.scr"
 
 	.include "data/maps/RustboroCity_Harbor/scripts.scr"
+
+	.include "data/maps/RustboroCity_Subway/scripts.scr"
