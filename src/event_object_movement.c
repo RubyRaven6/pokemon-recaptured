@@ -10978,7 +10978,7 @@ static void SpriteCB_VirtualObject(struct Sprite *sprite)
     UpdateObjectEventSpriteInvisibility(sprite, sprite->sInvisible);
 }
 
-static void UNUSED DestroyVirtualObjects(void)
+void DestroyVirtualObjects(void)
 {
     int i;
 
@@ -11064,6 +11064,18 @@ bool32 IsVirtualObjectInvisible(u8 virtualObjId)
         return FALSE;
 
     return (gSprites[spriteId].sInvisible == TRUE);
+}
+
+void DestroyVirtualObject(u8 virtualObjId)
+{
+	u8 spriteId = GetVirtualObjectSpriteId(virtualObjId);
+
+	if (spriteId == MAX_SPRITES)
+        return;
+
+	struct Sprite *sprite = &gSprites[spriteId];
+	if (sprite->inUse && sprite->callback == SpriteCB_VirtualObject)
+		DestroySprite(sprite);
 }
 
 void SetVirtualObjectSpriteAnim(u8 virtualObjId, u8 animNum)
