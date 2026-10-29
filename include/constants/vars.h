@@ -81,10 +81,12 @@ VAR_INTRO_SEQUENCE_STATE States
 - 12: Player gets rescued by Brawly
 - 13: Player talking to Brawly in house
 - 14: Player talking to Elsie
+- 15: Player has finally started their adventure
 */
 #define VAR_INTRO_SEQUENCE_STATE						0x4084
 #define VAR_STARTER_MON									0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
 #define VAR_TRACK_FERRY									0x4020
+#define VAR_TRACK_SUBWAY		                        0x4050
 
 //QUEST VARS
 #define VAR_QUEST_FIND_THE_HEART						0x404E
@@ -155,7 +157,6 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_POKELOT_RND2                                 0x404C // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
-#define VAR_LITTLEROOT_TOWN_STATE                        0x4050
 #define VAR_OLDALE_TOWN_STATE                            0x4051
 #define VAR_DEWFORD_TOWN_STATE                           0x4052 // Unused Var
 #define VAR_LAVARIDGE_TOWN_STATE                         0x4053
