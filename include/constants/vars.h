@@ -88,6 +88,10 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_TRACK_FERRY									0x4020
 #define VAR_TRACK_SUBWAY		                        0x4050
 
+//town/city states
+#define VAR_DEWFORD_TOWN_STATE                           0x4052
+#define VAR_RUSTBORO_CITY_STATE                          0x405A
+
 //QUEST VARS
 #define VAR_QUEST_FIND_THE_HEART						0x404E
 
@@ -158,7 +162,6 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
 #define VAR_OLDALE_TOWN_STATE                            0x4051
-#define VAR_DEWFORD_TOWN_STATE                           0x4052 // Unused Var
 #define VAR_LAVARIDGE_TOWN_STATE                         0x4053
 #define VAR_CURRENT_SECRET_BASE                          0x4054 // was probably allocated for VAR_FALLARBOR_TOWN_STATE at one point
 #define VAR_VERDANTURF_TOWN_STATE                        0x4055 // Unused Var
@@ -166,7 +169,6 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_PETALBURG_CITY_STATE                         0x4057
 #define VAR_SLATEPORT_CITY_STATE                         0x4058
 #define VAR_MAUVILLE_CITY_STATE                          0x4059 // Unused Var
-#define VAR_RUSTBORO_CITY_STATE                          0x405A
 #define VAR_FORTREE_CITY_STATE                           0x405B // Unused Var
 #define VAR_LILYCOVE_CITY_STATE                          0x405C // Unused Var
 #define VAR_MOSSDEEP_CITY_STATE                          0x405D

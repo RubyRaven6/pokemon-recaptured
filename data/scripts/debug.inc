@@ -218,10 +218,16 @@ Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
+	fadescreenswapbuffers FADE_TO_BLACK
+	special DestroyVirtualObjects
+	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
 Debug_EventScript_Script_2::
+	fadescreenswapbuffers FADE_TO_BLACK
+	destroyvobject 0
+	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
