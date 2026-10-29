@@ -9433,6 +9433,16 @@
       "secondary_tileset": "gTileset_Subway",
       "border_filepath": "data/layouts/RustboroCity_Subway/border.bin",
       "blockdata_filepath": "data/layouts/RustboroCity_Subway/map.bin"
+    },
+    {
+      "id": "LAYOUT_LITTLEROOT_TOWN_SUBWAY",
+      "name": "LittlerootTown_Subway_Layout",
+      "width": 20,
+      "height": 18,
+      "primary_tileset": "gTileset_BuildingPorytiles",
+      "secondary_tileset": "gTileset_Subway",
+      "border_filepath": "data/layouts/LittlerootTown_Subway/border.bin",
+      "blockdata_filepath": "data/layouts/LittlerootTown_Subway/map.bin"
     }
   ]
 }
