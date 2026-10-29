@@ -111,8 +111,8 @@
     {
       "local_id": "LOCALID_RUSTBORO_LITTLE_BOY",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
-      "x": 24,
-      "y": 56,
+      "x": 18,
+      "y": 52,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -125,8 +125,8 @@
     {
       "local_id": "LOCALID_RUSTBORO_LITTLE_GIRL",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
-      "x": 25,
-      "y": 56,
+      "x": 19,
+      "y": 52,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
@@ -275,8 +275,8 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 27,
-      "y": 37,
+      "x": 30,
+      "y": 25,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_POKEMON_SCHOOL",
       "dest_warp_id": "0"
@@ -296,13 +296,6 @@
       "dest_warp_id": "1"
     },
     {
-      "x": 30,
-      "y": 25,
-      "elevation": 0,
-      "dest_map": "MAP_RUSTBORO_CITY_HOUSE1",
-      "dest_warp_id": "0"
-    },
-    {
       "x": 9,
       "y": 38,
       "elevation": 0,
@@ -310,24 +303,31 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 30,
-      "y": 31,
+      "x": 32,
+      "y": 52,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_HOUSE2",
       "dest_warp_id": "0"
     },
     {
       "x": 5,
-      "y": 51,
+      "y": 53,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_FLAT2_1F",
       "dest_warp_id": "0"
     },
     {
-      "x": 26,
-      "y": 51,
+      "x": 24,
+      "y": 52,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_HOUSE3",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 7,
+      "y": 60,
+      "elevation": 0,
+      "dest_map": "MAP_RUSTBORO_CITY_HOUSE1",
       "dest_warp_id": "0"
     }
   ],
