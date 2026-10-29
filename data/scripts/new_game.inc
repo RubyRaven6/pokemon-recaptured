@@ -285,6 +285,7 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_HIDE_BRAWLYSHOUSE_STARTER
 	setflag FLAG_FOLLOWERS_DISABLED
 	setflag FLAG_FNPC_ALWAYS_HEALS_PARTY
+	setflag FLAG_SYS_B_DASH
 
 	@ </recaptured flags>
 	call EventScript_ResetAllBerries

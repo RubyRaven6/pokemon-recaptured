@@ -1651,3 +1651,14 @@ const struct Tileset gTileset_RustboroPorytiles =
     .metatileAttributes = gMetatileAttributes_RustboroPorytiles,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Subway =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Subway,
+    .palettes = gTilesetPalettes_Subway,
+    .metatiles = gMetatiles_Subway,
+    .metatileAttributes = gMetatileAttributes_Subway,
+    .callback = NULL,
+};
