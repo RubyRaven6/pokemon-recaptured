@@ -441,3 +441,6 @@ const u16 gMetatileAttributes_RustboroPorytiles[] = INCBIN_U16("data/tilesets/se
 
 const u16 gMetatiles_Subway[] = INCBIN_U16("data/tilesets/secondary/subway/metatiles.bin");
 const u16 gMetatileAttributes_Subway[] = INCBIN_U16("data/tilesets/secondary/subway/metatile_attributes.bin");
+
+const u16 gMetatiles_PetalburgPorytiles[] = INCBIN_U16("data/tilesets/secondary/petalburg_porytiles/metatiles.bin");
+const u16 gMetatileAttributes_PetalburgPorytiles[] = INCBIN_U16("data/tilesets/secondary/petalburg_porytiles/metatile_attributes.bin");
