@@ -27,6 +27,9 @@
   - TheDeadHeroAlistair
   - Poffin_Case. 
   - Special thanks: Syreldar
+- Subway Tiles:
+  - [Train Station by Ekat99](https://www.deviantart.com/ekat99/art/Train-Station-876100255)
+  - [Gen 3 style magnet train](https://www.deviantart.com/lo8jd/art/Pokemon-gen-3-style-magnet-train-tileset-1078581786)
 - SwSH User Interfaces Feature Branch by: Montblanc
   <details>
   <summary>Complete Credits for Summary Screen, Party Menu, Storage System, Bag Menu, Message Box</summary>
@@ -65,7 +68,6 @@
   <li> Message Box
   </ul>
   </details>
-
 - SWSH Style Stat Editor
   - Feature Branch: PCG
   - Archie: Base stat editor
@@ -120,6 +122,5 @@
     <li><a href="https://steamcommunity.com/profiles/76561198116557987">RAP Yogurt</a>: Found a typo in the documentation
     </ul>
     </details>
-
 - `cueobject` Macro by PSF
 - `debugprint` Macro by RavePossum
