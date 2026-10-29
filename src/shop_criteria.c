@@ -66,6 +66,11 @@ bool32 ShopCriteriaBySixBadges(enum Item item)
     return ShopCriteriaByBadgeCount(6);
 }
 
+bool32 ShopCriteriaByEightBadges(enum Item item)
+{
+    return ShopCriteriaByBadgeCount(8);
+}
+
 static bool32 ShopCriteriaByBadgeCount(u32 count)
 {
     u32 badgeCount = 0;

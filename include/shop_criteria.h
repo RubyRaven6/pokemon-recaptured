@@ -9,5 +9,6 @@ bool32 ShopCriteriaByTwoBadges(enum Item item);
 bool32 ShopCriteriaByFourBadges(enum Item item);
 bool32 ShopCriteriaByFiveBadges(enum Item item);
 bool32 ShopCriteriaBySixBadges(enum Item item);
+bool32 ShopCriteriaByEightBadges(enum Item item);
 
 #endif // GUARD_SHOP_CRITERIA_H
