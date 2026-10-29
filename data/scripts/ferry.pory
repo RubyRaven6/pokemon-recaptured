@@ -25,7 +25,12 @@ script Common_EventScript_FerryAttendant
 	if(var(VAR_TRACK_FERRY) != 3){dynmultipush("Lilycove", 	3)}
 	if(var(VAR_TRACK_FERRY) != 4){dynmultipush("Mossdeep", 	4)}
 	if(var(VAR_TRACK_FERRY) != 5){dynmultipush("Ever Grande", 5)}
+	dynmultipush("Nevermind.", 6)
 	dynmultistack(0,0, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+	if(var(VAR_RESULT) == 6){
+		closemessage
+		end
+	}
 	
 	msgbox("Thank you! Have a lovely trip.")
 	closemessage
@@ -75,6 +80,7 @@ script Common_EventScript_FerryAttendant
 	waitstate
 	releaseall
 	end
+
 }
 
 movement Movement_FerryDepart_West

@@ -147,7 +147,7 @@ static const u8 *const sAndroPresetNames[] = {
     COMPOUND_STRING("Kris"),
     COMPOUND_STRING("Zira"),
     COMPOUND_STRING("Phos"),
-    COMPOUND_STRING("Raine")
+    COMPOUND_STRING("Raine"),
     COMPOUND_STRING("Hange")
 };
 
