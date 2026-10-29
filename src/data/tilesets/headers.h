@@ -1662,3 +1662,14 @@ const struct Tileset gTileset_Subway =
     .metatileAttributes = gMetatileAttributes_Subway,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_PetalburgPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PetalburgPorytiles,
+    .palettes = gTilesetPalettes_PetalburgPorytiles,
+    .metatiles = gMetatiles_PetalburgPorytiles,
+    .metatileAttributes = gMetatileAttributes_PetalburgPorytiles,
+    .callback = NULL,
+};
