@@ -1,8 +1,290 @@
+const RICH_BOY_1 	= 0
+const FAT_MAN1 		= 1
+const POKEFAN_F 	= 2
+const WOMAN_1_1 	= 3
+const MAN_1 		= 4
+const WOMAN_2 		= 5
+const EXPERT_M 		= 6
+const EXPERT_F 		= 7
+const MAN_2 		= 8
+const WOMAN_3_1 	= 9
+const LASS 			= 10
+const MAN_4_1 		= 11
+const WOMAN_4 		= 12
+const WOMAN_1_2 	= 13
+const WOMAN_5 		= 14
+const BEAUTY 		= 15
+const GENTLEMAN 	= 16
+const FAT_MAN2 		= 17
+const MANIAC 		= 18
+const RICH_BOY_2 	= 19
+const POKEFAN_M 	= 20
+const MAN_4_2 		= 21
+const WOMAN_3_2 	= 22
+const MAN_5 		= 23
+const OLD_MAN 		= 24
+
+const PLAYER = LOCALID_PLAYER
+
 mapscripts RustboroCity_MapScripts {
-	
+	MAP_SCRIPT_ON_TRANSITION {
+		if(var(VAR_RUSTBORO_CITY_STATE) == 0)
+		{
+			goto(SpawnHarmonSpeechVObjects)
+		}
+	}
+}
+
+script(local) SpawnHarmonSpeechVObjects
+{
+	createvobject(OBJ_EVENT_GFX_RICH_BOY, RICH_BOY_1, 22, 35)
+	createvobject(OBJ_EVENT_GFX_FAT_MAN, FAT_MAN1, 23, 35)
+	createvobject(OBJ_EVENT_GFX_POKEFAN_F, POKEFAN_F, 22, 36)
+	createvobject(OBJ_EVENT_GFX_WOMAN_1, WOMAN_1_1, 23, 36)
+	createvobject(OBJ_EVENT_GFX_MAN_1, MAN_1, 24, 36)
+	createvobject(OBJ_EVENT_GFX_WOMAN_2, WOMAN_2, 26, 36)
+	createvobject(OBJ_EVENT_GFX_EXPERT_M, EXPERT_M, 27, 36)
+	createvobject(OBJ_EVENT_GFX_EXPERT_F, EXPERT_F, 28, 36)
+	createvobject(OBJ_EVENT_GFX_MAN_2, MAN_2, 29, 36)
+	createvobject(OBJ_EVENT_GFX_WOMAN_3, WOMAN_3_1, 23, 37)
+	createvobject(OBJ_EVENT_GFX_LASS, LASS, 24, 37)
+	createvobject(OBJ_EVENT_GFX_MAN_4, MAN_4_1, 26, 37)
+	createvobject(OBJ_EVENT_GFX_WOMAN_4, WOMAN_4, 27, 37)
+	createvobject(OBJ_EVENT_GFX_WOMAN_1, WOMAN_1_2, 28, 37)
+	createvobject(OBJ_EVENT_GFX_WOMAN_5, WOMAN_5, 29, 37)
+	createvobject(OBJ_EVENT_GFX_BEAUTY, BEAUTY, 23, 38)
+	createvobject(OBJ_EVENT_GFX_GENTLEMAN, GENTLEMAN, 24, 38)
+	createvobject(OBJ_EVENT_GFX_FAT_MAN, FAT_MAN2, 25, 38)
+	createvobject(OBJ_EVENT_GFX_MANIAC, MANIAC, 26, 38)
+	createvobject(OBJ_EVENT_GFX_RICH_BOY, RICH_BOY_2, 27, 38)
+	createvobject(OBJ_EVENT_GFX_POKEFAN_M, POKEFAN_M, 28, 38)
+	createvobject(OBJ_EVENT_GFX_MAN_4, MAN_4_2, 24, 39)
+	createvobject(OBJ_EVENT_GFX_WOMAN_3, WOMAN_3_2, 25, 39)
+	createvobject(OBJ_EVENT_GFX_MAN_5, MAN_5, 26, 39)
+	createvobject(OBJ_EVENT_GFX_OLD_MAN, OLD_MAN, 27, 39)
+}
+
+script(local) TurnHarmonSpeechVObjects
+{
+	if(var(VAR_TEMP_1) == 0)
+	{
+		setspeaker("Old Man")
+		message("My god! What is he talking about?{PAUSE 100}")
+	}
+	if(var(VAR_TEMP_1) == 1)
+	{
+		setspeaker("Maniac")
+		message("What do you mean?! He's just talking\nsense!{PAUSE 100}")
+	}
+
+	turnvobject(RICH_BOY_1, DIR_EAST)
+	turnvobject(FAT_MAN1, DIR_WEST)
+	turnvobject(POKEFAN_F, DIR_EAST)
+	turnvobject(WOMAN_1_1, DIR_EAST)
+	turnvobject(MAN_1, DIR_WEST)
+	turnvobject(WOMAN_2, DIR_EAST)
+	turnvobject(EXPERT_M, DIR_EAST)
+	turnvobject(EXPERT_F, DIR_WEST)
+	// MAN_2 STAYS LOOKING SOUTH
+	turnvobject(WOMAN_3_1, DIR_EAST)
+	turnvobject(LASS, DIR_WEST)
+	turnvobject(MAN_4_1, DIR_EAST)
+	turnvobject(WOMAN_4, DIR_WEST)
+	// WOMAN_1_2 STAYS LOOKING SOUTH
+	turnvobject(WOMAN_5, DIR_NORTH)
+	// BEAUTY STAYS LOOKING SOUTH
+	turnvobject(GENTLEMAN, DIR_EAST)
+	turnvobject(FAT_MAN2, DIR_WEST)
+	// MANIAC STAYS LOOKING SOUTH
+	turnvobject(RICH_BOY_2, DIR_EAST)
+	turnvobject(POKEFAN_M, DIR_WEST)
+	turnvobject(MAN_4_2, DIR_EAST)
+	turnvobject(WOMAN_3_2, DIR_WEST)
+	turnvobject(MAN_5, DIR_EAST)
+	turnvobject(OLD_MAN, DIR_WEST)
+	delay(20)
+
+	turnvobject(RICH_BOY_1, DIR_SOUTH)
+	turnvobject(FAT_MAN1, DIR_SOUTH)
+	turnvobject(POKEFAN_F, DIR_NORTH)
+	turnvobject(WOMAN_1_1, DIR_NORTH)
+	turnvobject(MAN_1, DIR_EAST)
+	turnvobject(WOMAN_2, DIR_WEST)
+	// EXPERT_M, STAY LOOKING EAST
+	// EXPERT_F, STAY LOOKING WEST
+	turnvobject(MAN_2, DIR_WEST)
+	turnvobject(WOMAN_3_1, DIR_SOUTH)
+	turnvobject(LASS, DIR_NORTH)
+	turnvobject(MAN_4_1, DIR_SOUTH)
+	turnvobject(WOMAN_4, DIR_EAST)
+	turnvobject(WOMAN_1_2, DIR_WEST)
+	turnvobject(WOMAN_5, DIR_NORTH)
+	turnvobject(BEAUTY, DIR_EAST)
+	turnvobject(GENTLEMAN, DIR_WEST)
+	turnvobject(FAT_MAN2, DIR_SOUTH)
+	turnvobject(MANIAC, DIR_WEST)
+	turnvobject(RICH_BOY_2, DIR_NORTH)
+	turnvobject(POKEFAN_M, DIR_SOUTH)
+	turnvobject(MAN_4_2, DIR_SOUTH)
+	turnvobject(WOMAN_3_2, DIR_EAST)
+	turnvobject(MAN_5, DIR_WEST)
+	turnvobject(OLD_MAN, DIR_NORTH)
+	delay(20)
+
+	turnvobject(RICH_BOY_1, DIR_EAST)
+	turnvobject(FAT_MAN1, DIR_WEST)
+	turnvobject(POKEFAN_F, DIR_EAST)
+	turnvobject(WOMAN_1_1, DIR_WEST)
+	turnvobject(MAN_1, DIR_WEST)
+	turnvobject(WOMAN_2, DIR_EAST)
+	turnvobject(EXPERT_M, DIR_WEST)
+	turnvobject(EXPERT_F, DIR_EAST)
+	turnvobject(MAN_2, DIR_WEST)
+	turnvobject(WOMAN_3_1, DIR_SOUTH)
+	turnvobject(LASS, DIR_EAST)
+	turnvobject(MAN_4_1, DIR_NORTH)
+	turnvobject(WOMAN_4, DIR_WEST)
+	turnvobject(WOMAN_1_2, DIR_NORTH)
+	turnvobject(WOMAN_5, DIR_WEST)
+	turnvobject(BEAUTY, DIR_NORTH)
+	turnvobject(GENTLEMAN, DIR_NORTH)
+	turnvobject(FAT_MAN2, DIR_NORTH)
+	turnvobject(MANIAC, DIR_EAST)
+	turnvobject(RICH_BOY_2, DIR_WEST)
+	turnvobject(POKEFAN_M, DIR_NORTH)
+	turnvobject(MAN_4_2, DIR_EAST)
+	turnvobject(WOMAN_3_2, DIR_WEST)
+	turnvobject(MAN_5, DIR_EAST)
+	turnvobject(OLD_MAN, DIR_WEST)
+	delay(20)
+
+	turnvobject(RICH_BOY_1, DIR_SOUTH)
+	turnvobject(FAT_MAN1, DIR_SOUTH)
+	turnvobject(POKEFAN_F, DIR_SOUTH)
+	turnvobject(WOMAN_1_1, DIR_SOUTH)
+	turnvobject(MAN_1, DIR_SOUTH)
+	turnvobject(WOMAN_2, DIR_SOUTH)
+	turnvobject(EXPERT_M, DIR_SOUTH)
+	turnvobject(EXPERT_F, DIR_SOUTH)
+	turnvobject(MAN_2, DIR_SOUTH)
+	turnvobject(WOMAN_3_1, DIR_SOUTH)
+	turnvobject(LASS, DIR_SOUTH)
+	turnvobject(MAN_4_1, DIR_SOUTH)
+	turnvobject(WOMAN_4, DIR_SOUTH)
+	turnvobject(WOMAN_1_2, DIR_SOUTH)
+	turnvobject(WOMAN_5, DIR_SOUTH)
+	turnvobject(BEAUTY, DIR_SOUTH)
+	turnvobject(GENTLEMAN, DIR_SOUTH)
+	turnvobject(FAT_MAN2, DIR_SOUTH)
+	turnvobject(MANIAC, DIR_SOUTH)
+	turnvobject(RICH_BOY_2, DIR_SOUTH)
+	turnvobject(POKEFAN_M, DIR_SOUTH)
+	turnvobject(MAN_4_2, DIR_SOUTH)
+	turnvobject(WOMAN_3_2, DIR_SOUTH)
+	turnvobject(MAN_5, DIR_SOUTH)
+	turnvobject(OLD_MAN, DIR_SOUTH)
+	delay(20)
+
+	if(var(VAR_TEMP_1) == 0){waitmessage}
+	if(var(VAR_TEMP_1) == 1){waitmessage}
+	return
+}
+
+script RustboroCity_EventScript_HarmonSpeech_Trigger1
+{
+	setvar(VAR_TEMP_0, 1)
+	call(YouHearACommotion)
+	goto(RustboroCity_EventScript_HarmonSpeech)
+}
+
+script RustboroCity_EventScript_HarmonSpeech_Trigger2
+{
+	setvar(VAR_TEMP_0, 2)
+	call(YouHearACommotion)
+	goto(RustboroCity_EventScript_HarmonSpeech)
+}
+
+script RustboroCity_EventScript_HarmonSpeech_Trigger3
+{
+	setvar(VAR_TEMP_0, 3)
+	call(YouHearACommotion)
+	goto(RustboroCity_EventScript_HarmonSpeech)
+}
+
+script RustboroCity_EventScript_HarmonSpeech_Trigger4
+{
+	call(YouHearACommotion)
+	goto(RustboroCity_EventScript_HarmonSpeech)
 }
 
 
+script(local) YouHearACommotion
+{
+	msgbox("As you walk down, you start hearing\nquite a commotion… What's going on?")
+	closemessage
+	return
+}
+
+script RustboroCity_EventScript_HarmonSpeech
+{
+	lock
+	switch(var(VAR_TEMP_0))
+	{
+		case 1:
+			applymovement(PLAYER, moves(walk_right * 5))
+			waitmovement(0)
+		case 2:
+			applymovement(PLAYER, moves(walk_right * 3))
+			waitmovement(0)
+		case 3:
+			applymovement(PLAYER, moves(walk_right * 2))
+			waitmovement(0)
+	}
+	applymovement(PLAYER, PlayerGoesToWatchSpeech)
+	waitmovement(0)
+
+	special(SpawnCameraObject)
+	applymovement(LOCALID_CAMERA, Movement_CameraPanDown_WalkDown2)
+	waitmovement(0)
+
+	setspeaker(SP_NAME_HARMON)
+	msgbox(
+		"My fellow Hoennians, I once again take\nthe stage to speak to you all.\p"
+		"Our very future--our CHILDREN--are\nbeing threatened as we speak.\lI talk, of course, about the League."
+	)
+	closemessage
+	
+	do
+	{
+		call(TurnHarmonSpeechVObjects)
+		addvar(VAR_TEMP_1, 1)
+	} while (var(VAR_TEMP_1) < 2)
+	
+	delay(20)
+
+	setspeaker(SP_NAME_NONE)
+	message("You begin to be lost in thought.")
+	waitmessage
+	waitbuttonpress
+	fadescreenswapbuffers(FADE_TO_BLACK)
+	delay(30)
+	special(DestroyVirtualObjects)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
+	message("The crowd has dispersed.")
+	waitmessage
+	waitbuttonpress
+	closemessage
+	
+	
+	release
+	end
+}
+
+movement PlayerGoesToWatchSpeech {
+	walk_down * 3 
+	walk_right * 2
+	walk_down * 3
+}
 
 raw `
 @RustboroCity_MapScripts::

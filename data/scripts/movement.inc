@@ -178,3 +178,19 @@ Common_Movement_WalkRightFaster::
 Common_Movement_WalkLeftFaster::
 	walk_faster_left
 	step_end
+
+@ Camera Movements
+Movement_CameraPanDown_WalkDown2::
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	step_end
+
+Movement_CameraPanDown_WalkDown3::
+	delay_16
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	step_end
