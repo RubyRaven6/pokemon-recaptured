@@ -19,6 +19,7 @@
 #include "field_specials.h"
 #include "field_weather.h"
 #include "graphics.h"
+#include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "item_icon.h"
@@ -5768,4 +5769,9 @@ bool8 CheckAddCoins(void)
         return FALSE;
     else
         return TRUE;
+}
+
+void KeepMessageBoxVisibleDuringFade(void)
+{
+    ClearGpuRegBits(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0);
 }

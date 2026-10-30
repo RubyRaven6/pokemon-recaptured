@@ -282,12 +282,12 @@ script RustboroCity_EventScript_HarmonSpeech
 	waitmessage
 	waitmovement(0)
 
+	fadescreenswapbuffers(FADE_TO_BLACK)
+	special(KeepMessageBoxVisibleDuringFade)
 	setspeaker(SP_NAME_NONE)
 	message("You begin to be lost in thought.")
 	waitmessage
 	waitbuttonpress
-	fadescreenswapbuffers(FADE_TO_BLACK)
-	delay(30)
 	special(DestroyVirtualObjects)
 	fadescreenswapbuffers(FADE_FROM_BLACK)
 	message("The crowd has dispersed.")
