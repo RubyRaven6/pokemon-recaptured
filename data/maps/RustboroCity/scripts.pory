@@ -278,13 +278,14 @@ script RustboroCity_EventScript_HarmonSpeech
 	applymovement(HARMON, moves(walk_slow_left, delay_4, face_up))
 	message(
 		"For too long have we allowed them to\ncorrupt the children with ideals of\lpower and might.\p"
+		"And what have we done? Nothing!"
 	)
 	waitmessage
 	waitmovement(0)
-
+	closemessage
+	delay(60)
 	fadescreenswapbuffers(FADE_TO_BLACK)
 	special(KeepMessageBoxVisibleDuringFade)
-	setspeaker(SP_NAME_NONE)
 	message("You begin to be lost in thought.")
 	waitmessage
 	waitbuttonpress
