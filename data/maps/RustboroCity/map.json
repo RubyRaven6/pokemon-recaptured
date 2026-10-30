@@ -217,6 +217,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_RUSTBORO_HARMON",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
       "x": 25,
       "y": 42,
