@@ -25,6 +25,7 @@ const MAN_5 		= 23
 const OLD_MAN 		= 24
 
 const PLAYER = LOCALID_PLAYER
+const HARMON = LOCALID_RUSTBORO_HARMON
 
 mapscripts RustboroCity_MapScripts {
 	MAP_SCRIPT_ON_TRANSITION {
@@ -261,6 +262,25 @@ script RustboroCity_EventScript_HarmonSpeech
 	} while (var(VAR_TEMP_1) < 2)
 	
 	delay(20)
+
+	applymovement(HARMON, moves(walk_slow_left))
+	message(
+		"For too long have we allowed them to\ncorrupt the children with ideals of\lpower and might.\p"
+	)
+	waitmessage
+	waitmovement(0)
+	applymovement(HARMON, moves(walk_slow_right * 2))
+	message(
+		"What example are we setting, telling\nthem to aspire becoming brutes who\lsolve their problems with violence?\p"
+	)
+	waitmessage
+	waitmovement(0)
+	applymovement(HARMON, moves(walk_slow_left, delay_4, face_up))
+	message(
+		"For too long have we allowed them to\ncorrupt the children with ideals of\lpower and might.\p"
+	)
+	waitmessage
+	waitmovement(0)
 
 	setspeaker(SP_NAME_NONE)
 	message("You begin to be lost in thought.")
