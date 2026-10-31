@@ -25,7 +25,8 @@ const MAN_5 		= 23
 const OLD_MAN 		= 24
 
 const PLAYER = LOCALID_PLAYER
-const HARMON = LOCALID_RUSTBORO_HARMON
+const ROBIN = LOCALID_RUSTBORO_ROBIN
+const HARMON = LOCALID_RUSTBORO_HARMON_SPEECH
 const GUARD1 = LOCALID_RUSTBORO_CITY_ARMISTICE_1
 const GUARD2 = LOCALID_RUSTBORO_CITY_ARMISTICE_2
 
@@ -367,7 +368,24 @@ script RustboroCity_EventScript_HarmonSpeech
 	end
 }
 
-script RustboroCity_EventScript_HelpingAxel
+script RustboroCity_EventScript_HelpingRobin_Trigger1
+{
+
+}
+script RustboroCity_EventScript_HelpingRobin_Trigger2
+{
+	
+}
+script RustboroCity_EventScript_HelpingRobin_Trigger3
+{
+	
+}
+script RustboroCity_EventScript_HelpingRobin_Trigger4
+{
+	
+}
+
+script RustboroCity_EventScript_HelpingRobin
 {
 	
 }

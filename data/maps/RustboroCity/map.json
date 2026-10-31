@@ -217,7 +217,7 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_RUSTBORO_HARMON",
+      "local_id": "LOCALID_RUSTBORO_HARMON_SPEECH",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
       "x": 25,
       "y": 42,
@@ -228,7 +228,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_RUSTBORO_HARMON_SPEECH"
     },
     {
       "local_id": "LOCALID_RUSTBORO_CITY_ARMISTICE_1",
@@ -242,7 +242,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_RUSTBORO_CITY_ARMISTICE_1"
     },
     {
       "local_id": "LOCALID_RUSTBORO_CITY_ARMISTICE_2",
@@ -256,11 +256,12 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_RUSTBORO_CITY_ARMISTICE_2"
     },
     {
+      "local_id": "LOCALID_RUSTBORO_ROBIN",
       "graphics_id": "OBJ_EVENT_GFX_WALLY",
-      "x": 30,
+      "x": 32,
       "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -270,6 +271,20 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_RUSTBORO_HARMON_CATCHING",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
+      "x": 39,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_RUSTBORO_HARMON_CATCHING"
     }
   ],
   "warp_events": [
@@ -408,6 +423,15 @@
       "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "0",
       "script": "RustboroCity_EventScript_HarmonSpeech_Trigger4"
+    },
+    {
+      "type": "trigger",
+      "x": 30,
+      "y": 9,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "NULL"
     }
   ],
   "bg_events": [
