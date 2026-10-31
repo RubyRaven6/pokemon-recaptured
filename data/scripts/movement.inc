@@ -180,6 +180,13 @@ Common_Movement_WalkLeftFaster::
 	step_end
 
 @ Camera Movements
+Movement_CameraPanUp_WalkUp2::
+	delay_16
+	delay_16
+	walk_up
+	walk_up
+	step_end
+
 Movement_CameraPanDown_WalkDown2::
 	delay_16
 	delay_16

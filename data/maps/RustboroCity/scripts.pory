@@ -26,6 +26,9 @@ const OLD_MAN 		= 24
 
 const PLAYER = LOCALID_PLAYER
 const HARMON = LOCALID_RUSTBORO_HARMON
+const GUARD1 = LOCALID_RUSTBORO_CITY_ARMISTICE_1
+const GUARD2 = LOCALID_RUSTBORO_CITY_ARMISTICE_2
+
 
 mapscripts RustboroCity_MapScripts {
 	MAP_SCRIPT_ON_TRANSITION {
@@ -70,12 +73,32 @@ script(local) TurnHarmonSpeechVObjects
 	if(var(VAR_TEMP_1) == 0)
 	{
 		setspeaker("Old Man")
-		message("My god! What is he talking about?{PAUSE 100}")
+		message("My god! What is he talking about?{PAUSE 30}")
 	}
 	if(var(VAR_TEMP_1) == 1)
 	{
-		setspeaker("Maniac")
-		message("What do you mean?! He's just talking\nsense!{PAUSE 100}")
+		setspeaker("Young Guy")
+		message("What do you mean?! He's just talking\nsense!{PAUSE 30}")
+	}
+	if(var(VAR_TEMP_1) == 2)
+	{
+		setspeaker("Young Girl")
+		message("But the league helps so many people…!{PAUSE 30}")
+	}
+	if(var(VAR_TEMP_1) == 3)
+	{
+		setspeaker("Woman")
+		message("You can't be serious…{PAUSE 30}")
+	}
+	if(var(VAR_TEMP_1) == 4)
+	{
+		setspeaker("Old Woman")
+		message("C'mon, he has to be onto something,\nright? He seems so convinced.{PAUSE 30}")
+	}
+	if(var(VAR_TEMP_1) == 5)
+	{
+		setspeaker("Man")
+		message("He's really loud about it, but he has a\npoint…{PAUSE 30}")
 	}
 
 	turnvobject(RICH_BOY_1, DIR_EAST)
@@ -186,8 +209,7 @@ script(local) TurnHarmonSpeechVObjects
 	turnvobject(OLD_MAN, DIR_SOUTH)
 	delay(20)
 
-	if(var(VAR_TEMP_1) == 0){waitmessage}
-	if(var(VAR_TEMP_1) == 1){waitmessage}
+	if(var(VAR_TEMP_1) < 6){waitmessage}
 	return
 }
 
@@ -259,11 +281,13 @@ script RustboroCity_EventScript_HarmonSpeech
 	{
 		call(TurnHarmonSpeechVObjects)
 		addvar(VAR_TEMP_1, 1)
-	} while (var(VAR_TEMP_1) < 2)
+		waitmessage
+	} while (var(VAR_TEMP_1) < 3)
 	
 	delay(20)
 
 	applymovement(HARMON, moves(walk_slow_left))
+	setspeaker(SP_NAME_HARMON)
 	message(
 		"For too long have we allowed them to\ncorrupt the children with ideals of\lpower and might.\p"
 	)
@@ -277,23 +301,65 @@ script RustboroCity_EventScript_HarmonSpeech
 	waitmovement(0)
 	applymovement(HARMON, moves(walk_slow_left, delay_4, face_up))
 	message(
-		"For too long have we allowed them to\ncorrupt the children with ideals of\lpower and might.\p"
-		"And what have we done? Nothing!"
+		"We train them day and night, often at\nthe expense of their health, safety\land childhood.\p"
+		"And what have we done?\p"
 	)
 	waitmessage
 	waitmovement(0)
+	applymovement(HARMON, moves(jump_in_place_up))
+	message(
+		"Nothing!\p"
+	)
+	waitmessage
+	waitmovement(0)
+
+	do
+	{
+		call(TurnHarmonSpeechVObjects)
+		addvar(VAR_TEMP_1, 1)
+		closemessage
+	} while (var(VAR_TEMP_1) < 6)
+
+	setspeaker(SP_NAME_HARMON)
+	message(
+		"I beseech you, my brethren, to join my\ncall to disband the League once and\lfor all!"
+	)
+	waitmessage
+	waitbuttonpress
 	closemessage
-	delay(60)
+
+	applymovement(LOCALID_CAMERA, Movement_CameraPanUp_WalkUp2)
+	applymovement(GUARD1, moves(delay_16, walk_left, walk_down * 3))
+	applymovement(HARMON, moves(walk_down, walk_left * 2, walk_down * 3))
+	applymovement(GUARD2, moves(delay_16, walk_left * 3, walk_down * 3))
+
+	waitmovement(GUARD1)
+	waitmovement(HARMON)
+	waitmovement(GUARD2)
+
+	removeobject(GUARD1)
+	removeobject(HARMON)
+	removeobject(GUARD2)
+	waitmovement(LOCALID_CAMERA)
+
+	do
+	{
+		call(TurnHarmonSpeechVObjects)
+		addvar(VAR_TEMP_1, 1)
+		closemessage
+	} while (var(VAR_TEMP_1) < 8)
+
 	fadescreenswapbuffers(FADE_TO_BLACK)
 	special(KeepMessageBoxVisibleDuringFade)
-	message("You begin to be lost in thought.")
+	message(
+		"The crowd around you discourses with\neach other. As you stood there, you\lfeel yourself being lost in thought…\p"
+		"Diancie's words begin to ring in your\nhead once more… A rot in the region's\lheart of hearts…\p"
+	)
 	waitmessage
-	waitbuttonpress
 	special(DestroyVirtualObjects)
+	special(RemoveCameraObject)
 	fadescreenswapbuffers(FADE_FROM_BLACK)
-	message("The crowd has dispersed.")
-	waitmessage
-	waitbuttonpress
+	msgbox("By the time you came to, you find that\nthe crowd has already dispersed.")
 	closemessage
 	
 	
