@@ -290,8 +290,7 @@ struct SafeAreaData {
 
 const struct SafeAreaData gSafeAreas[] =
 {
-    { MAP_GROUP(MAP_LITTLEROOT_TOWN), MAP_NUM(MAP_LITTLEROOT_TOWN) },
-    { MAP_GROUP(MAP_DEWFORD_TOWN), MAP_NUM(MAP_DEWFORD_TOWN) },
+    { MAP_GROUP(MAP_ROUTE116), MAP_NUM(MAP_ROUTE116) },
 };
 
 const struct SafeAreaData sUnsafeAreas[] =
