@@ -1,3 +1,4 @@
+raw`
 .set LOCALID_BOUNCER, 24
 
 MauvilleCity_GameCorner_MapScripts::
@@ -1751,3 +1752,4 @@ MauvilleCity_GameCorner_Text_CantBuyWithNoCoinCase:
 MauvilleCity_GameCorner_Text_Juice:
 	.string "BERRY JUICE!\n"
 	.string "Just 10 COINS.$"	
+`
