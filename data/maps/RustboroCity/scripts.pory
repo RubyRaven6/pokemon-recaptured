@@ -367,6 +367,11 @@ script RustboroCity_EventScript_HarmonSpeech
 	end
 }
 
+script RustboroCity_EventScript_HelpingAxel
+{
+	
+}
+
 movement PlayerGoesToWatchSpeech {
 	walk_down * 3 
 	walk_right * 2
