@@ -283,6 +283,8 @@ BrawlyMakesYouAnOfficialTrainer:
 			"You can just go up at any time to take\nthe next ferry already.\pGood luck!"
 		)
 	}
+	startquest(QUEST_POKEMON_LEAGUE)
+	openquestmenu
 	release
 	end
 }

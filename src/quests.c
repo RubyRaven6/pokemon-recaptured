@@ -245,6 +245,7 @@ static const u8 sText_Caught[] = _("Caught");
 static const u8 sText_Found[] = _("Found");
 static const u8 sText_Read[] = _("Read");
 static const u8 sText_Back[] = _("Back");
+static const u8 sText_Beaten[] = _("Beaten");
 static const u8 sText_DotSpace[] = _(". ");
 static const u8 sText_Close[] = _("Close");
 static const u8 sText_ColorGreen[] = _("{COLOR}{GREEN}");
@@ -254,21 +255,20 @@ static const u8 sText_AZ[] = _(" A-Z");
 //////////////////////BEGIN SUBQUEST CUSTOMIZATION/////////////////////////////
 
 //Declaration of subquest structures. Edits to subquests are made here.
-#define sub_quest(i, n, d, m, s, st, t) {.id = i, .name = n, .desc = d, .map = m, .sprite = s, .spritetype = st, .type = t}
 static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 {
 	{
-		.id = 0,
+		.id = SUB_QUEST_1_LITTLEROOT_GYM,
 		.name = COMPOUND_STRING("Littleroot Gym"),
-		.desc = COMPOUND_STRING("The first gym of the Pokémon\nLeague Gym Challenge."),
+		.desc = COMPOUND_STRING("Defeated the Littleroot Gym!"),
 		.map = gText_SideQuestMap1,
 		.sprite = OBJ_EVENT_GFX_WALLY,
 		.spritetype = OBJECT,
-		.type = sText_Found
+		.type = sText_Beaten
 	},
 
 	{
-		.id = 1,
+		.id = SUB_QUEST_2,
 		.name = gText_SubQuest1_Name2,
 		.desc = gText_SubQuest1_Desc2,
 		.map = gText_SideQuestMap2,
@@ -278,7 +278,7 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 	},
 
 	{
-		.id = 2,
+		.id = SUB_QUEST_3,
 		.name = gText_SubQuest1_Name3,
 		.desc = gText_SubQuest1_Desc3,
 		.map = gText_SideQuestMap3,
@@ -288,7 +288,7 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 	},
 
 	{
-		.id = 3,
+		.id = SUB_QUEST_4,
 		.name = gText_SubQuest1_Name4,
 		.desc = gText_SubQuest1_Desc4,
 		.map = gText_SideQuestMap4,
@@ -298,7 +298,7 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 	},
 
 	{
-		.id = 4,
+		.id = SUB_QUEST_5,
 		.name = gText_SubQuest1_Name5,
 		.desc = gText_SubQuest1_Desc5,
 		.map = gText_SideQuestMap5,
@@ -308,7 +308,7 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 	},
 
 	{
-		.id = 5,
+		.id = SUB_QUEST_6,
 		.name = gText_SubQuest1_Name6,
 		.desc = gText_SubQuest1_Desc6,
 		.map = gText_SideQuestMap6,
@@ -318,7 +318,7 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 	},
 
 	{
-		.id = 6,
+		.id = SUB_QUEST_7,
 		.name = gText_SubQuest1_Name7,
 		.desc = gText_SubQuest1_Desc7,
 		.map = gText_SideQuestMap7,
@@ -328,7 +328,7 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 	},
 
 	{
-		.id = 7,
+		.id = SUB_QUEST_8,
 		.name = gText_SubQuest1_Name8,
 		.desc = gText_SubQuest1_Desc8,
 		.map = gText_SideQuestMap8,
@@ -338,7 +338,7 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 	},
 
 	{
-		.id = 8,
+		.id = SUB_QUEST_9,
 		.name = gText_SubQuest1_Name9,
 		.desc = gText_SubQuest1_Desc9,
 		.map = gText_SideQuestMap9,
@@ -348,7 +348,7 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 	},
 
 	{
-		.id = 9,
+		.id = SUB_QUEST_10,
 		.name = gText_SubQuest1_Name10,
 		.desc = gText_SubQuest1_Desc10,
 		.map = gText_SideQuestMap10,
@@ -360,206 +360,206 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 
 static const struct SubQuest sSubQuests2[QUEST_2_SUB_COUNT] =
 {
-	sub_quest(
-	      10,
-	      gText_SubQuest2_Name1,
-	      gText_SubQuest2_Desc1,
-	      gText_SideQuestMap1,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_11,
+		.name = gText_SubQuest2_Name1,
+		.desc = gText_SubQuest2_Desc1,
+		.map = gText_SideQuestMap1,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      11,
-	      gText_SubQuest2_Name2,
-	      gText_SubQuest2_Desc2,
-	      gText_SideQuestMap2,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_12,
+		.name = gText_SubQuest2_Name2,
+		.desc = gText_SubQuest2_Desc2,
+		.map = gText_SideQuestMap2,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      12,
-	      gText_SubQuest2_Name3,
-	      gText_SubQuest2_Desc3,
-	      gText_SideQuestMap3,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_13,
+		.name = gText_SubQuest2_Name3,
+		.desc = gText_SubQuest2_Desc3,
+		.map = gText_SideQuestMap3,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      13,
-	      gText_SubQuest2_Name4,
-	      gText_SubQuest2_Desc4,
-	      gText_SideQuestMap4,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_14,
+		.name = gText_SubQuest2_Name4,
+		.desc = gText_SubQuest2_Desc4,
+		.map = gText_SideQuestMap4,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      14,
-	      gText_SubQuest2_Name5,
-	      gText_SubQuest2_Desc5,
-	      gText_SideQuestMap5,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_15,
+		.name = gText_SubQuest2_Name5,
+		.desc = gText_SubQuest2_Desc5,
+		.map = gText_SideQuestMap5,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      15,
-	      gText_SubQuest2_Name6,
-	      gText_SubQuest2_Desc6,
-	      gText_SideQuestMap6,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_16,
+		.name = gText_SubQuest2_Name6,
+		.desc = gText_SubQuest2_Desc6,
+		.map = gText_SideQuestMap6,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      16,
-	      gText_SubQuest2_Name7,
-	      gText_SubQuest2_Desc7,
-	      gText_SideQuestMap7,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_17,
+		.name = gText_SubQuest2_Name7,
+		.desc = gText_SubQuest2_Desc7,
+		.map = gText_SideQuestMap7,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      17,
-	      gText_SubQuest2_Name8,
-	      gText_SubQuest2_Desc8,
-	      gText_SideQuestMap8,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_18,
+		.name = gText_SubQuest2_Name8,
+		.desc = gText_SubQuest2_Desc8,
+		.map = gText_SideQuestMap8,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      18,
-	      gText_SubQuest2_Name9,
-	      gText_SubQuest2_Desc9,
-	      gText_SideQuestMap9,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_19,
+		.name = gText_SubQuest2_Name9,
+		.desc = gText_SubQuest2_Desc9,
+		.map = gText_SideQuestMap9,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      19,
-	      gText_SubQuest2_Name10,
-	      gText_SubQuest2_Desc10,
-	      gText_SideQuestMap10,
-	      SPECIES_HO_OH,
-	      PKMN,
-	      sText_Caught
+	{
+		.id = SUB_QUEST_20,
+		.name = gText_SubQuest2_Name10,
+		.desc = gText_SubQuest2_Desc10,
+		.map = gText_SideQuestMap10,
+		.sprite = SPECIES_HO_OH,
+		.spritetype = PKMN,
+		.type = sText_Caught
 
-	),
+	},
 
-	sub_quest(
-	      20,
-	      gText_SubQuest2_Name11,
-	      gText_SubQuest2_Desc11,
-	      gText_SideQuestMap11,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_21,
+		.name = gText_SubQuest2_Name11,
+		.desc = gText_SubQuest2_Desc11,
+		.map = gText_SideQuestMap11,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      21,
-	      gText_SubQuest2_Name12,
-	      gText_SubQuest2_Desc12,
-	      gText_SideQuestMap12,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_22,
+		.name = gText_SubQuest2_Name12,
+		.desc = gText_SubQuest2_Desc12,
+		.map = gText_SideQuestMap12,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      22,
-	      gText_SubQuest2_Name13,
-	      gText_SubQuest2_Desc13,
-	      gText_SideQuestMap13,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_23,
+		.name = gText_SubQuest2_Name13,
+		.desc = gText_SubQuest2_Desc13,
+		.map = gText_SideQuestMap13,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      23,
-	      gText_SubQuest2_Name14,
-	      gText_SubQuest2_Desc14,
-	      gText_SideQuestMap14,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_24,
+		.name = gText_SubQuest2_Name14,
+		.desc = gText_SubQuest2_Desc14,
+		.map = gText_SideQuestMap14,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      24,
-	      gText_SubQuest2_Name15,
-	      gText_SubQuest2_Desc15,
-	      gText_SideQuestMap15,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_25,
+		.name = gText_SubQuest2_Name15,
+		.desc = gText_SubQuest2_Desc15,
+		.map = gText_SideQuestMap15,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      25,
-	      gText_SubQuest2_Name16,
-	      gText_SubQuest2_Desc16,
-	      gText_SideQuestMap16,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_26,
+		.name = gText_SubQuest2_Name16,
+		.desc = gText_SubQuest2_Desc16,
+		.map = gText_SideQuestMap16,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      26,
-	      gText_SubQuest2_Name17,
-	      gText_SubQuest2_Desc17,
-	      gText_SideQuestMap17,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_27,
+		.name = gText_SubQuest2_Name17,
+		.desc = gText_SubQuest2_Desc17,
+		.map = gText_SideQuestMap17,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      27,
-	      gText_SubQuest2_Name18,
-	      gText_SubQuest2_Desc18,
-	      gText_SideQuestMap18,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_28,
+		.name = gText_SubQuest2_Name18,
+		.desc = gText_SubQuest2_Desc18,
+		.map = gText_SideQuestMap18,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      28,
-	      gText_SubQuest2_Name19,
-	      gText_SubQuest2_Desc19,
-	      gText_SideQuestMap19,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_29,
+		.name = gText_SubQuest2_Name19,
+		.desc = gText_SubQuest2_Desc19,
+		.map = gText_SideQuestMap19,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
-	sub_quest(
-	      29,
-	      gText_SubQuest2_Name20,
-	      gText_SubQuest2_Desc20,
-	      gText_SideQuestMap20,
-	      OBJ_EVENT_GFX_WALLY,
-	      OBJECT,
-	      sText_Found
-	),
+	{
+		.id = SUB_QUEST_30,
+		.name = gText_SubQuest2_Name20,
+		.desc = gText_SubQuest2_Desc20,
+		.map = gText_SideQuestMap20,
+		.sprite = OBJ_EVENT_GFX_WALLY,
+		.spritetype = OBJECT,
+		.type = sText_Found
+	},
 
 };
 
@@ -601,23 +601,33 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 		.questVariable = VAR_QUEST_FIND_THE_HEART //First unused var in vars.h,
 	},
 
-	[QUEST_2] = 
+	[QUEST_POKEMON_LEAGUE] = 
 	{
 		.name = COMPOUND_STRING("The Pokémon League"),
-		.desc = {COMPOUND_STRING("Take on the Pokémon League Gym\nChallenge!")},
-		.donedesc = COMPOUND_STRING("Congratulations, Champ!"),
+		.desc = {
+			COMPOUND_STRING("Challenge the Littleroot Gym!"),
+			COMPOUND_STRING("Challenge the Rustboro Gym!"),
+			COMPOUND_STRING("Challenge the Verdanturf Gym!")
+		},
+		.donedesc = COMPOUND_STRING("You've won the entire Pokémon League Challenge.\nCongratulations, Champ!"),
 		.map = {
-			COMPOUND_STRING("Litteroot Town")
+			COMPOUND_STRING("Litteroot Town"),
+			COMPOUND_STRING("Rustboro City"),
+			COMPOUND_STRING("Verdanturf Town"),
 		},
 		.sprite = {
-			OBJ_EVENT_GFX_BRENDAN_NORMAL
+			OBJ_EVENT_GFX_BRENDAN_NORMAL,
+			OBJ_EVENT_GFX_ROXANNE,
+			OBJ_EVENT_GFX_CAMPER,
 		},
 		.spritetype = {
+			OBJECT,
+			OBJECT,
 			OBJECT,
 		},
 		.subquests = sSubQuests1,
 		.numSubquests = QUEST_1_SUB_COUNT,
-		.questVariable = 0,
+		.questVariable = VAR_QUEST_POKEMON_LEAGUE,
 	},
 
 	[QUEST_3] = 

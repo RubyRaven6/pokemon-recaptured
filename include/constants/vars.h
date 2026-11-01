@@ -94,6 +94,7 @@ VAR_INTRO_SEQUENCE_STATE States
 
 //QUEST VARS
 #define VAR_QUEST_FIND_THE_HEART						0x404E
+#define VAR_QUEST_POKEMON_LEAGUE						0x408B
 
 /*
  __ __   ____  ____   ____  _      _       ____        ___  ___ ___    ___  ____    ____  _      ___   
@@ -209,14 +210,13 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_ROUTE133_STATE                               0x4080 // Unused Var
 #define VAR_ROUTE134_STATE                               0x4081 // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
-#define VAR_HIDDEN_MON_STEPS                                0x4083 // Unused Var
+#define VAR_HIDDEN_MON_STEPS                             0x4083
 #define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
 #define VAR_CONTEST_HALL_STATE                           0x4086
 #define VAR_CABLE_CLUB_STATE                             0x4087
 #define VAR_CONTEST_TYPE                                 0x4088
 #define VAR_SECRET_BASE_INITIALIZED                      0x4089
 #define VAR_CONTEST_PRIZE_PICKUP                         0x408A
-#define VAR_UNUSED_0x408B                                0x408B // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_BRENDAN              0x408C
 #define VAR_LITTLEROOT_RIVAL_STATE                       0x408D
 #define VAR_BOARD_BRINEY_BOAT_STATE                      0x408E
