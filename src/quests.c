@@ -259,8 +259,8 @@ static const struct SubQuest sSubQuests1[QUEST_1_SUB_COUNT] =
 {
 	{
 		.id = 0,
-		.name = gText_SubQuest1_Name1,
-		.desc = gText_SubQuest1_Desc1,
+		.name = COMPOUND_STRING("Littleroot Gym"),
+		.desc = COMPOUND_STRING("The first gym of the Pokémon\nLeague Gym Challenge."),
 		.map = gText_SideQuestMap1,
 		.sprite = OBJ_EVENT_GFX_WALLY,
 		.spritetype = OBJECT,
@@ -604,11 +604,20 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 	[QUEST_2] = 
 	{
 		.name = gText_SideQuestName_2,
-		.desc = {gText_SideQuestDesc_2},
-		.donedesc = gText_SideQuestDoneDesc_2,
-		.map = {gText_SideQuestMap2},
-		.sprite = {OBJ_EVENT_GFX_WALLY},
-		.spritetype = {OBJECT},
+		.desc = {COMPOUND_STRING("Take on the Pokémon League Gym\nChallenge!")},
+		.donedesc = COMPOUND_STRING("Congratulations, Champ!"),
+		.map = {
+			COMPOUND_STRING("Dewford Town"),
+			COMPOUND_STRING("Litteroot Town")
+		},
+		.sprite = {
+			OBJ_EVENT_GFX_BRAWLY,
+			OBJ_EVENT_GFX_BRENDAN_NORMAL
+		},
+		.spritetype = {
+			OBJECT,
+			OBJECT
+		},
 		.subquests = sSubQuests1,
 		.numSubquests = QUEST_1_SUB_COUNT,
 		.questVariable = 0,
