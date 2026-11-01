@@ -611,7 +611,7 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 			COMPOUND_STRING("Litteroot Town")
 		},
 		.sprite = {
-			OBJ_EVENT_GFX_BRAWLY,
+			OBJ_EVENT_GFX_EMPTY,
 			OBJ_EVENT_GFX_BRENDAN_NORMAL
 		},
 		.spritetype = {
