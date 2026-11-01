@@ -14357,9 +14357,8 @@ const struct ItemInfo gItemsInfo[] =
         .name = ITEM_NAME("League Ticket"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "This ticket denotes\n"
-            "you as a trainer, which\n"
-            "gives free passage."),
+            "This ticket which\n"
+            "gives you free\npassage."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
