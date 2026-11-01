@@ -55,7 +55,6 @@ script Common_EventScript_FerryAttendant
 	removeobject(SAILOR)
 
 	delay (60)
-	debugprint("VAR_TRACK_FERRY", VAR_TRACK_FERRY)
 	switch(var(VAR_TRACK_FERRY))
 	{
 		case RUSTBORO:
