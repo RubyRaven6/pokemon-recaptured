@@ -373,15 +373,15 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 22,
-      "y": 59,
+      "x": 23,
+      "y": 58,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_SUBWAY",
       "dest_warp_id": "0"
     },
     {
       "x": 23,
-      "y": 59,
+      "y": 57,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_SUBWAY",
       "dest_warp_id": "0"
