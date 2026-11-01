@@ -46,7 +46,7 @@ Debug_CheatStart_Old:
 	@setvar VAR_LITTLEROOT_RIVAL_STATE, 4 @ 4: Received Pokedex
 	@setflag FLAG_RECEIVED_BIKE
 	@additem ITEM_ACRO_BIKE
-	@setvar VAR_BRINEY_HOUSE_STATE, 1
+	@setvar VAR_ROBIN_ROT, 1
 	@setvar VAR_ROUTE116_STATE, 2
 	@setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
 	@setflag FLAG_BADGE01_GET
@@ -844,3 +844,13 @@ Debug_EventScript_TellTheTime_Text_0:
 
 DebugEventScript_PrintWeekday_Text_0:
 	.string "Time of day: {STR_VAR_1}$"
+
+Debug_CheckRobinVars::
+	callnative CheckRobinVars
+	msgbox Debug_RobinVarValues, MSGBOX_DEFAULT
+	release
+	end
+
+Debug_RobinVarValues::
+	.string "Robin Heart: {STR_VAR_1}\n"
+	.string "Robin Rot: {STR_VAR_2}.$"

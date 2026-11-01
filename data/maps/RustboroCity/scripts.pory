@@ -420,6 +420,21 @@ script RustboroCity_EventScript_RobinTalksOutLoud
 	turnobject(ROBIN, DIR_WEST)
 	applymovement(ROBIN, moves(emote_exclamation_mark))
 	waitmovement(0)
+	setspeaker(SP_NAME_ROBIN)
+	msgbox(
+		"Oh! Hello. I'm sorry, I didn't mean to\nblock your way.\p"
+		"I was just wondering whether I could\ngo and catch a Pokémon in the grass\lright outside.\p"
+		"I always wanted one you see, but I'm\nnot sure if I could go…"
+	)
+	mcdialogue("I can help you.", "Good luck.")
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			addvar(VAR_ROBIN_HEART, 1)
+		case 1:
+			addvar(VAR_ROBIN_ROT, 1)
+	}
+
 	release
 	return
 }

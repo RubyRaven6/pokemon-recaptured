@@ -87,6 +87,8 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_STARTER_MON									0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
 #define VAR_TRACK_FERRY									0x4020
 #define VAR_TRACK_SUBWAY		                        0x4050
+#define VAR_ROBIN_ROT                          0x4090
+#define VAR_ROBIN_HEART                               0x4091
 
 //town/city states
 #define VAR_DEWFORD_TOWN_STATE                           0x4052
@@ -221,8 +223,6 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_LITTLEROOT_RIVAL_STATE                       0x408D
 #define VAR_BOARD_BRINEY_BOAT_STATE                      0x408E
 #define VAR_DEVON_CORP_3F_STATE                          0x408F
-#define VAR_BRINEY_HOUSE_STATE                           0x4090
-#define VAR_UNUSED_0x4091                                0x4091 // Unused Var
 #define VAR_LITTLEROOT_INTRO_STATE                       0x4092
 #define VAR_MAUVILLE_GYM_STATE                           0x4093
 #define VAR_LILYCOVE_MUSEUM_2F_STATE                     0x4094

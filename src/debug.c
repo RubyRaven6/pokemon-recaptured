@@ -93,6 +93,7 @@ enum FlagsVarsDebugMenu
 {
     DEBUG_FLAGVAR_MENU_ITEM_FLAGS,
     DEBUG_FLAGVAR_MENU_ITEM_VARS,
+	DEBUG_FLAGVAR_MENU_ITEM_ROBIN_VARS,
     DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_ALL,
     DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_RESET,
     DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX,
@@ -414,6 +415,8 @@ extern const u8 Debug_BerryPestsDisabled[];
 extern const u8 Debug_BerryWeedsDisabled[];
 
 extern const u8 Common_EventScript_MoveRelearner[];
+
+extern const u8 Debug_CheckRobinVars[];
 
 static const struct DebugSelection sWarpSelection;
 static const struct DebugSelection sSetWeatherSelection;
@@ -743,7 +746,8 @@ static const struct DebugMenuOption sDebugMenu_Actions_Flags[] =
 {
     [DEBUG_FLAGVAR_MENU_ITEM_FLAGS]                = { COMPOUND_STRING("Set Flag XYZ…"),                     DebugAction_Selection_Init, &sToggleFlagSelection },
     [DEBUG_FLAGVAR_MENU_ITEM_VARS]                 = { COMPOUND_STRING("Set Var XYZ…"),                      DebugAction_Selection_Init, &sSetVarSelection},
-    [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_ALL]         = { COMPOUND_STRING("Pokédex Flags All"),                 DebugAction_FlagsVars_PokedexFlags_All },
+    [DEBUG_FLAGVAR_MENU_ITEM_ROBIN_VARS]		   = { COMPOUND_STRING("Check Robin Vars"),                  DebugAction_ExecuteScript, Debug_CheckRobinVars}, 
+	[DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_ALL]         = { COMPOUND_STRING("Pokédex Flags All"),                 DebugAction_FlagsVars_PokedexFlags_All },
     [DEBUG_FLAGVAR_MENU_ITEM_DEXFLAGS_RESET]       = { COMPOUND_STRING("Pokédex Flags Reset"),               DebugAction_FlagsVars_PokedexFlags_Reset },
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_POKEDEX]       = { COMPOUND_STRING("Toggle {STR_VAR_1}Pokédex"),         DebugAction_ToggleFlag, DebugAction_FlagsVars_SwitchDex },
     [DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_NATDEX]        = { COMPOUND_STRING("Toggle {STR_VAR_1}National Dex"),    DebugAction_ToggleFlag, DebugAction_FlagsVars_SwitchNatDex },
@@ -4869,4 +4873,10 @@ void CheckEWRAMCounters(struct ScriptContext *ctx)
 {
     ConvertIntToDecimalStringN(gStringVar1, gFollowerSteps, STR_CONV_MODE_LEFT_ALIGN, 5);
     ConvertIntToDecimalStringN(gStringVar2, gChainFishingDexNavStreak, STR_CONV_MODE_LEFT_ALIGN, 5);
+}
+
+void CheckRobinVars(void)
+{
+	ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_ROBIN_HEART), STR_CONV_MODE_LEFT_ALIGN, 5);
+	ConvertIntToDecimalStringN(gStringVar2, VarGet(VAR_ROBIN_ROT), STR_CONV_MODE_LEFT_ALIGN, 5);
 }
