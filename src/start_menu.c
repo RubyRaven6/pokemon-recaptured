@@ -290,8 +290,7 @@ struct SafeAreaData {
 
 const struct SafeAreaData gSafeAreas[] =
 {
-    { MAP_GROUP(MAP_LITTLEROOT_TOWN), MAP_NUM(MAP_LITTLEROOT_TOWN) },
-    { MAP_GROUP(MAP_DEWFORD_TOWN), MAP_NUM(MAP_DEWFORD_TOWN) },
+    { MAP_GROUP(MAP_ROUTE116), MAP_NUM(MAP_ROUTE116) },
 };
 
 const struct SafeAreaData sUnsafeAreas[] =
@@ -1716,7 +1715,8 @@ bool32 IsPlayerInSafeArea(void)
             return TRUE; // is safe
     }
 
-    if(gMapHeader.mapType == MAP_TYPE_INDOOR) //is this map indoors?
+	if(gMapHeader.mapType == MAP_TYPE_INDOOR
+	|| gMapHeader.mapType == MAP_TYPE_CITY) //is this map indoors?
         return TRUE;
 
     return FALSE; // ain't safe

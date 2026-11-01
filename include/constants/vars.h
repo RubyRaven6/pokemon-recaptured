@@ -80,12 +80,21 @@ VAR_INTRO_SEQUENCE_STATE States
 - 11: Player has accepted starter into team
 - 12: Player gets rescued by Brawly
 - 13: Player talking to Brawly in house
+- 14: Player talking to Elsie
+- 15: Player has finally started their adventure
 */
-#define VAR_INTRO_SEQUENCE_STATE                         0x4084
-#define VAR_STARTER_MON                                  0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
+#define VAR_INTRO_SEQUENCE_STATE						0x4084
+#define VAR_STARTER_MON									0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
+#define VAR_TRACK_FERRY									0x4020
+#define VAR_TRACK_SUBWAY		                        0x4050
+
+//town/city states
+#define VAR_DEWFORD_TOWN_STATE                           0x4052
+#define VAR_RUSTBORO_CITY_STATE                          0x405A
 
 //QUEST VARS
-#define VAR_QUEST_FIND_THE_HEART                         0x404E // Unused Var
+#define VAR_QUEST_FIND_THE_HEART						0x404E
+#define VAR_QUEST_POKEMON_LEAGUE						0x408B
 
 /*
  __ __   ____  ____   ____  _      _       ____        ___  ___ ___    ___  ____    ____  _      ___   
@@ -106,7 +115,6 @@ VAR_INTRO_SEQUENCE_STATE States
                                                                                                        
 */
 // general purpose vars
-#define VAR_RECYCLE_GOODS                                0x4020
 #define VAR_REPEL_STEP_COUNT                             0x4021
 #define VAR_ICE_STEP_COUNT                               0x4022
 #define VAR_MIRAGE_RND_H                                 0x4024 // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
@@ -154,9 +162,7 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_POKELOT_RND2                                 0x404C // Unused if OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES is TRUE
 #define VAR_POKELOT_PRIZE_PLACE                          0x404D
 #define VAR_LOTAD_SIZE_RECORD                            0x404F
-#define VAR_LITTLEROOT_TOWN_STATE                        0x4050
 #define VAR_OLDALE_TOWN_STATE                            0x4051
-#define VAR_DEWFORD_TOWN_STATE                           0x4052 // Unused Var
 #define VAR_LAVARIDGE_TOWN_STATE                         0x4053
 #define VAR_CURRENT_SECRET_BASE                          0x4054 // was probably allocated for VAR_FALLARBOR_TOWN_STATE at one point
 #define VAR_VERDANTURF_TOWN_STATE                        0x4055 // Unused Var
@@ -164,7 +170,6 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_PETALBURG_CITY_STATE                         0x4057
 #define VAR_SLATEPORT_CITY_STATE                         0x4058
 #define VAR_MAUVILLE_CITY_STATE                          0x4059 // Unused Var
-#define VAR_RUSTBORO_CITY_STATE                          0x405A
 #define VAR_FORTREE_CITY_STATE                           0x405B // Unused Var
 #define VAR_LILYCOVE_CITY_STATE                          0x405C // Unused Var
 #define VAR_MOSSDEEP_CITY_STATE                          0x405D
@@ -205,14 +210,13 @@ VAR_INTRO_SEQUENCE_STATE States
 #define VAR_ROUTE133_STATE                               0x4080 // Unused Var
 #define VAR_ROUTE134_STATE                               0x4081 // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
-#define VAR_HIDDEN_MON_STEPS                                0x4083 // Unused Var
+#define VAR_HIDDEN_MON_STEPS                             0x4083
 #define VAR_PETALBURG_GYM_STATE                          0x4085 // 0-1: Wally tutorial, 2-6: 0-4 badges, 7: Defeated Norman, 8: Rematch Norman
 #define VAR_CONTEST_HALL_STATE                           0x4086
 #define VAR_CABLE_CLUB_STATE                             0x4087
 #define VAR_CONTEST_TYPE                                 0x4088
 #define VAR_SECRET_BASE_INITIALIZED                      0x4089
 #define VAR_CONTEST_PRIZE_PICKUP                         0x408A
-#define VAR_UNUSED_0x408B                                0x408B // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_BRENDAN              0x408C
 #define VAR_LITTLEROOT_RIVAL_STATE                       0x408D
 #define VAR_BOARD_BRINEY_BOAT_STATE                      0x408E

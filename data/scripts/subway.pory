@@ -1,0 +1,92 @@
+const PLAYER = LOCALID_PLAYER
+
+const RUSTBORO = 0
+const LITTLEROOT = 1
+const MAUVILLE = 2
+const FALLARBOR = 3
+const LAVARIDGE = 4
+const FORTREE = 5
+const LILYCOVE = 6
+
+
+script Common_EventScript_SubwayAttendant
+{
+	lockall
+	setspeaker(SP_NAME_ATTENDANT)
+	msgbox("Hello! May I see your ticket?")
+	waitmovement(0)
+
+	if(var(VAR_TRACK_SUBWAY) != 0){dynmultipush("Rustboro",	 	0)}
+	if(var(VAR_TRACK_SUBWAY) != 1){dynmultipush("Littleroot",	1)}
+	if(var(VAR_TRACK_SUBWAY) != 2){dynmultipush("Mauville",	 	2)}
+	if(var(VAR_TRACK_SUBWAY) != 3){dynmultipush("Fallarbor",	3)}
+	if(var(VAR_TRACK_SUBWAY) != 4){dynmultipush("Lavaridge",	4)}
+	if(var(VAR_TRACK_SUBWAY) != 5){dynmultipush("Fortree",	 	5)}
+	if(var(VAR_TRACK_SUBWAY) != 6){dynmultipush("Lilycove",	 	6)}
+	dynmultipush("Nevermind.", 7)
+	dynmultistack(0,0, FALSE, 5, FALSE, 0, DYN_MULTICHOICE_CB_NONE)
+	if(var(VAR_RESULT) == 7){
+		closemessage
+		end
+	}
+	copyvar(VAR_TRACK_SUBWAY, VAR_RESULT)
+	
+	msgbox("Thank you! Have a lovely trip.")
+	closemessage
+
+	applymovement(PLAYER, PlayerBoardsTrain)
+	playse(SE_DOOR)
+	waitse
+	waitmovement(0)
+	hideplayer
+
+	delay (60)
+	random(4)
+	switch(var(VAR_TRACK_SUBWAY))
+	{
+		case LITTLEROOT:
+			goto(RandomizedLittleRootExit)
+		case RUSTBORO:
+			goto(RandomizedRustboroExit)
+	}
+
+RandomizedLittleRootExit:
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			warp(MAP_LITTLEROOT_TOWN_SUBWAY, 5, 15)
+		case 1:
+			warp(MAP_LITTLEROOT_TOWN_SUBWAY, 8, 15)
+		case 2:
+			warp(MAP_LITTLEROOT_TOWN_SUBWAY, 11, 15)
+		case 3:
+			warp(MAP_LITTLEROOT_TOWN_SUBWAY, 14, 15)
+	}
+	waitstate
+	releaseall
+	end
+
+RandomizedRustboroExit:
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			warp(MAP_RUSTBORO_CITY_SUBWAY, 5, 15)
+		case 1:
+			warp(MAP_RUSTBORO_CITY_SUBWAY, 8, 15)
+		case 2:
+			warp(MAP_RUSTBORO_CITY_SUBWAY, 11, 15)
+		case 3:
+			warp(MAP_RUSTBORO_CITY_SUBWAY, 14, 15)
+	}
+	waitstate
+	releaseall
+	end
+}
+
+movement PlayerBoardsTrain
+{
+	walk_down * 4
+	walk_right
+	face_down
+	walk_in_place_down
+}

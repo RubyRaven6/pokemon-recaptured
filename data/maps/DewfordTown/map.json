@@ -77,7 +77,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_ELSIE_IN_DEWFORD_TOWN"
+      "flag": "FLAG_HIDE_DEWFORD_TOWN_ELSIE"
     }
   ],
   "warp_events": [
@@ -131,15 +131,15 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 11,
-      "y": 25,
+      "x": 23,
+      "y": 28,
       "elevation": 0,
       "dest_map": "MAP_DEWFORD_TOWN_HOUSE4",
       "dest_warp_id": "0"
     },
     {
-      "x": 23,
-      "y": 28,
+      "x": 11,
+      "y": 25,
       "elevation": 0,
       "dest_map": "MAP_DEWFORD_TOWN_BRAWLYHOUSE",
       "dest_warp_id": "0"

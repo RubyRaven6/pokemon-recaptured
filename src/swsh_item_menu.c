@@ -73,7 +73,7 @@
 #include "constants/party_menu.h"
 #endif
 
-#if SWSH_BAG_MENU
+// #if SWSH_BAG_MENU
 
 #define TAG_POCKET_SCROLL_ARROW  110
 #define TAG_BAG_UI_PAL           111
@@ -3934,7 +3934,10 @@ static void ItemMenu_Give(u8 taskId)
 
 static void PrintThereIsNoPokemon(u8 taskId)
 {
-    DisplayItemMessage(taskId, FONT_NORMAL, gText_NoPokemon, HandleErrorMessage);
+    if(FlagGet(FLAG_ADVENTURE_STARTED))
+		DisplayItemMessage(taskId, FONT_NORMAL, gText_NoPokemon, HandleErrorMessage);
+	else
+		DisplayItemMessage(taskId, FONT_NORMAL, COMPOUND_STRING("Better drink it\nlater."), HandleErrorMessage);
 }
 
 static void PrintItemCantBeHeld(u8 taskId)
@@ -9016,4 +9019,4 @@ void ChooseItemsToTossFromPyramidBag(void)
 
 #endif // SWSH_BAG_PYRAMID
 
-#endif // SWSH_BAG_MENU
+// #endif // SWSH_BAG_MENU

@@ -82,6 +82,7 @@ const struct ItemInfo gItemsInfo[] =
         .secondaryId = BALL_GREAT,
         .iconPic = gItemIcon_GreatBall,
         .iconPalette = gItemIconPalette_GreatBall,
+		.shopCriteriaFunc = ShopCriteriaByTwoBadges,
     },
 
     [ITEM_ULTRA_BALL] =
@@ -98,7 +99,8 @@ const struct ItemInfo gItemsInfo[] =
         .secondaryId = BALL_ULTRA,
         .iconPic = gItemIcon_UltraBall,
         .iconPalette = gItemIconPalette_UltraBall,
-    },
+		.shopCriteriaFunc = ShopCriteriaByFourBadges,
+	},
 
     [ITEM_MASTER_BALL] =
     {
@@ -537,7 +539,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Potion,
         .iconPalette = gItemIconPalette_SuperPotion,
-    },
+		.shopCriteriaFunc = ShopCriteriaByTwoBadges,
+	},
 
     [ITEM_HYPER_POTION] =
     {
@@ -561,7 +564,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Potion,
         .iconPalette = gItemIconPalette_HyperPotion,
-    },
+		.shopCriteriaFunc = ShopCriteriaByFourBadges,
+	},
 
     [ITEM_MAX_POTION] =
     {
@@ -580,7 +584,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_LargePotion,
         .iconPalette = gItemIconPalette_MaxPotion,
-    },
+		.shopCriteriaFunc = ShopCriteriaByFiveBadges,
+	},
 
     [ITEM_FULL_RESTORE] =
     {
@@ -600,7 +605,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_LargePotion,
         .iconPalette = gItemIconPalette_FullRestore,
-    },
+		.shopCriteriaFunc = ShopCriteriaBySixBadges,
+	},
 
     [ITEM_REVIVE] =
     {
@@ -619,7 +625,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Revive,
         .iconPalette = gItemIconPalette_Revive,
-    },
+		.shopCriteriaFunc = ShopCriteriaByFourBadges,
+	},
 
     [ITEM_MAX_REVIVE] =
     {
@@ -638,7 +645,8 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_MaxRevive,
         .iconPalette = gItemIconPalette_Revive,
-    },
+		.shopCriteriaFunc = ShopCriteriaBySixBadges,
+	},
 
     [ITEM_FRESH_WATER] =
     {
@@ -855,13 +863,7 @@ const struct ItemInfo gItemsInfo[] =
     [ITEM_BURN_HEAL] =
     {
         .name = ITEM_NAME("Burn Heal"),
-    #if I_PRICE >= GEN_8
-        .price = 200,
-    #elif I_PRICE == GEN_7
-        .price = 300,
-    #else
-        .price = 250,
-    #endif
+        .price = 220,
         .description = COMPOUND_STRING(
             "Heals Pokémon\n"
             "of a burn."),
@@ -874,26 +876,16 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_StatusHeal,
         .iconPalette = gItemIconPalette_BurnHeal,
+		.shopCriteriaFunc = ShopCriteriaByFourBadges,
     },
 
     [ITEM_ICE_HEAL] =
     {
         .name = ITEM_NAME("Ice Heal"),
-    #if I_PRICE >= GEN_8
-        .price = 200,
-    #elif I_PRICE == GEN_7
-        .price = 100,
-    #else
-        .price = 250,
-    #endif
+        .price = 220,
         .description = COMPOUND_STRING(
-        #if B_USE_FROSTBITE
             "Heals Pokémon\n"
             "of frostbite."),
-        #else
-            "Defrosts a frozen\n"
-            "Pokémon."),
-        #endif
         .pocket = POCKET_ITEMS,
         .sortType = ITEM_TYPE_STATUS_RECOVERY,
         .type = ITEM_USE_PARTY_MENU,
@@ -903,6 +895,7 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_StatusHeal,
         .iconPalette = gItemIconPalette_IceHeal,
+		.shopCriteriaFunc = ShopCriteriaByFourBadges,
     },
 
     [ITEM_AWAKENING] =
@@ -946,6 +939,7 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_FullHeal,
         .iconPalette = gItemIconPalette_FullHeal,
+		.shopCriteriaFunc = ShopCriteriaBySixBadges,
     },
 
     [ITEM_ETHER] =
@@ -966,6 +960,7 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Ether,
         .iconPalette = gItemIconPalette_Ether,
+		.shopCriteriaFunc = ShopCriteriaByFiveBadges,
     },
 
     [ITEM_MAX_ETHER] =
@@ -1005,6 +1000,7 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Ether,
         .iconPalette = gItemIconPalette_Elixir,
+		.shopCriteriaFunc = ShopCriteriaByEightBadges,
     },
 
     [ITEM_MAX_ELIXIR] =
@@ -2224,6 +2220,7 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Repel,
         .iconPalette = gItemIconPalette_SuperRepel,
+		.shopCriteriaFunc = ShopCriteriaByTwoBadges,
     },
 
     [ITEM_MAX_REPEL] =
@@ -2242,6 +2239,7 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Repel,
         .iconPalette = gItemIconPalette_MaxRepel,
+		.shopCriteriaFunc = ShopCriteriaByFourBadges,
     },
 
     [ITEM_LURE] =
@@ -14354,14 +14352,13 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_SSTicket,
     },
 
-    [ITEM_EON_TICKET] =
+    [ITEM_TRAINER_TICKET] =
     {
-        .name = ITEM_NAME("Eon Ticket"),
+        .name = ITEM_NAME("League Ticket"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "The ticket for a\n"
-            "ferry to a distant\n"
-            "southern island."),
+            "This ticket which\n"
+            "gives you free\npassage."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -15795,7 +15792,7 @@ const struct ItemInfo gItemsInfo[] =
     {
         .name = ITEM_NAME("Fresh-Start Mochi"),
         .pluralName = ITEM_PLURAL_NAME("Fresh-Start Mochi"),
-        .price = 300,
+        .price = 25000,
         .description = COMPOUND_STRING(
             "A cake that causes\n"
             "a Pokémon change\n"
@@ -15808,6 +15805,7 @@ const struct ItemInfo gItemsInfo[] =
         .flingPower = 30,
         .iconPic = gItemIcon_Mochi,
         .iconPalette = gItemIconPalette_FreshStartMochi,
+		.shopCriteriaFunc = ShopCriteriaByEightBadges,
     },
 
     [ITEM_GLIMMERING_CHARM] =

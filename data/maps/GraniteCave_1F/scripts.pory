@@ -63,7 +63,7 @@ script(local) GraniteCave_1F_EventScript_HikerStopsYou
 			cueobject(LOCALID_GRANITE_CAVE_1F_HIKER, DIR_SOUTH)
 	}
 	setspeaker("Hiker")
-	msgbox("Hey now! It's dangerous to go further\nin if you don't have any Pokémon.\pI can't let you continue without one.")
+	msgbox("Hey now! It's dangerous to go further\nin if you aren't a trainer.\pI can't let you continue unless you\nare.")
 	closemessage
 	switch(var(VAR_TEMP_0))
 	{

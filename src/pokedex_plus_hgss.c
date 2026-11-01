@@ -55,7 +55,7 @@
 
 // static .rodata strings
 
-static const u8 sText_TenDashes[] = _("----------");
+const u8 gText_TenDashes[] = _("----------");
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 
 static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}TOGGLE   {DPAD_UPDOWN}MOVES");
@@ -1765,7 +1765,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     if (species)
         name = GetSpeciesName(species);
     else
-        name = sText_TenDashes;
+        name = gText_TenDashes;
     PrintInfoScreenTextWhite(name, 139 + (6 * digitCount), 17);
     // if (owned)
     // {

@@ -540,10 +540,12 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_PlayerReflectionFrlg,  OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION},
     {gObjectEventPal_PlayerFrlg,            OBJ_EVENT_PAL_TAG_PLAYER_GREEN},
     {gObjectEventPal_PlayerReflectionFrlg,  OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION},
+#endif
     {gObjectEventPal_NpcBlue,               OBJ_EVENT_PAL_TAG_NPC_BLUE},
+	{gObjectEventPal_NpcWhite,              OBJ_EVENT_PAL_TAG_NPC_WHITE},
     {gObjectEventPal_NpcPink,               OBJ_EVENT_PAL_TAG_NPC_PINK},
+#if IS_FRLG
     {gObjectEventPal_NpcGreen,              OBJ_EVENT_PAL_TAG_NPC_GREEN},
-    {gObjectEventPal_NpcWhite,              OBJ_EVENT_PAL_TAG_NPC_WHITE},
     {gObjectEventPal_NpcBlueReflection,     OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION},
     {gObjectEventPal_NpcPinkReflection,     OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION},
     {gObjectEventPal_NpcGreenReflection,    OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION},
@@ -10976,7 +10978,7 @@ static void SpriteCB_VirtualObject(struct Sprite *sprite)
     UpdateObjectEventSpriteInvisibility(sprite, sprite->sInvisible);
 }
 
-static void UNUSED DestroyVirtualObjects(void)
+void DestroyVirtualObjects(void)
 {
     int i;
 
@@ -11062,6 +11064,18 @@ bool32 IsVirtualObjectInvisible(u8 virtualObjId)
         return FALSE;
 
     return (gSprites[spriteId].sInvisible == TRUE);
+}
+
+void DestroyVirtualObject(u8 virtualObjId)
+{
+	u8 spriteId = GetVirtualObjectSpriteId(virtualObjId);
+
+	if (spriteId == MAX_SPRITES)
+        return;
+
+	struct Sprite *sprite = &gSprites[spriteId];
+	if (sprite->inUse && sprite->callback == SpriteCB_VirtualObject)
+		DestroySprite(sprite);
 }
 
 void SetVirtualObjectSpriteAnim(u8 virtualObjId, u8 animNum)

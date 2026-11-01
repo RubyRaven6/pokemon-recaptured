@@ -399,7 +399,10 @@ static u32 ComputeExpRewardForBattler(u32 expMonId, enum BattlerId fainterBattle
     else if (gExperienceTables[growthRate][levelCap] < currentExp + reward)
         reward = gExperienceTables[growthRate][levelCap] - currentExp;
 
-    return reward;
+    if(!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+		return reward / 3;
+    else
+		return reward;
 }
 
 static inline bool32 WasPartyMonSentOut(enum BattleTrainer trainer, u32 partyIndex)

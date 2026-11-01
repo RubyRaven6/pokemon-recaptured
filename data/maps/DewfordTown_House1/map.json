@@ -9,7 +9,7 @@
   "map_type": "MAP_TYPE_INDOOR",
   "allow_cycling": false,
   "allow_escaping": false,
-  "allow_running": false,
+  "allow_running": true,
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
@@ -60,14 +60,14 @@
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_DEWFORD_TOWN",
-      "dest_warp_id": "3"
+      "dest_warp_id": "2"
     },
     {
       "x": 4,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_DEWFORD_TOWN",
-      "dest_warp_id": "3"
+      "dest_warp_id": "2"
     }
   ],
   "coord_events": [],

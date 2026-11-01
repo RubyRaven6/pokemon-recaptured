@@ -494,10 +494,12 @@ const u16 gObjectEventPic_GreenVSSeekerBike[] = INCGFX_U16("graphics/object_even
 
 const u16 gObjectEventPal_PlayerFrlg[] = INCGFX_U16("graphics/object_events/palettes/player_frlg.pal", ".gbapal");
 const u16 gObjectEventPal_PlayerReflectionFrlg[] = INCGFX_U16("graphics/object_events/palettes/player_reflection_frlg.pal", ".gbapal");
+#endif
 const u16 gObjectEventPal_NpcBlue[] = INCGFX_U16("graphics/object_events/palettes/npc_blue.pal", ".gbapal");
 const u16 gObjectEventPal_NpcPink[] = INCGFX_U16("graphics/object_events/palettes/npc_pink.pal", ".gbapal");
-const u16 gObjectEventPal_NpcGreen[] = INCGFX_U16("graphics/object_events/palettes/npc_green.pal", ".gbapal");
 const u16 gObjectEventPal_NpcWhite[] = INCGFX_U16("graphics/object_events/palettes/npc_white.pal", ".gbapal");
+#if IS_FRLG
+const u16 gObjectEventPal_NpcGreen[] = INCGFX_U16("graphics/object_events/palettes/npc_green.pal", ".gbapal");
 const u16 gObjectEventPal_NpcBlueReflection[] = INCGFX_U16("graphics/object_events/palettes/npc_blue_reflection.pal", ".gbapal");
 const u16 gObjectEventPal_NpcPinkReflection[] = INCGFX_U16("graphics/object_events/palettes/npc_pink_reflection.pal", ".gbapal");
 const u16 gObjectEventPal_NpcGreenReflection[] = INCGFX_U16("graphics/object_events/palettes/npc_green_reflection.pal", ".gbapal");
@@ -528,13 +530,15 @@ const u16 gObjectEventPic_CrushGirl[] = INCGFX_U16("graphics/object_events/pics/
 const u16 gObjectEventPic_FatManFrlg[] = INCGFX_U16("graphics/object_events/pics/people/fat_man_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_BaldingMan[] = INCGFX_U16("graphics/object_events/pics/people/balding_man.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_Woman2Frlg[] = INCGFX_U16("graphics/object_events/pics/people/woman_2_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
+#endif
 const u16 gObjectEventPic_OldMan1[] = INCGFX_U16("graphics/object_events/pics/people/old_man_1.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u16 gObjectEventPic_OldMan2[] = INCGFX_U16("graphics/object_events/pics/people/old_man_2.png", ".4bpp", "-mwidth 2 -mheight 4");
+#if IS_FRLG
 const u16 gObjectEventPic_OldManLyingDown[] = INCGFX_U16("graphics/object_events/pics/people/old_man_lying_down.png", ".4bpp");
 const u16 gObjectEventPic_WorkerM[] = INCGFX_U16("graphics/object_events/pics/people/worker_m.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_WorkerF[] = INCGFX_U16("graphics/object_events/pics/people/worker_f.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_BeautyFrlg[] = INCGFX_U16("graphics/object_events/pics/people/beauty_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_Chef[] = INCGFX_U16("graphics/object_events/pics/people/chef.png", ".4bpp", "-mwidth 2 -mheight 4");
-const u16 gObjectEventPic_OldMan2[] = INCGFX_U16("graphics/object_events/pics/people/old_man_2.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_OldWomanFrlg[] = INCGFX_U16("graphics/object_events/pics/people/old_woman_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_CamperFrlg[] = INCGFX_U16("graphics/object_events/pics/people/camper_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u16 gObjectEventPic_PicnickerFrlg[] = INCGFX_U16("graphics/object_events/pics/people/picnicker_frlg.png", ".4bpp", "-mwidth 2 -mheight 4");
@@ -631,7 +635,9 @@ const u16 gObjectEventPic_DoduoOld[] = INCGFX_U16("graphics/object_events/pics/p
 const u16 gObjectEventPic_FearowOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/fearow.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPic_KabutoOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/kabuto.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPic_MachokeOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/machoke.png", ".4bpp", "-mwidth 2 -mheight 2");
+#endif
 const u16 gObjectEventPic_SnorlaxOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/snorlax.png", ".4bpp");
+#if IS_FRLG
 const u16 gObjectEventPic_SpearowOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/spearow.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPic_CuboneOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/cubone.png", ".4bpp", "-mwidth 2 -mheight 2");
 const u16 gObjectEventPic_PoliwrathOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/poliwrath.png", ".4bpp", "-mwidth 2 -mheight 2");
@@ -642,3 +648,5 @@ const u16 gObjectEventPic_PidgeyOld[] = INCGFX_U16("graphics/object_events/pics/
 const u16 gObjectEventPic_ClefairyOld[] = INCGFX_U16("graphics/object_events/pics/pokemon_old/clefairy.png", ".4bpp", "-mwidth 2 -mheight 2");
 
 #endif // IS_FRLG
+
+const u16 gObjectEventPic_Empty[] = INCGFX_U16("graphics/object_events/pics/people/empty.png", ".4bpp", "-mwidth 2 -mheight 2");

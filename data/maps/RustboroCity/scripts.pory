@@ -1,8 +1,447 @@
+const RICH_BOY_1 	= 0
+const FAT_MAN1 		= 1
+const POKEFAN_F 	= 2
+const WOMAN_1_1 	= 3
+const MAN_1 		= 4
+const WOMAN_2 		= 5
+const EXPERT_M 		= 6
+const EXPERT_F 		= 7
+const MAN_2 		= 8
+const WOMAN_3_1 	= 9
+const LASS 			= 10
+const MAN_4_1 		= 11
+const WOMAN_4 		= 12
+const WOMAN_1_2 	= 13
+const WOMAN_5 		= 14
+const BEAUTY 		= 15
+const GENTLEMAN 	= 16
+const FAT_MAN2 		= 17
+const MANIAC 		= 18
+const RICH_BOY_2 	= 19
+const POKEFAN_M 	= 20
+const MAN_4_2 		= 21
+const WOMAN_3_2 	= 22
+const MAN_5 		= 23
+const OLD_MAN 		= 24
+
+const PLAYER = LOCALID_PLAYER
+const ROBIN = LOCALID_RUSTBORO_ROBIN
+const HARMON = LOCALID_RUSTBORO_HARMON_SPEECH
+const GUARD1 = LOCALID_RUSTBORO_CITY_ARMISTICE_1
+const GUARD2 = LOCALID_RUSTBORO_CITY_ARMISTICE_2
+
+
+mapscripts RustboroCity_MapScripts {
+	MAP_SCRIPT_ON_TRANSITION {
+		if(var(VAR_RUSTBORO_CITY_STATE) == 0)
+		{
+			goto(SpawnHarmonSpeechVObjects)
+		}
+	}
+}
+
+script(local) SpawnHarmonSpeechVObjects
+{
+	createvobject(OBJ_EVENT_GFX_RICH_BOY, RICH_BOY_1, 22, 35)
+	createvobject(OBJ_EVENT_GFX_FAT_MAN, FAT_MAN1, 23, 35)
+	createvobject(OBJ_EVENT_GFX_POKEFAN_F, POKEFAN_F, 22, 36)
+	createvobject(OBJ_EVENT_GFX_WOMAN_1, WOMAN_1_1, 23, 36)
+	createvobject(OBJ_EVENT_GFX_MAN_1, MAN_1, 24, 36)
+	createvobject(OBJ_EVENT_GFX_WOMAN_2, WOMAN_2, 26, 36)
+	createvobject(OBJ_EVENT_GFX_EXPERT_M, EXPERT_M, 27, 36)
+	createvobject(OBJ_EVENT_GFX_EXPERT_F, EXPERT_F, 28, 36)
+	createvobject(OBJ_EVENT_GFX_MAN_2, MAN_2, 29, 36)
+	createvobject(OBJ_EVENT_GFX_WOMAN_3, WOMAN_3_1, 23, 37)
+	createvobject(OBJ_EVENT_GFX_LASS, LASS, 24, 37)
+	createvobject(OBJ_EVENT_GFX_MAN_4, MAN_4_1, 26, 37)
+	createvobject(OBJ_EVENT_GFX_WOMAN_4, WOMAN_4, 27, 37)
+	createvobject(OBJ_EVENT_GFX_WOMAN_1, WOMAN_1_2, 28, 37)
+	createvobject(OBJ_EVENT_GFX_WOMAN_5, WOMAN_5, 29, 37)
+	createvobject(OBJ_EVENT_GFX_BEAUTY, BEAUTY, 23, 38)
+	createvobject(OBJ_EVENT_GFX_GENTLEMAN, GENTLEMAN, 24, 38)
+	createvobject(OBJ_EVENT_GFX_FAT_MAN, FAT_MAN2, 25, 38)
+	createvobject(OBJ_EVENT_GFX_MANIAC, MANIAC, 26, 38)
+	createvobject(OBJ_EVENT_GFX_RICH_BOY, RICH_BOY_2, 27, 38)
+	createvobject(OBJ_EVENT_GFX_POKEFAN_M, POKEFAN_M, 28, 38)
+	createvobject(OBJ_EVENT_GFX_MAN_4, MAN_4_2, 24, 39)
+	createvobject(OBJ_EVENT_GFX_WOMAN_3, WOMAN_3_2, 25, 39)
+	createvobject(OBJ_EVENT_GFX_MAN_5, MAN_5, 26, 39)
+	createvobject(OBJ_EVENT_GFX_OLD_MAN, OLD_MAN, 27, 39)
+}
+
+script(local) TurnHarmonSpeechVObjects
+{
+	if(var(VAR_TEMP_1) == 0)
+	{
+		setspeaker("Old Man")
+		message("My god! What is he talking about?{PAUSE 30}")
+	}
+	if(var(VAR_TEMP_1) == 1)
+	{
+		setspeaker("Young Guy")
+		message("What do you mean?! He's just talking\nsense!{PAUSE 30}")
+	}
+	if(var(VAR_TEMP_1) == 2)
+	{
+		setspeaker("Young Girl")
+		message("But the league helps so many people…!{PAUSE 30}")
+	}
+	if(var(VAR_TEMP_1) == 3)
+	{
+		setspeaker("Woman")
+		message("You can't be serious…{PAUSE 30}")
+	}
+	if(var(VAR_TEMP_1) == 4)
+	{
+		setspeaker("Old Woman")
+		message("C'mon, he has to be onto something,\nright? He seems so convinced.{PAUSE 30}")
+	}
+	if(var(VAR_TEMP_1) == 5)
+	{
+		setspeaker("Man")
+		message("He's really loud about it, but he has a\npoint…{PAUSE 30}")
+	}
+
+	turnvobject(RICH_BOY_1, DIR_EAST)
+	turnvobject(FAT_MAN1, DIR_WEST)
+	turnvobject(POKEFAN_F, DIR_EAST)
+	turnvobject(WOMAN_1_1, DIR_EAST)
+	turnvobject(MAN_1, DIR_WEST)
+	turnvobject(WOMAN_2, DIR_EAST)
+	turnvobject(EXPERT_M, DIR_EAST)
+	turnvobject(EXPERT_F, DIR_WEST)
+	// MAN_2 STAYS LOOKING SOUTH
+	turnvobject(WOMAN_3_1, DIR_EAST)
+	turnvobject(LASS, DIR_WEST)
+	turnvobject(MAN_4_1, DIR_EAST)
+	turnvobject(WOMAN_4, DIR_WEST)
+	// WOMAN_1_2 STAYS LOOKING SOUTH
+	turnvobject(WOMAN_5, DIR_NORTH)
+	// BEAUTY STAYS LOOKING SOUTH
+	turnvobject(GENTLEMAN, DIR_EAST)
+	turnvobject(FAT_MAN2, DIR_WEST)
+	// MANIAC STAYS LOOKING SOUTH
+	turnvobject(RICH_BOY_2, DIR_EAST)
+	turnvobject(POKEFAN_M, DIR_WEST)
+	turnvobject(MAN_4_2, DIR_EAST)
+	turnvobject(WOMAN_3_2, DIR_WEST)
+	turnvobject(MAN_5, DIR_EAST)
+	turnvobject(OLD_MAN, DIR_WEST)
+	delay(20)
+
+	turnvobject(RICH_BOY_1, DIR_SOUTH)
+	turnvobject(FAT_MAN1, DIR_SOUTH)
+	turnvobject(POKEFAN_F, DIR_NORTH)
+	turnvobject(WOMAN_1_1, DIR_NORTH)
+	turnvobject(MAN_1, DIR_EAST)
+	turnvobject(WOMAN_2, DIR_WEST)
+	// EXPERT_M, STAY LOOKING EAST
+	// EXPERT_F, STAY LOOKING WEST
+	turnvobject(MAN_2, DIR_WEST)
+	turnvobject(WOMAN_3_1, DIR_SOUTH)
+	turnvobject(LASS, DIR_NORTH)
+	turnvobject(MAN_4_1, DIR_SOUTH)
+	turnvobject(WOMAN_4, DIR_EAST)
+	turnvobject(WOMAN_1_2, DIR_WEST)
+	turnvobject(WOMAN_5, DIR_NORTH)
+	turnvobject(BEAUTY, DIR_EAST)
+	turnvobject(GENTLEMAN, DIR_WEST)
+	turnvobject(FAT_MAN2, DIR_SOUTH)
+	turnvobject(MANIAC, DIR_WEST)
+	turnvobject(RICH_BOY_2, DIR_NORTH)
+	turnvobject(POKEFAN_M, DIR_SOUTH)
+	turnvobject(MAN_4_2, DIR_SOUTH)
+	turnvobject(WOMAN_3_2, DIR_EAST)
+	turnvobject(MAN_5, DIR_WEST)
+	turnvobject(OLD_MAN, DIR_NORTH)
+	delay(20)
+
+	turnvobject(RICH_BOY_1, DIR_EAST)
+	turnvobject(FAT_MAN1, DIR_WEST)
+	turnvobject(POKEFAN_F, DIR_EAST)
+	turnvobject(WOMAN_1_1, DIR_WEST)
+	turnvobject(MAN_1, DIR_WEST)
+	turnvobject(WOMAN_2, DIR_EAST)
+	turnvobject(EXPERT_M, DIR_WEST)
+	turnvobject(EXPERT_F, DIR_EAST)
+	turnvobject(MAN_2, DIR_WEST)
+	turnvobject(WOMAN_3_1, DIR_SOUTH)
+	turnvobject(LASS, DIR_EAST)
+	turnvobject(MAN_4_1, DIR_NORTH)
+	turnvobject(WOMAN_4, DIR_WEST)
+	turnvobject(WOMAN_1_2, DIR_NORTH)
+	turnvobject(WOMAN_5, DIR_WEST)
+	turnvobject(BEAUTY, DIR_NORTH)
+	turnvobject(GENTLEMAN, DIR_NORTH)
+	turnvobject(FAT_MAN2, DIR_NORTH)
+	turnvobject(MANIAC, DIR_EAST)
+	turnvobject(RICH_BOY_2, DIR_WEST)
+	turnvobject(POKEFAN_M, DIR_NORTH)
+	turnvobject(MAN_4_2, DIR_EAST)
+	turnvobject(WOMAN_3_2, DIR_WEST)
+	turnvobject(MAN_5, DIR_EAST)
+	turnvobject(OLD_MAN, DIR_WEST)
+	delay(20)
+
+	turnvobject(RICH_BOY_1, DIR_SOUTH)
+	turnvobject(FAT_MAN1, DIR_SOUTH)
+	turnvobject(POKEFAN_F, DIR_SOUTH)
+	turnvobject(WOMAN_1_1, DIR_SOUTH)
+	turnvobject(MAN_1, DIR_SOUTH)
+	turnvobject(WOMAN_2, DIR_SOUTH)
+	turnvobject(EXPERT_M, DIR_SOUTH)
+	turnvobject(EXPERT_F, DIR_SOUTH)
+	turnvobject(MAN_2, DIR_SOUTH)
+	turnvobject(WOMAN_3_1, DIR_SOUTH)
+	turnvobject(LASS, DIR_SOUTH)
+	turnvobject(MAN_4_1, DIR_SOUTH)
+	turnvobject(WOMAN_4, DIR_SOUTH)
+	turnvobject(WOMAN_1_2, DIR_SOUTH)
+	turnvobject(WOMAN_5, DIR_SOUTH)
+	turnvobject(BEAUTY, DIR_SOUTH)
+	turnvobject(GENTLEMAN, DIR_SOUTH)
+	turnvobject(FAT_MAN2, DIR_SOUTH)
+	turnvobject(MANIAC, DIR_SOUTH)
+	turnvobject(RICH_BOY_2, DIR_SOUTH)
+	turnvobject(POKEFAN_M, DIR_SOUTH)
+	turnvobject(MAN_4_2, DIR_SOUTH)
+	turnvobject(WOMAN_3_2, DIR_SOUTH)
+	turnvobject(MAN_5, DIR_SOUTH)
+	turnvobject(OLD_MAN, DIR_SOUTH)
+	delay(20)
+
+	if(var(VAR_TEMP_1) < 6){waitmessage}
+	return
+}
+
+script RustboroCity_EventScript_HarmonSpeech_Trigger1
+{
+	setvar(VAR_TEMP_0, 1)
+	call(YouHearACommotion)
+	goto(RustboroCity_EventScript_HarmonSpeech)
+}
+
+script RustboroCity_EventScript_HarmonSpeech_Trigger2
+{
+	setvar(VAR_TEMP_0, 2)
+	call(YouHearACommotion)
+	goto(RustboroCity_EventScript_HarmonSpeech)
+}
+
+script RustboroCity_EventScript_HarmonSpeech_Trigger3
+{
+	setvar(VAR_TEMP_0, 3)
+	call(YouHearACommotion)
+	goto(RustboroCity_EventScript_HarmonSpeech)
+}
+
+script RustboroCity_EventScript_HarmonSpeech_Trigger4
+{
+	call(YouHearACommotion)
+	goto(RustboroCity_EventScript_HarmonSpeech)
+}
+
+
+script(local) YouHearACommotion
+{
+	msgbox("As you walk down, you start hearing\nquite a commotion… What's going on?")
+	closemessage
+	return
+}
+
+script RustboroCity_EventScript_HarmonSpeech
+{
+	lock
+	switch(var(VAR_TEMP_0))
+	{
+		case 1:
+			applymovement(PLAYER, moves(walk_right * 5))
+			waitmovement(0)
+		case 2:
+			applymovement(PLAYER, moves(walk_right * 3))
+			waitmovement(0)
+		case 3:
+			applymovement(PLAYER, moves(walk_right * 2))
+			waitmovement(0)
+	}
+	applymovement(PLAYER, PlayerGoesToWatchSpeech)
+	waitmovement(0)
+
+	special(SpawnCameraObject)
+	applymovement(LOCALID_CAMERA, Movement_CameraPanDown_WalkDown2)
+	waitmovement(0)
+
+	setspeaker(SP_NAME_HARMON)
+	msgbox(
+		"My fellow Hoennians, I once again take\nthe stage to speak to you all.\p"
+		"Our very future--our CHILDREN--are\nbeing threatened as we speak.\lI talk, of course, about the League."
+	)
+	closemessage
+	
+	do
+	{
+		call(TurnHarmonSpeechVObjects)
+		addvar(VAR_TEMP_1, 1)
+		waitmessage
+	} while (var(VAR_TEMP_1) < 3)
+	
+	delay(20)
+
+	applymovement(HARMON, moves(walk_slow_left))
+	setspeaker(SP_NAME_HARMON)
+	message(
+		"For too long have we allowed them to\ncorrupt the children with ideals of\lpower and might.\p"
+	)
+	waitmessage
+	waitmovement(0)
+	applymovement(HARMON, moves(walk_slow_right * 2))
+	message(
+		"What example are we setting, telling\nthem to aspire becoming brutes who\lsolve their problems with violence?\p"
+	)
+	waitmessage
+	waitmovement(0)
+	applymovement(HARMON, moves(walk_slow_left, delay_4, face_up))
+	message(
+		"We train them day and night, often at\nthe expense of their health, safety\land childhood.\p"
+		"And what have we done?\p"
+	)
+	waitmessage
+	waitmovement(0)
+	applymovement(HARMON, moves(jump_in_place_up))
+	message(
+		"Nothing!\p"
+	)
+	waitmessage
+	waitmovement(0)
+
+	do
+	{
+		call(TurnHarmonSpeechVObjects)
+		addvar(VAR_TEMP_1, 1)
+		closemessage
+	} while (var(VAR_TEMP_1) < 6)
+
+	setspeaker(SP_NAME_HARMON)
+	message(
+		"I beseech you, my brethren, to join my\ncall to disband the League once and\lfor all!"
+	)
+	waitmessage
+	waitbuttonpress
+	closemessage
+
+	applymovement(LOCALID_CAMERA, Movement_CameraPanUp_WalkUp2)
+	applymovement(GUARD1, moves(delay_16, walk_left, walk_down * 3))
+	applymovement(HARMON, moves(walk_down, walk_left * 2, walk_down * 3))
+	applymovement(GUARD2, moves(delay_16, walk_left * 3, walk_down * 3))
+
+	waitmovement(GUARD1)
+	waitmovement(HARMON)
+	waitmovement(GUARD2)
+
+	removeobject(GUARD1)
+	removeobject(HARMON)
+	removeobject(GUARD2)
+	waitmovement(LOCALID_CAMERA)
+
+	do
+	{
+		call(TurnHarmonSpeechVObjects)
+		addvar(VAR_TEMP_1, 1)
+		closemessage
+	} while (var(VAR_TEMP_1) < 8)
+
+	fadescreenswapbuffers(FADE_TO_BLACK)
+	special(KeepMessageBoxVisibleDuringFade)
+	message(
+		"The crowd around you discourses with\neach other. As you stood there, you\lfeel yourself being lost in thought…\p"
+		"Diancie's words begin to ring in your\nhead once more… A rot in the region's\lheart of hearts…\p"
+	)
+	waitmessage
+	special(DestroyVirtualObjects)
+	special(RemoveCameraObject)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
+	msgbox("By the time you came to, you find that\nthe crowd has already dispersed.")
+	closemessage
+	
+	
+	release
+	end
+}
+
+script RustboroCity_EventScript_HelpingRobin_Trigger1
+{
+	setvar(VAR_TEMP_0, 1)
+	call(RustboroCity_EventScript_RobinTalksOutLoud)
+	goto(RustboroCity_EventScript_HelpingRobin)
+}
+script RustboroCity_EventScript_HelpingRobin_Trigger2
+{
+	setvar(VAR_TEMP_0, 2)
+	call(RustboroCity_EventScript_RobinTalksOutLoud)
+	goto(RustboroCity_EventScript_HelpingRobin)
+}
+script RustboroCity_EventScript_HelpingRobin_Trigger3
+{
+	setvar(VAR_TEMP_0, 3)
+	call(RustboroCity_EventScript_RobinTalksOutLoud)
+	goto(RustboroCity_EventScript_HelpingRobin)
+}
+
+script RustboroCity_EventScript_HelpingRobin_Trigger4
+{
+	setvar(VAR_TEMP_0, 3)
+	call(RustboroCity_EventScript_RobinTalksOutLoud)
+	goto(RustboroCity_EventScript_HelpingRobin)	
+}
+
+script RustboroCity_EventScript_RobinTalksOutLoud
+{
+	setspeaker(SP_NAME_ROBIN)
+	msgbox("Oh… should I…? But what if he catches\nme…")
+	closemessage
+	switch(var(VAR_TEMP_0))
+	{
+		case 0:
+			applymovement(PLAYER, moves(walk_down, walk_right))
+			waitmovement(0)
+		case 1:
+			applymovement(PLAYER, moves(walk_right))
+			waitmovement(0)
+		case 2:
+			applymovement(PLAYER, moves(walk_up, walk_right))
+			waitmovement(0)
+		case 3:
+			applymovement(PLAYER, moves(walk_up * 2, walk_right))
+			waitmovement(0)
+	}
+	lock
+
+	mcdialogue("Are you okay?", "Do you need help?")
+	turnobject(ROBIN, DIR_WEST)
+	applymovement(ROBIN, moves(emote_exclamation_mark))
+	waitmovement(0)
+	release
+	return
+}
+
+script RustboroCity_EventScript_HelpingRobin
+{
+	
+}
+
+
+
+movement PlayerGoesToWatchSpeech {
+	walk_down * 3 
+	walk_right * 2
+	walk_down * 3
+}
+
 raw `
-RustboroCity_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_OnFrame
-	.byte 0
+@RustboroCity_MapScripts::
+@	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_OnTransition
+@	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_OnFrame
+@	.byte 0
 
 RustboroCity_OnTransition:
 	setflag FLAG_VISITED_RUSTBORO_CITY
@@ -242,40 +681,40 @@ RustboroCity_EventScript_Man2::
 
 RustboroCity_EventScript_StolenGoodsTrigger0::
 	lockall
-	setobjectxyperm LOCALID_RUSTBORO_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_RUSTBORO_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm 0, 14, 21 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
+	setobjectmovementtype 0, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 0
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
 
 RustboroCity_EventScript_StolenGoodsTrigger1::
 	lockall
-	setobjectxyperm LOCALID_RUSTBORO_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_RUSTBORO_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm 0, 14, 21 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
+	setobjectmovementtype 0, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 1
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
 
 RustboroCity_EventScript_StolenGoodsTrigger2::
 	lockall
-	setobjectxyperm LOCALID_RUSTBORO_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_RUSTBORO_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm 0, 14, 21 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
+	setobjectmovementtype 0, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 2
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
 
 RustboroCity_EventScript_StolenGoodsTrigger3::
 	lockall
-	setobjectxyperm LOCALID_RUSTBORO_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_RUSTBORO_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm 0, 14, 21 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
+	setobjectmovementtype 0, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 3
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
 
 RustboroCity_EventScript_StolenGoodsTrigger4::
 	lockall
-	setobjectxyperm LOCALID_RUSTBORO_DEVON_EMPLOYEE, 14, 21
-	setobjectmovementtype LOCALID_RUSTBORO_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm 0, 14, 21 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
+	setobjectmovementtype 0, MOVEMENT_TYPE_FACE_RIGHT
 	setvar VAR_0x8004, 4
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
@@ -284,20 +723,20 @@ RustboroCity_EventScript_StolenGoodsScene::
 	msgbox RustboroCity_Text_OutOfTheWay, MSGBOX_DEFAULT
 	closemessage
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
-	addobject LOCALID_RUSTBORO_GRUNT
-	addobject LOCALID_RUSTBORO_DEVON_EMPLOYEE
-	applymovement LOCALID_RUSTBORO_GRUNT, RustboroCity_Movement_GruntEscape
-	waitmovement 0
-	removeobject LOCALID_RUSTBORO_GRUNT
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeChaseGrunt1
-	waitmovement 0
+	addobject 0 @LOCALID_RUSTBORO_GRUNT
+	addobject 0 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
+	applymovement 0 , RustboroCity_Movement_GruntEscape
+	waitmovement 0 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
+	removeobject 0 @LOCALID_RUSTBORO_GRUNT
+	applymovement 0, RustboroCity_Movement_EmployeeChaseGrunt1
+	waitmovement 0 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	msgbox RustboroCity_Text_WaitDontTakeMyGoods, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeChaseGrunt2
-	waitmovement 0
+	applymovement 0, RustboroCity_Movement_EmployeeChaseGrunt2
+	waitmovement 0 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	fadedefaultbgm
-	removeobject LOCALID_RUSTBORO_DEVON_EMPLOYEE
-	setobjectxyperm LOCALID_RUSTBORO_DEVON_EMPLOYEE, 30, 10
+	removeobject 0 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
+	setobjectxyperm 0, 30, 10 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
 	setflag FLAG_DEVON_GOODS_STOLEN
 	setvar VAR_RUSTBORO_CITY_STATE, 2
@@ -323,31 +762,31 @@ RustboroCity_EventScript_YouGotItThankYou::
 
 @ Unknown, unused employee movements. Based on the differences in movement theyre for approaching an object (probably the player) in different positions
 RustboroCity_EventScript_EmployeeApproachUp::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachUp
+	applymovement 0, RustboroCity_Movement_EmployeeApproachUp
 	waitmovement 0
 	return
 
 @ Unused, see above
 RustboroCity_EventScript_EmployeeApproachLeft::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachLeft
+	applymovement 0, RustboroCity_Movement_EmployeeApproachLeft
 	waitmovement 0
 	return
 
 @ Unused, see above
 RustboroCity_EventScript_EmployeeApproachRight::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachRight
+	applymovement 0, RustboroCity_Movement_EmployeeApproachRight
 	waitmovement 0
 	return
 
 @ Unused, see above
 RustboroCity_EventScript_EmployeeApproachDown::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachDown
+	applymovement 0, RustboroCity_Movement_EmployeeApproachDown
 	waitmovement 0
 	return
 
 @ Unused, similar movement to the above scripts
 RustboroCity_EventScript_EmployeeApproachPlayerFar::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachPlayerFar
+	applymovement 0, RustboroCity_Movement_EmployeeApproachPlayerFar
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
@@ -501,57 +940,57 @@ RustboroCity_EventScript_EmployeeAskToGetGoods::
 	call_if_eq VAR_TEMP_1, 3, RustboroCity_EventScript_EmployeeApproachPlayerDown1
 	setflag FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN
 	setvar VAR_RUSTBORO_CITY_STATE, 3
-	copyobjectxytoperm LOCALID_RUSTBORO_DEVON_EMPLOYEE
+	copyobjectxytoperm 0
 	msgbox RustboroCity_Text_HelpMeIWasRobbed, MSGBOX_DEFAULT
 	releaseall
 	end
 
 @ The below movement scripts are either partially or fully duplicated by the movement scripts when the player returns the goods
 RustboroCity_EventScript_EmployeeFacePlayerUp1::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterUp
+	applymovement 0, Common_Movement_WalkInPlaceFasterUp @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+	applymovement 0, Common_Movement_ExclamationMark @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+	applymovement 0, Common_Movement_Delay48 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_EmployeeFacePlayerLeft1::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterLeft
+	applymovement 0, Common_Movement_WalkInPlaceFasterLeft @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+	applymovement 0, Common_Movement_ExclamationMark @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+	applymovement 0, Common_Movement_Delay48 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_FaceRight
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_EmployeeFacePlayerDown1::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterDown
+	applymovement 0, Common_Movement_WalkInPlaceFasterDown @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+	applymovement 0, Common_Movement_ExclamationMark @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+	applymovement 0, Common_Movement_Delay48 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_EmployeeApproachPlayerDown1::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterDown
+	applymovement 0, Common_Movement_WalkInPlaceFasterDown @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+	applymovement 0, Common_Movement_ExclamationMark @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+	applymovement 0, Common_Movement_Delay48 @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachPlayerDown
+	applymovement 0, RustboroCity_Movement_EmployeeApproachPlayerDown @LOCALID_RUSTBORO_DEVON_EMPLOYEE
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
@@ -610,62 +1049,62 @@ RustboroCity_EventScript_BagFull::
 	return
 
 RustboroCity_EventScript_EmployeeFacePlayerUp2::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterUp
+	applymovement 0, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+	applymovement 0, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+	applymovement 0, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_EmployeeFacePlayerLeft2::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterRight
+	applymovement 0, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+	applymovement 0, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+	applymovement 0, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_FaceLeft
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_EmployeeFacePlayerDown2::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterDown
+	applymovement 0, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+	applymovement 0, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+	applymovement 0, Common_Movement_Delay48
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_EmployeeApproachPlayerDown2::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterDown
+	applymovement 0, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+	applymovement 0, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+	applymovement 0, Common_Movement_Delay48
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachPlayerDown
+	applymovement 0, RustboroCity_Movement_EmployeeApproachPlayerDown
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 RustboroCity_EventScript_EmployeeFacePlayerRight::
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterLeft
+	applymovement 0, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+	applymovement 0, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+	applymovement 0, Common_Movement_Delay48
 	waitmovement 0
 	return
 

@@ -1618,3 +1618,58 @@ const struct Tileset gTileset_DewfordGymPorytiles =
     .metatileAttributes = gMetatileAttributes_DewfordGymPorytiles,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_Harbor =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Harbor,
+    .palettes = gTilesetPalettes_Harbor,
+    .metatiles = gMetatiles_Harbor,
+    .metatileAttributes = gMetatileAttributes_Harbor,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_FallarborPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_FallarborPorytiles,
+    .palettes = gTilesetPalettes_FallarborPorytiles,
+    .metatiles = gMetatiles_FallarborPorytiles,
+    .metatileAttributes = gMetatileAttributes_FallarborPorytiles,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_RustboroPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_RustboroPorytiles,
+    .palettes = gTilesetPalettes_RustboroPorytiles,
+    .metatiles = gMetatiles_RustboroPorytiles,
+    .metatileAttributes = gMetatileAttributes_RustboroPorytiles,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Subway =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Subway,
+    .palettes = gTilesetPalettes_Subway,
+    .metatiles = gMetatiles_Subway,
+    .metatileAttributes = gMetatileAttributes_Subway,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_PetalburgPorytiles =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PetalburgPorytiles,
+    .palettes = gTilesetPalettes_PetalburgPorytiles,
+    .metatiles = gMetatiles_PetalburgPorytiles,
+    .metatileAttributes = gMetatileAttributes_PetalburgPorytiles,
+    .callback = NULL,
+};

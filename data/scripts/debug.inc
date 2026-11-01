@@ -23,10 +23,10 @@ Debug_CheatStart::
 	@ setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 2
 	@ setseenmon SPECIES_MANKEY_SPECIAL
 	@ setseenmon SPECIES_TINKATINK_SPECIAL
-	@ setseenmon SPECIES_NACLI_SPECIAL
+	@ setseenmon SPECIES_SOLOSIS_SPECIAL
 	@ givemon SPECIES_MANKEY_SPECIAL, 10, ITEM_NONE
 	@ givemon SPECIES_TINKATINK_SPECIAL, 10, ITEM_NONE
-	@ givemon SPECIES_NACLI_SPECIAL, 10, ITEM_NONE
+	@ givemon SPECIES_SOLOSIS_SPECIAL, 10, ITEM_NONE
 Debug_CheatStart_Old:
 	@setflag FLAG_RESCUED_BIRCH
 	@setflag FLAG_HIDE_ROUTE_101_BIRCH_ZIGZAGOON_BATTLE
@@ -39,7 +39,7 @@ Debug_CheatStart_Old:
 	@setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
 	@setflag FLAG_SYS_NATIONAL_DEX
 	@special EnableNationalPokedex
-	@setvar VAR_LITTLEROOT_TOWN_STATE, 4 @ 4: Received Running Shoes
+	@setvar VAR_TRACK_SUBWAY, 4 @ 4: Received Running Shoes
 	@setvar VAR_LITTLEROOT_INTRO_STATE, 7 @ 7: Told to go meet rival
 	@setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 2 @ 2: Met Rival's Mom (and is corresponding gender)
 	@setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 2 @ 2: Met Rival's Mom (and is corresponding gender)
@@ -49,14 +49,14 @@ Debug_CheatStart_Old:
 	@setvar VAR_BRINEY_HOUSE_STATE, 1
 	@setvar VAR_ROUTE116_STATE, 2
 	@setflag FLAG_HIDE_ROUTE_116_MR_BRINEY
-	setflag FLAG_BADGE01_GET
-	setflag FLAG_BADGE02_GET
-	setflag FLAG_BADGE03_GET
-	setflag FLAG_BADGE04_GET
-	setflag FLAG_BADGE05_GET
-	setflag FLAG_BADGE06_GET
-	setflag FLAG_BADGE07_GET
-	setflag FLAG_BADGE08_GET
+	@setflag FLAG_BADGE01_GET
+	@setflag FLAG_BADGE02_GET
+	@setflag FLAG_BADGE03_GET
+	@setflag FLAG_BADGE04_GET
+	@setflag FLAG_BADGE05_GET
+	@setflag FLAG_BADGE06_GET
+	@setflag FLAG_BADGE07_GET
+	@setflag FLAG_BADGE08_GET
 	@setflag FLAG_VISITED_LITTLEROOT_TOWN
 	@setflag FLAG_VISITED_OLDALE_TOWN
 	@setflag FLAG_VISITED_DEWFORD_TOWN
@@ -79,6 +79,10 @@ Debug_CheatStart_Old:
 	@clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	release
 	end
+
+Debug_ForceSave::
+	forcesave
+	release
 
 Debug_CheatStartFrlg::
 	setflag FLAG_SYS_POKEMON_GET
@@ -214,10 +218,12 @@ Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
+	startquest QUEST_POKEMON_LEAGUE
 	release
 	end
 
 Debug_EventScript_Script_2::
+	completesubquest QUEST_POKEMON_LEAGUE, SUB_QUEST_1_LITTLEROOT_GYM
 	release
 	end
 

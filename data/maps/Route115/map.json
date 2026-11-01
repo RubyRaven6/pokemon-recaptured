@@ -48,20 +48,20 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "6",
-      "script": "Route115_EventScript_Timothy",
+      "script": "NULL",
       "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
-      "x": 27,
-      "y": 53,
+      "x": 24,
+      "y": 44,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route115_EventScript_Nob",
+      "script": "NULL",
       "flag": "0"
     },
     {
@@ -105,15 +105,15 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GIRL_3",
-      "x": 15,
-      "y": 50,
+      "x": 23,
+      "y": 43,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route115_EventScript_Cyndy",
+      "script": "NULL",
       "flag": "0"
     },
     {
@@ -126,26 +126,13 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route115_EventScript_Koichi",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
-      "x": 24,
-      "y": 62,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route115_EventScript_Hector",
+      "script": "NULL",
       "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 20,
-      "y": 60,
+      "x": 16,
+      "y": 43,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -217,7 +204,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EventScript_RockSmash",
+      "script": "NULL",
       "flag": "FLAG_TEMP_11"
     },
     {
@@ -243,7 +230,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "Route115_EventScript_Kyra",
+      "script": "NULL",
       "flag": "0"
     },
     {
@@ -256,7 +243,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route115_EventScript_Jaiden",
+      "script": "NULL",
       "flag": "0"
     },
     {
@@ -269,7 +256,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route115_EventScript_Helene",
+      "script": "NULL",
       "flag": "0"
     },
     {
@@ -282,26 +269,13 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route115_EventScript_Alix",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_LASS",
-      "x": 28,
-      "y": 62,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "4",
-      "script": "Route115_EventScript_Marlene",
+      "script": "NULL",
       "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 26,
-      "y": 67,
+      "x": 31,
+      "y": 61,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -345,6 +319,13 @@
       "y": 10,
       "elevation": 0,
       "dest_map": "MAP_TERRA_CAVE_ENTRANCE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 14,
+      "y": 49,
+      "elevation": 0,
+      "dest_map": "MAP_RUSTBORO_CITY_HARBOR",
       "dest_warp_id": "0"
     }
   ],
@@ -437,16 +418,9 @@
       "secret_base_id": "SECRET_BASE_BROWN_CAVE3_3"
     },
     {
-      "type": "secret_base",
-      "x": 20,
-      "y": 53,
-      "elevation": 0,
-      "secret_base_id": "SECRET_BASE_RED_CAVE3_1"
-    },
-    {
       "type": "hidden_item",
-      "x": 15,
-      "y": 49,
+      "x": 23,
+      "y": 44,
       "elevation": 3,
       "item": "ITEM_HEART_SCALE",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE_115_HEART_SCALE"

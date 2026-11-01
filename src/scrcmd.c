@@ -1590,6 +1590,24 @@ bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
     return FALSE;
 }
 
+void ScrCmd_hidevobject(struct ScriptContext *ctx)
+{
+    u8 virtualObjId = ScriptReadByte(ctx);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+
+    SetVirtualObjectInvisibility(virtualObjId, TRUE);
+}
+
+void ScrCmd_destroyvobject(struct ScriptContext *ctx)
+{
+    u8 virtualObjId = ScriptReadByte(ctx);
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+
+    DestroyVirtualObject(virtualObjId);
+}
+
 // lockall freezes all object events except the player immediately.
 // The player is frozen after waiting for their current movement to finish.
 bool8 ScrCmd_lockall(struct ScriptContext *ctx)

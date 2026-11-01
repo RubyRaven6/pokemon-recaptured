@@ -1562,11 +1562,14 @@ static const struct SpriteFrameImage sPicTable_BaldingMan[] = {
 static const struct SpriteFrameImage sPicTable_Woman2Frlg[] = {
     overworld_ascending_frames(gObjectEventPic_Woman2Frlg, 2, 4),
 };
-
+#endif
 static const struct SpriteFrameImage sPicTable_OldMan1[] = {
-    overworld_ascending_frames(gObjectEventPic_OldMan1, 2, 4),
+	overworld_ascending_frames(gObjectEventPic_OldMan1, 2, 4),
+    overworld_frame(gObjectEventPic_OldMan1, 2, 4, 6),
+    overworld_frame(gObjectEventPic_OldMan1, 2, 4, 7),
+    overworld_frame(gObjectEventPic_OldMan1, 2, 4, 8),
 };
-
+#if IS_FRLG
 static const struct SpriteFrameImage sPicTable_WorkerM[] = {
     overworld_ascending_frames(gObjectEventPic_WorkerM, 2, 4),
 };
@@ -1582,19 +1585,14 @@ static const struct SpriteFrameImage sPicTable_BeautyFrlg[] = {
 static const struct SpriteFrameImage sPicTable_Chef[] = {
     overworld_ascending_frames(gObjectEventPic_Chef, 2, 4),
 };
-
+#endif
 static const struct SpriteFrameImage sPicTable_OldMan2[] = {
-    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 0),
-    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 1),
-    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 2),
-    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 0),
-    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 0),
-    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 1),
-    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 1),
-    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 2),
-    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 2),
-    overworld_frame(gObjectEventPic_OldWoman, 2, 4, 0),
+    overworld_ascending_frames(gObjectEventPic_OldMan2, 2, 4),
+    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 6),
+    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 7),
+    overworld_frame(gObjectEventPic_OldMan2, 2, 4, 8),
 };
+#if IS_FRLG
 
 static const struct SpriteFrameImage sPicTable_OldManLyingDown[] = {
     overworld_frame(gObjectEventPic_OldManLyingDown, 4, 4, 0),
@@ -2050,7 +2048,7 @@ static const struct SpriteFrameImage sPicTable_SSAnne[] = {
     overworld_frame(gObjectEventPic_SSAnne, 8, 16, 0),
     overworld_frame(gObjectEventPic_SSAnne, 8, 16, 0),
 };
-
+#endif
 static const struct SpriteFrameImage sPicTable_Snorlax[] = {
     overworld_frame(gObjectEventPic_SnorlaxOld, 4, 4, 0),
     overworld_frame(gObjectEventPic_SnorlaxOld, 4, 4, 0),
@@ -2063,6 +2061,7 @@ static const struct SpriteFrameImage sPicTable_Snorlax[] = {
     overworld_frame(gObjectEventPic_SnorlaxOld, 4, 4, 0),
 };
 
+#if IS_FRLG
 static const struct SpriteFrameImage sPicTable_Spearow[] = {
     overworld_frame(gObjectEventPic_SpearowOld, 2, 2, 0),
     overworld_frame(gObjectEventPic_SpearowOld, 2, 2, 1),
@@ -2532,3 +2531,7 @@ static const struct SpriteFrameImage sPicTable_MomFrlg[] = {
 };
 
 #endif // IS_FRLG
+
+static const struct SpriteFrameImage sPicTable_Empty[] = {
+    overworld_ascending_frames(gObjectEventPic_Empty, 2, 4),
+};
