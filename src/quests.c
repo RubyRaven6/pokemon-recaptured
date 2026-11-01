@@ -603,20 +603,17 @@ static const struct SideQuest sSideQuests[QUEST_COUNT] =
 
 	[QUEST_2] = 
 	{
-		.name = gText_SideQuestName_2,
+		.name = COMPOUND_STRING("The Pokémon League"),
 		.desc = {COMPOUND_STRING("Take on the Pokémon League Gym\nChallenge!")},
 		.donedesc = COMPOUND_STRING("Congratulations, Champ!"),
 		.map = {
-			COMPOUND_STRING("Dewford Town"),
 			COMPOUND_STRING("Litteroot Town")
 		},
 		.sprite = {
-			OBJ_EVENT_GFX_EMPTY,
 			OBJ_EVENT_GFX_BRENDAN_NORMAL
 		},
 		.spritetype = {
 			OBJECT,
-			OBJECT
 		},
 		.subquests = sSubQuests1,
 		.numSubquests = QUEST_1_SUB_COUNT,
@@ -2123,7 +2120,14 @@ void GenerateQuestLocation(s32 questId)
 {
 	if (!IsSubquestMode())
 	{
-		StringCopy(gStringVar2, GetQuestLocation(questId));
+		if(IsQuestUnlocked(questId))
+		{
+			StringCopy(gStringVar2, GetQuestLocation(questId));
+		}
+		else
+		{
+			StringCopy(gStringVar2, gText_TenDashes);
+		}
 	}
 	else
 	{
@@ -2145,7 +2149,7 @@ void GenerateQuestFlavorText(s32 questId)
 	{
 		if (IsQuestInactiveState(questId) == TRUE)
 		{
-			StringCopy(gStringVar1, sText_StartForMore);
+			StringCopy(gStringVar1, gText_TenDashes);
 		}
 		if (IsQuestActiveState(questId) == TRUE)
 		{
@@ -2267,7 +2271,7 @@ bool8 IsQuestCompletedState(s32 questId)
 	}
 }
 
-bool8 UNUSED IsQuestUnlocked(s32 questId)
+bool8 IsQuestUnlocked(s32 questId)
 {
 	if (QuestMenu_GetSetQuestState(questId, FLAG_GET_UNLOCKED))
 	{
@@ -2287,7 +2291,10 @@ void DetermineSpriteType(s32 questId)
 	if (IsSubquestMode() == FALSE)
 	{
 		spriteId = GetQuestSprite(questId);
-		spriteType = GetQuestSpriteType(questId);
+		if(IsQuestUnlocked(questId))
+			spriteType = GetQuestSpriteType(questId);
+		else
+			spriteType = NO_SPRITE;
 
 		QuestMenu_CreateSprite(spriteId, sStateDataPtr->spriteIconSlot,
 		                       spriteType);

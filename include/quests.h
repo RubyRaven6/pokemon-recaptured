@@ -21,9 +21,13 @@
 #define ALPHA       2
 #define SUB         3
 
-#define OBJECT      1
-#define ITEM        2
-#define PKMN        3
+enum QuestObjectTypes
+{
+	OBJECT,
+	ITEM,
+	PKMN,
+	NO_SPRITE
+};
 
 #define MAX_QUEST_STATES 50
 /* Defines how many states a complex quest can have */

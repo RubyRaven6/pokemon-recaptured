@@ -2553,5 +2553,5 @@ extern const u8 gText_SubQuest2_Desc18[];
 extern const u8 gText_SubQuest2_Desc19[];
 extern const u8 gText_SubQuest2_Desc20[];
 
-
+extern const u8 gText_TenDashes[];
 #endif // GUARD_STRINGS_H
