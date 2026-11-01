@@ -567,6 +567,17 @@ gSongTable::
 	song mus_rg_teachy_tv_menu, MUSIC_PLAYER_BGM, 0
 	song mus_heart_motif, MUSIC_PLAYER_BGM, 0
 	song mus_rot_motif, MUSIC_PLAYER_BGM, 0
+	song mus_hgss_casino, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_1, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_2, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_3, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_4, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_5, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_6, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_7, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_8, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_9, MUSIC_PLAYER_BGM, 0
+	song mus_casino_plus_gacha, MUSIC_PLAYER_BGM, 0
 	song ph_trap_blend, MUSIC_PLAYER_SE2, 2
 	song ph_trap_held, MUSIC_PLAYER_SE2, 2
 	song ph_trap_solo, MUSIC_PLAYER_SE2, 2

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "clock.h"
 #include "new_game.h"
+#include "derby.h"
 #include "random.h"
 #include "clock.h"
 #include "pokemon.h"
@@ -19,6 +20,7 @@
 #include "rtc.h"
 #include "easy_chat.h"
 #include "event_data.h"
+#include "constants/flags.h"
 #include "money.h"
 #include "trainer_hill.h"
 #include "trainer_tower.h"
@@ -192,6 +194,7 @@ void NewGameInitData(void)
     ClearBerryTrees();
     SetMoney(&gSaveBlock1Ptr->money, 3000);
     SetCoins(0);
+    GetNewDerby();
     ResetLinkContestBoolean();
     ResetGameStats();
     ClearAllContestWinnerPics();
