@@ -22,7 +22,7 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 1,
+      "x": 3,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN",
@@ -43,43 +43,43 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 6,
+      "x": 8,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN",
       "dest_warp_id": "0"
     },
     {
-      "x": 24,
+      "x": 23,
       "y": 8,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN",
       "dest_warp_id": "0"
     },
     {
-      "x": 18,
+      "x": 19,
       "y": 15,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN",
       "dest_warp_id": "0"
     },
     {
-      "x": 23,
+      "x": 24,
       "y": 18,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN",
       "dest_warp_id": "0"
     },
     {
-      "x": 18,
-      "y": 21,
+      "x": 19,
+      "y": 20,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN_SUBWAY",
       "dest_warp_id": "0"
     },
     {
       "x": 19,
-      "y": 21,
+      "y": 19,
       "elevation": 0,
       "dest_map": "MAP_LITTLEROOT_TOWN_SUBWAY",
       "dest_warp_id": "0"
