@@ -122,5 +122,8 @@
     <li><a href="https://steamcommunity.com/profiles/76561198116557987">RAP Yogurt</a>: Found a typo in the documentation
     </ul>
     </details>
+- Game Corner Expansion
+  - Original branch by Chris Piche
+  - Expanded further by ASGMDDeluxe64
 - `cueobject` Macro by PSF
 - `debugprint` Macro by RavePossum
