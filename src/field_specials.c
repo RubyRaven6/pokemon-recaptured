@@ -1367,7 +1367,8 @@ void IsGrassTypeInParty(void)
 
 void SpawnCameraObject(void)
 {
-    u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1,
+    DebugPrintf("%s", __func__);
+	u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1,
                                                   MOVEMENT_TYPE_FACE_DOWN,
                                                   LOCALID_CAMERA,
                                                   gSaveBlock1Ptr->pos.x + MAP_OFFSET,
@@ -1537,10 +1538,10 @@ void SetShoalItemFlag(u16 unused)
     FlagSet(FLAG_SYS_SHOAL_ITEM);
 }
 
-void LoadWallyZigzagoon(void)
+void LoadRobinStarter(void)
 {
     u16 monData;
-    CreateRandomMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_ZIGZAGOON, 7);
+    CreateRandomMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_GEODUDE, 6);
     monData = TRUE;
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_ABILITY_NUM, &monData);
     monData = MOVE_TACKLE;

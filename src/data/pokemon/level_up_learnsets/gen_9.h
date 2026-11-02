@@ -7481,7 +7481,7 @@ static const struct LevelUpMove sPelipperLevelUpLearnset[] = {
 static const struct LevelUpMove sRaltsLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_GROWL),
     LEVEL_UP_MOVE( 1, MOVE_DISARMING_VOICE),
-    LEVEL_UP_MOVE( 3, MOVE_DOUBLE_TEAM),
+    LEVEL_UP_MOVE( 6, MOVE_DOUBLE_TEAM),
     LEVEL_UP_MOVE( 6, MOVE_CONFUSION),
     LEVEL_UP_MOVE( 9, MOVE_HYPNOSIS),
     LEVEL_UP_MOVE(12, MOVE_DRAINING_KISS),

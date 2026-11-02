@@ -280,14 +280,17 @@ EventScript_ResetAllMapFlags::
 	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	setflag FLAG_WE_FLAG_NO_CATCHING
 	setflag FLAG_WE_FLAG_NO_RUNNING
+	setflag FLAG_FOLLOWERS_DISABLED
+	setflag FLAG_SYS_B_DASH
+	setflag FLAG_FNPC_ALWAYS_HEALS_PARTY
 	setflag FLAG_HIDE_ABANDONED_GYM_BRAWLY
 	setflag FLAG_HIDE_BRAWLYSHOUSE_ELSIE
 	setflag FLAG_HIDE_BRAWLYSHOUSE_STARTER
-	setflag FLAG_FOLLOWERS_DISABLED
-	setflag FLAG_FNPC_ALWAYS_HEALS_PARTY
-	setflag FLAG_SYS_B_DASH
+	setflag FLAG_HIDE_RUSTBORO_HARMON_CATCHING
+	setflag FLAG_HIDE_RUSTBORO_HARMON_BEFORE_CATCHING
 
 	@ </recaptured flags>
+	
 	call EventScript_ResetAllBerries
 	end
 

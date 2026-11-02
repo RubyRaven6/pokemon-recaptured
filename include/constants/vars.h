@@ -84,7 +84,7 @@ VAR_INTRO_SEQUENCE_STATE States
 - 15: Player has finally started their adventure
 */
 #define VAR_INTRO_SEQUENCE_STATE						0x4084
-#define VAR_STARTER_MON									0x4023 // 0=Treecko, 1=Torchic, 2=Mudkip
+#define VAR_STARTER_MON									0x4023 // 0=Mankey, 1=Tinkatink, 2=Solosis
 #define VAR_TRACK_FERRY									0x4020
 #define VAR_TRACK_SUBWAY		                        0x4050
 #define VAR_ROBIN_ROT                          0x4090

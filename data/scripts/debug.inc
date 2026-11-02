@@ -376,8 +376,8 @@ Debug_EventScript_Steven_Multi::
 
 Debug_EventScript_WallyTutorial::
 	special SavePlayerParty
-	special LoadWallyZigzagoon
-	special StartWallyTutorialBattle
+	special LoadRobinStarter
+	special StartRobinTutorialBattle
 	special LoadPlayerParty
 	release
 	end

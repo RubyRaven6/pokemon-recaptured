@@ -315,7 +315,7 @@ static void WallyHandleChooseAction(enum BattlerId battler)
         ActionSelectionDestroyCursorAt(i);
 
     ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
-    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillWallyDo);
+    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillRobinDo);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 

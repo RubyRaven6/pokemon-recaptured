@@ -74,10 +74,13 @@
 #define FLAG_HIDE_BRAWLYSHOUSE_ELSIE 			0x31
 #define FLAG_HIDE_BRAWLYSHOUSE_STARTER 			0x34
 #define FLAG_HIDE_PLAYERSHOUSE_ELSIE 			0x35
-#define FLAG_HIDE_RUSTBORO_HARMON_SPEECH 				0x36
+#define FLAG_HIDE_RUSTBORO_HARMON_SPEECH		0x36
 #define FLAG_HIDE_RUSTBORO_CITY_ARMISTICE_1 	0x37
 #define FLAG_HIDE_RUSTBORO_CITY_ARMISTICE_2 	0x38
-#define FLAG_HIDE_RUSTBORO_HARMON_CATCHING    0x39 // Unused Flag
+#define FLAG_HIDE_RUSTBORO_HARMON_CATCHING    	0x39
+#define FLAG_HIDE_RUSTBORO_ROBIN				0x3C
+#define FLAG_HIDE_RUSTBORO_HARMON_BEFORE_CATCHING    0x3D
+#define FLAG_RUSTBORO_ROBIN_CUTSCENE_COMPLETE    0x3E
 
 // System-ish Flags
 #define FLAG_DEXNAV_SEARCH    0x24 // Searching for mon
@@ -89,12 +92,10 @@
 #define FLAG_WE_FLAG_NO_RUNNING    0x2D // Disables Running from Wild Mons
 #define FLAG_FOLLOWERS_DISABLED    0x32 // Disable Followers
 #define FLAG_FNPC_ALWAYS_HEALS_PARTY    0x33 // Follower NPC Heals player 
-
 #define FLAG_DERBY_FLAG_NICKNAME    0x3A // Derby Flag Nickname
 #define FLAG_DERBY_FLAG_RESET    0x3B // Derby Flag Reset
-#define FLAG_UNUSED_0x03C    0x3C // Unused Flag
-#define FLAG_UNUSED_0x03D    0x3D // Unused Flag
-#define FLAG_UNUSED_0x03E    0x3E // Unused Flag
+
+// vanilla flags
 #define FLAG_UNUSED_0x03F    0x3F // Unused Flag
 #define FLAG_UNUSED_0x040    0x40 // Unused Flag
 #define FLAG_UNUSED_0x041    0x41 // Unused Flag

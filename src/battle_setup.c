@@ -514,9 +514,9 @@ static void DoBattlePyramidTrainerHillBattle(void)
 }
 
 // Initiates battle where Wally catches Ralts
-void StartWallyTutorialBattle(void)
+void StartRobinTutorialBattle(void)
 {
-    CreateMaleMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_RALTS, 5);
+    CreateFemaleMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_RALTS, 5);
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_CATCH_TUTORIAL;
@@ -525,7 +525,7 @@ void StartWallyTutorialBattle(void)
 
 void StartOldManTutorialBattle(void)
 {
-    CreateMaleMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_WEEDLE, 5);
+    CreateFemaleMon(&gParties[B_TRAINER_OPPONENT_A][0], SPECIES_WEEDLE, 5);
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_CATCH_TUTORIAL;

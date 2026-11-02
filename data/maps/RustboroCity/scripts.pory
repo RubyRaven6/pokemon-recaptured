@@ -26,13 +26,21 @@ const OLD_MAN 		= 24
 
 const PLAYER = LOCALID_PLAYER
 const ROBIN = LOCALID_RUSTBORO_ROBIN
-const HARMON = LOCALID_RUSTBORO_HARMON_SPEECH
+const HARMON_SPEECH = LOCALID_RUSTBORO_HARMON_SPEECH
+const HARMON_CATCHING = LOCALID_RUSTBORO_HARMON_CATCHING
+const HARMON_BEFORE_CATCHING = LOCALID_RUSTBORO_HARMON_BEFORE_CATCHING
 const GUARD1 = LOCALID_RUSTBORO_CITY_ARMISTICE_1
 const GUARD2 = LOCALID_RUSTBORO_CITY_ARMISTICE_2
 
 
 mapscripts RustboroCity_MapScripts {
 	MAP_SCRIPT_ON_TRANSITION {
+		if(var(VAR_RUSTBORO_CITY_STATE) == 0)
+		{
+			goto(SpawnHarmonSpeechVObjects)
+		}
+	}
+	MAP_SCRIPT_ON_RESUME {
 		if(var(VAR_RUSTBORO_CITY_STATE) == 0)
 		{
 			goto(SpawnHarmonSpeechVObjects)
@@ -287,27 +295,27 @@ script RustboroCity_EventScript_HarmonSpeech
 	
 	delay(20)
 
-	applymovement(HARMON, moves(walk_slow_left))
+	applymovement(HARMON_SPEECH, moves(walk_slow_left))
 	setspeaker(SP_NAME_HARMON)
 	message(
 		"For too long have we allowed them to\ncorrupt the children with ideals of\lpower and might.\p"
 	)
 	waitmessage
 	waitmovement(0)
-	applymovement(HARMON, moves(walk_slow_right * 2))
+	applymovement(HARMON_SPEECH, moves(walk_slow_right * 2))
 	message(
 		"What example are we setting, telling\nthem to aspire becoming brutes who\lsolve their problems with violence?\p"
 	)
 	waitmessage
 	waitmovement(0)
-	applymovement(HARMON, moves(walk_slow_left, delay_4, face_up))
+	applymovement(HARMON_SPEECH, moves(walk_slow_left, delay_4, face_up))
 	message(
 		"We train them day and night, often at\nthe expense of their health, safety\land childhood.\p"
 		"And what have we done?\p"
 	)
 	waitmessage
 	waitmovement(0)
-	applymovement(HARMON, moves(jump_in_place_up))
+	applymovement(HARMON_SPEECH, moves(jump_in_place_up))
 	message(
 		"Nothing!\p"
 	)
@@ -323,24 +331,19 @@ script RustboroCity_EventScript_HarmonSpeech
 
 	setspeaker(SP_NAME_HARMON)
 	message(
-		"I beseech you, my brethren, to join my\ncall to disband the League once and\lfor all!"
+		"I beseech you, my brethren, to join my\ncall to disband the League once and\lfor all!\p"
+		"We must combine our efforts, so that\nwe can yet save the children!"
+		"I thank you all for the opportunity to\nspeak the truth this day."
 	)
 	waitmessage
 	waitbuttonpress
 	closemessage
 
 	applymovement(LOCALID_CAMERA, Movement_CameraPanUp_WalkUp2)
-	applymovement(GUARD1, moves(delay_16, walk_left, walk_down * 3))
-	applymovement(HARMON, moves(walk_down, walk_left * 2, walk_down * 3))
-	applymovement(GUARD2, moves(delay_16, walk_left * 3, walk_down * 3))
+	applymovement(GUARD1, moves(delay_16, walk_left * 3, walk_up * 16))
+	applymovement(HARMON_SPEECH, moves(walk_down, walk_left * 4, walk_up * 16))
+	applymovement(GUARD2, moves(delay_16, walk_left * 5, walk_up * 16))
 
-	waitmovement(GUARD1)
-	waitmovement(HARMON)
-	waitmovement(GUARD2)
-
-	removeobject(GUARD1)
-	removeobject(HARMON)
-	removeobject(GUARD2)
 	waitmovement(LOCALID_CAMERA)
 
 	do
@@ -348,7 +351,15 @@ script RustboroCity_EventScript_HarmonSpeech
 		call(TurnHarmonSpeechVObjects)
 		addvar(VAR_TEMP_1, 1)
 		closemessage
-	} while (var(VAR_TEMP_1) < 8)
+	} while (var(VAR_TEMP_1) < 10)
+
+	waitmovement(GUARD1)
+	waitmovement(HARMON_SPEECH)
+	waitmovement(GUARD2)
+
+	removeobject(GUARD1)
+	removeobject(HARMON_SPEECH)
+	removeobject(GUARD2)
 
 	fadescreenswapbuffers(FADE_TO_BLACK)
 	special(KeepMessageBoxVisibleDuringFade)
@@ -363,7 +374,7 @@ script RustboroCity_EventScript_HarmonSpeech
 	msgbox("By the time you came to, you find that\nthe crowd has already dispersed.")
 	closemessage
 	
-	
+	setvar(VAR_RUSTBORO_CITY_STATE, 1)
 	release
 	end
 }
@@ -389,7 +400,7 @@ script RustboroCity_EventScript_HelpingRobin_Trigger3
 
 script RustboroCity_EventScript_HelpingRobin_Trigger4
 {
-	setvar(VAR_TEMP_0, 3)
+	setvar(VAR_TEMP_0, 4)
 	call(RustboroCity_EventScript_RobinTalksOutLoud)
 	goto(RustboroCity_EventScript_HelpingRobin)	
 }
@@ -401,16 +412,16 @@ script RustboroCity_EventScript_RobinTalksOutLoud
 	closemessage
 	switch(var(VAR_TEMP_0))
 	{
-		case 0:
+		case 1:
 			applymovement(PLAYER, moves(walk_down, walk_right))
 			waitmovement(0)
-		case 1:
+		case 2:
 			applymovement(PLAYER, moves(walk_right))
 			waitmovement(0)
-		case 2:
+		case 3:
 			applymovement(PLAYER, moves(walk_up, walk_right))
 			waitmovement(0)
-		case 3:
+		case 4:
 			applymovement(PLAYER, moves(walk_up * 2, walk_right))
 			waitmovement(0)
 	}
@@ -423,25 +434,150 @@ script RustboroCity_EventScript_RobinTalksOutLoud
 	setspeaker(SP_NAME_ROBIN)
 	msgbox(
 		"Oh! Hello. I'm sorry, I didn't mean to\nblock your way.\p"
+		"My name is Robin. It's so nice to meet\nyou, uhm…?\p"
+		"{PLAYER}? That's a beautiful name.\p"
 		"I was just wondering whether I could\ngo and catch a Pokémon in the grass\lright outside.\p"
-		"I always wanted one you see, but I'm\nnot sure if I could go…"
+		"I have one from the gym one you see,\nbut I'm not sure if I could go…\lcatch one myself…"
 	)
-	mcdialogue("I can help you.", "Good luck.")
-	switch(var(VAR_RESULT))
-	{
-		case 0:
-			addvar(VAR_ROBIN_HEART, 1)
-		case 1:
-			addvar(VAR_ROBIN_ROT, 1)
-	}
-
-	release
+	closemessage
 	return
 }
 
 script RustboroCity_EventScript_HelpingRobin
 {
+	setflag(FLAG_RUSTBORO_ROBIN_CUTSCENE_COMPLETE)
+	mcdialogue("I can help you.", "Good luck with that.")
+	switch(var(VAR_RESULT))
+	{
+		case 0:
+			addvar(VAR_ROBIN_HEART, 1)
+			goto(HelpingRobinCatchPokemon)
+		case 1:
+			addvar(VAR_ROBIN_ROT, 1)
+			goto(TellingRobinGoodLuck)
+	}
+
+HelpingRobinCatchPokemon:
+	special(SavePlayerParty)
+	special(LoadRobinStarter)
+	setflag(FLAG_HIDE_MAP_NAME_POPUP)
+
+	setspeaker(SP_NAME_ROBIN)
+	msgbox("Oh! R-Really? That's incredible nice\nof you… Well, if you don't mind then I'd\lbe more than happy if you're with me.")
+	message("Let's go, shall we?\p")
+	cueobjecttalking(LOCALID_RUSTBORO_ROBIN, TRUE)
+	waitmessage
+	closemessage
+	applymovement(ROBIN, moves(walk_right * 11, walk_down * 4, walk_right*2))
+	applymovement(PLAYER, moves(walk_right * 12, walk_down * 4, walk_right))
+	waitmovement(ROBIN)
+	waitmovement(PLAYER)
+	release
+	setspeaker(SP_NAME_ROBIN)
+	msgbox(
+		"Hmm… you just have to look around,\nright?\p"
+		"It's kinda scary for Pok\emon to just\njump out though…")
+	lock
+	message("Oh!\p")
+	applymovement(ROBIN, moves(face_right, emote_exclamation_mark, delay_16 * 2))
+	waitmovement(0)
+	waitmessage
+
+	special(StartRobinTutorialBattle)
+	closemessage
+	addobject(HARMON_CATCHING, MAP_ROUTE116)
+	clearflag(FLAG_HIDE_RUSTBORO_HARMON_CATCHING)
+	lock
+	setspeaker(SP_NAME_ROBIN)
+	msgbox(
+		"I… I did it!\p"
+		"I have my own Pok\emon!")
+	applymovement(ROBIN, moves(face_player), MAP_RUSTBORO_CITY)
+	applymovement(HARMON_CATCHING, moves(walk_right * 6, walk_down, emote_exclamation_mark), MAP_ROUTE116)
+	msgbox("I can't thank you enough for coming\nwith me. God knows how nervous I was…")
+	waitmovement(ROBIN)
+	waitmovement(HARMON_CATCHING)
 	
+	setspeaker(SP_NAME_HARMON)
+	applymovement(ROBIN, moves(face_up), MAP_RUSTBORO_CITY)
+	applymovement(PLAYER, moves(face_up), MAP_RUSTBORO_CITY)
+	msgbox("Robin Goodwill! What on earth are you\ndoing?")
+	waitmovement(ROBIN)
+	waitmovement(PLAYER)
+
+	applymovement(ROBIN, moves(walk_fast_up * 3, walk_fast_left * 2), MAP_RUSTBORO_CITY)
+	applymovement(HARMON_CATCHING, moves(delay_16 *2, face_right), MAP_ROUTE116)
+
+	setspeaker(SP_NAME_ROBIN)
+	msgbox("F-father! I'm sorry I just wanted to,\nuhm…")
+	waitmovement(ROBIN)
+	waitmovement(HARMON_CATCHING)
+	applymovement(HARMON_CATCHING, moves(walk_in_place_right), MAP_ROUTE116)
+	setspeaker(SP_NAME_HARMON)
+	msgbox(
+		"Are those Pok\eballs in your hands?\nHave I taught you nothing?\p"
+		"We will speak of this later. We must\naway to the next city."
+	)
+	waitmovement(0)
+	setspeaker(SP_NAME_ROBIN)
+	msgbox("Yes, Father…")
+	closemessage
+
+	applymovement(HARMON_CATCHING, moves(walk_up * 2, walk_left * 6), MAP_ROUTE116)
+	applymovement(ROBIN, moves(face_down, delay_16 * 2, delay_8, walk_up * 2, walk_left * 6), MAP_RUSTBORO_CITY)
+	waitmovement(ROBIN)
+	waitmovement(HARMON_CATCHING)
+	fadescreenswapbuffers(FADE_TO_BLACK)
+	removeobject(HARMON_CATCHING, MAP_ROUTE116)
+	removeobject(ROBIN, MAP_RUSTBORO_CITY)
+	fadescreenswapbuffers(FADE_FROM_BLACK)
+	
+	clearflag(FLAG_HIDE_MAP_NAME_POPUP)
+	release
+	end
+TellingRobinGoodLuck:
+	addobject(HARMON_BEFORE_CATCHING)
+	clearflag(HARMON_BEFORE_CATCHING)
+	applymovement(HARMON_BEFORE_CATCHING, moves(walk_right * 6))
+	setspeaker(SP_NAME_ROBIN)
+	msgbox(
+		"Oh, thank you! I might need it, haha.\nYou see, I'm not really supposed to--"
+	)
+	waitmovement(HARMON_BEFORE_CATCHING)
+	applymovement(ROBIN, moves(face_left, emote_exclamation_mark))
+	applymovement(PLAYER, moves(face_left))
+	setspeaker(SP_NAME_HARMON)
+	msgbox(
+		"Robin? What on earth are you doing\nout here? I am about to give my word\lto the people here soon.\p"
+		"You are meant to be my side, remember?"
+	)
+	waitmovement(ROBIN)
+	waitmovement(PLAYER)
+
+	applymovement(ROBIN, moves(walk_fast_down, walk_fast_left *2))
+	setspeaker(SP_NAME_ROBIN)
+	msgbox("F-father! I'm sorry I just wanted to,\nuhm…")
+	waitmovement(ROBIN)
+	applymovement(HARMON_BEFORE_CATCHING, moves(walk_in_place_right))
+	setspeaker(SP_NAME_HARMON)
+	msgbox(
+		"Is that a Pok\eball in your hand?\nHave I taught you nothing?\p"
+		"We will speak of this later. Hurry and\nfollow me to my speech."
+	)
+	waitmovement(0)
+	setspeaker(SP_NAME_ROBIN)
+	msgbox("Yes, Father…")
+	closemessage
+
+	applymovement(HARMON_BEFORE_CATCHING, moves(walk_left * 7))
+	applymovement(ROBIN, moves(walk_left * 5, face_right, delay_16 * 4, walk_left * 2))
+	waitmovement(HARMON_BEFORE_CATCHING)
+	waitmovement(ROBIN)
+	removeobject(HARMON_BEFORE_CATCHING)
+	removeobject(ROBIN)
+
+	release
+	end
 }
 
 

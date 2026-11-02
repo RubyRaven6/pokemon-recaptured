@@ -246,7 +246,7 @@
     },
     {
       "local_id": "LOCALID_RUSTBORO_CITY_ARMISTICE_2",
-      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
+      "graphics_id": "OBJ_EVENT_GFX_WALLY",
       "x": 26,
       "y": 43,
       "elevation": 0,
@@ -270,13 +270,13 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "0"
+      "flag": "FLAG_HIDE_RUSTBORO_ROBIN"
     },
     {
-      "local_id": "LOCALID_RUSTBORO_HARMON_CATCHING",
+      "local_id": "LOCALID_RUSTBORO_HARMON_BEFORE_CATCHING",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
-      "x": 39,
-      "y": 8,
+      "x": 23,
+      "y": 11,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -284,7 +284,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_RUSTBORO_HARMON_CATCHING"
+      "flag": "FLAG_HIDE_RUSTBORO_HARMON_BEFORE_CATCHING"
     }
   ],
   "warp_events": [
@@ -297,7 +297,7 @@
     },
     {
       "x": 13,
-      "y": 30,
+      "y": 31,
       "elevation": 0,
       "dest_map": "MAP_RUSTBORO_CITY_FLAT1_1F",
       "dest_warp_id": "0"
@@ -429,7 +429,7 @@
       "x": 30,
       "y": 9,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "FLAG_RUSTBORO_ROBIN_CUTSCENE_COMPLETE",
       "var_value": "0",
       "script": "RustboroCity_EventScript_HelpingRobin_Trigger1"
     },
@@ -438,7 +438,7 @@
       "x": 30,
       "y": 10,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "FLAG_RUSTBORO_ROBIN_CUTSCENE_COMPLETE",
       "var_value": "0",
       "script": "RustboroCity_EventScript_HelpingRobin_Trigger2"
     },
@@ -447,7 +447,7 @@
       "x": 30,
       "y": 11,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "FLAG_RUSTBORO_ROBIN_CUTSCENE_COMPLETE",
       "var_value": "0",
       "script": "RustboroCity_EventScript_HelpingRobin_Trigger3"
     },
@@ -456,7 +456,7 @@
       "x": 30,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_TEMP_0",
+      "var": "FLAG_RUSTBORO_ROBIN_CUTSCENE_COMPLETE",
       "var_value": "0",
       "script": "RustboroCity_EventScript_HelpingRobin_Trigger4"
     }
