@@ -1367,7 +1367,6 @@ void IsGrassTypeInParty(void)
 
 void SpawnCameraObject(void)
 {
-    DebugPrintf("%s", __func__);
 	u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1,
                                                   MOVEMENT_TYPE_FACE_DOWN,
                                                   LOCALID_CAMERA,
@@ -5783,4 +5782,56 @@ bool8 CheckAddCoins(void)
 void KeepMessageBoxVisibleDuringFade(void)
 {
     ClearGpuRegBits(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0);
+}
+
+const u8 sRustboroCrowd[][3] =
+{
+	{OBJ_EVENT_GFX_RICH_BOY, 22, 35},
+	{OBJ_EVENT_GFX_FAT_MAN, 23, 35},
+	{OBJ_EVENT_GFX_POKEFAN_F, 22, 36},
+	{OBJ_EVENT_GFX_WOMAN_1, 23, 36},
+	{OBJ_EVENT_GFX_MAN_1, 24, 36},
+	{OBJ_EVENT_GFX_WOMAN_2, 26, 36},
+	{OBJ_EVENT_GFX_EXPERT_M, 27, 36},
+	{OBJ_EVENT_GFX_EXPERT_F, 28, 36},
+	{OBJ_EVENT_GFX_MAN_2, 29, 36},
+	{OBJ_EVENT_GFX_WOMAN_3, 23, 37},
+	{OBJ_EVENT_GFX_LASS, 24, 37},
+	{OBJ_EVENT_GFX_MAN_4, 26, 37},
+	{OBJ_EVENT_GFX_WOMAN_4, 27, 37},
+	{OBJ_EVENT_GFX_WOMAN_1, 28, 37},
+	{OBJ_EVENT_GFX_WOMAN_5, 29, 37},
+	{OBJ_EVENT_GFX_BEAUTY, 23, 38},
+	{OBJ_EVENT_GFX_GENTLEMAN, 24, 38},
+	{OBJ_EVENT_GFX_FAT_MAN, 25, 38},
+	{OBJ_EVENT_GFX_MANIAC, 26, 38},
+	{OBJ_EVENT_GFX_RICH_BOY, 27, 38},
+	{OBJ_EVENT_GFX_POKEFAN_M, 28, 38},
+	{OBJ_EVENT_GFX_MAN_4, 24, 39},
+	{OBJ_EVENT_GFX_WOMAN_3, 25, 39},
+	{OBJ_EVENT_GFX_MAN_5, 26, 39},
+	{OBJ_EVENT_GFX_OLD_MAN, 27, 39}
+};
+
+void Task_WaitAndLoadRustboroVObjects(u8 taskId)
+{
+	if (gTasks[taskId].data[0] < 60)
+	{
+		gTasks[taskId].data[0]++;
+	}
+	else
+	{
+		for (u32 i = 0; i < 25; i++)
+		{
+			Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
+			CreateVirtualObject(sRustboroCrowd[i][0], i, sRustboroCrowd[i][1], sRustboroCrowd[i][2] + 1, 3, DIR_SOUTH);
+		}
+		DestroyTask(taskId);
+	}
+}
+
+void CreateRustboroVObjects(void)
+{
+    u32 taskId = CreateTask(Task_WaitAndLoadRustboroVObjects, 0);
+    gTasks[taskId].data[0] = 0;
 }

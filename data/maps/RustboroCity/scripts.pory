@@ -38,7 +38,8 @@ mapscripts RustboroCity_MapScripts {
 		if(var(VAR_RUSTBORO_CITY_STATE) == 0)
 		{
 			special(DestroyVirtualObjects)
-			goto(SpawnHarmonSpeechVObjects)
+			callnative(CreateRustboroVObjects)
+			// goto(SpawnHarmonSpeechVObjects)
 		}
 	}
 }
