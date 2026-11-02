@@ -34,15 +34,10 @@ const GUARD2 = LOCALID_RUSTBORO_CITY_ARMISTICE_2
 
 
 mapscripts RustboroCity_MapScripts {
-	MAP_SCRIPT_ON_TRANSITION {
-		if(var(VAR_RUSTBORO_CITY_STATE) == 0)
-		{
-			goto(SpawnHarmonSpeechVObjects)
-		}
-	}
 	MAP_SCRIPT_ON_RESUME {
 		if(var(VAR_RUSTBORO_CITY_STATE) == 0)
 		{
+			special(DestroyVirtualObjects)
 			goto(SpawnHarmonSpeechVObjects)
 		}
 	}
