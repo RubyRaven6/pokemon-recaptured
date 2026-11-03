@@ -1017,7 +1017,7 @@ static const u8 sFontColorTable[][3] = {
 #define BAG_CHAR_BASE_TILES         1024
 
 #define BAG_TILES_STD_BORDER        9
-#define BAG_TILES_MSGBOX            14
+#define BAG_TILES_MSGBOX            25
 
 #define BAG_BASE_STD_BORDER         1
 #define BAG_BASE_MSGBOX             (BAG_BASE_STD_BORDER + BAG_TILES_STD_BORDER)
@@ -1254,7 +1254,7 @@ STATIC_ASSERT(ARRAY_COUNT(sDefaultBagWindows) == WIN_COUNT + 1, BagWindowTemplat
 // bg0 - see sContextMenuWindowTemplates
 // ----------------------------------------------------------------------------
 
-#define ITEMWIN_MESSAGE_W           27
+#define ITEMWIN_MESSAGE_W           26
 #define ITEMWIN_MESSAGE_H           4
 #define ITEMWIN_MESSAGE_TILES       (ITEMWIN_MESSAGE_W * ITEMWIN_MESSAGE_H)
 #define ITEMWIN_MESSAGE_BASE        WIN_PARTY_INFO(PARTY_SIZE)
