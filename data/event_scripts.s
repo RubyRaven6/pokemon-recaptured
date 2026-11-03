@@ -1776,3 +1776,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/RustboroCity_Subway/scripts.scr"
 
 	.include "data/maps/LittlerootTown_Subway/scripts.scr"
+
+	.include "data/maps/LittlerootTown_Gym/scripts.scr"

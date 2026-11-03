@@ -1673,3 +1673,14 @@ const struct Tileset gTileset_PetalburgPorytiles =
     .metatileAttributes = gMetatileAttributes_PetalburgPorytiles,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_LittlerootGym =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LittlerootGym,
+    .palettes = gTilesetPalettes_LittlerootGym,
+    .metatiles = gMetatiles_LittlerootGym,
+    .metatileAttributes = gMetatileAttributes_LittlerootGym,
+    .callback = NULL,
+};
