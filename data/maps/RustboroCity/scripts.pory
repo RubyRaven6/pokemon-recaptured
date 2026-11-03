@@ -510,10 +510,20 @@ HelpingRobinCatchPokemon:
 	waitmovement(HARMON_CATCHING)
 	applymovement(HARMON_CATCHING, moves(walk_in_place_right), MAP_ROUTE116)
 	setspeaker(SP_NAME_HARMON)
-	msgbox(
-		"Are those Pok\eballs in your hands?\nHave I taught you nothing?\p"
-		"We will speak of this later. We must\naway to the next city."
-	)
+	if(var(VAR_RUSTBORO_CITY_STATE) == 0)
+	{
+		msgbox(
+			"Is that a Pok\eball in your hand?\nHave I taught you nothing?\p"
+			"We will speak of this later. Hurry and\nfollow me to my speech."
+		)
+	}
+	else
+	{
+		msgbox(
+			"Are those Pok\eballs in your hands?\nHave I taught you nothing?\p"
+			"We will speak of this later. We must\naway to the next city."
+		)
+	}
 	waitmovement(0)
 	setspeaker(SP_NAME_ROBIN)
 	msgbox("Yes, Father…")
@@ -543,10 +553,20 @@ TellingRobinGoodLuck:
 	applymovement(ROBIN, moves(face_left, emote_exclamation_mark))
 	applymovement(PLAYER, moves(face_left))
 	setspeaker(SP_NAME_HARMON)
-	msgbox(
-		"Robin? What on earth are you doing\nout here? I am about to give my word\lto the people here soon.\p"
-		"You are meant to be my side, remember?"
-	)
+	if(var(VAR_RUSTBORO_CITY_STATE) == 0)
+	{
+		msgbox(
+			"Robin? What on earth are you doing\nout here? I am about to give my word\lto the people here soon.\p"
+			"You are meant to be my side, remember?"
+		)
+	}
+	else
+	{
+		msgbox(
+			"Robin? What on earth are you doing\nout here? I've been looking for you\lfor a while.\p"
+			"We are meant to go to the next city."
+		)
+	}
 	waitmovement(ROBIN)
 	waitmovement(PLAYER)
 
@@ -556,10 +576,20 @@ TellingRobinGoodLuck:
 	waitmovement(ROBIN)
 	applymovement(HARMON_BEFORE_CATCHING, moves(walk_in_place_right))
 	setspeaker(SP_NAME_HARMON)
-	msgbox(
-		"Is that a Pok\eball in your hand?\nHave I taught you nothing?\p"
-		"We will speak of this later. Hurry and\nfollow me to my speech."
-	)
+	if(var(VAR_RUSTBORO_CITY_STATE) == 0)
+	{
+		msgbox(
+			"Is that a Pok\eball in your hand?\nHave I taught you nothing?\p"
+			"We will speak of this later. Hurry and\nfollow me to my speech."
+		)
+	}
+	else
+	{
+		msgbox(
+			"Are those Pok\eballs in your hands?\nHave I taught you nothing?\p"
+			"We will speak of this later. We must\naway to the next city."
+		)
+	}
 	waitmovement(0)
 	setspeaker(SP_NAME_ROBIN)
 	msgbox("Yes, Father…")
